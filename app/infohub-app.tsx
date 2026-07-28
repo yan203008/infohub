@@ -307,10 +307,10 @@ export function InfoHubApp({ user }: { user: ChatGPTUser | null }) {
           />
         </nav>
         <div className="sidebar-bottom">
-          <button>
+          <a className="settings-link" href="/admin">
             <Settings size={19} />
-            设置
-          </button>
+            管理后台
+          </a>
           <div className="profile-mini">
             <span>{user?.displayName.slice(0, 1).toUpperCase() ?? "访"}</span>
             <div>
@@ -424,7 +424,11 @@ export function InfoHubApp({ user }: { user: ChatGPTUser | null }) {
                 : "公开日报无需登录即可阅读；登录后可以同步笔记、进度和私人文档。"
             }
             action={
-              user ? undefined : (
+              user ? (
+                <a className="primary-button sign-in" href="/admin">
+                  进入管理后台
+                </a>
+              ) : (
                 <a className="primary-button sign-in" href="/signin-with-chatgpt?return_to=%2F">
                   登录并同步
                 </a>

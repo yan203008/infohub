@@ -16,6 +16,12 @@ export const sources = sqliteTable(
   (table) => [uniqueIndex("sources_url_idx").on(table.url)],
 );
 
+export const appSettings = sqliteTable("app_settings", {
+  key: text("key").primaryKey(),
+  value: text("value").notNull(),
+  updatedAt: integer("updated_at", { mode: "timestamp_ms" }).notNull(),
+});
+
 export const contents = sqliteTable(
   "contents",
   {
