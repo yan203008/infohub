@@ -365,6 +365,69 @@ button {
   cursor: pointer;
 }
 
+.section-toolbar button {
+  min-height: 40px;
+  padding: 0 10px;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: white;
+  color: var(--green);
+  font-weight: 680;
+}
+
+.section-groups {
+  display: grid;
+  gap: 34px;
+}
+
+.content-section {
+  min-width: 0;
+}
+
+.content-section-heading {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 16px;
+  margin: 0 2px 12px;
+}
+
+.content-section-heading h2 {
+  margin: 0;
+  font-size: 20px;
+  letter-spacing: -0.035em;
+}
+
+.content-section-heading p {
+  margin: 4px 0 0;
+  color: #8a938d;
+  font-size: 11px;
+}
+
+.content-section-heading > span {
+  display: grid;
+  min-width: 30px;
+  height: 30px;
+  padding: 0 8px;
+  place-items: center;
+  border-radius: 10px;
+  background: #edf2ee;
+  color: var(--green);
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.empty-section {
+  display: grid;
+  min-height: 90px;
+  place-items: center;
+  border: 1px dashed #d7ded8;
+  border-radius: 18px;
+  background: rgba(255, 255, 255, 0.48);
+  color: #929b95;
+  font-size: 12px;
+}
+
 .feed {
   display: grid;
   gap: 10px;
@@ -964,6 +1027,85 @@ button {
 .note-sheet .primary-button {
   width: 100%;
   margin-top: 12px;
+}
+
+.section-settings-sheet {
+  max-height: min(760px, 88vh);
+  overflow-y: auto;
+}
+
+.section-settings-list {
+  display: grid;
+  gap: 8px;
+}
+
+.section-setting-row {
+  display: grid;
+  grid-template-columns: 42px 1fr 82px;
+  min-height: 64px;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 9px;
+  border: 1px solid var(--line);
+  border-radius: 15px;
+  background: #fbfcfa;
+}
+
+.section-setting-row > div {
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.section-setting-row strong {
+  font-size: 14px;
+}
+
+.section-setting-row small {
+  overflow: hidden;
+  color: #89928c;
+  font-size: 10px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.visibility-button,
+.order-actions button {
+  display: grid;
+  width: 40px;
+  height: 40px;
+  padding: 0;
+  place-items: center;
+  border: 0;
+  border-radius: 12px;
+  background: #eef1ee;
+  color: #929a95;
+  cursor: pointer;
+}
+
+.visibility-button.active {
+  background: var(--green-soft);
+  color: var(--green);
+}
+
+.order-actions {
+  display: flex;
+  gap: 2px;
+}
+
+.order-actions button {
+  width: 38px;
+}
+
+.order-actions button:disabled {
+  opacity: 0.28;
+  cursor: default;
+}
+
+.section-settings-sheet .settings-done {
+  width: 100%;
+  margin-top: 14px;
 }
 
 .toast {

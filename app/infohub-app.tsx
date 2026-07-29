@@ -6,16 +6,21 @@ import {
   BookOpen,
   CalendarDays,
   Check,
+  ChevronDown,
   ChevronLeft,
   ChevronRight,
+  ChevronUp,
   Clock3,
   FileText,
   Headphones,
+  Eye,
+  EyeOff,
   MoreHorizontal,
   PenLine,
   Play,
   Search,
   Settings,
+  SlidersHorizontal,
   Sparkles,
   UserRound,
   Video,
@@ -26,6 +31,7 @@ import type { ChatGPTUser } from "./chatgpt-auth";
 
 type Source = "youtube" | "podcast" | "daily" | "builder";
 type Tab = "daily" | "discover" | "notes" | "me";
+type SectionId = "x" | "papers" | "github" | "youtube" | "podcasts";
 
 type Item = {
   id: string;
@@ -42,9 +48,10 @@ type Item = {
   sourceUrl: string;
   paragraphs: string[];
   externalLinks?: { label: string; url: string }[];
+  section?: SectionId;
 };
 
-const items: Item[] = [
+const coreItems: Item[] = [
   {
     id: "mel-hormones",
     source: "youtube",
@@ -59,6 +66,7 @@ const items: Item[] = [
     digestDate: "2026-07-29",
     publishedDate: "7月23日发布",
     sourceUrl: "https://www.youtube.com/watch?v=9tKZ3w-Gku8",
+    section: "youtube",
     paragraphs: [
       "这期节目把女性从青春期、生育年龄到围绝经期和绝经后的变化看作一条连续的激素健康轨迹，而不是彼此割裂的问题。越早了解家族史、月经模式和症状变化，越容易在关键阶段做出适合自己的选择。",
       "关于避孕，嘉宾强调不要把“天然”等同于“更安全”。口服避孕药、宫内节育器、植入剂和屏障法各有适用范围与风险；可靠性、个人病史和能否持续正确使用，比社交媒体上的笼统结论更重要。",
@@ -81,6 +89,7 @@ const items: Item[] = [
     digestDate: "2026-07-29",
     publishedDate: "7月20日发布",
     sourceUrl: "https://www.youtube.com/watch?v=A9Sr-4c-3Tg",
+    section: "youtube",
     paragraphs: [
       "这场直播从世界杯决赛切入，讨论体育赛事如何承载国家认同、媒体叙事和政治情绪。作者把阿根廷与西班牙的比赛放进更大的国际关系框架中，尝试解释赛事之外的象征意义。",
       "随后话题转向美国、伊朗和拉丁美洲。节目把军事行动、资源、金融网络与国内政治联系起来，提出了一系列关于未来政策走向的预测。",
@@ -155,6 +164,7 @@ const items: Item[] = [
     digestDate: "2026-07-28",
     publishedDate: "7月20日发布",
     sourceUrl: "https://www.youtube.com/watch?v=ybrv66DM9Dw",
+    section: "youtube",
     paragraphs: [
       "节目首先澄清，不应随意把别人诊断为“自恋者”或“反社会人格”。更有帮助的做法，是观察一个人是否长期、反复表现出冷漠、操纵和敌意，以及这些行为如何影响周围的人。",
       "嘉宾把常被讨论的黑暗人格分为心理病态、自恋、马基雅维利主义和施虐倾向。它们并不是非黑即白的标签，也可能彼此重叠；重点是持续出现的行为模式，而不是一次糟糕的互动。",
@@ -176,6 +186,7 @@ const items: Item[] = [
     digestDate: "2026-07-28",
     publishedDate: "7月18日发布",
     sourceUrl: "https://www.youtube.com/watch?v=E7QKiRnw0M8",
+    section: "youtube",
     paragraphs: [
       "直播把世界杯视为一种国家叙事与大众注意力的载体，并由此延伸到阿根廷、西班牙、以色列和美国之间的关系。作者试图用资本与政治联盟解释赛事周边的舆论。",
       "在美国政治部分，节目讨论选举管理、移民、联邦与州权力的冲突，以及这些议题可能如何影响中期选举。这些内容夹杂事实陈述与主持人的预测，需要分别核对。",
@@ -236,6 +247,260 @@ const items: Item[] = [
   },
 ];
 
+function feedItem(input: {
+  id: string;
+  section: SectionId;
+  source: Source;
+  sourceLabel: string;
+  title: string;
+  summary: string;
+  digestDate: string;
+  publishedDate: string;
+  sourceUrl: string;
+  accent: string;
+  tags: string[];
+  detail?: string;
+}): Item {
+  return {
+    ...input,
+    time: input.digestDate === "2026-07-29" ? "今天采集" : "昨日采集",
+    readTime: "3 分钟",
+    paragraphs: [
+      input.summary,
+      input.detail ?? "该条目来自公开信息源，InfoHub 保留原始链接，并按每日采集时间归档。",
+    ],
+  };
+}
+
+const feedItems: Item[] = [
+  feedItem({
+    id: "x-swyx-cost-per-task",
+    section: "x",
+    source: "builder",
+    sourceLabel: "Swyx · Follow Builders",
+    title: "衡量 AI 成本，应该从 token 单价转向每任务成本",
+    summary: "Swyx 认为单纯比较输入、输出 token 价格已经不够，真实任务的完成成本更能反映模型与 Agent 的价值。",
+    digestDate: "2026-07-29",
+    publishedDate: "7月28日发布",
+    sourceUrl: "https://x.com/swyx/status/2081904230768816487",
+    accent: "green",
+    tags: ["X", "AI 成本", "Agent"],
+  }),
+  feedItem({
+    id: "x-aaron-ai-work",
+    section: "x",
+    source: "builder",
+    sourceLabel: "Aaron Levie · Follow Builders",
+    title: "AI 带来的不只是裁员，也可能是工作范围扩张",
+    summary: "Aaron Levie 观察到企业正招聘工程、销售和内部 AI 部署人才，用 AI 去解决过去没有能力处理的问题。",
+    digestDate: "2026-07-29",
+    publishedDate: "7月28日发布",
+    sourceUrl: "https://x.com/levie/status/2081930301752942703",
+    accent: "green",
+    tags: ["X", "未来工作", "企业 AI"],
+  }),
+  feedItem({
+    id: "x-random-walker-labor",
+    section: "x",
+    source: "daily",
+    sourceLabel: "Arvind Narayanan · 技术动态 X 热榜",
+    title: "一个关于 AI 与劳动关系的思想实验",
+    summary: "Arvind Narayanan 从“如果互联网从未公开源代码”出发，讨论训练数据、技能扩散与 AI 劳动叙事之间的关系。",
+    digestDate: "2026-07-29",
+    publishedDate: "7月29日发布",
+    sourceUrl: "https://x.com/random_walker/status/2082163285588107752",
+    accent: "blue",
+    tags: ["X 热榜", "AI 劳动", "观点"],
+  }),
+  feedItem({
+    id: "paper-redesign",
+    section: "papers",
+    source: "daily",
+    sourceLabel: "Hugging Face Daily Papers",
+    title: "ReDesign：把平面图片恢复成可编辑设计结构",
+    summary: "ReDesign 用 Agent 分解图片中的文字、矢量、颜色、分组与图层，并通过逐步验证减少长流程中的错误累积。",
+    digestDate: "2026-07-29",
+    publishedDate: "7月28日收录",
+    sourceUrl: "https://huggingface.co/papers/2607.25565",
+    accent: "violet",
+    tags: ["热门论文", "Agent", "设计"],
+  }),
+  feedItem({
+    id: "paper-hifi-umi",
+    section: "papers",
+    source: "daily",
+    sourceLabel: "Hugging Face Daily Papers",
+    title: "HiFi-UMI：不依赖真实机器人后训练的操作策略",
+    summary: "研究通过高精度、可规模化的人类操作数据，让策略无需真实机器人后训练也能直接部署，并公开大规模数据集。",
+    digestDate: "2026-07-29",
+    publishedDate: "7月28日收录",
+    sourceUrl: "https://huggingface.co/papers/2607.25895",
+    accent: "violet",
+    tags: ["热门论文", "机器人", "多模态"],
+  }),
+  feedItem({
+    id: "paper-inmind",
+    section: "papers",
+    source: "daily",
+    sourceLabel: "Hugging Face Daily Papers",
+    title: "InMind：Agent 记忆检索的隐式关联盲区",
+    summary: "论文发现，记忆内容与用户问题没有表面相似词时，多类记忆系统很难召回真正需要的信息。",
+    digestDate: "2026-07-29",
+    publishedDate: "7月27日收录",
+    sourceUrl: "https://huggingface.co/papers/2607.24368",
+    accent: "violet",
+    tags: ["热门论文", "Agent Memory", "检索"],
+  }),
+  feedItem({
+    id: "github-airi",
+    section: "github",
+    source: "daily",
+    sourceLabel: "GitHub Trending",
+    title: "moeru-ai/airi：自托管实时语音与游戏互动角色",
+    summary: "一个由用户自己托管的 AI 角色项目，支持实时语音、桌面端以及 Minecraft、Factorio 等互动场景。",
+    digestDate: "2026-07-29",
+    publishedDate: "今日热榜",
+    sourceUrl: "https://github.com/moeru-ai/airi",
+    accent: "blue",
+    tags: ["GitHub", "开源", "语音 Agent"],
+  }),
+  feedItem({
+    id: "github-aisuite",
+    section: "github",
+    source: "daily",
+    sourceLabel: "GitHub Trending",
+    title: "andrewyng/aisuite：统一调用多个生成式 AI 服务",
+    summary: "用一套简洁接口连接不同模型服务，减少应用在多供应商之间切换时的适配成本。",
+    digestDate: "2026-07-29",
+    publishedDate: "今日热榜",
+    sourceUrl: "https://github.com/andrewyng/aisuite",
+    accent: "blue",
+    tags: ["GitHub", "多模型", "开发工具"],
+  }),
+  feedItem({
+    id: "github-ecc",
+    section: "github",
+    source: "daily",
+    sourceLabel: "GitHub Trending",
+    title: "affaan-m/ECC：Agent Harness 性能优化系统",
+    summary: "围绕 Claude Code、Codex、Cursor 等工具组织技能、记忆、安全和研究优先的开发流程。",
+    digestDate: "2026-07-29",
+    publishedDate: "今日热榜",
+    sourceUrl: "https://github.com/affaan-m/ECC",
+    accent: "blue",
+    tags: ["GitHub", "Agent Harness", "Codex"],
+  }),
+  feedItem({
+    id: "podcast-granola",
+    section: "podcasts",
+    source: "podcast",
+    sourceLabel: "AI & I by Every",
+    title: "Granola 创始人：第一波 AI 应用之后，工作界面会变成什么",
+    summary: "Chris Pedregal 与 Dan Shipper 讨论会议记录之外的机会、AI 原生团队结构，以及如何把上下文转化为决策和行动。",
+    digestDate: "2026-07-29",
+    publishedDate: "7月15日发布",
+    sourceUrl: "https://www.youtube.com/playlist?list=PLuMcoKK9mKgHtW_o9h5sGO2vXrffKHwJL",
+    accent: "orange",
+    tags: ["播客", "Granola", "AI 产品"],
+    detail: "嘉宾认为会议笔记只是入口，更大的机会是理解跨会议上下文、识别决策和行动，并探索适合普通用户的 AI 原生工作界面。",
+  }),
+  feedItem({
+    id: "x-peter-codex-video",
+    section: "x",
+    source: "builder",
+    sourceLabel: "Peter Yang · Follow Builders",
+    title: "手机上的 Codex 完成了一轮视频修改与交付",
+    summary: "开发者在骑车时远程让 Codex 编辑视频，随后定时检查 Slack 反馈并连续导出新版本。",
+    digestDate: "2026-07-28",
+    publishedDate: "7月27日发布",
+    sourceUrl: "https://x.com/petergyang/status/2081775399097549083",
+    accent: "green",
+    tags: ["X", "Codex", "自动化"],
+  }),
+  feedItem({
+    id: "x-claude-security",
+    section: "x",
+    source: "daily",
+    sourceLabel: "tatsuki · 技术动态 X 热榜",
+    title: "Claude Code 安全设置：从真实告警日志重新排序优先级",
+    summary: "作者复盘两个月、逾万行安全日志，讨论哪些检测规则真正触发，以及配置安全措施的实际顺序。",
+    digestDate: "2026-07-28",
+    publishedDate: "7月28日发布",
+    sourceUrl: "https://x.com/nobel_824/status/2081962142056792475",
+    accent: "blue",
+    tags: ["X 热榜", "Claude Code", "安全"],
+  }),
+  feedItem({
+    id: "paper-cve-attack",
+    section: "papers",
+    source: "daily",
+    sourceLabel: "Hugging Face Daily Papers",
+    title: "LLM 扩充漏洞标签，未必能改善攻击技术分类",
+    summary: "研究在 CVE 到 MITRE ATT&CK 的映射任务上发现，专家标注质量比用 LLM 扩大数据规模更关键。",
+    digestDate: "2026-07-28",
+    publishedDate: "7月28日收录",
+    sourceUrl: "https://huggingface.co/papers/2607.25572",
+    accent: "violet",
+    tags: ["热门论文", "安全", "数据质量"],
+  }),
+  feedItem({
+    id: "paper-mage-vl",
+    section: "papers",
+    source: "daily",
+    sourceLabel: "Hugging Face Daily Papers",
+    title: "Mage-VL：面向实时视频理解的流式多模态模型",
+    summary: "模型利用视频编码中的运动信息选择性处理高变化区域，减少视觉 token，并提升流式推理效率。",
+    digestDate: "2026-07-28",
+    publishedDate: "7月27日收录",
+    sourceUrl: "https://huggingface.co/papers/2607.24904",
+    accent: "violet",
+    tags: ["热门论文", "多模态", "视频"],
+  }),
+  feedItem({
+    id: "github-editor",
+    section: "github",
+    source: "daily",
+    sourceLabel: "GitHub Trending",
+    title: "pascalorg/editor：创建并分享 3D 建筑项目",
+    summary: "面向浏览器的 3D 建筑设计与分享工具，进入本次 GitHub Trending 榜单。",
+    digestDate: "2026-07-28",
+    publishedDate: "回跑热榜",
+    sourceUrl: "https://github.com/pascalorg/editor",
+    accent: "blue",
+    tags: ["GitHub", "3D", "设计工具"],
+  }),
+  feedItem({
+    id: "github-jenkins",
+    section: "github",
+    source: "daily",
+    sourceLabel: "GitHub Trending",
+    title: "jenkinsci/jenkins：经典自动化服务器重回热榜",
+    summary: "Jenkins 自动化服务器出现在本次榜单，反映成熟基础设施项目仍持续获得关注。",
+    digestDate: "2026-07-28",
+    publishedDate: "回跑热榜",
+    sourceUrl: "https://github.com/jenkinsci/jenkins",
+    accent: "blue",
+    tags: ["GitHub", "CI/CD", "自动化"],
+  }),
+];
+
+const items: Item[] = [...coreItems, ...feedItems];
+
+const sectionDefinitions: { id: SectionId; label: string; description: string }[] = [
+  { id: "x", label: "X 推特内容", description: "Follow Builders + 技术动态 X 热榜" },
+  { id: "papers", label: "热门论文", description: "Hugging Face Daily Papers" },
+  { id: "github", label: "GitHub Trending", description: "每日开源项目热榜" },
+  { id: "youtube", label: "热门 YouTube", description: "已订阅频道的新视频与回跑内容" },
+  { id: "podcasts", label: "播客", description: "AI Builder 访谈与节目" },
+];
+
+type SectionPreference = { id: SectionId; visible: boolean };
+
+const defaultSectionPreferences: SectionPreference[] = sectionDefinitions.map((section) => ({
+  id: section.id,
+  visible: true,
+}));
+
 const sourceIcon = {
   youtube: Video,
   podcast: Headphones,
@@ -278,6 +543,10 @@ export function InfoHubApp({ user }: { user: ChatGPTUser | null }) {
   const [note, setNote] = useState("");
   const [noteOpen, setNoteOpen] = useState(false);
   const [toast, setToast] = useState("");
+  const [sectionSettingsOpen, setSectionSettingsOpen] = useState(false);
+  const [sectionPreferences, setSectionPreferences] = useState<SectionPreference[]>(
+    defaultSectionPreferences,
+  );
 
   useEffect(() => {
     const stored = window.localStorage.getItem("infohub-demo-note");
@@ -287,20 +556,67 @@ export function InfoHubApp({ user }: { user: ChatGPTUser | null }) {
   }, []);
 
   useEffect(() => {
+    if (!user) return;
+    let cancelled = false;
+    void fetch("/api/preferences/sections")
+      .then(async (response) => {
+        if (!response.ok) return null;
+        return (await response.json()) as { preferences: SectionPreference[] | null };
+      })
+      .then((data) => {
+        if (cancelled || !data?.preferences) return;
+        setSectionPreferences(data.preferences);
+        window.localStorage.setItem(
+          "infohub-section-preferences",
+          JSON.stringify(data.preferences),
+        );
+      })
+      .catch(() => undefined);
+    return () => {
+      cancelled = true;
+    };
+  }, [user]);
+
+  useEffect(() => {
     if (!toast) return;
     const timer = window.setTimeout(() => setToast(""), 2200);
     return () => window.clearTimeout(timer);
   }, [toast]);
+
+  useEffect(() => {
+    const stored = window.localStorage.getItem("infohub-section-preferences");
+    if (!stored) return;
+    try {
+      const parsed = JSON.parse(stored) as SectionPreference[];
+      const validIds = new Set(sectionDefinitions.map((section) => section.id));
+      if (parsed.length !== sectionDefinitions.length || parsed.some((item) => !validIds.has(item.id))) {
+        return;
+      }
+      const timer = window.setTimeout(() => setSectionPreferences(parsed), 0);
+      return () => window.clearTimeout(timer);
+    } catch {
+      return;
+    }
+  }, []);
 
   const sourceCount = useMemo(
     () => new Set(items.map((item) => item.source)).size,
     [],
   );
   const visibleItems = useMemo(
-    () => items.filter((item) => item.digestDate === selectedDate),
+    () => items.filter((item) => item.digestDate === selectedDate && item.section),
     [selectedDate],
   );
-  const visibleSourceCount = new Set(visibleItems.map((item) => item.sourceLabel)).size;
+  const orderedSections = sectionPreferences
+    .map((preference) => ({
+      ...sectionDefinitions.find((section) => section.id === preference.id)!,
+      visible: preference.visible,
+    }));
+  const visibleSections = orderedSections.filter((section) => section.visible);
+  const visibleSectionIds = new Set(visibleSections.map((section) => section.id));
+  const displayedItems = visibleItems.filter(
+    (item) => item.section && visibleSectionIds.has(item.section),
+  );
 
   function toggleSaved(id: string) {
     setSaved((current) =>
@@ -314,6 +630,35 @@ export function InfoHubApp({ user }: { user: ChatGPTUser | null }) {
     window.localStorage.setItem("infohub-demo-note", note);
     setToast("笔记已保存");
     setNoteOpen(false);
+  }
+
+  function saveSectionPreferences(next: SectionPreference[]) {
+    setSectionPreferences(next);
+    window.localStorage.setItem("infohub-section-preferences", JSON.stringify(next));
+    if (user) {
+      void fetch("/api/preferences/sections", {
+        method: "POST",
+        headers: { "content-type": "application/json" },
+        body: JSON.stringify({ preferences: next }),
+      }).catch(() => undefined);
+    }
+  }
+
+  function toggleSection(id: SectionId) {
+    saveSectionPreferences(
+      sectionPreferences.map((section) =>
+        section.id === id ? { ...section, visible: !section.visible } : section,
+      ),
+    );
+  }
+
+  function moveSection(id: SectionId, direction: -1 | 1) {
+    const index = sectionPreferences.findIndex((section) => section.id === id);
+    const target = index + direction;
+    if (index < 0 || target < 0 || target >= sectionPreferences.length) return;
+    const next = [...sectionPreferences];
+    [next[index], next[target]] = [next[target], next[index]];
+    saveSectionPreferences(next);
   }
 
   if (activeItem) {
@@ -574,7 +919,7 @@ export function InfoHubApp({ user }: { user: ChatGPTUser | null }) {
                 </span>
                 <small>{selectedDate === recentDates[0] ? "刚刚更新" : "已完成"}</small>
               </div>
-              <h2>{visibleSourceCount} 个信息源，{visibleItems.length} 条内容</h2>
+              <h2>{visibleSections.length} 个板块，{displayedItems.length} 条内容</h2>
               <p>
                 {visibleItems.length > 0
                   ? selectedDate === recentDates[0]
@@ -583,36 +928,60 @@ export function InfoHubApp({ user }: { user: ChatGPTUser | null }) {
                   : "这一天两个频道没有新的采集结果。你仍可切换日期查看历史内容。"}
               </p>
               <div className="digest-stats">
-                <span><Video size={16} /> {visibleItems.filter((item) => item.source === "youtube").length} YouTube</span>
-                <span><Sparkles size={16} /> {visibleItems.filter((item) => item.source === "builder").length} Builders</span>
-                <span><FileText size={16} /> {visibleItems.filter((item) => item.source === "daily").length} 技术动态</span>
+                {visibleSectionIds.has("x") && <span><Sparkles size={16} /> {visibleItems.filter((item) => item.section === "x").length} X</span>}
+                {visibleSectionIds.has("papers") && <span><FileText size={16} /> {visibleItems.filter((item) => item.section === "papers").length} 论文</span>}
+                {visibleSectionIds.has("github") && <span><Bookmark size={16} /> {visibleItems.filter((item) => item.section === "github").length} GitHub</span>}
+                {visibleSectionIds.has("youtube") && <span><Video size={16} /> {visibleItems.filter((item) => item.section === "youtube").length} YouTube</span>}
+                {visibleSectionIds.has("podcasts") && <span><Headphones size={16} /> {visibleItems.filter((item) => item.section === "podcasts").length} 播客</span>}
               </div>
             </section>
 
-            <section className="section-heading">
+            <section className="section-heading section-toolbar">
               <div>
-                <h2>本日内容</h2>
-                <span>{visibleItems.length} 篇</span>
+                <h2>内容板块</h2>
+                <span>按你的顺序展示</span>
               </div>
-              <button>全部已读 <Check size={16} /></button>
+              <button onClick={() => setSectionSettingsOpen(true)}>
+                <SlidersHorizontal size={16} /> 调整板块
+              </button>
             </section>
 
-            <div className="feed">
-              {visibleItems.map((item) => (
-                <ContentCard
-                  key={item.id}
-                  item={item}
-                  saved={saved.includes(item.id)}
-                  onOpen={() => setActiveItem(item)}
-                  onSave={() => toggleSaved(item.id)}
-                />
-              ))}
-              {visibleItems.length === 0 && (
+            <div className="section-groups">
+              {visibleSections.map((section) => {
+                const sectionItems = visibleItems.filter((item) => item.section === section.id);
+                return (
+                  <section className="content-section" key={section.id}>
+                    <header className="content-section-heading">
+                      <div>
+                        <h2>{section.label}</h2>
+                        <p>{section.description}</p>
+                      </div>
+                      <span>{sectionItems.length}</span>
+                    </header>
+                    {sectionItems.length > 0 ? (
+                      <div className="feed">
+                        {sectionItems.map((item) => (
+                          <ContentCard
+                            key={item.id}
+                            item={item}
+                            saved={saved.includes(item.id)}
+                            onOpen={() => setActiveItem(item)}
+                            onSave={() => toggleSaved(item.id)}
+                          />
+                        ))}
+                      </div>
+                    ) : (
+                      <div className="empty-section">本日暂无更新</div>
+                    )}
+                  </section>
+                );
+              })}
+              {visibleSections.length === 0 && (
                 <div className="empty-daily">
-                  <CalendarDays size={24} />
-                  <h3>这一天没有新内容</h3>
-                  <p>两个频道均已检查完成。可切换到“最新”查看最近一次采集。</p>
-                  <button onClick={() => setSelectedDate(recentDates[0])}>返回最新</button>
+                  <EyeOff size={24} />
+                  <h3>所有板块都已隐藏</h3>
+                  <p>你可以随时重新开启想看的板块。</p>
+                  <button onClick={() => setSectionSettingsOpen(true)}>调整板块</button>
                 </div>
               )}
             </div>
@@ -662,6 +1031,58 @@ export function InfoHubApp({ user }: { user: ChatGPTUser | null }) {
           />
         )}
       </div>
+
+      {sectionSettingsOpen && (
+        <div className="sheet-backdrop" onClick={() => setSectionSettingsOpen(false)}>
+          <section
+            className="note-sheet section-settings-sheet"
+            onClick={(event) => event.stopPropagation()}
+            aria-label="调整首页板块"
+          >
+            <div className="sheet-handle" />
+            <div className="sheet-title">
+              <div>
+                <span>调整首页板块</span>
+                <small>设置仅影响你的首页展示</small>
+              </div>
+              <button className="icon-button" onClick={() => setSectionSettingsOpen(false)} aria-label="关闭">
+                <X size={20} />
+              </button>
+            </div>
+            <div className="section-settings-list">
+              {sectionPreferences.map((preference, index) => {
+                const section = sectionDefinitions.find((item) => item.id === preference.id)!;
+                return (
+                  <div className="section-setting-row" key={preference.id}>
+                    <button
+                      className={`visibility-button ${preference.visible ? "active" : ""}`}
+                      onClick={() => toggleSection(preference.id)}
+                      aria-label={preference.visible ? `隐藏${section.label}` : `显示${section.label}`}
+                    >
+                      {preference.visible ? <Eye size={18} /> : <EyeOff size={18} />}
+                    </button>
+                    <div>
+                      <strong>{section.label}</strong>
+                      <small>{section.description}</small>
+                    </div>
+                    <span className="order-actions">
+                      <button onClick={() => moveSection(preference.id, -1)} disabled={index === 0} aria-label="上移">
+                        <ChevronUp size={18} />
+                      </button>
+                      <button onClick={() => moveSection(preference.id, 1)} disabled={index === sectionPreferences.length - 1} aria-label="下移">
+                        <ChevronDown size={18} />
+                      </button>
+                    </span>
+                  </div>
+                );
+              })}
+            </div>
+            <button className="primary-button settings-done" onClick={() => setSectionSettingsOpen(false)}>
+              <Check size={18} /> 完成
+            </button>
+          </section>
+        </div>
+      )}
 
       <nav className="bottom-nav" aria-label="主要导航">
         <NavButton

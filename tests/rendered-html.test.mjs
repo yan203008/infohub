@@ -11,6 +11,12 @@ test("builds the InfoHub daily experience", async () => {
   assert.match(source, /label="每日"/);
   assert.match(source, /最近七天/);
   assert.match(source, /更多日期/);
+  assert.match(source, /X 推特内容/);
+  assert.match(source, /热门论文/);
+  assert.match(source, /GitHub Trending/);
+  assert.match(source, /热门 YouTube/);
+  assert.match(source, /调整首页板块/);
+  assert.match(source, /infohub-section-preferences/);
   assert.match(source, /2026-07-28/);
   assert.match(source, /2026-07-29/);
 });

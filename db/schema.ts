@@ -22,6 +22,20 @@ export const appSettings = sqliteTable("app_settings", {
   updatedAt: integer("updated_at", { mode: "timestamp_ms" }).notNull(),
 });
 
+export const userPreferences = sqliteTable(
+  "user_preferences",
+  {
+    id: text("id").primaryKey(),
+    userEmail: text("user_email").notNull(),
+    key: text("key").notNull(),
+    value: text("value").notNull(),
+    updatedAt: integer("updated_at", { mode: "timestamp_ms" }).notNull(),
+  },
+  (table) => [
+    uniqueIndex("user_preferences_owner_key_idx").on(table.userEmail, table.key),
+  ],
+);
+
 export const contents = sqliteTable(
   "contents",
   {
