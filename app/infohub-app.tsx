@@ -50,6 +50,8 @@ type Item = {
   externalLinks?: { label: string; url: string }[];
   facts?: { label: string; value: string }[];
   takeaways?: string[];
+  utility?: string;
+  sections?: { title: string; timeRange: string; paragraphs: string[] }[];
   section?: SectionId;
   inRecentWindow?: boolean;
 };
@@ -263,6 +265,8 @@ function feedItem(input: {
   externalLinks?: { label: string; url: string }[];
   facts?: { label: string; value: string }[];
   takeaways?: string[];
+  utility?: string;
+  sections?: { title: string; timeRange: string; paragraphs: string[] }[];
   inRecentWindow?: boolean;
 }): Item {
   return {
@@ -289,6 +293,10 @@ const feedItems: Item[] = [
     sourceUrl: "https://x.com/swyx/status/2081904230768816487",
     accent: "green",
     tags: ["X", "AI 成本", "Agent"],
+    paragraphs: [
+      "中文介绍：Swyx 提出，衡量 AI 服务价格时，只比较每百万 token 的输入和输出单价已经越来越失真。Agent 为了完成一个任务，可能需要多轮推理、搜索、工具调用和返工，因此真正值得比较的是“成功完成一个任务一共花了多少钱”。",
+      "这意味着一个 token 单价更高、但一次就能把事情做对的模型，实际使用成本可能反而更低。对产品团队而言，模型评估也应该从价格表转向完整任务的成功率、耗时和总成本。",
+    ],
   }),
   feedItem({
     id: "x-aaron-ai-work",
@@ -302,6 +310,10 @@ const feedItems: Item[] = [
     sourceUrl: "https://x.com/levie/status/2081930301752942703",
     accent: "green",
     tags: ["X", "未来工作", "企业 AI"],
+    paragraphs: [
+      "中文介绍：Aaron Levie 认为，AI 对工作的影响不应只被理解为“用更少的人完成原来的事情”。一些企业正在招聘工程师、销售人员和内部 AI 部署人才，把 AI 用于过去因为成本太高或能力不足而没有处理的问题。",
+      "他的核心判断是，AI 可能让公司的服务范围扩张：同样的组织可以服务更多客户、处理更多长尾需求，并创造原本不存在的工作。只把 AI 当成削减成本工具的公司，可能会输给那些用 AI 扩大业务边界的公司。",
+    ],
   }),
   feedItem({
     id: "x-random-walker-labor",
@@ -315,6 +327,10 @@ const feedItems: Item[] = [
     sourceUrl: "https://x.com/random_walker/status/2082163285588107752",
     accent: "blue",
     tags: ["X 热榜", "AI 劳动", "观点"],
+    paragraphs: [
+      "中文介绍：Arvind Narayanan 通过一个思想实验讨论 AI、知识共享与劳动之间的关系：如果互联网和软件行业从未形成开放代码、公开教程与共享知识的传统，今天关于 AI 训练数据和技能来源的讨论会不会完全不同？",
+      "这条推文提醒读者，AI 并不是凭空产生能力，它建立在长期积累的人类知识、公开资料与集体协作之上。因此，讨论 AI 对劳动者的回报、训练数据的许可和技术收益如何分配时，不能只把它看成一个单纯的模型性能问题。",
+    ],
   }),
   feedItem({
     id: "paper-redesign",
@@ -328,6 +344,15 @@ const feedItems: Item[] = [
     sourceUrl: "https://huggingface.co/papers/2607.25565",
     accent: "violet",
     tags: ["热门论文", "Agent", "设计"],
+    paragraphs: [
+      "中文摘要：把一张普通的平面图片恢复成可编辑设计文件，是现代设计流程中常见且昂贵的瓶颈。真正的“可编辑”不仅要求画面看起来相似，还需要恢复字体、矢量形状、颜色、元素分组和图层顺序等多种属性。ReDesign 使用一个 Agent 框架，按步骤选择并组合不同工具，逐层构建可编辑的图层结构。",
+      "为了避免长流程中一个小错误不断累积，系统会在每次扩展图层时进行局部验证，决定接受、删减或重试。研究团队还建立了 Figma Edit Replay Benchmark，包含 909 个原始 Figma 文件和 14,796 条受控编辑指令，用真实编辑操作检验重建结果是否好用。实验显示，ReDesign 在保持视觉相似度的同时，在布局、颜色和文字编辑方面获得了更好的可编辑性。",
+    ],
+    utility: "如果这类技术成熟，普通人以后可能不必拿到原始设计文件，也能把海报、截图或旧宣传图恢复成可修改的素材。它会降低重新排版、改文案、换颜色和复用旧设计的门槛，但并不意味着可以忽略图片版权或原设计者的权益。",
+    externalLinks: [
+      { label: "查看 Hugging Face 论文页", url: "https://huggingface.co/papers/2607.25565" },
+      { label: "打开 arXiv 原文", url: "https://arxiv.org/abs/2607.25565" },
+    ],
   }),
   feedItem({
     id: "paper-hifi-umi",
@@ -341,6 +366,15 @@ const feedItems: Item[] = [
     sourceUrl: "https://huggingface.co/papers/2607.25895",
     accent: "violet",
     tags: ["热门论文", "机器人", "多模态"],
+    paragraphs: [
+      "中文摘要：训练能直接部署到真实机器人的操作策略，长期受制于高质量数据不足。真实机器人遥操作的数据准确，但成本高、很难扩大规模；不使用机器人的 UMI 数据更容易收集，却通常只能用于预训练，最后仍要加入少量真实机器人数据做后训练。HiFi-UMI 的问题是：如果把无机器人数据本身做得足够精确，能不能完全去掉最后这一步？",
+      "研究团队设计了一套便携的数据生产系统，同时提高轨迹精度、双手夹爪相对位置、同步精度和视野范围，在不使用外部跟踪设施的情况下，把末端执行器误差控制在约 3 毫米。只使用这些演示数据后训练的策略，可以直接部署到真实机器人，并在多个模型架构上接近真实遥操作数据的表现；最强策略在精密插入任务上达到 85% 成功率。团队还开源了 2,000 小时的高精度演示数据。",
+    ],
+    utility: "这篇论文离普通人的日常使用还有距离，但它可能降低机器人学习新家务和操作技能的成本。未来机器人公司不必为了每项技能反复占用真实机器采集数据，更可能通过人类示范快速扩充能力，从而影响家用机器人、仓储和制造自动化的普及速度。",
+    externalLinks: [
+      { label: "查看 Hugging Face 论文页", url: "https://huggingface.co/papers/2607.25895" },
+      { label: "打开 arXiv 原文", url: "https://arxiv.org/abs/2607.25895" },
+    ],
   }),
   feedItem({
     id: "paper-inmind",
@@ -485,6 +519,10 @@ const feedItems: Item[] = [
     sourceUrl: "https://x.com/nobel_824/status/2081962142056792475",
     accent: "blue",
     tags: ["X 热榜", "Claude Code", "安全"],
+    paragraphs: [
+      "中文介绍：作者复盘了两个月、超过一万行 Claude Code 安全告警日志，试图回答一个很实际的问题：网上推荐的许多安全设置，哪些真的在日常开发中触发，哪些只是看起来完整却很少发挥作用？",
+      "这条内容的重点不是让所有人照抄同一套配置，而是建议用真实告警和使用方式重新排序安全措施。应该优先处理高频、后果严重的风险，并持续检查误报；否则过多规则会制造噪音，让真正重要的告警更容易被忽略。",
+    ],
   }),
   feedItem({
     id: "paper-cve-attack",
@@ -498,6 +536,15 @@ const feedItems: Item[] = [
     sourceUrl: "https://huggingface.co/papers/2607.25572",
     accent: "violet",
     tags: ["热门论文", "安全", "数据质量"],
+    paragraphs: [
+      "中文摘要：研究要解决的是如何根据漏洞的文字描述，把 CVE 映射到 MITRE ATT&CK 的企业攻击技术。作者没有依赖容易产生扩展误差的间接映射链，而是使用 1,207 个由专家整理的 CVE 建立高质量数据集，并训练多标签分类器。这个模型相较零样本相似度基线显著提高了检索表现。",
+      "研究随后测试能否用大语言模型生成更多标签来扩充数据。最初不同实验看起来结论矛盾，但进一步复现发现，表面的提升主要来自评估噪音。LLM 标签与专家标注的一致度约为 0.39，在不同扩充规模下都没有带来可靠改进，数据接近一千条时还降低了稀有攻击技术的覆盖。修正评估流程后，结果再次显示：增加专家标注能稳定提高效果，增加 LLM 标签则不能。",
+    ],
+    utility: "它给普通人的启示不只属于网络安全：用 AI 快速生成更多数据，不等于数据真的更好。当招聘、医疗、风控或内容审核系统声称用了“大量 AI 标注数据”时，更应该追问标注是否经过专家验证、评估方法是否稳定，以及少数和罕见情况有没有因此被忽略。",
+    externalLinks: [
+      { label: "查看 Hugging Face 论文页", url: "https://huggingface.co/papers/2607.25572" },
+      { label: "打开 arXiv 原文", url: "https://arxiv.org/abs/2607.25572" },
+    ],
   }),
   feedItem({
     id: "paper-mage-vl",
@@ -543,7 +590,7 @@ const feedItems: Item[] = [
   }),
 ];
 
-const items: Item[] = [
+const fallbackItems: Item[] = [
   ...coreItems.map((item) => ({ ...item, inRecentWindow: false })),
   ...feedItems,
 ];
@@ -602,6 +649,7 @@ export function InfoHubApp({ user }: { user: ChatGPTUser | null }) {
   const [activeItem, setActiveItem] = useState<Item | null>(null);
   const [saved, setSaved] = useState<string[]>([]);
   const [completed, setCompleted] = useState<string[]>([]);
+  const [liveItems, setLiveItems] = useState<Item[]>([]);
   const [highlighted, setHighlighted] = useState(false);
   const [note, setNote] = useState("");
   const [noteOpen, setNoteOpen] = useState(false);
@@ -610,6 +658,25 @@ export function InfoHubApp({ user }: { user: ChatGPTUser | null }) {
   const [sectionPreferences, setSectionPreferences] = useState<SectionPreference[]>(
     defaultSectionPreferences,
   );
+  const items = liveItems.length > 0 ? liveItems : fallbackItems;
+
+  useEffect(() => {
+    let cancelled = false;
+    void fetch("/api/feed")
+      .then(async (response) => {
+        if (!response.ok) return null;
+        return (await response.json()) as { items?: Item[] };
+      })
+      .then((data) => {
+        if (!cancelled && Array.isArray(data?.items) && data.items.length > 0) {
+          setLiveItems(data.items);
+        }
+      })
+      .catch(() => undefined);
+    return () => {
+      cancelled = true;
+    };
+  }, []);
 
   useEffect(() => {
     const stored = window.localStorage.getItem("infohub-demo-note");
@@ -705,7 +772,7 @@ export function InfoHubApp({ user }: { user: ChatGPTUser | null }) {
           item.section &&
           item.inRecentWindow !== false,
       ),
-    [selectedDate],
+    [items, selectedDate],
   );
   const orderedSections = sectionPreferences
     .map((preference) => ({
@@ -839,11 +906,13 @@ export function InfoHubApp({ user }: { user: ChatGPTUser | null }) {
           </div>
           <h1>{activeItem.title}</h1>
           <p className="reader-deck">{activeItem.summary}</p>
-          <div className="tag-row">
-            {activeItem.tags.map((tag) => (
-              <span key={tag}>{tag}</span>
-            ))}
-          </div>
+          {activeItem.section !== "papers" && (
+            <div className="tag-row">
+              {activeItem.tags.map((tag) => (
+                <span key={tag}>{tag}</span>
+              ))}
+            </div>
+          )}
           <div className="article-rule" />
           {activeItem.takeaways && activeItem.takeaways.length > 0 && (
             <section className="reader-takeaways">
@@ -866,17 +935,60 @@ export function InfoHubApp({ user }: { user: ChatGPTUser | null }) {
               ))}
             </section>
           )}
-          <div className="article-body">
-            {activeItem.paragraphs.map((paragraph, index) => (
-              <p
-                key={paragraph}
-                className={highlighted && index === 1 ? "highlighted" : ""}
-              >
-                {paragraph}
-              </p>
-            ))}
-          </div>
-          <section className="source-links" aria-label="相关链接">
+          {activeItem.section === "papers" ? (
+            <>
+              <section className="paper-abstract">
+                <span>ABSTRACT</span>
+                <h2>中文摘要</h2>
+                <div className="article-body">
+                  {activeItem.paragraphs.map((paragraph, index) => (
+                    <p key={paragraph} className={highlighted && index === 1 ? "highlighted" : ""}>
+                      {paragraph.replace(/^中文摘要：/, "")}
+                    </p>
+                  ))}
+                </div>
+              </section>
+              <section className="paper-keywords">
+                <span>KEYWORDS</span>
+                <h2>关键词</h2>
+                <div className="tag-row">
+                  {activeItem.tags.map((tag) => <span key={tag}>{tag}</span>)}
+                </div>
+              </section>
+              <section className="paper-utility">
+                <span>WHY IT MATTERS</span>
+                <h2>对非技术读者有什么用</h2>
+                <p>{activeItem.utility}</p>
+              </section>
+            </>
+          ) : activeItem.sections && activeItem.sections.length > 0 ? (
+            <div className="article-body article-sections">
+              {activeItem.sections.map((section) => (
+                <section key={`${section.title}-${section.timeRange}`}>
+                  <h3>{section.title} <small>{section.timeRange}</small></h3>
+                  {section.paragraphs.map((paragraph) => <p key={paragraph}>{paragraph}</p>)}
+                </section>
+              ))}
+            </div>
+          ) : (
+            <div className="article-body">
+              {activeItem.paragraphs.map((paragraph, index) => (
+                <p
+                  key={paragraph}
+                  className={highlighted && index === 1 ? "highlighted" : ""}
+                >
+                  {paragraph}
+                </p>
+              ))}
+            </div>
+          )}
+          {activeItem.section === "x" ? (
+            <p className="direct-link">
+              <strong>链接直达：</strong>
+              <a href={activeItem.sourceUrl} target="_blank" rel="noreferrer">{activeItem.sourceUrl}</a>
+            </p>
+          ) : (
+            <section className="source-links" aria-label="相关链接">
               <h2>相关链接</h2>
               {readerLinks.map((link) => (
                 <a key={link.url} href={link.url} target="_blank" rel="noreferrer">
@@ -884,7 +996,8 @@ export function InfoHubApp({ user }: { user: ChatGPTUser | null }) {
                   <ChevronRight size={16} />
                 </a>
               ))}
-          </section>
+            </section>
+          )}
           <div className="article-end">
             <span>END</span>
           </div>

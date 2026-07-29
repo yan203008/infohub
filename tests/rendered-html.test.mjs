@@ -5,6 +5,8 @@ import test from "node:test";
 const appFile = new URL("../app/infohub-app.tsx", import.meta.url);
 const adminFile = new URL("../app/admin/admin-console.tsx", import.meta.url);
 const youtubePromptFile = new URL("../lib/youtube-processing-prompt.ts", import.meta.url);
+const collectorFile = new URL("../scripts/collect.mjs", import.meta.url);
+const workflowFile = new URL("../.github/workflows/collect.yml", import.meta.url);
 
 test("builds the InfoHub daily experience", async () => {
   await access(new URL("../dist/server/index.js", import.meta.url));
@@ -30,6 +32,25 @@ test("builds the InfoHub daily experience", async () => {
   assert.match(source, /2026-07-29/);
   assert.match(source, /打开 GitHub 仓库/);
   assert.match(source, /最近两天没有新视频/);
+  assert.match(source, /中文摘要/);
+  assert.match(source, /对非技术读者有什么用/);
+  assert.match(source, /链接直达：/);
+});
+
+test("includes the automatic multi-source collector", async () => {
+  const [collector, workflow] = await Promise.all([
+    readFile(collectorFile, "utf8"),
+    readFile(workflowFile, "utf8"),
+  ]);
+
+  assert.match(collector, /collectFollowBuilders/);
+  assert.match(collector, /collectTechnicalX/);
+  assert.match(collector, /collectPapers/);
+  assert.match(collector, /collectGithub/);
+  assert.match(collector, /collectYoutube/);
+  assert.match(collector, /MOONSHOT_API_KEY/);
+  assert.match(collector, /\/api\/ingest/);
+  assert.match(workflow, /cron: "17 \* \* \* \*"/);
 });
 
 test("includes both configured YouTube sources and original links", async () => {

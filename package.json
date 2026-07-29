@@ -11,7 +11,9 @@
     "start": "WRANGLER_LOG_PATH=.wrangler/wrangler.log vinext start",
     "test": "npm run build && node --test tests/rendered-html.test.mjs",
     "lint": "eslint . --ignore-pattern dist --ignore-pattern .next",
-    "db:generate": "drizzle-kit generate"
+    "db:generate": "drizzle-kit generate",
+    "collect": "node --env-file-if-exists=.env.local scripts/collect.mjs",
+    "collect:dry": "node --env-file-if-exists=.env.local scripts/collect.mjs --dry-run"
   },
   "dependencies": {
     "drizzle-orm": "0.45.2",

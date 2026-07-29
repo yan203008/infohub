@@ -91,6 +91,23 @@ actions tied to the current ChatGPT user. Leave public content anonymous.
 - `npm run build`: verify the vinext build output
 - `npm test`: build the starter and verify its rendered loading skeleton
 - `npm run db:generate`: generate Drizzle migrations after schema changes
+- `npm run collect:dry`: collect recent sources and write a local report without uploading
+- `npm run collect`: collect, process with Kimi, and upload through the protected ingest API
+
+## Automatic Collection
+
+Copy `.env.example` to `.env.local` for local runs. Keep real values out of Git:
+
+- `MOONSHOT_API_KEY`: Kimi / Moonshot content processing
+- `INGEST_SECRET`: shared secret protecting `/api/ingest`
+- `INFOHUB_BASE_URL`: deployed InfoHub origin
+- `ADMIN_EMAIL`: the only account allowed to open `/admin`
+
+The hourly GitHub Actions workflow uses repository secrets with the same names.
+It fetches Follow Builders, the AttentionVC AI X leaderboard, Hugging Face Daily
+Papers, GitHub Trending, and configured YouTube channels. New YouTube videos are
+transcribed with `baoyu-youtube-transcript`, processed by Kimi, and uploaded to
+D1. A failure in one source is recorded without stopping the other sources.
 
 ## Learn More
 
