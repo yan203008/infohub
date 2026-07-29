@@ -26,7 +26,7 @@ import {
   Video,
   X,
 } from "lucide-react";
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useEffect, useLayoutEffect, useMemo, useRef, useState } from "react";
 import type { ChatGPTUser } from "./chatgpt-auth";
 import generatedFeed from "./generated-feed.json";
 
@@ -720,7 +720,7 @@ export function InfoHubApp({ user }: { user: ChatGPTUser | null }) {
 
   useEffect(() => {
     if (!activeItem) return;
-    let frame = window.requestAnimationFrame(() => window.scrollTo({ top: 0, behavior: "auto" }));
+    let frame = 0;
     const updateProgress = () => {
       window.cancelAnimationFrame(frame);
       frame = window.requestAnimationFrame(() => {
@@ -737,6 +737,13 @@ export function InfoHubApp({ user }: { user: ChatGPTUser | null }) {
       window.removeEventListener("scroll", updateProgress);
       window.removeEventListener("resize", updateProgress);
     };
+  }, [activeItem]);
+
+  useLayoutEffect(() => {
+    if (!activeItem) return;
+    window.scrollTo(0, 0);
+    const frame = window.requestAnimationFrame(() => window.scrollTo(0, 0));
+    return () => window.cancelAnimationFrame(frame);
   }, [activeItem]);
 
   useEffect(() => {
@@ -867,10 +874,10 @@ export function InfoHubApp({ user }: { user: ChatGPTUser | null }) {
   function toggleSaved(id: string) {
     if (saved.includes(id)) {
       setContentState(id, null);
-      setToast("已从待读移除");
+      setToast("已取消感兴趣");
     } else {
       setContentState(id, "saved");
-      setToast("已加入待读，可在“待读”中查看");
+      setToast("已标记为感兴趣，可在“感兴趣”中查看");
     }
   }
 
@@ -887,6 +894,7 @@ export function InfoHubApp({ user }: { user: ChatGPTUser | null }) {
 
   function openItem(item: Item) {
     returnScrollYRef.current = window.scrollY;
+    window.scrollTo(0, 0);
     setActiveItem(item);
   }
 
@@ -1007,7 +1015,7 @@ export function InfoHubApp({ user }: { user: ChatGPTUser | null }) {
           <button
             className={`icon-button ${saved.includes(activeItem.id) ? "is-active" : ""}`}
             onClick={() => toggleSaved(activeItem.id)}
-            aria-label={saved.includes(activeItem.id) ? "移出待读" : "加入待读"}
+            aria-label={saved.includes(activeItem.id) ? "取消感兴趣" : "标记为感兴趣"}
           >
             <Bookmark size={20} fill={saved.includes(activeItem.id) ? "currentColor" : "none"} />
           </button>
@@ -1184,8 +1192,8 @@ export function InfoHubApp({ user }: { user: ChatGPTUser | null }) {
               {saved.includes(activeItem.id)
                 ? "完成"
                 : completed.includes(activeItem.id)
-                  ? "再次待读"
-                  : "加入待读"}
+                  ? "再次标记"
+                  : "感兴趣"}
             </span>
           </button>
           <a href={activeItem.sourceUrl} target="_blank" rel="noreferrer">
@@ -1267,8 +1275,7 @@ export function InfoHubApp({ user }: { user: ChatGPTUser | null }) {
           <NavButton
             active={tab === "reading"}
             icon={<Bookmark size={20} />}
-            label="待读"
-            count={queueItems.length}
+            label="感兴趣"
             onClick={() => setTab("reading")}
           />
           <NavButton
@@ -1448,7 +1455,7 @@ export function InfoHubApp({ user }: { user: ChatGPTUser | null }) {
             <section className="queue-summary">
               <Bookmark size={19} />
               <div>
-                <strong>{queueItems.length} 篇待读</strong>
+                <strong>{queueItems.length} 篇感兴趣内容</strong>
                 <span>{user ? "已在手机和网页间同步" : "登录后可跨端同步"}</span>
               </div>
             </section>
@@ -1468,7 +1475,7 @@ export function InfoHubApp({ user }: { user: ChatGPTUser | null }) {
             ) : (
               <div className="empty-daily queue-empty">
                 <Bookmark size={24} />
-                <h3>还没有待读内容</h3>
+                <h3>还没有感兴趣的内容</h3>
                 <p>在每日首页点击书签，感兴趣的内容就会集中到这里。</p>
                 <button onClick={() => setTab("daily")}>返回每日</button>
               </div>
@@ -1574,8 +1581,7 @@ export function InfoHubApp({ user }: { user: ChatGPTUser | null }) {
         <NavButton
           active={tab === "reading"}
           icon={<Bookmark size={21} />}
-          label="待读"
-          count={queueItems.length}
+          label="感兴趣"
           onClick={() => setTab("reading")}
         />
         <NavButton
@@ -1695,9 +1701,7 @@ function ContentCard({
         <div className="card-copy">
           <div className="card-meta">
             <span>{item.sourceLabel}</span>
-            <i />
-            <span>{item.time}</span>
-            {saved && <b className="queue-badge">待读</b>}
+            {saved && <b className="queue-badge">感兴趣</b>}
             {completed && <b className="read-badge">已读</b>}
           </div>
           <h3>{item.title}</h3>
@@ -1711,7 +1715,7 @@ function ContentCard({
       <button
         className={`save-button ${saved ? "is-active" : ""}`}
         onClick={onSave}
-        aria-label={saved ? "移出待读" : "加入待读"}
+        aria-label={saved ? "取消感兴趣" : "标记为感兴趣"}
       >
         <Bookmark size={18} fill={saved ? "currentColor" : "none"} />
       </button>

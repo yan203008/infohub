@@ -16,6 +16,7 @@ const cutoff = new Date(`${shanghaiDate(new Date(now.valueOf() - 24 * 60 * 60 * 
 const moonshotKey = process.env.MOONSHOT_API_KEY?.trim();
 const moonshotBaseUrl = (process.env.MOONSHOT_BASE_URL || "https://api.moonshot.cn/v1").replace(/\/$/, "");
 const moonshotModel = process.env.MOONSHOT_MODEL || "kimi-k3";
+const supadataKey = process.env.SUPADATA_API_KEY?.trim();
 
 function shanghaiDate(value = now) {
   return new Intl.DateTimeFormat("en-CA", {
@@ -617,7 +618,128 @@ async function configuredYoutubeSources() {
   })));
 }
 
+function youtubeVideoId(value) {
+  return value.match(/[?&]v=([\w-]{11})/)?.[1]
+    || value.match(/youtu\.be\/([\w-]{11})/)?.[1]
+    || (/^[\w-]{11}$/.test(value) ? value : undefined);
+}
+
+async function supadataRequest(path, params = {}) {
+  if (!supadataKey) throw new Error("SUPADATA_API_KEY is not configured");
+  const url = new URL(`https://api.supadata.ai/v1${path}`);
+  Object.entries(params).forEach(([key, value]) => url.searchParams.set(key, String(value)));
+  const response = await fetch(url, {
+    headers: { "x-api-key": supadataKey },
+    signal: AbortSignal.timeout(60_000),
+  });
+  const payload = await response.json().catch(() => ({}));
+  if (!response.ok) throw new Error(`Supadata returned HTTP ${response.status}`);
+  return { response, payload };
+}
+
+function transcriptText(payload) {
+  if (typeof payload.content === "string") return payload.content;
+  if (!Array.isArray(payload.content)) return "";
+  const stamp = (milliseconds) => {
+    const totalSeconds = Math.max(0, Math.floor(Number(milliseconds || 0) / 1000));
+    const hours = String(Math.floor(totalSeconds / 3600)).padStart(2, "0");
+    const minutes = String(Math.floor((totalSeconds % 3600) / 60)).padStart(2, "0");
+    const seconds = String(totalSeconds % 60).padStart(2, "0");
+    return `${hours}:${minutes}:${seconds}`;
+  };
+  return payload.content.map((chunk) => {
+    const end = Number(chunk.offset || 0) + Number(chunk.duration || 0);
+    return `[${stamp(chunk.offset)} → ${stamp(end)}] ${chunk.text}`;
+  }).join("\n");
+}
+
+async function supadataTranscript(videoId) {
+  const cachePath = join(root, "work/youtube-transcripts", `supadata-${videoId}.txt`);
+  try {
+    const cached = await readFile(cachePath, "utf8");
+    if (cached.trim()) return cached;
+  } catch {
+    // Fetch and cache below.
+  }
+  const remember = async (text) => {
+    if (!text) return text;
+    await mkdir(dirname(cachePath), { recursive: true });
+    await writeFile(cachePath, text);
+    return text;
+  };
+  const { response, payload } = await supadataRequest("/transcript", {
+    url: `https://www.youtube.com/watch?v=${videoId}`,
+    text: false,
+    chunkSize: 2000,
+    mode: "auto",
+  });
+  if (response.status === 200) return remember(transcriptText(payload));
+  const jobId = payload.jobId;
+  if (!jobId) throw new Error("Supadata did not return transcript or job ID");
+  for (let attempt = 0; attempt < 300; attempt += 1) {
+    await new Promise((resolveDelay) => setTimeout(resolveDelay, 2_000));
+    const result = await supadataRequest(`/transcript/${jobId}`);
+    const text = transcriptText(result.payload);
+    if (text) return remember(text);
+  }
+  throw new Error("Supadata transcript job timed out");
+}
+
+function splitTranscript(transcript, maximumCharacters = 12_000) {
+  const chunks = [];
+  let current = "";
+  for (const line of transcript.split("\n")) {
+    if (current && current.length + line.length + 1 > maximumCharacters) {
+      chunks.push(current);
+      current = "";
+    }
+    current += `${current ? "\n" : ""}${line}`;
+  }
+  if (current) chunks.push(current);
+  return chunks;
+}
+
+async function processYoutubeTranscript(title, transcript) {
+  const chunks = splitTranscript(transcript);
+  const prompt = "你是 YouTube 长内容编辑。忠实处理给定的连续文字稿片段，不能删减论点、论据、案例、步骤、条件、例外和重要细节；只删除无信息量口头禅和完全重复。返回 JSON：{items:[{id,titleZh,summary,keywords,takeaways,sections:[{title,timeRange,paragraphs}]}]}。titleZh 是适合中文阅读的标题；takeaways 为该片段最可应用的内容；sections 按时间顺序整理成阅读友好的中文文章，每节必须使用片段中真实的起止时间戳；不得补充文字稿外信息。";
+  const inputs = chunks.map((transcriptChunk, id) => ({ id, title, transcript: transcriptChunk }));
+  const processed = await kimiItems(
+    prompt,
+    inputs,
+    { batchSize: 1, maxTokens: 6_500, concurrency: 2 },
+  );
+  for (const input of inputs.filter((entry) => !processed.some((item) => Number(item.id) === entry.id))) {
+    try {
+      const retry = await kimiJson(prompt, [input], { maxTokens: 6_500, timeoutMs: 5 * 60 * 1000 });
+      processed.push(...(retry.items || []));
+      console.log(`[kimi] youtube segment ${input.id + 1}/${inputs.length} recovered`);
+    } catch (error) {
+      console.warn(`[kimi] youtube segment ${input.id + 1}/${inputs.length} retry failed: ${error.message}`);
+    }
+  }
+  if (inputs.some((entry) => !processed.some((item) => Number(item.id) === entry.id))) {
+    throw new Error("Kimi did not process every YouTube transcript segment");
+  }
+  processed.sort((a, b) => Number(a.id) - Number(b.id));
+  const sections = processed.flatMap((item) => Array.isArray(item.sections) ? item.sections : []);
+  if (sections.length === 0) throw new Error("Kimi did not return YouTube article sections");
+  const summaries = processed.map((item) => item.summary).filter(Boolean);
+  return {
+    title: processed.find((item) => item.titleZh)?.titleZh || title,
+    summary: summaries[0] || "已根据完整视频文字稿整理为中文阅读文章。",
+    keywords: [...new Set(processed.flatMap((item) => Array.isArray(item.keywords) ? item.keywords : []))].slice(0, 8),
+    takeaways: [...new Set(processed.flatMap((item) => Array.isArray(item.takeaways) ? item.takeaways : []))].slice(0, 10),
+    sections,
+  };
+}
+
+async function supadataVideo(value) {
+  const { payload } = await supadataRequest("/youtube/video", { id: value });
+  return payload;
+}
+
 async function transcriptFor(videoId) {
+  if (supadataKey) return supadataTranscript(videoId);
   const script = process.env.BAOYU_TRANSCRIPT_SCRIPT || join(
     homedir(),
     ".codex/skills/baoyu-youtube-transcript/scripts/main.ts",
@@ -635,22 +757,38 @@ async function transcriptFor(videoId) {
 }
 
 async function collectYoutube() {
-  const youtubeSources = await configuredYoutubeSources();
-  const videos = (await Promise.all(youtubeSources.map(async (channel) => {
-    return (await youtubeFeed(channel.channelId))
-      .filter((video) => recent(video.publishedAt))
-      .map((video) => ({ ...video, channel }));
-  }))).flat();
+  const previewUrl = process.env.INFOHUB_PREVIEW_YOUTUBE_URL?.trim();
+  let videos;
+  if (previewUrl) {
+    const videoId = youtubeVideoId(previewUrl);
+    if (!videoId) throw new Error("Invalid INFOHUB_PREVIEW_YOUTUBE_URL");
+    const metadata = await supadataVideo(videoId);
+    videos = [{
+      videoId,
+      title: metadata.title,
+      publishedAt: now.toISOString(),
+      channel: {
+        id: `youtube-preview-${metadata.channel?.id || videoId}`,
+        name: `${metadata.channel?.name || "YouTube"} · 临时示例`,
+        url: metadata.channel?.id
+          ? `https://www.youtube.com/channel/${metadata.channel.id}`
+          : previewUrl,
+      },
+    }];
+  } else {
+    const youtubeSources = await configuredYoutubeSources();
+    videos = (await Promise.all(youtubeSources.map(async (channel) => {
+      return (await youtubeFeed(channel.channelId))
+        .filter((video) => recent(video.publishedAt))
+        .map((video) => ({ ...video, channel }));
+    }))).flat();
+  }
 
   const items = [];
   for (const video of videos) {
     try {
       const transcript = await transcriptFor(video.videoId);
-      const processed = await kimiJson(
-        "你是 YouTube 长内容编辑。完整覆盖文字稿，不删减论点、论据、案例、步骤、条件、例外和重要细节；删除无信息量口头禅与完全重复。先给可应用的 Takeaways，再按时间顺序整理成阅读友好的中文文章。返回 JSON：{title,summary,keywords,takeaways,sections:[{title,timeRange,paragraphs}]}。takeaways 5-10 条；每个 section 必须有起止时间戳；不得编造文字稿外信息。",
-        { title: video.title, transcript },
-        { maxTokens: 20_000, timeoutMs: 10 * 60 * 1000 },
-      );
+      const processed = await processYoutubeTranscript(video.title, transcript);
       if (!Array.isArray(processed.takeaways) || !Array.isArray(processed.sections)) {
         throw new Error("Kimi did not return complete YouTube sections");
       }

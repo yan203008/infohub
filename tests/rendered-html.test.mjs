@@ -23,8 +23,9 @@ test("builds the InfoHub daily experience", async () => {
   assert.match(source, /调整首页板块/);
   assert.match(source, /移出首页/);
   assert.match(source, /infohub-section-preferences/);
-  assert.match(source, /label="待读"/);
-  assert.match(source, /加入待读/);
+  assert.match(source, /label="感兴趣"/);
+  assert.match(source, /标记为感兴趣/);
+  assert.doesNotMatch(source, /label="感兴趣"\s+count=/);
   assert.match(source, /完成/);
   assert.doesNotMatch(source, /label="发现"/);
   assert.doesNotMatch(source, /不感兴趣/);
@@ -49,6 +50,7 @@ test("includes the automatic multi-source collector", async () => {
   assert.match(collector, /collectGithub/);
   assert.match(collector, /collectYoutube/);
   assert.match(collector, /MOONSHOT_API_KEY/);
+  assert.match(collector, /SUPADATA_API_KEY/);
   assert.match(collector, /\/api\/ingest/);
   assert.match(workflow, /cron: "17 \* \* \* \*"/);
 });
