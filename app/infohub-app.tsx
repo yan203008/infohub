@@ -15,7 +15,7 @@ import {
   Headphones,
   Eye,
   EyeOff,
-  MoreHorizontal,
+  ExternalLink,
   PenLine,
   Play,
   Search,
@@ -1011,9 +1011,16 @@ export function InfoHubApp({ user }: { user: ChatGPTUser | null }) {
           >
             <Bookmark size={20} fill={saved.includes(activeItem.id) ? "currentColor" : "none"} />
           </button>
-          <button className="icon-button" aria-label="更多操作">
-            <MoreHorizontal size={22} />
-          </button>
+          <a
+            className="icon-button"
+            href={activeItem.sourceUrl}
+            target="_blank"
+            rel="noreferrer"
+            aria-label="打开原始内容"
+            title="打开原始内容"
+          >
+            <ExternalLink size={20} />
+          </a>
         </header>
 
         <article className="reader" ref={readerRef}>
