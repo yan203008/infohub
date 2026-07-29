@@ -48,7 +48,7 @@ export function AdminConsole({ adminName }: { adminName: string }) {
   const [settings, setSettings] = useState({
     aiProvider: "kimi",
     aiBaseUrl: "https://api.moonshot.cn/v1",
-    aiModel: "kimi-k2.6",
+    aiModel: "kimi-k3",
     digestTime: "08:00",
     articlePrompt:
       "将字幕整理成结构清晰、忠于原意的中文文章，删除口语赘词，保留关键论据与案例。",

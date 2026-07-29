@@ -1,0 +1,365 @@
+[
+  {
+    "section": "x",
+    "digestDate": "2026-07-28",
+    "publishedDate": "7/28",
+    "time": "昨日采集",
+    "readTime": "3 分钟",
+    "accent": "green",
+    "inRecentWindow": true,
+    "paragraphs": [
+      "标题:Claude Code 的安全设置,要做的事按顺序全部写出来(Claude 官方推荐方法)。正文预览:「我把官方安全插件运行了两个月,把 17,385 行日志全部读完了。25 条检测规则中,实际触发过的只有 1 条。」",
+      "核心观点:这是一篇基于实测数据的 Claude Code 安全加固教程。作者用「两个月、17,385 行日志、25 条规则只触发 1 条」这组具体数字,暗示多数检测规则在真实使用中处于「沉默」状态,从而引出按优先级/顺序配置安全的必要性。阅读时需注意的语境:第一,1/25 的触发率来自作者个人的使用场景和项目类型,样本不具普遍性,不能据此断定插件「没用」——安全规则的价值本就在于低频但关键的拦截;第二,标题声称「Claude 官方推荐法」,读者可对照顾 Anthropic 官方文档核实其依据;第三,预览未透露具体触发的是哪条规则、以及作者给出的操作顺序是什么,这些核心内容需阅读原文确认。作者是日本专注 Claude Code 使用支援的博主。"
+    ],
+    "id": "attentionvc-ai:2081962142056792475",
+    "title": "Claude Code 的安全设置:按什么顺序做,我全部写出来(Claude 官方推荐方法)",
+    "sourceUrl": "https://x.com/nobel_824/status/2081962142056792475",
+    "summary": "作者将 Claude 官方安全插件运行了两个月,通读全部 17,385 行日志后发现:25 条检测规则中实际触发的只有 1 条。文章据此按官方推荐方法,完整写出 Claude Code 安全配置的执行顺序。",
+    "tags": [
+      "Claude Code",
+      "安全插件",
+      "日志分析",
+      "检测规则",
+      "官方推荐配置",
+      "实战复盘"
+    ],
+    "source": "daily",
+    "sourceLabel": "tatsuki | Claude Code活用支援 · 技术动态 X 热榜",
+    "publishedAt": "2026-07-28T04:37:10.000Z"
+  },
+  {
+    "section": "x",
+    "digestDate": "2026-07-28",
+    "publishedDate": "7/28",
+    "time": "昨日采集",
+    "readTime": "3 分钟",
+    "accent": "green",
+    "inRecentWindow": true,
+    "paragraphs": [
+      "标题:如何在 Claude Code 中构建一个 AI 视频工作室。正文预览:「我把 Claude Code 变成了一个真正能运转的电影工作室,现在我要把整套系统交给你:技能、提示词、循环,以及将它们串在一起的六阶段流水线。每个阶段都依托……」(预览在此截断)",
+      "核心观点:把 Claude Code 当作编排中枢,用多智能体 + 技能 + 提示词循环搭建一条分六个阶段的 AI 视频(电影)生产流水线,并以「手把手交给你」的教程形式分享。阅读时需注意的语境:第一,标签中出现 seedance(字节跳动的视频生成模型)、MCP 和 multi-agent,暗示流水线可能调用外部视频生成模型并通过 MCP 连接工具,但预览并未明说,属于合理推测而非事实;第二,「完整系统交给你」是推广性表述,实际可复现程度、API 成本、成片质量都需在正文和评论区验证;第三,预览在「each stage leans」处截断,六个阶段各自的具体职责未知,不应自行脑补细节。作者粉丝量较大,内容带有明显的展示与引流属性。"
+    ],
+    "id": "attentionvc-ai:2082107255449919582",
+    "title": "如何在 Claude Code 里搭建一个 AI 视频工作室",
+    "sourceUrl": "https://x.com/EXM7777/status/2082107255449919582",
+    "summary": "作者声称把 Claude Code 改造成了一个可实际运转的「电影工作室」,并公开完整系统:技能(skills)、提示词、循环机制,以及把它们串联起来的六阶段流水线。",
+    "tags": [
+      "Claude Code",
+      "AI 视频生成",
+      "六阶段流水线",
+      "多智能体",
+      "Seedance",
+      "MCP"
+    ],
+    "source": "daily",
+    "sourceLabel": "Machina · 技术动态 X 热榜",
+    "publishedAt": "2026-07-28T14:13:48.000Z"
+  },
+  {
+    "section": "papers",
+    "digestDate": "2026-07-29",
+    "publishedDate": "7/29",
+    "time": "今天采集",
+    "readTime": "3 分钟",
+    "accent": "violet",
+    "inRecentWindow": true,
+    "paragraphs": [
+      "在策略蒸馏（OPD）将逐词元的监督建立在学生模型自己生成的轨迹之上，但存在“前缀失败”问题：一旦学生模型在推理开头走错了方向，后续所有生成内容都建立在这个偏差之上，产生方向错误的续写，既引发不可靠的监督信号，也浪费计算资源。",
+      "研究者发现，在失败的前缀上存在一种“师生续写不对称”现象：面对同样的错误开头，教师模型倾向于扭转方向，而学生模型往往沿原方向继续走下去。他们把这种差异转化为一种无需人工标注的“交接触发信号”，提出接力在策略蒸馏（Relay-OPD）：训练时在检测到的触发点让教师短暂接管，生成一段“教师赛程”，随后学生重新接手，并在拼接而成的接力轨迹上接受优化。有限的接力预算把干预集中在关键的早期位置，同时避免学生策略偏离自身太远。",
+      "实验以 Qwen3-4B-Instruct-2507 为教师、Qwen3-0.6B/1.7B-Non-Thinking 为学生，在八个数学推理基准上，Relay-OPD 在每个基准上都取得最佳或次佳成绩：1.7B 学生模型平均比标准 OPD 高出 5.73 个百分点，比最强基线 FastOPD 高出 1.49 个百分点，0.6B 模型也有一致的提升。此外，训练轨迹长度减少了 50% 以上。"
+    ],
+    "utility": "这项研究解决的是“如何用更少的算力把小模型教得更聪明”的问题。如果方法被采用，普通人可能间接受益：手机、电脑等个人设备上运行的小模型在数学和推理任务上表现更好，AI 服务的训练成本下降也可能让相关产品更便宜、响应更快。对关注 AI 行业的从业者和投资者来说，它展示了提升小模型性价比的一条具体技术路径。需要注意的是，这些结论来自特定模型和数学推理基准上的实验，能否推广到其他任务和场景，论文本身并未覆盖。",
+    "externalLinks": [
+      {
+        "label": "查看 Hugging Face 论文页",
+        "url": "https://huggingface.co/papers/2607.26057"
+      },
+      {
+        "label": "打开 arXiv 原文",
+        "url": "https://arxiv.org/abs/2607.26057"
+      }
+    ],
+    "id": "huggingface-daily-papers:2607.26057",
+    "title": "传递接力棒：基于轨迹接力的在策略蒸馏",
+    "sourceUrl": "https://huggingface.co/papers/2607.26057",
+    "summary": "本文提出一种名为 Relay-OPD 的小模型训练方法：在“在策略蒸馏”过程中，一旦检测到学生模型在推理早期走错方向，就让教师模型短暂接管、纠正方向，再交还学生继续生成。在八个数学推理基准上，该方法全面优于现有蒸馏方法，且训练轨迹长度减少一半以上，明显节省了训练算力。",
+    "tags": [
+      "知识蒸馏",
+      "大语言模型",
+      "小模型训练",
+      "数学推理",
+      "训练效率"
+    ],
+    "source": "daily",
+    "sourceLabel": "Hugging Face Daily Papers",
+    "publishedAt": "2026-07-28T17:59:46Z"
+  },
+  {
+    "section": "papers",
+    "digestDate": "2026-07-29",
+    "publishedDate": "7/29",
+    "time": "今天采集",
+    "readTime": "3 分钟",
+    "accent": "violet",
+    "inRecentWindow": true,
+    "paragraphs": [
+      "通用机器人操作策略越来越普遍地采用建立在大型预训练骨干网络之上的“动作分块”流策略。然而，这些动作块以开环方式执行：一旦开始执行，策略就无法对中途到达的感知信息做出反应，牺牲了“反应性”。更频繁地重新规划本可以恢复反应性，但从感知到动作的整个流程（一个大型骨干网络加上多步去噪过程）速度太慢——这种延迟使频繁重规划成为不可能，导致已承诺执行的动作很快过时。因此，这类策略并不适合需要动态、闭环控制的场景。",
+      "研究者提出了πR²，它在保留大型骨干网络、富有表现力的多模态策略以及多动作预测能力的同时，让这些策略既具备反应性又能实时运行。πR²基于扩散强制（diffusion forcing）中的逐位置噪声调度，贡献了两个核心思路。第一，它将条件输入拆分为快速通道和慢速通道：快速通道承载每个时刻都新鲜更新的本体感知信息（机器人自身关节状态等），慢速通道则异步更新视觉-语言特征。这样，策略在执行一个动作块的过程中就能对本体感知做出即时反应，同时容忍略显过时的视觉信息。第二，一种延迟自适应的流调度机制把正在执行中的动作当作“修补”（inpainting）条件来处理，并在每次调用时仅用一步去噪就输出动作，使同一个训练好的模型能够适应不同硬件的延迟水平。",
+      "πR²只需对现有架构做极少改动，便可从预训练策略微调得到。研究者将其应用于真实 xArm6 机械臂加 XHand 灵巧手平台上的 GR00T-N1.7 模型：闭环重规划速度约为原基础策略的4倍（在一块 A5000 GPU 上达到约25Hz），每40毫秒就能基于一次新的观测采取行动。在仿真和真实世界的操作任务中，与最强基线相比，πR²将成功率在仿真中最高提升23%，在真实世界中最高提升30%。"
+    ],
+    "utility": "这项研究解决的是机器人“反应慢半拍”的问题：目前许多智能机器人一旦开始做一个动作，就无法在中途根据新情况调整，比如抓取移动的物体或避开突然出现的人。πR²让机器人能每40毫秒根据最新感知调整动作，且无需推翻现有模型、改动成本较低。对普通人来说，这意味着未来的家庭服务机器人、仓储物流机器人在动态环境中会更灵活、更安全；对关注自动化投资或职业变化的人来说，这提示机器人在非结构化环境（而非只有流水线）中胜任工作的能力正在稳步进步。需要注意的是，这些成果是在特定机械臂平台和有限任务上验证的，成功率提升也是“最高”而非普遍水平，离普及应用仍有距离。",
+    "externalLinks": [
+      {
+        "label": "查看 Hugging Face 论文页",
+        "url": "https://huggingface.co/papers/2607.26055"
+      },
+      {
+        "label": "打开 arXiv 原文",
+        "url": "https://arxiv.org/abs/2607.26055"
+      }
+    ],
+    "id": "huggingface-daily-papers:2607.26055",
+    "title": "πR²：具备反应能力的实时流策略",
+    "sourceUrl": "https://huggingface.co/papers/2607.26055",
+    "summary": "本文提出πR²，一种让基于大型预训练模型的机器人操作策略在保留原有能力的同时实现实时反应的方法。它将快速更新的本体感知与异步更新的视觉语言信息分通道处理，并以单步去噪输出动作，使机器人能在真实硬件上每40毫秒依据新观测调整行为，操作成功率最高提升30%。",
+    "tags": [
+      "机器人操作策略",
+      "实时闭环控制",
+      "流策略",
+      "反应性",
+      "动作分块",
+      "扩散模型"
+    ],
+    "source": "daily",
+    "sourceLabel": "Hugging Face Daily Papers",
+    "publishedAt": "2026-07-28T17:59:31Z"
+  },
+  {
+    "section": "papers",
+    "digestDate": "2026-07-29",
+    "publishedDate": "7/29",
+    "time": "今天采集",
+    "readTime": "3 分钟",
+    "accent": "violet",
+    "inRecentWindow": true,
+    "paragraphs": [
+      "低秩适配（LoRA）的混合专家（MoE）变体把每个词元路由到固定数量 k 的专家。然而，模型对不同词元的不确定程度各不相同，因此单一的 k 会在简单词元上花费过多，而对困难词元服务不足。研究者观察到，路由器的输出分布本身就是每个词元的不确定性信号：概率质量集中表示模型有把握，分布平坦则表示含糊不清。",
+      "研究者提出 CARE（专家的置信度自适应路由），以\"核采样\"的方式接纳专家：按路由器权重从大到小依次激活专家，直到累积概率质量达到阈值；当被接纳的专家之间意见不一致时，还会小幅扩展。一个\"预算恒温器\"负责校准该阈值，使平均激活的专家数量与任意给定目标相符。CARE 是一种即插即用、只需单次前向传播的规则，不引入任何额外参数。",
+      "在基于 LLaMA-3.1-8B 和 Qwen2.5-7B 的八项常识基准以及数学、代码和知识任务上，CARE 在计算量相同的情况下优于固定的 top-k MoE-LoRA，并在激活更少专家的同时达到与固定 k=4 基线相当的表现。同样的置信度与分歧信号还能改进分布外检测，效果优于 MSP、熵以及多遍代理方法。研究者从核保真度、预算最优性以及分歧的认识论解读等方面为该设计提供了理论支持，并公开了代码。"
+    ],
+    "utility": "这项研究的核心思路是让AI\"量力而行\"：简单内容少花算力，拿不准的内容多投入资源。对普通用户来说，这类技术若被采用，意味着AI助手可能在不牺牲回答质量的前提下响应更快、运行成本更低，未来在手机等本地设备上跑AI也更可行。对在工作中使用或采购AI服务的人来说，论文还展示了一种判断模型\"什么时候没把握\"的信号，有助于识别模型面对陌生输入时可能在\"硬撑\"，这对在医疗、金融等高风险场景中评估AI输出的可信度有参考价值。需要注意，这些结论来自论文所述的基准测试和特定模型，实际收益仍取决于具体应用场景。",
+    "externalLinks": [
+      {
+        "label": "查看 Hugging Face 论文页",
+        "url": "https://huggingface.co/papers/2607.26052"
+      },
+      {
+        "label": "打开 arXiv 原文",
+        "url": "https://arxiv.org/abs/2607.26052"
+      }
+    ],
+    "id": "huggingface-daily-papers:2607.26052",
+    "title": "把专家花在没把握的地方：面向混合专家LoRA的置信度自适应路由",
+    "sourceUrl": "https://huggingface.co/papers/2607.26052",
+    "summary": "大模型微调中常用的混合专家方法会给每个词元分配固定数量的\"专家\"，但模型对不同词元的把握其实不同。本文提出的CARE方法利用路由器的输出分布判断把握大小：有把握时少激活专家、没把握时多激活，并通过一个\"预算恒温器\"把平均开销控制在目标水平。在不增加参数、不增加计算量的前提下，它在多项常识、数学、代码和知识任务上优于固定专家数的做法，还能更好地识别模型没见过的输入。",
+    "tags": [
+      "混合专家模型",
+      "LoRA微调",
+      "置信度自适应路由",
+      "大语言模型",
+      "分布外检测",
+      "计算效率"
+    ],
+    "source": "daily",
+    "sourceLabel": "Hugging Face Daily Papers",
+    "publishedAt": "2026-07-28T17:59:16Z"
+  },
+  {
+    "section": "github",
+    "digestDate": "2026-07-29",
+    "publishedDate": "7/29",
+    "time": "今天采集",
+    "readTime": "3 分钟",
+    "accent": "blue",
+    "inRecentWindow": true,
+    "paragraphs": [
+      "根据仓库描述，pascalorg/editor 的核心用途是帮助用户创建并分享 3D 建筑（建筑学/空间设计）项目，定位偏向在线化的三维设计工具，并提供 editor.pascal.app 作为在线入口。",
+      "该项目使用 TypeScript 开发并以 MIT 协议开源，拥有较高的社区关注度（约 1.9 万 Star），适合对 3D 建筑设计、Web 端三维编辑工具感兴趣的开发者研究或参与贡献。",
+      "需要注意的是，本次提供的仓库 README 内容为空，因此无法确认其具体功能列表、技术架构、部署方式与使用门槛。建议在采用前访问项目主页与仓库源码，核实功能现状、文档完善程度与维护活跃度，避免因信息不足产生误判。"
+    ],
+    "facts": [
+      {
+        "label": "主要语言",
+        "value": "TypeScript"
+      },
+      {
+        "label": "Stars",
+        "value": "19,065"
+      },
+      {
+        "label": "许可证",
+        "value": "MIT"
+      },
+      {
+        "label": "最近更新",
+        "value": "2026-07-29"
+      }
+    ],
+    "externalLinks": [
+      {
+        "label": "阅读项目 README",
+        "url": "https://github.com/pascalorg/editor#readme"
+      },
+      {
+        "label": "打开项目网站",
+        "url": "https://editor.pascal.app"
+      },
+      {
+        "label": "查看 Releases",
+        "url": "https://github.com/pascalorg/editor/releases"
+      }
+    ],
+    "id": "github-trending:pascalorg/editor",
+    "title": "Pascal Editor：创建与分享 3D 建筑项目",
+    "sourceUrl": "https://github.com/pascalorg/editor",
+    "summary": "一个用于创建和分享 3D 建筑项目的开源编辑器，基于 TypeScript 构建，采用 MIT 许可证。",
+    "tags": [
+      "3D建筑",
+      "在线编辑器",
+      "建筑设计",
+      "TypeScript",
+      "MIT协议",
+      "项目分享"
+    ],
+    "source": "daily",
+    "sourceLabel": "GitHub Trending",
+    "publishedAt": "2026-07-29T07:48:45.277Z"
+  },
+  {
+    "section": "github",
+    "digestDate": "2026-07-29",
+    "publishedDate": "7/29",
+    "time": "今天采集",
+    "readTime": "3 分钟",
+    "accent": "blue",
+    "inRecentWindow": true,
+    "paragraphs": [
+      "Jenkins 是领先的开源自动化服务器，使用 Java 构建，提供超过 2000 个插件，几乎可以自动化任何工作，让人类把时间花在机器无法完成的事情上。它由开源社区治理，采用 MIT 许可证，被全球数百万用户和数千家公司（从初创公司到大型企业）用于自动化软件交付流水线。",
+      "Jenkins 的典型用途是自动化开发工作流，常见场景包括：构建项目、运行测试以便尽早发现缺陷与问题、静态代码分析以及部署。通过执行重复性任务，它能够帮助团队节省时间并优化开发流程。",
+      "在分发与安装方面，Jenkins 提供 WAR 包、Docker 镜像以及面向多个 Linux 发行版和 Windows 的原生包与安装程序，并提供两条发布线：更新频繁、包含全部新特性与修复的 Weekly 版本，以及通过缺陷修复回溯定期更新、更稳定的 LTS（长期支持）版本。",
+      "Jenkins 适合需要搭建持续集成/持续交付（CI/CD）体系的开发与运维团队。需要注意的是：由于它基于 Java，部署前需准备相应运行环境；插件生态庞大，选型与版本兼容性需要维护；生产环境通常建议选择 LTS 版本以获得更稳定的体验。新手贡献者可以从贡献指南、good first issue 与 Gitter 社区频道入手。"
+    ],
+    "facts": [
+      {
+        "label": "主要语言",
+        "value": "Java"
+      },
+      {
+        "label": "Stars",
+        "value": "26,159"
+      },
+      {
+        "label": "许可证",
+        "value": "MIT"
+      },
+      {
+        "label": "最近更新",
+        "value": "2026-07-28"
+      }
+    ],
+    "externalLinks": [
+      {
+        "label": "阅读项目 README",
+        "url": "https://github.com/jenkinsci/jenkins#readme"
+      },
+      {
+        "label": "打开项目网站",
+        "url": "https://www.jenkins.io"
+      },
+      {
+        "label": "查看 Releases",
+        "url": "https://github.com/jenkinsci/jenkins/releases"
+      }
+    ],
+    "id": "github-trending:jenkinsci/jenkins",
+    "title": "Jenkins：领先的开源自动化服务器",
+    "sourceUrl": "https://github.com/jenkinsci/jenkins",
+    "summary": "Jenkins 是用 Java 构建的领先开源自动化服务器，通过 2000 多个插件支持构建、测试、静态代码分析与部署等几乎任何自动化任务。",
+    "tags": [
+      "持续集成",
+      "CI/CD",
+      "自动化服务器",
+      "Java",
+      "插件生态",
+      "构建部署",
+      "LTS"
+    ],
+    "source": "daily",
+    "sourceLabel": "GitHub Trending",
+    "publishedAt": "2026-07-29T07:48:45.277Z"
+  },
+  {
+    "section": "github",
+    "digestDate": "2026-07-29",
+    "publishedDate": "7/29",
+    "time": "今天采集",
+    "readTime": "3 分钟",
+    "accent": "blue",
+    "inRecentWindow": true,
+    "paragraphs": [
+      "Project AIRI 的目标是重现类似 Neuro-sama 的体验，充当 AI 虚拟角色（waifu/赛博生命）的“灵魂容器”，把这些角色带入现实世界。它强调自托管与用户所有（self hosted, you-owned），即数据和角色由用户自己掌控，而非依赖第三方托管服务。",
+      "核心能力方面，根据项目描述，AIRI 支持实时语音聊天，并且能够游玩 Minecraft 和 Factorio 等游戏。平台支持方面，README 提供了 Windows 安装包、macOS（Apple Silicon）DMG 与 Linux 的下载入口，同时也提供可直接体验的 Web 版本（airi.moeru.ai），覆盖桌面与浏览器场景。",
+      "该项目适合对 AI 虚拟伴侣、虚拟主播、实时语音交互以及 AI 玩游戏等方向感兴趣的开发者与爱好者，社区活跃度较高（Discord、Telegram、QQ、微信群等渠道齐全），并提供多语言文档（含简体中文、日语、俄语等）。",
+      "需要注意的是，本次抓取的 README 内容被截断，主要展示下载与社区入口，未包含完整的部署与配置说明。作为自托管项目，实际使用时的大模型、语音等能力的接入方式与资源消耗，请以官方文档（airi.moeru.ai/docs）为准，并留意项目仍处于活跃迭代中，版本间可能存在变动。"
+    ],
+    "facts": [
+      {
+        "label": "主要语言",
+        "value": "TypeScript"
+      },
+      {
+        "label": "Stars",
+        "value": "45,021"
+      },
+      {
+        "label": "许可证",
+        "value": "MIT"
+      },
+      {
+        "label": "最近更新",
+        "value": "2026-07-29"
+      }
+    ],
+    "externalLinks": [
+      {
+        "label": "阅读项目 README",
+        "url": "https://github.com/moeru-ai/airi#readme"
+      },
+      {
+        "label": "打开项目网站",
+        "url": "https://airi.moeru.ai/docs/"
+      },
+      {
+        "label": "查看 Releases",
+        "url": "https://github.com/moeru-ai/airi/releases"
+      }
+    ],
+    "id": "github-trending:moeru-ai/airi",
+    "title": "Project AIRI：自托管的 AI 虚拟伙伴",
+    "sourceUrl": "https://github.com/moeru-ai/airi",
+    "summary": "AIRI 是一个自托管、由用户自己拥有的 AI 虚拟伙伴（类似 Grok Companion / Neuro-sama），支持实时语音聊天，并能游玩 Minecraft 与 Factorio，可在 Web、macOS、Windows 等平台运行。",
+    "tags": [
+      "AI伴侣",
+      "虚拟角色",
+      "自托管",
+      "实时语音",
+      "Neuro-sama",
+      "Minecraft",
+      "Factorio",
+      "TypeScript"
+    ],
+    "source": "daily",
+    "sourceLabel": "GitHub Trending",
+    "publishedAt": "2026-07-29T07:48:45.277Z"
+  }
+]

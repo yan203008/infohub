@@ -31,7 +31,7 @@ test("builds the InfoHub daily experience", async () => {
   assert.match(source, /2026-07-28/);
   assert.match(source, /2026-07-29/);
   assert.match(source, /打开 GitHub 仓库/);
-  assert.match(source, /最近两天没有新视频/);
+  assert.match(source, /最近两天没有可生成文章的新长视频/);
   assert.match(source, /中文摘要/);
   assert.match(source, /对非技术读者有什么用/);
   assert.match(source, /链接直达：/);

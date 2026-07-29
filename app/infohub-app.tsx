@@ -28,6 +28,7 @@ import {
 } from "lucide-react";
 import { useEffect, useMemo, useState } from "react";
 import type { ChatGPTUser } from "./chatgpt-auth";
+import generatedFeed from "./generated-feed.json";
 
 type Source = "youtube" | "podcast" | "daily" | "builder";
 type Tab = "daily" | "reading" | "notes" | "me";
@@ -590,10 +591,13 @@ const feedItems: Item[] = [
   }),
 ];
 
-const fallbackItems: Item[] = [
+const demoFallbackItems: Item[] = [
   ...coreItems.map((item) => ({ ...item, inRecentWindow: false })),
   ...feedItems,
 ];
+const fallbackItems: Item[] = generatedFeed.length > 0
+  ? generatedFeed as Item[]
+  : demoFallbackItems;
 
 const sectionDefinitions: { id: SectionId; label: string; description: string }[] = [
   { id: "x", label: "X 推特内容", description: "Follow Builders + 技术动态 X 热榜" },
@@ -1264,8 +1268,8 @@ export function InfoHubApp({ user }: { user: ChatGPTUser | null }) {
                     ) : (
                       section.id === "youtube" ? (
                         <div className="empty-section source-empty-state">
-                          <strong>最近两天没有新视频</strong>
-                          <p>Mel Robbins 最近更新于 7月23日，Predictive History 最近更新于 7月20日。</p>
+                          <strong>最近两天没有可生成文章的新长视频</strong>
+                          <p>Mel Robbins 近两天仅更新了 Shorts；Predictive History 最近一条长视频发布于 7月20日。</p>
                           <span>发现新视频后会自动生成 Takeaways 和完整阅读文章。</span>
                         </div>
                       ) : (

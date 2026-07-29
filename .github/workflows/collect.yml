@@ -33,7 +33,7 @@ jobs:
         env:
           MOONSHOT_API_KEY: ${{ secrets.MOONSHOT_API_KEY }}
           MOONSHOT_BASE_URL: https://api.moonshot.cn/v1
-          MOONSHOT_MODEL: kimi-k2.6
+          MOONSHOT_MODEL: kimi-k3
           INGEST_SECRET: ${{ secrets.INGEST_SECRET }}
           INFOHUB_BASE_URL: ${{ secrets.INFOHUB_BASE_URL }}
           BAOYU_TRANSCRIPT_SCRIPT: ${{ runner.temp }}/baoyu-skills/skills/baoyu-youtube-transcript/scripts/main.ts

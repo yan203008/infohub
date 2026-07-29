@@ -5,16 +5,17 @@ import { mkdir, readFile, writeFile } from "node:fs/promises";
 import { homedir } from "node:os";
 import { dirname, join, resolve } from "node:path";
 import { promisify } from "node:util";
+import { jsonrepair } from "jsonrepair";
 
 const execFileAsync = promisify(execFile);
 const root = resolve(import.meta.dirname, "..");
 const config = JSON.parse(await readFile(join(root, "config/sources.json"), "utf8"));
 const isDryRun = process.argv.includes("--dry-run");
 const now = new Date();
-const cutoff = new Date(now.valueOf() - 48 * 60 * 60 * 1000);
+const cutoff = new Date(`${shanghaiDate(new Date(now.valueOf() - 24 * 60 * 60 * 1000))}T00:00:00+08:00`);
 const moonshotKey = process.env.MOONSHOT_API_KEY?.trim();
 const moonshotBaseUrl = (process.env.MOONSHOT_BASE_URL || "https://api.moonshot.cn/v1").replace(/\/$/, "");
-const moonshotModel = process.env.MOONSHOT_MODEL || "kimi-k2.6";
+const moonshotModel = process.env.MOONSHOT_MODEL || "kimi-k3";
 
 function shanghaiDate(value = now) {
   return new Intl.DateTimeFormat("en-CA", {
@@ -42,23 +43,56 @@ function stripHtml(value = "") {
     .trim();
 }
 
-async function fetchWithRetry(url, options = {}, attempts = 3) {
+async function curlGet(url, options = {}) {
+  const headers = {
+    "user-agent": "InfoHub-Collector/1.0",
+    ...(options.headers || {}),
+  };
+  const args = ["--max-time", "30", "--silent", "--show-error", "--location"];
+  for (const [name, value] of Object.entries(headers)) {
+    args.push("--header", `${name}: ${value}`);
+  }
+  args.push("--write-out", "\n__INFOHUB_STATUS__%{http_code}", url);
+  const { stdout } = await execFileAsync("curl", args, {
+    cwd: root,
+    maxBuffer: 1024 * 1024 * 30,
+    timeout: 35_000,
+  });
+  const marker = "\n__INFOHUB_STATUS__";
+  const markerIndex = stdout.lastIndexOf(marker);
+  if (markerIndex === -1) throw new Error("curl response status missing");
+  const body = stdout.slice(0, markerIndex);
+  const status = Number(stdout.slice(markerIndex + marker.length));
+  const response = new Response(body, { status });
+  if (!response.ok) throw new Error(`${status} ${response.statusText}`);
+  return response;
+}
+
+async function fetchWithRetry(url, options = {}, attempts = 2) {
+  const { timeoutMs = 12_000, ...fetchOptions } = options;
   let lastError;
   for (let attempt = 1; attempt <= attempts; attempt += 1) {
     try {
       const response = await fetch(url, {
-        ...options,
+        ...fetchOptions,
         headers: {
           "user-agent": "InfoHub-Collector/1.0",
-          ...(options.headers || {}),
+          ...(fetchOptions.headers || {}),
         },
-        signal: AbortSignal.timeout(20_000),
+        signal: AbortSignal.timeout(timeoutMs),
       });
       if (!response.ok) throw new Error(`${response.status} ${response.statusText}`);
       return response;
     } catch (error) {
       lastError = error;
       if (attempt < attempts) await new Promise((resolveDelay) => setTimeout(resolveDelay, attempt * 800));
+    }
+  }
+  if (!fetchOptions.method || fetchOptions.method.toUpperCase() === "GET") {
+    try {
+      return await curlGet(url, fetchOptions);
+    } catch (error) {
+      lastError = error;
     }
   }
   throw lastError;
@@ -68,28 +102,35 @@ async function fetchJson(url, options) {
   return (await fetchWithRetry(url, options)).json();
 }
 
-async function kimiJson(system, input) {
+async function kimiJson(system, input, { maxTokens = 5_000, timeoutMs = 240_000 } = {}) {
   if (!moonshotKey) throw new Error("MOONSHOT_API_KEY is not configured");
   const response = await fetchWithRetry(`${moonshotBaseUrl}/chat/completions`, {
     method: "POST",
+    timeoutMs,
     headers: {
       authorization: `Bearer ${moonshotKey}`,
       "content-type": "application/json",
     },
     body: JSON.stringify({
       model: moonshotModel,
-      temperature: 0.2,
+      temperature: 1,
+      max_tokens: maxTokens,
       response_format: { type: "json_object" },
       messages: [
         { role: "system", content: system },
         { role: "user", content: JSON.stringify(input) },
       ],
     }),
-  });
+  }, 1);
   const payload = await response.json();
   const content = payload.choices?.[0]?.message?.content;
   if (!content) throw new Error("Kimi returned an empty response");
-  return JSON.parse(content);
+  const jsonText = content.trim().replace(/^```(?:json)?\s*/i, "").replace(/\s*```$/, "");
+  try {
+    return JSON.parse(jsonText);
+  } catch {
+    return JSON.parse(jsonrepair(jsonText));
+  }
 }
 
 function baseBody(section, publishedAt, extra = {}) {
@@ -119,7 +160,7 @@ async function collectFollowBuilders() {
     })))
     .filter((tweet) => recent(tweet.createdAt))
     .sort((a, b) => (b.likes || 0) - (a.likes || 0))
-    .slice(0, 8);
+    .slice(0, 4);
   if (tweets.length === 0) return [];
 
   const processed = await kimiJson(
@@ -161,7 +202,7 @@ async function collectTechnicalX() {
   const feed = await fetchJson(config.technicalX.url);
   const entries = (feed.entries || [])
     .filter((entry) => recent(entry.tweetCreatedAt))
-    .slice(0, 8);
+    .slice(0, 3);
   if (entries.length === 0) return [];
 
   const processed = await kimiJson(
@@ -210,6 +251,33 @@ function normalizePaper(entry) {
   };
 }
 
+function parseArxivFeed(xml) {
+  return [...xml.matchAll(/<entry>([\s\S]*?)<\/entry>/g)].flatMap((match) => {
+    const block = match[1];
+    const idUrl = block.match(/<id>([^<]+)<\/id>/)?.[1];
+    const id = idUrl?.match(/\/abs\/([^v<]+)(?:v\d+)?$/)?.[1];
+    const title = block.match(/<title>([\s\S]*?)<\/title>/)?.[1];
+    const abstract = block.match(/<summary>([\s\S]*?)<\/summary>/)?.[1];
+    const publishedAt = block.match(/<published>([^<]+)<\/published>/)?.[1];
+    if (!id || !title || !abstract || !publishedAt) return [];
+    return [{ id, title: stripHtml(title), abstract: stripHtml(abstract), publishedAt }];
+  });
+}
+
+async function recentArxivPapers() {
+  const start = shanghaiDate(new Date(now.valueOf() - 24 * 60 * 60 * 1000)).replaceAll("-", "");
+  const end = shanghaiDate(now).replaceAll("-", "");
+  const query = new URLSearchParams({
+    search_query: `submittedDate:[${start}0000 TO ${end}2359] AND (cat:cs.AI OR cat:cs.CL OR cat:cs.LG)`,
+    start: "0",
+    max_results: "10",
+    sortBy: "submittedDate",
+    sortOrder: "descending",
+  });
+  const xml = await (await fetchWithRetry(`https://export.arxiv.org/api/query?${query}`)).text();
+  return parseArxivFeed(xml);
+}
+
 async function collectPapers() {
   const dates = [shanghaiDate(now), shanghaiDate(new Date(now.valueOf() - 24 * 60 * 60 * 1000))];
   const pages = await Promise.all(dates.map(async (date) => {
@@ -219,20 +287,36 @@ async function collectPapers() {
       return [];
     }
   }));
-  const papers = pages
+  let papers = pages
     .flat()
     .map(normalizePaper)
     .filter((paper) => paper.id && paper.title && paper.abstract && recent(paper.publishedAt))
     .filter((paper, index, all) => all.findIndex((entry) => entry.id === paper.id) === index)
-    .slice(0, 6);
+    .slice(0, 3);
+  if (papers.length === 0) {
+    papers = (await recentArxivPapers()).filter((paper) => recent(paper.publishedAt)).slice(0, 3);
+  }
   if (papers.length === 0) return [];
 
-  const processed = await kimiJson(
-    "你是面向普通读者的论文编辑。只根据给定英文标题和摘要处理，不得补充摘要外的研究结果。返回 JSON：{items:[{id,titleZh,summaryZh,paragraphs,keywords,utility}]}。paragraphs 是忠实、清楚的中文摘要翻译，可分 2-4 段；keywords 为 3-6 个中文关键词；utility 用非技术语言说明普通人为什么值得了解、可能影响什么生活或工作判断，不能夸大论文结论。",
-    papers,
-  );
+  const processedItems = [];
+  for (const paper of papers) {
+    try {
+      const item = await kimiJson(
+        "你是面向普通读者的论文编辑。只根据给定英文标题和摘要处理，不得补充摘要外的研究结果。严格返回 JSON 对象：{id,titleZh,summaryZh,paragraphs,keywords,utility}。paragraphs 是忠实、完整、清楚的中文摘要翻译，可分 2-4 段；keywords 为 3-6 个中文关键词；utility 用非技术语言说明普通人为什么值得了解、可能影响什么生活或工作判断，不能夸大论文结论。",
+        paper,
+        { maxTokens: 4_000, timeoutMs: 4 * 60 * 1000 },
+      );
+      if (item.id && item.titleZh && item.summaryZh && Array.isArray(item.paragraphs)
+        && item.paragraphs.join("").length >= 120 && Array.isArray(item.keywords) && item.utility) {
+        processedItems.push(item);
+      }
+    } catch (error) {
+      console.error(`[collect] paper ${paper.id} skipped: ${error?.message || String(error)}`);
+    }
+  }
+  if (processedItems.length === 0) throw new Error("Kimi did not return a complete paper entry");
 
-  return (processed.items || []).flatMap((item) => {
+  return processedItems.flatMap((item) => {
     const paper = papers.find((entry) => String(entry.id) === String(item.id));
     if (!paper) return [];
     const publishedAt = paper.publishedAt || now.toISOString();
@@ -268,7 +352,7 @@ function trendingRepositories(html) {
       const href = match[1].match(/<h2[^>]*>[\s\S]*?<a[^>]+href="\/([^"?#]+)"/i)?.[1];
       return href && href.split("/").length === 2 ? [href] : [];
     })
-    .slice(0, 5);
+    .slice(0, 3);
 }
 
 async function collectGithub() {
@@ -293,7 +377,7 @@ async function collectGithub() {
       forks: metadata.forks_count,
       license: metadata.license?.spdx_id,
       updatedAt: metadata.pushed_at,
-      readme: readme.slice(0, 12_000),
+      readme: readme.slice(0, 6_000),
     };
   }));
 
@@ -347,6 +431,30 @@ function parseYoutubeFeed(xml) {
     if (!videoId || !title || !publishedAt) return [];
     return [{ videoId, title: stripHtml(title), publishedAt }];
   });
+}
+
+function parseYoutubeProxyFeed(payload) {
+  return (payload.items || []).flatMap((item) => {
+    const videoId = item.guid?.replace(/^yt:video:/, "") || item.link?.match(/(?:v=|shorts\/)([\w-]{11})/)?.[1];
+    const publishedAt = item.pubDate ? `${item.pubDate.replace(" ", "T")}Z` : undefined;
+    if (!videoId || !item.title || !publishedAt) return [];
+    return [{ videoId, title: item.title, publishedAt }];
+  });
+}
+
+async function youtubeFeed(channelId) {
+  const url = `https://www.youtube.com/feeds/videos.xml?channel_id=${channelId}`;
+  try {
+    const response = await fetch(url, {
+      headers: { "user-agent": "InfoHub-Collector/1.0" },
+      signal: AbortSignal.timeout(8_000),
+    });
+    if (!response.ok) throw new Error(`${response.status} ${response.statusText}`);
+    return parseYoutubeFeed(await response.text());
+  } catch {
+    const proxyUrl = `https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(url)}`;
+    return parseYoutubeProxyFeed(await fetchJson(proxyUrl));
+  }
 }
 
 async function resolveYoutubeChannelId(url) {
@@ -408,10 +516,7 @@ async function transcriptFor(videoId) {
 async function collectYoutube() {
   const youtubeSources = await configuredYoutubeSources();
   const videos = (await Promise.all(youtubeSources.map(async (channel) => {
-    const xml = await (await fetchWithRetry(
-      `https://www.youtube.com/feeds/videos.xml?channel_id=${channel.channelId}`,
-    )).text();
-    return parseYoutubeFeed(xml)
+    return (await youtubeFeed(channel.channelId))
       .filter((video) => recent(video.publishedAt))
       .map((video) => ({ ...video, channel }));
   }))).flat();
@@ -422,6 +527,7 @@ async function collectYoutube() {
     const processed = await kimiJson(
       "你是 YouTube 长内容编辑。完整覆盖文字稿，不删减论点、论据、案例、步骤、条件、例外和重要细节；删除无信息量口头禅与完全重复。先给可应用的 Takeaways，再按时间顺序整理成阅读友好的中文文章。返回 JSON：{title,summary,keywords,takeaways,sections:[{title,timeRange,paragraphs}]}。takeaways 5-10 条；每个 section 必须有起止时间戳；不得编造文字稿外信息。",
       { title: video.title, transcript },
+      { maxTokens: 20_000, timeoutMs: 10 * 60 * 1000 },
     );
     const keywords = Array.isArray(processed.keywords) ? processed.keywords : ["YouTube"];
     items.push({
@@ -449,20 +555,30 @@ async function collectYoutube() {
 }
 
 async function main() {
-  const collectors = [
+  const requestedSource = process.argv.find((argument) => argument.startsWith("--source="))?.split("=")[1];
+  const allCollectors = [
     ["follow-builders", collectFollowBuilders],
     ["technical-x", collectTechnicalX],
     ["papers", collectPapers],
     ["github", collectGithub],
     ["youtube", collectYoutube],
   ];
-  const results = await Promise.allSettled(collectors.map(([, collect]) => collect()));
+  const collectors = requestedSource
+    ? allCollectors.filter(([source]) => source === requestedSource)
+    : allCollectors;
+  if (collectors.length === 0) throw new Error(`Unknown collector: ${requestedSource}`);
   const errors = [];
-  const items = results.flatMap((result, index) => {
-    if (result.status === "fulfilled") return result.value;
-    errors.push({ source: collectors[index][0], message: result.reason?.message || String(result.reason) });
-    return [];
-  });
+  const items = [];
+  for (const [source, collect] of collectors) {
+    console.error(`[collect] ${source} started`);
+    try {
+      items.push(...await collect());
+      console.error(`[collect] ${source} finished`);
+    } catch (error) {
+      errors.push({ source, message: error?.message || String(error) });
+      console.error(`[collect] ${source} failed: ${error?.message || String(error)}`);
+    }
+  }
 
   const report = {
     generatedAt: now.toISOString(),
@@ -471,7 +587,7 @@ async function main() {
     items,
     errors,
   };
-  const outputPath = join(root, "outputs/last-collection.json");
+  const outputPath = join(root, `outputs/last-collection${requestedSource ? `-${requestedSource}` : ""}.json`);
   await mkdir(dirname(outputPath), { recursive: true });
   await writeFile(outputPath, `${JSON.stringify(report, null, 2)}\n`);
 
