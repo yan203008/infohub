@@ -551,6 +551,30 @@ button {
   font-size: 11px;
 }
 
+.queue-badge,
+.read-badge {
+  margin-left: auto;
+  padding: 3px 7px;
+  border-radius: 999px;
+  font-size: 9px;
+  font-weight: 750;
+}
+
+.queue-badge {
+  background: var(--green-soft);
+  color: var(--green);
+}
+
+.read-badge {
+  background: #eef0ee;
+  color: #7d857f;
+}
+
+.content-card.is-completed .card-copy h3,
+.content-card.is-completed .card-copy > p {
+  color: #7f8882;
+}
+
 .card-meta i {
   width: 3px;
   height: 3px;
@@ -633,6 +657,7 @@ button {
 
 .bottom-nav button,
 .desktop-sidebar nav button {
+  position: relative;
   display: flex;
   min-width: 44px;
   min-height: 48px;
@@ -644,6 +669,22 @@ button {
   background: transparent;
   color: #8a938d;
   cursor: pointer;
+}
+
+.nav-count {
+  position: absolute;
+  top: 3px;
+  right: 12px;
+  display: grid;
+  min-width: 17px;
+  height: 17px;
+  padding: 0 4px;
+  place-items: center;
+  border-radius: 999px;
+  background: #df7258;
+  color: white;
+  font-size: 9px;
+  font-weight: 750;
 }
 
 .bottom-nav button {
@@ -892,8 +933,8 @@ button {
   bottom: calc(10px + env(safe-area-inset-bottom));
   left: 12px;
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  max-width: 440px;
+  grid-template-columns: repeat(4, 1fr);
+  max-width: 560px;
   min-height: 58px;
   margin: auto;
   padding: 5px;
@@ -925,6 +966,10 @@ button {
 .reader-actions button:active,
 .reader-actions a:active {
   background: #edf3ef;
+  color: var(--green);
+}
+
+.reader-actions button.is-active {
   color: var(--green);
 }
 
@@ -1041,7 +1086,7 @@ button {
 
 .section-setting-row {
   display: grid;
-  grid-template-columns: 42px 1fr 82px;
+  grid-template-columns: 1fr 82px;
   min-height: 64px;
   align-items: center;
   gap: 10px;
@@ -1052,6 +1097,8 @@ button {
 }
 
 .section-setting-row > div {
+  grid-column: 1;
+  grid-row: 1;
   display: flex;
   min-width: 0;
   flex-direction: column;
@@ -1084,6 +1131,22 @@ button {
   cursor: pointer;
 }
 
+.section-setting-row > .visibility-button {
+  display: flex;
+  grid-column: 1 / -1;
+  grid-row: 2;
+  width: 100%;
+  gap: 7px;
+  color: #69736c;
+  font-size: 11px;
+  font-weight: 680;
+}
+
+.section-setting-row > .visibility-button.active {
+  background: #f3f5f3;
+  color: #68736c;
+}
+
 .visibility-button.active {
   background: var(--green-soft);
   color: var(--green);
@@ -1091,7 +1154,13 @@ button {
 
 .order-actions {
   display: flex;
+  grid-column: 2;
+  grid-row: 1;
   gap: 2px;
+}
+
+.order-actions.is-hidden {
+  visibility: hidden;
 }
 
 .order-actions button {
@@ -1106,6 +1175,37 @@ button {
 .section-settings-sheet .settings-done {
   width: 100%;
   margin-top: 14px;
+}
+
+.queue-summary {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 20px;
+  padding: 15px 16px;
+  border: 1px solid #d7e4da;
+  border-radius: 17px;
+  background: var(--green-soft);
+  color: var(--green);
+}
+
+.queue-summary > div {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.queue-summary strong {
+  font-size: 14px;
+}
+
+.queue-summary span {
+  color: #668071;
+  font-size: 10px;
+}
+
+.queue-empty {
+  margin-top: 10px;
 }
 
 .toast {

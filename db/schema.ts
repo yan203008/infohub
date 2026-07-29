@@ -36,6 +36,23 @@ export const userPreferences = sqliteTable(
   ],
 );
 
+export const userContentStates = sqliteTable(
+  "user_content_states",
+  {
+    id: text("id").primaryKey(),
+    userEmail: text("user_email").notNull(),
+    contentId: text("content_id").notNull(),
+    state: text("state", { enum: ["saved", "completed"] }).notNull(),
+    updatedAt: integer("updated_at", { mode: "timestamp_ms" }).notNull(),
+  },
+  (table) => [
+    uniqueIndex("user_content_states_owner_content_idx").on(
+      table.userEmail,
+      table.contentId,
+    ),
+  ],
+);
+
 export const contents = sqliteTable(
   "contents",
   {

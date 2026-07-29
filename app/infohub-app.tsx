@@ -30,7 +30,7 @@ import { useEffect, useMemo, useState } from "react";
 import type { ChatGPTUser } from "./chatgpt-auth";
 
 type Source = "youtube" | "podcast" | "daily" | "builder";
-type Tab = "daily" | "discover" | "notes" | "me";
+type Tab = "daily" | "reading" | "notes" | "me";
 type SectionId = "x" | "papers" | "github" | "youtube" | "podcasts";
 
 type Item = {
@@ -49,6 +49,7 @@ type Item = {
   paragraphs: string[];
   externalLinks?: { label: string; url: string }[];
   section?: SectionId;
+  inRecentWindow?: boolean;
 };
 
 const coreItems: Item[] = [
@@ -66,7 +67,6 @@ const coreItems: Item[] = [
     digestDate: "2026-07-29",
     publishedDate: "7月23日发布",
     sourceUrl: "https://www.youtube.com/watch?v=9tKZ3w-Gku8",
-    section: "youtube",
     paragraphs: [
       "这期节目把女性从青春期、生育年龄到围绝经期和绝经后的变化看作一条连续的激素健康轨迹，而不是彼此割裂的问题。越早了解家族史、月经模式和症状变化，越容易在关键阶段做出适合自己的选择。",
       "关于避孕，嘉宾强调不要把“天然”等同于“更安全”。口服避孕药、宫内节育器、植入剂和屏障法各有适用范围与风险；可靠性、个人病史和能否持续正确使用，比社交媒体上的笼统结论更重要。",
@@ -89,7 +89,6 @@ const coreItems: Item[] = [
     digestDate: "2026-07-29",
     publishedDate: "7月20日发布",
     sourceUrl: "https://www.youtube.com/watch?v=A9Sr-4c-3Tg",
-    section: "youtube",
     paragraphs: [
       "这场直播从世界杯决赛切入，讨论体育赛事如何承载国家认同、媒体叙事和政治情绪。作者把阿根廷与西班牙的比赛放进更大的国际关系框架中，尝试解释赛事之外的象征意义。",
       "随后话题转向美国、伊朗和拉丁美洲。节目把军事行动、资源、金融网络与国内政治联系起来，提出了一系列关于未来政策走向的预测。",
@@ -164,7 +163,6 @@ const coreItems: Item[] = [
     digestDate: "2026-07-28",
     publishedDate: "7月20日发布",
     sourceUrl: "https://www.youtube.com/watch?v=ybrv66DM9Dw",
-    section: "youtube",
     paragraphs: [
       "节目首先澄清，不应随意把别人诊断为“自恋者”或“反社会人格”。更有帮助的做法，是观察一个人是否长期、反复表现出冷漠、操纵和敌意，以及这些行为如何影响周围的人。",
       "嘉宾把常被讨论的黑暗人格分为心理病态、自恋、马基雅维利主义和施虐倾向。它们并不是非黑即白的标签，也可能彼此重叠；重点是持续出现的行为模式，而不是一次糟糕的互动。",
@@ -186,7 +184,6 @@ const coreItems: Item[] = [
     digestDate: "2026-07-28",
     publishedDate: "7月18日发布",
     sourceUrl: "https://www.youtube.com/watch?v=E7QKiRnw0M8",
-    section: "youtube",
     paragraphs: [
       "直播把世界杯视为一种国家叙事与大众注意力的载体，并由此延伸到阿根廷、西班牙、以色列和美国之间的关系。作者试图用资本与政治联盟解释赛事周边的舆论。",
       "在美国政治部分，节目讨论选举管理、移民、联邦与州权力的冲突，以及这些议题可能如何影响中期选举。这些内容夹杂事实陈述与主持人的预测，需要分别核对。",
@@ -260,6 +257,7 @@ function feedItem(input: {
   accent: string;
   tags: string[];
   detail?: string;
+  inRecentWindow?: boolean;
 }): Item {
   return {
     ...input,
@@ -350,6 +348,7 @@ const feedItems: Item[] = [
     sourceUrl: "https://huggingface.co/papers/2607.24368",
     accent: "violet",
     tags: ["热门论文", "Agent Memory", "检索"],
+    inRecentWindow: false,
   }),
   feedItem({
     id: "github-airi",
@@ -403,6 +402,7 @@ const feedItems: Item[] = [
     accent: "orange",
     tags: ["播客", "Granola", "AI 产品"],
     detail: "嘉宾认为会议笔记只是入口，更大的机会是理解跨会议上下文、识别决策和行动，并探索适合普通用户的 AI 原生工作界面。",
+    inRecentWindow: false,
   }),
   feedItem({
     id: "x-peter-codex-video",
@@ -416,6 +416,7 @@ const feedItems: Item[] = [
     sourceUrl: "https://x.com/petergyang/status/2081775399097549083",
     accent: "green",
     tags: ["X", "Codex", "自动化"],
+    inRecentWindow: false,
   }),
   feedItem({
     id: "x-claude-security",
@@ -455,6 +456,7 @@ const feedItems: Item[] = [
     sourceUrl: "https://huggingface.co/papers/2607.24904",
     accent: "violet",
     tags: ["热门论文", "多模态", "视频"],
+    inRecentWindow: false,
   }),
   feedItem({
     id: "github-editor",
@@ -468,6 +470,7 @@ const feedItems: Item[] = [
     sourceUrl: "https://github.com/pascalorg/editor",
     accent: "blue",
     tags: ["GitHub", "3D", "设计工具"],
+    inRecentWindow: false,
   }),
   feedItem({
     id: "github-jenkins",
@@ -481,16 +484,20 @@ const feedItems: Item[] = [
     sourceUrl: "https://github.com/jenkinsci/jenkins",
     accent: "blue",
     tags: ["GitHub", "CI/CD", "自动化"],
+    inRecentWindow: false,
   }),
 ];
 
-const items: Item[] = [...coreItems, ...feedItems];
+const items: Item[] = [
+  ...coreItems.map((item) => ({ ...item, inRecentWindow: false })),
+  ...feedItems,
+];
 
 const sectionDefinitions: { id: SectionId; label: string; description: string }[] = [
   { id: "x", label: "X 推特内容", description: "Follow Builders + 技术动态 X 热榜" },
   { id: "papers", label: "热门论文", description: "Hugging Face Daily Papers" },
   { id: "github", label: "GitHub Trending", description: "每日开源项目热榜" },
-  { id: "youtube", label: "热门 YouTube", description: "已订阅频道的新视频与回跑内容" },
+  { id: "youtube", label: "热门 YouTube", description: "已订阅频道最近两天的新视频" },
   { id: "podcasts", label: "播客", description: "AI Builder 访谈与节目" },
 ];
 
@@ -539,6 +546,7 @@ export function InfoHubApp({ user }: { user: ChatGPTUser | null }) {
   const [selectedDate, setSelectedDate] = useState(recentDates[0]);
   const [activeItem, setActiveItem] = useState<Item | null>(null);
   const [saved, setSaved] = useState<string[]>([]);
+  const [completed, setCompleted] = useState<string[]>([]);
   const [highlighted, setHighlighted] = useState(false);
   const [note, setNote] = useState("");
   const [noteOpen, setNoteOpen] = useState(false);
@@ -556,6 +564,21 @@ export function InfoHubApp({ user }: { user: ChatGPTUser | null }) {
   }, []);
 
   useEffect(() => {
+    const stored = window.localStorage.getItem("infohub-library-state");
+    if (!stored) return;
+    try {
+      const parsed = JSON.parse(stored) as { saved?: string[]; completed?: string[] };
+      const timer = window.setTimeout(() => {
+        setSaved(Array.isArray(parsed.saved) ? parsed.saved : []);
+        setCompleted(Array.isArray(parsed.completed) ? parsed.completed : []);
+      }, 0);
+      return () => window.clearTimeout(timer);
+    } catch {
+      return;
+    }
+  }, []);
+
+  useEffect(() => {
     if (!user) return;
     let cancelled = false;
     void fetch("/api/preferences/sections")
@@ -570,6 +593,26 @@ export function InfoHubApp({ user }: { user: ChatGPTUser | null }) {
           "infohub-section-preferences",
           JSON.stringify(data.preferences),
         );
+      })
+      .catch(() => undefined);
+    return () => {
+      cancelled = true;
+    };
+  }, [user]);
+
+  useEffect(() => {
+    if (!user) return;
+    let cancelled = false;
+    void fetch("/api/library")
+      .then(async (response) => {
+        if (!response.ok) return null;
+        return (await response.json()) as { saved: string[]; completed: string[] };
+      })
+      .then((data) => {
+        if (cancelled || !data) return;
+        setSaved(data.saved);
+        setCompleted(data.completed);
+        window.localStorage.setItem("infohub-library-state", JSON.stringify(data));
       })
       .catch(() => undefined);
     return () => {
@@ -599,12 +642,14 @@ export function InfoHubApp({ user }: { user: ChatGPTUser | null }) {
     }
   }, []);
 
-  const sourceCount = useMemo(
-    () => new Set(items.map((item) => item.source)).size,
-    [],
-  );
   const visibleItems = useMemo(
-    () => items.filter((item) => item.digestDate === selectedDate && item.section),
+    () =>
+      items.filter(
+        (item) =>
+          item.digestDate === selectedDate &&
+          item.section &&
+          item.inRecentWindow !== false,
+      ),
     [selectedDate],
   );
   const orderedSections = sectionPreferences
@@ -617,13 +662,45 @@ export function InfoHubApp({ user }: { user: ChatGPTUser | null }) {
   const displayedItems = visibleItems.filter(
     (item) => item.section && visibleSectionIds.has(item.section),
   );
+  const queueItems = items.filter(
+    (item) => saved.includes(item.id) && item.inRecentWindow !== false,
+  );
+
+  function setContentState(id: string, state: "saved" | "completed" | null) {
+    const nextSaved = state === "saved"
+      ? [...new Set([...saved, id])]
+      : saved.filter((value) => value !== id);
+    const nextCompleted = state === "completed"
+      ? [...new Set([...completed, id])]
+      : completed.filter((value) => value !== id);
+    setSaved(nextSaved);
+    setCompleted(nextCompleted);
+    window.localStorage.setItem(
+      "infohub-library-state",
+      JSON.stringify({ saved: nextSaved, completed: nextCompleted }),
+    );
+    if (user) {
+      void fetch("/api/library", {
+        method: "POST",
+        headers: { "content-type": "application/json" },
+        body: JSON.stringify({ contentId: id, state }),
+      }).catch(() => undefined);
+    }
+  }
 
   function toggleSaved(id: string) {
-    setSaved((current) =>
-      current.includes(id)
-        ? current.filter((value) => value !== id)
-        : [...current, id],
-    );
+    if (saved.includes(id)) {
+      setContentState(id, null);
+      setToast("已从待读移除");
+    } else {
+      setContentState(id, "saved");
+      setToast("已加入待读，可在“待读”中查看");
+    }
+  }
+
+  function markCompleted(id: string) {
+    setContentState(id, "completed");
+    setToast("已完成阅读");
   }
 
   function saveNote() {
@@ -678,9 +755,9 @@ export function InfoHubApp({ user }: { user: ChatGPTUser | null }) {
           <button
             className={`icon-button ${saved.includes(activeItem.id) ? "is-active" : ""}`}
             onClick={() => toggleSaved(activeItem.id)}
-            aria-label="收藏文章"
+            aria-label={saved.includes(activeItem.id) ? "移出待读" : "加入待读"}
           >
-            <Bookmark size={20} fill="currentColor" />
+            <Bookmark size={20} fill={saved.includes(activeItem.id) ? "currentColor" : "none"} />
           </button>
           <button className="icon-button" aria-label="更多操作">
             <MoreHorizontal size={22} />
@@ -744,6 +821,22 @@ export function InfoHubApp({ user }: { user: ChatGPTUser | null }) {
             <BookOpen size={19} />
             <span>笔记</span>
             {note && <i />}
+          </button>
+          <button
+            className={saved.includes(activeItem.id) || completed.includes(activeItem.id) ? "is-active" : ""}
+            onClick={() => {
+              if (saved.includes(activeItem.id)) markCompleted(activeItem.id);
+              else toggleSaved(activeItem.id);
+            }}
+          >
+            {saved.includes(activeItem.id) ? <Check size={19} /> : <Bookmark size={18} />}
+            <span>
+              {saved.includes(activeItem.id)
+                ? "完成"
+                : completed.includes(activeItem.id)
+                  ? "再次待读"
+                  : "加入待读"}
+            </span>
           </button>
           <a href={activeItem.sourceUrl} target="_blank" rel="noreferrer">
             <Play size={18} />
@@ -817,7 +910,7 @@ export function InfoHubApp({ user }: { user: ChatGPTUser | null }) {
                 onClick={() => { setSelectedDate(date); setTab("daily"); }}
               >
                 <span>{index === 0 ? "最新" : index === 1 ? "昨天" : displayDay(date, true)}</span>
-                <small>{items.filter((item) => item.digestDate === date).length}</small>
+                <small>{items.filter((item) => item.digestDate === date && item.section && item.inRecentWindow !== false).length}</small>
               </button>
             ))}
             <label className="sidebar-more">
@@ -826,10 +919,11 @@ export function InfoHubApp({ user }: { user: ChatGPTUser | null }) {
             </label>
           </div>
           <NavButton
-            active={tab === "discover"}
-            icon={<Search size={20} />}
-            label="发现"
-            onClick={() => setTab("discover")}
+            active={tab === "reading"}
+            icon={<Bookmark size={20} />}
+            label="待读"
+            count={queueItems.length}
+            onClick={() => setTab("reading")}
           />
           <NavButton
             active={tab === "notes"}
@@ -923,9 +1017,9 @@ export function InfoHubApp({ user }: { user: ChatGPTUser | null }) {
               <p>
                 {visibleItems.length > 0
                   ? selectedDate === recentDates[0]
-                    ? "YouTube、Follow Builders 与技术动态均已完成采集和中文整理。"
+                    ? "最近两天的真实更新已完成汇总；没有新内容的板块会保持为空。"
                     : "历史回跑已完成，内容按采集日期归档，可继续阅读和记笔记。"
-                  : "这一天两个频道没有新的采集结果。你仍可切换日期查看历史内容。"}
+                  : "这一天没有新的采集结果。你仍可切换日期查看其他日报。"}
               </p>
               <div className="digest-stats">
                 {visibleSectionIds.has("x") && <span><Sparkles size={16} /> {visibleItems.filter((item) => item.section === "x").length} X</span>}
@@ -965,6 +1059,7 @@ export function InfoHubApp({ user }: { user: ChatGPTUser | null }) {
                             key={item.id}
                             item={item}
                             saved={saved.includes(item.id)}
+                            completed={completed.includes(item.id)}
                             onOpen={() => setActiveItem(item)}
                             onSave={() => toggleSaved(item.id)}
                           />
@@ -988,13 +1083,43 @@ export function InfoHubApp({ user }: { user: ChatGPTUser | null }) {
           </div>
         )}
 
-        {tab === "discover" && (
-          <PlaceholderPage
-            icon={<Search size={24} />}
-            eyebrow="发现"
-            title="从全部内容中找到下一篇"
-            description={`当前公共内容流整合了 ${sourceCount} 类信息源。搜索、标签与历史日报会在这里集中呈现。`}
-          />
+        {tab === "reading" && (
+          <div className="content-area reading-list-page">
+            <section className="welcome">
+              <div>
+                <p>私人阅读清单</p>
+                <h1>准备稍后认真读的内容。</h1>
+              </div>
+            </section>
+            <section className="queue-summary">
+              <Bookmark size={19} />
+              <div>
+                <strong>{queueItems.length} 篇待读</strong>
+                <span>{user ? "已在手机和网页间同步" : "登录后可跨端同步"}</span>
+              </div>
+            </section>
+            {queueItems.length > 0 ? (
+              <div className="feed">
+                {queueItems.map((item) => (
+                  <ContentCard
+                    key={item.id}
+                    item={item}
+                    saved
+                    completed={false}
+                    onOpen={() => setActiveItem(item)}
+                    onSave={() => toggleSaved(item.id)}
+                  />
+                ))}
+              </div>
+            ) : (
+              <div className="empty-daily queue-empty">
+                <Bookmark size={24} />
+                <h3>还没有待读内容</h3>
+                <p>在每日首页点击书签，感兴趣的内容就会集中到这里。</p>
+                <button onClick={() => setTab("daily")}>返回每日</button>
+              </div>
+            )}
+          </div>
         )}
         {tab === "notes" && (
           <PlaceholderPage
@@ -1060,12 +1185,13 @@ export function InfoHubApp({ user }: { user: ChatGPTUser | null }) {
                       aria-label={preference.visible ? `隐藏${section.label}` : `显示${section.label}`}
                     >
                       {preference.visible ? <Eye size={18} /> : <EyeOff size={18} />}
+                      <span>{preference.visible ? "移出首页" : "恢复"}</span>
                     </button>
                     <div>
                       <strong>{section.label}</strong>
                       <small>{section.description}</small>
                     </div>
-                    <span className="order-actions">
+                    <span className={`order-actions ${preference.visible ? "" : "is-hidden"}`}>
                       <button onClick={() => moveSection(preference.id, -1)} disabled={index === 0} aria-label="上移">
                         <ChevronUp size={18} />
                       </button>
@@ -1092,10 +1218,11 @@ export function InfoHubApp({ user }: { user: ChatGPTUser | null }) {
           onClick={() => setTab("daily")}
         />
         <NavButton
-          active={tab === "discover"}
-          icon={<Search size={21} />}
-          label="发现"
-          onClick={() => setTab("discover")}
+          active={tab === "reading"}
+          icon={<Bookmark size={21} />}
+          label="待读"
+          count={queueItems.length}
+          onClick={() => setTab("reading")}
         />
         <NavButton
           active={tab === "notes"}
@@ -1126,16 +1253,18 @@ function SourceBadge({ item, compact = false }: { item: Item; compact?: boolean 
 function ContentCard({
   item,
   saved,
+  completed,
   onOpen,
   onSave,
 }: {
   item: Item;
   saved: boolean;
+  completed: boolean;
   onOpen: () => void;
   onSave: () => void;
 }) {
   return (
-    <article className="content-card">
+    <article className={`content-card ${completed ? "is-completed" : ""}`}>
       <button className="card-main" onClick={onOpen}>
         <SourceBadge item={item} />
         <div className="card-copy">
@@ -1143,6 +1272,8 @@ function ContentCard({
             <span>{item.sourceLabel}</span>
             <i />
             <span>{item.time}</span>
+            {saved && <b className="queue-badge">待读</b>}
+            {completed && <b className="read-badge">已读</b>}
           </div>
           <h3>{item.title}</h3>
           <p>{item.summary}</p>
@@ -1155,7 +1286,7 @@ function ContentCard({
       <button
         className={`save-button ${saved ? "is-active" : ""}`}
         onClick={onSave}
-        aria-label={saved ? "取消收藏" : "收藏"}
+        aria-label={saved ? "移出待读" : "加入待读"}
       >
         <Bookmark size={18} fill={saved ? "currentColor" : "none"} />
       </button>
@@ -1167,17 +1298,20 @@ function NavButton({
   active,
   icon,
   label,
+  count,
   onClick,
 }: {
   active: boolean;
   icon: React.ReactNode;
   label: string;
+  count?: number;
   onClick: () => void;
 }) {
   return (
     <button className={active ? "active" : ""} onClick={onClick}>
       {icon}
       <span>{label}</span>
+      {!!count && <small className="nav-count">{count}</small>}
     </button>
   );
 }
