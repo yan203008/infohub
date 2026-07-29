@@ -764,6 +764,45 @@ button {
   background: linear-gradient(transparent 8%, #f7e7a2 8%, #f7e7a2 93%, transparent 93%);
 }
 
+.source-links {
+  display: grid;
+  gap: 8px;
+  margin-top: 36px;
+  padding: 18px;
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  background: #f8faf7;
+}
+
+.source-links h2 {
+  margin: 0 0 4px;
+  font-size: 14px;
+  letter-spacing: -0.02em;
+}
+
+.source-links a {
+  display: flex;
+  min-height: 42px;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 8px 10px;
+  border-radius: 11px;
+  background: white;
+  color: #3f5d4b;
+  font-size: 12px;
+  line-height: 1.45;
+  text-decoration: none;
+}
+
+.source-links a:active {
+  background: var(--green-soft);
+}
+
+.source-links svg {
+  flex: 0 0 auto;
+}
+
 .article-end {
   display: flex;
   align-items: center;

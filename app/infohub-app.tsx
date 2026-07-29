@@ -41,6 +41,7 @@ type Item = {
   publishedDate: string;
   sourceUrl: string;
   paragraphs: string[];
+  externalLinks?: { label: string; url: string }[];
 };
 
 const items: Item[] = [
@@ -88,6 +89,59 @@ const items: Item[] = [
     ],
   },
   {
+    id: "builders-2026-07-29",
+    source: "builder",
+    sourceLabel: "Follow Builders",
+    title: "Builder 动态：AI 成本开始按“任务”衡量",
+    summary:
+      "从 Swyx、Aaron Levie 到 Amjad Masad，14 位 Builder 的 29 条更新集中讨论 AI 成本、工作扩张与 Agent 能力边界。",
+    time: "今天采集",
+    readTime: "6 分钟",
+    accent: "green",
+    tags: ["Builder", "AI 成本", "Agent"],
+    digestDate: "2026-07-29",
+    publishedDate: "7月28日更新",
+    sourceUrl: "https://github.com/zarazhangrui/follow-builders",
+    paragraphs: [
+      "Follow Builders 本次中央内容源返回 14 位 Builder、29 条动态和 1 期播客。这里先保留信息密度最高的观点，并把每一条对应的原始链接附在文末。",
+      "Swyx 认为，用每百万输入或输出 token 的价格衡量 AI 成本已经不够有意义，更值得观察的是完成一个真实任务需要多少钱。这会把模型评估从“单价”推向成功率、工具调用和完整工作流成本。",
+      "Box CEO Aaron Levie 观察到，企业使用 AI 后并不只是削减成本，也会招聘工程师、销售和内部 AI 部署人才去解决过去无力处理的问题。他的判断是：只把 AI 当作降本工具的公司，可能输给用 AI 扩大服务能力的公司。",
+      "Replit CEO Amjad Masad 把下一阶段描述为对“计算宇宙”的探索：Agent 可以在算法、程序、证明和设计空间中搜索。这个视角把 AI 编程从代码补全推进到更广泛的自动发现。",
+    ],
+    externalLinks: [
+      { label: "Swyx：从 token 单价转向每任务成本", url: "https://x.com/swyx/status/2081904230768816487" },
+      { label: "Aaron Levie：AI 与企业招聘", url: "https://x.com/levie/status/2081930301752942703" },
+      { label: "Amjad Masad：探索计算宇宙", url: "https://x.com/amasad/status/2082000490066592127" },
+    ],
+  },
+  {
+    id: "tech-2026-07-29",
+    source: "daily",
+    sourceLabel: "技术动态",
+    title: "Agentic AI 进入科学计算，开源 AI 工具持续升温",
+    summary:
+      "今日技术源汇总了 OpenAI 的科学计算实践，以及 GitHub Trending 上值得关注的多模型、Agent 和生成式项目。",
+    time: "今天采集",
+    readTime: "5 分钟",
+    accent: "blue",
+    tags: ["科学计算", "GitHub Trending", "开发工具"],
+    digestDate: "2026-07-29",
+    publishedDate: "7月29日更新",
+    sourceUrl: "https://github.com/yan203008/dailynews_0603",
+    paragraphs: [
+      "技术动态任务本次从公开源抓取到 13 个 GitHub Trending 项目，并同步检查 OpenAI、DeepMind、Hugging Face、TLDR AI、Smol AI News、Latent Space 等 AI 新闻源。",
+      "OpenAI 最新文章讨论科学家如何使用 AI 编程 Agent 改造科学计算软件，并以基因组学等场景说明 Agent 不只生成代码，也能参与旧系统现代化与研究工作流。",
+      "GitHub Trending 中，aisuite 提供多个生成式 AI 服务的统一调用方式；ECC 聚焦 Claude Code、Codex、Cursor 等 Agent 工具的技能、记忆、安全和性能优化；Airi 则探索自托管实时语音与游戏互动角色。",
+      "这里展示的是“技术动态”部分，不混入财经、行情和国际时政。后续每日任务会继续合并去重，再由 Kimi 生成中文摘要。",
+    ],
+    externalLinks: [
+      { label: "OpenAI：Agentic AI 与科学计算", url: "https://openai.com/index/scientific-computing-agentic-ai" },
+      { label: "GitHub Trending：aisuite", url: "https://github.com/andrewyng/aisuite" },
+      { label: "GitHub Trending：ECC", url: "https://github.com/affaan-m/ECC" },
+      { label: "GitHub Trending：Airi", url: "https://github.com/moeru-ai/airi" },
+    ],
+  },
+  {
     id: "mel-toxic-people",
     source: "youtube",
     sourceLabel: "Mel Robbins",
@@ -127,6 +181,57 @@ const items: Item[] = [
       "在美国政治部分，节目讨论选举管理、移民、联邦与州权力的冲突，以及这些议题可能如何影响中期选举。这些内容夹杂事实陈述与主持人的预测，需要分别核对。",
       "谈到 AI，作者认为当前商业模式与数据中心投入之间存在张力，并推测未来可能通过市场调整、行业整合或政府介入来消化成本。",
       "这是一档立场鲜明的评论节目，不是新闻事实简报。摘要保留了主要论证路径，但节目中的因果判断和未来预测应被视为观点，而不是已证实结论。",
+    ],
+  },
+  {
+    id: "builders-2026-07-28",
+    source: "builder",
+    sourceLabel: "Follow Builders",
+    title: "Builder 动态：手机上的 Codex 完成了一轮视频交付",
+    summary:
+      "Peter Yang 分享远程视频工作流，Guillermo Rauch 讨论 Agent 隔离，产品团队则重新思考评审和协作方式。",
+    time: "昨日采集",
+    readTime: "6 分钟",
+    accent: "green",
+    tags: ["Codex", "Agent 安全", "产品工作流"],
+    digestDate: "2026-07-28",
+    publishedDate: "7月27—28日更新",
+    sourceUrl: "https://github.com/zarazhangrui/follow-builders",
+    paragraphs: [
+      "Peter Yang 转述了一次完整的远程工作流：开发者在骑车时通过手机让 Codex 操作电脑编辑发布视频，随后定时查看 Slack 反馈并连续导出新版本，回到家时视频已经通过审核。重点不在单次代码生成，而在跨工具、持续检查和迭代交付。",
+      "Vercel CEO Guillermo Rauch 提醒，Agent 的运行边界需要比普通容器更强。他引用实验说明，Agent 可能触发底层系统故障，因此微虚拟机等更强隔离方式会成为生产环境的重要基础设施。",
+      "Meta AI 产品负责人 Madhu Guru 认为，好的产品评审应该在一小时内压缩数月学习，并模拟市场对创意的反应；如果会议只剩状态更新和领导曝光，就会变成团队负担。",
+      "这些动态共同指向一个趋势：Agent 逐渐进入真实交付流程后，团队不仅要关注模型能力，还要重新设计安全边界、反馈循环和人的协作方式。",
+    ],
+    externalLinks: [
+      { label: "Peter Yang：Codex 远程视频工作流", url: "https://x.com/petergyang/status/2081775399097549083" },
+      { label: "Guillermo Rauch：Agent 的安全隔离", url: "https://x.com/rauchg/status/2081842439304995169" },
+      { label: "Madhu Guru：产品评审应该压缩学习", url: "https://x.com/realmadhuguru/status/2081781952437486052" },
+    ],
+  },
+  {
+    id: "tech-2026-07-28",
+    source: "daily",
+    sourceLabel: "技术动态",
+    title: "AI 正在扩展工作边界，而不只是加速原有任务",
+    summary:
+      "OpenAI 的最新研究关注人们如何借助 AI 承担跨角色任务；技术源同时追踪多模型接口与 Agent 工程工具。",
+    time: "昨日采集",
+    readTime: "5 分钟",
+    accent: "blue",
+    tags: ["AI 工作", "多模型", "Agent 工程"],
+    digestDate: "2026-07-28",
+    publishedDate: "7月27日更新",
+    sourceUrl: "https://github.com/yan203008/dailynews_0603",
+    paragraphs: [
+      "OpenAI 发布的研究把关注点放在“人借助 AI 做了哪些以前不做的事”，而不只是同一任务节省了多少时间。文章认为，使用者正在跨越原本的岗位边界，承担更广泛的分析、写作和技术任务。",
+      "这一观察与近期开发工具的变化相呼应：统一多模型接口、Agent 运行框架和记忆/安全组件越来越多，团队可以更低成本地把模型接入完整工作流。",
+      "技术动态会保留原始来源、标题和发布时间，然后只提取技术板块。相同事件来自多个来源时会合并，避免首页被重复新闻占满。",
+    ],
+    externalLinks: [
+      { label: "OpenAI：AI 如何扩展人们的工作内容", url: "https://openai.com/index/how-ai-is-expanding-what-people-do-at-work" },
+      { label: "GitHub Trending：aisuite", url: "https://github.com/andrewyng/aisuite" },
+      { label: "GitHub Trending：ECC", url: "https://github.com/affaan-m/ECC" },
     ],
   },
 ];
@@ -264,6 +369,17 @@ export function InfoHubApp({ user }: { user: ChatGPTUser | null }) {
               </p>
             ))}
           </div>
+          {activeItem.externalLinks && (
+            <section className="source-links" aria-label="原始来源">
+              <h2>原始来源</h2>
+              {activeItem.externalLinks.map((link) => (
+                <a key={link.url} href={link.url} target="_blank" rel="noreferrer">
+                  <span>{link.label}</span>
+                  <ChevronRight size={16} />
+                </a>
+              ))}
+            </section>
+          )}
           <div className="article-end">
             <span>END</span>
           </div>
@@ -444,7 +560,7 @@ export function InfoHubApp({ user }: { user: ChatGPTUser | null }) {
               </div>
               <label className="date-picker-button">
                 <CalendarDays size={18} />
-                <span>选择单日</span>
+                <span>更多日期</span>
                 <input type="date" value={selectedDate} onChange={(event) => setSelectedDate(event.target.value)} />
               </label>
             </section>
@@ -462,13 +578,14 @@ export function InfoHubApp({ user }: { user: ChatGPTUser | null }) {
               <p>
                 {visibleItems.length > 0
                   ? selectedDate === recentDates[0]
-                    ? "本次已跑通两个 YouTube 频道的视频发现、字幕抓取与中文整理。"
+                    ? "YouTube、Follow Builders 与技术动态均已完成采集和中文整理。"
                     : "历史回跑已完成，内容按采集日期归档，可继续阅读和记笔记。"
                   : "这一天两个频道没有新的采集结果。你仍可切换日期查看历史内容。"}
               </p>
               <div className="digest-stats">
-                <span><Video size={16} /> {visibleItems.length} 视频</span>
-                <span><FileText size={16} /> {visibleItems.length} 篇整理</span>
+                <span><Video size={16} /> {visibleItems.filter((item) => item.source === "youtube").length} YouTube</span>
+                <span><Sparkles size={16} /> {visibleItems.filter((item) => item.source === "builder").length} Builders</span>
+                <span><FileText size={16} /> {visibleItems.filter((item) => item.source === "daily").length} 技术动态</span>
               </div>
             </section>
 

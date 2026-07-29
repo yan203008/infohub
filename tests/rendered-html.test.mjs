@@ -10,7 +10,7 @@ test("builds the InfoHub daily experience", async () => {
 
   assert.match(source, /label="每日"/);
   assert.match(source, /最近七天/);
-  assert.match(source, /选择单日/);
+  assert.match(source, /更多日期/);
   assert.match(source, /2026-07-28/);
   assert.match(source, /2026-07-29/);
 });
@@ -20,6 +20,8 @@ test("includes both configured YouTube sources and original links", async () => 
 
   assert.match(source, /Mel Robbins/);
   assert.match(source, /Predictive History/);
+  assert.match(source, /Follow Builders/);
+  assert.match(source, /sourceLabel: "技术动态"/);
   assert.match(source, /youtube\.com\/watch\?v=9tKZ3w-Gku8/);
   assert.match(source, /youtube\.com\/watch\?v=A9Sr-4c-3Tg/);
 });
