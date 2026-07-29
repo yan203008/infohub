@@ -26,7 +26,7 @@ import {
   Video,
   X,
 } from "lucide-react";
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import type { ChatGPTUser } from "./chatgpt-auth";
 import generatedFeed from "./generated-feed.json";
 
@@ -56,6 +56,14 @@ type Item = {
   section?: SectionId;
   inRecentWindow?: boolean;
 };
+
+type HighlightRange = {
+  start: number;
+  end: number;
+  text: string;
+};
+
+type HighlightStore = Record<string, Record<string, HighlightRange[]>>;
 
 const coreItems: Item[] = [
   {
@@ -654,7 +662,8 @@ export function InfoHubApp({ user }: { user: ChatGPTUser | null }) {
   const [saved, setSaved] = useState<string[]>([]);
   const [completed, setCompleted] = useState<string[]>([]);
   const [liveItems, setLiveItems] = useState<Item[]>([]);
-  const [highlighted, setHighlighted] = useState(false);
+  const [readingProgress, setReadingProgress] = useState(0);
+  const [highlights, setHighlights] = useState<HighlightStore>({});
   const [note, setNote] = useState("");
   const [noteOpen, setNoteOpen] = useState(false);
   const [toast, setToast] = useState("");
@@ -662,7 +671,15 @@ export function InfoHubApp({ user }: { user: ChatGPTUser | null }) {
   const [sectionPreferences, setSectionPreferences] = useState<SectionPreference[]>(
     defaultSectionPreferences,
   );
-  const items = liveItems.length > 0 ? liveItems : fallbackItems;
+  const readerRef = useRef<HTMLElement>(null);
+  const returnScrollYRef = useRef(0);
+  const items = useMemo(() => {
+    const merged = new Map(fallbackItems.map((item) => [item.id, item]));
+    liveItems.forEach((item) => merged.set(item.id, item));
+    return [...merged.values()].sort((a, b) =>
+      String(b.publishedAt ?? b.digestDate).localeCompare(String(a.publishedAt ?? a.digestDate)),
+    );
+  }, [liveItems]);
 
   useEffect(() => {
     let cancelled = false;
@@ -688,6 +705,39 @@ export function InfoHubApp({ user }: { user: ChatGPTUser | null }) {
     const timer = window.setTimeout(() => setNote(stored), 0);
     return () => window.clearTimeout(timer);
   }, []);
+
+  useEffect(() => {
+    const stored = window.localStorage.getItem("infohub-highlights");
+    if (!stored) return;
+    try {
+      const parsed = JSON.parse(stored) as HighlightStore;
+      const timer = window.setTimeout(() => setHighlights(parsed), 0);
+      return () => window.clearTimeout(timer);
+    } catch {
+      return;
+    }
+  }, []);
+
+  useEffect(() => {
+    if (!activeItem) return;
+    let frame = window.requestAnimationFrame(() => window.scrollTo({ top: 0, behavior: "auto" }));
+    const updateProgress = () => {
+      window.cancelAnimationFrame(frame);
+      frame = window.requestAnimationFrame(() => {
+        const scrollable = document.documentElement.scrollHeight - window.innerHeight;
+        setReadingProgress(scrollable > 0 ? Math.min(100, Math.round((window.scrollY / scrollable) * 100)) : 100);
+      });
+    };
+    const resetTimer = window.setTimeout(() => setReadingProgress(0), 0);
+    window.addEventListener("scroll", updateProgress, { passive: true });
+    window.addEventListener("resize", updateProgress);
+    return () => {
+      window.cancelAnimationFrame(frame);
+      window.clearTimeout(resetTimer);
+      window.removeEventListener("scroll", updateProgress);
+      window.removeEventListener("resize", updateProgress);
+    };
+  }, [activeItem]);
 
   useEffect(() => {
     const stored = window.localStorage.getItem("infohub-library-state");
@@ -835,6 +885,65 @@ export function InfoHubApp({ user }: { user: ChatGPTUser | null }) {
     setNoteOpen(false);
   }
 
+  function openItem(item: Item) {
+    returnScrollYRef.current = window.scrollY;
+    setActiveItem(item);
+  }
+
+  function closeReader() {
+    const returnTo = returnScrollYRef.current;
+    setActiveItem(null);
+    window.requestAnimationFrame(() => {
+      window.requestAnimationFrame(() => window.scrollTo({ top: returnTo, behavior: "auto" }));
+    });
+  }
+
+  function addSelectedHighlight() {
+    if (!activeItem || !readerRef.current) return;
+    const selection = window.getSelection();
+    if (!selection || selection.isCollapsed || selection.rangeCount === 0) {
+      setToast("请先长按或拖动，选中想划线的文字");
+      return;
+    }
+    const range = selection.getRangeAt(0);
+    const startElement = range.startContainer.nodeType === Node.ELEMENT_NODE
+      ? range.startContainer as Element
+      : range.startContainer.parentElement;
+    const endElement = range.endContainer.nodeType === Node.ELEMENT_NODE
+      ? range.endContainer as Element
+      : range.endContainer.parentElement;
+    const startParagraph = startElement?.closest<HTMLElement>("[data-highlight-key]");
+    const endParagraph = endElement?.closest<HTMLElement>("[data-highlight-key]");
+    if (!startParagraph || startParagraph !== endParagraph || !readerRef.current.contains(startParagraph)) {
+      setToast("一次请在同一段内选择文字");
+      return;
+    }
+    const before = document.createRange();
+    before.selectNodeContents(startParagraph);
+    before.setEnd(range.startContainer, range.startOffset);
+    const start = before.toString().length;
+    const text = selection.toString().trim();
+    const end = start + selection.toString().length;
+    const key = startParagraph.dataset.highlightKey;
+    if (!key || !text) {
+      setToast("请先选择想划线的文字");
+      return;
+    }
+    const current = highlights[activeItem.id]?.[key] ?? [];
+    const nextRanges = mergeHighlightRanges([...current, { start, end, text }]);
+    const next = {
+      ...highlights,
+      [activeItem.id]: {
+        ...(highlights[activeItem.id] ?? {}),
+        [key]: nextRanges,
+      },
+    };
+    setHighlights(next);
+    window.localStorage.setItem("infohub-highlights", JSON.stringify(next));
+    selection.removeAllRanges();
+    setToast("已划线，可在笔记中引用");
+  }
+
   function saveSectionPreferences(next: SectionPreference[]) {
     setSectionPreferences(next);
     window.localStorage.setItem("infohub-section-preferences", JSON.stringify(next));
@@ -865,6 +974,11 @@ export function InfoHubApp({ user }: { user: ChatGPTUser | null }) {
   }
 
   if (activeItem) {
+    const readerSequence = tab === "reading" ? queueItems : displayedItems;
+    const activeIndex = readerSequence.findIndex((item) => item.id === activeItem.id);
+    const nextItem = activeIndex >= 0 ? readerSequence[activeIndex + 1] : undefined;
+    const itemHighlights = highlights[activeItem.id] ?? {};
+    const highlightedQuotes = Object.values(itemHighlights).flat().map((range) => range.text);
     const readerLinks = [
       {
         label: activeItem.section === "github" ? "打开 GitHub 仓库" : "查看原始内容",
@@ -879,13 +993,16 @@ export function InfoHubApp({ user }: { user: ChatGPTUser | null }) {
         <header className="reader-topbar">
           <button
             className="icon-button"
-            onClick={() => setActiveItem(null)}
-            aria-label="返回今日汇总"
+            onClick={closeReader}
+            aria-label="返回刚才浏览的位置"
           >
             <ChevronLeft size={22} />
           </button>
-          <div className="reading-progress" aria-label="阅读进度 36%">
-            <span style={{ width: "36%" }} />
+          <div className="reading-progress-wrap" aria-label={`阅读进度 ${readingProgress}%`} title="当前文章阅读进度">
+            <div className="reading-progress">
+              <span style={{ width: `${readingProgress}%` }} />
+            </div>
+            <small>{readingProgress}%</small>
           </div>
           <button
             className={`icon-button ${saved.includes(activeItem.id) ? "is-active" : ""}`}
@@ -899,7 +1016,7 @@ export function InfoHubApp({ user }: { user: ChatGPTUser | null }) {
           </button>
         </header>
 
-        <article className="reader">
+        <article className="reader" ref={readerRef}>
           <div className="reader-source">
             <SourceBadge item={activeItem} compact />
             <span>{activeItem.sourceLabel}</span>
@@ -930,14 +1047,17 @@ export function InfoHubApp({ user }: { user: ChatGPTUser | null }) {
             </section>
           )}
           {activeItem.facts && activeItem.facts.length > 0 && (
-            <section className="project-facts" aria-label="项目数据">
-              {activeItem.facts.map((fact) => (
-                <div key={fact.label}>
-                  <span>{fact.label}</span>
-                  <strong>{fact.value}</strong>
-                </div>
-              ))}
-            </section>
+            <>
+              <section className="project-facts" aria-label="项目数据">
+                {activeItem.facts.map((fact) => (
+                  <div key={fact.label}>
+                    <span>{fact.label}</span>
+                    <strong>{fact.value}</strong>
+                  </div>
+                ))}
+              </section>
+              {activeItem.section === "github" && <GitHubStarGuide facts={activeItem.facts} />}
+            </>
           )}
           {activeItem.section === "papers" ? (
             <>
@@ -946,9 +1066,12 @@ export function InfoHubApp({ user }: { user: ChatGPTUser | null }) {
                 <h2>中文摘要</h2>
                 <div className="article-body">
                   {activeItem.paragraphs.map((paragraph, index) => (
-                    <p key={paragraph} className={highlighted && index === 1 ? "highlighted" : ""}>
-                      {paragraph.replace(/^中文摘要：/, "")}
-                    </p>
+                    <SelectableParagraph
+                      key={paragraph}
+                      highlightKey={`paragraph:${index}`}
+                      text={paragraph.replace(/^中文摘要：/, "")}
+                      ranges={itemHighlights[`paragraph:${index}`] ?? []}
+                    />
                   ))}
                 </div>
               </section>
@@ -967,22 +1090,29 @@ export function InfoHubApp({ user }: { user: ChatGPTUser | null }) {
             </>
           ) : activeItem.sections && activeItem.sections.length > 0 ? (
             <div className="article-body article-sections">
-              {activeItem.sections.map((section) => (
+              {activeItem.sections.map((section, sectionIndex) => (
                 <section key={`${section.title}-${section.timeRange}`}>
                   <h3>{section.title} <small>{section.timeRange}</small></h3>
-                  {section.paragraphs.map((paragraph) => <p key={paragraph}>{paragraph}</p>)}
+                  {section.paragraphs.map((paragraph, paragraphIndex) => (
+                    <SelectableParagraph
+                      key={paragraph}
+                      highlightKey={`section:${sectionIndex}:${paragraphIndex}`}
+                      text={paragraph}
+                      ranges={itemHighlights[`section:${sectionIndex}:${paragraphIndex}`] ?? []}
+                    />
+                  ))}
                 </section>
               ))}
             </div>
           ) : (
             <div className="article-body">
               {activeItem.paragraphs.map((paragraph, index) => (
-                <p
+                <SelectableParagraph
                   key={paragraph}
-                  className={highlighted && index === 1 ? "highlighted" : ""}
-                >
-                  {paragraph}
-                </p>
+                  highlightKey={`paragraph:${index}`}
+                  text={paragraph}
+                  ranges={itemHighlights[`paragraph:${index}`] ?? []}
+                />
               ))}
             </div>
           )}
@@ -1005,14 +1135,27 @@ export function InfoHubApp({ user }: { user: ChatGPTUser | null }) {
           <div className="article-end">
             <span>END</span>
           </div>
+          <button
+            className="next-article"
+            onClick={() => {
+              markCompleted(activeItem.id);
+              if (nextItem) {
+                setActiveItem(nextItem);
+              } else {
+                closeReader();
+              }
+            }}
+          >
+            <span>{nextItem ? "完成并读下一篇" : "完成阅读并返回"}</span>
+            <strong>{nextItem?.title ?? "回到刚才浏览的位置"}</strong>
+            <ChevronRight size={19} />
+          </button>
         </article>
 
         <div className="reader-actions">
           <button
-            onClick={() => {
-              setHighlighted((value) => !value);
-              setToast(highlighted ? "已取消示例划线" : "已添加示例划线");
-            }}
+            onMouseDown={(event) => event.preventDefault()}
+            onClick={addSelectedHighlight}
           >
             <PenLine size={19} />
             <span>划线</span>
@@ -1065,11 +1208,7 @@ export function InfoHubApp({ user }: { user: ChatGPTUser | null }) {
                   <X size={20} />
                 </button>
               </div>
-              {highlighted && (
-                <blockquote>
-                  真正可用的长期记忆至少包含三个环节。第一是写入决策……
-                </blockquote>
-              )}
+              {highlightedQuotes.map((quote) => <blockquote key={quote}>{quote}</blockquote>)}
               <textarea
                 value={note}
                 onChange={(event) => setNote(event.target.value)}
@@ -1260,7 +1399,7 @@ export function InfoHubApp({ user }: { user: ChatGPTUser | null }) {
                             item={item}
                             saved={saved.includes(item.id)}
                             completed={completed.includes(item.id)}
-                            onOpen={() => setActiveItem(item)}
+                            onOpen={() => openItem(item)}
                             onSave={() => toggleSaved(item.id)}
                           />
                         ))}
@@ -1269,7 +1408,7 @@ export function InfoHubApp({ user }: { user: ChatGPTUser | null }) {
                       section.id === "youtube" ? (
                         <div className="empty-section source-empty-state">
                           <strong>最近两天没有可生成文章的新长视频</strong>
-                          <p>Mel Robbins 近两天仅更新了 Shorts；Predictive History 最近一条长视频发布于 7月20日。</p>
+                          <p>已订阅 4 个频道；只有取得可靠字幕的近期长视频，才会进入二次加工。</p>
                           <span>发现新视频后会自动生成 Takeaways 和完整阅读文章。</span>
                         </div>
                       ) : (
@@ -1314,7 +1453,7 @@ export function InfoHubApp({ user }: { user: ChatGPTUser | null }) {
                     item={item}
                     saved
                     completed={false}
-                    onOpen={() => setActiveItem(item)}
+                    onOpen={() => openItem(item)}
                     onSave={() => toggleSaved(item.id)}
                   />
                 ))}
@@ -1446,6 +1585,77 @@ export function InfoHubApp({ user }: { user: ChatGPTUser | null }) {
         />
       </nav>
     </main>
+  );
+}
+
+function mergeHighlightRanges(ranges: HighlightRange[]) {
+  return ranges
+    .filter((range) => range.end > range.start)
+    .sort((a, b) => a.start - b.start)
+    .reduce<HighlightRange[]>((merged, range) => {
+      const previous = merged.at(-1);
+      if (!previous || range.start > previous.end) {
+        merged.push(range);
+        return merged;
+      }
+      previous.end = Math.max(previous.end, range.end);
+      previous.text = `${previous.text} ${range.text}`.trim();
+      return merged;
+    }, []);
+}
+
+function SelectableParagraph({
+  text,
+  highlightKey,
+  ranges,
+}: {
+  text: string;
+  highlightKey: string;
+  ranges: HighlightRange[];
+}) {
+  const validRanges = ranges
+    .filter((range) => range.start >= 0 && range.end <= text.length && range.end > range.start)
+    .sort((a, b) => a.start - b.start);
+  const parts: React.ReactNode[] = [];
+  let cursor = 0;
+  validRanges.forEach((range, index) => {
+    if (range.start > cursor) parts.push(text.slice(cursor, range.start));
+    parts.push(<mark key={`${range.start}-${range.end}-${index}`}>{text.slice(range.start, range.end)}</mark>);
+    cursor = Math.max(cursor, range.end);
+  });
+  if (cursor < text.length) parts.push(text.slice(cursor));
+  return <p data-highlight-key={highlightKey}>{parts.length > 0 ? parts : text}</p>;
+}
+
+function numericFact(value = "") {
+  const normalized = value.replaceAll(",", "").trim().toLowerCase();
+  const number = Number.parseFloat(normalized.replace(/[^\d.]/g, ""));
+  if (Number.isNaN(number)) return 0;
+  return normalized.includes("k") ? number * 1_000 : normalized.includes("m") ? number * 1_000_000 : number;
+}
+
+function GitHubStarGuide({ facts }: { facts: { label: string; value: string }[] }) {
+  const total = numericFact(facts.find((fact) => fact.label === "Stars")?.value);
+  const today = numericFact(facts.find((fact) => fact.label.includes("今日新增"))?.value);
+  const totalContext = total >= 50_000
+    ? "已经是跨圈层知名项目"
+    : total >= 10_000
+      ? "属于很受欢迎的成熟项目"
+      : total >= 1_000
+        ? "已经形成有规模的开发者社区"
+        : "仍处于早期增长阶段";
+  const todayContext = today >= 500
+    ? "今天增长非常快"
+    : today >= 100
+      ? "今天热度明显"
+      : today > 0
+        ? "今天仍在持续获得关注"
+        : "是否热门还要结合今日新增和项目年龄判断";
+  return (
+    <aside className="star-guide">
+      <strong>Star 怎么看？</strong>
+      <p>Star 类似开发者的收藏。这个项目{totalContext}；{todayContext}。粗略参考：1k 已值得关注，10k 算热门，50k 以上非常少见，但新项目更应该看“今日新增”。</p>
+    </aside>
   );
 }
 

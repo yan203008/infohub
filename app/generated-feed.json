@@ -183,9 +183,9 @@
     "accent": "blue",
     "inRecentWindow": true,
     "paragraphs": [
-      "根据仓库描述，pascalorg/editor 的核心用途是帮助用户创建并分享 3D 建筑（建筑学/空间设计）项目，定位偏向在线化的三维设计工具，并提供 editor.pascal.app 作为在线入口。",
-      "该项目使用 TypeScript 开发并以 MIT 协议开源，拥有较高的社区关注度（约 1.9 万 Star），适合对 3D 建筑设计、Web 端三维编辑工具感兴趣的开发者研究或参与贡献。",
-      "需要注意的是，本次提供的仓库 README 内容为空，因此无法确认其具体功能列表、技术架构、部署方式与使用门槛。建议在采用前访问项目主页与仓库源码，核实功能现状、文档完善程度与维护活跃度，避免因信息不足产生误判。"
+      "Pascal Editor 是一个用于创建和分享 3D 建筑项目的编辑器，底层基于 React Three Fiber 和 WebGPU 渲染。它以 Turborepo monorepo 形式组织，拆分为 core（节点 schema、场景状态、注册契约）、viewer（3D 渲染运行时）、editor（编辑工具与 UI）、nodes（内置节点定义与渲染器）和 ui（共享组件）等包，另有一个独立的 Next.js 宿主应用。",
+      "场景数据采用扁平字典存储的节点模型，所有节点继承 BaseNode，通过 parentId 建立层级关系：站点（Site）下包含建筑（Building）、楼层（Level），楼层下再有墙体、楼板、天花板、屋顶、区域以及门窗、灯具等构件，还支持 3D 扫描参考（Scan）和 2D 参考（Guide）。状态管理基于 Zustand，场景数据持久化到 IndexedDB，并通过 Zundo 提供撤销/重做能力。",
+      "该项目适合想在 Web 端搭建建筑/空间设计工具的开发者：既可以直接使用官方托管的编辑器，也可以通过 npm 安装 @pascal-app/core、viewer、editor、nodes 等包，先用 loadPlugin 加载内置插件，再挂载 <Viewer> 组件进行集成。需要注意的是，使用 WebGPU 渲染对浏览器环境有一定要求；项目采用 MIT 协议，社区交流渠道包括 Discord 和 X。"
     ],
     "facts": [
       {
@@ -194,7 +194,15 @@
       },
       {
         "label": "Stars",
-        "value": "19,065"
+        "value": "19,184"
+      },
+      {
+        "label": "今日新增 Stars",
+        "value": "+341"
+      },
+      {
+        "label": "Forks",
+        "value": "2,559"
       },
       {
         "label": "许可证",
@@ -220,20 +228,22 @@
       }
     ],
     "id": "github-trending:pascalorg/editor",
-    "title": "Pascal Editor：创建与分享 3D 建筑项目",
+    "title": "Pascal Editor：基于 WebGPU 的 3D 建筑编辑器",
     "sourceUrl": "https://github.com/pascalorg/editor",
-    "summary": "一个用于创建和分享 3D 建筑项目的开源编辑器，基于 TypeScript 构建，采用 MIT 许可证。",
+    "summary": "一款用 React Three Fiber 与 WebGPU 构建的开源 3D 建筑编辑器，支持创建和分享建筑项目，采用模块化 monorepo 架构，可作为库集成到自己的 React 应用中。",
     "tags": [
-      "3D建筑",
-      "在线编辑器",
+      "3D编辑器",
       "建筑设计",
+      "React Three Fiber",
+      "WebGPU",
       "TypeScript",
-      "MIT协议",
-      "项目分享"
+      "Zustand",
+      "monorepo",
+      "MIT"
     ],
     "source": "daily",
     "sourceLabel": "GitHub Trending",
-    "publishedAt": "2026-07-29T07:48:45.277Z"
+    "publishedAt": "2026-07-29T09:47:36.699Z"
   },
   {
     "section": "github",
@@ -244,10 +254,9 @@
     "accent": "blue",
     "inRecentWindow": true,
     "paragraphs": [
-      "Jenkins 是领先的开源自动化服务器，使用 Java 构建，提供超过 2000 个插件，几乎可以自动化任何工作，让人类把时间花在机器无法完成的事情上。它由开源社区治理，采用 MIT 许可证，被全球数百万用户和数千家公司（从初创公司到大型企业）用于自动化软件交付流水线。",
-      "Jenkins 的典型用途是自动化开发工作流，常见场景包括：构建项目、运行测试以便尽早发现缺陷与问题、静态代码分析以及部署。通过执行重复性任务，它能够帮助团队节省时间并优化开发流程。",
-      "在分发与安装方面，Jenkins 提供 WAR 包、Docker 镜像以及面向多个 Linux 发行版和 Windows 的原生包与安装程序，并提供两条发布线：更新频繁、包含全部新特性与修复的 Weekly 版本，以及通过缺陷修复回溯定期更新、更稳定的 LTS（长期支持）版本。",
-      "Jenkins 适合需要搭建持续集成/持续交付（CI/CD）体系的开发与运维团队。需要注意的是：由于它基于 Java，部署前需准备相应运行环境；插件生态庞大，选型与版本兼容性需要维护；生产环境通常建议选择 LTS 版本以获得更稳定的体验。新手贡献者可以从贡献指南、good first issue 与 Gitter 社区频道入手。"
+      "Jenkins 是领先的开源自动化服务器，使用 Java 开发，核心定位是通过自动化把重复性工作交给机器完成，让开发者专注于更有价值的事情。它拥有超过 2000 个插件，几乎可以扩展来自动化任何任务。",
+      "典型用途包括：构建项目、运行测试以便尽早发现缺陷、执行静态代码分析以及部署应用。Jenkins 提供 WAR 包、Docker 镜像以及多个 Linux 发行版和 Windows 的原生安装包，并设有 Weekly（频繁发布新特性和修复）与 LTS（长期支持、定期回移植缺陷修复）两条发布线，方便不同稳定性需求的团队选择。",
+      "该项目适合需要搭建 CI/CD 流水线的开发团队和运维人员，也对想要参与开源的开发者友好：仓库提供了贡献指南、good first issue 标签和 Gitter 新手交流频道。项目由开源社区治理，采用 MIT 协议，文档、插件索引与博客等资源均可在 jenkins.io 官网获取。"
     ],
     "facts": [
       {
@@ -256,7 +265,15 @@
       },
       {
         "label": "Stars",
-        "value": "26,159"
+        "value": "26,178"
+      },
+      {
+        "label": "今日新增 Stars",
+        "value": "+180"
+      },
+      {
+        "label": "Forks",
+        "value": "9,704"
       },
       {
         "label": "许可证",
@@ -284,19 +301,20 @@
     "id": "github-trending:jenkinsci/jenkins",
     "title": "Jenkins：领先的开源自动化服务器",
     "sourceUrl": "https://github.com/jenkinsci/jenkins",
-    "summary": "Jenkins 是用 Java 构建的领先开源自动化服务器，通过 2000 多个插件支持构建、测试、静态代码分析与部署等几乎任何自动化任务。",
+    "summary": "用 Java 构建的主流开源自动化服务器，拥有超过 2000 个插件，可自动化构建、测试、静态代码分析与部署等开发流程，提供 Weekly 与 LTS 两条发布线。",
     "tags": [
-      "持续集成",
       "CI/CD",
       "自动化服务器",
       "Java",
+      "持续集成",
+      "持续部署",
       "插件生态",
-      "构建部署",
-      "LTS"
+      "DevOps",
+      "MIT"
     ],
     "source": "daily",
     "sourceLabel": "GitHub Trending",
-    "publishedAt": "2026-07-29T07:48:45.277Z"
+    "publishedAt": "2026-07-29T09:47:36.699Z"
   },
   {
     "section": "github",
@@ -307,10 +325,10 @@
     "accent": "blue",
     "inRecentWindow": true,
     "paragraphs": [
-      "Project AIRI 的目标是重现类似 Neuro-sama 的体验，充当 AI 虚拟角色（waifu/赛博生命）的“灵魂容器”，把这些角色带入现实世界。它强调自托管与用户所有（self hosted, you-owned），即数据和角色由用户自己掌控，而非依赖第三方托管服务。",
-      "核心能力方面，根据项目描述，AIRI 支持实时语音聊天，并且能够游玩 Minecraft 和 Factorio 等游戏。平台支持方面，README 提供了 Windows 安装包、macOS（Apple Silicon）DMG 与 Linux 的下载入口，同时也提供可直接体验的 Web 版本（airi.moeru.ai），覆盖桌面与浏览器场景。",
-      "该项目适合对 AI 虚拟伴侣、虚拟主播、实时语音交互以及 AI 玩游戏等方向感兴趣的开发者与爱好者，社区活跃度较高（Discord、Telegram、QQ、微信群等渠道齐全），并提供多语言文档（含简体中文、日语、俄语等）。",
-      "需要注意的是，本次抓取的 README 内容被截断，主要展示下载与社区入口，未包含完整的部署与配置说明。作为自托管项目，实际使用时的大模型、语音等能力的接入方式与资源消耗，请以官方文档（airi.moeru.ai/docs）为准，并留意项目仍处于活跃迭代中，版本间可能存在变动。"
+      "Project AIRI 的定位是“灵魂容器”：一个自托管、数据由用户自己掌控的 AI 虚拟伴侣（官方称其为 you-owned Grok Companion），希望达到 Neuro-sama 的高度，让虚拟角色成为存在于我们世界中的“数字生命”。项目使用 TypeScript 开发，采用 MIT 协议开源，社区热度极高（4.5 万+ Star）。",
+      "核心能力方面，README 与项目简介明确提到的功能包括：实时语音聊天，以及让角色实际游玩 Minecraft 和 Factorio 等游戏。项目提供 Web 版本可直接在线体验，同时提供 Windows 安装包（.exe）、macOS 安装包（Apple Silicon 的 .dmg）以及 Linux 版本的下载入口，文档站点为 airi.moeru.ai。",
+      "适用人群主要是喜欢虚拟主播、AI 伴侣/虚拟角色，且希望自行搭建、自己掌握数据与运行环境的用户，也适合对“AI 虚拟生命”方向感兴趣的 TypeScript 开发者参与贡献。项目提供 Discord、Telegram、微信、QQ 等多个社区渠道，并有中、日、俄、越、法、韩等多语言 README。",
+      "注意事项：从发布版本号（v0.10.x）看项目仍处于早期快速迭代阶段，功能与接口可能频繁变动；README 本身未展开部署与配置细节，实际安装、模型与语音等能力的接入方式需以官方文档为准，不要假设开箱即用的完整体验。"
     ],
     "facts": [
       {
@@ -319,7 +337,15 @@
       },
       {
         "label": "Stars",
-        "value": "45,021"
+        "value": "45,086"
+      },
+      {
+        "label": "今日新增 Stars",
+        "value": "+797"
+      },
+      {
+        "label": "Forks",
+        "value": "4,464"
       },
       {
         "label": "许可证",
@@ -345,21 +371,1256 @@
       }
     ],
     "id": "github-trending:moeru-ai/airi",
-    "title": "Project AIRI：自托管的 AI 虚拟伙伴",
+    "title": "AIRI：自托管的 AI 虚拟伴侣，复刻 Neuro-sama",
     "sourceUrl": "https://github.com/moeru-ai/airi",
-    "summary": "AIRI 是一个自托管、由用户自己拥有的 AI 虚拟伙伴（类似 Grok Companion / Neuro-sama），支持实时语音聊天，并能游玩 Minecraft 与 Factorio，可在 Web、macOS、Windows 等平台运行。",
+    "summary": "Project AIRI 是一个自托管、由用户自己拥有的 AI 虚拟伴侣项目，目标是复刻 Neuro-sama，把 AI waifu 与虚拟角色带入现实世界，支持实时语音聊天以及游玩 Minecraft、Factorio，覆盖 Web / macOS / Windows 等平台。",
     "tags": [
-      "AI伴侣",
+      "AI 伴侣",
       "虚拟角色",
-      "自托管",
-      "实时语音",
       "Neuro-sama",
-      "Minecraft",
-      "Factorio",
-      "TypeScript"
+      "实时语音",
+      "自托管",
+      "游戏 AI",
+      "TypeScript",
+      "MIT"
     ],
     "source": "daily",
     "sourceLabel": "GitHub Trending",
-    "publishedAt": "2026-07-29T07:48:45.277Z"
+    "publishedAt": "2026-07-29T09:47:36.699Z"
+  },
+  {
+    "section": "github",
+    "digestDate": "2026-07-29",
+    "publishedDate": "7/29",
+    "time": "今天采集",
+    "readTime": "3 分钟",
+    "accent": "blue",
+    "inRecentWindow": true,
+    "paragraphs": [
+      "aisuite 解决的是多家 LLM SDK 接口不一致的问题：它是一个轻量级 Python 库，以 `<provider>:<model-name>` 的模型名格式路由请求，让开发者用同一套 OpenAI 风格的 Chat Completions API 调用 OpenAI、Anthropic、Google、Mistral、Hugging Face、AWS、Cohere、Ollama、OpenRouter、Requesty 等提供商，切换提供商只需改动一个字符串。",
+      "在统一聊天接口之上，aisuite 还提供 Agents API：可以把真实的 Python 函数作为工具交给模型调用，运行多轮工具调用循环，挂载现成的工具包（files、git、shell）或接入任意 MCP server，并通过 tool policies 对工具使用进行治理。聊天接口统一支持 temperature、max_tokens、tools 等核心参数，传入 stream=True 即可在支持的提供商（OpenAI、Anthropic、Ollama 及 OpenAI 兼容端点）上以同样的循环消费流式输出。",
+      "适用人群是需要在多个大模型之间灵活切换、横向对比或构建跨模型 Agent 的 Python 开发者。安装方式为 pip install aisuite（基础包不含各 provider SDK），也可通过 extras 安装指定或全部 provider SDK，如 'aisuite[anthropic]'、'aisuite[all]'；调用云端模型需自行配置各家 API key，也可配合 Ollama 使用本地模型。",
+      "注意事项：README 顶部公告说明，基于 aisuite 构建的桌面 AI 助手 OpenWorker 已迁移到独立仓库 andrewyng/openworker，其源码快照暂时保留在本仓库的 platform/ 目录、将在未来版本中移除，因此不要在本仓库中跟进 OpenWorker 的后续开发。项目采用 MIT 协议，代码风格使用 black。"
+    ],
+    "facts": [
+      {
+        "label": "主要语言",
+        "value": "Python"
+      },
+      {
+        "label": "Stars",
+        "value": "15,785"
+      },
+      {
+        "label": "今日新增 Stars",
+        "value": "+62"
+      },
+      {
+        "label": "Forks",
+        "value": "1,663"
+      },
+      {
+        "label": "许可证",
+        "value": "MIT"
+      },
+      {
+        "label": "最近更新",
+        "value": "2026-07-26"
+      }
+    ],
+    "externalLinks": [
+      {
+        "label": "阅读项目 README",
+        "url": "https://github.com/andrewyng/aisuite#readme"
+      },
+      {
+        "label": "查看 Releases",
+        "url": "https://github.com/andrewyng/aisuite/releases"
+      }
+    ],
+    "id": "github-trending:andrewyng/aisuite",
+    "title": "aisuite：统一多家大模型接口的轻量 Python 库",
+    "sourceUrl": "https://github.com/andrewyng/aisuite",
+    "summary": "aisuite 是 Andrew Ng 团队开源的轻量 Python 库，提供统一的多家生成式 AI 提供商接口：底层是 OpenAI 风格的 Chat Completions API，上层是带工具与工具包的 Agents API，改一个字符串即可切换模型提供商。",
+    "tags": [
+      "Python",
+      "LLM",
+      "统一接口",
+      "多提供商",
+      "Chat Completions",
+      "Agents",
+      "MCP",
+      "流式输出",
+      "MIT"
+    ],
+    "source": "daily",
+    "sourceLabel": "GitHub Trending",
+    "publishedAt": "2026-07-29T09:47:36.699Z"
+  },
+  {
+    "section": "github",
+    "digestDate": "2026-07-29",
+    "publishedDate": "7/29",
+    "time": "今天采集",
+    "readTime": "3 分钟",
+    "accent": "blue",
+    "inRecentWindow": true,
+    "paragraphs": [
+      "ECC 定位为「agent harness」性能优化系统，围绕 AI 编程代理的运行环境提供增强能力，覆盖技能（Skills）、直觉（Instincts）、记忆（Memory）、安全（Security）以及研究优先的开发流程，目标平台包括 Claude Code、Codex、Opencode、Cursor 等主流 AI 编程工具。",
+      "项目以 JavaScript 为主，通过 npm 包 ecc-universal 与 ecc-agentshield 分发，同时提供 GitHub App 和插件（插件标识 ecc@ecc）等多种安装方式；官方文档提供包括简体中文、繁体中文、日语、韩语等在内的多语言版本，社区通过 Discord 进行交流与答疑。",
+      "仓库代码遵循 MIT 协议永久免费，适合希望增强 AI 编程代理能力的个人开发者与团队；托管服务 ECC Pro 是面向私有仓库的 GitHub App（每席位每月 19 美元起），属于付费增值部分，用于资助开源项目的持续开发。",
+      "注意事项：官方特别强调只从经验证的渠道安装——GitHub 仓库、官方 npm 包、GitHub App、插件标识 ecc@ecc 以及官网 ecc.tools；第三方转载或非官方镜像未经项目维护与审查，可能包含恶意软件。"
+    ],
+    "facts": [
+      {
+        "label": "主要语言",
+        "value": "JavaScript"
+      },
+      {
+        "label": "Stars",
+        "value": "235,177"
+      },
+      {
+        "label": "今日新增 Stars",
+        "value": "+636"
+      },
+      {
+        "label": "Forks",
+        "value": "35,822"
+      },
+      {
+        "label": "许可证",
+        "value": "MIT"
+      },
+      {
+        "label": "最近更新",
+        "value": "2026-07-29"
+      }
+    ],
+    "externalLinks": [
+      {
+        "label": "阅读项目 README",
+        "url": "https://github.com/affaan-m/ECC#readme"
+      },
+      {
+        "label": "打开项目网站",
+        "url": "https://ecc.tools"
+      },
+      {
+        "label": "查看 Releases",
+        "url": "https://github.com/affaan-m/ECC/releases"
+      }
+    ],
+    "id": "github-trending:affaan-m/ECC",
+    "title": "ECC：面向 AI 编程代理的运行环境优化系统",
+    "sourceUrl": "https://github.com/affaan-m/ECC",
+    "summary": "为 Claude Code、Codex、Opencode、Cursor 等 AI 编程工具提供技能、记忆、安全与研究驱动开发能力的 agent harness 性能优化系统，MIT 协议开源。",
+    "tags": [
+      "AI 编程代理",
+      "agent harness",
+      "Claude Code",
+      "Codex",
+      "Cursor",
+      "安全",
+      "MIT",
+      "JavaScript"
+    ],
+    "source": "daily",
+    "sourceLabel": "GitHub Trending",
+    "publishedAt": "2026-07-29T09:47:36.699Z"
+  },
+  {
+    "section": "github",
+    "digestDate": "2026-07-29",
+    "publishedDate": "7/29",
+    "time": "今天采集",
+    "readTime": "3 分钟",
+    "accent": "blue",
+    "inRecentWindow": true,
+    "paragraphs": [
+      "speech-to-speech 是 Hugging Face 开源的语音代理流水线，采用 VAD → STT → LLM → TTS 的级联结构，各环节在独立线程中运行并通过队列连接：Silero VAD v5 检测语音边界与话轮转换，STT 转写用户语音（可选实时部分转写），LLM 流式生成回复与工具调用，TTS 合成音频并流式返回客户端。整个服务通过兼容 OpenAI Realtime 协议的 WebSocket API（默认 ws://localhost:8765/v1/realtime）暴露，任何兼容该协议的客户端均可直接接入。该项目已作为数千台 Reachy Mini 机器人的对话后端在生产环境运行。",
+      "核心能力在于全模块化，每个环节都可替换。LLM 环节使用 OpenAI 兼容协议，可指向托管服务商、HF Inference Providers，或本机的 vLLM、llama.cpp 服务器，从而构建完全本地、完全开源的技术栈。默认安装使用 Parakeet TDT 做本地语音识别、Qwen3-TTS 做本地语音合成（非 macOS 平台默认 GGML 后端，Apple Silicon 使用 mlx-audio），macOS 与非 macOS 依赖通过平台标记自动解析。",
+      "适用人群：需要自建低延迟语音助手、语音机器人后端，或希望摆脱闭源语音 API 依赖的开发者。安装简单（pip install speech-to-speech，需 Python 3.10+），项目采用 Apache-2.0 协议，代码以便捷修改为导向，重点关注 Transformers 与 Hugging Face Hub 上可用的模型。",
+      "注意事项：默认快速上手需要 OpenAI 兼容 API 密钥；在 Linux 上使用 Qwen3-TTS 时，PyPI 默认的 qwentts-cpp-python wheel 针对 CUDA 12.8，若环境不匹配，需先从 Hugging Face wheelhouse 安装对应 CUDA 13.x、CUDA 12.4 或纯 CPU 版本的 wheel，再安装 speech-to-speech。"
+    ],
+    "facts": [
+      {
+        "label": "主要语言",
+        "value": "Python"
+      },
+      {
+        "label": "Stars",
+        "value": "7,540"
+      },
+      {
+        "label": "今日新增 Stars",
+        "value": "+227"
+      },
+      {
+        "label": "Forks",
+        "value": "978"
+      },
+      {
+        "label": "许可证",
+        "value": "Apache-2.0"
+      },
+      {
+        "label": "最近更新",
+        "value": "2026-07-28"
+      }
+    ],
+    "externalLinks": [
+      {
+        "label": "阅读项目 README",
+        "url": "https://github.com/huggingface/speech-to-speech#readme"
+      },
+      {
+        "label": "查看 Releases",
+        "url": "https://github.com/huggingface/speech-to-speech/releases"
+      }
+    ],
+    "id": "github-trending:huggingface/speech-to-speech",
+    "title": "speech-to-speech：用开源模型构建本地语音代理",
+    "sourceUrl": "https://github.com/huggingface/speech-to-speech",
+    "summary": "Hugging Face 开源的低延迟、全模块化语音代理流水线（VAD→STT→LLM→TTS），通过兼容 OpenAI Realtime 的 WebSocket API 提供服务，可完全本地化运行。",
+    "tags": [
+      "语音代理",
+      "STT",
+      "TTS",
+      "VAD",
+      "LLM",
+      "OpenAI Realtime",
+      "本地部署",
+      "Apache-2.0",
+      "Python"
+    ],
+    "source": "daily",
+    "sourceLabel": "GitHub Trending",
+    "publishedAt": "2026-07-29T09:47:36.699Z"
+  },
+  {
+    "section": "github",
+    "digestDate": "2026-07-29",
+    "publishedDate": "7/29",
+    "time": "今天采集",
+    "readTime": "3 分钟",
+    "accent": "blue",
+    "inRecentWindow": true,
+    "paragraphs": [
+      "项目用途：解决“买了好技术书、读过就忘”的痛点。相比直接搜 PDF 只能得到页码、问 AI 容易幻觉、做笔记又不再翻看，book-to-skill 把整本书蒸馏成结构化的技能（Skill），安装到智能体的技能目录后，只需输入“/书名-slug 主题”，智能体就会读取对应章节并基于真实内容作答。官方实测回答一个问题比把整本书塞进上下文少用 24–51 倍 token。",
+      "核心能力：运行一条命令即可生成完整技能包，包括 SKILL.md（核心心智模型与章节索引，约 4000 token）、按章节拆分的 Markdown 文件（按需加载、不占用技能预算）、glossary.md 术语表（含章节引用）、patterns.md（技巧、算法与设计模式汇总）以及 cheatsheet.md（决策表与速查规则）。输入不局限于书籍，内部文档、架构决策记录、运维手册、入门指南等结构化文档同样适用，可对整个 docs/ 目录做提取。",
+      "适用人群与注意事项：适合经常翻阅技术书籍的开发者，以及希望把团队文档接入 AI 编程助手的团队。技能遵循开放的 Agent Skills 标准，同一份 SKILL.md 可被 Copilot CLI、Amp、Claude Code 读取，但需宿主环境支持该标准；不同宿主安装路径不同（如 ~/.claude/skills/）。项目基于 Python，采用 MIT 协议。"
+    ],
+    "facts": [
+      {
+        "label": "主要语言",
+        "value": "Python"
+      },
+      {
+        "label": "Stars",
+        "value": "12,040"
+      },
+      {
+        "label": "今日新增 Stars",
+        "value": "+423"
+      },
+      {
+        "label": "Forks",
+        "value": "1,376"
+      },
+      {
+        "label": "许可证",
+        "value": "MIT"
+      },
+      {
+        "label": "最近更新",
+        "value": "2026-07-28"
+      }
+    ],
+    "externalLinks": [
+      {
+        "label": "阅读项目 README",
+        "url": "https://github.com/virgiliojr94/book-to-skill#readme"
+      },
+      {
+        "label": "查看 Releases",
+        "url": "https://github.com/virgiliojr94/book-to-skill/releases"
+      }
+    ],
+    "id": "github-trending:virgiliojr94/book-to-skill",
+    "title": "book-to-skill：把技术书籍蒸馏成 AI 智能体技能",
+    "sourceUrl": "https://github.com/virgiliojr94/book-to-skill",
+    "summary": "一个 Python 工具，可将技术书籍（PDF、EPUB、DOCX、Markdown、HTML、RTF、MOBI）或整个文档目录转换为符合 Agent Skills 开放标准的技能包，让 GitHub Copilot CLI、Amp、Claude Code 等智能体按需加载章节并基于真实内容回答问题，避免幻觉。",
+    "tags": [
+      "Claude Code",
+      "Agent Skills",
+      "GitHub Copilot CLI",
+      "PDF 解析",
+      "知识蒸馏",
+      "技术书籍",
+      "AI 编程助手",
+      "Python",
+      "MIT"
+    ],
+    "source": "daily",
+    "sourceLabel": "GitHub Trending",
+    "publishedAt": "2026-07-29T09:47:36.699Z"
+  },
+  {
+    "section": "github",
+    "digestDate": "2026-07-29",
+    "publishedDate": "7/29",
+    "time": "今天采集",
+    "readTime": "3 分钟",
+    "accent": "blue",
+    "inRecentWindow": true,
+    "paragraphs": [
+      "项目用途：GeoLibre 旨在提供一个开箱即用、跨平台的 GIS 工作环境。Web 版无需安装即可在浏览器中使用完整应用，桌面版提供 Windows、macOS、Linux 安装包（含 Microsoft Store、AUR、Flatpak 等渠道），同时响应式适配移动端小屏；Python 包（pip/conda 均可安装）让它还能嵌入 Jupyter Notebook，方便科研与数据分析工作流。",
+      "核心能力：基于 Tauri v2、React、TypeScript、MapLibre GL JS、DuckDB-WASM Spatial 与 deck.gl 构建。功能亮点包括 3D Tiles 渲染、按建筑年代着色并 3D 拉伸的城市建筑可视化、自动从图层符号生成图例、沿时间轴播放的时间滑块动画（演示中用 1850–2025 年逐年“生长”出曼哈顿）。它还支持地球之外的行星底图（OpenPlanetaryMap 与 USGS Astrogeology 提供的月球、火星、水星、金星、木卫、土卫六、冥王星等），并按项目设置椭球体以保证距离、面积和比例尺测量与所绘制天体匹配；深空星空背景来自大气效果插件。另有插件系统与在线项目分享功能。",
+      "适用人群与注意事项：适合 GIS 从业者、城市规划与空间数据分析师、科研人员及需要在 Notebook 中做地理可视化的 Python 用户。项目采用 MIT 协议，并在 Zenodo 提供 DOI 便于学术引用。需要注意的是，README 中演示的完整功能列表与部分细节托管在官网文档，实际使用某些能力（如行星底图、插件）可能需要查阅其文档确认配置方式。"
+    ],
+    "facts": [
+      {
+        "label": "主要语言",
+        "value": "TypeScript"
+      },
+      {
+        "label": "Stars",
+        "value": "3,655"
+      },
+      {
+        "label": "今日新增 Stars",
+        "value": "+607"
+      },
+      {
+        "label": "Forks",
+        "value": "409"
+      },
+      {
+        "label": "许可证",
+        "value": "MIT"
+      },
+      {
+        "label": "最近更新",
+        "value": "2026-07-29"
+      }
+    ],
+    "externalLinks": [
+      {
+        "label": "阅读项目 README",
+        "url": "https://github.com/opengeos/GeoLibre#readme"
+      },
+      {
+        "label": "打开项目网站",
+        "url": "https://geolibre.app"
+      },
+      {
+        "label": "查看 Releases",
+        "url": "https://github.com/opengeos/GeoLibre/releases"
+      }
+    ],
+    "id": "github-trending:opengeos/GeoLibre",
+    "title": "GeoLibre：随处运行的轻量级云原生 GIS 平台",
+    "sourceUrl": "https://github.com/opengeos/GeoLibre",
+    "summary": "一个免费开源的轻量级云原生地理信息系统（GIS）平台，用于可视化、探索和分析地理空间数据。同一套工作区可运行在浏览器、桌面（Windows/macOS/Linux）、Android 原生应用及 Jupyter Notebook 中，并承诺数据保存在本地、保护隐私。",
+    "tags": [
+      "GIS",
+      "地理空间",
+      "MapLibre",
+      "DuckDB-WASM",
+      "deck.gl",
+      "Tauri",
+      "3D Tiles",
+      "行星制图",
+      "Jupyter",
+      "开源",
+      "MIT"
+    ],
+    "source": "daily",
+    "sourceLabel": "GitHub Trending",
+    "publishedAt": "2026-07-29T09:47:36.699Z"
+  },
+  {
+    "section": "github",
+    "digestDate": "2026-07-29",
+    "publishedDate": "7/29",
+    "time": "今天采集",
+    "readTime": "3 分钟",
+    "accent": "blue",
+    "inRecentWindow": true,
+    "paragraphs": [
+      "这是一个面向系统化交易（量化交易）的资源导航仓库，本身不提供交易功能，而是汇总了寻找、开发和运行量化策略所需的论文、软件、书籍、文章等各类资源。清单包含 97 个库和软件包、40 多个由机构和学术界描述的策略、55 本入门与专业书籍、23 个视频访谈，以及博客和课程。",
+      "库和软件包部分按编程语言分类并按 Star 数降序排列，覆盖面很广：事件驱动与向量化的回测/实盘框架（如 vnpy、zipline、backtrader、QUANTAXIS 等）、加密货币交易、交易机器人、技术指标与绩效指标计算、组合优化、衍生品定价与风险分析、券商 API、数据源、数据库、图计算、机器学习、时间序列分析和可视化等。策略部分则按资产类别组织，涵盖债券、商品、货币、股票、REITs 和加密货币等。",
+      "适合量化交易初学者、策略研究人员和开发者使用：初学者可以从书籍、视频和课程入门，研究者可以按资产类别查找策略思路，工程师可以按语言和热度挑选回测框架与数据接口。",
+      "需要注意的是，这是一个社区维护的清单，收录的第三方项目质量与维护状态不一（其中不乏已停止维护的老项目），使用前应自行核实；仓库中也带有指向 paperswithbacktest.com 付费内容的推广链接。此外，任何策略资源都不构成投资建议，实盘使用需自行做好回测验证与风险管理。"
+    ],
+    "facts": [
+      {
+        "label": "主要语言",
+        "value": "Python"
+      },
+      {
+        "label": "Stars",
+        "value": "10,034"
+      },
+      {
+        "label": "今日新增 Stars",
+        "value": "+309"
+      },
+      {
+        "label": "Forks",
+        "value": "1,322"
+      },
+      {
+        "label": "许可证",
+        "value": "未标注"
+      },
+      {
+        "label": "最近更新",
+        "value": "2025-01-22"
+      }
+    ],
+    "externalLinks": [
+      {
+        "label": "阅读项目 README",
+        "url": "https://github.com/paperswithbacktest/awesome-systematic-trading#readme"
+      },
+      {
+        "label": "打开项目网站",
+        "url": "https://paperswithbacktest.com"
+      },
+      {
+        "label": "查看 Releases",
+        "url": "https://github.com/paperswithbacktest/awesome-systematic-trading/releases"
+      }
+    ],
+    "id": "github-trending:paperswithbacktest/awesome-systematic-trading",
+    "title": "系统化交易资源精选清单（Awesome Systematic Trading）",
+    "sourceUrl": "https://github.com/paperswithbacktest/awesome-systematic-trading",
+    "summary": "一份精心整理的系统化（量化）交易资源清单，收录了 97 个回测与实盘交易库、40 多个机构与学术策略、55 本书籍、23 个视频以及博客和课程，帮助交易者发现、开发并运行量化交易策略。",
+    "tags": [
+      "量化交易",
+      "系统化交易",
+      "回测框架",
+      "交易策略",
+      "资源清单",
+      "Python"
+    ],
+    "source": "daily",
+    "sourceLabel": "GitHub Trending",
+    "publishedAt": "2026-07-29T09:47:36.699Z"
+  },
+  {
+    "section": "github",
+    "digestDate": "2026-07-29",
+    "publishedDate": "7/29",
+    "time": "今天采集",
+    "readTime": "3 分钟",
+    "accent": "blue",
+    "inRecentWindow": true,
+    "paragraphs": [
+      "该项目解决 AI 智能体进入生产环境后的治理问题：智能体会调用工具、浏览网页、查询数据库并委派其他智能体，一旦部署便会自主决策。工具包围绕三个核心问题构建——某个动作是否被允许、是哪个智能体执行了该动作、以及能否提供可审计的防篡改记录来证明发生了什么，弥补了 OAuth 作用域和 IAM 角色只能控制'连到哪个服务'而无法约束'连接后做什么'的空白。",
+      "其核心思路是不依赖提示词层面的安全约束（README 引用研究指出自适应攻击对 GPT-4o、Claude 3 等模型的攻击成功率可达 100%，提示注入尚无万无一失的防御），而是在确定性的应用代码层拦截每一次工具调用、消息发送和智能体委派，使被内核拒绝的动作在结构上不可能发生，而非仅仅'不太可能发生'。项目宣称覆盖 OWASP Agentic Top 10 全部 10 项，并提供 PyPI、npm、NuGet 多语言 SDK，一次 pip install 即可接入任意智能体框架。",
+      "适合需要将 AI 智能体投入生产、并对安全合规有要求的团队，尤其是面临多智能体共享凭证、审计追溯、策略合规等场景的平台工程与安全团队。采用 MIT 许可证开源，并有 CI、OpenSSF Scorecard 等工程实践背书。",
+      "需要注意的是，项目目前处于 Public Preview 阶段，官方明确提示在 GA 之前可能存在破坏性变更，生产采用时应关注版本锁定与变更日志；此外治理拦截发生在应用代码层，其防护范围取决于智能体对工具调用链路的接入方式，接入设计时需确认所有敏感动作都经过拦截点。"
+    ],
+    "facts": [
+      {
+        "label": "主要语言",
+        "value": "Python"
+      },
+      {
+        "label": "Stars",
+        "value": "5,390"
+      },
+      {
+        "label": "今日新增 Stars",
+        "value": "+46"
+      },
+      {
+        "label": "Forks",
+        "value": "854"
+      },
+      {
+        "label": "许可证",
+        "value": "MIT"
+      },
+      {
+        "label": "最近更新",
+        "value": "2026-07-29"
+      }
+    ],
+    "externalLinks": [
+      {
+        "label": "阅读项目 README",
+        "url": "https://github.com/microsoft/agent-governance-toolkit#readme"
+      },
+      {
+        "label": "查看 Releases",
+        "url": "https://github.com/microsoft/agent-governance-toolkit/releases"
+      }
+    ],
+    "id": "github-trending:microsoft/agent-governance-toolkit",
+    "title": "微软 AI 智能体治理工具包（Agent Governance Toolkit）",
+    "sourceUrl": "https://github.com/microsoft/agent-governance-toolkit",
+    "summary": "微软开源的 AI 智能体治理工具包，为自主 AI 智能体提供策略执行、零信任身份、执行沙箱和可靠性工程能力，完整覆盖 OWASP Agentic Top 10 全部 10 项风险。",
+    "tags": [
+      "AI智能体",
+      "安全治理",
+      "策略执行",
+      "零信任",
+      "沙箱",
+      "OWASP",
+      "微软",
+      "Python"
+    ],
+    "source": "daily",
+    "sourceLabel": "GitHub Trending",
+    "publishedAt": "2026-07-29T09:47:36.699Z"
+  },
+  {
+    "section": "github",
+    "digestDate": "2026-07-29",
+    "publishedDate": "7/29",
+    "time": "今天采集",
+    "readTime": "3 分钟",
+    "accent": "blue",
+    "inRecentWindow": true,
+    "paragraphs": [
+      "superfile 是一个运行在终端中的文件管理器，主打精致现代的界面与顺滑的键盘操作体验。项目使用 Go 开发，安装完成后在终端输入 spf 即可启动，适合习惯在命令行环境中完成文件浏览与日常管理操作的用户，也可作为图形化文件管理器的轻量替代。",
+      "在安装与构建方面，macOS 和 Linux 提供一键安装脚本，Windows 用户可通过 PowerShell 脚本、Winget 或 Scoop 安装，官网还列出了更多安装方式；也可以克隆源码后用 build.sh（macOS/Linux）或 go build（Windows）自行编译，仅需 Go 环境。功能扩展上，superfile 拥有插件列表、自定义主题与自定义热键体系，官方特别提醒 vim/nvim 用户把默认热键配置切换为 vim 版本，以获得更一致的操作手感。",
+      "需要注意的是，项目目前完整支持 Linux 和 macOS，Windows 平台官方标注为“尚未完全支持”，对稳定性要求高的 Windows 用户应有所预期。另外 superfile 内置自动更新检查：当距离上次检查超过 24 小时，会从 GitHub 拉取最新发布版本并向用户提示更新；如不希望启用该行为，可在配置文件中将 auto_check_update 设为 false。"
+    ],
+    "facts": [
+      {
+        "label": "主要语言",
+        "value": "Go"
+      },
+      {
+        "label": "Stars",
+        "value": "21,737"
+      },
+      {
+        "label": "今日新增 Stars",
+        "value": "+662"
+      },
+      {
+        "label": "Forks",
+        "value": "713"
+      },
+      {
+        "label": "许可证",
+        "value": "MIT"
+      },
+      {
+        "label": "最近更新",
+        "value": "2026-07-28"
+      }
+    ],
+    "externalLinks": [
+      {
+        "label": "阅读项目 README",
+        "url": "https://github.com/yorukot/superfile#readme"
+      },
+      {
+        "label": "打开项目网站",
+        "url": "https://superfile.dev"
+      },
+      {
+        "label": "查看 Releases",
+        "url": "https://github.com/yorukot/superfile/releases"
+      }
+    ],
+    "id": "github-trending:yorukot/superfile",
+    "title": "superfile：高颜值的现代化终端文件管理器",
+    "sourceUrl": "https://github.com/yorukot/superfile",
+    "summary": "superfile 是一款用 Go 编写的现代化终端文件管理器，界面精美、交互流畅，支持 Linux、macOS 与 Windows（Windows 尚未完全支持），并提供插件、主题与自定义热键等可扩展能力，MIT 协议开源。",
+    "tags": [
+      "终端文件管理器",
+      "Go",
+      "TUI",
+      "跨平台",
+      "插件",
+      "自定义主题",
+      "热键",
+      "MIT"
+    ],
+    "source": "daily",
+    "sourceLabel": "GitHub Trending",
+    "publishedAt": "2026-07-29T09:47:36.699Z"
+  },
+  {
+    "section": "github",
+    "digestDate": "2026-07-29",
+    "publishedDate": "7/29",
+    "time": "今天采集",
+    "readTime": "3 分钟",
+    "accent": "blue",
+    "inRecentWindow": true,
+    "paragraphs": [
+      "Claude Video 提供 /watch 命令，弥补了大模型“能读网页、能跑脚本、却无法看视频”的短板。用户粘贴一个 URL（YouTube、Loom、TikTok、X、Instagram 等 yt-dlp 支持的数百个站点）或本地视频路径（.mp4、.mov、.mkv、.webm）并附上问题，Claude 会先抓取字幕、按需下载内容、提取关键帧并获取带时间戳的转录文本，最后把每一帧当作图像读入上下文，基于真实画面和音频作答。典型用途包括拆解他人爆款视频的开头钩子与结构、从屏幕录像中定位 bug 出现的帧并描述原因、总结长视频、剥离发布会视频里的营销话术只留干货、把系列课程批量整理成可检索的笔记等。",
+      "工作流程上，yt-dlp 优先检查原生字幕（手动或自动生成，免费且即时），在 transcript 细节级别下，有字幕的链接甚至无需下载视频即可返回结果；ffmpeg 按所选细节级别提取帧：efficient 仅解码关键帧、近乎瞬时，balanced 与 token-burner 优先选取场景切换帧，帧数不足时回退到按时长均匀采样；帧默认为 512px 宽的 JPEG，并限制在 1998px 高以内以兼容 Claude 的 Read。当视频没有字幕时，会抽取单声道 16kHz 音频（约 480 kB/分钟）回退到 Whisper API——优先 Groq 的 whisper-large-v3（更便宜更快），其次 OpenAI 的 whisper-1。",
+      "安装上推荐通过 Claude Code 插件市场一键安装（可随市场自动更新），也可通过 npx skills 安装到 Codex、Cursor、Copilot、Gemini CLI 等 50 多个 Agent Skills 宿主，-g 参数为全局安装。零配置即可开始：首次运行会在 macOS 上通过 brew 自动安装 yt-dlp 和 ffmpeg（Linux/Windows 会打印对应安装命令），大多数公开视频依靠现成字幕即可免费分析，仅当视频没有字幕时才需要 Whisper API 密钥。",
+      "需要注意的是成本问题：token 消耗主要由帧数决定，每张帧都是图像，图像 token 累积很快，对长视频做稀疏扫描可能白白烧掉上下文预算。因此脚本按时长设置了默认帧预算（如 30 秒以内约 30 帧、足够密集），并建议对长视频聚焦到具体时间段提问而非整片扫描。运行结束后脚本会输出工作目录，若没有后续追问，Claude 会清理临时文件。"
+    ],
+    "facts": [
+      {
+        "label": "主要语言",
+        "value": "Python"
+      },
+      {
+        "label": "Stars",
+        "value": "12,440"
+      },
+      {
+        "label": "今日新增 Stars",
+        "value": "+988"
+      },
+      {
+        "label": "Forks",
+        "value": "1,236"
+      },
+      {
+        "label": "许可证",
+        "value": "MIT"
+      },
+      {
+        "label": "最近更新",
+        "value": "2026-07-01"
+      }
+    ],
+    "externalLinks": [
+      {
+        "label": "阅读项目 README",
+        "url": "https://github.com/bradautomates/claude-video#readme"
+      },
+      {
+        "label": "查看 Releases",
+        "url": "https://github.com/bradautomates/claude-video/releases"
+      }
+    ],
+    "id": "github-trending:bradautomates/claude-video",
+    "title": "Claude Video /watch：让 Claude 真正“看懂”视频",
+    "sourceUrl": "https://github.com/bradautomates/claude-video",
+    "summary": "一个面向 Claude Code 及 50+ Agent Skills 宿主的插件，通过 /watch 命令下载视频、提取画面帧、转录音频，让 Claude 基于真实画面与语音内容回答关于视频的问题，而不再只靠标题和简介猜测。",
+    "tags": [
+      "Claude Code",
+      "视频理解",
+      "yt-dlp",
+      "ffmpeg",
+      "Whisper",
+      "Agent Skills",
+      "帧提取",
+      "转录"
+    ],
+    "source": "daily",
+    "sourceLabel": "GitHub Trending",
+    "publishedAt": "2026-07-29T09:47:36.699Z"
+  },
+  {
+    "section": "x",
+    "digestDate": "2026-07-29",
+    "publishedDate": "7/29",
+    "time": "今天采集",
+    "readTime": "3 分钟",
+    "accent": "green",
+    "inRecentWindow": true,
+    "paragraphs": [
+      "Sol 的人们，大家好！我已经重置了所有 ChatGPT Work 和 Codex 用户的使用限额。与此同时，快速更新一下关于 GPT-5.6 Sol 使用限额的情况。过去几周，你们中的许多人告诉我们，Sol 消耗你们 Codex 限额的速度比预期更快。明确地说，我们并没有减少……（注：原推文文本在此截断，后续内容缺失）",
+      "【原文内容】该推文由 X 用户 thsottiaux 发布，内容涉及 OpenAI 相关产品：ChatGPT Work、Codex 以及被称为 GPT-5.6 Sol 的模型。作者表示已重置相关用户的使用限额，并承认收到用户关于限额消耗过快的反馈，随后开始作出澄清，但提供的文本在句子中途（“we have not reduced usage on an”）被截断。【编辑解释】由于原文不完整，无法得知澄清的完整内容、限额调整的具体数值或后续措施，不应推测缺失部分。推文提到的“Sol”应为 GPT-5.6 模型的某个版本或代号名称，但原文未给出进一步说明。"
+    ],
+    "id": "follow-builders:2082317452755751098",
+    "title": "重置 ChatGPT Work 与 Codex 用户的使用限额",
+    "sourceUrl": "https://x.com/thsottiaux/status/2082317452755751098",
+    "summary": "作者宣布已重置所有 ChatGPT Work 和 Codex 用户的使用限额，并就 GPT-5.6 Sol 的使用限额发布简要更新。原文提到许多用户反馈 Sol 消耗 Codex 限额的速度比预期更快，作者开始澄清并未减少用量，但推文文本在此处被截断，后续内容未知。",
+    "tags": [
+      "X",
+      "AI"
+    ],
+    "source": "builder",
+    "sourceLabel": "thsottiaux · Follow Builders",
+    "publishedAt": "2026-07-29T04:09:00.000Z"
+  },
+  {
+    "section": "x",
+    "digestDate": "2026-07-28",
+    "publishedDate": "7/28",
+    "time": "昨日采集",
+    "readTime": "3 分钟",
+    "accent": "green",
+    "inRecentWindow": true,
+    "paragraphs": [
+      "（推文正文无文字内容，仅为一个链接：https://t.co/Zgd4HPRMyi）",
+      "【原文内容】该推文的全部内容就是一个 X 平台自动生成的 t.co 短链接，作者 levie 未附带任何文字、图片描述或上下文。【编辑解释】按照规定，对于只有链接、缺乏上下文的推文，不猜测链接所指向的网页、图片或视频内容。目前信息不足，无法提供有效翻译或解读。"
+    ],
+    "id": "follow-builders:2082114876873597239",
+    "title": "仅含链接的推文（信息不足，无法判断内容）",
+    "sourceUrl": "https://x.com/levie/status/2082114876873597239",
+    "summary": "该推文由 levie 发布，正文中只有一个 t.co 短链接，不包含任何文字说明，因此无法确定推文所指向的具体内容。",
+    "tags": [
+      "X",
+      "AI"
+    ],
+    "source": "builder",
+    "sourceLabel": "levie · Follow Builders",
+    "publishedAt": "2026-07-28T14:44:00.000Z"
+  },
+  {
+    "section": "x",
+    "digestDate": "2026-07-29",
+    "publishedDate": "7/29",
+    "time": "今天采集",
+    "readTime": "3 分钟",
+    "accent": "green",
+    "inRecentWindow": true,
+    "paragraphs": [
+      "更多开源好东西。我们刚刚发布了一个 CLI 和 TypeScript SDK，用于查找、验证并修复代码中的安全漏洞。它可以扫描代码仓库、审查变更、长期跟踪发现的问题，并在 CI 中运行安全检查。",
+      "【原文内容】推文称该工具以开源形式发布，提供命令行工具（CLI）和 TypeScript SDK，核心能力覆盖漏洞的发现、验证与修复，典型使用场景包括仓库扫描、变更审查、随时间跟踪漏洞（findings），以及在持续集成（CI）中执行安全检查。【编辑解释】CI 指持续集成，即代码提交后自动构建与测试的流程，此处指可将安全扫描嵌入该流程实现自动化拦截。【信息不足说明】推文附带一个 t.co 短链接，指向的具体产品页面或代码仓库无法确认，故不猜测其内容与产品名称；作者背景资料为空，也不对其所属机构做推断。"
+    ],
+    "id": "follow-builders:2082241164850364555",
+    "title": "开源安全工具发布：用于查找与修复漏洞的 CLI 和 TypeScript SDK",
+    "sourceUrl": "https://x.com/thsottiaux/status/2082241164850364555",
+    "summary": "作者宣布开源发布一款安全工具的 CLI 与 TypeScript SDK，功能包括扫描代码仓库、审查变更、长期跟踪漏洞发现，并可在 CI 流程中运行安全检查。",
+    "tags": [
+      "开源",
+      "安全漏洞",
+      "CLI",
+      "TypeScript SDK",
+      "CI",
+      "代码扫描"
+    ],
+    "source": "builder",
+    "sourceLabel": "thsottiaux · Follow Builders",
+    "publishedAt": "2026-07-28T23:05:00.000Z"
+  },
+  {
+    "section": "x",
+    "digestDate": "2026-07-29",
+    "publishedDate": "7/29",
+    "time": "今天采集",
+    "readTime": "3 分钟",
+    "accent": "green",
+    "inRecentWindow": true,
+    "paragraphs": [
+      "有一天我们做出了重置按钮，剩下的就是历史了。",
+      "【原文内容】推文仅一句话：\"One day we created the reset button and the rest is history.\" 其中\"the rest is history\"是英语惯用语，意为\"后来的发展众所周知/顺理成章\"。【编辑解释】这句话可能是在回顾某个产品中\"重置按钮\"功能上线后产生的重大影响，也可能是玩笑或双关语，但推文本身未提供任何所指对象的信息。【信息不足说明】没有链接、截图或前后文，无法确定\"重置按钮\"属于哪个产品、项目或事件，故不做任何猜测。"
+    ],
+    "id": "follow-builders:2082326593532473523",
+    "title": "推文：关于\"重置按钮\"的简短感慨（上下文缺失）",
+    "sourceUrl": "https://x.com/thsottiaux/status/2082326593532473523",
+    "summary": "作者发了一条简短推文称\"有一天我们创造了重置按钮，剩下的就都成了历史\"，但没有任何上下文说明所指的产品或事件。",
+    "tags": [
+      "重置按钮",
+      "产品回顾",
+      "惯用语",
+      "上下文缺失"
+    ],
+    "source": "builder",
+    "sourceLabel": "thsottiaux · Follow Builders",
+    "publishedAt": "2026-07-29T04:45:00.000Z"
+  },
+  {
+    "section": "x",
+    "digestDate": "2026-07-29",
+    "publishedDate": "7/29",
+    "time": "今天采集",
+    "readTime": "3 分钟",
+    "accent": "green",
+    "inRecentWindow": true,
+    "paragraphs": [
+      "关于当下的招聘市场：对 AI 原生的个人贡献者（IC）/『队员兼教练』型人才来说，这是一个巨大的牛市；对『某某部门负责人』式的管理者来说，则是一个巨大的熊市。我从未见过如此猛烈的两极分化。简单化地说：1 年管理 10 个智能体（agent）的经验 > 10 年管理 10 到 100 人的经验。",
+      "【原文要点】作者借用股市术语作比喻：『牛市』指需求旺盛、身价上涨，『熊市』指需求萎缩、身价下跌；『bifurcation』意为分叉、两极分化。IC（individual contributor）指不带团队、亲自干活的专业人员；『player-coach』指既亲自下场做事又兼顾带队的复合角色；『heads of X』指以纯管理为职责的部门负责人。末句中的『agent』指 AI 智能体。【解释（非原文）】这条推文反映了一种在科技圈流行的观点：随着 AI 智能体能承担越来越多执行层工作，『善于指挥 AI 干活』的实战型人才价值上升，而传统的纯中层管理岗位相对贬值，组织趋向扁平化。需要注意的是，最后那句『1 年管 10 个智能体 > 10 年管 100 人』是作者自己承认的『过度简化』（to oversimplify），属于刻意夸张的修辞，用以强调趋势，不应被视为客观数据或普遍规律。背景上，swyx 是 AI 工程领域的知名作者与评论者，此推文属其个人观点表达。"
+    ],
+    "id": "follow-builders:2082199414656127010",
+    "title": "swyx：AI 时代招聘市场剧烈分化——AI 原生人才走牛，纯管理者走熊",
+    "sourceUrl": "https://x.com/swyx/status/2082199414656127010",
+    "summary": "作者 swyx 认为当前招聘市场出现罕见的两极分化：AI 原生的个人贡献者（IC）和『队员兼教练』型人才极度抢手，而纯粹的『X 部门负责人』式管理者则遭遇寒流。他自称『过度简化』地表示：1 年管理 10 个 AI 智能体的经验，胜过 10 年管理 10 到 100 人的经验。",
+    "tags": [
+      "AI 原生人才",
+      "招聘市场",
+      "个人贡献者",
+      "AI 智能体",
+      "管理者贬值",
+      "职场两极分化"
+    ],
+    "source": "builder",
+    "sourceLabel": "swyx · Follow Builders",
+    "publishedAt": "2026-07-28T20:20:00.000Z"
+  },
+  {
+    "section": "x",
+    "digestDate": "2026-07-29",
+    "publishedDate": "7/29",
+    "time": "今天采集",
+    "readTime": "3 分钟",
+    "accent": "green",
+    "inRecentWindow": true,
+    "paragraphs": [
+      "来自扎克伯格的一篇关于 AI 的精彩文章和愿景。（后附链接）",
+      "【原文要点】推文正文只有一句称赞——称扎克伯格的某篇文章/愿景『很棒』，随后附有一条 t.co 短链接。【解释（非原文）】t.co 是 X 平台的链接缩短服务，仅凭推文文本无法判断链接实际指向何处，也无法确认它具体指扎克伯格的哪篇文章、发布于哪个平台、具体内容是什么。本条推文信息不足，根据处理原则不对链接内容做任何猜测。背景上，levie 这一账号通常被认为是云存储公司 Box 的 CEO Aaron Levie，但此身份信息不属于推文内容本身。可以确认的只有：该作者读过一篇出自扎克伯格的 AI 相关文章，并给予了正面评价。"
+    ],
+    "id": "follow-builders:2082168124733116537",
+    "title": "levie 称赞扎克伯格的 AI 愿景文章（链接内容无法确认）",
+    "sourceUrl": "https://x.com/levie/status/2082168124733116537",
+    "summary": "levie 发文称赞扎克伯格关于 AI 的一篇文章及其愿景，但推文仅附带一条短链接，没有其他上下文，无法确认链接指向的具体内容。",
+    "tags": [
+      "扎克伯格",
+      "AI 愿景",
+      "文章推荐",
+      "链接内容不明",
+      "信息不足"
+    ],
+    "source": "builder",
+    "sourceLabel": "levie · Follow Builders",
+    "publishedAt": "2026-07-28T18:15:00.000Z"
+  },
+  {
+    "section": "x",
+    "digestDate": "2026-07-29",
+    "publishedDate": "7/29",
+    "time": "今天采集",
+    "readTime": "3 分钟",
+    "accent": "green",
+    "inRecentWindow": true,
+    "paragraphs": [
+      "开玩笑没问题，但当涉及到你的生活、你的意图和你的世界观（weltanschauung）时，要他妈的认真。",
+      "【原文内容】推文核心是一句人生态度宣言：幽默可以有，但对人生根本问题要绝对认真。其中 'weltanschauung' 是德语词，意为'世界观'，在英语学术语境中常被直接借用。推文附带一个链接（https://t.co/cgQF2NPElz），链接指向的具体内容无法从推文本身确定，信息不足，不作猜测。【背景解释】Garry Tan 是知名创业孵化器 Y Combinator 的总裁兼 CEO，此类推文符合他一贯面向创业者输出'认真对待人生与使命'的风格。'be earnest as fuck' 用粗口强化语气，意在反对当代互联网文化中'对一切都戏谑反讽'的态度，主张在核心信念上保持真诚与严肃。"
+    ],
+    "id": "follow-builders:2082176112906711452",
+    "title": "Garry Tan：可以开玩笑，但对人生与世界观必须极度认真",
+    "sourceUrl": "https://x.com/garrytan/status/2082176112906711452",
+    "summary": "Y Combinator CEO Garry Tan 发推表示，开玩笑无妨，但涉及个人生活、意图和世界观时，必须极其认真严肃地对待。",
+    "tags": [
+      "人生态度",
+      "世界观",
+      "Garry Tan",
+      "Y Combinator",
+      "认真"
+    ],
+    "source": "builder",
+    "sourceLabel": "garrytan · Follow Builders",
+    "publishedAt": "2026-07-28T18:47:00.000Z"
+  },
+  {
+    "section": "x",
+    "digestDate": "2026-07-28",
+    "publishedDate": "7/28",
+    "time": "昨日采集",
+    "readTime": "3 分钟",
+    "accent": "green",
+    "inRecentWindow": true,
+    "paragraphs": [
+      "我今天早上在沙发上写出了 Codex 的权威历史（definitive history）。文章基于对团队的数小时深度采访，受访者包括 @thsottiaux、@ajambrosino 和 @gdb。我的手一次都没有碰过键盘或鼠标……整件事都是我完成的，包括整理采访内容、构建时间……（注：推文原文在此处被截断，后续内容缺失，疑似为'构建时间线'）",
+      "【原文内容】作者宣称用一早上完成了一篇关于 Codex 的深度历史报道，素材来自对团队成员的数小时采访，且全程未使用键盘鼠标。提到的三人：@gdb 是 OpenAI 联合创始人 Greg Brockman；@thsottiaux（Thibault Sottiaux）是 OpenAI Codex 的工程负责人；@ajambrosino 为 OpenAI Codex 团队成员。【背景解释】这里的 Codex 指 OpenAI 的 AI 编程代理产品。'双手不碰键盘鼠标'暗示作者全程通过语音输入和 AI 工具（很可能包括 Codex 本身或其自家的 AI 写作流程）完成采访整理与写作，意在展示 AI 辅助创作的成熟工作流——这属于基于语境的推断，原文因截断未明确说明所用工具。【信息局限】推文结尾'building a time'后被截断，无法确认完整句意（可能是'timeline'），故不对截断部分做确定性解读。"
+    ],
+    "id": "follow-builders:2082130836485259530",
+    "title": "Dan Shipper：全程不用键盘鼠标，完成 OpenAI Codex 权威发展史报道",
+    "sourceUrl": "https://x.com/danshipper/status/2082130836485259530",
+    "summary": "Every 创始人 Dan Shipper 称，他花一个早上在沙发上完成了一篇关于 Codex 的权威历史文章，素材来自对 Codex 团队数小时的深度采访，全程双手未触碰键盘和鼠标。推文原文在此截断，结尾内容缺失。",
+    "tags": [
+      "OpenAI Codex",
+      "Dan Shipper",
+      "AI 写作",
+      "深度采访",
+      "Greg Brockman"
+    ],
+    "source": "builder",
+    "sourceLabel": "danshipper · Follow Builders",
+    "publishedAt": "2026-07-28T15:47:00.000Z"
+  },
+  {
+    "section": "x",
+    "digestDate": "2026-07-29",
+    "publishedDate": "7/29",
+    "time": "今天采集",
+    "readTime": "3 分钟",
+    "accent": "green",
+    "inRecentWindow": true,
+    "paragraphs": [
+      "谁在写一封反对销毁珍稀书籍的公开信？",
+      "【原文内容】推文仅包含一句反问和一个短链接，没有其他说明文字。【解释与局限】链接指向的内容无法访问，因此无法确认作者所指的‘销毁珍本书’具体涉及什么事件、机构或争议，此处不作猜测。可确认的信息仅限于：作者以反问方式表达对此事的关注，语气上暗示已有人或应有人发起相关公开信。另据公开资料，amasad 为 Replit 首席执行官 Amjad Masad，此身份属于编者的补充说明，并非推文原文信息。整体而言，该推文上下文信息不足，无法给出更具体的解读。"
+    ],
+    "id": "follow-builders:2082317323445387514",
+    "title": "amasad 反问：谁在写反对销毁珍本书的公开信？",
+    "sourceUrl": "https://x.com/amasad/status/2082317323445387514",
+    "summary": "作者以反问形式提问是否有人在撰写一封反对销毁珍稀书籍的公开信，并附链接。链接内容无法访问，具体所指事件不明。",
+    "tags": [
+      "珍本书",
+      "公开信",
+      "销毁书籍",
+      "反问",
+      "信息不足",
+      "链接无上下文"
+    ],
+    "source": "builder",
+    "sourceLabel": "amasad · Follow Builders",
+    "publishedAt": "2026-07-29T04:08:00.000Z"
+  },
+  {
+    "section": "x",
+    "digestDate": "2026-07-29",
+    "publishedDate": "7/29",
+    "time": "今天采集",
+    "readTime": "3 分钟",
+    "accent": "green",
+    "inRecentWindow": true,
+    "paragraphs": [
+      "提供大型模型的服务（部署大模型）是件难事。",
+      "【原文内容】推文只有一句简短陈述‘Serving large models is hard’和一个短链接。【解释与局限】链接内容无法访问，因此无法确认作者是在评论某篇文章、某个技术事件、某次故障还是自身经历，此处不作猜测。可确认的信息仅限于：作者表达了大模型推理/部署服务具有较高技术难度这一观点。‘Serving’在大模型语境中通常指模型的在线推理服务与部署运维。另据公开资料，steipete 为知名开发者 Peter Steinberger，此身份属于编者的补充说明，并非推文原文信息。由于推文本身信息不足，无法提供更具体的背景解读。"
+    ],
+    "id": "follow-builders:2082337130299457652",
+    "title": "steipete：部署大模型服务很难",
+    "sourceUrl": "https://x.com/steipete/status/2082337130299457652",
+    "summary": "作者简短感叹提供大模型服务（serving large models）很困难，并附链接。链接内容无法访问，无法确认其评论的具体对象。",
+    "tags": [
+      "大模型",
+      "模型部署",
+      "推理服务",
+      "技术难度",
+      "信息不足"
+    ],
+    "source": "builder",
+    "sourceLabel": "steipete · Follow Builders",
+    "publishedAt": "2026-07-29T05:27:00.000Z"
+  },
+  {
+    "section": "x",
+    "digestDate": "2026-07-29",
+    "publishedDate": "7/29",
+    "time": "今天采集",
+    "readTime": "3 分钟",
+    "accent": "green",
+    "inRecentWindow": true,
+    "paragraphs": [
+      "原文：A decade ago…as I was going through my own Minus One journey and was lost in the fog of uncertainty, I got 2 pieces of deep personal insight: 1/ I want to build new things in the world 2/ I want to work with brilliant and intense people On days such as this both feel abundant. https://t.co/muLvlHqTp",
+      "中文加工暂未完成，可通过下方链接查看原始推文。"
+    ],
+    "id": "follow-builders:2082214798935326833",
+    "title": "adityaag：A decade ago…as I was going through my own Minus One journ",
+    "sourceUrl": "https://x.com/adityaag/status/2082214798935326833",
+    "summary": "原始推文已采集；本条中文加工暂未完成。",
+    "tags": [
+      "X",
+      "AI"
+    ],
+    "source": "builder",
+    "sourceLabel": "adityaag · Follow Builders",
+    "publishedAt": "2026-07-28T21:21:00.000Z"
+  },
+  {
+    "section": "x",
+    "digestDate": "2026-07-29",
+    "publishedDate": "7/29",
+    "time": "今天采集",
+    "readTime": "3 分钟",
+    "accent": "green",
+    "inRecentWindow": true,
+    "paragraphs": [
+      "原文：Sanctuary city policy was never meant to be used to protect fentanyl dealers or violent criminals https://t.co/jLsQzhfcuU",
+      "中文加工暂未完成，可通过下方链接查看原始推文。"
+    ],
+    "id": "follow-builders:2082169572212584877",
+    "title": "garrytan：Sanctuary city policy was never meant to be used to protec",
+    "sourceUrl": "https://x.com/garrytan/status/2082169572212584877",
+    "summary": "原始推文已采集；本条中文加工暂未完成。",
+    "tags": [
+      "X",
+      "AI"
+    ],
+    "source": "builder",
+    "sourceLabel": "garrytan · Follow Builders",
+    "publishedAt": "2026-07-28T18:21:00.000Z"
+  },
+  {
+    "section": "x",
+    "digestDate": "2026-07-29",
+    "publishedDate": "7/29",
+    "time": "今天采集",
+    "readTime": "3 分钟",
+    "accent": "green",
+    "inRecentWindow": true,
+    "paragraphs": [
+      "1300 Elo！（附链接）",
+      "【原文信息】推文全文为「1300 Elo!」，并附有一个 t.co 短链接，没有其他上下文。【背景解释】Elo 是一种评级体系，最初为国际象棋设计，现广泛用于电子竞技、在线对弈平台等场景，1300 分通常代表中等或业余进阶水平，但具体含义取决于所在平台。作者 amasad（Amjad Masad）是编程平台 Replit 的创始人兼 CEO，此为公开背景信息。【信息不足】由于推文只包含链接而无更多说明，无法判断该评分来自哪款游戏、哪个平台或何种活动，本编辑不对链接内容做猜测。"
+    ],
+    "id": "follow-builders:2082316150273360316",
+    "title": "amasad 晒出「1300 Elo」评分（链接内容无法确认）",
+    "sourceUrl": "https://x.com/amasad/status/2082316150273360316",
+    "summary": "推文仅有「1300 Elo!」字样和一个短链接，Elo 是常见于棋类及竞技游戏的评级体系，但链接指向内容无法确认，信息不足。",
+    "tags": [
+      "Elo 评分",
+      "竞技评级",
+      "短链接",
+      "信息不足"
+    ],
+    "source": "builder",
+    "sourceLabel": "amasad · Follow Builders",
+    "publishedAt": "2026-07-29T04:03:00.000Z"
+  },
+  {
+    "section": "x",
+    "digestDate": "2026-07-29",
+    "publishedDate": "7/29",
+    "time": "今天采集",
+    "readTime": "3 分钟",
+    "accent": "green",
+    "inRecentWindow": true,
+    "paragraphs": [
+      "我厌倦了用 IMDb 给电影和电视剧评分，而 Letterboxd 又不支持电子游戏。所以我开发了 Tastemaker，让任何人都能在一个精美的个人主页里整理自己喜欢的电影、电视剧和游戏。你可以用它来：→ 给喜欢的作品评分和写评论 → 创建并分享清单 → 发现（原文此处被截断，后续内容缺失）",
+      "【原文语境】这是一条产品发布类推文，作者 petergyang（Peter Yang）以个人需求为出发点推出了新产品 Tastemaker。【背景解释】IMDb 是知名电影与剧集资料库及评分网站；Letterboxd 是影迷常用的电影评分与社交记录平台，但主要聚焦电影，不覆盖电子游戏。作者指出这两个工具的空白——没有一个平台能同时优雅地记录电影、剧集和游戏三类内容，于是自建产品填补这一需求。Tastemaker 的核心功能包括：为作品评分和撰写评论、创建并分享个性化清单，以及（从被截断的「Discov」推断）发现他人内容的功能。【需注意】推文文本在「Discov」处被截断，完整功能列表不得而知；以上对截断处的推断仅为基于常见拼写的合理推测，并非原文确认内容。"
+    ],
+    "id": "follow-builders:2082254840655405293",
+    "title": "Peter Yang 推出自建评分平台 Tastemaker，整合电影、剧集与游戏",
+    "sourceUrl": "https://x.com/petergyang/status/2082254840655405293",
+    "summary": "作者厌倦了用 IMDb 给电影和剧集评分，而 Letterboxd 又不支持电子游戏，于是自己开发了 Tastemaker，让用户在一个精美个人主页中集中展示喜欢的电影、剧集和游戏，支持评分、写评论、创建并分享清单等功能（推文末尾被截断）。",
+    "tags": [
+      "Tastemaker",
+      "产品发布",
+      "电影评分",
+      "电子游戏",
+      "Letterboxd",
+      "IMDb"
+    ],
+    "source": "builder",
+    "sourceLabel": "petergyang · Follow Builders",
+    "publishedAt": "2026-07-29T00:00:00.000Z"
+  },
+  {
+    "section": "x",
+    "digestDate": "2026-07-29",
+    "publishedDate": "7/29",
+    "time": "今天采集",
+    "readTime": "3 分钟",
+    "accent": "green",
+    "inRecentWindow": true,
+    "paragraphs": [
+      "原文：Imagine SETI@Home, where you donated compute to search for aliens, but instead you donate compute to search math proofs. https://t.co/5Stl475G4a",
+      "中文加工暂未完成，可通过下方链接查看原始推文。"
+    ],
+    "id": "follow-builders:2082316553740284060",
+    "title": "amasad：Imagine SETI@Home, where you donated compute to search for",
+    "sourceUrl": "https://x.com/amasad/status/2082316553740284060",
+    "summary": "原始推文已采集；本条中文加工暂未完成。",
+    "tags": [
+      "X",
+      "AI"
+    ],
+    "source": "builder",
+    "sourceLabel": "amasad · Follow Builders",
+    "publishedAt": "2026-07-29T04:05:00.000Z"
+  },
+  {
+    "section": "x",
+    "digestDate": "2026-07-29",
+    "publishedDate": "7/29",
+    "time": "今天采集",
+    "readTime": "3 分钟",
+    "accent": "green",
+    "inRecentWindow": true,
+    "paragraphs": [
+      "原文：This is why i do anti depressants and stimulants. Dynamism x2. Join me America! https://t.co/yXB5FbDGsJ",
+      "中文加工暂未完成，可通过下方链接查看原始推文。"
+    ],
+    "id": "follow-builders:2082270947793350785",
+    "title": "danshipper：This is why i do anti depressants and stimulants. Dynamism",
+    "sourceUrl": "https://x.com/danshipper/status/2082270947793350785",
+    "summary": "原始推文已采集；本条中文加工暂未完成。",
+    "tags": [
+      "X",
+      "AI"
+    ],
+    "source": "builder",
+    "sourceLabel": "danshipper · Follow Builders",
+    "publishedAt": "2026-07-29T01:04:00.000Z"
+  },
+  {
+    "section": "x",
+    "digestDate": "2026-07-29",
+    "publishedDate": "7/29",
+    "time": "今天采集",
+    "readTime": "3 分钟",
+    "accent": "green",
+    "inRecentWindow": true,
+    "paragraphs": [
+      "这些都是对 Codex 的合理批评，尽管我也很喜欢这款产品！我其实完全不知道 Sol Pro 居然存在——它比 Sol High 更好吗？为什么 Codex 里没有提供？",
+      "【原文要点】这是一条回应他人言论的推文：作者承认针对 Codex 的批评'都是合理的'，同时表达了对 Sol Pro 的惊讶，并提出两个疑问——Sol Pro 是否优于 Sol High、为何 Codex 中没有 Sol Pro。推文末尾附有一个链接（可能是被引用推文或截图），其指向内容从文本本身无法获知，因此这些批评的具体内容、以及 Sol Pro 与 Sol High 的确切定义均无法确认，不作猜测。【解释与背景，非原文信息】Codex 通常指 OpenAI 推出的 AI 编程助手产品；'Sol Pro'与'Sol High'疑似为模型版本或推理强度档位的名称，但仅凭本推文无法证实其含义。"
+    ],
+    "id": "follow-builders:2082323512069685575",
+    "title": "petergyang 回应 Codex 批评，追问 Sol Pro 与 Sol High 的区别",
+    "sourceUrl": "https://x.com/petergyang/status/2082323512069685575",
+    "summary": "作者认同他人对 Codex 的批评，表示自己此前完全不知道 Sol Pro 的存在，并质疑它是否优于 Sol High、为何未在 Codex 中提供。推文附有链接，具体内容无法从文本获知。",
+    "tags": [
+      "Codex",
+      "AI 编程工具",
+      "模型档位",
+      "产品反馈",
+      "Sol Pro"
+    ],
+    "source": "builder",
+    "sourceLabel": "petergyang · Follow Builders",
+    "publishedAt": "2026-07-29T04:33:00.000Z"
+  },
+  {
+    "section": "x",
+    "digestDate": "2026-07-29",
+    "publishedDate": "7/29",
+    "time": "今天采集",
+    "readTime": "3 分钟",
+    "accent": "green",
+    "inRecentWindow": true,
+    "paragraphs": [
+      "庇护城市（Sanctuary Cities）的最初起草者从未想过事情会发展到这个地步。",
+      "【原文要点】全文只有一句话加一个链接，核心意思是：庇护城市政策的原始起草者未曾意图造成当前局面。链接内容无法从推文文本获知，因此'this（这一局面）'具体指什么事件、被提及的起草者身份及其原话均无法确认——本条推文信息不足，不对链接内容作任何猜测。【解释与背景，非原文信息】'庇护城市'是美国移民政策术语，指限制地方执法机构配合联邦移民执法行动的司法辖区，相关争议由来已久。作者 Garry Tan 为 Y Combinator 现任 CEO，但其发此推的具体动机和指向仅凭本条推文无法判断。"
+    ],
+    "id": "follow-builders:2082170934182756411",
+    "title": "Garry Tan 就庇护城市政策发表一句评论",
+    "sourceUrl": "https://x.com/garrytan/status/2082170934182756411",
+    "summary": "作者称庇护城市（Sanctuary Cities）政策的最初起草者并未打算让事态发展成如今的样子。推文仅附一个链接，缺乏上下文，'这个地步'具体所指事件无法确认。",
+    "tags": [
+      "庇护城市",
+      "美国移民政策",
+      "Garry Tan",
+      "信息不足"
+    ],
+    "source": "builder",
+    "sourceLabel": "garrytan · Follow Builders",
+    "publishedAt": "2026-07-28T18:26:00.000Z"
+  },
+  {
+    "section": "x",
+    "digestDate": "2026-07-28",
+    "publishedDate": "7/28",
+    "time": "昨日采集",
+    "readTime": "3 分钟",
+    "accent": "green",
+    "inRecentWindow": true,
+    "paragraphs": [
+      "我今天在公司看到一位软件工程师。没有 Claude，没有 Wispr，连 Tab 键都不用。就那么写着代码。用他的双手，硬生生地写。",
+      "【原文事实】推文列举了三样被"
+    ],
+    "id": "follow-builders:2082112941814661236",
+    "title": "调侃：像目击珍稀动物一样目击",
+    "sourceUrl": "https://x.com/realmadhuguru/status/2082112941814661236",
+    "summary": "作者以发现珍稀生物般的口吻，调侃自己看到一位完全不用任何 AI 工具、纯手工写代码的软件工程师。",
+    "tags": [
+      "软件工程师",
+      "AI 编程工具",
+      "Claude",
+      "代码补全",
+      "手写代码",
+      "幽默调侃"
+    ],
+    "source": "builder",
+    "sourceLabel": "realmadhuguru · Follow Builders",
+    "publishedAt": "2026-07-28T14:36:00.000Z"
+  },
+  {
+    "section": "x",
+    "digestDate": "2026-07-29",
+    "publishedDate": "7/29",
+    "time": "今天采集",
+    "readTime": "3 分钟",
+    "accent": "green",
+    "inRecentWindow": true,
+    "paragraphs": [
+      "又或者，原因是你没有我得的这种病——对我来说，费力地跋涉于那些艰深、抽象的句子之中，是一种极致的平静。",
+      "【原文事实】推文以"
+    ],
+    "id": "follow-builders:2082273076352315440",
+    "title": "自嘲：啃艰深抽象句子让我平静",
+    "sourceUrl": "https://x.com/danshipper/status/2082273076352315440",
+    "summary": "作者在回复中自嘲：自己喜欢读艰深抽象的文字，并非因为别的，而是因为患有",
+    "tags": [
+      "抽象文字",
+      "阅读体验",
+      "自嘲幽默",
+      "回复推文",
+      "语境缺失"
+    ],
+    "source": "builder",
+    "sourceLabel": "danshipper · Follow Builders",
+    "publishedAt": "2026-07-29T01:12:00.000Z"
+  },
+  {
+    "section": "x",
+    "digestDate": "2026-07-29",
+    "publishedDate": "7/29",
+    "time": "今天采集",
+    "readTime": "3 分钟",
+    "accent": "green",
+    "inRecentWindow": true,
+    "paragraphs": [
+      "我只是如实转述；如果你不喜欢这个趋势，有很多反例：（链接）",
+      "【原文内容】推文只有一句话和一个链接：作者声称自己只是\"在转述/报道\"（i'm just reporting），并指出如果读者不喜欢\"这个趋势\"，链接中有许多反例。【语境与解释】这条推文缺少必要的上下文：其一，\"这个趋势\"（this trend）具体指什么无从得知，它很可能是对某条更早推文或某个话题的回复，但原始语境未随推文提供；其二，所附短链接（t.co）指向的外部内容无法确认，可能是文章、列表或另一组推文。【信息不足声明】由于缺少上下文，无法判断作者讨论的具体话题、立场以及链接内容，以上仅为对字面文字的忠实呈现，不对链接内容做任何推测。"
+    ],
+    "id": "follow-builders:2082255848492183583",
+    "title": "swyx：我只是如实转述，不喜欢这个趋势的话有很多反例",
+    "sourceUrl": "https://x.com/swyx/status/2082255848492183583",
+    "summary": "swyx 表示自己的说法只是如实转述，并附上一个链接，称若有人不喜欢某个趋势，可以找到许多反例。但推文本身缺乏上下文，无法确定所指的\"趋势\"是什么。",
+    "tags": [
+      "swyx",
+      "转述",
+      "反例",
+      "趋势",
+      "上下文缺失"
+    ],
+    "source": "builder",
+    "sourceLabel": "swyx · Follow Builders",
+    "publishedAt": "2026-07-29T00:04:00.000Z"
+  },
+  {
+    "section": "x",
+    "digestDate": "2026-07-29",
+    "publishedDate": "7/29",
+    "time": "今天采集",
+    "readTime": "3 分钟",
+    "accent": "green",
+    "inRecentWindow": true,
+    "paragraphs": [
+      "我还构建了 Tastemaker，想看看能否用 Claude Design 和 Claude Code 把一个粗略的想法变成一个有用的产品。我制作了一个视频，完整展示了我的整个流程，包括：1. 创建 design.md 和 HTML 规格说明；2. 在 Claude Design 中进行界面原型设计；3. 使用 Claude Code 进行构建和迭代。📌",
+      "【原文内容】作者介绍了自己做的产品 Tastemaker，目标是验证\"从粗略想法到可用产品\"这一过程能否由 Claude Design 和 Claude Code 完成，并配有演示视频。视频涵盖三个步骤：(1) 创建 design.md（设计文档）和 HTML 规格说明；(2) 在 Claude Design 中做屏幕/界面原型；(3) 用 Claude Code 构建并迭代。📌 符号表示这是一条置顶推文。【语境与解释】以下为补充解释，非原文内容：这条推文反映了当前 AI 辅助产品开发的一种典型工作流——先用 Markdown 文档（design.md）把设计需求结构化地写下来，再用 HTML 规格描述界面细节，作为 AI 工具的输入；随后在原型工具中快速生成界面，最后由 AI 编程助手（Claude Code）实现并反复迭代。Peter Yang 是产品管理领域的知名内容创作者，经常分享 AI 工具在 Product Maker/独立开发中的实践。Tastemaker 具体功能在推文中未说明，原文仅提到它是一个\"有用的产品\"。"
+    ],
+    "id": "follow-builders:2082254852600873376",
+    "title": "Peter Yang 用 Claude Design 与 Claude Code 把粗略想法做成产品 Tastemaker",
+    "sourceUrl": "https://x.com/petergyang/status/2082254852600873376",
+    "summary": "Peter Yang 分享了他构建的产品 Tastemaker：他想验证能否借助 Claude Design 和 Claude Code 把一个粗略想法变成有用产品，并制作视频完整展示流程，包括编写 design.md 与 HTML 规格、在 Claude Design 中做界面原型、用 Claude Code 构建与迭代三步。",
+    "tags": [
+      "Claude Code",
+      "Claude Design",
+      "AI 产品开发",
+      "界面原型",
+      "工作流",
+      "Peter Yang"
+    ],
+    "source": "builder",
+    "sourceLabel": "petergyang · Follow Builders",
+    "publishedAt": "2026-07-29T00:00:00.000Z"
+  },
+  {
+    "section": "x",
+    "digestDate": "2026-07-29",
+    "publishedDate": "7/29",
+    "time": "今天采集",
+    "readTime": "3 分钟",
+    "accent": "green",
+    "inRecentWindow": true,
+    "paragraphs": [
+      "https://t.co/uwzHs4G1nt（原文仅为一个短链接，无文字内容可翻译）",
+      "【原文内容】该推文由用户 swyx 发布，正文除一个 t.co 短链接外不含任何文字、话题标签或媒体描述。【编辑说明】按照处理规范，对于只有链接、缺乏上下文的推文，不得猜测链接所指向的实际内容（如文章、图片、视频或其他页面）。如需进一步处理，需要补充该链接指向的具体内容或推文的其他上下文信息。"
+    ],
+    "id": "follow-builders:2082287480687272053",
+    "title": "swyx 发布的纯链接推文（信息不足，无法处理）",
+    "sourceUrl": "https://x.com/swyx/status/2082287480687272053",
+    "summary": "该推文正文仅包含一个 X 平台短链接（t.co），没有任何文字说明、图片描述或其他上下文信息，因此无法判断其主题与内容。",
+    "tags": [
+      "纯链接推文",
+      "信息不足",
+      "swyx",
+      "短链接",
+      "无法判断内容"
+    ],
+    "source": "builder",
+    "sourceLabel": "swyx · Follow Builders",
+    "publishedAt": "2026-07-29T02:09:00.000Z"
   }
 ]

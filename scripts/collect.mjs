@@ -39,8 +39,48 @@ function stripHtml(value = "") {
     .replace(/&#39;/g, "'")
     .replace(/&lt;/g, "<")
     .replace(/&gt;/g, ">")
+    .replace(/&nbsp;/g, " ")
+    .replace(/&#(\d+);/g, (_, code) => String.fromCodePoint(Number(code)))
     .replace(/\s+/g, " ")
     .trim();
+}
+
+function reportSubsection(html, name) {
+  const marker = `data-sub-content="${name}"`;
+  const start = html.indexOf(marker);
+  if (start === -1) return "";
+  const next = html.indexOf('<div class="sub-content"', start + marker.length);
+  return html.slice(start, next === -1 ? html.length : next);
+}
+
+function reportArticles(html, subsection) {
+  return [...reportSubsection(html, subsection).matchAll(/<article class="article">([\s\S]*?)<\/article>/g)]
+    .map((match) => match[1]);
+}
+
+function reportField(block, className) {
+  return stripHtml(block.match(new RegExp(`<[^>]+class="${className}"[^>]*>([\\s\\S]*?)<\\/[^>]+>`))?.[1] || "");
+}
+
+function reportDate(value) {
+  const match = value.match(/(\d{2})\/(\d{2})\s+(\d{2}):(\d{2})/);
+  if (!match) return now.toISOString();
+  const [, month, day, hour, minute] = match;
+  return new Date(`${now.getUTCFullYear()}-${month}-${day}T${hour}:${minute}:00+08:00`).toISOString();
+}
+
+function parseFollowBuildersReport(html) {
+  return reportArticles(html, "follow-builders").flatMap((block) => {
+    const link = block.match(/class="article-title">\s*<a href="([^"]+)"/)?.[1];
+    const id = link?.match(/status\/(\d+)/)?.[1];
+    const stats = reportField(block, "article-stats");
+    const author = stats.split("·")[1]?.trim() || "unknown";
+    const text = reportField(block, "article-excerpt");
+    const createdAt = reportDate(reportField(block, "article-meta"));
+    const likes = Number(stats.match(/([\d,]+) likes/)?.[1].replaceAll(",", "") || 0);
+    if (!link || !id || !text) return [];
+    return [{ id, url: link, text, createdAt, likes, builder: author, bio: "" }];
+  });
 }
 
 async function curlGet(url, options = {}) {
@@ -66,6 +106,35 @@ async function curlGet(url, options = {}) {
   const response = new Response(body, { status });
   if (!response.ok) throw new Error(`${status} ${response.statusText}`);
   return response;
+}
+
+async function curlJsonPost(url, { headers = {}, body = "", timeoutMs = 240_000 } = {}) {
+  const args = [
+    "--max-time", String(Math.ceil(timeoutMs / 1000)),
+    "--silent", "--show-error", "--location",
+    "--request", "POST",
+  ];
+  for (const [name, value] of Object.entries(headers)) {
+    args.push("--header", `${name}: ${value}`);
+  }
+  args.push("--data-binary", body, "--write-out", "\n__INFOHUB_STATUS__%{http_code}", url);
+  let stdout;
+  try {
+    ({ stdout } = await execFileAsync("curl", args, {
+      cwd: root,
+      maxBuffer: 1024 * 1024 * 30,
+      timeout: timeoutMs + 5_000,
+    }));
+  } catch {
+    throw new Error("Moonshot request timed out or lost connection");
+  }
+  const marker = "\n__INFOHUB_STATUS__";
+  const markerIndex = stdout.lastIndexOf(marker);
+  if (markerIndex === -1) throw new Error("curl response status missing");
+  const responseBody = stdout.slice(0, markerIndex);
+  const status = Number(stdout.slice(markerIndex + marker.length));
+  if (status < 200 || status >= 300) throw new Error(`Moonshot returned HTTP ${status}`);
+  return JSON.parse(responseBody);
 }
 
 async function fetchWithRetry(url, options = {}, attempts = 2) {
@@ -104,25 +173,22 @@ async function fetchJson(url, options) {
 
 async function kimiJson(system, input, { maxTokens = 5_000, timeoutMs = 240_000 } = {}) {
   if (!moonshotKey) throw new Error("MOONSHOT_API_KEY is not configured");
-  const response = await fetchWithRetry(`${moonshotBaseUrl}/chat/completions`, {
-    method: "POST",
-    timeoutMs,
-    headers: {
-      authorization: `Bearer ${moonshotKey}`,
-      "content-type": "application/json",
-    },
-    body: JSON.stringify({
-      model: moonshotModel,
-      temperature: 1,
-      max_tokens: maxTokens,
-      response_format: { type: "json_object" },
-      messages: [
-        { role: "system", content: system },
-        { role: "user", content: JSON.stringify(input) },
-      ],
-    }),
-  }, 1);
-  const payload = await response.json();
+  const url = `${moonshotBaseUrl}/chat/completions`;
+  const headers = {
+    authorization: `Bearer ${moonshotKey}`,
+    "content-type": "application/json",
+  };
+  const body = JSON.stringify({
+    model: moonshotModel,
+    temperature: 1,
+    max_tokens: maxTokens,
+    response_format: { type: "json_object" },
+    messages: [
+      { role: "system", content: system },
+      { role: "user", content: JSON.stringify(input) },
+    ],
+  });
+  const payload = await curlJsonPost(url, { headers, body, timeoutMs });
   const content = payload.choices?.[0]?.message?.content;
   if (!content) throw new Error("Kimi returned an empty response");
   const jsonText = content.trim().replace(/^```(?:json)?\s*/i, "").replace(/\s*```$/, "");
@@ -131,6 +197,33 @@ async function kimiJson(system, input, { maxTokens = 5_000, timeoutMs = 240_000 
   } catch {
     return JSON.parse(jsonrepair(jsonText));
   }
+}
+
+async function kimiItems(system, inputs, { batchSize = 2, maxTokens = 3_500, concurrency = 3 } = {}) {
+  const batches = [];
+  for (let index = 0; index < inputs.length; index += batchSize) {
+    batches.push(inputs.slice(index, index + batchSize));
+  }
+  const results = new Array(batches.length).fill(null);
+  let cursor = 0;
+  async function worker() {
+    while (cursor < batches.length) {
+      const batchIndex = cursor++;
+      try {
+        const processed = await kimiJson(system, batches[batchIndex], {
+          maxTokens,
+          timeoutMs: 3 * 60 * 1000,
+        });
+        results[batchIndex] = processed.items || [];
+        console.log(`[kimi] batch ${batchIndex + 1}/${batches.length} completed`);
+      } catch (error) {
+        results[batchIndex] = [];
+        console.warn(`[kimi] batch ${batchIndex + 1}/${batches.length} skipped: ${error.message}`);
+      }
+    }
+  }
+  await Promise.all(Array.from({ length: Math.min(concurrency, batches.length) }, () => worker()));
+  return results.flat();
 }
 
 function baseBody(section, publishedAt, extra = {}) {
@@ -151,20 +244,23 @@ function baseBody(section, publishedAt, extra = {}) {
 }
 
 async function collectFollowBuilders() {
-  const feed = await fetchJson(config.followBuilders.url);
+  const reportPath = process.env.INFOHUB_DAILY_REPORT_PATH?.trim();
+  const feed = reportPath
+    ? { x: [{ name: "Follow Builders", bio: "", tweets: parseFollowBuildersReport(await readFile(reportPath, "utf8")) }] }
+    : await fetchJson(config.followBuilders.url);
   const tweets = (feed.x || [])
     .flatMap((builder) => (builder.tweets || []).map((tweet) => ({
       ...tweet,
-      builder: builder.name,
-      bio: builder.bio,
+      builder: tweet.builder || builder.name,
+      bio: tweet.bio || builder.bio,
     })))
     .filter((tweet) => recent(tweet.createdAt))
     .sort((a, b) => (b.likes || 0) - (a.likes || 0))
-    .slice(0, 4);
+    .slice(0, 30);
   if (tweets.length === 0) return [];
 
-  const processed = await kimiJson(
-    "你是中文科技编辑。忠实处理 X 推文，不得编造。返回 JSON：{items:[{id,title,summary,translation,detail,keywords}]}。translation 是完整中文翻译；detail 补充原推文语境和含义，但必须明确区分原文与解释。keywords 为 3-6 个中文关键词。",
+  const processedItems = await kimiItems(
+    "你是中文科技编辑。忠实处理 X 推文，不得编造。返回 JSON：{items:[{id,title,summary,translation,detail,keywords}]}。translation 是完整中文翻译；detail 补充原推文语境和含义，但必须明确区分原文与解释。keywords 为 3-6 个中文关键词。对于只有链接、缺乏上下文的推文，明确写出信息不足，不得猜测链接内容。",
     tweets.map((tweet) => ({
       id: tweet.id,
       author: tweet.builder,
@@ -172,13 +268,14 @@ async function collectFollowBuilders() {
       text: tweet.text,
       url: tweet.url,
     })),
+    { batchSize: 2, maxTokens: 3_500, concurrency: 3 },
   );
 
-  return (processed.items || []).flatMap((item) => {
-    const tweet = tweets.find((entry) => String(entry.id) === String(item.id));
-    if (!tweet) return [];
-    const keywords = Array.isArray(item.keywords) ? item.keywords : ["X", "AI"];
-    return [{
+  return tweets.map((tweet) => {
+    const item = processedItems.find((entry) => String(entry.id) === String(tweet.id));
+    const fallbackTitle = `${tweet.builder}：${tweet.text.replace(/https?:\/\/\S+/g, "").trim().slice(0, 58) || "仅分享了链接"}`;
+    const keywords = Array.isArray(item?.keywords) ? item.keywords : ["X", "AI"];
+    return {
       externalId: String(tweet.id),
       source: {
         id: config.followBuilders.id,
@@ -186,15 +283,17 @@ async function collectFollowBuilders() {
         name: `${tweet.builder} · Follow Builders`,
         url: "https://github.com/zarazhangrui/follow-builders",
       },
-      title: item.title,
+      title: item?.title || fallbackTitle,
       sourceUrl: tweet.url,
-      summary: item.summary,
+      summary: item?.summary || "原始推文已采集；本条中文加工暂未完成。",
       publishedAt: tweet.createdAt,
       keywords,
       body: baseBody("x", tweet.createdAt, {
-        paragraphs: [item.translation, item.detail].filter(Boolean),
+        paragraphs: item
+          ? [item.translation, item.detail].filter(Boolean)
+          : [`原文：${tweet.text}`, "中文加工暂未完成，可通过下方链接查看原始推文。"],
       }),
-    }];
+    };
   });
 }
 
@@ -350,48 +449,66 @@ function trendingRepositories(html) {
   return [...html.matchAll(/<article[^>]*Box-row[^>]*>([\s\S]*?)<\/article>/g)]
     .flatMap((match) => {
       const href = match[1].match(/<h2[^>]*>[\s\S]*?<a[^>]+href="\/([^"?#]+)"/i)?.[1];
-      return href && href.split("/").length === 2 ? [href] : [];
+      const dailyStars = Number(match[1].match(/([\d,]+)\s+stars today/i)?.[1].replaceAll(",", "") || 0);
+      return href && href.split("/").length === 2 ? [{ repository: href, dailyStars }] : [];
     })
-    .slice(0, 3);
+    .slice(0, 15);
+}
+
+function reportTrendingRepositories(html) {
+  return reportArticles(html, "github-trending").flatMap((block) => {
+    const url = block.match(/class="article-title">\s*<a href="([^"]+)"/)?.[1];
+    const repository = url?.match(/github\.com\/([^/]+\/[^/?#]+)/)?.[1];
+    const stats = reportField(block, "article-stats");
+    const dailyStars = Number(stats.match(/([\d,]+) stars today/i)?.[1].replaceAll(",", "") || 0);
+    return repository ? [{ repository, dailyStars }] : [];
+  }).slice(0, 15);
 }
 
 async function collectGithub() {
-  const html = await (await fetchWithRetry(config.github.url)).text();
-  const repositories = trendingRepositories(html);
-  if (repositories.length === 0) throw new Error("GitHub Trending returned no repositories");
-  const details = await Promise.all(repositories.map(async (repository) => {
-    const [metadata, readme] = await Promise.all([
-      fetchJson(`https://api.github.com/repos/${repository}`, {
-        headers: { accept: "application/vnd.github+json" },
-      }),
-      fetchWithRetry(`https://raw.githubusercontent.com/${repository}/HEAD/README.md`)
-        .then((response) => response.text())
-        .catch(() => ""),
-    ]);
-    return {
-      repository,
-      description: metadata.description,
-      homepage: metadata.homepage,
-      language: metadata.language,
-      stars: metadata.stargazers_count,
-      forks: metadata.forks_count,
-      license: metadata.license?.spdx_id,
-      updatedAt: metadata.pushed_at,
-      readme: readme.slice(0, 6_000),
-    };
-  }));
+  const reportPath = process.env.INFOHUB_DAILY_REPORT_PATH?.trim();
+  const repositoryEntries = reportPath
+    ? reportTrendingRepositories(await readFile(reportPath, "utf8"))
+    : trendingRepositories(await (await fetchWithRetry(config.github.url)).text());
+  if (repositoryEntries.length === 0) throw new Error("GitHub Trending returned no repositories");
+  const details = [];
+  for (let index = 0; index < repositoryEntries.length; index += 3) {
+    const batch = repositoryEntries.slice(index, index + 3);
+    details.push(...await Promise.all(batch.map(async ({ repository, dailyStars }) => {
+      const [metadata, readme] = await Promise.all([
+        fetchJson(`https://api.github.com/repos/${repository}`, {
+          headers: { accept: "application/vnd.github+json" },
+        }),
+        fetchWithRetry(`https://raw.githubusercontent.com/${repository}/HEAD/README.md`)
+          .then((response) => response.text())
+          .catch(() => ""),
+      ]);
+      return {
+        repository,
+        description: metadata.description,
+        homepage: metadata.homepage,
+        language: metadata.language,
+        stars: metadata.stargazers_count,
+        dailyStars,
+        forks: metadata.forks_count,
+        license: metadata.license?.spdx_id,
+        updatedAt: metadata.pushed_at,
+        readme: readme.slice(0, 5_000),
+      };
+    })));
+  }
 
-  const processed = await kimiJson(
+  const processedItems = await kimiItems(
     "你是开源项目编辑。根据仓库元数据与 README，返回 JSON：{items:[{repository,titleZh,summaryZh,paragraphs,keywords}]}。paragraphs 用 2-4 段说明项目用途、核心能力、适用人群和注意事项；不得编造 README 没有的功能。",
     details,
+    { batchSize: 2, maxTokens: 4_500, concurrency: 2 },
   );
 
-  return (processed.items || []).flatMap((item) => {
-    const repo = details.find((entry) => entry.repository === item.repository);
-    if (!repo) return [];
+  return details.map((repo) => {
+    const item = processedItems.find((entry) => entry.repository === repo.repository);
     const publishedAt = now.toISOString();
-    const keywords = Array.isArray(item.keywords) ? item.keywords : ["GitHub", "开源"];
-    return [{
+    const keywords = Array.isArray(item?.keywords) ? item.keywords : ["GitHub", "开源"];
+    return {
       externalId: repo.repository,
       source: {
         id: config.github.id,
@@ -399,16 +516,20 @@ async function collectGithub() {
         name: config.github.name,
         url: config.github.url,
       },
-      title: item.titleZh || repo.repository,
+      title: item?.titleZh || repo.repository,
       sourceUrl: `https://github.com/${repo.repository}`,
-      summary: item.summaryZh,
+      summary: item?.summaryZh || repo.description || "GitHub Trending 热门开源项目",
       publishedAt,
       keywords,
       body: baseBody("github", publishedAt, {
-        paragraphs: item.paragraphs,
+        paragraphs: Array.isArray(item?.paragraphs) && item.paragraphs.length > 0
+          ? item.paragraphs
+          : [repo.description || `${repo.repository} 今日进入 GitHub Trending。`, "详细功能请通过下方链接阅读项目 README。"],
         facts: [
           { label: "主要语言", value: repo.language || "未标注" },
           { label: "Stars", value: Number(repo.stars || 0).toLocaleString("en-US") },
+          { label: "今日新增 Stars", value: repo.dailyStars ? `+${Number(repo.dailyStars).toLocaleString("en-US")}` : "未获取" },
+          { label: "Forks", value: Number(repo.forks || 0).toLocaleString("en-US") },
           { label: "许可证", value: repo.license || "未标注" },
           { label: "最近更新", value: shanghaiDate(new Date(repo.updatedAt)) },
         ],
@@ -418,7 +539,7 @@ async function collectGithub() {
           { label: "查看 Releases", url: `https://github.com/${repo.repository}/releases` },
         ],
       }),
-    }];
+    };
   });
 }
 
@@ -523,33 +644,40 @@ async function collectYoutube() {
 
   const items = [];
   for (const video of videos) {
-    const transcript = await transcriptFor(video.videoId);
-    const processed = await kimiJson(
-      "你是 YouTube 长内容编辑。完整覆盖文字稿，不删减论点、论据、案例、步骤、条件、例外和重要细节；删除无信息量口头禅与完全重复。先给可应用的 Takeaways，再按时间顺序整理成阅读友好的中文文章。返回 JSON：{title,summary,keywords,takeaways,sections:[{title,timeRange,paragraphs}]}。takeaways 5-10 条；每个 section 必须有起止时间戳；不得编造文字稿外信息。",
-      { title: video.title, transcript },
-      { maxTokens: 20_000, timeoutMs: 10 * 60 * 1000 },
-    );
-    const keywords = Array.isArray(processed.keywords) ? processed.keywords : ["YouTube"];
-    items.push({
-      externalId: video.videoId,
-      source: {
-        id: video.channel.id,
-        type: "youtube",
-        name: video.channel.name,
-        url: video.channel.url,
-      },
-      title: processed.title || video.title,
-      sourceUrl: `https://www.youtube.com/watch?v=${video.videoId}`,
-      summary: processed.summary,
-      publishedAt: video.publishedAt,
-      keywords,
-      body: baseBody("youtube", video.publishedAt, {
-        takeaways: processed.takeaways,
-        sections: processed.sections,
-        paragraphs: [],
-        readTime: "深度阅读",
-      }),
-    });
+    try {
+      const transcript = await transcriptFor(video.videoId);
+      const processed = await kimiJson(
+        "你是 YouTube 长内容编辑。完整覆盖文字稿，不删减论点、论据、案例、步骤、条件、例外和重要细节；删除无信息量口头禅与完全重复。先给可应用的 Takeaways，再按时间顺序整理成阅读友好的中文文章。返回 JSON：{title,summary,keywords,takeaways,sections:[{title,timeRange,paragraphs}]}。takeaways 5-10 条；每个 section 必须有起止时间戳；不得编造文字稿外信息。",
+        { title: video.title, transcript },
+        { maxTokens: 20_000, timeoutMs: 10 * 60 * 1000 },
+      );
+      if (!Array.isArray(processed.takeaways) || !Array.isArray(processed.sections)) {
+        throw new Error("Kimi did not return complete YouTube sections");
+      }
+      const keywords = Array.isArray(processed.keywords) ? processed.keywords : ["YouTube"];
+      items.push({
+        externalId: video.videoId,
+        source: {
+          id: video.channel.id,
+          type: "youtube",
+          name: video.channel.name,
+          url: video.channel.url,
+        },
+        title: processed.title || video.title,
+        sourceUrl: `https://www.youtube.com/watch?v=${video.videoId}`,
+        summary: processed.summary,
+        publishedAt: video.publishedAt,
+        keywords,
+        body: baseBody("youtube", video.publishedAt, {
+          takeaways: processed.takeaways,
+          sections: processed.sections,
+          paragraphs: [],
+          readTime: "深度阅读",
+        }),
+      });
+    } catch (error) {
+      console.error(`[collect] youtube ${video.videoId} skipped: ${error?.message || String(error)}`);
+    }
   }
   return items;
 }
