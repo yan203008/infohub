@@ -15,6 +15,7 @@ import {
   Trash2,
   Video,
 } from "lucide-react";
+import Link from "next/link";
 import { useCallback, useEffect, useState } from "react";
 import type { FormEvent } from "react";
 
@@ -72,7 +73,8 @@ export function AdminConsole({ adminName }: { adminName: string }) {
   }, []);
 
   useEffect(() => {
-    void load();
+    const timer = window.setTimeout(() => void load(), 0);
+    return () => window.clearTimeout(timer);
   }, [load]);
 
   async function send(payload: unknown) {
@@ -146,9 +148,9 @@ export function AdminConsole({ adminName }: { adminName: string }) {
   return (
     <main className="admin-shell">
       <header className="admin-header">
-        <a href="/" aria-label="返回 InfoHub">
+        <Link href="/" aria-label="返回 InfoHub">
           <ArrowLeft size={19} />
-        </a>
+        </Link>
         <div>
           <span>InfoHub</span>
           <small>管理后台</small>
@@ -165,7 +167,7 @@ export function AdminConsole({ adminName }: { adminName: string }) {
           </div>
           <div className="admin-health">
             <i />
-            采集服务等待 API Key
+            YouTube 字幕采集已启用
           </div>
         </section>
 
@@ -339,10 +341,7 @@ export function AdminConsole({ adminName }: { adminName: string }) {
                 <span><CircleAlert size={16} /> Kimi / Moonshot API</span>
                 <b>待配置</b>
               </div>
-              <div className="secret-row">
-                <span><CircleAlert size={16} /> Supadata API</span>
-                <b>待配置</b>
-              </div>
+              <p className="secret-note">YouTube 字幕使用内置采集能力，不需要 Supadata API Key。</p>
             </section>
 
             <button className="primary-button admin-save" onClick={saveSettings} disabled={saving}>

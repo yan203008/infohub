@@ -168,6 +168,88 @@ button {
   display: none;
 }
 
+.date-filter {
+  display: grid;
+  gap: 10px;
+  margin: -4px 0 18px;
+}
+
+.date-chips {
+  display: flex;
+  gap: 8px;
+  overflow-x: auto;
+  padding: 4px 1px 8px;
+  scrollbar-width: none;
+  scroll-snap-type: x proximity;
+}
+
+.date-chips::-webkit-scrollbar {
+  display: none;
+}
+
+.date-chips button {
+  display: grid;
+  min-width: 68px;
+  min-height: 60px;
+  padding: 9px 10px;
+  border: 1px solid var(--line);
+  border-radius: 15px;
+  background: rgba(255, 255, 255, 0.82);
+  color: var(--muted);
+  text-align: left;
+  scroll-snap-align: start;
+  cursor: pointer;
+}
+
+.date-chips button small {
+  margin-bottom: 3px;
+  font-size: 10px;
+}
+
+.date-chips button strong {
+  color: var(--ink);
+  font-size: 13px;
+  white-space: nowrap;
+}
+
+.date-chips button.active {
+  border-color: var(--green);
+  background: var(--green);
+  color: rgba(255, 255, 255, 0.75);
+  box-shadow: 0 8px 18px rgba(31, 107, 75, 0.16);
+}
+
+.date-chips button.active strong {
+  color: white;
+}
+
+.date-picker-button {
+  position: relative;
+  display: flex;
+  min-height: 44px;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  background: white;
+  color: var(--green);
+  font-size: 13px;
+  font-weight: 680;
+  cursor: pointer;
+}
+
+.date-picker-button input,
+.sidebar-more input {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  cursor: pointer;
+}
+
 .digest-card {
   position: relative;
   overflow: hidden;
@@ -286,6 +368,50 @@ button {
 .feed {
   display: grid;
   gap: 10px;
+}
+
+.empty-daily {
+  display: grid;
+  min-height: 230px;
+  padding: 34px 22px;
+  place-items: center;
+  align-content: center;
+  border: 1px dashed #d7ded8;
+  border-radius: 20px;
+  background: rgba(255, 255, 255, 0.58);
+  color: var(--muted);
+  text-align: center;
+}
+
+.empty-daily svg {
+  margin-bottom: 12px;
+  color: var(--green);
+}
+
+.empty-daily h3 {
+  margin: 0 0 6px;
+  color: var(--ink);
+  font-size: 16px;
+}
+
+.empty-daily p {
+  max-width: 34ch;
+  margin: 0;
+  font-size: 12px;
+  line-height: 1.65;
+}
+
+.empty-daily button {
+  min-height: 40px;
+  margin-top: 16px;
+  padding: 0 15px;
+  border: 0;
+  border-radius: 12px;
+  background: var(--green-soft);
+  color: var(--green);
+  font-size: 12px;
+  font-weight: 700;
+  cursor: pointer;
 }
 
 .content-card {
@@ -848,6 +974,41 @@ button {
     margin-top: 40px;
   }
 
+  .sidebar-dates {
+    display: grid;
+    gap: 2px;
+    margin: 4px 0 10px 32px;
+    padding-left: 10px;
+    border-left: 1px solid #dfe6e0;
+  }
+
+  .desktop-sidebar nav .sidebar-dates button {
+    min-height: 34px;
+    padding: 0 10px;
+    justify-content: space-between;
+    border-radius: 10px;
+    font-size: 11px;
+  }
+
+  .desktop-sidebar nav .sidebar-dates button.active {
+    background: #eef4ef;
+  }
+
+  .sidebar-dates button small {
+    color: #a0a8a2;
+  }
+
+  .sidebar-more {
+    position: relative;
+    display: flex;
+    min-height: 34px;
+    align-items: center;
+    padding: 0 10px;
+    color: #89928c;
+    font-size: 11px;
+    cursor: pointer;
+  }
+
   .desktop-sidebar nav button {
     justify-content: flex-start;
     gap: 12px;
@@ -933,6 +1094,16 @@ button {
 
   .content-area {
     padding: 52px 44px 80px;
+  }
+
+  .date-filter {
+    grid-template-columns: 1fr 132px;
+    align-items: start;
+    margin-bottom: 22px;
+  }
+
+  .date-chips {
+    padding-top: 0;
   }
 
   .welcome {
@@ -1121,6 +1292,13 @@ button {
   background: #edf6f0;
   color: var(--green);
   font-size: 12px;
+}
+
+.secret-note {
+  margin: 12px 0 0;
+  color: var(--muted);
+  font-size: 11px;
+  line-height: 1.6;
 }
 
 .admin-grid,
