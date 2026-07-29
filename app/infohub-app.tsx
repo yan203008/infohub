@@ -48,6 +48,8 @@ type Item = {
   sourceUrl: string;
   paragraphs: string[];
   externalLinks?: { label: string; url: string }[];
+  facts?: { label: string; value: string }[];
+  takeaways?: string[];
   section?: SectionId;
   inRecentWindow?: boolean;
 };
@@ -257,13 +259,17 @@ function feedItem(input: {
   accent: string;
   tags: string[];
   detail?: string;
+  paragraphs?: string[];
+  externalLinks?: { label: string; url: string }[];
+  facts?: { label: string; value: string }[];
+  takeaways?: string[];
   inRecentWindow?: boolean;
 }): Item {
   return {
     ...input,
     time: input.digestDate === "2026-07-29" ? "今天采集" : "昨日采集",
     readTime: "3 分钟",
-    paragraphs: [
+    paragraphs: input.paragraphs ?? [
       input.summary,
       input.detail ?? "该条目来自公开信息源，InfoHub 保留原始链接，并按每日采集时间归档。",
     ],
@@ -362,6 +368,22 @@ const feedItems: Item[] = [
     sourceUrl: "https://github.com/moeru-ai/airi",
     accent: "blue",
     tags: ["GitHub", "开源", "语音 Agent"],
+    facts: [
+      { label: "主要语言", value: "TypeScript" },
+      { label: "Stars", value: "45k" },
+      { label: "许可证", value: "MIT" },
+      { label: "最近更新", value: "7月29日" },
+    ],
+    paragraphs: [
+      "AIRI 是一个可自行托管、由用户掌控数据的虚拟角色项目，目标是把实时对话、角色形象、记忆与环境互动组合成持续存在的 AI 伙伴。它支持实时语音交流，并提供网页、macOS 和 Windows 版本。",
+      "项目不仅是一个聊天界面。它围绕 Live2D、VRM、语音识别与合成、记忆系统和插件能力构建角色容器，还可以连接 Minecraft、Factorio 等游戏场景。浏览器版本大量使用 WebGPU、WebAudio、WebAssembly 和 WebSocket；桌面版本则可以利用 CUDA 或 Apple Metal。",
+      "适合关注 AI 角色、实时语音 Agent、自托管个人助手和虚拟主播技术的人。项目仍处于快速开发期，安装或接入外部能力前应查看最新文档、系统要求和安全说明。",
+    ],
+    externalLinks: [
+      { label: "阅读项目 README", url: "https://github.com/moeru-ai/airi#readme" },
+      { label: "查看使用文档", url: "https://airi.moeru.ai/docs/" },
+      { label: "查看 Releases", url: "https://github.com/moeru-ai/airi/releases" },
+    ],
   }),
   feedItem({
     id: "github-aisuite",
@@ -375,6 +397,23 @@ const feedItems: Item[] = [
     sourceUrl: "https://github.com/andrewyng/aisuite",
     accent: "blue",
     tags: ["GitHub", "多模型", "开发工具"],
+    facts: [
+      { label: "主要语言", value: "Python" },
+      { label: "Stars", value: "15.8k" },
+      { label: "许可证", value: "MIT" },
+      { label: "定位", value: "多模型 SDK" },
+    ],
+    paragraphs: [
+      "aisuite 是一个轻量级 Python 库，用统一接口调用不同生成式 AI 服务。最基础的一层是兼容 OpenAI 风格的 Chat Completions API，应用只需要更换 provider:model 字符串，就能在 OpenAI、Anthropic、Google、Mistral、Hugging Face、AWS、Ollama 等服务之间切换。",
+      "在统一聊天接口之上，项目还提供 Agents API、工具调用、工具包和 MCP 接入。开发者可以把普通 Python 函数交给模型使用，设置多轮工具执行，并通过策略控制哪些工具允许运行。文件、Git 和 Shell 等常见能力也被包装成可复用工具包。",
+      "它适合需要比较多个模型、降低供应商绑定，或用同一套业务代码连接云端模型和本地模型的团队。实际使用仍需分别准备对应服务商的 API Key，并检查不同模型在参数、工具调用和流式输出上的差异。",
+    ],
+    externalLinks: [
+      { label: "阅读项目 README", url: "https://github.com/andrewyng/aisuite#readme" },
+      { label: "查看 Chat Completions 快速开始", url: "https://github.com/andrewyng/aisuite/blob/main/docs/chat-completions-quickstart.md" },
+      { label: "查看 Agents 快速开始", url: "https://github.com/andrewyng/aisuite/blob/main/docs/agents-quickstart.md" },
+      { label: "打开 PyPI", url: "https://pypi.org/project/aisuite/" },
+    ],
   }),
   feedItem({
     id: "github-ecc",
@@ -388,6 +427,22 @@ const feedItems: Item[] = [
     sourceUrl: "https://github.com/affaan-m/ECC",
     accent: "blue",
     tags: ["GitHub", "Agent Harness", "Codex"],
+    facts: [
+      { label: "主要语言", value: "JavaScript" },
+      { label: "Stars", value: "235k" },
+      { label: "许可证", value: "MIT" },
+      { label: "最近更新", value: "7月29日" },
+    ],
+    paragraphs: [
+      "ECC 是一套面向编码 Agent 的工作流与配置集合，覆盖技能、命令、规则、记忆、安全检查和研究优先的开发方式。它的目标不是替代 Claude Code、Codex、Cursor 等工具，而是在这些工具之上提供可复用的工程方法。",
+      "仓库同时支持多种 Agent Harness，但每个 Harness 应只选择一种安装方式，避免技能、命令或 hooks 被重复加载。对 Codex 用户，项目提供同步流程和原生格式技能；对 Claude Code 用户，则提供插件与按需规则包。",
+      "项目强调把团队知识写进规则、技能和自动化检查，并提供规划、测试驱动开发、代码审查、构建修复、会话保存与恢复等工作流。由于 hooks、MCP 和项目指令都可能执行代码或接触凭据，使用前需要阅读安全说明，只安装真正需要的模块。",
+    ],
+    externalLinks: [
+      { label: "阅读项目 README", url: "https://github.com/affaan-m/ECC#readme" },
+      { label: "打开官方网站", url: "https://ecc.tools" },
+      { label: "查看安全说明", url: "https://github.com/affaan-m/ECC#security" },
+    ],
   }),
   feedItem({
     id: "podcast-granola",
@@ -739,6 +794,15 @@ export function InfoHubApp({ user }: { user: ChatGPTUser | null }) {
   }
 
   if (activeItem) {
+    const readerLinks = [
+      {
+        label: activeItem.section === "github" ? "打开 GitHub 仓库" : "查看原始内容",
+        url: activeItem.sourceUrl,
+      },
+      ...(activeItem.externalLinks ?? []).filter(
+        (link) => link.url !== activeItem.sourceUrl,
+      ),
+    ];
     return (
       <main className="app-shell reader-shell">
         <header className="reader-topbar">
@@ -781,6 +845,27 @@ export function InfoHubApp({ user }: { user: ChatGPTUser | null }) {
             ))}
           </div>
           <div className="article-rule" />
+          {activeItem.takeaways && activeItem.takeaways.length > 0 && (
+            <section className="reader-takeaways">
+              <span>TAKEAWAYS</span>
+              <h2>先看最值得带走的内容</h2>
+              <ul>
+                {activeItem.takeaways.map((takeaway) => (
+                  <li key={takeaway}>{takeaway}</li>
+                ))}
+              </ul>
+            </section>
+          )}
+          {activeItem.facts && activeItem.facts.length > 0 && (
+            <section className="project-facts" aria-label="项目数据">
+              {activeItem.facts.map((fact) => (
+                <div key={fact.label}>
+                  <span>{fact.label}</span>
+                  <strong>{fact.value}</strong>
+                </div>
+              ))}
+            </section>
+          )}
           <div className="article-body">
             {activeItem.paragraphs.map((paragraph, index) => (
               <p
@@ -791,17 +876,15 @@ export function InfoHubApp({ user }: { user: ChatGPTUser | null }) {
               </p>
             ))}
           </div>
-          {activeItem.externalLinks && (
-            <section className="source-links" aria-label="原始来源">
-              <h2>原始来源</h2>
-              {activeItem.externalLinks.map((link) => (
+          <section className="source-links" aria-label="相关链接">
+              <h2>相关链接</h2>
+              {readerLinks.map((link) => (
                 <a key={link.url} href={link.url} target="_blank" rel="noreferrer">
                   <span>{link.label}</span>
                   <ChevronRight size={16} />
                 </a>
               ))}
-            </section>
-          )}
+          </section>
           <div className="article-end">
             <span>END</span>
           </div>
@@ -914,7 +997,7 @@ export function InfoHubApp({ user }: { user: ChatGPTUser | null }) {
               </button>
             ))}
             <label className="sidebar-more">
-              <span>更多日期</span>
+              <span>历史日报</span>
               <input type="date" value={selectedDate} onChange={(event) => { setSelectedDate(event.target.value); setTab("daily"); }} />
             </label>
           </div>
@@ -999,7 +1082,7 @@ export function InfoHubApp({ user }: { user: ChatGPTUser | null }) {
               </div>
               <label className="date-picker-button">
                 <CalendarDays size={18} />
-                <span>更多日期</span>
+                <span>历史日报</span>
                 <input type="date" value={selectedDate} onChange={(event) => setSelectedDate(event.target.value)} />
               </label>
             </section>
@@ -1066,7 +1149,15 @@ export function InfoHubApp({ user }: { user: ChatGPTUser | null }) {
                         ))}
                       </div>
                     ) : (
-                      <div className="empty-section">本日暂无更新</div>
+                      section.id === "youtube" ? (
+                        <div className="empty-section source-empty-state">
+                          <strong>最近两天没有新视频</strong>
+                          <p>Mel Robbins 最近更新于 7月23日，Predictive History 最近更新于 7月20日。</p>
+                          <span>发现新视频后会自动生成 Takeaways 和完整阅读文章。</span>
+                        </div>
+                      ) : (
+                        <div className="empty-section">本日暂无更新</div>
+                      )
                     )}
                   </section>
                 );

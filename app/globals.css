@@ -868,6 +868,64 @@ button {
   background: linear-gradient(transparent 8%, #f7e7a2 8%, #f7e7a2 93%, transparent 93%);
 }
 
+.reader-takeaways {
+  margin: 0 0 34px;
+  padding: 22px;
+  border: 1px solid #cfe1d5;
+  border-radius: 20px;
+  background: linear-gradient(145deg, #edf7f0, #f7faf7);
+}
+
+.reader-takeaways > span {
+  color: var(--green);
+  font-size: 9px;
+  font-weight: 780;
+  letter-spacing: 0.16em;
+}
+
+.reader-takeaways h2 {
+  margin: 7px 0 14px;
+  font-size: 18px;
+}
+
+.reader-takeaways ul {
+  display: grid;
+  gap: 10px;
+  margin: 0;
+  padding-left: 18px;
+  color: #405448;
+  font-size: 13px;
+  line-height: 1.65;
+}
+
+.project-facts {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px;
+  margin-bottom: 30px;
+}
+
+.project-facts > div {
+  display: flex;
+  min-height: 66px;
+  flex-direction: column;
+  justify-content: center;
+  gap: 4px;
+  padding: 12px 14px;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  background: #f7f9f7;
+}
+
+.project-facts span {
+  color: var(--muted);
+  font-size: 9px;
+}
+
+.project-facts strong {
+  font-size: 13px;
+}
+
 .source-links {
   display: grid;
   gap: 8px;
@@ -1206,6 +1264,33 @@ button {
 
 .queue-empty {
   margin-top: 10px;
+}
+
+.source-empty-state {
+  display: flex;
+  min-height: 140px;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 5px;
+  text-align: left;
+}
+
+.source-empty-state strong {
+  color: #4d5a52;
+  font-size: 13px;
+}
+
+.source-empty-state p,
+.source-empty-state span {
+  margin: 0;
+  color: #7a847e;
+  font-size: 10px;
+  line-height: 1.55;
+}
+
+.source-empty-state span {
+  color: var(--green);
 }
 
 .toast {
@@ -1828,6 +1913,18 @@ button {
   min-height: 88px;
   padding: 11px 12px;
   resize: vertical;
+  line-height: 1.5;
+}
+
+.settings-form textarea.prompt-editor {
+  min-height: 430px;
+  font-size: 12px;
+}
+
+.settings-form label > small {
+  color: #8a938d;
+  font-size: 10px;
+  font-weight: 500;
   line-height: 1.5;
 }
 

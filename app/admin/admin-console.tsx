@@ -18,6 +18,7 @@ import {
 import Link from "next/link";
 import { useCallback, useEffect, useState } from "react";
 import type { FormEvent } from "react";
+import { youtubeProcessingPrompt } from "../../lib/youtube-processing-prompt";
 
 type SourceType = "youtube" | "podcast" | "daily" | "builder" | "wechat";
 type Source = {
@@ -51,6 +52,7 @@ export function AdminConsole({ adminName }: { adminName: string }) {
     digestTime: "08:00",
     articlePrompt:
       "将字幕整理成结构清晰、忠于原意的中文文章，删除口语赘词，保留关键论据与案例。",
+    youtubeArticlePrompt: youtubeProcessingPrompt,
     keywordPrompt: "提取 3–6 个最能代表内容主题的关键词。",
   });
 
@@ -309,13 +311,15 @@ export function AdminConsole({ adminName }: { adminName: string }) {
                   />
                 </label>
                 <label>
-                  文章整理 Prompt
+                  YouTube 文字稿加工 Prompt
                   <textarea
-                    value={settings.articlePrompt}
+                    className="prompt-editor"
+                    value={settings.youtubeArticlePrompt}
                     onChange={(event) =>
-                      setSettings({ ...settings, articlePrompt: event.target.value })
+                      setSettings({ ...settings, youtubeArticlePrompt: event.target.value })
                     }
                   />
+                  <small>固定输出顺序：Takeaways 在前，完整阅读文章在后；不再询问用户二次选择。</small>
                 </label>
                 <label>
                   关键词 Prompt
