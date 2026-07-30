@@ -1,6 +1,7 @@
 import { env } from "cloudflare:workers";
 import { getDb } from "../../../db";
-import { contents, sources } from "../../../db/schema";
+import { eq } from "drizzle-orm";
+import { appSettings, contents, sources } from "../../../db/schema";
 
 type IngestSource = {
   id: string;
@@ -53,8 +54,25 @@ export async function GET(request: Request) {
     return Response.json({ error: "Unauthorized" }, { status: 401 });
   }
 
-  const rows = await getDb().select().from(sources);
-  return Response.json({ sources: rows.filter((source) => source.enabled) });
+  const db = getDb();
+  const [rows, retryRows] = await Promise.all([
+    db.select().from(sources),
+    db
+      .select({ value: appSettings.value })
+      .from(appSettings)
+      .where(eq(appSettings.key, "collectionRetryRequest"))
+      .limit(1),
+  ]);
+  let retryRequest: unknown = null;
+  try {
+    retryRequest = JSON.parse(retryRows[0]?.value || "null");
+  } catch {
+    retryRequest = null;
+  }
+  return Response.json({
+    sources: rows.filter((source) => source.enabled),
+    retryRequest,
+  });
 }
 
 export async function POST(request: Request) {
@@ -62,7 +80,10 @@ export async function POST(request: Request) {
     return Response.json({ error: "Unauthorized" }, { status: 401 });
   }
 
-  const payload = (await request.json()) as { items?: unknown };
+  const payload = (await request.json()) as {
+    items?: unknown;
+    runSummary?: unknown;
+  };
   if (!Array.isArray(payload.items) || !payload.items.every(validItem)) {
     return Response.json({ error: "Invalid ingest payload" }, { status: 400 });
   }
@@ -70,6 +91,58 @@ export async function POST(request: Request) {
   const db = getDb();
   const now = new Date();
   let accepted = 0;
+
+  if (payload.runSummary && typeof payload.runSummary === "object") {
+    const serialized = JSON.stringify(payload.runSummary);
+    if (serialized.length > 120_000) {
+      return Response.json({ error: "Run summary is too large" }, { status: 400 });
+    }
+    await db
+      .insert(appSettings)
+      .values({ key: "lastCollectionRun", value: serialized, updatedAt: now })
+      .onConflictDoUpdate({
+        target: appSettings.key,
+        set: { value: serialized, updatedAt: now },
+      });
+
+    const sectionSummaries = (payload.runSummary as { sectionSummaries?: unknown }).sectionSummaries;
+    if (Array.isArray(sectionSummaries)) {
+      const existingRows = await db
+        .select({ value: appSettings.value })
+        .from(appSettings)
+        .where(eq(appSettings.key, "latestSectionSummaries"))
+        .limit(1);
+      let existing: unknown[] = [];
+      try {
+        const parsed = JSON.parse(existingRows[0]?.value || "[]") as unknown;
+        if (Array.isArray(parsed)) existing = parsed;
+      } catch {
+        existing = [];
+      }
+      const merged = new Map<string, unknown>();
+      for (const summary of [...existing, ...sectionSummaries]) {
+        if (summary && typeof summary === "object" && "section" in summary) {
+          merged.set(String((summary as { section: unknown }).section), summary);
+        }
+      }
+      await db
+        .insert(appSettings)
+        .values({
+          key: "latestSectionSummaries",
+          value: JSON.stringify([...merged.values()]),
+          updatedAt: now,
+        })
+        .onConflictDoUpdate({
+          target: appSettings.key,
+          set: { value: JSON.stringify([...merged.values()]), updatedAt: now },
+        });
+    }
+
+    const runStatus = (payload.runSummary as { status?: unknown }).status;
+    if (runStatus === "completed" || runStatus === "completed_with_errors") {
+      await db.delete(appSettings).where(eq(appSettings.key, "collectionRetryRequest"));
+    }
+  }
 
   for (const item of payload.items) {
     const publishedAt = new Date(item.publishedAt);

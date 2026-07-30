@@ -1,9 +1,28 @@
 name: Collect InfoHub sources
 
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
 on:
   workflow_dispatch:
+    inputs:
+      source:
+        description: "只重跑一个来源；all 表示完整运行"
+        required: true
+        default: all
+        type: choice
+        options:
+          - all
+          - follow-builders
+          - technical-x
+          - papers
+          - github
+          - youtube
   schedule:
-    - cron: "17 * * * *"
+    # 北京时间 08:30 开始，给 10:00 前完成采集、AI 加工和发布留出余量。
+    - cron: "30 0 * * *"
 
 concurrency:
   group: infohub-collector
@@ -13,6 +32,9 @@ jobs:
   collect:
     runs-on: ubuntu-latest
     timeout-minutes: 45
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
     steps:
       - uses: actions/checkout@v4
 
@@ -34,10 +56,41 @@ jobs:
           MOONSHOT_API_KEY: ${{ secrets.MOONSHOT_API_KEY }}
           MOONSHOT_BASE_URL: https://api.moonshot.cn/v1
           MOONSHOT_MODEL: kimi-k3
-          INGEST_SECRET: ${{ secrets.INGEST_SECRET }}
-          INFOHUB_BASE_URL: ${{ secrets.INFOHUB_BASE_URL }}
+          SUPADATA_API_KEY: ${{ secrets.SUPADATA_API_KEY }}
+          GETNOTE_API_KEY: ${{ secrets.GETNOTE_API_KEY }}
+          GETNOTE_CLIENT_ID: ${{ secrets.GETNOTE_CLIENT_ID }}
           BAOYU_TRANSCRIPT_SCRIPT: ${{ runner.temp }}/baoyu-skills/skills/baoyu-youtube-transcript/scripts/main.ts
-        run: npm run collect
+        run: |
+          if [ -n "${{ inputs.source }}" ] && [ "${{ inputs.source }}" != "all" ]; then
+            npm run collect -- --source="${{ inputs.source }}"
+          else
+            npm run collect:reliable
+          fi
+
+      - name: Save new public content
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add app/generated-feed.json app/generated-section-summaries.json app/generated-run-summary.json
+          if ! git diff --cached --quiet; then
+            git commit -m "content: update daily digest"
+            git push
+          fi
+
+      - name: Build GitHub Pages site
+        run: npm run build:pages
+
+      - name: Configure GitHub Pages
+        uses: actions/configure-pages@v5
+
+      - name: Upload GitHub Pages site
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: dist-pages
+
+      - name: Publish GitHub Pages site
+        id: deployment
+        uses: actions/deploy-pages@v4
 
       - name: Keep collection report
         if: always()

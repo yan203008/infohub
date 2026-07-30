@@ -1,22 +1,14 @@
-import { and, desc, eq, gte } from "drizzle-orm";
+import { desc, eq } from "drizzle-orm";
 import { getDb } from "../../../db";
-import { contents, sources } from "../../../db/schema";
-
-function startOfYesterdayShanghai() {
-  const formatter = new Intl.DateTimeFormat("en-CA", {
-    timeZone: "Asia/Shanghai",
-    year: "numeric",
-    month: "2-digit",
-    day: "2-digit",
-  });
-  const parts = formatter.formatToParts(new Date());
-  const values = Object.fromEntries(parts.map((part) => [part.type, part.value]));
-  const todayUtc = new Date(`${values.year}-${values.month}-${values.day}T00:00:00+08:00`);
-  return new Date(todayUtc.valueOf() - 24 * 60 * 60 * 1000);
-}
+import { appSettings, contents, sources } from "../../../db/schema";
+import generatedFeed from "../../generated-feed.json";
+import generatedSectionSummaries from "../../generated-section-summaries.json";
 
 export async function GET() {
-  const rows = await getDb()
+  try {
+    const db = getDb();
+    const [rows, summaryRows] = await Promise.all([
+    db
     .select({
       id: contents.id,
       title: contents.title,
@@ -30,14 +22,15 @@ export async function GET() {
     })
     .from(contents)
     .innerJoin(sources, eq(contents.sourceId, sources.id))
-    .where(
-      and(
-        eq(contents.status, "ready"),
-        gte(contents.publishedAt, startOfYesterdayShanghai()),
-      ),
-    )
+    .where(eq(contents.status, "ready"))
     .orderBy(desc(contents.publishedAt))
-    .limit(100);
+    .limit(500),
+    db
+      .select({ value: appSettings.value })
+      .from(appSettings)
+      .where(eq(appSettings.key, "latestSectionSummaries"))
+      .limit(1),
+  ]);
 
   const items = rows.flatMap((row) => {
     try {
@@ -58,5 +51,26 @@ export async function GET() {
     }
   });
 
-  return Response.json({ items });
+  let sectionSummaries: unknown[] = [];
+  try {
+    const parsed = JSON.parse(summaryRows[0]?.value || "[]") as unknown;
+    if (Array.isArray(parsed)) sectionSummaries = parsed;
+  } catch {
+    sectionSummaries = [];
+  }
+
+    const merged = new Map<string, unknown>();
+    for (const item of generatedFeed) merged.set(item.id, item);
+    for (const item of items) merged.set(item.id, item);
+    return Response.json({
+      items: [...merged.values()],
+      sectionSummaries: sectionSummaries.length > 0 ? sectionSummaries : generatedSectionSummaries,
+    });
+  } catch {
+    return Response.json({
+      items: generatedFeed,
+      sectionSummaries: generatedSectionSummaries,
+      mode: "local-preview",
+    });
+  }
 }

@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Geist } from "next/font/google";
 import { headers } from "next/headers";
 import "./globals.css";
@@ -22,6 +22,17 @@ export async function generateMetadata(): Promise<Metadata> {
   return {
     title: "InfoHub · 每天，读真正值得读的",
     description: "聚合 AI 视频、播客与技术动态，在一处阅读、划线和沉淀笔记。",
+    applicationName: "InfoHub",
+    manifest: "/manifest.webmanifest",
+    appleWebApp: {
+      capable: true,
+      statusBarStyle: "default",
+      title: "InfoHub",
+    },
+    icons: {
+      icon: "/favicon.svg",
+      apple: "/favicon.svg",
+    },
     openGraph: {
       title: "InfoHub",
       description: "每天，读真正值得读的",
@@ -37,6 +48,13 @@ export async function generateMetadata(): Promise<Metadata> {
     },
   };
 }
+
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  viewportFit: "cover",
+  themeColor: "#f6f8f3",
+};
 
 export default function RootLayout({
   children,

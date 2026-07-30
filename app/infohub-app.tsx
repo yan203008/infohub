@@ -19,7 +19,6 @@ import {
   PenLine,
   Play,
   Search,
-  Settings,
   SlidersHorizontal,
   Sparkles,
   UserRound,
@@ -29,10 +28,13 @@ import {
 import { useEffect, useLayoutEffect, useMemo, useRef, useState } from "react";
 import type { ChatGPTUser } from "./chatgpt-auth";
 import generatedFeed from "./generated-feed.json";
+import generatedSectionSummaries from "./generated-section-summaries.json";
 
 type Source = "youtube" | "podcast" | "daily" | "builder";
 type Tab = "daily" | "reading" | "notes" | "me";
-type SectionId = "x" | "papers" | "github" | "youtube" | "podcasts";
+type ReadingView = "curated" | "interested";
+type SectionId = "x" | "papers" | "github" | "youtube" | "podcasts" | "reading";
+type HomeSectionId = "x" | "papers" | "github" | "media";
 
 type Item = {
   id: string;
@@ -58,12 +60,34 @@ type Item = {
 };
 
 type HighlightRange = {
+  id?: string;
   start: number;
   end: number;
   text: string;
+  note?: string;
+  updatedAt?: string;
 };
 
 type HighlightStore = Record<string, Record<string, HighlightRange[]>>;
+
+type ReadingProgress = {
+  percent: number;
+  anchorKey?: string;
+  anchorOffset?: number;
+  updatedAt: string;
+};
+
+type ReadingProgressStore = Record<string, ReadingProgress>;
+
+type SectionSummary = {
+  section: SectionId;
+  label?: string;
+  overview: string;
+  trends: string[];
+  value: string;
+  technicalLevel: string;
+  technicalPercentage: number;
+};
 
 const coreItems: Item[] = [
   {
@@ -615,6 +639,18 @@ const sectionDefinitions: { id: SectionId; label: string; description: string }[
   { id: "podcasts", label: "播客", description: "AI Builder 访谈与节目" },
 ];
 
+const homeSectionDefinitions: {
+  id: HomeSectionId;
+  label: string;
+  description: string;
+  sections: SectionId[];
+}[] = [
+  { id: "x", label: "X 推特内容", description: "Follow Builders + 技术动态 X", sections: ["x"] },
+  { id: "papers", label: "热门论文", description: "近期 AI 研究与普通人价值", sections: ["papers"] },
+  { id: "github", label: "GitHub Trending", description: "热门开源项目与产品趋势", sections: ["github"] },
+  { id: "media", label: "频道更新", description: "订阅的 YouTube 与播客最新内容", sections: ["youtube", "podcasts"] },
+];
+
 type SectionPreference = { id: SectionId; visible: boolean };
 
 const defaultSectionPreferences: SectionPreference[] = sectionDefinitions.map((section) => ({
@@ -629,12 +665,60 @@ const sourceIcon = {
   builder: Sparkles,
 };
 
+function fallbackSectionDigest(section: SectionId, items: Item[]): SectionSummary {
+  const keywords = [...new Set(items.flatMap((item) => item.tags))].slice(0, 5);
+  const technicalPercentage = section === "papers" ? 65 : section === "github" ? 55 : 30;
+  const representativeTitles = items.slice(0, 3).map((item) => `《${item.title}》`);
+  const valueBySection: Partial<Record<SectionId, string>> = {
+    x: "适合观察 AI 产品与工作方式的真实变化，尤其是一线 Builder 正在使用、质疑和修正什么。",
+    papers: "适合判断哪些研究方向可能影响未来的 AI 成本、速度和产品能力，不需要先掌握论文中的全部公式。",
+    github: "适合发现正在成形的 AI 产品能力与开源生态，产品、内容和业务从业者也能据此观察趋势。",
+    youtube: "适合从长内容中了解完整观点、案例和对话语境，再决定是否进入精读。",
+    podcasts: "适合从长对话中了解嘉宾的方法、案例与判断过程。",
+  };
+  return {
+    section,
+    overview: items.length > 0
+      ? `今天共有 ${items.length} 条更新，主要围绕${keywords.slice(0, 3).join("、") || "AI 行业新动向"}展开。代表内容包括${representativeTitles.join("、")}。`
+      : "本日暂无新的内容。",
+    trends: items.slice(0, 2).map((item) => `${item.title}：${item.summary}`),
+    value: items.length > 0
+      ? valueBySection[section] ?? "适合快速了解这一类内容的主要进展与实际影响。"
+      : "可以切换到其他日期查看已有内容。",
+    technicalLevel: technicalPercentage >= 60 ? "中高" : technicalPercentage >= 40 ? "中等" : "较低",
+    technicalPercentage,
+  };
+}
+
+function normalizeMissingContextText(value: string) {
+  return value
+    .replaceAll("链接指向的内容无法访问", "当前采集结果未包含链接页内容")
+    .replaceAll("链接内容无法访问", "当前采集结果未包含链接页内容")
+    .replaceAll("链接无法访问", "当前采集结果未包含链接页内容")
+    .replaceAll("链接内容无法确认", "当前采集结果未包含链接页详情")
+    .replaceAll("链接指向内容无法确认", "当前采集结果未包含链接页详情");
+}
+
+function normalizeItemCopy(item: Item): Item {
+  return {
+    ...item,
+    title: normalizeMissingContextText(item.title),
+    summary: normalizeMissingContextText(item.summary),
+    paragraphs: item.paragraphs.map(normalizeMissingContextText),
+    utility: item.utility ? normalizeMissingContextText(item.utility) : item.utility,
+    sections: item.sections?.map((section) => ({
+      ...section,
+      paragraphs: section.paragraphs.map(normalizeMissingContextText),
+    })),
+  };
+}
+
 function toIsoDate(date: Date) {
   return `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, "0")}-${String(date.getDate()).padStart(2, "0")}`;
 }
 
-function getRecentDates() {
-  const anchor = new Date(2026, 6, 29);
+function getRecentDates(anchorValue?: string) {
+  const anchor = anchorValue ? new Date(`${anchorValue}T12:00:00`) : new Date();
   return Array.from({ length: 7 }, (_, index) => {
     const date = new Date(anchor);
     date.setDate(anchor.getDate() - index);
@@ -654,17 +738,39 @@ function displayDay(value: string, compact = false) {
   }).format(date);
 }
 
+function isCuratedItem(item: Item) {
+  return item.id.startsWith("manual-")
+    || item.section === "reading"
+    || item.sourceLabel.startsWith("管理员精选");
+}
+
 export function InfoHubApp({ user }: { user: ChatGPTUser | null }) {
-  const recentDates = useMemo(() => getRecentDates(), []);
+  const initialDailyDate = useMemo(() =>
+    fallbackItems
+      .filter((item) => !isCuratedItem(item) && item.inRecentWindow !== false)
+      .map((item) => item.digestDate)
+      .filter(Boolean)
+      .sort()
+      .at(-1),
+  []);
+  const recentDates = useMemo(() => getRecentDates(initialDailyDate), [initialDailyDate]);
   const [tab, setTab] = useState<Tab>("daily");
+  const [readingView, setReadingView] = useState<ReadingView>("curated");
   const [selectedDate, setSelectedDate] = useState(recentDates[0]);
+  const [activeHomeSection, setActiveHomeSection] = useState<HomeSectionId | null>(null);
   const [activeItem, setActiveItem] = useState<Item | null>(null);
   const [saved, setSaved] = useState<string[]>([]);
   const [completed, setCompleted] = useState<string[]>([]);
   const [liveItems, setLiveItems] = useState<Item[]>([]);
+  const [liveSectionSummaries, setLiveSectionSummaries] = useState<SectionSummary[]>(
+    generatedSectionSummaries as SectionSummary[],
+  );
   const [readingProgress, setReadingProgress] = useState(0);
+  const [readingProgressStore, setReadingProgressStore] = useState<ReadingProgressStore>({});
   const [highlights, setHighlights] = useState<HighlightStore>({});
   const [note, setNote] = useState("");
+  const [highlightNote, setHighlightNote] = useState("");
+  const [selectedHighlight, setSelectedHighlight] = useState<{ paragraphKey: string; highlightId: string } | null>(null);
   const [noteOpen, setNoteOpen] = useState(false);
   const [toast, setToast] = useState("");
   const [sectionSettingsOpen, setSectionSettingsOpen] = useState(false);
@@ -673,24 +779,36 @@ export function InfoHubApp({ user }: { user: ChatGPTUser | null }) {
   );
   const readerRef = useRef<HTMLElement>(null);
   const returnScrollYRef = useRef(0);
+  const progressSaveTimerRef = useRef<number | null>(null);
+  const suppressProgressRef = useRef(false);
+  const pendingParagraphKeyRef = useRef<string | null>(null);
   const items = useMemo(() => {
     const merged = new Map(fallbackItems.map((item) => [item.id, item]));
     liveItems.forEach((item) => merged.set(item.id, item));
-    return [...merged.values()].sort((a, b) =>
+    return [...merged.values()].map(normalizeItemCopy).sort((a, b) =>
       String(b.publishedAt ?? b.digestDate).localeCompare(String(a.publishedAt ?? a.digestDate)),
     );
   }, [liveItems]);
+  const latestDailyDate = items
+    .filter((item) => !isCuratedItem(item) && item.inRecentWindow !== false)
+    .map((item) => item.digestDate)
+    .filter(Boolean)
+    .sort()
+    .at(-1);
 
   useEffect(() => {
     let cancelled = false;
     void fetch("/api/feed")
       .then(async (response) => {
         if (!response.ok) return null;
-        return (await response.json()) as { items?: Item[] };
+        return (await response.json()) as { items?: Item[]; sectionSummaries?: SectionSummary[] };
       })
       .then((data) => {
         if (!cancelled && Array.isArray(data?.items) && data.items.length > 0) {
           setLiveItems(data.items);
+        }
+        if (!cancelled && Array.isArray(data?.sectionSummaries) && data.sectionSummaries.length > 0) {
+          setLiveSectionSummaries(data.sectionSummaries);
         }
       })
       .catch(() => undefined);
@@ -719,21 +837,52 @@ export function InfoHubApp({ user }: { user: ChatGPTUser | null }) {
   }, []);
 
   useEffect(() => {
+    const stored = window.localStorage.getItem("infohub-reading-progress");
+    if (!stored) return;
+    try {
+      const parsed = JSON.parse(stored) as ReadingProgressStore;
+      const timer = window.setTimeout(() => setReadingProgressStore(parsed), 0);
+      return () => window.clearTimeout(timer);
+    } catch {
+      return;
+    }
+  }, []);
+
+  useEffect(() => {
     if (!activeItem) return;
     let frame = 0;
     const updateProgress = () => {
+      if (suppressProgressRef.current) return;
       window.cancelAnimationFrame(frame);
       frame = window.requestAnimationFrame(() => {
+        if (suppressProgressRef.current) return;
         const scrollable = document.documentElement.scrollHeight - window.innerHeight;
-        setReadingProgress(scrollable > 0 ? Math.min(100, Math.round((window.scrollY / scrollable) * 100)) : 100);
+        const percent = scrollable > 0 ? Math.min(100, Math.max(0, Math.round((window.scrollY / scrollable) * 100))) : 100;
+        setReadingProgress(percent);
+        const paragraphs = Array.from(readerRef.current?.querySelectorAll<HTMLElement>("[data-highlight-key]") ?? []);
+        const anchor = [...paragraphs].reverse().find((element) => element.getBoundingClientRect().top <= 110) ?? paragraphs[0];
+        const progress: ReadingProgress = {
+          percent,
+          anchorKey: anchor?.dataset.highlightKey,
+          anchorOffset: anchor ? Math.round(window.scrollY - (anchor.getBoundingClientRect().top + window.scrollY)) : undefined,
+          updatedAt: new Date().toISOString(),
+        };
+        setReadingProgressStore((current) => ({ ...current, [activeItem.id]: progress }));
+        if (progressSaveTimerRef.current) window.clearTimeout(progressSaveTimerRef.current);
+        progressSaveTimerRef.current = window.setTimeout(() => {
+          const stored = window.localStorage.getItem("infohub-reading-progress");
+          let current: ReadingProgressStore = {};
+          try { current = stored ? JSON.parse(stored) as ReadingProgressStore : {}; } catch { current = {}; }
+          window.localStorage.setItem("infohub-reading-progress", JSON.stringify({ ...current, [activeItem.id]: progress }));
+        }, 250);
       });
     };
-    const resetTimer = window.setTimeout(() => setReadingProgress(0), 0);
+    updateProgress();
     window.addEventListener("scroll", updateProgress, { passive: true });
     window.addEventListener("resize", updateProgress);
     return () => {
       window.cancelAnimationFrame(frame);
-      window.clearTimeout(resetTimer);
+      if (progressSaveTimerRef.current) window.clearTimeout(progressSaveTimerRef.current);
       window.removeEventListener("scroll", updateProgress);
       window.removeEventListener("resize", updateProgress);
     };
@@ -741,8 +890,33 @@ export function InfoHubApp({ user }: { user: ChatGPTUser | null }) {
 
   useLayoutEffect(() => {
     if (!activeItem) return;
-    window.scrollTo(0, 0);
-    const frame = window.requestAnimationFrame(() => window.scrollTo(0, 0));
+    const pendingParagraphKey = pendingParagraphKeyRef.current;
+    pendingParagraphKeyRef.current = null;
+    const stored = window.localStorage.getItem("infohub-reading-progress");
+    let progress: ReadingProgress | undefined;
+    try { progress = stored ? (JSON.parse(stored) as ReadingProgressStore)[activeItem.id] : undefined; } catch { progress = undefined; }
+    const restore = () => {
+      if (pendingParagraphKey) {
+        const paragraph = readerRef.current?.querySelector<HTMLElement>(`[data-highlight-key="${CSS.escape(pendingParagraphKey)}"]`);
+        if (paragraph) {
+          window.scrollTo(0, Math.max(0, paragraph.getBoundingClientRect().top + window.scrollY - 110));
+          return;
+        }
+      }
+      if (progress?.anchorKey) {
+        const anchor = readerRef.current?.querySelector<HTMLElement>(`[data-highlight-key="${CSS.escape(progress.anchorKey)}"]`);
+        if (anchor) {
+          window.scrollTo(0, anchor.getBoundingClientRect().top + window.scrollY + (progress.anchorOffset ?? 0));
+          setReadingProgress(progress.percent);
+          return;
+        }
+      }
+      const scrollable = document.documentElement.scrollHeight - window.innerHeight;
+      window.scrollTo(0, progress ? scrollable * progress.percent / 100 : 0);
+      setReadingProgress(progress?.percent ?? 0);
+    };
+    restore();
+    const frame = window.requestAnimationFrame(restore);
     return () => window.cancelAnimationFrame(frame);
   }, [activeItem]);
 
@@ -831,6 +1005,7 @@ export function InfoHubApp({ user }: { user: ChatGPTUser | null }) {
         (item) =>
           item.digestDate === selectedDate &&
           item.section &&
+          !isCuratedItem(item) &&
           item.inRecentWindow !== false,
       ),
     [items, selectedDate],
@@ -842,12 +1017,42 @@ export function InfoHubApp({ user }: { user: ChatGPTUser | null }) {
     }));
   const visibleSections = orderedSections.filter((section) => section.visible);
   const visibleSectionIds = new Set(visibleSections.map((section) => section.id));
+  const preferenceOrder = new Map(sectionPreferences.map((section, index) => [section.id, index]));
+  const homeSections = homeSectionDefinitions
+    .filter((group) => group.sections.some((section) => visibleSectionIds.has(section)))
+    .sort((a, b) => {
+      const aIndex = Math.min(...a.sections.map((section) => preferenceOrder.get(section) ?? 99));
+      const bIndex = Math.min(...b.sections.map((section) => preferenceOrder.get(section) ?? 99));
+      return aIndex - bIndex;
+    });
   const displayedItems = visibleItems.filter(
     (item) => item.section && visibleSectionIds.has(item.section),
   );
+  const activeHomeDefinition = homeSections.find((section) => section.id === activeHomeSection) ?? null;
+  const activeSectionItems = activeHomeDefinition
+    ? visibleItems.filter((item) => item.section && activeHomeDefinition.sections.includes(item.section))
+    : [];
   const queueItems = items.filter(
     (item) => saved.includes(item.id) && item.inRecentWindow !== false,
   );
+  const curatedItems = items.filter(
+    (item) => isCuratedItem(item) && item.inRecentWindow !== false,
+  );
+  const readingListItems = readingView === "curated" ? curatedItems : queueItems;
+  const highlightNoteEntries = Object.entries(highlights).flatMap(([itemId, paragraphs]) => {
+    const item = items.find((candidate) => candidate.id === itemId);
+    if (!item) return [];
+    return Object.entries(paragraphs).flatMap(([paragraphKey, ranges]) =>
+      ranges
+        .filter((range) => Boolean(range.note?.trim()))
+        .map((range) => ({
+          item,
+          paragraphKey,
+          range,
+          highlightId: range.id ?? `${range.start}-${range.end}`,
+        })),
+    );
+  }).sort((a, b) => String(b.range.updatedAt ?? "").localeCompare(String(a.range.updatedAt ?? "")));
 
   function setContentState(id: string, state: "saved" | "completed" | null) {
     const nextSaved = state === "saved"
@@ -883,23 +1088,60 @@ export function InfoHubApp({ user }: { user: ChatGPTUser | null }) {
 
   function markCompleted(id: string) {
     setContentState(id, "completed");
+    const progress = { percent: 100, updatedAt: new Date().toISOString() };
+    const nextProgress = { ...readingProgressStore, [id]: progress };
+    setReadingProgressStore(nextProgress);
+    setReadingProgress(100);
+    window.localStorage.setItem("infohub-reading-progress", JSON.stringify(nextProgress));
     setToast("已完成阅读");
   }
 
   function saveNote() {
+    if (selectedHighlight && activeItem) {
+      const articleHighlights = highlights[activeItem.id] ?? {};
+      const ranges = articleHighlights[selectedHighlight.paragraphKey] ?? [];
+      const next: HighlightStore = {
+        ...highlights,
+        [activeItem.id]: {
+          ...articleHighlights,
+          [selectedHighlight.paragraphKey]: ranges.map((range) =>
+            (range.id ?? `${range.start}-${range.end}`) === selectedHighlight.highlightId
+              ? { ...range, id: selectedHighlight.highlightId, note: highlightNote.trim(), updatedAt: new Date().toISOString() }
+              : range,
+          ),
+        },
+      };
+      setHighlights(next);
+      window.localStorage.setItem("infohub-highlights", JSON.stringify(next));
+      setToast(highlightNote.trim() ? "划线笔记已保存" : "划线已保存");
+      setNoteOpen(false);
+      setSelectedHighlight(null);
+      return;
+    }
     window.localStorage.setItem("infohub-demo-note", note);
     setToast("笔记已保存");
     setNoteOpen(false);
   }
 
+  function closeNoteSheet() {
+    if (selectedHighlight || note.trim()) {
+      saveNote();
+      return;
+    }
+    setNoteOpen(false);
+    setSelectedHighlight(null);
+  }
+
   function openItem(item: Item) {
     returnScrollYRef.current = window.scrollY;
+    suppressProgressRef.current = false;
     window.scrollTo(0, 0);
     setActiveItem(item);
   }
 
   function closeReader() {
     const returnTo = returnScrollYRef.current;
+    suppressProgressRef.current = true;
     setActiveItem(null);
     window.requestAnimationFrame(() => {
       window.requestAnimationFrame(() => window.scrollTo({ top: returnTo, behavior: "auto" }));
@@ -938,7 +1180,14 @@ export function InfoHubApp({ user }: { user: ChatGPTUser | null }) {
       return;
     }
     const current = highlights[activeItem.id]?.[key] ?? [];
-    const nextRanges = mergeHighlightRanges([...current, { start, end, text }]);
+    if (current.some((item) => start < item.end && end > item.start)) {
+      setToast("这段文字已有划线");
+      selection.removeAllRanges();
+      return;
+    }
+    const highlightId = crypto.randomUUID();
+    const nextRanges = [...current, { id: highlightId, start, end, text, note: "", updatedAt: new Date().toISOString() }]
+      .sort((a, b) => a.start - b.start);
     const next = {
       ...highlights,
       [activeItem.id]: {
@@ -949,7 +1198,29 @@ export function InfoHubApp({ user }: { user: ChatGPTUser | null }) {
     setHighlights(next);
     window.localStorage.setItem("infohub-highlights", JSON.stringify(next));
     selection.removeAllRanges();
-    setToast("已划线，可在笔记中引用");
+    setSelectedHighlight({ paragraphKey: key, highlightId });
+    setHighlightNote("");
+    setNoteOpen(true);
+  }
+
+  function openHighlightNote(paragraphKey: string, range: HighlightRange) {
+    const highlightId = range.id ?? `${range.start}-${range.end}`;
+    setSelectedHighlight({ paragraphKey, highlightId });
+    setHighlightNote(range.note ?? "");
+    setNoteOpen(true);
+  }
+
+  function openSavedHighlight(item: Item, paragraphKey: string, range: HighlightRange) {
+    returnScrollYRef.current = window.scrollY;
+    suppressProgressRef.current = false;
+    pendingParagraphKeyRef.current = paragraphKey;
+    setSelectedHighlight({
+      paragraphKey,
+      highlightId: range.id ?? `${range.start}-${range.end}`,
+    });
+    setHighlightNote(range.note ?? "");
+    setNoteOpen(true);
+    setActiveItem(item);
   }
 
   function saveSectionPreferences(next: SectionPreference[]) {
@@ -982,14 +1253,20 @@ export function InfoHubApp({ user }: { user: ChatGPTUser | null }) {
   }
 
   if (activeItem) {
-    const readerSequence = tab === "reading" ? queueItems : displayedItems;
+    const readerSequence = tab === "reading" ? readingListItems : displayedItems;
     const activeIndex = readerSequence.findIndex((item) => item.id === activeItem.id);
     const nextItem = activeIndex >= 0 ? readerSequence[activeIndex + 1] : undefined;
     const itemHighlights = highlights[activeItem.id] ?? {};
-    const highlightedQuotes = Object.values(itemHighlights).flat().map((range) => range.text);
+    const highlightedEntries = Object.entries(itemHighlights).flatMap(([paragraphKey, ranges]) =>
+      ranges.map((range) => ({ paragraphKey, range })),
+    );
     const readerLinks = [
       {
-        label: activeItem.section === "github" ? "打开 GitHub 仓库" : "查看原始内容",
+        label: activeItem.section === "github"
+          ? "打开 GitHub 仓库"
+          : activeItem.section === "youtube" || activeItem.section === "podcasts"
+            ? "跳转收听"
+            : "查看原始内容",
         url: activeItem.sourceUrl,
       },
       ...(activeItem.externalLinks ?? []).filter(
@@ -1024,8 +1301,8 @@ export function InfoHubApp({ user }: { user: ChatGPTUser | null }) {
             href={activeItem.sourceUrl}
             target="_blank"
             rel="noreferrer"
-            aria-label="打开原始内容"
-            title="打开原始内容"
+            aria-label={activeItem.section === "youtube" || activeItem.section === "podcasts" ? "跳转收听" : "打开原始内容"}
+            title={activeItem.section === "youtube" || activeItem.section === "podcasts" ? "跳转收听" : "打开原始内容"}
           >
             <ExternalLink size={20} />
           </a>
@@ -1052,15 +1329,15 @@ export function InfoHubApp({ user }: { user: ChatGPTUser | null }) {
           <div className="article-rule" />
           {activeItem.takeaways && activeItem.takeaways.length > 0 && (
             <section className="reader-takeaways">
-              <span>TAKEAWAYS</span>
-              <h2>先看最值得带走的内容</h2>
-              <ul>
-                {activeItem.takeaways.map((takeaway) => (
+              <h2>Takeaway</h2>
+              <ol>
+                {activeItem.takeaways.slice(0, 6).map((takeaway) => (
                   <li key={takeaway}>{takeaway}</li>
                 ))}
-              </ul>
+              </ol>
             </section>
           )}
+          <h2 className="reader-section-title">阅读原文</h2>
           {activeItem.facts && activeItem.facts.length > 0 && (
             <>
               <section className="project-facts" aria-label="项目数据">
@@ -1086,6 +1363,7 @@ export function InfoHubApp({ user }: { user: ChatGPTUser | null }) {
                       highlightKey={`paragraph:${index}`}
                       text={paragraph.replace(/^中文摘要：/, "")}
                       ranges={itemHighlights[`paragraph:${index}`] ?? []}
+                      onHighlightClick={(range) => openHighlightNote(`paragraph:${index}`, range)}
                     />
                   ))}
                 </div>
@@ -1114,6 +1392,7 @@ export function InfoHubApp({ user }: { user: ChatGPTUser | null }) {
                       highlightKey={`section:${sectionIndex}:${paragraphIndex}`}
                       text={paragraph}
                       ranges={itemHighlights[`section:${sectionIndex}:${paragraphIndex}`] ?? []}
+                      onHighlightClick={(range) => openHighlightNote(`section:${sectionIndex}:${paragraphIndex}`, range)}
                     />
                   ))}
                 </section>
@@ -1127,6 +1406,7 @@ export function InfoHubApp({ user }: { user: ChatGPTUser | null }) {
                   highlightKey={`paragraph:${index}`}
                   text={paragraph}
                   ranges={itemHighlights[`paragraph:${index}`] ?? []}
+                  onHighlightClick={(range) => openHighlightNote(`paragraph:${index}`, range)}
                 />
               ))}
             </div>
@@ -1175,10 +1455,10 @@ export function InfoHubApp({ user }: { user: ChatGPTUser | null }) {
             <PenLine size={19} />
             <span>划线</span>
           </button>
-          <button onClick={() => setNoteOpen(true)}>
+          <button onClick={() => { setSelectedHighlight(null); setNoteOpen(true); }}>
             <BookOpen size={19} />
             <span>笔记</span>
-            {note && <i />}
+            {(note || highlightedEntries.some(({ range }) => range.note?.trim())) && <i />}
           </button>
           <button
             className={saved.includes(activeItem.id) || completed.includes(activeItem.id) ? "is-active" : ""}
@@ -1198,12 +1478,12 @@ export function InfoHubApp({ user }: { user: ChatGPTUser | null }) {
           </button>
           <a href={activeItem.sourceUrl} target="_blank" rel="noreferrer">
             <Play size={18} />
-            <span>原文</span>
+            <span>{activeItem.section === "youtube" || activeItem.section === "podcasts" ? "跳转收听" : "原文"}</span>
           </a>
         </div>
 
         {noteOpen && (
-          <div className="sheet-backdrop" onClick={() => setNoteOpen(false)}>
+          <div className="sheet-backdrop" onClick={closeNoteSheet}>
             <section
               className="note-sheet"
               onClick={(event) => event.stopPropagation()}
@@ -1212,27 +1492,49 @@ export function InfoHubApp({ user }: { user: ChatGPTUser | null }) {
               <div className="sheet-handle" />
               <div className="sheet-title">
                 <div>
-                  <span>我的笔记</span>
-                  <small>仅自己可见 · 自动跨端同步</small>
+                  <span>{selectedHighlight ? "划线笔记" : "我的笔记"}</span>
+                  <small>仅保存在当前设备</small>
                 </div>
                 <button
                   className="icon-button"
-                  onClick={() => setNoteOpen(false)}
+                  onClick={closeNoteSheet}
                   aria-label="关闭笔记"
                 >
                   <X size={20} />
                 </button>
               </div>
-              {highlightedQuotes.map((quote) => <blockquote key={quote}>{quote}</blockquote>)}
+              {selectedHighlight ? (
+                <blockquote>
+                  {Object.values(itemHighlights).flat().find((range) =>
+                    (range.id ?? `${range.start}-${range.end}`) === selectedHighlight.highlightId,
+                  )?.text}
+                </blockquote>
+              ) : (
+                <div className="highlight-note-list">
+                  {highlightedEntries.map(({ paragraphKey, range }) => (
+                    <button
+                      key={`${paragraphKey}:${range.id ?? `${range.start}-${range.end}`}`}
+                      onClick={() => openHighlightNote(paragraphKey, range)}
+                    >
+                      <blockquote>{range.text}</blockquote>
+                      <span>{range.note?.trim() || "还没有写笔记，点击添加"}</span>
+                      <ChevronRight size={16} />
+                    </button>
+                  ))}
+                  {highlightedEntries.length === 0 && (
+                    <p className="note-empty-copy">还没有划线。先在正文中选中一段文字，再点击“划线”。</p>
+                  )}
+                </div>
+              )}
               <textarea
-                value={note}
-                onChange={(event) => setNote(event.target.value)}
-                placeholder="写下你的想法……"
+                value={selectedHighlight ? highlightNote : note}
+                onChange={(event) => selectedHighlight ? setHighlightNote(event.target.value) : setNote(event.target.value)}
+                placeholder={selectedHighlight ? "为这段划线写笔记（可留空）……" : "写下你的想法……"}
                 autoFocus
               />
               <button className="primary-button" onClick={saveNote}>
                 <Check size={18} />
-                保存笔记
+                {selectedHighlight ? "保存" : "保存笔记"}
               </button>
             </section>
           </div>
@@ -1253,7 +1555,7 @@ export function InfoHubApp({ user }: { user: ChatGPTUser | null }) {
           <NavButton
             active={tab === "daily"}
             icon={<CalendarDays size={20} />}
-            label="每日"
+            label="日报"
             onClick={() => setTab("daily")}
           />
           <div className="sidebar-dates" aria-label="最近七天">
@@ -1261,21 +1563,21 @@ export function InfoHubApp({ user }: { user: ChatGPTUser | null }) {
               <button
                 key={date}
                 className={selectedDate === date ? "active" : ""}
-                onClick={() => { setSelectedDate(date); setTab("daily"); }}
+                onClick={() => { setSelectedDate(date); setActiveHomeSection(null); setTab("daily"); }}
               >
                 <span>{index === 0 ? "最新" : index === 1 ? "昨天" : displayDay(date, true)}</span>
-                <small>{items.filter((item) => item.digestDate === date && item.section && item.inRecentWindow !== false).length}</small>
+                <small>{items.filter((item) => item.digestDate === date && item.section && !isCuratedItem(item) && item.inRecentWindow !== false).length}</small>
               </button>
             ))}
             <label className="sidebar-more">
               <span>历史日报</span>
-              <input type="date" value={selectedDate} onChange={(event) => { setSelectedDate(event.target.value); setTab("daily"); }} />
+              <input type="date" value={selectedDate} onChange={(event) => { setSelectedDate(event.target.value); setActiveHomeSection(null); setTab("daily"); }} />
             </label>
           </div>
           <NavButton
             active={tab === "reading"}
-            icon={<Bookmark size={20} />}
-            label="感兴趣"
+            icon={<BookOpen size={20} />}
+            label="精读"
             onClick={() => setTab("reading")}
           />
           <NavButton
@@ -1292,15 +1594,11 @@ export function InfoHubApp({ user }: { user: ChatGPTUser | null }) {
           />
         </nav>
         <div className="sidebar-bottom">
-          <a className="settings-link" href="/admin">
-            <Settings size={19} />
-            管理后台
-          </a>
           <div className="profile-mini">
-            <span>{user?.displayName.slice(0, 1).toUpperCase() ?? "访"}</span>
+            <span>本</span>
             <div>
-              <strong>{user?.displayName ?? "访客模式"}</strong>
-              <small>{user ? "笔记已同步" : "登录后同步笔记"}</small>
+              <strong>本地阅读模式</strong>
+              <small>私人数据只在当前设备</small>
             </div>
           </div>
         </div>
@@ -1343,7 +1641,7 @@ export function InfoHubApp({ user }: { user: ChatGPTUser | null }) {
                   <button
                     key={date}
                     className={selectedDate === date ? "active" : ""}
-                    onClick={() => setSelectedDate(date)}
+                    onClick={() => { setSelectedDate(date); setActiveHomeSection(null); }}
                   >
                     <small>{index === 0 ? "最新" : index === 1 ? "昨天" : new Intl.DateTimeFormat("zh-CN", { weekday: "short" }).format(new Date(`${date}T12:00:00`))}</small>
                     <strong>{displayDay(date, true)}</strong>
@@ -1353,94 +1651,109 @@ export function InfoHubApp({ user }: { user: ChatGPTUser | null }) {
               <label className="date-picker-button">
                 <CalendarDays size={18} />
                 <span>历史日报</span>
-                <input type="date" value={selectedDate} onChange={(event) => setSelectedDate(event.target.value)} />
+                <input type="date" value={selectedDate} onChange={(event) => { setSelectedDate(event.target.value); setActiveHomeSection(null); }} />
               </label>
             </section>
 
-            <section className="digest-card">
-              <div className="digest-glow" />
-              <div className="digest-topline">
-                <span>
-                  <Sparkles size={15} />
-                  每日摘要
-                </span>
-                <small>{selectedDate === recentDates[0] ? "刚刚更新" : "已完成"}</small>
-              </div>
-              <h2>{visibleSections.length} 个板块，{displayedItems.length} 条内容</h2>
-              <p>
-                {visibleItems.length > 0
-                  ? selectedDate === recentDates[0]
-                    ? "最近两天的真实更新已完成汇总；没有新内容的板块会保持为空。"
-                    : "历史回跑已完成，内容按采集日期归档，可继续阅读和记笔记。"
-                  : "这一天没有新的采集结果。你仍可切换日期查看其他日报。"}
-              </p>
-              <div className="digest-stats">
-                {visibleSectionIds.has("x") && <span><Sparkles size={16} /> {visibleItems.filter((item) => item.section === "x").length} X</span>}
-                {visibleSectionIds.has("papers") && <span><FileText size={16} /> {visibleItems.filter((item) => item.section === "papers").length} 论文</span>}
-                {visibleSectionIds.has("github") && <span><Bookmark size={16} /> {visibleItems.filter((item) => item.section === "github").length} GitHub</span>}
-                {visibleSectionIds.has("youtube") && <span><Video size={16} /> {visibleItems.filter((item) => item.section === "youtube").length} YouTube</span>}
-                {visibleSectionIds.has("podcasts") && <span><Headphones size={16} /> {visibleItems.filter((item) => item.section === "podcasts").length} 播客</span>}
-              </div>
-            </section>
+            {!activeHomeDefinition ? (
+              <>
+                <section className="digest-card">
+                  <div className="digest-glow" />
+                  <div className="digest-topline">
+                    <span><Sparkles size={15} /> 每日摘要</span>
+                    <small>{selectedDate === recentDates[0] ? "刚刚更新" : "已完成"}</small>
+                  </div>
+                  <h2>{homeSections.length} 个板块，{displayedItems.length} 条内容</h2>
+                  <p>首页只展示板块总结。选择一个板块后，再查看其中的全部内容。</p>
+                </section>
 
-            <section className="section-heading section-toolbar">
-              <div>
-                <h2>内容板块</h2>
-                <span>按你的顺序展示</span>
-              </div>
-              <button onClick={() => setSectionSettingsOpen(true)}>
-                <SlidersHorizontal size={16} /> 调整板块
-              </button>
-            </section>
+                <section className="section-heading section-toolbar">
+                  <div>
+                    <h2>今日板块</h2>
+                    <span>点击总结查看全部内容</span>
+                  </div>
+                  <button onClick={() => setSectionSettingsOpen(true)}>
+                    <SlidersHorizontal size={16} /> 调整板块
+                  </button>
+                </section>
 
-            <div className="section-groups">
-              {visibleSections.map((section) => {
-                const sectionItems = visibleItems.filter((item) => item.section === section.id);
-                return (
-                  <section className="content-section" key={section.id}>
-                    <header className="content-section-heading">
-                      <div>
-                        <h2>{section.label}</h2>
-                        <p>{section.description}</p>
-                      </div>
-                      <span>{sectionItems.length}</span>
-                    </header>
-                    {sectionItems.length > 0 ? (
-                      <div className="feed">
-                        {sectionItems.map((item) => (
-                          <ContentCard
-                            key={item.id}
-                            item={item}
-                            saved={saved.includes(item.id)}
-                            completed={completed.includes(item.id)}
-                            onOpen={() => openItem(item)}
-                            onSave={() => toggleSaved(item.id)}
-                          />
-                        ))}
-                      </div>
-                    ) : (
-                      section.id === "youtube" ? (
-                        <div className="empty-section source-empty-state">
-                          <strong>最近两天没有可生成文章的新长视频</strong>
-                          <p>已订阅 4 个频道；只有取得可靠字幕的近期长视频，才会进入二次加工。</p>
-                          <span>发现新视频后会自动生成 Takeaways 和完整阅读文章。</span>
+                <div className="home-summary-list">
+                  {homeSections.map((group) => {
+                    const groupItems = visibleItems.filter(
+                      (item) => item.section && group.sections.includes(item.section),
+                    );
+                    const firstSection = group.sections[0];
+                    const sectionSummary = selectedDate === latestDailyDate && group.sections.length === 1
+                      ? liveSectionSummaries.find((summary) => summary.section === firstSection)
+                        ?? fallbackSectionDigest(firstSection, groupItems)
+                      : fallbackSectionDigest(firstSection, groupItems);
+                    return (
+                      <button
+                        className="home-summary-card"
+                        key={group.id}
+                        onClick={() => { setActiveHomeSection(group.id); window.scrollTo(0, 0); }}
+                      >
+                        <header>
+                          <div>
+                            <span>{group.description}</span>
+                            <h2>{group.label}</h2>
+                          </div>
+                          <b>{groupItems.length}</b>
+                        </header>
+                        <p>{sectionSummary.overview}</p>
+                        {sectionSummary.trends.length > 0 && (
+                          <ul>{sectionSummary.trends.map((trend) => <li key={trend}>{trend}</li>)}</ul>
+                        )}
+                        <div className="home-summary-value">
+                          <strong>为什么值得看</strong>
+                          <span>{sectionSummary.value}</span>
                         </div>
-                      ) : (
-                        <div className="empty-section">本日暂无更新</div>
-                      )
-                    )}
-                  </section>
-                );
-              })}
-              {visibleSections.length === 0 && (
-                <div className="empty-daily">
-                  <EyeOff size={24} />
-                  <h3>所有板块都已隐藏</h3>
-                  <p>你可以随时重新开启想看的板块。</p>
-                  <button onClick={() => setSectionSettingsOpen(true)}>调整板块</button>
+                        <footer>
+                          <small>专业程度 {sectionSummary.technicalLevel} · 约 {sectionSummary.technicalPercentage}%</small>
+                          <span>查看全部 <ChevronRight size={16} /></span>
+                        </footer>
+                      </button>
+                    );
+                  })}
+                  {homeSections.length === 0 && (
+                    <div className="empty-daily">
+                      <EyeOff size={24} />
+                      <h3>所有板块都已隐藏</h3>
+                      <button onClick={() => setSectionSettingsOpen(true)}>调整板块</button>
+                    </div>
+                  )}
                 </div>
-              )}
-            </div>
+              </>
+            ) : (
+              <section className="section-detail-page">
+                <button className="section-back" onClick={() => setActiveHomeSection(null)}>
+                  <ChevronLeft size={18} /> 返回板块总结
+                </button>
+                <header className="content-section-heading">
+                  <div>
+                    <h2>{activeHomeDefinition.label}</h2>
+                    <p>{activeHomeDefinition.description}</p>
+                  </div>
+                  <span>{activeSectionItems.length}</span>
+                </header>
+                {activeSectionItems.length > 0 ? (
+                  <div className="feed single-column-feed">
+                    {activeSectionItems.map((item) => (
+                      <ContentCard
+                        key={item.id}
+                        item={item}
+                        saved={saved.includes(item.id)}
+                        completed={completed.includes(item.id)}
+                        progress={readingProgressStore[item.id]?.percent ?? 0}
+                        onOpen={() => openItem(item)}
+                      />
+                    ))}
+                  </div>
+                ) : (
+                  <div className="empty-section">本日暂无更新</div>
+                )}
+              </section>
+            )}
           </div>
         )}
 
@@ -1448,25 +1761,46 @@ export function InfoHubApp({ user }: { user: ChatGPTUser | null }) {
           <div className="content-area reading-list-page">
             <section className="welcome">
               <div>
-                <p>私人阅读清单</p>
-                <h1>准备稍后认真读的内容。</h1>
+                <p>长期阅读库</p>
+                <h1>好内容不应该被困在某一天。</h1>
               </div>
             </section>
+            <div className="reading-view-tabs" role="tablist" aria-label="精读内容类型">
+              <button
+                className={readingView === "curated" ? "active" : ""}
+                onClick={() => setReadingView("curated")}
+                role="tab"
+                aria-selected={readingView === "curated"}
+              >
+                <Sparkles size={17} />
+                <span><strong>公开精选</strong><small>管理员整理·长期保留</small></span>
+              </button>
+              <button
+                className={readingView === "interested" ? "active" : ""}
+                onClick={() => setReadingView("interested")}
+                role="tab"
+                aria-selected={readingView === "interested"}
+              >
+                <Bookmark size={17} />
+                <span><strong>我的感兴趣</strong><small>私人清单·仅当前设备</small></span>
+              </button>
+            </div>
             <section className="queue-summary">
-              <Bookmark size={19} />
+              {readingView === "curated" ? <Sparkles size={19} /> : <Bookmark size={19} />}
               <div>
-                <strong>{queueItems.length} 篇感兴趣内容</strong>
-                <span>{user ? "已在手机和网页间同步" : "登录后可跨端同步"}</span>
+                <strong>{readingListItems.length} 篇{readingView === "curated" ? "公开精选" : "感兴趣内容"}</strong>
+                <span>{readingView === "curated" ? "按最新整理时间排序，不随日报过期" : "保存在当前设备"}</span>
               </div>
             </section>
-            {queueItems.length > 0 ? (
+            {readingListItems.length > 0 ? (
               <div className="feed">
-                {queueItems.map((item) => (
+                {readingListItems.map((item) => (
                   <ContentCard
                     key={item.id}
                     item={item}
-                    saved
-                    completed={false}
+                    saved={saved.includes(item.id)}
+                    completed={completed.includes(item.id)}
+                    progress={readingProgressStore[item.id]?.percent ?? 0}
                     onOpen={() => openItem(item)}
                     onSave={() => toggleSaved(item.id)}
                   />
@@ -1474,46 +1808,68 @@ export function InfoHubApp({ user }: { user: ChatGPTUser | null }) {
               </div>
             ) : (
               <div className="empty-daily queue-empty">
-                <Bookmark size={24} />
-                <h3>还没有感兴趣的内容</h3>
-                <p>在每日首页点击书签，感兴趣的内容就会集中到这里。</p>
-                <button onClick={() => setTab("daily")}>返回每日</button>
+                {readingView === "curated" ? <Sparkles size={24} /> : <Bookmark size={24} />}
+                <h3>{readingView === "curated" ? "还没有公开精选" : "还没有感兴趣的内容"}</h3>
+                <p>{readingView === "curated" ? "管理员提交并处理完成的链接会长期保留在这里。" : "打开内容详情并标记“感兴趣”，内容就会集中到这里。"}</p>
+                <button onClick={() => setTab("daily")}>返回日报</button>
               </div>
             )}
           </div>
         )}
         {tab === "notes" && (
-          <PlaceholderPage
-            icon={<BookOpen size={24} />}
-            eyebrow="私人空间"
-            title={note ? "你的笔记已经在这里了" : "读到有启发的地方，就留下它"}
-            description={
-              note ||
-              "划线、批注和自由笔记仅自己可见；登录后会在手机与网页之间同步。"
-            }
-          />
+          <div className="content-area notes-page">
+            <section className="welcome">
+              <div>
+                <p>私人笔记</p>
+                <h1>把值得记住的内容留下来。</h1>
+              </div>
+            </section>
+            <section className="notes-summary">
+              <BookOpen size={19} />
+              <div>
+                <strong>{highlightNoteEntries.length} 条划线笔记</strong>
+                <span>仅保存在当前设备，点击可回到原文位置</span>
+              </div>
+            </section>
+            {note && (
+              <section className="free-note-card">
+                <span>自由笔记</span>
+                <p>{note}</p>
+              </section>
+            )}
+            {highlightNoteEntries.length > 0 ? (
+              <div className="saved-note-list">
+                {highlightNoteEntries.map(({ item, paragraphKey, range, highlightId }) => (
+                  <button
+                    key={`${item.id}:${paragraphKey}:${highlightId}`}
+                    onClick={() => openSavedHighlight(item, paragraphKey, range)}
+                  >
+                    <header>
+                      <SourceBadge item={item} compact />
+                      <span>{item.title}</span>
+                      <ChevronRight size={17} />
+                    </header>
+                    <blockquote>{range.text}</blockquote>
+                    <p>{range.note}</p>
+                  </button>
+                ))}
+              </div>
+            ) : !note ? (
+              <div className="empty-daily queue-empty">
+                <BookOpen size={24} />
+                <h3>还没有笔记</h3>
+                <p>在文章中选中内容并写下想法，会自动汇总到这里。</p>
+                <button onClick={() => setTab("reading")}>去精读</button>
+              </div>
+            ) : null}
+          </div>
         )}
         {tab === "me" && (
           <PlaceholderPage
             icon={<UserRound size={24} />}
-            eyebrow={user ? "账户已连接" : "访客模式"}
-            title={user?.displayName ?? "登录后，让笔记跟着你走"}
-            description={
-              user
-                ? "笔记、阅读进度与私人文档会自动同步。"
-                : "公开日报无需登录即可阅读；登录后可以同步笔记、进度和私人文档。"
-            }
-            action={
-              user ? (
-                <a className="primary-button sign-in" href="/admin">
-                  进入管理后台
-                </a>
-              ) : (
-                <a className="primary-button sign-in" href="/signin-with-chatgpt?return_to=%2F">
-                  登录并同步
-                </a>
-              )
-            }
+            eyebrow="本地模式"
+            title="你的阅读数据保存在这台设备"
+            description="公开内容无需登录。感兴趣、阅读进度、划线和笔记不会上传，也不会提供给内容生产线。"
           />
         )}
       </div>
@@ -1575,13 +1931,13 @@ export function InfoHubApp({ user }: { user: ChatGPTUser | null }) {
         <NavButton
           active={tab === "daily"}
           icon={<CalendarDays size={21} />}
-          label="每日"
+          label="日报"
           onClick={() => setTab("daily")}
         />
         <NavButton
           active={tab === "reading"}
-          icon={<Bookmark size={21} />}
-          label="感兴趣"
+          icon={<BookOpen size={21} />}
+          label="精读"
           onClick={() => setTab("reading")}
         />
         <NavButton
@@ -1601,30 +1957,16 @@ export function InfoHubApp({ user }: { user: ChatGPTUser | null }) {
   );
 }
 
-function mergeHighlightRanges(ranges: HighlightRange[]) {
-  return ranges
-    .filter((range) => range.end > range.start)
-    .sort((a, b) => a.start - b.start)
-    .reduce<HighlightRange[]>((merged, range) => {
-      const previous = merged.at(-1);
-      if (!previous || range.start > previous.end) {
-        merged.push(range);
-        return merged;
-      }
-      previous.end = Math.max(previous.end, range.end);
-      previous.text = `${previous.text} ${range.text}`.trim();
-      return merged;
-    }, []);
-}
-
 function SelectableParagraph({
   text,
   highlightKey,
   ranges,
+  onHighlightClick,
 }: {
   text: string;
   highlightKey: string;
   ranges: HighlightRange[];
+  onHighlightClick: (range: HighlightRange) => void;
 }) {
   const validRanges = ranges
     .filter((range) => range.start >= 0 && range.end <= text.length && range.end > range.start)
@@ -1633,7 +1975,21 @@ function SelectableParagraph({
   let cursor = 0;
   validRanges.forEach((range, index) => {
     if (range.start > cursor) parts.push(text.slice(cursor, range.start));
-    parts.push(<mark key={`${range.start}-${range.end}-${index}`}>{text.slice(range.start, range.end)}</mark>);
+    parts.push(
+      <mark
+        key={`${range.start}-${range.end}-${index}`}
+        className={range.note ? "has-note" : ""}
+        role="button"
+        tabIndex={0}
+        title={range.note ? "查看划线笔记" : "为这段划线添加笔记"}
+        onClick={() => onHighlightClick(range)}
+        onKeyDown={(event) => {
+          if (event.key === "Enter" || event.key === " ") onHighlightClick(range);
+        }}
+      >
+        {text.slice(range.start, range.end)}
+      </mark>,
+    );
     cursor = Math.max(cursor, range.end);
   });
   if (cursor < text.length) parts.push(text.slice(cursor));
@@ -1685,14 +2041,16 @@ function ContentCard({
   item,
   saved,
   completed,
+  progress,
   onOpen,
   onSave,
 }: {
   item: Item;
   saved: boolean;
   completed: boolean;
+  progress: number;
   onOpen: () => void;
-  onSave: () => void;
+  onSave?: () => void;
 }) {
   return (
     <article className={`content-card ${completed ? "is-completed" : ""}`}>
@@ -1703,6 +2061,7 @@ function ContentCard({
             <span>{item.sourceLabel}</span>
             {saved && <b className="queue-badge">感兴趣</b>}
             {completed && <b className="read-badge">已读</b>}
+            {!completed && progress > 0 && <b className="progress-badge">阅读中 · {progress}%</b>}
           </div>
           <h3>{item.title}</h3>
           <p>{item.summary}</p>
@@ -1712,13 +2071,15 @@ function ContentCard({
           </div>
         </div>
       </button>
-      <button
-        className={`save-button ${saved ? "is-active" : ""}`}
-        onClick={onSave}
-        aria-label={saved ? "取消感兴趣" : "标记为感兴趣"}
-      >
-        <Bookmark size={18} fill={saved ? "currentColor" : "none"} />
-      </button>
+      {onSave && (
+        <button
+          className={`save-button ${saved ? "is-active" : ""}`}
+          onClick={onSave}
+          aria-label={saved ? "取消感兴趣" : "标记为感兴趣"}
+        >
+          <Bookmark size={18} fill={saved ? "currentColor" : "none"} />
+        </button>
+      )}
     </article>
   );
 }

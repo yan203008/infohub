@@ -12,7 +12,7 @@ test("builds the InfoHub daily experience", async () => {
   await access(new URL("../dist/server/index.js", import.meta.url));
   const source = await readFile(appFile, "utf8");
 
-  assert.match(source, /label="每日"/);
+  assert.match(source, /label="日报"/);
   assert.match(source, /最近七天/);
   assert.match(source, /历史日报/);
   assert.doesNotMatch(source, /更多日期/);
@@ -23,16 +23,21 @@ test("builds the InfoHub daily experience", async () => {
   assert.match(source, /调整首页板块/);
   assert.match(source, /移出首页/);
   assert.match(source, /infohub-section-preferences/);
-  assert.match(source, /label="感兴趣"/);
+  assert.match(source, /label="精读"/);
+  assert.match(source, /公开精选/);
+  assert.match(source, /我的感兴趣/);
   assert.match(source, /标记为感兴趣/);
-  assert.doesNotMatch(source, /label="感兴趣"\s+count=/);
+  assert.doesNotMatch(source, /label="精读"\s+count=/);
   assert.match(source, /完成/);
   assert.doesNotMatch(source, /label="发现"/);
   assert.doesNotMatch(source, /不感兴趣/);
   assert.match(source, /2026-07-28/);
   assert.match(source, /2026-07-29/);
   assert.match(source, /打开 GitHub 仓库/);
-  assert.match(source, /最近两天没有可生成文章的新长视频/);
+  assert.match(source, /频道更新/);
+  assert.match(source, /首页只展示板块总结/);
+  assert.match(source, /home-summary-card/);
+  assert.match(source, /返回板块总结/);
   assert.match(source, /中文摘要/);
   assert.match(source, /对非技术读者有什么用/);
   assert.match(source, /链接直达：/);
@@ -52,7 +57,10 @@ test("includes the automatic multi-source collector", async () => {
   assert.match(collector, /MOONSHOT_API_KEY/);
   assert.match(collector, /SUPADATA_API_KEY/);
   assert.match(collector, /\/api\/ingest/);
-  assert.match(workflow, /cron: "17 \* \* \* \*"/);
+  assert.match(collector, /buildSectionSummaries/);
+  assert.match(collector, /质量检查/);
+  assert.match(workflow, /cron: "0 23 \* \* \*"/);
+  assert.match(workflow, /SUPADATA_API_KEY/);
 });
 
 test("includes both configured YouTube sources and original links", async () => {
@@ -73,6 +81,8 @@ test("uses the direct YouTube transcript processing prompt", async () => {
   ]);
 
   assert.match(admin, /YouTube 文字稿加工 Prompt/);
+  assert.match(admin, /最近一次内容处理/);
+  assert.match(admin, /处理总结/);
   assert.match(prompt, /Takeaways 必须放在文章前面/);
   assert.match(prompt, /完整覆盖视频实际讲述的内容/);
   assert.match(prompt, /不要询问用户选择/);

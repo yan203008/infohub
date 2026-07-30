@@ -18,6 +18,22 @@ const moonshotBaseUrl = (process.env.MOONSHOT_BASE_URL || "https://api.moonshot.
 const moonshotModel = process.env.MOONSHOT_MODEL || "kimi-k3";
 const supadataKey = process.env.SUPADATA_API_KEY?.trim();
 
+const sourceLabels = {
+  "follow-builders": "Follow Builders",
+  "technical-x": "技术动态 X",
+  papers: "热门论文",
+  github: "GitHub Trending",
+  youtube: "YouTube",
+};
+
+const sectionLabels = {
+  x: "X 推特内容",
+  papers: "热门论文",
+  github: "GitHub Trending",
+  youtube: "热门 YouTube",
+  podcasts: "播客",
+};
+
 function shanghaiDate(value = now) {
   return new Intl.DateTimeFormat("en-CA", {
     timeZone: "Asia/Shanghai",
@@ -236,12 +252,88 @@ function baseBody(section, publishedAt, extra = {}) {
       month: "numeric",
       day: "numeric",
     }).format(new Date(publishedAt)),
-    time: shanghaiDate(new Date(publishedAt)) === shanghaiDate() ? "今天采集" : "昨日采集",
+    time: "本次更新",
     readTime: "3 分钟",
     accent: section === "x" ? "green" : section === "papers" ? "violet" : section === "github" ? "blue" : "orange",
     inRecentWindow: true,
     ...extra,
   };
+}
+
+function fallbackSectionSummary(section, items) {
+  const keywords = [...new Set(items.flatMap((item) => item.keywords || []))].slice(0, 5);
+  const representativeTitles = items.slice(0, 3).map((item) => `《${item.title}》`);
+  return {
+    section,
+    label: sectionLabels[section] || section,
+    overview: `本次共整理 ${items.length} 条内容，代表条目包括${representativeTitles.join("、")}。`,
+    trends: keywords.length > 0
+      ? [`本批内容的关注点集中在${keywords.slice(0, 3).join("、")}，具体观点与适用范围以各条正文为准。`]
+      : [],
+    value: "先通过标题和摘要判断是否值得深入阅读，再进入详情查看完整内容。",
+    technicalLevel: section === "papers" || section === "github" ? "中高" : "中等",
+    technicalPercentage: section === "papers" ? 65 : section === "github" ? 55 : 30,
+  };
+}
+
+async function buildSectionSummaries(items) {
+  const groups = Object.groupBy(items, (item) => item.body?.section || "other");
+  const fallback = Object.entries(groups)
+    .filter(([section]) => sectionLabels[section])
+    .map(([section, sectionItems]) => fallbackSectionSummary(section, sectionItems || []));
+  if (!moonshotKey || fallback.length === 0) return fallback;
+
+  try {
+    const processed = await kimiJson(
+      "你是面向非技术读者的信息主编。根据同一板块的全部标题与摘要，写一张能帮助用户决定是否展开阅读的板块导读。不要筛选、排名或删除内容，不得补充输入之外的事实。返回 JSON：{sections:[{section,overview,trends,value,technicalLevel,technicalPercentage}]}。overview 用 80-140 个中文字概括内容的 2-3 个具体组成部分，并点出代表性内容；trends 为 1-3 条跨越多条内容才能得到的共同变化或因果观察，每条 30-70 字；value 具体说明非技术读者能据此形成什么判断。technicalLevel 只能是低、中等、中高、高；technicalPercentage 为 0-100 的估算整数。禁止把关键词改写成“X 是主要主题”，禁止使用“主要涉及若干内容”等空话，禁止逐条重复标题。对于信息残缺的 X 推文，可以说明本批内容的完整性差异，但不要猜测缺失内容。",
+      Object.entries(groups)
+        .filter(([section]) => sectionLabels[section])
+        .map(([section, sectionItems]) => ({
+          section,
+          label: sectionLabels[section],
+          items: (sectionItems || []).map((item) => ({ title: item.title, summary: item.summary })),
+        })),
+      { maxTokens: 2_500, timeoutMs: 180_000 },
+    );
+    return fallback.map((entry) => {
+      const summary = (processed.sections || []).find((item) => item.section === entry.section);
+      return summary
+        ? {
+            ...entry,
+            overview: summary.overview || entry.overview,
+            trends: Array.isArray(summary.trends) ? summary.trends.slice(0, 3) : entry.trends,
+            value: summary.value || entry.value,
+            technicalLevel: summary.technicalLevel || entry.technicalLevel,
+            technicalPercentage: Number.isFinite(Number(summary.technicalPercentage))
+              ? Math.max(0, Math.min(100, Math.round(Number(summary.technicalPercentage))))
+              : entry.technicalPercentage,
+          }
+        : entry;
+    });
+  } catch (error) {
+    console.error(`[collect] processing summary fallback: ${error?.message || String(error)}`);
+    return fallback;
+  }
+}
+
+function checkItems(items) {
+  const rejected = [];
+  const accepted = items.filter((item) => {
+    const missing = [
+      !item.externalId && "内容 ID",
+      !item.title && "标题",
+      !item.summary && "摘要",
+      !item.sourceUrl && "原始链接",
+      !item.body?.section && "板块",
+    ].filter(Boolean);
+    if (missing.length === 0) return true;
+    rejected.push({
+      source: item.source?.id || "unknown",
+      message: `${item.title || item.externalId || "未命名内容"} 缺少${missing.join("、")}`,
+    });
+    return false;
+  });
+  return { accepted, rejected };
 }
 
 async function collectFollowBuilders() {
@@ -256,12 +348,13 @@ async function collectFollowBuilders() {
       bio: tweet.bio || builder.bio,
     })))
     .filter((tweet) => recent(tweet.createdAt))
+    .filter((tweet) => tweet.text.replace(/https?:\/\/\S+/g, "").trim().length >= 12)
     .sort((a, b) => (b.likes || 0) - (a.likes || 0))
     .slice(0, 30);
   if (tweets.length === 0) return [];
 
   const processedItems = await kimiItems(
-    "你是中文科技编辑。忠实处理 X 推文，不得编造。返回 JSON：{items:[{id,title,summary,translation,detail,keywords}]}。translation 是完整中文翻译；detail 补充原推文语境和含义，但必须明确区分原文与解释。keywords 为 3-6 个中文关键词。对于只有链接、缺乏上下文的推文，明确写出信息不足，不得猜测链接内容。",
+    "你是中文科技编辑。忠实处理 X 推文，不得编造。返回 JSON：{items:[{id,title,summary,translation,detail,keywords}]}。translation 是完整中文翻译；detail 补充原推文语境和含义，但必须明确区分原文与解释。keywords 为 3-6 个中文关键词。输入只包含推文正文，并不包含短链接目标页的正文；不要写‘链接无法访问’，应准确写成‘当前采集结果未包含链接页详情’。不要猜测链接内容。",
     tweets.map((tweet) => ({
       id: tweet.id,
       author: tweet.builder,
@@ -292,7 +385,7 @@ async function collectFollowBuilders() {
       body: baseBody("x", tweet.createdAt, {
         paragraphs: item
           ? [item.translation, item.detail].filter(Boolean)
-          : [`原文：${tweet.text}`, "中文加工暂未完成，可通过下方链接查看原始推文。"],
+          : [`原文：${tweet.text}`, "中文加工暂未完成，可通过原始链接查看推文。"],
       }),
     };
   });
@@ -820,6 +913,84 @@ async function collectYoutube() {
   return items;
 }
 
+function stage(id, label) {
+  return { id, label, status: "pending", detail: "等待处理" };
+}
+
+async function saveReport(report, outputPath) {
+  await mkdir(dirname(outputPath), { recursive: true });
+  await writeFile(outputPath, `${JSON.stringify(report, null, 2)}\n`);
+}
+
+function publicFeedItem(item) {
+  return {
+    ...item.body,
+    id: `${item.source.id}:${item.externalId}`,
+    title: item.title,
+    sourceUrl: item.sourceUrl,
+    summary: item.summary,
+    tags: item.keywords,
+    source: item.source.type,
+    sourceLabel: item.source.name,
+    publishedAt: item.publishedAt,
+  };
+}
+
+async function publishStaticFiles(items, sectionSummaries, runSummary) {
+  const feedPath = join(root, "app/generated-feed.json");
+  const summariesPath = join(root, "app/generated-section-summaries.json");
+  let existing = [];
+  let existingSummaries = [];
+  try {
+    const parsed = JSON.parse(await readFile(feedPath, "utf8"));
+    if (Array.isArray(parsed)) existing = parsed;
+  } catch {
+    existing = [];
+  }
+  try {
+    const parsed = JSON.parse(await readFile(summariesPath, "utf8"));
+    if (Array.isArray(parsed)) existingSummaries = parsed;
+  } catch {
+    existingSummaries = [];
+  }
+
+  const merged = new Map(existing.map((item) => [item.id, item]));
+  for (const item of items.map(publicFeedItem)) merged.set(item.id, item);
+  const feed = [...merged.values()].sort((a, b) =>
+    String(b.publishedAt ?? b.digestDate ?? "").localeCompare(String(a.publishedAt ?? a.digestDate ?? "")),
+  );
+  const mergedSummaries = new Map(existingSummaries.map((summary) => [summary.section, summary]));
+  for (const summary of sectionSummaries) mergedSummaries.set(summary.section, summary);
+
+  await Promise.all([
+    writeFile(feedPath, `${JSON.stringify(feed, null, 2)}\n`),
+    writeFile(summariesPath, `${JSON.stringify([...mergedSummaries.values()], null, 2)}\n`),
+    writeFile(join(root, "app/generated-run-summary.json"), `${JSON.stringify(runSummary, null, 2)}\n`),
+  ]);
+}
+
+async function syncRunSummary(report) {
+  if (isDryRun) return;
+  const baseUrl = process.env.INFOHUB_BASE_URL?.replace(/\/$/, "");
+  const ingestSecret = process.env.INGEST_SECRET?.trim();
+  if (!baseUrl || !ingestSecret) return;
+  try {
+    const summary = { ...report };
+    delete summary.items;
+    delete summary.upload;
+    await fetchWithRetry(`${baseUrl}/api/ingest`, {
+      method: "POST",
+      headers: {
+        authorization: `Bearer ${ingestSecret}`,
+        "content-type": "application/json",
+      },
+      body: JSON.stringify({ items: [], runSummary: summary }),
+    }, 2);
+  } catch (error) {
+    console.error(`[collect] status sync skipped: ${error?.message || String(error)}`);
+  }
+}
+
 async function main() {
   const requestedSource = process.argv.find((argument) => argument.startsWith("--source="))?.split("=")[1];
   const allCollectors = [
@@ -833,50 +1004,137 @@ async function main() {
     ? allCollectors.filter(([source]) => source === requestedSource)
     : allCollectors;
   if (collectors.length === 0) throw new Error(`Unknown collector: ${requestedSource}`);
-  const errors = [];
-  const items = [];
-  for (const [source, collect] of collectors) {
-    console.error(`[collect] ${source} started`);
-    try {
-      items.push(...await collect());
-      console.error(`[collect] ${source} finished`);
-    } catch (error) {
-      errors.push({ source, message: error?.message || String(error) });
-      console.error(`[collect] ${source} failed: ${error?.message || String(error)}`);
-    }
-  }
-
+  const outputPath = join(root, `outputs/last-collection${requestedSource ? `-${requestedSource}` : ""}.json`);
   const report = {
+    id: `collection-${now.toISOString()}`,
     generatedAt: now.toISOString(),
     windowStart: cutoff.toISOString(),
-    itemCount: items.length,
-    items,
-    errors,
+    mode: isDryRun ? "preview" : "production",
+    status: "running",
+    itemCount: 0,
+    validItemCount: 0,
+    publishedCount: 0,
+    stages: [
+      stage("collect", "采集"),
+      stage("summarize", "处理总结"),
+      stage("quality", "质量检查"),
+      stage("publish", "发布"),
+    ],
+    sources: [],
+    sectionSummaries: [],
+    errors: [],
   };
-  const outputPath = join(root, `outputs/last-collection${requestedSource ? `-${requestedSource}` : ""}.json`);
-  await mkdir(dirname(outputPath), { recursive: true });
-  await writeFile(outputPath, `${JSON.stringify(report, null, 2)}\n`);
 
-  if (!isDryRun && items.length > 0) {
-    const baseUrl = process.env.INFOHUB_BASE_URL?.replace(/\/$/, "");
-    const ingestSecret = process.env.INGEST_SECRET?.trim();
-    if (!baseUrl || !ingestSecret) {
-      throw new Error("INFOHUB_BASE_URL and INGEST_SECRET are required for upload");
+  report.stages[0] = { ...report.stages[0], status: "running", detail: `正在处理 ${collectors.length} 个信息源` };
+  await saveReport(report, outputPath);
+  await syncRunSummary(report);
+
+  const errors = report.errors;
+  const items = [];
+  for (const [source, collect] of collectors) {
+    const startedAt = new Date().toISOString();
+    console.error(`[collect] ${source} started`);
+    try {
+      const collected = await collect();
+      items.push(...collected);
+      report.sources.push({
+        id: source,
+        label: sourceLabels[source] || source,
+        status: "completed",
+        itemCount: collected.length,
+        startedAt,
+        finishedAt: new Date().toISOString(),
+      });
+      console.error(`[collect] ${source} finished`);
+    } catch (error) {
+      const message = error?.message || String(error);
+      errors.push({ source, message });
+      report.sources.push({
+        id: source,
+        label: sourceLabels[source] || source,
+        status: "failed",
+        itemCount: 0,
+        error: message,
+        startedAt,
+        finishedAt: new Date().toISOString(),
+      });
+      console.error(`[collect] ${source} failed: ${error?.message || String(error)}`);
     }
-    const response = await fetchWithRetry(`${baseUrl}/api/ingest`, {
-      method: "POST",
-      headers: {
-        authorization: `Bearer ${ingestSecret}`,
-        "content-type": "application/json",
-      },
-      body: JSON.stringify({ items }),
-    });
-    report.upload = await response.json();
+    report.itemCount = items.length;
+    await saveReport(report, outputPath);
   }
 
+  report.stages[0] = {
+    ...report.stages[0],
+    status: errors.length === collectors.length ? "failed" : "completed",
+    detail: `完成 ${collectors.length - errors.length}/${collectors.length} 个来源，共 ${items.length} 条内容`,
+  };
+  report.stages[1] = { ...report.stages[1], status: "running", detail: "正在生成各板块的阅读提示" };
+  await saveReport(report, outputPath);
+  await syncRunSummary(report);
+
+  report.sectionSummaries = await buildSectionSummaries(items);
+  const noUpdates = items.length === 0 && errors.length === 0;
+  report.stages[1] = {
+    ...report.stages[1],
+    status: items.length > 0 || noUpdates ? "completed" : "failed",
+    detail: items.length > 0 ? `已生成 ${report.sectionSummaries.length} 个板块总结` : noUpdates ? "本次没有新内容" : "没有可总结的内容",
+  };
+  report.stages[2] = { ...report.stages[2], status: "running", detail: "正在检查必要字段" };
+  await saveReport(report, outputPath);
+  await syncRunSummary(report);
+
+  const checked = checkItems(items);
+  errors.push(...checked.rejected);
+  report.validItemCount = checked.accepted.length;
+  report.stages[2] = {
+    ...report.stages[2],
+    status: checked.accepted.length > 0 || items.length === 0 ? "completed" : "failed",
+    detail: `通过 ${checked.accepted.length} 条，未通过 ${checked.rejected.length} 条`,
+  };
+
+  if (!isDryRun && checked.accepted.length > 0) {
+    report.stages[3] = { ...report.stages[3], status: "running", detail: `正在发布 ${checked.accepted.length} 条内容` };
+    await saveReport(report, outputPath);
+    await syncRunSummary(report);
+    try {
+      report.stages[3] = { ...report.stages[3], status: "completed", detail: `已写入 ${checked.accepted.length} 条公开内容` };
+      report.publishedCount = checked.accepted.length;
+      await publishStaticFiles(checked.accepted, report.sectionSummaries, report);
+    } catch (error) {
+      const message = error?.message || String(error);
+      errors.push({ source: "publish", message });
+      report.publishedCount = 0;
+      report.stages[3] = { ...report.stages[3], status: "failed", detail: message };
+    }
+  } else if (isDryRun) {
+    report.stages[3] = { ...report.stages[3], status: "completed", detail: "预览模式，未发布" };
+  } else if (noUpdates) {
+    report.stages[3] = { ...report.stages[3], status: "completed", detail: "本次没有新内容，无需发布" };
+  } else {
+    report.stages[3] = { ...report.stages[3], status: "failed", detail: "没有通过检查的内容" };
+  }
+
+  report.status = report.publishedCount > 0 || isDryRun || noUpdates
+    ? errors.length > 0 ? "completed_with_errors" : "completed"
+    : "failed";
+  report.finishedAt = new Date().toISOString();
+  report.items = checked.accepted;
+  await saveReport(report, outputPath);
+  if (!isDryRun) {
+    const publicRunSummary = { ...report };
+    delete publicRunSummary.items;
+    delete publicRunSummary.upload;
+    await writeFile(
+      join(root, "app/generated-run-summary.json"),
+      `${JSON.stringify(publicRunSummary, null, 2)}\n`,
+    );
+  }
+  await syncRunSummary(report);
+
   console.log(JSON.stringify({
-    ok: errors.length === 0,
-    itemCount: items.length,
+    ok: report.status === "completed",
+    itemCount: checked.accepted.length,
     errors,
     outputPath,
   }, null, 2));
