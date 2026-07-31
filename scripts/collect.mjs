@@ -353,39 +353,52 @@ async function collectFollowBuilders() {
     .slice(0, 30);
   if (tweets.length === 0) return [];
 
-  const processedItems = await kimiItems(
-    "你是中文科技编辑。忠实处理 X 推文，不得编造。返回 JSON：{items:[{id,title,summary,translation,detail,keywords}]}。translation 是完整中文翻译；detail 补充原推文语境和含义，但必须明确区分原文与解释。keywords 为 3-6 个中文关键词。输入只包含推文正文，并不包含短链接目标页的正文；不要写‘链接无法访问’，应准确写成‘当前采集结果未包含链接页详情’。不要猜测链接内容。",
-    tweets.map((tweet) => ({
-      id: tweet.id,
-      author: tweet.builder,
-      bio: tweet.bio,
-      text: tweet.text,
-      url: tweet.url,
-    })),
-    { batchSize: 2, maxTokens: 3_500, concurrency: 3 },
+  const grouped = Object.entries(Object.groupBy(tweets, (tweet) => tweet.builder)).map(
+    ([builder, builderTweets], index) => ({
+      id: index,
+      builder,
+      bio: builderTweets?.find((tweet) => tweet.bio)?.bio || "",
+      tweets: (builderTweets || []).map((tweet) => ({
+        id: String(tweet.id),
+        text: tweet.text,
+        url: tweet.url,
+        likes: tweet.likes || 0,
+        createdAt: tweet.createdAt,
+      })),
+    }),
   );
 
-  return tweets.map((tweet) => {
-    const item = processedItems.find((entry) => String(entry.id) === String(tweet.id));
-    const fallbackTitle = `${tweet.builder}：${tweet.text.replace(/https?:\/\/\S+/g, "").trim().slice(0, 58) || "仅分享了链接"}`;
-    const keywords = Array.isArray(item?.keywords) ? item.keywords : ["X", "AI"];
+  const processedItems = await kimiItems(
+    "你是 AI Builders Digest 的中文编辑。把同一位 Builder 在过去 24 小时的全部推文合并成一段像懂行朋友介绍动态的自然中文，不做评价、推荐、延伸分析或链接页猜测。保留具体产品、人名、数字、观点和幽默语气；多条推文之间有关系时自然串联，没有关系时用清楚的转折分开。人物身份只能来自 bio；bio 不足时只写姓名。返回 JSON：{items:[{id,title,summary,paragraph,keywords}]}。title 为“身份 + 姓名”或姓名；summary 为一句话概览；paragraph 为完整中文介绍；keywords 为 3-6 个中文关键词。链接由系统另行展示，不要写入 paragraph。",
+    grouped,
+    { batchSize: 2, maxTokens: 4_000, concurrency: 3 },
+  );
+
+  return grouped.map((group) => {
+    const item = processedItems.find((entry) => String(entry.id) === String(group.id));
+    const latestTweet = [...group.tweets].sort((a, b) => String(b.createdAt).localeCompare(String(a.createdAt)))[0];
+    const keywords = Array.isArray(item?.keywords) ? item.keywords : ["X", "AI Builders"];
+    const digestDate = shanghaiDate(new Date(latestTweet.createdAt));
     return {
-      externalId: String(tweet.id),
+      externalId: `digest-${digestDate}-${group.builder.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "") || group.id}`,
       source: {
         id: config.followBuilders.id,
         type: "builder",
-        name: `${tweet.builder} · Follow Builders`,
+        name: `${group.builder} · Follow Builders`,
         url: "https://github.com/zarazhangrui/follow-builders",
       },
-      title: item?.title || fallbackTitle,
-      sourceUrl: tweet.url,
-      summary: item?.summary || "原始推文已采集；本条中文加工暂未完成。",
-      publishedAt: tweet.createdAt,
+      title: item?.title || group.builder,
+      sourceUrl: latestTweet.url,
+      summary: item?.summary || `${group.builder} 今天发布了 ${group.tweets.length} 条动态。`,
+      publishedAt: latestTweet.createdAt,
       keywords,
-      body: baseBody("x", tweet.createdAt, {
-        paragraphs: item
-          ? [item.translation, item.detail].filter(Boolean)
-          : [`原文：${tweet.text}`, "中文加工暂未完成，可通过原始链接查看推文。"],
+      body: baseBody("x", latestTweet.createdAt, {
+        digestFormat: "builders-digest",
+        paragraphs: [item?.paragraph || group.tweets.map((tweet) => tweet.text).join("\n\n")],
+        externalLinks: group.tweets.map((tweet, index) => ({
+          label: group.tweets.length === 1 ? "推文" : `推文 ${index + 1}`,
+          url: tweet.url,
+        })),
       }),
     };
   });
@@ -954,8 +967,18 @@ async function publishStaticFiles(items, sectionSummaries, runSummary) {
     existingSummaries = [];
   }
 
-  const merged = new Map(existing.map((item) => [item.id, item]));
-  for (const item of items.map(publicFeedItem)) merged.set(item.id, item);
+  const publicItems = items.map(publicFeedItem);
+  const buildersDigestDates = new Set(
+    publicItems
+      .filter((item) => item.digestFormat === "builders-digest")
+      .map((item) => item.digestDate),
+  );
+  const retained = existing.filter((item) => !(
+    buildersDigestDates.has(item.digestDate)
+    && String(item.sourceLabel || "").includes("Follow Builders")
+  ));
+  const merged = new Map(retained.map((item) => [item.id, item]));
+  for (const item of publicItems) merged.set(item.id, item);
   const feed = [...merged.values()].sort((a, b) =>
     String(b.publishedAt ?? b.digestDate ?? "").localeCompare(String(a.publishedAt ?? a.digestDate ?? "")),
   );

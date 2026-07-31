@@ -55,6 +55,7 @@ type Item = {
   takeaways?: string[];
   utility?: string;
   sections?: { title: string; timeRange: string; paragraphs: string[] }[];
+  digestFormat?: "builders-digest";
   section?: SectionId;
   inRecentWindow?: boolean;
 };
@@ -1032,6 +1033,8 @@ export function InfoHubApp({ user }: { user: ChatGPTUser | null }) {
   const activeSectionItems = activeHomeDefinition
     ? visibleItems.filter((item) => item.section && activeHomeDefinition.sections.includes(item.section))
     : [];
+  const builderDigestItems = activeSectionItems.filter((item) => item.digestFormat === "builders-digest");
+  const regularSectionItems = activeSectionItems.filter((item) => item.digestFormat !== "builders-digest");
   const queueItems = items.filter(
     (item) => saved.includes(item.id) && item.inRecentWindow !== false,
   );
@@ -1737,18 +1740,64 @@ export function InfoHubApp({ user }: { user: ChatGPTUser | null }) {
                   <span>{activeSectionItems.length}</span>
                 </header>
                 {activeSectionItems.length > 0 ? (
-                  <div className="feed single-column-feed">
-                    {activeSectionItems.map((item) => (
-                      <ContentCard
-                        key={item.id}
-                        item={item}
-                        saved={saved.includes(item.id)}
-                        completed={completed.includes(item.id)}
-                        progress={readingProgressStore[item.id]?.percent ?? 0}
-                        onOpen={() => openItem(item)}
-                      />
-                    ))}
-                  </div>
+                  <>
+                    {builderDigestItems.length > 0 && (
+                      <section className="builders-digest">
+                        <header className="builders-digest-intro">
+                          <span>Follow Builders</span>
+                          <h2>AI Builders Digest — {displayDay(selectedDate, true)}</h2>
+                          <p>像是一位懂行的朋友在跟你聊天。以下内容来自关注的 AI Builders 过去 24 小时的动态。</p>
+                        </header>
+                        <div className="builders-digest-list">
+                          {builderDigestItems.map((item) => (
+                            <article key={item.id} className="builder-digest-entry">
+                              <header>
+                                <div>
+                                  <span>{item.sourceLabel.replace(/\s*·\s*Follow Builders$/, "")}</span>
+                                  <h3>{item.title}</h3>
+                                </div>
+                                <button
+                                  className={saved.includes(item.id) ? "saved" : ""}
+                                  onClick={() => toggleSaved(item.id)}
+                                >
+                                  <Bookmark size={17} fill={saved.includes(item.id) ? "currentColor" : "none"} />
+                                  {saved.includes(item.id) ? "已感兴趣" : "感兴趣"}
+                                </button>
+                              </header>
+                              {item.paragraphs.map((paragraph, index) => <p key={index}>{paragraph}</p>)}
+                              <div className="builder-tweet-links">
+                                {(item.externalLinks?.length ? item.externalLinks : [{ label: "推文", url: item.sourceUrl }]).map((link) => (
+                                  <a key={link.url} href={link.url} target="_blank" rel="noreferrer">
+                                    {link.label} <ExternalLink size={14} />
+                                  </a>
+                                ))}
+                              </div>
+                              <button className="builder-read-action" onClick={() => openItem(item)}>
+                                精读与记笔记 <ChevronRight size={16} />
+                              </button>
+                            </article>
+                          ))}
+                        </div>
+                      </section>
+                    )}
+                    {regularSectionItems.length > 0 && (
+                      <div className="feed single-column-feed">
+                        {builderDigestItems.length > 0 && activeHomeDefinition.id === "x" && (
+                          <h3 className="technical-x-heading">技术动态 X</h3>
+                        )}
+                        {regularSectionItems.map((item) => (
+                          <ContentCard
+                            key={item.id}
+                            item={item}
+                            saved={saved.includes(item.id)}
+                            completed={completed.includes(item.id)}
+                            progress={readingProgressStore[item.id]?.percent ?? 0}
+                            onOpen={() => openItem(item)}
+                          />
+                        ))}
+                      </div>
+                    )}
+                  </>
                 ) : (
                   <div className="empty-section">本日暂无更新</div>
                 )}

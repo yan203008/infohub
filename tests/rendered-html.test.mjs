@@ -59,7 +59,7 @@ test("includes the automatic multi-source collector", async () => {
   assert.match(collector, /\/api\/ingest/);
   assert.match(collector, /buildSectionSummaries/);
   assert.match(collector, /质量检查/);
-  assert.match(workflow, /cron: "0 23 \* \* \*"/);
+  assert.match(workflow, /cron: "30 0 \* \* \*"/);
   assert.match(workflow, /SUPADATA_API_KEY/);
 });
 
