@@ -15,6 +15,7 @@
     "lint": "eslint . --ignore-pattern dist --ignore-pattern dist-pages --ignore-pattern .next",
     "db:generate": "drizzle-kit generate",
     "collect": "node --env-file-if-exists=.env.local scripts/collect.mjs",
+    "summaries": "node --env-file-if-exists=.env.local scripts/collect.mjs --summaries-only",
     "collect:reliable": "node --env-file-if-exists=.env.local scripts/run-collection-with-retries.mjs",
     "import:report": "node scripts/import-collection-report.mjs",
     "collect:dry": "node --env-file-if-exists=.env.local scripts/collect.mjs --dry-run",

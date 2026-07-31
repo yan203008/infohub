@@ -20,6 +20,7 @@ on:
           - papers
           - github
           - youtube
+          - summaries
   schedule:
     # 北京时间 08:30 开始，给 10:00 前完成采集、AI 加工和发布留出余量。
     - cron: "30 0 * * *"
@@ -61,7 +62,9 @@ jobs:
           GETNOTE_CLIENT_ID: ${{ secrets.GETNOTE_CLIENT_ID }}
           BAOYU_TRANSCRIPT_SCRIPT: ${{ runner.temp }}/baoyu-skills/skills/baoyu-youtube-transcript/scripts/main.ts
         run: |
-          if [ -n "${{ inputs.source }}" ] && [ "${{ inputs.source }}" != "all" ]; then
+          if [ "${{ inputs.source }}" = "summaries" ]; then
+            npm run summaries
+          elif [ -n "${{ inputs.source }}" ] && [ "${{ inputs.source }}" != "all" ]; then
             npm run collect -- --source="${{ inputs.source }}"
           else
             npm run collect:reliable

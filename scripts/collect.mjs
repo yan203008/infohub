@@ -18,6 +18,9 @@ const moonshotKey = process.env.MOONSHOT_API_KEY?.trim();
 const moonshotBaseUrl = (process.env.MOONSHOT_BASE_URL || "https://api.moonshot.cn/v1").replace(/\/$/, "");
 const moonshotModel = process.env.MOONSHOT_MODEL || "kimi-k3";
 const supadataKey = process.env.SUPADATA_API_KEY?.trim();
+const summaryOnly = process.argv.includes("--summaries-only");
+
+const sleep = (milliseconds) => new Promise((resolveDelay) => setTimeout(resolveDelay, milliseconds));
 
 const sourceLabels = {
   "follow-builders": "Follow Builders",
@@ -151,7 +154,20 @@ async function curlJsonPost(url, { headers = {}, body = "", timeoutMs = 240_000 
   if (markerIndex === -1) throw new Error("curl response status missing");
   const responseBody = stdout.slice(0, markerIndex);
   const status = Number(stdout.slice(markerIndex + marker.length));
-  if (status < 200 || status >= 300) throw new Error(`Moonshot returned HTTP ${status}`);
+  if (status < 200 || status >= 300) {
+    let detail = "";
+    try {
+      const payload = JSON.parse(responseBody);
+      detail = String(payload?.error?.message || payload?.message || payload?.error?.code || "")
+        .replace(/sk-[A-Za-z0-9_-]+/g, "[redacted]")
+        .slice(0, 240);
+    } catch {
+      detail = "";
+    }
+    const error = new Error(`Moonshot returned HTTP ${status}${detail ? `: ${detail}` : ""}`);
+    error.status = status;
+    throw error;
+  }
   return JSON.parse(responseBody);
 }
 
@@ -206,18 +222,32 @@ async function kimiJson(system, input, { maxTokens = 5_000, timeoutMs = 240_000 
       { role: "user", content: JSON.stringify(input) },
     ],
   });
-  const payload = await curlJsonPost(url, { headers, body, timeoutMs });
-  const content = payload.choices?.[0]?.message?.content;
-  if (!content) throw new Error("Kimi returned an empty response");
-  const jsonText = content.trim().replace(/^```(?:json)?\s*/i, "").replace(/\s*```$/, "");
-  try {
-    return JSON.parse(jsonText);
-  } catch {
-    return JSON.parse(jsonrepair(jsonText));
+  const maximumAttempts = 5;
+  for (let attempt = 1; attempt <= maximumAttempts; attempt += 1) {
+    try {
+      const payload = await curlJsonPost(url, { headers, body, timeoutMs });
+      const content = payload.choices?.[0]?.message?.content;
+      if (!content) throw new Error("Kimi returned an empty response");
+      const jsonText = content.trim().replace(/^```(?:json)?\s*/i, "").replace(/\s*```$/, "");
+      try {
+        return JSON.parse(jsonText);
+      } catch {
+        return JSON.parse(jsonrepair(jsonText));
+      }
+    } catch (error) {
+      const retryable = error?.status === 429
+        || error?.status >= 500
+        || /timed out|lost connection|overloaded|繁忙/i.test(error?.message || "");
+      if (!retryable || attempt === maximumAttempts) throw error;
+      const delayMs = Math.min(90_000, 10_000 * (2 ** (attempt - 1))) + Math.floor(Math.random() * 2_000);
+      console.warn(`[kimi] temporary failure (${attempt}/${maximumAttempts}): ${error.message}; retrying in ${Math.ceil(delayMs / 1000)}s`);
+      await sleep(delayMs);
+    }
   }
+  throw new Error("Kimi retry loop ended unexpectedly");
 }
 
-async function kimiItems(system, inputs, { batchSize = 2, maxTokens = 3_500, concurrency = 3 } = {}) {
+async function kimiItems(system, inputs, { batchSize = 2, maxTokens = 3_500, concurrency = 2 } = {}) {
   const batches = [];
   for (let index = 0; index < inputs.length; index += batchSize) {
     batches.push(inputs.slice(index, index + batchSize));
@@ -234,6 +264,7 @@ async function kimiItems(system, inputs, { batchSize = 2, maxTokens = 3_500, con
         });
         results[batchIndex] = processed.items || [];
         console.log(`[kimi] batch ${batchIndex + 1}/${batches.length} completed`);
+        await sleep(1_500);
       } catch (error) {
         results[batchIndex] = [];
         console.warn(`[kimi] batch ${batchIndex + 1}/${batches.length} skipped: ${error.message}`);
@@ -263,18 +294,76 @@ function baseBody(section, publishedAt, extra = {}) {
 
 function fallbackSectionSummary(section, items) {
   const keywords = [...new Set(items.flatMap((item) => item.keywords || []))].slice(0, 5);
-  const representativeTitles = items.slice(0, 3).map((item) => `《${item.title}》`);
+  const representativeItems = items.slice(0, 3);
+  const sectionValue = {
+    x: "帮助非技术读者了解一线 AI 从业者正在发布、争论和修正什么，并判断哪些变化可能影响日常使用与工作方式。",
+    papers: "帮助非技术读者观察 AI 研究正在解决哪些现实问题，以及这些研究未来可能转化成怎样的产品能力。",
+    github: "帮助非技术读者发现正在形成的开源工具和产品方向，判断哪些能力已从概念进入可以实际尝试的阶段。",
+    youtube: "帮助读者先理解长内容的核心观点与适用对象，再决定是否投入时间精读。",
+    podcasts: "帮助读者快速了解长对话中的核心议题、经验和判断，再决定是否深入阅读或收听。",
+  };
+  const overview = representativeItems
+    .map((item) => `《${item.title}》${item.summary ? `：${item.summary}` : ""}`)
+    .join("；")
+    .slice(0, 420);
   return {
     section,
     label: sectionLabels[section] || section,
-    overview: `本次共整理 ${items.length} 条内容，代表条目包括${representativeTitles.join("、")}。`,
+    overview: `本次收录 ${items.length} 条内容。${overview}`,
     trends: keywords.length > 0
-      ? [`本批内容的关注点集中在${keywords.slice(0, 3).join("、")}，具体观点与适用范围以各条正文为准。`]
+      ? [`可先从${keywords.slice(0, 3).join("、")}几个方向了解本批内容；这是一份基于原始摘要的导读，具体判断以各条正文为准。`]
       : [],
-    value: "先通过标题和摘要判断是否值得深入阅读，再进入详情查看完整内容。",
+    value: sectionValue[section] || "帮助读者快速理解本批内容的范围与可能价值，再自主决定是否深入阅读。",
     technicalLevel: section === "papers" || section === "github" ? "中高" : "中等",
     technicalPercentage: section === "papers" ? 65 : section === "github" ? 55 : 30,
   };
+}
+
+function sectionPrompt(section) {
+  const sectionGuidance = {
+    x: "这是 X 动态。请说明一线 AI Builder 今天具体在发布、讨论或争论什么，以及这些动态共同反映的产品或行业变化。",
+    papers: "这是热门论文。请用非技术语言说明研究在解决什么问题、采用了什么新思路，以及它可能带来的现实能力；不要照抄论文摘要。",
+    github: "这是 GitHub Trending。请说明这些项目能让人做什么、集中出现了哪些产品或开源趋势，以及非程序员为什么需要关注；不要复述 README。",
+    youtube: "这是 YouTube 长内容。请说明核心议题、主要观点和适合阅读的人群。",
+    podcasts: "这是播客长内容。请说明核心议题、嘉宾的关键判断和适合阅读的人群。",
+  };
+  return `你是面向关注 AI、但不是算法或研发人员的信息主编。${sectionGuidance[section] || "请写一份清楚、具体的板块导读。"}
+
+根据输入中的标题、摘要和正文要点生成一张首页导读。不得筛选、排名或删除内容，不得补充输入之外的事实。
+
+返回 JSON：{section,overview,trends,value,technicalLevel,technicalPercentage}。
+- overview：100-180 个中文字，回答“本批内容具体包含什么”，组织成自然、可读的短文，不要只罗列标题。
+- trends：1-3 条，每条 35-80 字，只写跨越多条内容才能得出的共同变化、差异或因果观察。
+- value：40-90 个中文字，回答“非技术读者看完后能理解什么、形成什么判断”，必须结合本批具体内容。
+- technicalLevel：只能是低、中等、中高、高；technicalPercentage：0-100 整数。
+
+禁止使用“先点击查看”“先通过标题判断”“主要涉及若干内容”“X 是主要主题”“具体内容以正文为准”等无信息量表达，也不要逐条重复标题。信息不足时直接说明能够确认的边界，不要猜测。`;
+}
+
+function summaryInput(item) {
+  const takeaways = Array.isArray(item.body?.takeaways) ? item.body.takeaways.slice(0, 6) : [];
+  const sections = Array.isArray(item.body?.sections)
+    ? item.body.sections.slice(0, 5).map((entry) => `${entry.title || ""} ${entry.content || ""}`.trim().slice(0, 320))
+    : [];
+  const paragraphs = Array.isArray(item.body?.paragraphs) ? item.body.paragraphs.slice(0, 4) : [];
+  const digestEntries = Array.isArray(item.body?.digestEntries)
+    ? item.body.digestEntries.slice(0, 8).map((entry) => `${entry.builder || ""} ${entry.summary || entry.text || ""}`.trim().slice(0, 320))
+    : [];
+  return {
+    title: item.title,
+    summary: item.summary,
+    keywords: item.keywords || [],
+    keyPoints: [...takeaways, ...sections, ...paragraphs, ...digestEntries].filter(Boolean).slice(0, 10),
+  };
+}
+
+function usefulSectionSummary(summary) {
+  if (!summary || typeof summary !== "object") return false;
+  const overview = String(summary.overview || "").trim();
+  const value = String(summary.value || "").trim();
+  const trends = Array.isArray(summary.trends) ? summary.trends.filter(Boolean) : [];
+  const filler = /先(?:点击|通过标题)|主要涉及若干|是(?:本次更新中)?的主要主题|具体内容以|再进入详情/;
+  return overview.length >= 45 && value.length >= 25 && trends.length > 0 && !filler.test(`${overview} ${value} ${trends.join(" ")}`);
 }
 
 async function buildSectionSummaries(items) {
@@ -282,39 +371,42 @@ async function buildSectionSummaries(items) {
   const fallback = Object.entries(groups)
     .filter(([section]) => sectionLabels[section])
     .map(([section, sectionItems]) => fallbackSectionSummary(section, sectionItems || []));
-  if (!moonshotKey || fallback.length === 0) return fallback;
-
-  try {
-    const processed = await kimiJson(
-      "你是面向非技术读者的信息主编。根据同一板块的全部标题与摘要，写一张能帮助用户决定是否展开阅读的板块导读。不要筛选、排名或删除内容，不得补充输入之外的事实。返回 JSON：{sections:[{section,overview,trends,value,technicalLevel,technicalPercentage}]}。overview 用 80-140 个中文字概括内容的 2-3 个具体组成部分，并点出代表性内容；trends 为 1-3 条跨越多条内容才能得到的共同变化或因果观察，每条 30-70 字；value 具体说明非技术读者能据此形成什么判断。technicalLevel 只能是低、中等、中高、高；technicalPercentage 为 0-100 的估算整数。禁止把关键词改写成“X 是主要主题”，禁止使用“主要涉及若干内容”等空话，禁止逐条重复标题。对于信息残缺的 X 推文，可以说明本批内容的完整性差异，但不要猜测缺失内容。",
-      Object.entries(groups)
-        .filter(([section]) => sectionLabels[section])
-        .map(([section, sectionItems]) => ({
-          section,
-          label: sectionLabels[section],
-          items: (sectionItems || []).map((item) => ({ title: item.title, summary: item.summary })),
-        })),
-      { maxTokens: 2_500, timeoutMs: 180_000 },
-    );
-    return fallback.map((entry) => {
-      const summary = (processed.sections || []).find((item) => item.section === entry.section);
-      return summary
-        ? {
-            ...entry,
-            overview: summary.overview || entry.overview,
-            trends: Array.isArray(summary.trends) ? summary.trends.slice(0, 3) : entry.trends,
-            value: summary.value || entry.value,
-            technicalLevel: summary.technicalLevel || entry.technicalLevel,
-            technicalPercentage: Number.isFinite(Number(summary.technicalPercentage))
-              ? Math.max(0, Math.min(100, Math.round(Number(summary.technicalPercentage))))
-              : entry.technicalPercentage,
-          }
-        : entry;
-    });
-  } catch (error) {
-    console.error(`[collect] processing summary fallback: ${error?.message || String(error)}`);
-    return fallback;
+  if (!moonshotKey || fallback.length === 0) {
+    return { summaries: fallback, failures: moonshotKey ? [] : [{ source: "summary", message: "MOONSHOT_API_KEY is not configured" }] };
   }
+
+  const summaries = [];
+  const failures = [];
+  // Item processing can consume the account's short-window token allowance. Give it time to recover.
+  if (!summaryOnly) await sleep(15_000);
+  for (const entry of fallback) {
+    const sectionItems = groups[entry.section] || [];
+    try {
+      const processed = await kimiJson(
+        sectionPrompt(entry.section),
+        { section: entry.section, label: entry.label, items: sectionItems.map(summaryInput) },
+        { maxTokens: 1_600, timeoutMs: 180_000 },
+      );
+      if (!usefulSectionSummary(processed)) throw new Error("Kimi section summary did not pass the usefulness check");
+      summaries.push({
+        ...entry,
+        overview: processed.overview,
+        trends: processed.trends.slice(0, 3),
+        value: processed.value,
+        technicalLevel: processed.technicalLevel || entry.technicalLevel,
+        technicalPercentage: Number.isFinite(Number(processed.technicalPercentage))
+          ? Math.max(0, Math.min(100, Math.round(Number(processed.technicalPercentage))))
+          : entry.technicalPercentage,
+      });
+    } catch (error) {
+      const message = error?.message || String(error);
+      console.error(`[collect] ${entry.section} summary fallback: ${message}`);
+      failures.push({ source: `summary:${entry.section}`, message });
+      summaries.push(entry);
+    }
+    await sleep(3_000);
+  }
+  return { summaries, failures };
 }
 
 function checkItems(items) {
@@ -1015,7 +1107,52 @@ async function syncRunSummary(report) {
   }
 }
 
+async function regenerateSectionSummaries() {
+  const feedPath = join(root, "app/generated-feed.json");
+  const summariesPath = join(root, "app/generated-section-summaries.json");
+  const feed = JSON.parse(await readFile(feedPath, "utf8"));
+  const availableDates = feed.map((item) => item.digestDate).filter(Boolean).sort();
+  const targetDate = feed.some((item) => item.digestDate === runDigestDate)
+    ? runDigestDate
+    : availableDates.at(-1);
+  const items = feed
+    .filter((item) => item.digestDate === targetDate && sectionLabels[item.section])
+    .map((item) => ({
+      title: item.title,
+      summary: item.summary,
+      keywords: item.tags || [],
+      body: { ...item, section: item.section },
+    }));
+  if (items.length === 0) throw new Error(`No public items found for ${targetDate || runDigestDate}`);
+
+  const result = await buildSectionSummaries(items);
+  let existing = [];
+  try {
+    const parsed = JSON.parse(await readFile(summariesPath, "utf8"));
+    if (Array.isArray(parsed)) existing = parsed;
+  } catch {
+    existing = [];
+  }
+  const failedSections = new Set(result.failures.map((failure) => failure.source.replace(/^summary:/, "")));
+  const merged = new Map(existing.map((summary) => [summary.section, summary]));
+  for (const summary of result.summaries) {
+    if (!failedSections.has(summary.section)) merged.set(summary.section, summary);
+  }
+  await writeFile(summariesPath, `${JSON.stringify([...merged.values()], null, 2)}\n`);
+  console.log(JSON.stringify({
+    ok: result.failures.length === 0,
+    targetDate,
+    generated: result.summaries.length - result.failures.length,
+    failures: result.failures,
+  }, null, 2));
+  if (result.failures.length > 0) process.exitCode = 1;
+}
+
 async function main() {
+  if (summaryOnly) {
+    await regenerateSectionSummaries();
+    return;
+  }
   const requestedSource = process.argv.find((argument) => argument.startsWith("--source="))?.split("=")[1];
   const allCollectors = [
     ["follow-builders", collectFollowBuilders],
@@ -1097,12 +1234,16 @@ async function main() {
   await saveReport(report, outputPath);
   await syncRunSummary(report);
 
-  report.sectionSummaries = await buildSectionSummaries(items);
+  const summaryResult = await buildSectionSummaries(items);
+  report.sectionSummaries = summaryResult.summaries;
+  errors.push(...summaryResult.failures);
   const noUpdates = items.length === 0 && errors.length === 0;
   report.stages[1] = {
     ...report.stages[1],
-    status: items.length > 0 || noUpdates ? "completed" : "failed",
-    detail: items.length > 0 ? `已生成 ${report.sectionSummaries.length} 个板块总结` : noUpdates ? "本次没有新内容" : "没有可总结的内容",
+    status: summaryResult.failures.length > 0 ? "failed" : items.length > 0 || noUpdates ? "completed" : "failed",
+    detail: summaryResult.failures.length > 0
+      ? `${report.sectionSummaries.length - summaryResult.failures.length} 个成功，${summaryResult.failures.length} 个失败并使用原始摘要兜底`
+      : items.length > 0 ? `已生成 ${report.sectionSummaries.length} 个板块总结` : noUpdates ? "本次没有新内容" : "没有可总结的内容",
   };
   report.stages[2] = { ...report.stages[2], status: "running", detail: "正在检查必要字段" };
   await saveReport(report, outputPath);
@@ -1162,7 +1303,7 @@ async function main() {
     errors,
     outputPath,
   }, null, 2));
-  if (errors.length === collectors.length) process.exitCode = 1;
+  if (report.sources.length > 0 && report.sources.every((source) => source.status === "failed")) process.exitCode = 1;
 }
 
 await main();
