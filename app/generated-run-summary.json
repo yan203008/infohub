@@ -1,36 +1,36 @@
 {
-  "id": "collection-2026-07-31T06:11:09.683Z",
-  "generatedAt": "2026-07-31T06:11:09.683Z",
+  "id": "collection-2026-07-31T06:29:56.955Z",
+  "generatedAt": "2026-07-31T06:29:56.955Z",
   "windowStart": "2026-07-29T16:00:00.000Z",
   "mode": "production",
-  "status": "completed_with_errors",
-  "itemCount": 45,
-  "validItemCount": 45,
-  "publishedCount": 45,
+  "status": "completed",
+  "itemCount": 16,
+  "validItemCount": 16,
+  "publishedCount": 16,
   "stages": [
     {
       "id": "collect",
       "label": "采集",
       "status": "completed",
-      "detail": "完成 3/5 个来源，共 45 条内容"
+      "detail": "完成 1/1 个来源，共 16 条内容"
     },
     {
       "id": "summarize",
       "label": "处理总结",
       "status": "completed",
-      "detail": "已生成 3 个板块总结"
+      "detail": "已生成 1 个板块总结"
     },
     {
       "id": "quality",
       "label": "质量检查",
       "status": "completed",
-      "detail": "通过 45 条，未通过 0 条"
+      "detail": "通过 16 条，未通过 0 条"
     },
     {
       "id": "publish",
       "label": "发布",
       "status": "completed",
-      "detail": "已写入 45 条公开内容"
+      "detail": "已写入 16 条公开内容"
     }
   ],
   "sources": [
@@ -38,89 +38,24 @@
       "id": "follow-builders",
       "label": "Follow Builders",
       "status": "completed",
-      "itemCount": 29,
-      "startedAt": "2026-07-31T06:11:09.698Z",
-      "finishedAt": "2026-07-31T06:16:06.434Z"
-    },
-    {
-      "id": "technical-x",
-      "label": "技术动态 X",
-      "status": "failed",
-      "itemCount": 0,
-      "error": "Moonshot returned HTTP 429",
-      "startedAt": "2026-07-31T06:16:06.434Z",
-      "finishedAt": "2026-07-31T06:16:26.750Z"
-    },
-    {
-      "id": "papers",
-      "label": "热门论文",
-      "status": "completed",
-      "itemCount": 2,
-      "startedAt": "2026-07-31T06:16:26.751Z",
-      "finishedAt": "2026-07-31T06:19:50.688Z"
-    },
-    {
-      "id": "github",
-      "label": "GitHub Trending",
-      "status": "completed",
-      "itemCount": 14,
-      "startedAt": "2026-07-31T06:19:50.689Z",
-      "finishedAt": "2026-07-31T06:22:22.789Z"
-    },
-    {
-      "id": "youtube",
-      "label": "YouTube",
-      "status": "failed",
-      "itemCount": 0,
-      "error": "422 ",
-      "startedAt": "2026-07-31T06:22:22.790Z",
-      "finishedAt": "2026-07-31T06:22:24.215Z"
+      "itemCount": 16,
+      "startedAt": "2026-07-31T06:29:56.971Z",
+      "finishedAt": "2026-07-31T06:33:30.929Z"
     }
   ],
   "sectionSummaries": [
     {
       "section": "x",
       "label": "X 推特内容",
-      "overview": "本次共整理 29 条内容，代表条目包括《OpenAI 工程师称 GPT-5.6 Sol 在 ARC-AGI-3 基准上达到最先进水平》、《OpenAI 员工预告明日再发新品：本周主题是'便宜到无需计量的智能'》、《Sam Altman：so excited for this.\n\nvery close to models that will signi》。",
+      "overview": "本次共整理 16 条内容，代表条目包括《OpenAI Codex 与 ChatGPT 团队 Thibault Sottiaux》、《Sam Altman》、《OpenClaw 的 ClawFather Peter Steinberger》。",
       "trends": [
-        "本批内容的关注点集中在GPT-5.6 Sol、ARC-AGI-3、最先进水平，具体观点与适用范围以各条正文为准。"
+        "本批内容的关注点集中在GPT-5.6 Sol、ARC-AGI-3、上下文压缩，具体观点与适用范围以各条正文为准。"
       ],
       "value": "先通过标题和摘要判断是否值得深入阅读，再进入详情查看完整内容。",
       "technicalLevel": "中等",
       "technicalPercentage": 30
-    },
-    {
-      "section": "papers",
-      "label": "热门论文",
-      "overview": "本次共整理 2 条内容，代表条目包括《AskChem：以论断为中心的化学文献综合基础设施》、《PhiZero：一个围绕“物理语言”构建的世界模型》。",
-      "trends": [
-        "本批内容的关注点集中在化学文献检索、论断级检索、证据溯源，具体观点与适用范围以各条正文为准。"
-      ],
-      "value": "先通过标题和摘要判断是否值得深入阅读，再进入详情查看完整内容。",
-      "technicalLevel": "中高",
-      "technicalPercentage": 65
-    },
-    {
-      "section": "github",
-      "label": "GitHub Trending",
-      "overview": "本次共整理 14 条内容，代表条目包括《huggingface/speech-to-speech》、《microsoft/AI-For-Beginners》、《paperswithbacktest/awesome-systematic-trading》。",
-      "trends": [
-        "本批内容的关注点集中在GitHub、开源、WhatsApp，具体观点与适用范围以各条正文为准。"
-      ],
-      "value": "先通过标题和摘要判断是否值得深入阅读，再进入详情查看完整内容。",
-      "technicalLevel": "中高",
-      "technicalPercentage": 55
     }
   ],
-  "errors": [
-    {
-      "source": "technical-x",
-      "message": "Moonshot returned HTTP 429"
-    },
-    {
-      "source": "youtube",
-      "message": "422 "
-    }
-  ],
-  "finishedAt": "2026-07-31T06:24:13.939Z"
+  "errors": [],
+  "finishedAt": "2026-07-31T06:33:51.058Z"
 }
