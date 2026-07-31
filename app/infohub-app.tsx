@@ -691,13 +691,45 @@ function fallbackSectionDigest(section: SectionId, items: Item[]): SectionSummar
   };
 }
 
-function normalizeMissingContextText(value: string) {
+function sectionKeywords(items: Item[], limit = 6) {
+  const ignored = new Set(["x", "twitter", "github", "开源", "ai builders", "人工智能"]);
+  const counts = new Map<string, { label: string; count: number; order: number }>();
+  let order = 0;
+  for (const tag of items.flatMap((item) => item.tags || [])) {
+    const label = String(tag).trim();
+    const key = label.toLocaleLowerCase();
+    if (!label || ignored.has(key)) continue;
+    const current = counts.get(key);
+    counts.set(key, current
+      ? { ...current, count: current.count + 1 }
+      : { label, count: 1, order: order++ });
+  }
+  return [...counts.values()]
+    .sort((a, b) => b.count - a.count || a.order - b.order)
+    .slice(0, limit)
+    .map((entry) => entry.label);
+}
+
+function normalizeChineseTypography(value: string) {
+  if ((value.match(/[\u3400-\u9fff]/g) || []).length < 3) return value;
   return value
+    .replace(/"([^"\n]+)"/g, "“$1”")
+    .replace(/,(?=\s|[\u3400-\u9fff]|$)/g, "，")
+    .replace(/;(?!\/)/g, "；")
+    .replace(/:(?!\/\/)/g, "：")
+    .replace(/\?/g, "？")
+    .replace(/!/g, "！")
+    .replace(/([\u3400-\u9fff])\.(?=\s|[\u3400-\u9fff]|$)/g, "$1。")
+    .replace(/([，。！？；：])\s+/g, "$1");
+}
+
+function normalizeMissingContextText(value: string) {
+  return normalizeChineseTypography(value
     .replaceAll("链接指向的内容无法访问", "当前采集结果未包含链接页内容")
     .replaceAll("链接内容无法访问", "当前采集结果未包含链接页内容")
     .replaceAll("链接无法访问", "当前采集结果未包含链接页内容")
     .replaceAll("链接内容无法确认", "当前采集结果未包含链接页详情")
-    .replaceAll("链接指向内容无法确认", "当前采集结果未包含链接页详情");
+    .replaceAll("链接指向内容无法确认", "当前采集结果未包含链接页详情"));
 }
 
 function normalizeItemCopy(item: Item): Item {
@@ -1690,6 +1722,7 @@ export function InfoHubApp({ user }: { user: ChatGPTUser | null }) {
                       ? liveSectionSummaries.find((summary) => summary.section === firstSection)
                         ?? fallbackSectionDigest(firstSection, groupItems)
                       : fallbackSectionDigest(firstSection, groupItems);
+                    const keywords = sectionKeywords(groupItems);
                     return (
                       <button
                         className="home-summary-card"
@@ -1704,8 +1737,16 @@ export function InfoHubApp({ user }: { user: ChatGPTUser | null }) {
                           <b>{groupItems.length}</b>
                         </header>
                         <p>{sectionSummary.overview}</p>
-                        {sectionSummary.trends.length > 0 && (
-                          <ul>{sectionSummary.trends.map((trend) => <li key={trend}>{trend}</li>)}</ul>
+                        {keywords.length > 0 && (
+                          <div className="home-summary-keywords" aria-label="关键词">
+                            {keywords.map((keyword) => <span key={keyword}>{keyword}</span>)}
+                          </div>
+                        )}
+                        {sectionSummary.trends[0] && (
+                          <div className="home-summary-trend">
+                            <strong>趋势</strong>
+                            <span>{sectionSummary.trends[0]}</span>
+                          </div>
                         )}
                         <div className="home-summary-value">
                           <strong>为什么值得看</strong>

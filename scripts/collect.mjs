@@ -342,9 +342,9 @@ function sectionPrompt(section) {
 根据输入中的标题、摘要和正文要点生成一张首页导读。不得筛选、排名或删除内容，不得补充输入之外的事实。
 
 返回 JSON：{section,overview,trends,value,technicalLevel,technicalPercentage}。
-- overview：100-180 个中文字，回答“本批内容具体包含什么”，组织成自然、可读的短文，不要只罗列标题。
-- trends：1-3 条，每条 35-80 字，只写跨越多条内容才能得出的共同变化、差异或因果观察。
-- value：40-90 个中文字，回答“非技术读者看完后能理解什么、形成什么判断”，必须结合本批具体内容。
+- overview：55-90 个中文字，最多 3 句，只概括最重要的 2-3 个内容方向。不要罗列人名、项目名或逐条复述。
+- trends：1-2 条，每条 25-45 个中文字，只写跨越多条内容才能得出的共同变化或差异。
+- value：30-55 个中文字，只回答“非技术读者看完后能获得什么具体判断”，必须结合本批内容。
 - technicalLevel：只能是低、中等、中高、高；technicalPercentage：0-100 整数。
 
 禁止使用“先点击查看”“先通过标题判断”“主要涉及若干内容”“X 是主要主题”“具体内容以正文为准”等无信息量表达，也不要逐条重复标题。信息不足时直接说明能够确认的边界，不要猜测。`;
@@ -373,7 +373,14 @@ function usefulSectionSummary(summary) {
   const value = String(summary.value || "").trim();
   const trends = Array.isArray(summary.trends) ? summary.trends.filter(Boolean) : [];
   const filler = /先(?:点击|通过标题)|主要涉及若干|是(?:本次更新中)?的主要主题|具体内容以|再进入详情/;
-  return overview.length >= 45 && value.length >= 25 && trends.length > 0 && !filler.test(`${overview} ${value} ${trends.join(" ")}`);
+  return overview.length >= 35
+    && overview.length <= 110
+    && value.length >= 20
+    && value.length <= 70
+    && trends.length > 0
+    && trends.length <= 2
+    && trends.every((trend) => String(trend).length <= 65)
+    && !filler.test(`${overview} ${value} ${trends.join(" ")}`);
 }
 
 async function buildSectionSummaries(items) {
@@ -392,12 +399,19 @@ async function buildSectionSummaries(items) {
   for (const entry of fallback) {
     const sectionItems = groups[entry.section] || [];
     try {
-      const processed = await kimiJson(
+      let processed = await kimiJson(
         sectionPrompt(entry.section),
         { section: entry.section, label: entry.label, items: sectionItems.map(summaryInput) },
         { maxTokens: 1_600, timeoutMs: 180_000 },
       );
-      if (!usefulSectionSummary(processed)) throw new Error("Kimi section summary did not pass the usefulness check");
+      if (!usefulSectionSummary(processed)) {
+        processed = await kimiJson(
+          "你是中文信息编辑。把输入的板块导读压缩成首页卡片文案，不增加新事实。只返回 JSON：{section,overview,trends,value,technicalLevel,technicalPercentage}。overview 55-90 个中文字、最多 3 句；trends 只留 1-2 条、每条 25-45 字；value 30-55 个中文字。删除人名和项目名罗列，只保留最重要的内容范围、一个共同趋势和对非技术读者的具体价值。",
+          processed,
+          { maxTokens: 800, timeoutMs: 120_000 },
+        );
+      }
+      if (!usefulSectionSummary(processed)) throw new Error("Kimi section summary did not pass the usefulness check after compression");
       summaries.push({
         ...entry,
         overview: processed.overview,
@@ -471,14 +485,36 @@ async function collectFollowBuilders() {
     }),
   );
 
+  const buildersPrompt = "你是 AI Builders Digest 的中文编辑。把同一位 Builder 在过去 24 小时的全部推文合并成一段像懂行朋友介绍动态的自然中文，不做评价、推荐、延伸分析或链接页猜测。所有英文内容必须翻译成自然中文，中文正文统一使用全角中文标点；产品名、人名和必要术语可以保留英文。保留具体产品、人名、数字、观点和幽默语气；多条推文之间有关系时自然串联，没有关系时用清楚的转折分开。人物身份只能来自 bio；bio 不足时只写姓名。返回 JSON：{items:[{id,title,summary,paragraph,keywords}]}。title 为“身份 + 姓名”或姓名；summary 为一句话概览；paragraph 为完整中文介绍；keywords 为 3-6 个中文关键词。链接由系统另行展示，不要写入 paragraph。";
   const processedItems = await kimiItems(
-    "你是 AI Builders Digest 的中文编辑。把同一位 Builder 在过去 24 小时的全部推文合并成一段像懂行朋友介绍动态的自然中文，不做评价、推荐、延伸分析或链接页猜测。保留具体产品、人名、数字、观点和幽默语气；多条推文之间有关系时自然串联，没有关系时用清楚的转折分开。人物身份只能来自 bio；bio 不足时只写姓名。返回 JSON：{items:[{id,title,summary,paragraph,keywords}]}。title 为“身份 + 姓名”或姓名；summary 为一句话概览；paragraph 为完整中文介绍；keywords 为 3-6 个中文关键词。链接由系统另行展示，不要写入 paragraph。",
+    buildersPrompt,
     grouped,
-    { batchSize: 2, maxTokens: 4_000, concurrency: 3 },
+    { batchSize: 2, maxTokens: 4_000, concurrency: 2 },
   );
+  const validBuilderItem = (entry) => entry
+    && String(entry.paragraph || "").match(/[\u3400-\u9fff]/g)?.length >= 8
+    && Array.isArray(entry.keywords)
+    && entry.keywords.length > 0;
+  const missingGroups = grouped.filter((group) => !validBuilderItem(
+    processedItems.find((entry) => String(entry.id) === String(group.id)),
+  ));
+  if (missingGroups.length > 0) {
+    console.warn(`[collect] retrying ${missingGroups.length} incomplete Follow Builders entries`);
+    processedItems.push(...await kimiItems(
+      buildersPrompt,
+      missingGroups,
+      { batchSize: 1, maxTokens: 3_500, concurrency: 1 },
+    ));
+  }
+  const unresolvedGroups = grouped.filter((group) => !validBuilderItem(
+    [...processedItems].reverse().find((entry) => String(entry.id) === String(group.id)),
+  ));
+  if (unresolvedGroups.length > 0) {
+    throw new Error(`Kimi did not finish ${unresolvedGroups.length} Follow Builders entries`);
+  }
 
   return grouped.map((group) => {
-    const item = processedItems.find((entry) => String(entry.id) === String(group.id));
+    const item = [...processedItems].reverse().find((entry) => String(entry.id) === String(group.id));
     const latestTweet = [...group.tweets].sort((a, b) => String(b.createdAt).localeCompare(String(a.createdAt)))[0];
     const keywords = Array.isArray(item?.keywords) ? item.keywords : ["X", "AI Builders"];
     const digestDate = shanghaiDate(new Date(latestTweet.createdAt));
@@ -497,7 +533,7 @@ async function collectFollowBuilders() {
       keywords,
       body: baseBody("x", latestTweet.createdAt, {
         digestFormat: "builders-digest",
-        paragraphs: [item?.paragraph || group.tweets.map((tweet) => tweet.text).join("\n\n")],
+        paragraphs: [item.paragraph],
         externalLinks: group.tweets.map((tweet, index) => ({
           label: group.tweets.length === 1 ? "推文" : `推文 ${index + 1}`,
           url: tweet.url,
@@ -708,14 +744,39 @@ async function collectGithub() {
     })));
   }
 
+  const githubPrompt = "你是面向非程序员的开源项目编辑。根据仓库元数据与 README，返回 JSON：{items:[{repository,titleZh,summaryZh,paragraphs,keywords}]}。titleZh 使用清楚的中文产品式标题；summaryZh 用一句话说明这是什么、能帮助人做什么；paragraphs 必须用 2-4 段自然中文具体说明项目用途、核心能力、适用人群和使用门槛，让不写代码的读者也能判断它是否有价值。不得只让读者去看 README，不得用 README 缺少细节作为正文，不得编造没有的功能；keywords 为 4-7 个中文关键词。";
   const processedItems = await kimiItems(
-    "你是开源项目编辑。根据仓库元数据与 README，返回 JSON：{items:[{repository,titleZh,summaryZh,paragraphs,keywords}]}。paragraphs 用 2-4 段说明项目用途、核心能力、适用人群和注意事项；不得编造 README 没有的功能。",
+    githubPrompt,
     details,
     { batchSize: 2, maxTokens: 4_500, concurrency: 2 },
   );
+  const validGithubItem = (entry) => entry
+    && String(entry.summaryZh || "").match(/[\u3400-\u9fff]/g)?.length >= 8
+    && Array.isArray(entry.paragraphs)
+    && entry.paragraphs.length >= 2
+    && Array.isArray(entry.keywords)
+    && entry.keywords.length >= 3
+    && !/详细功能请|阅读项目 README|去看 README/i.test(entry.paragraphs.join(" "));
+  const missingRepositories = details.filter((repo) => !validGithubItem(
+    processedItems.find((entry) => entry.repository === repo.repository),
+  ));
+  if (missingRepositories.length > 0) {
+    console.warn(`[collect] retrying ${missingRepositories.length} incomplete GitHub entries`);
+    processedItems.push(...await kimiItems(
+      githubPrompt,
+      missingRepositories,
+      { batchSize: 1, maxTokens: 3_500, concurrency: 1 },
+    ));
+  }
+  const unresolvedRepositories = details.filter((repo) => !validGithubItem(
+    [...processedItems].reverse().find((entry) => entry.repository === repo.repository),
+  ));
+  if (unresolvedRepositories.length > 0) {
+    throw new Error(`Kimi did not finish ${unresolvedRepositories.length} GitHub entries`);
+  }
 
   return details.map((repo) => {
-    const item = processedItems.find((entry) => entry.repository === repo.repository);
+    const item = [...processedItems].reverse().find((entry) => entry.repository === repo.repository);
     const publishedAt = now.toISOString();
     const keywords = Array.isArray(item?.keywords) ? item.keywords : ["GitHub", "开源"];
     return {
@@ -726,15 +787,13 @@ async function collectGithub() {
         name: config.github.name,
         url: config.github.url,
       },
-      title: item?.titleZh || repo.repository,
+      title: item.titleZh || repo.repository,
       sourceUrl: `https://github.com/${repo.repository}`,
-      summary: item?.summaryZh || repo.description || "GitHub Trending 热门开源项目",
+      summary: item.summaryZh,
       publishedAt,
       keywords,
       body: baseBody("github", publishedAt, {
-        paragraphs: Array.isArray(item?.paragraphs) && item.paragraphs.length > 0
-          ? item.paragraphs
-          : [repo.description || `${repo.repository} 今日进入 GitHub Trending。`, "详细功能请通过下方链接阅读项目 README。"],
+        paragraphs: item.paragraphs,
         facts: [
           { label: "主要语言", value: repo.language || "未标注" },
           { label: "Stars", value: Number(repo.stars || 0).toLocaleString("en-US") },

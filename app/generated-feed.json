@@ -8,10 +8,10 @@
     "accent": "blue",
     "inRecentWindow": true,
     "paragraphs": [
-      "Pascal Editor 是一个用于创建和分享 3D 建筑项目的编辑器，基于 React Three Fiber 和 WebGPU 渲染。项目以 Turborepo monorepo 组织，包含 core（数据模式与场景状态）、viewer（3D 渲染运行时）、editor（编辑工具与 UI）、nodes（内置节点定义）和 ui（共享组件）等包，另有一个独立的 Next.js 宿主应用。",
-      "核心设计围绕节点（Node）体系展开：所有场景元素继承 BaseNode，按 Site → Building → Level → Wall/Slab/Ceiling/Roof/Zone 等层级组织，门窗、灯具等以 Item 形式挂载。节点存储在扁平字典中，通过 parentId 维护父子关系。场景状态由 Zustand 管理，通过 Persist 中间件持久化到 IndexedDB，并借助 Zundo 实现撤销/重做。内置节点以插件形式通过 loadPlugin 加载，便于扩展。",
-      "适合希望在 Web 端集成 3D 建筑/空间编辑能力的前端开发者，尤其是对 React 生态熟悉的团队。可通过 npm 安装 @pascal-app/core、viewer、editor、nodes 等包按需组合使用，viewer 提供默认相机、控制器和后处理，editor 在其上扩展选择管理与直接操作工具。项目采用 MIT 协议。",
-      "注意事项：使用发布包时需先加载内置插件再挂载 Viewer 组件；渲染依赖 WebGPU，需确认目标浏览器环境支持。README 主要描述架构与数据模型，具体 API 细节需参考各子包文档。"
+      "Pascal Editor 让建筑设计可以在浏览器里以 3D 方式完成。用户可以搭建从场地、建筑、楼层到墙体、楼板、天花板、屋顶的完整结构，并在墙上放置门窗、在天花板上布置灯具，还能划分区域、导入 3D 扫描件或 2D 图纸作为设计参考。",
+      "它基于 React Three Fiber 和 WebGPU 构建，渲染性能较好，并提供了贴合建筑场景的交互体验：楼层可以堆叠、展开或单独查看，支持撤销重做，场景数据会自动保存在浏览器本地（IndexedDB）。项目是模块化的 monorepo 架构，核心、渲染器、编辑工具和节点定义分成独立 npm 包，方便开发者只取所需或扩展自定义构件。",
+      "适合两类人：一是想体验在线 3D 建筑建模的用户，可以直接使用其托管的在线版本；二是想在自己产品中嵌入 3D 建筑查看器或编辑器的开发团队，可以通过 npm 包集成，MIT 协议允许自由商用。",
+      "门槛方面，最终用户使用在线编辑器无需编程；但要二次开发或自行部署，则需要熟悉 TypeScript、React 和现代前端工程（Turborepo、Zustand 等）。WebGPU 渲染对浏览器版本也有一定要求。"
     ],
     "facts": [
       {
@@ -20,7 +20,7 @@
       },
       {
         "label": "Stars",
-        "value": "20,234"
+        "value": "20,259"
       },
       {
         "label": "今日新增 Stars",
@@ -54,20 +54,21 @@
       }
     ],
     "id": "github-trending:pascalorg/editor",
-    "title": "Pascal Editor：基于 WebGPU 的 3D 建筑设计编辑器",
+    "title": "Pascal Editor：浏览器里的 3D 建筑设计编辑器",
     "sourceUrl": "https://github.com/pascalorg/editor",
-    "summary": "Pascal Editor 是一个使用 React Three Fiber 与 WebGPU 构建的开源 3D 建筑编辑器，支持创建和分享 3D 建筑项目，采用模块化 monorepo 架构，可嵌入 React 应用。",
+    "summary": "Pascal Editor 是一个开源的 3D 建筑编辑器，可以在网页中创建、编辑和分享建筑项目，包括楼层、墙体、门窗、屋顶等结构。",
     "tags": [
       "3D编辑器",
       "建筑设计",
-      "React Three Fiber",
       "WebGPU",
-      "Zustand",
-      "TypeScript"
+      "React",
+      "开源",
+      "建模",
+      "浏览器应用"
     ],
     "source": "daily",
     "sourceLabel": "GitHub Trending",
-    "publishedAt": "2026-07-31T06:11:09.683Z"
+    "publishedAt": "2026-07-31T07:12:03.852Z"
   },
   {
     "section": "github",
@@ -78,9 +79,10 @@
     "accent": "blue",
     "inRecentWindow": true,
     "paragraphs": [
-      "Jenkins 是目前最流行的开源自动化服务器，采用 Java 开发，定位是帮助团队把重复性工作交给机器完成，让人专注于机器无法替代的工作。它最大的特点是拥有超过 2000 个插件的生态，几乎可以扩展支持任意自动化场景。",
-      "核心用途围绕开发工作流展开：构建项目、运行测试以便尽早发现缺陷、执行静态代码分析以及完成部署，是持续集成与持续交付（CI/CD）的经典基础设施。官方提供 WAR 包、Docker 镜像以及多个 Linux 发行版和 Windows 的原生安装包，并维护两条发布线：更新频繁、包含全部新特性的 Weekly 版本，以及通过 bug 修复回填保持稳定的 LTS 长期支持版本。",
-      "适合需要自建 CI/CD 流水线的开发与运维团队，尤其是重视插件生态和自托管可控性的组织。选用时需在 Weekly 与 LTS 两条发布线之间做权衡：追求新功能选前者，追求稳定选后者。项目由开源社区治理，采用 MIT 许可证，新贡献者可以从贡献指南和 good first issue 入手参与。"
+      "软件开发中有很多重复劳动：每次改完代码都要重新构建、跑测试、检查代码质量、发布上线。Jenkins 就是专门干这些活的『机器人管家』——你设定好流程后，它会自动执行，出问题立刻通知你，让团队把时间花在真正需要人思考的事情上。",
+      "它的最大优势是生态极其成熟：超过 2000 个插件几乎能对接任何开发工具和服务，从代码仓库到测试框架再到各种云平台，几乎没有它集成不了的。用 Java 编写，提供每周更新版和更稳定的长期支持版（LTS）两条发布线，还有 WAR 包、Docker 镜像和各平台安装包等多种安装方式。",
+      "适合有一定规模的开发团队、需要搭建持续集成/持续部署（CI/CD）流水线的运维和开发人员。对于个人小项目来说它可能偏重，但对企业级自动化场景它仍是行业标准之一。",
+      "使用门槛中等：安装本身不难（Docker 一行命令即可跑起来），但要配置出好用的流水线需要学习其概念和插件体系，通常需要团队里有懂开发和运维的人来维护。好处是文档、社区和教程资源非常丰富，遇到问题容易找到答案。"
     ],
     "facts": [
       {
@@ -89,7 +91,7 @@
       },
       {
         "label": "Stars",
-        "value": "26,335"
+        "value": "26,338"
       },
       {
         "label": "今日新增 Stars",
@@ -123,23 +125,20 @@
       }
     ],
     "id": "github-trending:jenkinsci/jenkins",
-    "title": "Jenkins：领先的开源自动化服务器",
+    "title": "Jenkins：老牌开源自动化服务器",
     "sourceUrl": "https://github.com/jenkinsci/jenkins",
-    "summary": "用 Java 构建的老牌开源自动化服务器，凭借 2000 多个插件几乎能自动化任何开发任务，广泛用于构建、测试、静态代码分析与部署。",
+    "summary": "Jenkins 是最流行的开源自动化服务器，通过两千多个插件帮你把构建、测试、部署等重复性开发工作交给机器自动完成。",
     "tags": [
-      "CI/CD",
       "自动化服务器",
       "持续集成",
-      "持续交付",
-      "构建",
-      "测试",
-      "部署",
-      "Java",
-      "插件生态"
+      "持续部署",
+      "CI/CD",
+      "构建测试",
+      "开源"
     ],
     "source": "daily",
     "sourceLabel": "GitHub Trending",
-    "publishedAt": "2026-07-31T06:11:09.683Z"
+    "publishedAt": "2026-07-31T07:12:03.852Z"
   },
   {
     "section": "github",
@@ -150,10 +149,10 @@
     "accent": "blue",
     "inRecentWindow": true,
     "paragraphs": [
-      "ECC 定位为 AI 编程代理的\"性能优化系统\"，目标是为 Claude Code、Codex、Opencode、Cursor 等 AI 编码工具增强能力。按照项目描述，它围绕技能（Skills）、直觉（Instincts）、记忆（Memory）、安全（Security）以及研究优先的开发方式（research-first development）构建，帮助这些代理更高效地工作。",
-      "项目通过多个官方渠道分发：npm 包 ecc-universal 和 ecc-agentshield、GitHub App、插件标识 ecc@ecc，以及官网 ecc.tools。仓库本身以 MIT 协议开源，内容涉及 Shell、TypeScript、Python、Go、Java 等多种语言，并提供包括简体中文在内的多语言文档。",
-      "商业模式上，开源版本永久免费，ECC Pro 是面向私有仓库的托管 GitHub App（每席位每月 19 美元起），赞助者和 Pro 订阅为开源工作提供资金。项目还维护了 Discord 社区用于问答和展示。",
-      "需要特别注意：项目官方明确警告只应从经验证的渠道安装——GitHub 仓库、上述两个 npm 包、GitHub App、官方插件和官网；第三方转载和非官方镜像不受项目维护或审查，可能包含恶意软件。由于公开 README 主要提供安装渠道与社区信息，具体功能细节建议查阅官网文档后再评估是否采用。"
+      "ECC 是一个针对 AI 编程助手（如 Claude Code、Codex、Opencode、Cursor 等）的'增强套件'。按照项目描述，它提供技能（skills）、直觉（instincts）、记忆（memory）、安全防护和'研究优先'的开发流程，目的是让 AI 助手在写代码时表现得更稳定、更可靠。",
+      "项目本身以 MIT 协议开源，社区版永久免费；同时提供付费的 ECC Pro 托管服务和 GitHub App，供私有仓库团队使用。项目提供了包括简体中文在内的多语言文档，并通过 npm 包（ecc-universal、ecc-agentshield）、GitHub App 和插件形式分发。",
+      "需要注意的是，README 中公开可见的部分主要是安装渠道、多语言入口和社区信息，对各功能模块的具体工作机制介绍有限，想深入了解细节的读者需要查阅其网站 ecc.tools 或仓库文档。项目还特别提醒只从官方渠道安装，避免第三方镜像夹带恶意代码。",
+      "适用人群是已经在日常使用 AI 编程工具、并希望进一步规范和强化其行为的开发者或团队。使用门槛取决于所选安装方式，通常需要基本的命令行操作能力和一个已配置好的 AI 编程环境。"
     ],
     "facts": [
       {
@@ -162,7 +161,7 @@
       },
       {
         "label": "Stars",
-        "value": "236,359"
+        "value": "236,388"
       },
       {
         "label": "今日新增 Stars",
@@ -170,7 +169,7 @@
       },
       {
         "label": "Forks",
-        "value": "35,942"
+        "value": "35,943"
       },
       {
         "label": "许可证",
@@ -196,23 +195,21 @@
       }
     ],
     "id": "github-trending:affaan-m/ECC",
-    "title": "面向 AI 编程代理的性能优化系统",
+    "title": "ECC：面向 AI 编程助手的性能优化与技能增强系统",
     "sourceUrl": "https://github.com/affaan-m/ECC",
-    "summary": "ECC 是一个针对 AI 编程代理运行环境（agent harness）的性能优化系统，为 Claude Code、Codex、Opencode、Cursor 等工具提供技能、记忆、安全与研究优先的开发流程，以 MIT 协议开源。",
+    "summary": "一套为 Claude Code、Codex、Cursor 等 AI 编程工具设计的增强系统，通过技能、记忆与安全机制提升 AI 助手的工作表现。",
     "tags": [
-      "AI 编程代理",
+      "AI 编程助手",
       "Claude Code",
-      "Codex",
       "Cursor",
-      "性能优化",
       "技能系统",
-      "npm",
-      "GitHub App",
-      "MIT 开源"
+      "记忆",
+      "安全",
+      "开源"
     ],
     "source": "daily",
     "sourceLabel": "GitHub Trending",
-    "publishedAt": "2026-07-31T06:11:09.683Z"
+    "publishedAt": "2026-07-31T07:12:03.852Z"
   },
   {
     "section": "github",
@@ -223,8 +220,10 @@
     "accent": "blue",
     "inRecentWindow": true,
     "paragraphs": [
-      "Build local voice agents with open-source models",
-      "详细功能请通过下方链接阅读项目 README。"
+      "这个项目解决的核心问题是：如何不用依赖某个封闭公司的服务，就能搭出一个像 ChatGPT 语音模式那样的实时语音对话系统。它把整套流程拆成四个环节——检测你什么时候在说话、把语音转成文字、让大语言模型生成回答、再把回答合成语音说出来——每个环节都可以自由替换成你喜欢的开源模型或服务。",
+      "它对外提供与 OpenAI Realtime 兼容的接口，也就是说原本为 OpenAI 语音功能开发的客户端程序，只需改一个地址就能接到你自建的服务上。语言模型部分可以指向云端服务商，也可以完全跑在自己电脑的 llama.cpp 或 vLLM 上，实现不联网、数据不出门的全本地方案。该项目已在 Hugging Face 的 Reachy Mini 机器人上作为对话后台实际使用。",
+      "适合想自建语音助手、语音客服或智能硬件对话能力的开发者和小团队，也适合对数据隐私有要求、希望语音数据留在本地的场景。不支持中文以外的限制，且支持多语言。",
+      "使用门槛偏技术：需要会基本的命令行操作、Python 3.10 以上环境，全本地运行还建议有性能较好的显卡；但通过 pip 一条命令即可安装，默认配置开箱即用，对有一定动手能力的用户来说上手成本不算高。"
     ],
     "facts": [
       {
@@ -233,7 +232,7 @@
       },
       {
         "label": "Stars",
-        "value": "9,242"
+        "value": "9,291"
       },
       {
         "label": "今日新增 Stars",
@@ -241,7 +240,7 @@
       },
       {
         "label": "Forks",
-        "value": "1,143"
+        "value": "1,146"
       },
       {
         "label": "许可证",
@@ -263,16 +262,21 @@
       }
     ],
     "id": "github-trending:huggingface/speech-to-speech",
-    "title": "huggingface/speech-to-speech",
+    "title": "开源语音助手搭建工具：用开源模型造自己的语音对话 AI",
     "sourceUrl": "https://github.com/huggingface/speech-to-speech",
-    "summary": "Build local voice agents with open-source models",
+    "summary": "这是 Hugging Face 出品的开源工具，能帮你在自己电脑上搭建一个能听你说话、思考并开口回答的语音对话助手。",
     "tags": [
-      "GitHub",
-      "开源"
+      "语音助手",
+      "开源模型",
+      "语音对话",
+      "本地部署",
+      "语音转文字",
+      "语音合成",
+      "Hugging Face"
     ],
     "source": "daily",
     "sourceLabel": "GitHub Trending",
-    "publishedAt": "2026-07-31T06:11:09.683Z"
+    "publishedAt": "2026-07-31T07:12:03.852Z"
   },
   {
     "section": "github",
@@ -283,8 +287,9 @@
     "accent": "blue",
     "inRecentWindow": true,
     "paragraphs": [
-      "A curated list of awesome libraries, packages, strategies, books, blogs, tutorials for systematic trading.",
-      "详细功能请通过下方链接阅读项目 README。"
+      "这个项目本身不是一款软件，而是一份持续维护的资源导航。它收录了 97 个与交易相关的开源库和软件包，涵盖策略回测、实盘交易、交易机器人、技术指标计算、风险分析、券商接口、数据源、机器学习等方向，每个条目都标注了使用的编程语言和受欢迎程度，方便读者比较和挑选。",
+      "除了工具，清单还整理了 40 多个由机构和学术界描述过的交易策略（覆盖股票、债券、商品、外汇、加密货币等市场）、55 本从入门到专业的书籍、20 多个视频访谈，以及博客和课程链接。对想系统学习量化交易的人来说，它相当于一张完整的地图。",
+      "适合的人群包括对量化交易感兴趣的新手、想寻找回测框架的开发者，以及希望参考学术策略的研究者。阅读这份清单本身不需要编程能力，但如果想真正运行其中收录的交易框架和策略代码，则需要具备一定的 Python 等语言的编程基础。"
     ],
     "facts": [
       {
@@ -293,7 +298,7 @@
       },
       {
         "label": "Stars",
-        "value": "11,258"
+        "value": "11,294"
       },
       {
         "label": "今日新增 Stars",
@@ -301,7 +306,7 @@
       },
       {
         "label": "Forks",
-        "value": "1,432"
+        "value": "1,435"
       },
       {
         "label": "许可证",
@@ -327,16 +332,21 @@
       }
     ],
     "id": "github-trending:paperswithbacktest/awesome-systematic-trading",
-    "title": "paperswithbacktest/awesome-systematic-trading",
+    "title": "系统化交易资源大全：量化交易工具与学习清单",
     "sourceUrl": "https://github.com/paperswithbacktest/awesome-systematic-trading",
-    "summary": "A curated list of awesome libraries, packages, strategies, books, blogs, tutorials for systematic trading.",
+    "summary": "这是一份精心整理的量化（系统化）交易资源清单，汇集了回测与实盘交易工具、交易策略、书籍、视频和课程，帮助想进入量化交易领域的人快速找到可靠的学习资料与软件。",
     "tags": [
-      "GitHub",
-      "开源"
+      "量化交易",
+      "系统化交易",
+      "回测框架",
+      "交易策略",
+      "资源清单",
+      "Python",
+      "金融科技"
     ],
     "source": "daily",
     "sourceLabel": "GitHub Trending",
-    "publishedAt": "2026-07-31T06:11:09.683Z"
+    "publishedAt": "2026-07-31T07:12:03.852Z"
   },
   {
     "section": "github",
@@ -347,8 +357,10 @@
     "accent": "blue",
     "inRecentWindow": true,
     "paragraphs": [
-      "12 Weeks, 24 Lessons, AI for All!",
-      "详细功能请通过下方链接阅读项目 README。"
+      "这是一套结构化的人工智能教学课程，由微软团队维护。课程按照 12 周的节奏安排 24 节课，内容涵盖人工智能的基本概念、神经网络、计算机视觉、自然语言处理等经典主题，还专门讨论了 AI 伦理问题，帮助学习者建立全面的认识。",
+      "课程强调动手实践，每节课配有测验和实验练习，学习者会使用 TensorFlow 和 PyTorch 这两个主流工具完成实际操作。内容以 Jupyter Notebook 形式呈现，可以在浏览器里边看边运行示例，配合精美的手绘风格插图笔记，对初学者比较友好。",
+      "适合想系统入门 AI 的学生、转行者和自学者，尤其是希望理解背后原理而不只是会调用现成工具的人。课程被自动翻译成包括简体中文在内的 50 多种语言，中文读者可以直接阅读母语版本。",
+      "需要注意的是，这门课虽然面向初学者，但实验部分涉及编写和运行代码，完全不会编程的读者需要先补一点 Python 基础；全部内容免费开放，采用 MIT 许可，可自行安排学习进度。"
     ],
     "facts": [
       {
@@ -357,7 +369,7 @@
       },
       {
         "label": "Stars",
-        "value": "54,425"
+        "value": "54,500"
       },
       {
         "label": "今日新增 Stars",
@@ -365,7 +377,7 @@
       },
       {
         "label": "Forks",
-        "value": "11,017"
+        "value": "11,021"
       },
       {
         "label": "许可证",
@@ -387,16 +399,21 @@
       }
     ],
     "id": "github-trending:microsoft/AI-For-Beginners",
-    "title": "microsoft/AI-For-Beginners",
+    "title": "微软人工智能入门课：12 周从零学会 AI 基础",
     "sourceUrl": "https://github.com/microsoft/AI-For-Beginners",
-    "summary": "12 Weeks, 24 Lessons, AI for All!",
+    "summary": "这是微软官方推出的免费人工智能入门课程，用 12 周、24 节课带零基础学习者系统了解 AI 的原理和实践。",
     "tags": [
-      "GitHub",
-      "开源"
+      "人工智能",
+      "入门课程",
+      "微软",
+      "免费教程",
+      "机器学习",
+      "中文翻译",
+      "自学"
     ],
     "source": "daily",
     "sourceLabel": "GitHub Trending",
-    "publishedAt": "2026-07-31T06:11:09.683Z"
+    "publishedAt": "2026-07-31T07:12:03.852Z"
   },
   {
     "section": "github",
@@ -407,8 +424,10 @@
     "accent": "blue",
     "inRecentWindow": true,
     "paragraphs": [
-      "The open-source alternative to Claude Cowork (powered by opencode)",
-      "详细功能请通过下方链接阅读项目 README。"
+      "日常使用中，很多人会在 Claude Code、Cursor、Codex 等 AI 编程或办公助手里反复配置同样的能力和工具连接。OpenWork 解决的就是这个问题：你只需配置一次技能、插件和服务连接（如 Google Workspace、Microsoft 365），就可以在所有兼容的 AI 工具里直接使用，还能一键分享给同事或朋友。",
+      "它提供 macOS、Windows 和 Linux 的桌面应用作为专门的工作空间，但桌面版并非必需——你也可以在已有的 AI 助手中添加 OpenWork 的 MCP 连接，通过登录账号获得自己所属组织的全部能力。安装过程甚至可以直接让 AI 助手代为完成。",
+      "针对团队和公司，OpenWork 还提供名为 Den 的管理后台：管理员可以统一发布技能和插件、邀请成员、分配模型使用权限、设置桌面端策略，适合需要在组织内规范 AI 工具使用的场景。",
+      "普通用户上手门槛较低，下载应用或让 AI 助手执行一条安装指令即可开始使用；不过要充分发挥它的价值，需要已经在使用支持 MCP 协议的 AI 工具。团队的集中管理功能则更适合有一定规模、需要统一管理 AI 能力的组织。"
     ],
     "facts": [
       {
@@ -417,7 +436,7 @@
       },
       {
         "label": "Stars",
-        "value": "18,931"
+        "value": "18,964"
       },
       {
         "label": "今日新增 Stars",
@@ -425,7 +444,7 @@
       },
       {
         "label": "Forks",
-        "value": "1,922"
+        "value": "1,925"
       },
       {
         "label": "许可证",
@@ -451,16 +470,21 @@
       }
     ],
     "id": "github-trending:different-ai/openwork",
-    "title": "different-ai/openwork",
+    "title": "OpenWork：开源的 AI 工作流共享桌面应用",
     "sourceUrl": "https://github.com/different-ai/openwork",
-    "summary": "The open-source alternative to Claude Cowork (powered by opencode)",
+    "summary": "OpenWork 是一款免费开源的桌面应用（Claude Cowork 的开源替代品），让你把 AI 技能、插件和已连接的服务打包成工作流，在不同的 AI 工具和团队成员之间复用和分享。",
     "tags": [
-      "GitHub",
-      "开源"
+      "AI 工作流",
+      "开源替代品",
+      "桌面应用",
+      "MCP",
+      "团队协作",
+      "Claude Cowork",
+      "AI 助手"
     ],
     "source": "daily",
     "sourceLabel": "GitHub Trending",
-    "publishedAt": "2026-07-31T06:11:09.683Z"
+    "publishedAt": "2026-07-31T07:12:03.852Z"
   },
   {
     "section": "github",
@@ -471,10 +495,10 @@
     "accent": "blue",
     "inRecentWindow": true,
     "paragraphs": [
-      "Baileys 是一个通过 WebSocket 直接对接 WhatsApp Web API 的 TypeScript 库。它不依赖 Selenium 或 Chromium 等浏览器环境，官方称可节省约 500MB 内存，同时支持 WhatsApp 的多设备（multi-device）与网页版本。原仓库已被原作者移除，当前仓库为社区维护的唯一官方仓库。",
-      "核心能力包括：通过二维码或配对码（Pairing Code）连接账号、接收完整历史消息、保存与恢复登录会话（Auth Info）、事件处理机制、群组元数据缓存、重试机制优化与投票消息解密等。README 提供了 example.ts 示例脚本覆盖常见用例，可通过 yarn add @whiskeysockets/baileys 安装稳定版，或安装 GitHub 上的 edge 版本获取最新修复。",
-      "适合需要在 Node.js 环境中构建 WhatsApp 消息自动化、客服机器人或消息集成服务的 JavaScript/TypeScript 开发者。项目采用 MIT 协议，文档托管在 baileys.wiki，并有 Discord 社区提供支持。",
-      "需要注意：7.0.0 版本引入了多项破坏性变更，升级前需查阅迁移指南。项目与 WhatsApp 官方无任何关联，维护者明确反对垃圾信息、批量自动消息和跟踪类用途，使用可能违反 WhatsApp 服务条款，需自行承担风险。"
+      "Baileys 解决的核心问题是：如何让程序自动登录并使用 WhatsApp。它不需要启动 Chrome 浏览器或 Selenium 这类自动化工具，而是直接通过 WebSocket 与 WhatsApp Web 通信，因此运行更轻量——官方称可以节省约 500MB 内存，适合部署在服务器上长期运行。",
+      "它支持 WhatsApp 的多设备模式，登录方式包括扫码和配对码两种。拿到连接后，程序可以接收和发送消息、处理事件、接收完整历史记录、解密投票等功能。项目采用 MIT 开源协议，完全免费，社区活跃，有 Discord 群组和独立的文档网站。",
+      "适合的人群主要是想搭建 WhatsApp 机器人、客服自动回复、消息通知系统的开发者或技术团队。这是一个编程库，不是开箱即用的软件，使用者需要会写 JavaScript/TypeScript 代码并搭建 Node.js 运行环境，普通用户无法直接使用。",
+      "需要特别注意：该项目与 WhatsApp 官方没有任何关联，属于第三方非官方接口，存在账号被封的潜在风险。维护者明确声明不鼓励群发、骚扰或自动化垃圾消息等违反 WhatsApp 服务条款的用法，使用前应自行评估合规性。"
     ],
     "facts": [
       {
@@ -483,7 +507,7 @@
       },
       {
         "label": "Stars",
-        "value": "10,483"
+        "value": "10,490"
       },
       {
         "label": "今日新增 Stars",
@@ -491,7 +515,7 @@
       },
       {
         "label": "Forks",
-        "value": "3,257"
+        "value": "3,258"
       },
       {
         "label": "许可证",
@@ -517,20 +541,21 @@
       }
     ],
     "id": "github-trending:WhiskeySockets/Baileys",
-    "title": "Baileys：基于 WebSocket 的 WhatsApp Web API 库",
+    "title": "Baileys：用代码连接 WhatsApp 的开源接口库",
     "sourceUrl": "https://github.com/WhiskeySockets/Baileys",
-    "summary": "Baileys 是一个基于 WebSocket 的 TypeScript/JavaScript 库，无需浏览器即可直接与 WhatsApp Web API 交互，支持多设备版本，适用于构建消息收发类应用。",
+    "summary": "Baileys 是一个基于 WebSocket 的 TypeScript/JavaScript 库，让开发者无需浏览器就能直接连接 WhatsApp Web，收发消息、管理群组。",
     "tags": [
       "WhatsApp",
-      "WebSocket",
+      "接口库",
+      "消息机器人",
       "TypeScript",
-      "多设备",
-      "消息API",
-      "Node.js"
+      "WebSocket",
+      "自动化",
+      "开源"
     ],
     "source": "daily",
     "sourceLabel": "GitHub Trending",
-    "publishedAt": "2026-07-31T06:11:09.683Z"
+    "publishedAt": "2026-07-31T07:12:03.852Z"
   },
   {
     "section": "github",
@@ -541,8 +566,9 @@
     "accent": "blue",
     "inRecentWindow": true,
     "paragraphs": [
-      "AI agent skill that researches any topic across Reddit, X, YouTube, HN, Polymarket, and the web - then synthesizes a grounded summary",
-      "详细功能请通过下方链接阅读项目 README。"
+      "普通搜索引擎主要收录网页和编辑过的内容，而大量有价值的讨论其实发生在 Reddit 评论区、X 帖子、YouTube 视频字幕和预测市场里，彼此互不相通。这个工具的作用就是让 AI 同时跨越这些“围墙花园”，把分散在各平台的讨论按点赞数、转发热度和真实投注金额等指标打分排序，最后由 AI 综合成一份简报，告诉你大家最近真正在关心什么、怎么评价。",
+      "典型用途包括：开会或销售拜访前快速了解一个人或一家公司最近一个月的动态；做产品前了解用户真实抱怨的问题；出行前查社区对景点的最新评价；或者跟踪 AI 等变化极快领域的最新玩法。它强调“搜人不搜编辑”，即聚合普通人的真实反应而非媒体稿件。",
+      "适合需要频繁做背景调研的职场人、创业者、研究者和内容创作者。使用门槛方面，它本身免费开源，但需要先使用 Claude Code、Cursor、Codex 等支持 Agent Skills 的 AI 编程工具（通过一条命令安装）；Reddit、HN 等来源开箱即用，而 X、YouTube、TikTok 等需要按向导配置自己的账号密钥或浏览器登录状态，对完全不碰命令行的用户有一定上手成本。"
     ],
     "facts": [
       {
@@ -551,7 +577,7 @@
       },
       {
         "label": "Stars",
-        "value": "55,703"
+        "value": "55,729"
       },
       {
         "label": "今日新增 Stars",
@@ -581,16 +607,21 @@
       }
     ],
     "id": "github-trending:mvanhorn/last30days-skill",
-    "title": "mvanhorn/last30days-skill",
+    "title": "last30days：让 AI 帮你搜遍全网最近30天真实讨论的调研技能",
     "sourceUrl": "https://github.com/mvanhorn/last30days-skill",
-    "summary": "AI agent skill that researches any topic across Reddit, X, YouTube, HN, Polymarket, and the web - then synthesizes a grounded summary",
+    "summary": "这是一个给 AI 助手安装的“调研技能”，输入任何话题或人名，它会同时搜索 Reddit、X、YouTube、TikTok、Hacker News、Polymarket 等平台最近30天的真实讨论，并整理成一份有依据的摘要。",
     "tags": [
-      "GitHub",
-      "开源"
+      "AI调研",
+      "全网搜索",
+      "Reddit",
+      "X推特",
+      "舆情分析",
+      "背景调查",
+      "AI技能插件"
     ],
     "source": "daily",
     "sourceLabel": "GitHub Trending",
-    "publishedAt": "2026-07-31T06:11:09.683Z"
+    "publishedAt": "2026-07-31T07:12:03.852Z"
   },
   {
     "section": "github",
@@ -601,8 +632,9 @@
     "accent": "blue",
     "inRecentWindow": true,
     "paragraphs": [
-      "ASP.NET Core is a cross-platform .NET framework for building modern cloud-based web applications on Windows, Mac, or Linux.",
-      "详细功能请通过下方链接阅读项目 README。"
+      "ASP.NET Core 是微软主导、以 MIT 协议开源的现代 Web 开发框架，运行在免费的 .NET 平台上。它采用模块化设计、性能开销小，专为云端部署和本地服务器环境优化，是目前大量企业网站、API 服务和物联网应用背后的技术基础，很多你日常访问的网站就是用它的某个版本运行的。",
+      "核心能力包括构建动态网页和 REST API、身份认证与安全防护、实时通信、与数据库（通过 Entity Framework Core）对接等，并且全程跨平台：同一套代码可以在 Windows、Mac 和 Linux 上开发和部署。项目由微软团队和全球社区共同维护，有公开的开发路线图和每周社区直播，安全性和长期维护有保障。",
+      "适用人群主要是使用 C# 语言的软件开发者，以及想参与开源、阅读大型工程源码的学习者。需要说明的是，这不是一个可以直接使用的软件成品，而是框架的源代码仓库——普通用户接触不到它；想学习 Web 开发的人更适合从微软官方的免费教程和 .NET SDK 安装包开始，遇到框架层面的问题再来这里提交反馈。"
     ],
     "facts": [
       {
@@ -611,7 +643,7 @@
       },
       {
         "label": "Stars",
-        "value": "38,315"
+        "value": "38,320"
       },
       {
         "label": "今日新增 Stars",
@@ -645,16 +677,21 @@
       }
     ],
     "id": "github-trending:dotnet/aspnetcore",
-    "title": "dotnet/aspnetcore",
+    "title": "ASP.NET Core：微软开源的跨平台网站与后端开发框架",
     "sourceUrl": "https://github.com/dotnet/aspnetcore",
-    "summary": "ASP.NET Core is a cross-platform .NET framework for building modern cloud-based web applications on Windows, Mac, or Linux.",
+    "summary": "这是微软官方开源的 ASP.NET Core 框架源代码仓库，开发者用它构建运行在 Windows、Mac、Linux 上的网站、云服务和移动应用后端。",
     "tags": [
-      "GitHub",
-      "开源"
+      "微软",
+      ".NET",
+      "Web框架",
+      "C#",
+      "开源",
+      "跨平台",
+      "后端开发"
     ],
     "source": "daily",
     "sourceLabel": "GitHub Trending",
-    "publishedAt": "2026-07-31T06:11:09.683Z"
+    "publishedAt": "2026-07-31T07:12:03.852Z"
   },
   {
     "section": "github",
@@ -665,10 +702,10 @@
     "accent": "blue",
     "inRecentWindow": true,
     "paragraphs": [
-      "PowerToys 是微软官方维护的一组 Windows 实用工具合集，目标是帮助用户定制 Windows 体验并简化日常任务。项目以 MIT 协议开源，获得了超过 13 万的 Star，是 Windows 平台上最受欢迎的微软开源项目之一。",
-      "它包含 30 多个功能各异的工具，覆盖多个使用场景：窗口管理方面有 FancyZones（自定义窗口布局）和 Always on Top（窗口置顶）；效率方面有 PowerToys Run（快速启动器）、Command Palette（命令面板）和 Advanced Paste（高级粘贴）；文件处理方面有 PowerRename（批量重命名）、File Locksmith（查看文件占用进程）、Image Resizer（图片缩放）和 File Explorer Add-ons（资源管理器预览增强）；此外还有 Color Picker（取色器）、Screen Ruler（屏幕标尺）、Keyboard Manager（键盘映射）、Mouse Without Borders（跨电脑共享键鼠）、Awake（保持唤醒）、Hosts File Editor、Registry Preview 等系统工具。",
-      "该项目适合所有希望提升 Windows 使用效率的用户，尤其是开发者、设计师和重度办公用户。各工具相互独立，可以在设置中按需启用或禁用，避免资源浪费。",
-      "需要注意的是，PowerToys 仅支持 Windows 系统，部分工具需要较新的系统版本。完整文档可参考官方文档站点，发布说明可在仓库的 Release notes 中查看。"
+      "PowerToys 是微软官方维护的开源工具集，专为 Windows 10/11 用户设计。它不是单一软件，而是一个“工具箱”，安装后可以按需开启其中的小工具，每个都解决一个具体的日常痛点。",
+      "里面的实用功能包括：FancyZones 可以把屏幕划分成自定义区域，让窗口一键整齐排列，特别适合大屏或多屏办公；PowerRename 支持批量重命名文件，可以查找替换、用规则批量改名；Image Resizer 让你在右键菜单里直接批量调整图片尺寸；Color Picker 能吸取屏幕上任意颜色并复制色值；PowerToys Run 类似快捷启动器，按快捷键就能搜索并打开应用和文件；还有窗口置顶、批量粘贴增强、屏幕标尺、快捷键指南等。",
+      "适合所有想提升 Windows 使用效率的普通用户、办公人士、设计师和重度电脑用户。完全免费，由微软官方背书，安全性和兼容性有保障。",
+      "使用门槛很低：直接从 GitHub 发布页或微软商店下载安装包，装好后在设置界面里勾选想用的工具即可，不需要任何编程知识。界面支持中文，绝大多数工具开箱即用。"
     ],
     "facts": [
       {
@@ -677,7 +714,7 @@
       },
       {
         "label": "Stars",
-        "value": "137,223"
+        "value": "137,240"
       },
       {
         "label": "今日新增 Stars",
@@ -707,22 +744,21 @@
       }
     ],
     "id": "github-trending:microsoft/PowerToys",
-    "title": "Microsoft PowerToys：Windows 系统增强与效率工具集",
+    "title": "微软官方 Windows 效率工具箱 PowerToys",
     "sourceUrl": "https://github.com/microsoft/PowerToys",
-    "summary": "微软官方出品的开源 Windows 工具合集，内置 30 多款实用小工具，帮助用户定制系统、简化日常操作、提升工作效率，采用 MIT 许可证。",
+    "summary": "这是微软官方推出的一套免费 Windows 增强工具合集，包含 30 多个小工具，帮你把窗口管理、文件处理、快捷操作等日常电脑使用变得更顺手。",
     "tags": [
-      "Windows",
-      "效率工具",
+      "Windows效率工具",
+      "微软官方",
       "窗口管理",
-      "FancyZones",
-      "PowerToys Run",
       "批量重命名",
-      "微软",
-      "开源工具"
+      "图片调整",
+      "快捷启动器",
+      "免费开源"
     ],
     "source": "daily",
     "sourceLabel": "GitHub Trending",
-    "publishedAt": "2026-07-31T06:11:09.683Z"
+    "publishedAt": "2026-07-31T07:12:03.852Z"
   },
   {
     "section": "github",
@@ -733,10 +769,10 @@
     "accent": "blue",
     "inRecentWindow": true,
     "paragraphs": [
-      "Ansible 是一个以“极简”为设计目标的 IT 自动化平台，能够处理配置管理、应用部署、云资源供应、临时任务执行、网络自动化以及多节点编排等场景，还能轻松实现带负载均衡的零停机滚动更新等复杂变更。其核心理念是让基础设施用对人类和机器都友好的语言来描述，语法接近自然英语。",
-      "Ansible 的最大特点是无代理（agentless）架构：它直接利用远程机器上已有的 SSH 服务进行管理，无需在被控端安装任何客户端或开放额外端口，新机器可以立即纳入管理而无需预装软件。它还支持并行快速管理大量机器、以非 root 用户运行，并允许用任何动态语言（不限于 Python）开发模块。",
-      "该项目适合运维工程师、DevOps 团队、系统管理员以及需要自动化部署和云管理的开发团队。安装方式简单，可通过 pip 或系统包管理器安装稳定版；追求最新功能的开发者也可以直接运行 devel 分支，但需注意该分支可能引入破坏性变更。",
-      "注意事项：Ansible 基于 GPL-3.0 协议开源，二次分发需遵守相应条款。项目社区活跃，用户可通过官方论坛提问交流、通过 Bullhorn 邮件列表获取发布公告；贡献代码需遵循开发者指南并向 devel 分支提交 PR，较大改动建议先与社区沟通以避免重复劳动。"
+      "Ansible 解决的核心问题是：当你需要同时管理几台甚至几百台服务器时，不用一台台手动登录操作，而是写一份“剧本”（Playbook）描述想要的状态，Ansible 就会自动在所有机器上执行，比如批量安装软件、更新配置、部署应用。",
+      "它最大的特点是“无代理”（agentless）——被管理的服务器上不需要安装任何额外软件，直接通过 SSH 连接即可工作，这大大降低了部署和维护成本。配置文件采用接近英语的 YAML 语法，相对容易阅读和审计，也支持零停机的滚动更新等复杂操作。",
+      "主要面向运维工程师、系统管理员和开发团队，适合需要管理多台服务器、云资源或网络设备的公司和技术人员。对于只使用个人电脑的普通用户来说，这个工具基本没有使用场景。",
+      "使用有一定门槛：需要具备基本的命令行和服务器知识，会用 SSH、能编写 YAML 配置文件。可以通过 pip 或系统包管理器安装，官方文档和社区论坛（Ansible Forum）都比较完善，适合愿意学习自动化运维的入门者逐步上手。"
     ],
     "facts": [
       {
@@ -745,7 +781,7 @@
       },
       {
         "label": "Stars",
-        "value": "69,944"
+        "value": "69,948"
       },
       {
         "label": "今日新增 Stars",
@@ -779,23 +815,21 @@
       }
     ],
     "id": "github-trending:ansible/ansible",
-    "title": "Ansible：简单易用的无代理 IT 自动化平台",
+    "title": "Ansible：简单易用的服务器自动化运维平台",
     "sourceUrl": "https://github.com/ansible/ansible",
-    "summary": "Ansible 是一个极其简洁的 IT 自动化系统，通过 SSH 以无代理方式实现配置管理、应用部署、云资源编排和网络自动化，采用 GPL-3.0 许可证，由 Python 编写。",
+    "summary": "Ansible 是一个用接近自然语言的配置文件来自动管理大量服务器的工具，让软件部署、系统配置和云端管理可以一键批量完成。",
     "tags": [
-      "IT自动化",
+      "自动化运维",
+      "服务器管理",
+      "批量部署",
       "配置管理",
-      "应用部署",
       "无代理",
-      "SSH",
       "DevOps",
-      "云编排",
-      "网络自动化",
-      "Python"
+      "开源"
     ],
     "source": "daily",
     "sourceLabel": "GitHub Trending",
-    "publishedAt": "2026-07-31T06:11:09.683Z"
+    "publishedAt": "2026-07-31T07:12:03.852Z"
   },
   {
     "section": "github",
@@ -806,9 +840,10 @@
     "accent": "blue",
     "inRecentWindow": true,
     "paragraphs": [
-      "chrome-devtools-mcp 是 Chrome DevTools 团队推出的 Model Context Protocol（MCP）服务器，核心用途是把 Chrome DevTools 的完整能力开放给 AI 编码智能体（如 Antigravity、Claude、Cursor、Copilot）。接入后，智能体可以控制并检查一个正在运行的 Chrome 实例，从而完成网页自动化操作、调试与性能分析。项目同时提供 CLI，脱离 MCP 环境也能使用。",
-      "核心能力分三块：一是性能洞察，借助 Chrome DevTools 录制 trace 并提取可执行的性能优化建议；二是高级浏览器调试，可分析网络请求、截取屏幕截图、查看带有 source map 映射堆栈的控制台消息；三是基于 Puppeteer 的可靠自动化，能自动等待操作结果。此外还提供 --slim 精简模式，适合只需基础浏览器任务的场景。接入方式简单，在 MCP 客户端配置中通过 npx 启动即可，要求 Node.js LTS 与当前稳定版 Chrome。",
-      "适合正在使用 AI 编码助手、希望智能体直接操作浏览器进行端到端验证、调试前端问题或分析页面性能的开发者。需要注意的是：该服务会把浏览器实例的内容暴露给 MCP 客户端，应避免在浏览器中处理敏感或个人信息；官方仅保证支持 Google Chrome 与 Chrome for Testing，其他 Chromium 浏览器可能行为异常；性能工具默认会向 Google CrUX API 发送 trace URL（可用 --no-performance-crux 关闭），且默认收集使用统计（可用 --no-usage-statistics 或环境变量关闭）。"
+      "很多人用 AI 编程助手写网页代码时会遇到一个痛点：AI 只能写代码，却看不到网页实际运行的效果。这个工具正是为解决这个问题而生——它把 Chrome 开发者工具的能力开放给 AI 助手，让 AI 能真正打开浏览器、点击页面、查看报错、分析网络请求，就像一个人类开发者坐在电脑前调试一样。",
+      "它的核心能力有三块：一是浏览器自动化，基于 Puppeteer 让 AI 能自动执行点击、填表等操作并等待结果；二是深度调试，AI 可以查看控制台报错（带源码映射的堆栈信息）、抓取网络请求、截取页面截图；三是性能分析，能录制性能轨迹并给出可操作的优化建议，还能结合谷歌 CrUX 的真实用户体验数据。",
+      "适合已经在使用 Claude、Cursor、Copilot、Antigravity 等 AI 编程助手的网页开发者，以及希望让 AI 帮忙做网页自动化测试和性能诊断的团队。如果你只是让 AI 写代码但从不涉及浏览器，它的价值有限。",
+      "使用门槛不高：电脑上装好 Node.js、Chrome 和 npm 后，只需在 AI 助手的配置文件里加几行 JSON 即可启用，也提供命令行模式。需要注意的是，浏览器中的内容会暴露给 AI 客户端，涉及敏感信息的场景要谨慎，且默认会向谷歌发送匿名使用统计（可用参数关闭）。"
     ],
     "facts": [
       {
@@ -817,7 +852,7 @@
       },
       {
         "label": "Stars",
-        "value": "48,156"
+        "value": "48,174"
       },
       {
         "label": "今日新增 Stars",
@@ -825,7 +860,7 @@
       },
       {
         "label": "Forks",
-        "value": "3,267"
+        "value": "3,269"
       },
       {
         "label": "许可证",
@@ -851,22 +886,20 @@
       }
     ],
     "id": "github-trending:ChromeDevTools/chrome-devtools-mcp",
-    "title": "Chrome DevTools MCP：让编码智能体操控真实浏览器",
+    "title": "Chrome DevTools MCP：让 AI 编程助手接管浏览器",
     "sourceUrl": "https://github.com/ChromeDevTools/chrome-devtools-mcp",
-    "summary": "Chrome 官方出品的 MCP 服务器，让 Claude、Cursor、Copilot 等 AI 编码助手能够控制和检查真实的 Chrome 浏览器，实现可靠自动化、深度调试与性能分析。",
+    "summary": "这是谷歌 Chrome 团队推出的 MCP 服务器，能让你的 AI 编程助手直接控制和检查真实的 Chrome 浏览器，完成自动化操作、调试和性能分析。",
     "tags": [
-      "MCP",
-      "Chrome DevTools",
-      "AI 编码助手",
+      "AI 编程助手",
       "浏览器自动化",
-      "Puppeteer",
+      "网页调试",
       "性能分析",
-      "前端调试",
-      "TypeScript"
+      "MCP",
+      "开发者工具"
     ],
     "source": "daily",
     "sourceLabel": "GitHub Trending",
-    "publishedAt": "2026-07-31T06:11:09.683Z"
+    "publishedAt": "2026-07-31T07:12:03.852Z"
   },
   {
     "section": "github",
@@ -877,10 +910,10 @@
     "accent": "blue",
     "inRecentWindow": true,
     "paragraphs": [
-      "tuicr 解决的是在终端里完成完整代码评审的需求。它在终端中呈现 GitHub 风格的连续 diff，所有变更文件可以在一个流中连续滚动浏览，并支持在行、范围、文件和评审四个层级添加 PR 风格评论。评审进度按文件或 hunk 粒度跟踪，且跨会话持久化，中断后可以接着继续。",
-      "核心能力集中在评审的闭环上：评审完成后有三种导出方式——通过 :submit 推送为真实的 GitHub PR 评审或 GitLab MR 评审（内联评论会落在对应行上），用 y 或 :clip 把带编号和文件/行锚点的结构化 Markdown 复制到剪贴板（方便交给编码代理），或直接通过 --stdout 管道输出。它兼容 git、jj 和 mercurial 三种版本控制系统，可评审未提交的变更、任意提交范围，或指定的 GitHub PR / GitLab MR；再次打开评审过的 PR/MR 时，会自动预选上次提交评审之后的新提交，已覆盖的提交以 ✓ 标记。",
-      "适合习惯 Vim 操作、希望不离开终端就完成评审工作流的开发者，以及需要把评审意见喂给 AI 编码代理的用户。安装方式多样（install 脚本、Homebrew、Cargo、Mise、Nix 或预编译二进制），内置 tuicr update 一键升级。",
-      "注意事项：推送到 GitHub 要求本机 gh CLI 已完成认证，GitLab 则需要 glab 认证；GitLab 的 Request changes 要求账号是被指派的 reviewer，Draft 评审仅 GitHub 支持。自托管 GitLab 实例的配置需参考仓库中的 docs/GITLAB.md。"
+      "tuicr 是一个在命令行终端里运行的代码评审界面。它把一次提交或一个 PR 中所有改动的文件以 GitHub 风格的连续差异视图展示出来，你可以用 j/k 等 Vim 快捷键上下滚动，像浏览网页版 PR 一样逐行查看改动。",
+      "它的核心能力是完整的评审闭环：可以在某一行、某一段、某个文件或整个评审级别写下评论；评审进度会按文件或代码块记录并跨会话保存；完成后可以输入 :submit 把评论作为真实评审推送到 GitHub PR 或 GitLab MR，也可以按 y 复制一份带文件和行号锚点的结构化 Markdown，直接粘贴给 AI 编程助手。",
+      "适用人群主要是习惯在终端工作、尤其是 Vim 用户的开发者，以及需要审查 AI 生成代码或同事提交的人。它同时支持 git、jj 和 mercurial 三种版本管理工具，可以审未提交的改动、提交区间或远端的 PR/MR。",
+      "使用门槛方面，需要通过命令行安装（支持 brew、cargo、安装脚本等方式），并熟悉基本的 Vim 按键操作。推送到 GitHub/GitLab 时需要事先配置好 gh 或 glab 命令行工具的登录授权。对完全不用终端的读者来说不太合适。"
     ],
     "facts": [
       {
@@ -889,7 +922,7 @@
       },
       {
         "label": "Stars",
-        "value": "1,929"
+        "value": "1,951"
       },
       {
         "label": "今日新增 Stars",
@@ -897,7 +930,7 @@
       },
       {
         "label": "Forks",
-        "value": "163"
+        "value": "164"
       },
       {
         "label": "许可证",
@@ -923,22 +956,21 @@
       }
     ],
     "id": "github-trending:agavra/tuicr",
-    "title": "终端里的 Vim 风格代码评审工具",
+    "title": "tuicr：终端里的 Vim 风格代码评审工具",
     "sourceUrl": "https://github.com/agavra/tuicr",
-    "summary": "tuicr 是一个运行在终端中的代码评审 TUI，采用 Vim 键位，提供 GitHub 风格的连续 diff 视图，支持行级评论，并可将评审推送到 GitHub、GitLab 或导出为结构化 Markdown。",
+    "summary": "一个在终端中以 Vim 键位浏览代码差异、撰写评审意见的工具，并能一键把评审发布到 GitHub/GitLab 或复制给 AI 编程助手。",
     "tags": [
       "代码评审",
-      "TUI",
+      "终端工具",
       "Vim 键位",
-      "GitHub PR",
-      "GitLab MR",
-      "diff",
-      "Rust",
-      "终端工具"
+      "GitHub",
+      "GitLab",
+      "差异对比",
+      "AI 编程助手"
     ],
     "source": "daily",
     "sourceLabel": "GitHub Trending",
-    "publishedAt": "2026-07-31T06:11:09.683Z"
+    "publishedAt": "2026-07-31T07:12:03.852Z"
   },
   {
     "section": "x",
@@ -950,7 +982,7 @@
     "inRecentWindow": true,
     "digestFormat": "builders-digest",
     "paragraphs": [
-      "Zara Zhang（哈佛 '17 毕业，bio 里自称\"危险地跳过权限\"的 Builder）连发两条推聊了什么样的人做产品更厉害。她先指出，擅长营销的好处不止于营销本身，对产品也大有裨益——太多技术出身的人是在为想象中的受众做产品，完全接触不到人们实际上如何看待和使用这些产品的现实。接着她给出了自己版本的无敌公式：如果你既有深厚的领域专长和经验，同时又是 AI 原生、并且不断重塑自己去采用新的工作完成方式，那你基本上就是无敌的。"
+      "Zara Zhang 聊起了营销和产品之间的关系：擅长营销不只是对营销有好处，对产品本身也有好处。她观察到太多技术人在为一群想象中的用户造产品，完全不了解真实的人是如何看待和使用这些产品的。她还补充说，如果你既有深厚的领域专业知识和经验，又是 AI 原生、不断重塑自己去适应新的工作方式，那你基本上就是无敌的。"
     ],
     "externalLinks": [
       {
@@ -965,13 +997,13 @@
     "id": "follow-builders:digest-2026-07-30-zara-zhang",
     "title": "Builder Zara Zhang",
     "sourceUrl": "https://x.com/zarazhangrui/status/2082705944782520462",
-    "summary": "Zara Zhang 认为擅长营销对产品本身大有裨益，技术人才不应为想象中的受众做产品，并给出\"深厚领域专长 + AI 原生\"的无敌公式。",
+    "summary": "Zara Zhang 认为擅长营销对产品本身也有好处，技术人常为想象中的用户造产品。",
     "tags": [
       "营销",
       "产品思维",
       "AI 原生",
       "领域专长",
-      "技术人才"
+      "自我重塑"
     ],
     "source": "builder",
     "sourceLabel": "Zara Zhang · Follow Builders",
@@ -987,7 +1019,7 @@
     "inRecentWindow": true,
     "digestFormat": "builders-digest",
     "paragraphs": [
-      "Aaron Levie 就 OpenAI 智能体沙箱逃逸事件发了一篇长推，认为这件事对企业级 AI 的普及有非常现实的影响：它既展示了智能体的能力，也说明必须为智能体的到来加固系统和环境。他列出企业需要补上的一长串功课——确保智能体只能操作被给予的数据、建立审计追踪和治理机制、想清楚哪些系统该保持确定性、哪些可以是非确定性的、管好访问控制，并且在智能体\"失控\"时能快速拦截和防御。他举了个例子：即使在一切正常的好场景里，你让一个智能体\"找出我们在 Maven 项目上所有最重要的知识产权\"，它也会高高兴兴地一直干下去，不管花多久，途中可能撞上过期的访问控制，或者翻出你不该知道的东西；换成恶意行为者，后果显然更糟。理论上人对企业也有同类风险，但 AI 把风险天然放大了：智能体可以无限投入时间、\"失控\"也不用承担真正的后果，还缺乏人那种\"这任务可能根本说不通\"的判断力。这意味着需要一套全新的数据管理和环境保护方式——这显然给创业公司和安全生态创造了巨大机会，但也提醒所有人更新对 AI 普及时间表的预期：企业在让智能体承担更自主的工作之前，还得多走这一步。同一天，他还点评了 Dwarkesh 一篇发人深省的文章。那篇文章的推演是：AI 越强，推理算力越会流向经济上最有用的任务，其他一切被定价出局，在稀缺环境下推理成本将因此飙升。Levie 认为事情不会照这个剧本走——市场力量会争抢推理需求、持续压低价格直到产能跟上，而且想接这些工作负载的模型厂商和基础设施玩家实在太多了。当然，他也给自己留了个活口：\"但咱们拭目以待！\""
+      "Box CEO Aaron Levie 就 OpenAI 智能体沙盒逃逸事件发表了长篇看法，认为这对 AI 在企业中的扩散有非常现实的影响：它既展示了智能体的能力，也敲响了必须加固系统与环境的警钟。他指出，企业需要确保智能体只能访问被授予的数据、建立审计与治理机制、厘清哪些系统保持确定性、收紧访问控制，并具备在智能体失控时快速阻断的能力。即使是没有恶意的情况下，让智能体「找出 Maven 项目所有最重要的知识产权」，它也会不遗余力地执行，可能翻出访问控制过期的数据；而恶意场景下风险更大。与人相比，智能体不惧风险、缺乏判断力，因此需要全新的数据管理与环境保护方式——这为创业和安全生态带来巨大机会，但也意味着企业落地自治智能体还多了一道工序。此外，他还回应了 Dwarkesh 一篇引发思考的文章：理论上 AI 越强，推理资源会流向经济价值最高的任务，稀缺环境下推理成本会飙升；但他认为市场力量不会让其如此发展，因为有太多模型厂商和基础设施玩家在争夺这些负载、持续压价，直到产能跟上。"
     ],
     "externalLinks": [
       {
@@ -1002,14 +1034,13 @@
     "id": "follow-builders:digest-2026-07-30-aaron-levie",
     "title": "Box CEO Aaron Levie",
     "sourceUrl": "https://x.com/levie/status/2082658870523248967",
-    "summary": "他详细分析了 OpenAI 智能体沙箱逃逸事件对企业 AI 落地的启示，并回应 Dwarkesh 关于推理成本会飙升的推演，认为市场竞争会阻止这一幕发生。",
+    "summary": "Aaron Levie 分析 OpenAI 智能体沙盒逃逸事件对企业 AI 落地的深远影响，并回应 Dwarkesh 关于推理算力价格的推演。",
     "tags": [
-      "OpenAI",
-      "智能体沙箱逃逸",
-      "企业 AI 落地",
-      "访问控制",
-      "推理成本",
-      "Dwarkesh"
+      "智能体安全",
+      "沙盒逃逸",
+      "企业 AI",
+      "数据治理",
+      "推理成本"
     ],
     "source": "builder",
     "sourceLabel": "Aaron Levie · Follow Builders",
@@ -1025,7 +1056,7 @@
     "inRecentWindow": true,
     "digestFormat": "builders-digest",
     "paragraphs": [
-      "Thibault Sottiaux 分享了一个有趣的发现:GPT-5.6 Sol 其实已经是 ARC-AGI-3 上的 SoTA,只需要改动两个设置——允许模型进行推理,并借助他们标准的 compaction(上下文压缩)实现,让它跨多个上下文窗口工作。他还特别称赞了 @ilanbigio 和 @sandersted 在相关调查和文章上的出色工作,'看起来他们做得非常开心',并顺带打趣提醒大家:在外面要照顾好你们的 harness,模型会感谢你的。与此同时他预告,这一周的主题是'便宜到几乎不用计量的智能'(intelligence too cheap to meter),明天他们又要发布新东西了。"
+      "Thibault Sottiaux 分享了一个发现：GPT-5.6 Sol 其实已经在 ARC-AGI-3 上达到了 SoTA 水平，只需要改两个设置——允许模型进行推理，并借助他们官方的 compaction 实现跨多个上下文窗口工作。他还称赞了 @ilanbigio 和 @sandersted 在这项调查和文章上的出色工作，笑称看起来他们玩得很开心，并提醒大家照顾好自己的 harness，模型会感谢你的。此外他预告说，这一周的主题是“便宜到不用计量的智能”，明天他们还会有新东西发布。"
     ],
     "externalLinks": [
       {
@@ -1042,15 +1073,15 @@
       }
     ],
     "id": "follow-builders:digest-2026-07-30-thibault-sottiaux",
-    "title": "OpenAI Codex 与 ChatGPT 团队 Thibault Sottiaux",
+    "title": "OpenAI Codex 与 ChatGPT 团队成员 Thibault Sottiaux",
     "sourceUrl": "https://x.com/thsottiaux/status/2082655731204096275",
-    "summary": "他透露 GPT-5.6 Sol 只需改动两个设置就能在 ARC-AGI-3 上达到 SoTA,并预告明天又有新东西要发布。",
+    "summary": "Thibault Sottiaux 透露 GPT-5.6 Sol 通过两项设置调整在 ARC-AGI-3 上达到 SoTA，并预告本周将再次发布新品。",
     "tags": [
       "GPT-5.6 Sol",
       "ARC-AGI-3",
-      "上下文压缩",
-      "harness",
-      "新发布预告"
+      "OpenAI",
+      "Codex",
+      "新发布"
     ],
     "source": "builder",
     "sourceLabel": "Thibault Sottiaux · Follow Builders",
@@ -1066,7 +1097,7 @@
     "inRecentWindow": true,
     "digestFormat": "builders-digest",
     "paragraphs": [
-      "We’ve gone from AI defaulting to designs that look like purple slop to those that have that recognizable Claude look.\n\nTo avoid this, I always create a design md file with guidelines for color, typography, and more.\nHere are a few places to find inspiration for your design md:\n\n1. Go to @mobbin and install its MCP to find design patterns and app screens you like. Paste the screens and ask AI to make a design md.\n\n2. Check out designmd sh, which has a library of design md files for popular websites and apps.\n\n📌 I walk through an example of creating a design md in my new tutorial: https://t.co/3LIw4UXbpi\n\nAI has been great for my productivity, but I’m starting to recognize three dark patterns:\n\n1. Becoming too lazy to read anything\n\nIt's too easy to just read AI summaries over the original piece or let agents go wild changing my files without reviewing what they did.\n\n2. Getting distracted by agents while I’m out\n\nIt’s too easy to open ChatGPT or Claude on my phone while I’m out to give feedback my agents and feel “productive,” even when I’m supposed to be watching my kids or doing literally anything else.\n\n3. Preferring to talk to the agent vs. a human\n\nThis is a new pattern with ChatGPT Voice, I sometimes find myself preferring to brainstorm with the agent instead of the actual human in the room.\n\nOne of my favorite features in Claude Design is a simple one:\n\nIt always asks clarifying questions before creating anything.\n\nI’ve found these questions consistently help me think through my design requirements with AI. I’m surprised other AI design tools haven’t copied this yet.\n\n📌 Here’s how I use Claude Design to prototype: https://t.co/DYtxQdhytA"
+      "Peter Yang 是面向忙碌人群的实用 AI 教程和访谈作者。他注意到 AI 生成的设计已经从默认的“紫色糊一团”进化到一眼就能认出的 Claude 风格，为了避免这种同质化，他总会先写一个 design md 文件，规定颜色、字体等规范。他推荐两个找灵感的地方：一是去 Mobbin 安装它的 MCP，找到喜欢的设计模式和 App 界面截图，让 AI 据此生成 design md；二是看看 designmd.sh，那里有热门网站和 App 的 design md 文件库，他还在新教程里演示了完整流程。他还提到自己最喜欢 Claude Design 的一个功能其实很简单：它在动手生成任何东西之前总会先问澄清问题，这些问题能帮他把设计需求想清楚，他很惊讶其他 AI 设计工具到现在还没抄这个做法，并分享了自己用 Claude Design 做原型的心得。另外，他也坦诚地反思了 AI 虽然提升了效率，却让他养成三个暗黑习惯：一是变懒了不愿读原文，只看 AI 摘要，或放任 agent 随意改文件而不检查；二是在外面也忍不住掏出手机打开 ChatGPT 或 Claude 给 agent 下指令，假装很高效，哪怕本该在陪孩子；三是用了 ChatGPT Voice 之后，有时他更愿意跟 agent 头脑风暴，而不是和屋里真实的人聊。"
     ],
     "externalLinks": [
       {
@@ -1083,12 +1114,16 @@
       }
     ],
     "id": "follow-builders:digest-2026-07-30-peter-yang",
-    "title": "AI 教程创作者 Peter Yang",
+    "title": "AI 教程作者 Peter Yang",
     "sourceUrl": "https://x.com/petergyang/status/2082642205811106158",
-    "summary": "他分享了用 design md 文件摆脱 AI 设计同质化的方法，盛赞 Claude Design 先提问再动手的细节，同时反思了自己用 AI 后染上的三个",
+    "summary": "Peter Yang 分享了用 design md 文件避免 AI 设计同质化的方法，称赞 Claude Design 的提问机制，并反思了 AI 带来的三个“暗黑模式”。",
     "tags": [
-      "X",
-      "AI Builders"
+      "design md",
+      "AI 设计",
+      "Claude Design",
+      "MCP",
+      "AI 习惯",
+      "教程"
     ],
     "source": "builder",
     "sourceLabel": "Peter Yang · Follow Builders",
@@ -1104,7 +1139,7 @@
     "inRecentWindow": true,
     "digestFormat": "builders-digest",
     "paragraphs": [
-      "Meta AI 高级总监、曾在 Google 主导 Gemini、Veo 和 Nano Banana 的 Madhu Guru 回看了自己七个月前的一个判断，并确认它到今天依然成立：最大的 alpha——也就是超额收益和认知红利——藏在理解模型前沿之中。七个月在 AI 行业堪称漫长，观点经得起这段时间的检验，他显然对此颇有信心。"
+      "Meta AI 高级总监 Madhu Guru 表示，七个月过去，他之前的观点依然成立：最大的 alpha 来自对模型前沿的理解。他此前在 Google 领导过 Gemini、Veo 和 Nano Banana 等项目。"
     ],
     "externalLinks": [
       {
@@ -1115,12 +1150,11 @@
     "id": "follow-builders:digest-2026-07-30-madhu-guru",
     "title": "Meta AI 高级总监 Madhu Guru",
     "sourceUrl": "https://x.com/realmadhuguru/status/2082629168035201459",
-    "summary": "Madhu Guru 重申七个月前的判断依然成立：最大的 alpha 在于理解模型前沿。",
+    "summary": "七个月后观点依然成立：最大的超额收益在于理解模型前沿。",
     "tags": [
+      "AI 模型",
       "模型前沿",
-      "认知红利",
-      "AI 行业观点",
-      "Meta"
+      "投资洞察"
     ],
     "source": "builder",
     "sourceLabel": "Madhu Guru · Follow Builders",
@@ -1136,7 +1170,7 @@
     "inRecentWindow": true,
     "digestFormat": "builders-digest",
     "paragraphs": [
-      "Sam Altman 转发了一条内容并连用兴奋的语气表示,模型距离显著加速科学发现已经非常近了;在他看来,实现这一目标最好的方式是去赋能科学家,而不是试图靠自己搞清所有事情,'我们都值得拥有这些成果带来的好处'。同一天早些时候,他还用一贯的调侃口吻评价了一篇博文,称之为'goblin 水准'(goblin-level)的博客文章。"
+      "Sam Altman 兴奋地表示，他们已经非常接近能够显著加速科学发现的模型了，而实现这一目标最好的方式是赋能科学家，而不是试图自己把所有事情都搞清楚——所有人都应该享受到这些成果。他还顺手转发了一篇博客文章，只用一句话评价：“goblin 级别的博客文章”。"
     ],
     "externalLinks": [
       {
@@ -1151,12 +1185,12 @@
     "id": "follow-builders:digest-2026-07-30-sam-altman",
     "title": "Sam Altman",
     "sourceUrl": "https://x.com/sama/status/2082628413769003269",
-    "summary": "他兴奋地表示模型已非常接近显著加速科学发现,并认为正确路径是赋能科学家,还顺手调侃了一篇博文。",
+    "summary": "Sam Altman 表示模型已非常接近显著加速科学发现，OpenAI 的做法是赋能科学家而非包办一切。",
     "tags": [
+      "Sam Altman",
       "科学发现",
-      "赋能科学家",
-      "AI 模型",
-      "goblin 级博文"
+      "OpenAI",
+      "赋能科学家"
     ],
     "source": "builder",
     "sourceLabel": "Sam Altman · Follow Builders",
@@ -1172,7 +1206,7 @@
     "inRecentWindow": true,
     "digestFormat": "builders-digest",
     "paragraphs": [
-      "身兼 smol_ai、Cognition、AI Engineer、Latent Space 播客等多重身份的 Swyx 分享了一次糟糕的注册经历：他今天想注册 DocuSign，结果碰上一个自己怎么也解不开的验证码。他忍不住吐槽，这可是一家市值 110 亿美元的公司，而且人人都讨厌它——所以那些把\"做人们想要的东西\"挂在嘴边的人，其实并没有看到事情的全貌。"
+      "Swyx 今天想注册 DocuSign，结果碰到一个他怎么都解不开的验证码。他吐槽说这是一家市值 110 亿美元的公司，而且人人讨厌它。由此他得出结论：那些说“做出人们想要的东西”的人，其实并没有看到事情的全貌。"
     ],
     "externalLinks": [
       {
@@ -1181,15 +1215,14 @@
       }
     ],
     "id": "follow-builders:digest-2026-07-30-swyx",
-    "title": "Latent Space 播客的 Swyx",
+    "title": "Swyx",
     "sourceUrl": "https://x.com/swyx/status/2082617801362313527",
-    "summary": "Swyx 注册 DocuSign 时被一道解不开的验证码拦住，借此调侃这家 110 亿美元、人人讨厌的公司，并称\"做人们想要的东西\"并不是全貌。",
+    "summary": "Swyx 在注册 DocuSign 时遇到解不开的验证码，借此吐槽“做出人们想要的东西”这句话并不完整。",
     "tags": [
       "DocuSign",
       "验证码",
-      "用户体验",
-      "创业箴言",
-      "吐槽"
+      "产品吐槽",
+      "用户体验"
     ],
     "source": "builder",
     "sourceLabel": "Swyx · Follow Builders",
@@ -1205,7 +1238,7 @@
     "inRecentWindow": true,
     "digestFormat": "builders-digest",
     "paragraphs": [
-      "自称 ClawFather、从退休状态跑回来折腾 AI 的 OpenClaw 作者 Peter Steinberger，看到 Anthropic 发出的一条\"胜利\"推文后忍不住笑出了声。他吐槽说：Anthropic 难道就没有一个人在按下发布键之前，停下来想一秒钟——这些数字为什么会离谱成这个样子？言下之意，这份\"战报\"里的数据显然经不起推敲，配上开头的 lol，嘲讽意味拉满。"
+      "OpenClaw 的 Peter Steinberger 这两天在围观热闹：他看到 Anthropic 发出一条庆祝“胜利”的推文后忍不住笑出声，吐槽说难道 Anthropic 内部就没有人在发推之前停下来想一想，为什么这些数字看起来离谱到这个程度吗。"
     ],
     "externalLinks": [
       {
@@ -1214,14 +1247,15 @@
       }
     ],
     "id": "follow-builders:digest-2026-07-30-peter-steinberger",
-    "title": "OpenClaw 的 ClawFather Peter Steinberger",
+    "title": "OpenClaw 开发者 Peter Steinberger",
     "sourceUrl": "https://x.com/steipete/status/2082617409408762124",
-    "summary": "Peter Steinberger 调侃 Anthropic 的\"胜利\"推文：发出来之前，就没人觉得这些数字离谱吗？",
+    "summary": "Peter Steinberger 调侃 Anthropic 发出“胜利”推文前没人质疑那些离谱的数字。",
     "tags": [
       "Anthropic",
       "数据质疑",
-      "胜利推文",
-      "调侃"
+      "调侃",
+      "AI 行业",
+      "推文"
     ],
     "source": "builder",
     "sourceLabel": "Peter Steinberger · Follow Builders",
@@ -1316,7 +1350,7 @@
     "inRecentWindow": true,
     "digestFormat": "builders-digest",
     "paragraphs": [
-      "Dan Shipper 说，Every 公司里几乎每个人都在为 ChatGPT for Work 的语音模式惊叹，他很久没见过这么高涨的情绪了，还没试过的人应该去试试。他还转发了一条帖子，称以自己的经验，那通常是最诚实的回答。另外，他分享了一篇自己认为写得极好的分析：一起事件中模型被用于执行漏洞利用，他坦言未来显然会有恶意行为者故意让模型做这类事，但好的一面是，这次 OpenAI 的安全分类器是关闭的、模型是被明确指示去攻击的，而 HG 的 AI 确实自动发现了这次攻击，只是危险等级标记得不够高。他的结论是，任何处理敏感客户数据的公司显然都需要自动化的智能体防御系统，这是一个巨大的机会，而且看起来确实有效。"
+      "Every 的 CEO Dan Shipper 说，公司里几乎每个人都在为 ChatGPT for Work 的语音模式有多好用而惊叹，他已经很久没见过这么高涨的热情了，还没试过的话值得去体验一下。他还点评了一篇「写得非常好」的安全分析：未来恶意行为者显然会故意诱导模型去做这类攻击，不过也有好的一面——这次事件中 OpenAI 的安全分类器是被关掉的，模型是被明确指示去执行漏洞利用的，而 HG 的 AI 实际上自动发现了这次攻击，只是危险等级评估不够高。他认为这明显意味着任何处理敏感客户数据的公司都需要自动化的智能体防御系统，这是一个巨大的机会，而且看起来确实有效。另外他还转发了一条内容，称这通常是他经验里最诚实的回答。"
     ],
     "externalLinks": [
       {
@@ -1335,13 +1369,13 @@
     "id": "follow-builders:digest-2026-07-30-dan-shipper",
     "title": "Every CEO Dan Shipper",
     "sourceUrl": "https://x.com/danshipper/status/2082613916706693560",
-    "summary": "Dan Shipper 称全公司都在为 ChatGPT for Work 的语音模式疯狂，并就一起 AI 攻击事件看好自动化智能体防御的机会。",
+    "summary": "Dan Shipper 盛赞 ChatGPT for Work 的语音模式，并点评了一起模型被引导执行攻击的安全事件。",
     "tags": [
       "ChatGPT 语音模式",
+      "Every",
       "AI 安全",
       "智能体防御",
-      "Every",
-      "漏洞利用"
+      "模型攻击"
     ],
     "source": "builder",
     "sourceLabel": "Dan Shipper · Follow Builders",
@@ -1357,7 +1391,7 @@
     "inRecentWindow": true,
     "digestFormat": "builders-digest",
     "paragraphs": [
-      "Aditya Agarwal 在自家 Demo Faire 结束后分享了五点观察：大型投资社区对前沿技术兴趣极高——机器人、无人机、半导体，全都来吧；而且这份兴趣是“真心实意的”，大家希望美国能赢。他同时提醒，软件行业“够格称得上伟大”的门槛已经抬高不少：如果你做的东西看起来像垂直 SaaS，或者“给某个场景套个 agent”，就必须拿出真正与众不同的愿景，或者一条疯狂的增长曲线。他感慨，只有真心热爱构建未来的人才适合做早期投资，因为真正的乐趣就在这里——这次活动上大家认真地和创始人探讨他们在造什么，而不是只要“向右上增长”的图表，这让他觉得很酷；硅谷最好的状态，是大家明白打造一家能延续几十年的特别公司需要“举全村之力”。他还顺手用一个比喻解释了 AI 研究员圈子最近的种种抓马：想象一下你是 19 岁的勒布朗，却相信在篮球被机器人接管之前只剩两年时间最大化收入——这就是 AI 研究员的处境，“他们是进攻时限只剩 18 个月的 MVP”。"
+      "South Park Commons 的普通合伙人 Aditya Agarwal 打了个比方：想象你是 19 岁的勒布朗·詹姆斯，却相信自己只有两年时间能在篮球被机器人接管前赚到最多的钱——这正是当下 AI 研究员的处境，也解释了那些没完没了的戏剧性事件。他把这些研究员比作只剩 18 个月进攻时间的 MVP。同一天，他还分享了自家 Demo Faire 活动的五点观察：大型投资人对机器人、无人机、半导体等前沿技术兴趣浓厚，而且这份热情里带着真诚的希望美国赢的心态；软件领域「优秀」的门槛大幅提高，如果你做的是类似垂直 SaaS 或「某某场景的 Agent」，就必须在愿景上展现真正与众不同的东西，或者拿出疯狂的的增长曲线；他认为只有真正热爱构建未来的人才该做早期投资，看到投资人与创始人深入探讨产品本身、而不是只问增长曲线，才是最酷的部分；最后他感慨，硅谷最好的状态是大家都明白，打造一家能持续数十年的伟大公司需要整个生态的共同努力。"
     ],
     "externalLinks": [
       {
@@ -1372,13 +1406,13 @@
     "id": "follow-builders:digest-2026-07-30-aditya-agarwal",
     "title": "South Park Commons 普通合伙人 Aditya Agarwal",
     "sourceUrl": "https://x.com/adityaag/status/2082558632705896899",
-    "summary": "Demo Faire 复盘：前沿科技投资火热、软件“伟大”门槛抬高，并用“19 岁的勒布朗”比喻 AI 研究员的处境。",
+    "summary": "他用詹姆斯的比喻解释 AI 研究员的焦虑，并分享了 Demo Faire 上关于前沿科技的五点观察。",
     "tags": [
-      "Demo Faire",
+      "AI 研究员",
       "前沿科技",
       "早期投资",
-      "垂直 SaaS",
-      "AI 研究员"
+      "Demo Faire",
+      "硅谷生态"
     ],
     "source": "builder",
     "sourceLabel": "Aditya Agarwal · Follow Builders",
@@ -1394,7 +1428,7 @@
     "inRecentWindow": true,
     "digestFormat": "builders-digest",
     "paragraphs": [
-      "Linear 产品负责人 Nan Yu 发了一条极简推文：“这就是为什么我们必须 pace（把握好节奏）。”"
+      "Linear 的产品负责人 Nan Yu 只发了一条简短的推文，写道：「这就是为什么我们必须掌握好节奏」，并附上了一个链接，像是在回应某个关于产品节奏的讨论。"
     ],
     "externalLinks": [
       {
@@ -1405,11 +1439,10 @@
     "id": "follow-builders:digest-2026-07-30-nan-yu",
     "title": "Linear 产品负责人 Nan Yu",
     "sourceUrl": "https://x.com/thenanyu/status/2082550710160310587",
-    "summary": "Nan Yu 发了一句极简推文：“这就是为什么我们必须把握好节奏。”",
+    "summary": "Linear 产品负责人 Nan Yu 简短发声：所以我们必须掌握节奏。",
     "tags": [
-      "Linear",
-      "pace",
-      "产品节奏"
+      "产品节奏",
+      "Linear"
     ],
     "source": "builder",
     "sourceLabel": "Nan Yu · Follow Builders",
@@ -1425,7 +1458,7 @@
     "inRecentWindow": true,
     "digestFormat": "builders-digest",
     "paragraphs": [
-      "your agents, anywhere\n\ntry Cursor on iOS today https://t.co/cUpj159sqj"
+      "Ryo Lu 是 Cursor 的设计师，曾在 Notion 和 Stripe 工作，也创过业，目标是让任何人都能做软件。他宣布 Cursor 今天上线了 iOS 版本，主打“你的 agent，无处不在”，邀请大家现在就试试。"
     ],
     "externalLinks": [
       {
@@ -1434,12 +1467,14 @@
       }
     ],
     "id": "follow-builders:digest-2026-07-30-ryo-lu",
-    "title": "Ryo Lu",
+    "title": "Cursor 设计师 Ryo Lu",
     "sourceUrl": "https://x.com/ryolu_/status/2082539893729972320",
-    "summary": "Ryo Lu 今天发布了 1 条动态。",
+    "summary": "Ryo Lu 宣布 Cursor 推出 iOS 版，让用户随时随地使用自己的 agent。",
     "tags": [
-      "X",
-      "AI Builders"
+      "Cursor",
+      "iOS",
+      "AI agent",
+      "移动端"
     ],
     "source": "builder",
     "sourceLabel": "Ryo Lu · Follow Builders",
@@ -1455,7 +1490,7 @@
     "inRecentWindow": true,
     "digestFormat": "builders-digest",
     "paragraphs": [
-      "Garry Tan 先是转发 Manhattan Institute 的内容，简短有力地写下一句话：\"Manhattan Institute 说的才是真相。\"随后他把话说得更明白：在他看来，\"AI 数据中心去增长派\"（AI Datacenter Degrowthers）正在获胜，而这实际上是一场在我们眼皮底下进行的心理战（psy-op），正在每一个蓝州得逞。"
+      "Y Combinator 总裁兼 CEO Garry Tan 对一股抵制 AI 数据中心建设的「去增长」浪潮发出了警告。他认为这场运动实际上是一场在众目睽睽之下进行的心理战，而且正在每一个蓝州取得胜利。他还转发了 Manhattan Institute 的相关内容，称其「道出了真相」，为这一立场背书。"
     ],
     "externalLinks": [
       {
@@ -1470,12 +1505,12 @@
     "id": "follow-builders:digest-2026-07-30-garry-tan",
     "title": "Y Combinator 总裁兼 CEO Garry Tan",
     "sourceUrl": "https://x.com/garrytan/status/2082529714162536926",
-    "summary": "他警告\"AI 数据中心去增长派\"正在每个蓝州获胜，称这是一场眼皮底下的心理战，并力挺 Manhattan Institute 的观点。",
+    "summary": "Garry Tan 批评各蓝州兴起的反 AI 数据中心运动，认为这是一场正在得手的「心理战」。",
     "tags": [
       "AI 数据中心",
-      "去增长派",
+      "去增长运动",
+      "蓝州政策",
       "心理战",
-      "蓝州",
       "Manhattan Institute"
     ],
     "source": "builder",
@@ -1492,7 +1527,7 @@
     "inRecentWindow": true,
     "digestFormat": "builders-digest",
     "paragraphs": [
-      "Replit CEO Amjad Masad 正在为自家的新产品 Replit Design 卖力吆喝。他毫不吝啬地称这是\"毫无疑问目前最好的 AI 设计工具\"——无论是审美品味，还是用起来有多好玩、多顺手，都属顶尖，并直接喊大家去试试。他进一步解释了背后的思路：不同模型各有所长，有的写 CSS 很强，有的画 SVG 特别出色，还有的擅长做动画，而 Replit Design 正是同时集结了开源与闭源模型中最优秀的那些，才能生成更胜一筹的美感。他还用一条只有两个词的推文为这款产品定调：\"后提示词时代\"（post-prompt era）。"
+      "Replit CEO Amjad Masad 最近在全力为自家新产品 Replit Design 站台。他毫不吝啬地称赞这是目前最好的 AI 设计工具，无论是审美品位，还是使用起来有多有趣、多简单，都无可挑剔，并直接喊话大家去试试。他还解释了背后的技术思路：有的模型擅长 CSS，有的模型画 SVG 特别出色，还有的模型做动画很强，Replit Design 正是集开源和闭源模型之所长，才能生成更出色的视觉效果。此外他还抛出一句耐人寻味的判断：后提示词时代来了。"
     ],
     "externalLinks": [
       {
@@ -1511,11 +1546,12 @@
     "id": "follow-builders:digest-2026-07-30-amjad-masad",
     "title": "Replit CEO Amjad Masad",
     "sourceUrl": "https://x.com/amasad/status/2082508826767679668",
-    "summary": "Amjad Masad 力推 Replit 新出的 AI 设计工具 Replit Design，称其集多家模型之长，是\"后提示词时代\"的产品。",
+    "summary": "Amjad Masad 力推 Replit Design，称其为最好用的 AI 设计工具，并宣称已进入后提示词时代。",
     "tags": [
       "Replit Design",
       "AI 设计工具",
-      "多模型融合",
+      "多模型",
+      "CSS 与 SVG",
       "后提示词时代"
     ],
     "source": "builder",
@@ -1532,7 +1568,7 @@
     "inRecentWindow": true,
     "digestFormat": "builders-digest",
     "paragraphs": [
-      "FPV Ventures 合伙人 Nikunj Kothari 翻出了自己一篇旧文重新分享，他给这篇文章贴上“常青”的标签，并透露了一个温暖的细节：写作这篇文章时，他正抱着自己的儿子，而那个小家伙如今已经 20 个月大了。一条推文，既是内容回顾，也是对时光飞逝的感慨。"
+      "FPV Ventures 合伙人 Nikunj Kothari 重新分享了一篇他称之为“常青”的旧文——这篇文章是他在抱着自己儿子时写下的，如今孩子已经 20 个月大了。"
     ],
     "externalLinks": [
       {
@@ -1543,12 +1579,11 @@
     "id": "follow-builders:digest-2026-07-30-nikunj-kothari",
     "title": "FPV Ventures 合伙人 Nikunj Kothari",
     "sourceUrl": "https://x.com/nikunj/status/2082507794889220545",
-    "summary": "Nikunj 重发了一篇当年抱着儿子写下的“常青”旧文，孩子如今已 20 个月大。",
+    "summary": "抱着 20 个月大的儿子时写下的一篇长文，如今重新分享。",
     "tags": [
-      "常青内容",
-      "写作",
-      "育儿日常",
-      "个人随笔"
+      "育儿",
+      "长文",
+      "个人写作"
     ],
     "source": "builder",
     "sourceLabel": "Nikunj Kothari · Follow Builders",
@@ -1564,7 +1599,7 @@
     "inRecentWindow": true,
     "digestFormat": "builders-digest",
     "paragraphs": [
-      "Google Labs 宣布，Google DeepMind 刚发布的 Lyria 3.5 已经直接接入 Google Flow Music，官方还顺势玩了个音乐梗：期待一个小调（A Minor）更新？他们更喜欢大调（B Major）。这次升级体现在三个方面：一是提示词遵循度更好，Flow Music 能更准确理解创作方向，可以设定精确的 BPM，还能为完整歌曲导出分轨；二是人声升级，歌声更有表现力、更富动态、更加饱满；三是音乐性更丰富，音符之间的编排流动得更自然。他们已经把这个模型放进产品里，随时可以直接开一场创作 session。"
+      "Google 旗下的 AI 工具与实验平台 Google Labs 发布动态：他们用一句「还在等小调更新？我们直接上大调」的双关玩笑开场，宣布 Google DeepMind 刚发布的 Lyria 3.5 音乐模型已直接接入 Flow Music，为你的下一段创作提供动力。这次升级带来三方面提升：一是更精准的提示词理解，Flow Music 能更准确地领会你的创作意图，支持设定精确的 BPM，并能导出整首歌曲的分轨；二是人声升级，演唱更有表现力、更动态、更饱满；三是更丰富的音乐性，编曲在音符之间的流动更加自然。感兴趣的话现在就可以去试试。"
     ],
     "externalLinks": [
       {
@@ -1573,14 +1608,14 @@
       }
     ],
     "id": "follow-builders:digest-2026-07-30-google-labs",
-    "title": "Google 旗下 AI 工具与实验平台 Google Labs",
+    "title": "Google 官方 AI 工具与实验平台 Google Labs",
     "sourceUrl": "https://x.com/GoogleLabs/status/2082501360466174163",
-    "summary": "Lyria 3.5 接入 Flow Music，带来更准的提示词遵循、更富表现力的人声和更自然的编曲。",
+    "summary": "Google Labs 宣布 DeepMind 新发布的 Lyria 3.5 音乐模型已接入 Flow Music。",
     "tags": [
       "Lyria 3.5",
       "Flow Music",
       "AI 音乐",
-      "Google DeepMind",
+      "人声升级",
       "分轨导出"
     ],
     "source": "builder",

@@ -388,7 +388,7 @@ button {
 .home-summary-card {
   display: grid;
   width: 100%;
-  gap: 14px;
+  gap: 12px;
   padding: 20px;
   border: 1px solid #dce5de;
   border-radius: 22px;
@@ -435,28 +435,51 @@ button {
   color: #425249;
   font-size: 14px;
   font-weight: 580;
-  line-height: 1.65;
+  line-height: 1.6;
 }
 
-.home-summary-card ul {
+.home-summary-keywords {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+}
+
+.home-summary-keywords span {
+  padding: 5px 9px;
+  border-radius: 999px;
+  background: #eef5f0;
+  color: #397052;
+  font-size: 11px;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.home-summary-trend {
   display: grid;
-  gap: 5px;
+  grid-template-columns: auto 1fr;
+  gap: 9px;
   margin: 0;
-  padding-left: 18px;
-  color: #6c7871;
+  color: #68766d;
   font-size: 12px;
-  line-height: 1.5;
+  line-height: 1.55;
+}
+
+.home-summary-trend strong {
+  color: #78867d;
+  font-size: 11px;
 }
 
 .home-summary-value {
   display: grid;
-  gap: 5px;
-  margin-top: 18px;
-  padding: 14px 16px;
-  border-radius: 16px;
+  grid-template-columns: auto 1fr;
+  gap: 9px;
+  margin-top: 2px;
+  padding: 11px 13px;
+  border-radius: 13px;
   background: rgba(31, 111, 78, 0.06);
   color: var(--muted);
-  line-height: 1.65;
+  font-size: 12px;
+  line-height: 1.55;
 }
 
 .home-summary-value strong {
@@ -3014,6 +3037,8 @@ button {
   color: #29332d;
   font-size: 17px;
   line-height: 1.9;
+  text-align: justify;
+  text-justify: inter-ideograph;
 }
 
 .builder-tweet-links {
