@@ -561,9 +561,11 @@ async function collectTechnicalX() {
     })),
   );
 
-  return (processed.items || []).flatMap((item) => {
+  const items = (processed.items || []).flatMap((item) => {
     const entry = entries.find((value) => String(value.tweetId) === String(item.id));
-    if (!entry) return [];
+    const translation = String(item.translation || "");
+    if (!entry || (translation.match(/[\u3400-\u9fff]/g) || []).length < 8
+      || !item.title || !item.summary || !Array.isArray(item.keywords)) return [];
     const url = `https://x.com/${entry.author.handle}/status/${entry.tweetId}`;
     const keywords = Array.isArray(item.keywords) ? item.keywords : ["X 热榜", "AI"];
     return [{
@@ -584,6 +586,10 @@ async function collectTechnicalX() {
       }),
     }];
   });
+  if (items.length !== entries.length) {
+    throw new Error(`Kimi completed ${items.length}/${entries.length} technical X entries`);
+  }
+  return items;
 }
 
 function normalizePaper(entry) {
@@ -1085,6 +1091,9 @@ async function collectYoutube() {
       console.error(`[collect] youtube ${video.videoId} skipped: ${error?.message || String(error)}`);
     }
   }
+  if (videos.length > 0 && items.length === 0) {
+    throw new Error(`No YouTube item completed from ${videos.length} discovered video(s)`);
+  }
   return items;
 }
 
@@ -1372,7 +1381,10 @@ async function main() {
     errors,
     outputPath,
   }, null, 2));
-  if (report.sources.length > 0 && report.sources.every((source) => source.status === "failed")) process.exitCode = 1;
+  if (summaryResult.failures.length > 0
+    || (report.sources.length > 0 && report.sources.every((source) => source.status === "failed"))) {
+    process.exitCode = 1;
+  }
 }
 
 await main();

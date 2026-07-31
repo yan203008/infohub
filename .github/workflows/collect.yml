@@ -32,7 +32,7 @@ concurrency:
 jobs:
   collect:
     runs-on: ubuntu-latest
-    timeout-minutes: 45
+    timeout-minutes: 80
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
@@ -53,6 +53,8 @@ jobs:
         run: git clone --depth 1 https://github.com/jimliu/baoyu-skills.git "$RUNNER_TEMP/baoyu-skills"
 
       - name: Collect and publish
+        id: collect_step
+        continue-on-error: true
         env:
           MOONSHOT_API_KEY: ${{ secrets.MOONSHOT_API_KEY }}
           MOONSHOT_BASE_URL: https://api.kimi.com/coding/v1
@@ -100,6 +102,14 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: collection-report
-          path: outputs/last-collection.json
+          path: |
+            outputs/last-collection*.json
+            outputs/collection-status.json
           if-no-files-found: ignore
           retention-days: 14
+
+      - name: Mark unresolved collection errors
+        if: always() && steps.collect_step.outcome == 'failure'
+        run: |
+          echo "采集结果已尽可能发布，但仍有来源或总结在重试后失败。请查看 collection-report。"
+          exit 1

@@ -723,6 +723,24 @@ function normalizeChineseTypography(value: string) {
     .replace(/([，。！？；：])\s+/g, "$1");
 }
 
+function splitReadableParagraph(value: string, maximumLength = 240) {
+  const text = value.trim();
+  if (text.length <= maximumLength) return [text];
+  const sentences = text.match(/[^。！？!?]+[。！？!?]?/g)?.map((sentence) => sentence.trim()).filter(Boolean) ?? [text];
+  const paragraphs: string[] = [];
+  let current = "";
+  for (const sentence of sentences) {
+    if (current && current.length + sentence.length > maximumLength) {
+      paragraphs.push(current);
+      current = sentence;
+    } else {
+      current += sentence;
+    }
+  }
+  if (current) paragraphs.push(current);
+  return paragraphs;
+}
+
 function normalizeMissingContextText(value: string) {
   return normalizeChineseTypography(value
     .replaceAll("链接指向的内容无法访问", "当前采集结果未包含链接页内容")
@@ -1805,7 +1823,9 @@ export function InfoHubApp({ user }: { user: ChatGPTUser | null }) {
                                   {saved.includes(item.id) ? "已感兴趣" : "感兴趣"}
                                 </button>
                               </header>
-                              {item.paragraphs.map((paragraph, index) => <p key={index}>{paragraph}</p>)}
+                              {item.paragraphs
+                                .flatMap((paragraph) => splitReadableParagraph(paragraph))
+                                .map((paragraph, index) => <p key={`${item.id}-${index}`}>{paragraph}</p>)}
                               <div className="builder-tweet-links">
                                 {(item.externalLinks?.length ? item.externalLinks : [{ label: "推文", url: item.sourceUrl }]).map((link) => (
                                   <a key={link.url} href={link.url} target="_blank" rel="noreferrer">
