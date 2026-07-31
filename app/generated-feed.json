@@ -1,191 +1,17 @@
 [
   {
-    "section": "x",
-    "digestDate": "2026-07-28",
-    "publishedDate": "7/28",
-    "time": "昨日采集",
-    "readTime": "3 分钟",
-    "accent": "green",
-    "inRecentWindow": true,
-    "paragraphs": [
-      "标题:Claude Code 的安全设置,要做的事按顺序全部写出来(Claude 官方推荐方法)。正文预览:「我把官方安全插件运行了两个月,把 17,385 行日志全部读完了。25 条检测规则中,实际触发过的只有 1 条。」",
-      "核心观点:这是一篇基于实测数据的 Claude Code 安全加固教程。作者用「两个月、17,385 行日志、25 条规则只触发 1 条」这组具体数字,暗示多数检测规则在真实使用中处于「沉默」状态,从而引出按优先级/顺序配置安全的必要性。阅读时需注意的语境:第一,1/25 的触发率来自作者个人的使用场景和项目类型,样本不具普遍性,不能据此断定插件「没用」——安全规则的价值本就在于低频但关键的拦截;第二,标题声称「Claude 官方推荐法」,读者可对照顾 Anthropic 官方文档核实其依据;第三,预览未透露具体触发的是哪条规则、以及作者给出的操作顺序是什么,这些核心内容需阅读原文确认。作者是日本专注 Claude Code 使用支援的博主。"
-    ],
-    "id": "attentionvc-ai:2081962142056792475",
-    "title": "Claude Code 的安全设置:按什么顺序做,我全部写出来(Claude 官方推荐方法)",
-    "sourceUrl": "https://x.com/nobel_824/status/2081962142056792475",
-    "summary": "作者将 Claude 官方安全插件运行了两个月,通读全部 17,385 行日志后发现:25 条检测规则中实际触发的只有 1 条。文章据此按官方推荐方法,完整写出 Claude Code 安全配置的执行顺序。",
-    "tags": [
-      "Claude Code",
-      "安全插件",
-      "日志分析",
-      "检测规则",
-      "官方推荐配置",
-      "实战复盘"
-    ],
-    "source": "daily",
-    "sourceLabel": "tatsuki | Claude Code活用支援 · 技术动态 X 热榜",
-    "publishedAt": "2026-07-28T04:37:10.000Z"
-  },
-  {
-    "section": "x",
-    "digestDate": "2026-07-28",
-    "publishedDate": "7/28",
-    "time": "昨日采集",
-    "readTime": "3 分钟",
-    "accent": "green",
-    "inRecentWindow": true,
-    "paragraphs": [
-      "标题:如何在 Claude Code 中构建一个 AI 视频工作室。正文预览:「我把 Claude Code 变成了一个真正能运转的电影工作室,现在我要把整套系统交给你:技能、提示词、循环,以及将它们串在一起的六阶段流水线。每个阶段都依托……」(预览在此截断)",
-      "核心观点:把 Claude Code 当作编排中枢,用多智能体 + 技能 + 提示词循环搭建一条分六个阶段的 AI 视频(电影)生产流水线,并以「手把手交给你」的教程形式分享。阅读时需注意的语境:第一,标签中出现 seedance(字节跳动的视频生成模型)、MCP 和 multi-agent,暗示流水线可能调用外部视频生成模型并通过 MCP 连接工具,但预览并未明说,属于合理推测而非事实;第二,「完整系统交给你」是推广性表述,实际可复现程度、API 成本、成片质量都需在正文和评论区验证;第三,预览在「each stage leans」处截断,六个阶段各自的具体职责未知,不应自行脑补细节。作者粉丝量较大,内容带有明显的展示与引流属性。"
-    ],
-    "id": "attentionvc-ai:2082107255449919582",
-    "title": "如何在 Claude Code 里搭建一个 AI 视频工作室",
-    "sourceUrl": "https://x.com/EXM7777/status/2082107255449919582",
-    "summary": "作者声称把 Claude Code 改造成了一个可实际运转的「电影工作室」,并公开完整系统:技能(skills)、提示词、循环机制,以及把它们串联起来的六阶段流水线。",
-    "tags": [
-      "Claude Code",
-      "AI 视频生成",
-      "六阶段流水线",
-      "多智能体",
-      "Seedance",
-      "MCP"
-    ],
-    "source": "daily",
-    "sourceLabel": "Machina · 技术动态 X 热榜",
-    "publishedAt": "2026-07-28T14:13:48.000Z"
-  },
-  {
-    "section": "papers",
-    "digestDate": "2026-07-29",
-    "publishedDate": "7/29",
-    "time": "今天采集",
-    "readTime": "3 分钟",
-    "accent": "violet",
-    "inRecentWindow": true,
-    "paragraphs": [
-      "在策略蒸馏（OPD）将逐词元的监督建立在学生模型自己生成的轨迹之上，但存在“前缀失败”问题：一旦学生模型在推理开头走错了方向，后续所有生成内容都建立在这个偏差之上，产生方向错误的续写，既引发不可靠的监督信号，也浪费计算资源。",
-      "研究者发现，在失败的前缀上存在一种“师生续写不对称”现象：面对同样的错误开头，教师模型倾向于扭转方向，而学生模型往往沿原方向继续走下去。他们把这种差异转化为一种无需人工标注的“交接触发信号”，提出接力在策略蒸馏（Relay-OPD）：训练时在检测到的触发点让教师短暂接管，生成一段“教师赛程”，随后学生重新接手，并在拼接而成的接力轨迹上接受优化。有限的接力预算把干预集中在关键的早期位置，同时避免学生策略偏离自身太远。",
-      "实验以 Qwen3-4B-Instruct-2507 为教师、Qwen3-0.6B/1.7B-Non-Thinking 为学生，在八个数学推理基准上，Relay-OPD 在每个基准上都取得最佳或次佳成绩：1.7B 学生模型平均比标准 OPD 高出 5.73 个百分点，比最强基线 FastOPD 高出 1.49 个百分点，0.6B 模型也有一致的提升。此外，训练轨迹长度减少了 50% 以上。"
-    ],
-    "utility": "这项研究解决的是“如何用更少的算力把小模型教得更聪明”的问题。如果方法被采用，普通人可能间接受益：手机、电脑等个人设备上运行的小模型在数学和推理任务上表现更好，AI 服务的训练成本下降也可能让相关产品更便宜、响应更快。对关注 AI 行业的从业者和投资者来说，它展示了提升小模型性价比的一条具体技术路径。需要注意的是，这些结论来自特定模型和数学推理基准上的实验，能否推广到其他任务和场景，论文本身并未覆盖。",
-    "externalLinks": [
-      {
-        "label": "查看 Hugging Face 论文页",
-        "url": "https://huggingface.co/papers/2607.26057"
-      },
-      {
-        "label": "打开 arXiv 原文",
-        "url": "https://arxiv.org/abs/2607.26057"
-      }
-    ],
-    "id": "huggingface-daily-papers:2607.26057",
-    "title": "传递接力棒：基于轨迹接力的在策略蒸馏",
-    "sourceUrl": "https://huggingface.co/papers/2607.26057",
-    "summary": "本文提出一种名为 Relay-OPD 的小模型训练方法：在“在策略蒸馏”过程中，一旦检测到学生模型在推理早期走错方向，就让教师模型短暂接管、纠正方向，再交还学生继续生成。在八个数学推理基准上，该方法全面优于现有蒸馏方法，且训练轨迹长度减少一半以上，明显节省了训练算力。",
-    "tags": [
-      "知识蒸馏",
-      "大语言模型",
-      "小模型训练",
-      "数学推理",
-      "训练效率"
-    ],
-    "source": "daily",
-    "sourceLabel": "Hugging Face Daily Papers",
-    "publishedAt": "2026-07-28T17:59:46Z"
-  },
-  {
-    "section": "papers",
-    "digestDate": "2026-07-29",
-    "publishedDate": "7/29",
-    "time": "今天采集",
-    "readTime": "3 分钟",
-    "accent": "violet",
-    "inRecentWindow": true,
-    "paragraphs": [
-      "通用机器人操作策略越来越普遍地采用建立在大型预训练骨干网络之上的“动作分块”流策略。然而，这些动作块以开环方式执行：一旦开始执行，策略就无法对中途到达的感知信息做出反应，牺牲了“反应性”。更频繁地重新规划本可以恢复反应性，但从感知到动作的整个流程（一个大型骨干网络加上多步去噪过程）速度太慢——这种延迟使频繁重规划成为不可能，导致已承诺执行的动作很快过时。因此，这类策略并不适合需要动态、闭环控制的场景。",
-      "研究者提出了πR²，它在保留大型骨干网络、富有表现力的多模态策略以及多动作预测能力的同时，让这些策略既具备反应性又能实时运行。πR²基于扩散强制（diffusion forcing）中的逐位置噪声调度，贡献了两个核心思路。第一，它将条件输入拆分为快速通道和慢速通道：快速通道承载每个时刻都新鲜更新的本体感知信息（机器人自身关节状态等），慢速通道则异步更新视觉-语言特征。这样，策略在执行一个动作块的过程中就能对本体感知做出即时反应，同时容忍略显过时的视觉信息。第二，一种延迟自适应的流调度机制把正在执行中的动作当作“修补”（inpainting）条件来处理，并在每次调用时仅用一步去噪就输出动作，使同一个训练好的模型能够适应不同硬件的延迟水平。",
-      "πR²只需对现有架构做极少改动，便可从预训练策略微调得到。研究者将其应用于真实 xArm6 机械臂加 XHand 灵巧手平台上的 GR00T-N1.7 模型：闭环重规划速度约为原基础策略的4倍（在一块 A5000 GPU 上达到约25Hz），每40毫秒就能基于一次新的观测采取行动。在仿真和真实世界的操作任务中，与最强基线相比，πR²将成功率在仿真中最高提升23%，在真实世界中最高提升30%。"
-    ],
-    "utility": "这项研究解决的是机器人“反应慢半拍”的问题：目前许多智能机器人一旦开始做一个动作，就无法在中途根据新情况调整，比如抓取移动的物体或避开突然出现的人。πR²让机器人能每40毫秒根据最新感知调整动作，且无需推翻现有模型、改动成本较低。对普通人来说，这意味着未来的家庭服务机器人、仓储物流机器人在动态环境中会更灵活、更安全；对关注自动化投资或职业变化的人来说，这提示机器人在非结构化环境（而非只有流水线）中胜任工作的能力正在稳步进步。需要注意的是，这些成果是在特定机械臂平台和有限任务上验证的，成功率提升也是“最高”而非普遍水平，离普及应用仍有距离。",
-    "externalLinks": [
-      {
-        "label": "查看 Hugging Face 论文页",
-        "url": "https://huggingface.co/papers/2607.26055"
-      },
-      {
-        "label": "打开 arXiv 原文",
-        "url": "https://arxiv.org/abs/2607.26055"
-      }
-    ],
-    "id": "huggingface-daily-papers:2607.26055",
-    "title": "πR²：具备反应能力的实时流策略",
-    "sourceUrl": "https://huggingface.co/papers/2607.26055",
-    "summary": "本文提出πR²，一种让基于大型预训练模型的机器人操作策略在保留原有能力的同时实现实时反应的方法。它将快速更新的本体感知与异步更新的视觉语言信息分通道处理，并以单步去噪输出动作，使机器人能在真实硬件上每40毫秒依据新观测调整行为，操作成功率最高提升30%。",
-    "tags": [
-      "机器人操作策略",
-      "实时闭环控制",
-      "流策略",
-      "反应性",
-      "动作分块",
-      "扩散模型"
-    ],
-    "source": "daily",
-    "sourceLabel": "Hugging Face Daily Papers",
-    "publishedAt": "2026-07-28T17:59:31Z"
-  },
-  {
-    "section": "papers",
-    "digestDate": "2026-07-29",
-    "publishedDate": "7/29",
-    "time": "今天采集",
-    "readTime": "3 分钟",
-    "accent": "violet",
-    "inRecentWindow": true,
-    "paragraphs": [
-      "低秩适配（LoRA）的混合专家（MoE）变体把每个词元路由到固定数量 k 的专家。然而，模型对不同词元的不确定程度各不相同，因此单一的 k 会在简单词元上花费过多，而对困难词元服务不足。研究者观察到，路由器的输出分布本身就是每个词元的不确定性信号：概率质量集中表示模型有把握，分布平坦则表示含糊不清。",
-      "研究者提出 CARE（专家的置信度自适应路由），以\"核采样\"的方式接纳专家：按路由器权重从大到小依次激活专家，直到累积概率质量达到阈值；当被接纳的专家之间意见不一致时，还会小幅扩展。一个\"预算恒温器\"负责校准该阈值，使平均激活的专家数量与任意给定目标相符。CARE 是一种即插即用、只需单次前向传播的规则，不引入任何额外参数。",
-      "在基于 LLaMA-3.1-8B 和 Qwen2.5-7B 的八项常识基准以及数学、代码和知识任务上，CARE 在计算量相同的情况下优于固定的 top-k MoE-LoRA，并在激活更少专家的同时达到与固定 k=4 基线相当的表现。同样的置信度与分歧信号还能改进分布外检测，效果优于 MSP、熵以及多遍代理方法。研究者从核保真度、预算最优性以及分歧的认识论解读等方面为该设计提供了理论支持，并公开了代码。"
-    ],
-    "utility": "这项研究的核心思路是让AI\"量力而行\"：简单内容少花算力，拿不准的内容多投入资源。对普通用户来说，这类技术若被采用，意味着AI助手可能在不牺牲回答质量的前提下响应更快、运行成本更低，未来在手机等本地设备上跑AI也更可行。对在工作中使用或采购AI服务的人来说，论文还展示了一种判断模型\"什么时候没把握\"的信号，有助于识别模型面对陌生输入时可能在\"硬撑\"，这对在医疗、金融等高风险场景中评估AI输出的可信度有参考价值。需要注意，这些结论来自论文所述的基准测试和特定模型，实际收益仍取决于具体应用场景。",
-    "externalLinks": [
-      {
-        "label": "查看 Hugging Face 论文页",
-        "url": "https://huggingface.co/papers/2607.26052"
-      },
-      {
-        "label": "打开 arXiv 原文",
-        "url": "https://arxiv.org/abs/2607.26052"
-      }
-    ],
-    "id": "huggingface-daily-papers:2607.26052",
-    "title": "把专家花在没把握的地方：面向混合专家LoRA的置信度自适应路由",
-    "sourceUrl": "https://huggingface.co/papers/2607.26052",
-    "summary": "大模型微调中常用的混合专家方法会给每个词元分配固定数量的\"专家\"，但模型对不同词元的把握其实不同。本文提出的CARE方法利用路由器的输出分布判断把握大小：有把握时少激活专家、没把握时多激活，并通过一个\"预算恒温器\"把平均开销控制在目标水平。在不增加参数、不增加计算量的前提下，它在多项常识、数学、代码和知识任务上优于固定专家数的做法，还能更好地识别模型没见过的输入。",
-    "tags": [
-      "混合专家模型",
-      "LoRA微调",
-      "置信度自适应路由",
-      "大语言模型",
-      "分布外检测",
-      "计算效率"
-    ],
-    "source": "daily",
-    "sourceLabel": "Hugging Face Daily Papers",
-    "publishedAt": "2026-07-28T17:59:16Z"
-  },
-  {
     "section": "github",
-    "digestDate": "2026-07-29",
-    "publishedDate": "7/29",
-    "time": "今天采集",
+    "digestDate": "2026-07-31",
+    "publishedDate": "7/31",
+    "time": "本次更新",
     "readTime": "3 分钟",
     "accent": "blue",
     "inRecentWindow": true,
     "paragraphs": [
-      "Pascal Editor 是一个用于创建和分享 3D 建筑项目的编辑器，底层基于 React Three Fiber 和 WebGPU 渲染。它以 Turborepo monorepo 形式组织，拆分为 core（节点 schema、场景状态、注册契约）、viewer（3D 渲染运行时）、editor（编辑工具与 UI）、nodes（内置节点定义与渲染器）和 ui（共享组件）等包，另有一个独立的 Next.js 宿主应用。",
-      "场景数据采用扁平字典存储的节点模型，所有节点继承 BaseNode，通过 parentId 建立层级关系：站点（Site）下包含建筑（Building）、楼层（Level），楼层下再有墙体、楼板、天花板、屋顶、区域以及门窗、灯具等构件，还支持 3D 扫描参考（Scan）和 2D 参考（Guide）。状态管理基于 Zustand，场景数据持久化到 IndexedDB，并通过 Zundo 提供撤销/重做能力。",
-      "该项目适合想在 Web 端搭建建筑/空间设计工具的开发者：既可以直接使用官方托管的编辑器，也可以通过 npm 安装 @pascal-app/core、viewer、editor、nodes 等包，先用 loadPlugin 加载内置插件，再挂载 <Viewer> 组件进行集成。需要注意的是，使用 WebGPU 渲染对浏览器环境有一定要求；项目采用 MIT 协议，社区交流渠道包括 Discord 和 X。"
+      "Pascal Editor 是一个用于创建和分享 3D 建筑项目的编辑器，基于 React Three Fiber 和 WebGPU 渲染。项目以 Turborepo monorepo 组织，包含 core（数据模式与场景状态）、viewer（3D 渲染运行时）、editor（编辑工具与 UI）、nodes（内置节点定义）和 ui（共享组件）等包，另有一个独立的 Next.js 宿主应用。",
+      "核心设计围绕节点（Node）体系展开：所有场景元素继承 BaseNode，按 Site → Building → Level → Wall/Slab/Ceiling/Roof/Zone 等层级组织，门窗、灯具等以 Item 形式挂载。节点存储在扁平字典中，通过 parentId 维护父子关系。场景状态由 Zustand 管理，通过 Persist 中间件持久化到 IndexedDB，并借助 Zundo 实现撤销/重做。内置节点以插件形式通过 loadPlugin 加载，便于扩展。",
+      "适合希望在 Web 端集成 3D 建筑/空间编辑能力的前端开发者，尤其是对 React 生态熟悉的团队。可通过 npm 安装 @pascal-app/core、viewer、editor、nodes 等包按需组合使用，viewer 提供默认相机、控制器和后处理，editor 在其上扩展选择管理与直接操作工具。项目采用 MIT 协议。",
+      "注意事项：使用发布包时需先加载内置插件再挂载 Viewer 组件；渲染依赖 WebGPU，需确认目标浏览器环境支持。README 主要描述架构与数据模型，具体 API 细节需参考各子包文档。"
     ],
     "facts": [
       {
@@ -194,15 +20,15 @@
       },
       {
         "label": "Stars",
-        "value": "19,184"
+        "value": "20,234"
       },
       {
         "label": "今日新增 Stars",
-        "value": "+341"
+        "value": "+625"
       },
       {
         "label": "Forks",
-        "value": "2,559"
+        "value": "2,629"
       },
       {
         "label": "许可证",
@@ -210,7 +36,7 @@
       },
       {
         "label": "最近更新",
-        "value": "2026-07-29"
+        "value": "2026-07-30"
       }
     ],
     "externalLinks": [
@@ -228,35 +54,33 @@
       }
     ],
     "id": "github-trending:pascalorg/editor",
-    "title": "Pascal Editor：基于 WebGPU 的 3D 建筑编辑器",
+    "title": "Pascal Editor：基于 WebGPU 的 3D 建筑设计编辑器",
     "sourceUrl": "https://github.com/pascalorg/editor",
-    "summary": "一款用 React Three Fiber 与 WebGPU 构建的开源 3D 建筑编辑器，支持创建和分享建筑项目，采用模块化 monorepo 架构，可作为库集成到自己的 React 应用中。",
+    "summary": "Pascal Editor 是一个使用 React Three Fiber 与 WebGPU 构建的开源 3D 建筑编辑器，支持创建和分享 3D 建筑项目，采用模块化 monorepo 架构，可嵌入 React 应用。",
     "tags": [
       "3D编辑器",
       "建筑设计",
       "React Three Fiber",
       "WebGPU",
-      "TypeScript",
       "Zustand",
-      "monorepo",
-      "MIT"
+      "TypeScript"
     ],
     "source": "daily",
     "sourceLabel": "GitHub Trending",
-    "publishedAt": "2026-07-29T09:47:36.699Z"
+    "publishedAt": "2026-07-31T06:11:09.683Z"
   },
   {
     "section": "github",
-    "digestDate": "2026-07-29",
-    "publishedDate": "7/29",
-    "time": "今天采集",
+    "digestDate": "2026-07-31",
+    "publishedDate": "7/31",
+    "time": "本次更新",
     "readTime": "3 分钟",
     "accent": "blue",
     "inRecentWindow": true,
     "paragraphs": [
-      "Jenkins 是领先的开源自动化服务器，使用 Java 开发，核心定位是通过自动化把重复性工作交给机器完成，让开发者专注于更有价值的事情。它拥有超过 2000 个插件，几乎可以扩展来自动化任何任务。",
-      "典型用途包括：构建项目、运行测试以便尽早发现缺陷、执行静态代码分析以及部署应用。Jenkins 提供 WAR 包、Docker 镜像以及多个 Linux 发行版和 Windows 的原生安装包，并设有 Weekly（频繁发布新特性和修复）与 LTS（长期支持、定期回移植缺陷修复）两条发布线，方便不同稳定性需求的团队选择。",
-      "该项目适合需要搭建 CI/CD 流水线的开发团队和运维人员，也对想要参与开源的开发者友好：仓库提供了贡献指南、good first issue 标签和 Gitter 新手交流频道。项目由开源社区治理，采用 MIT 协议，文档、插件索引与博客等资源均可在 jenkins.io 官网获取。"
+      "Jenkins 是目前最流行的开源自动化服务器，采用 Java 开发，定位是帮助团队把重复性工作交给机器完成，让人专注于机器无法替代的工作。它最大的特点是拥有超过 2000 个插件的生态，几乎可以扩展支持任意自动化场景。",
+      "核心用途围绕开发工作流展开：构建项目、运行测试以便尽早发现缺陷、执行静态代码分析以及完成部署，是持续集成与持续交付（CI/CD）的经典基础设施。官方提供 WAR 包、Docker 镜像以及多个 Linux 发行版和 Windows 的原生安装包，并维护两条发布线：更新频繁、包含全部新特性的 Weekly 版本，以及通过 bug 修复回填保持稳定的 LTS 长期支持版本。",
+      "适合需要自建 CI/CD 流水线的开发与运维团队，尤其是重视插件生态和自托管可控性的组织。选用时需在 Weekly 与 LTS 两条发布线之间做权衡：追求新功能选前者，追求稳定选后者。项目由开源社区治理，采用 MIT 许可证，新贡献者可以从贡献指南和 good first issue 入手参与。"
     ],
     "facts": [
       {
@@ -265,15 +89,15 @@
       },
       {
         "label": "Stars",
-        "value": "26,178"
+        "value": "26,335"
       },
       {
         "label": "今日新增 Stars",
-        "value": "+180"
+        "value": "+25"
       },
       {
         "label": "Forks",
-        "value": "9,704"
+        "value": "9,721"
       },
       {
         "label": "许可证",
@@ -281,7 +105,7 @@
       },
       {
         "label": "最近更新",
-        "value": "2026-07-28"
+        "value": "2026-07-31"
       }
     ],
     "externalLinks": [
@@ -301,20 +125,1825 @@
     "id": "github-trending:jenkinsci/jenkins",
     "title": "Jenkins：领先的开源自动化服务器",
     "sourceUrl": "https://github.com/jenkinsci/jenkins",
-    "summary": "用 Java 构建的主流开源自动化服务器，拥有超过 2000 个插件，可自动化构建、测试、静态代码分析与部署等开发流程，提供 Weekly 与 LTS 两条发布线。",
+    "summary": "用 Java 构建的老牌开源自动化服务器，凭借 2000 多个插件几乎能自动化任何开发任务，广泛用于构建、测试、静态代码分析与部署。",
     "tags": [
       "CI/CD",
       "自动化服务器",
-      "Java",
       "持续集成",
-      "持续部署",
-      "插件生态",
-      "DevOps",
-      "MIT"
+      "持续交付",
+      "构建",
+      "测试",
+      "部署",
+      "Java",
+      "插件生态"
     ],
     "source": "daily",
     "sourceLabel": "GitHub Trending",
-    "publishedAt": "2026-07-29T09:47:36.699Z"
+    "publishedAt": "2026-07-31T06:11:09.683Z"
+  },
+  {
+    "section": "github",
+    "digestDate": "2026-07-31",
+    "publishedDate": "7/31",
+    "time": "本次更新",
+    "readTime": "3 分钟",
+    "accent": "blue",
+    "inRecentWindow": true,
+    "paragraphs": [
+      "ECC 定位为 AI 编程代理的\"性能优化系统\"，目标是为 Claude Code、Codex、Opencode、Cursor 等 AI 编码工具增强能力。按照项目描述，它围绕技能（Skills）、直觉（Instincts）、记忆（Memory）、安全（Security）以及研究优先的开发方式（research-first development）构建，帮助这些代理更高效地工作。",
+      "项目通过多个官方渠道分发：npm 包 ecc-universal 和 ecc-agentshield、GitHub App、插件标识 ecc@ecc，以及官网 ecc.tools。仓库本身以 MIT 协议开源，内容涉及 Shell、TypeScript、Python、Go、Java 等多种语言，并提供包括简体中文在内的多语言文档。",
+      "商业模式上，开源版本永久免费，ECC Pro 是面向私有仓库的托管 GitHub App（每席位每月 19 美元起），赞助者和 Pro 订阅为开源工作提供资金。项目还维护了 Discord 社区用于问答和展示。",
+      "需要特别注意：项目官方明确警告只应从经验证的渠道安装——GitHub 仓库、上述两个 npm 包、GitHub App、官方插件和官网；第三方转载和非官方镜像不受项目维护或审查，可能包含恶意软件。由于公开 README 主要提供安装渠道与社区信息，具体功能细节建议查阅官网文档后再评估是否采用。"
+    ],
+    "facts": [
+      {
+        "label": "主要语言",
+        "value": "JavaScript"
+      },
+      {
+        "label": "Stars",
+        "value": "236,359"
+      },
+      {
+        "label": "今日新增 Stars",
+        "value": "+804"
+      },
+      {
+        "label": "Forks",
+        "value": "35,942"
+      },
+      {
+        "label": "许可证",
+        "value": "MIT"
+      },
+      {
+        "label": "最近更新",
+        "value": "2026-07-30"
+      }
+    ],
+    "externalLinks": [
+      {
+        "label": "阅读项目 README",
+        "url": "https://github.com/affaan-m/ECC#readme"
+      },
+      {
+        "label": "打开项目网站",
+        "url": "https://ecc.tools"
+      },
+      {
+        "label": "查看 Releases",
+        "url": "https://github.com/affaan-m/ECC/releases"
+      }
+    ],
+    "id": "github-trending:affaan-m/ECC",
+    "title": "面向 AI 编程代理的性能优化系统",
+    "sourceUrl": "https://github.com/affaan-m/ECC",
+    "summary": "ECC 是一个针对 AI 编程代理运行环境（agent harness）的性能优化系统，为 Claude Code、Codex、Opencode、Cursor 等工具提供技能、记忆、安全与研究优先的开发流程，以 MIT 协议开源。",
+    "tags": [
+      "AI 编程代理",
+      "Claude Code",
+      "Codex",
+      "Cursor",
+      "性能优化",
+      "技能系统",
+      "npm",
+      "GitHub App",
+      "MIT 开源"
+    ],
+    "source": "daily",
+    "sourceLabel": "GitHub Trending",
+    "publishedAt": "2026-07-31T06:11:09.683Z"
+  },
+  {
+    "section": "github",
+    "digestDate": "2026-07-31",
+    "publishedDate": "7/31",
+    "time": "本次更新",
+    "readTime": "3 分钟",
+    "accent": "blue",
+    "inRecentWindow": true,
+    "paragraphs": [
+      "Build local voice agents with open-source models",
+      "详细功能请通过下方链接阅读项目 README。"
+    ],
+    "facts": [
+      {
+        "label": "主要语言",
+        "value": "Python"
+      },
+      {
+        "label": "Stars",
+        "value": "9,242"
+      },
+      {
+        "label": "今日新增 Stars",
+        "value": "+628"
+      },
+      {
+        "label": "Forks",
+        "value": "1,143"
+      },
+      {
+        "label": "许可证",
+        "value": "Apache-2.0"
+      },
+      {
+        "label": "最近更新",
+        "value": "2026-07-31"
+      }
+    ],
+    "externalLinks": [
+      {
+        "label": "阅读项目 README",
+        "url": "https://github.com/huggingface/speech-to-speech#readme"
+      },
+      {
+        "label": "查看 Releases",
+        "url": "https://github.com/huggingface/speech-to-speech/releases"
+      }
+    ],
+    "id": "github-trending:huggingface/speech-to-speech",
+    "title": "huggingface/speech-to-speech",
+    "sourceUrl": "https://github.com/huggingface/speech-to-speech",
+    "summary": "Build local voice agents with open-source models",
+    "tags": [
+      "GitHub",
+      "开源"
+    ],
+    "source": "daily",
+    "sourceLabel": "GitHub Trending",
+    "publishedAt": "2026-07-31T06:11:09.683Z"
+  },
+  {
+    "section": "github",
+    "digestDate": "2026-07-31",
+    "publishedDate": "7/31",
+    "time": "本次更新",
+    "readTime": "3 分钟",
+    "accent": "blue",
+    "inRecentWindow": true,
+    "paragraphs": [
+      "A curated list of awesome libraries, packages, strategies, books, blogs, tutorials for systematic trading.",
+      "详细功能请通过下方链接阅读项目 README。"
+    ],
+    "facts": [
+      {
+        "label": "主要语言",
+        "value": "Python"
+      },
+      {
+        "label": "Stars",
+        "value": "11,258"
+      },
+      {
+        "label": "今日新增 Stars",
+        "value": "+621"
+      },
+      {
+        "label": "Forks",
+        "value": "1,432"
+      },
+      {
+        "label": "许可证",
+        "value": "未标注"
+      },
+      {
+        "label": "最近更新",
+        "value": "2025-01-22"
+      }
+    ],
+    "externalLinks": [
+      {
+        "label": "阅读项目 README",
+        "url": "https://github.com/paperswithbacktest/awesome-systematic-trading#readme"
+      },
+      {
+        "label": "打开项目网站",
+        "url": "https://paperswithbacktest.com"
+      },
+      {
+        "label": "查看 Releases",
+        "url": "https://github.com/paperswithbacktest/awesome-systematic-trading/releases"
+      }
+    ],
+    "id": "github-trending:paperswithbacktest/awesome-systematic-trading",
+    "title": "paperswithbacktest/awesome-systematic-trading",
+    "sourceUrl": "https://github.com/paperswithbacktest/awesome-systematic-trading",
+    "summary": "A curated list of awesome libraries, packages, strategies, books, blogs, tutorials for systematic trading.",
+    "tags": [
+      "GitHub",
+      "开源"
+    ],
+    "source": "daily",
+    "sourceLabel": "GitHub Trending",
+    "publishedAt": "2026-07-31T06:11:09.683Z"
+  },
+  {
+    "section": "github",
+    "digestDate": "2026-07-31",
+    "publishedDate": "7/31",
+    "time": "本次更新",
+    "readTime": "3 分钟",
+    "accent": "blue",
+    "inRecentWindow": true,
+    "paragraphs": [
+      "12 Weeks, 24 Lessons, AI for All!",
+      "详细功能请通过下方链接阅读项目 README。"
+    ],
+    "facts": [
+      {
+        "label": "主要语言",
+        "value": "Jupyter Notebook"
+      },
+      {
+        "label": "Stars",
+        "value": "54,425"
+      },
+      {
+        "label": "今日新增 Stars",
+        "value": "+155"
+      },
+      {
+        "label": "Forks",
+        "value": "11,017"
+      },
+      {
+        "label": "许可证",
+        "value": "MIT"
+      },
+      {
+        "label": "最近更新",
+        "value": "2026-07-21"
+      }
+    ],
+    "externalLinks": [
+      {
+        "label": "阅读项目 README",
+        "url": "https://github.com/microsoft/AI-For-Beginners#readme"
+      },
+      {
+        "label": "查看 Releases",
+        "url": "https://github.com/microsoft/AI-For-Beginners/releases"
+      }
+    ],
+    "id": "github-trending:microsoft/AI-For-Beginners",
+    "title": "microsoft/AI-For-Beginners",
+    "sourceUrl": "https://github.com/microsoft/AI-For-Beginners",
+    "summary": "12 Weeks, 24 Lessons, AI for All!",
+    "tags": [
+      "GitHub",
+      "开源"
+    ],
+    "source": "daily",
+    "sourceLabel": "GitHub Trending",
+    "publishedAt": "2026-07-31T06:11:09.683Z"
+  },
+  {
+    "section": "github",
+    "digestDate": "2026-07-31",
+    "publishedDate": "7/31",
+    "time": "本次更新",
+    "readTime": "3 分钟",
+    "accent": "blue",
+    "inRecentWindow": true,
+    "paragraphs": [
+      "The open-source alternative to Claude Cowork (powered by opencode)",
+      "详细功能请通过下方链接阅读项目 README。"
+    ],
+    "facts": [
+      {
+        "label": "主要语言",
+        "value": "TypeScript"
+      },
+      {
+        "label": "Stars",
+        "value": "18,931"
+      },
+      {
+        "label": "今日新增 Stars",
+        "value": "+915"
+      },
+      {
+        "label": "Forks",
+        "value": "1,922"
+      },
+      {
+        "label": "许可证",
+        "value": "NOASSERTION"
+      },
+      {
+        "label": "最近更新",
+        "value": "2026-07-31"
+      }
+    ],
+    "externalLinks": [
+      {
+        "label": "阅读项目 README",
+        "url": "https://github.com/different-ai/openwork#readme"
+      },
+      {
+        "label": "打开项目网站",
+        "url": "https://openworklabs.com"
+      },
+      {
+        "label": "查看 Releases",
+        "url": "https://github.com/different-ai/openwork/releases"
+      }
+    ],
+    "id": "github-trending:different-ai/openwork",
+    "title": "different-ai/openwork",
+    "sourceUrl": "https://github.com/different-ai/openwork",
+    "summary": "The open-source alternative to Claude Cowork (powered by opencode)",
+    "tags": [
+      "GitHub",
+      "开源"
+    ],
+    "source": "daily",
+    "sourceLabel": "GitHub Trending",
+    "publishedAt": "2026-07-31T06:11:09.683Z"
+  },
+  {
+    "section": "github",
+    "digestDate": "2026-07-31",
+    "publishedDate": "7/31",
+    "time": "本次更新",
+    "readTime": "3 分钟",
+    "accent": "blue",
+    "inRecentWindow": true,
+    "paragraphs": [
+      "Baileys 是一个通过 WebSocket 直接对接 WhatsApp Web API 的 TypeScript 库。它不依赖 Selenium 或 Chromium 等浏览器环境，官方称可节省约 500MB 内存，同时支持 WhatsApp 的多设备（multi-device）与网页版本。原仓库已被原作者移除，当前仓库为社区维护的唯一官方仓库。",
+      "核心能力包括：通过二维码或配对码（Pairing Code）连接账号、接收完整历史消息、保存与恢复登录会话（Auth Info）、事件处理机制、群组元数据缓存、重试机制优化与投票消息解密等。README 提供了 example.ts 示例脚本覆盖常见用例，可通过 yarn add @whiskeysockets/baileys 安装稳定版，或安装 GitHub 上的 edge 版本获取最新修复。",
+      "适合需要在 Node.js 环境中构建 WhatsApp 消息自动化、客服机器人或消息集成服务的 JavaScript/TypeScript 开发者。项目采用 MIT 协议，文档托管在 baileys.wiki，并有 Discord 社区提供支持。",
+      "需要注意：7.0.0 版本引入了多项破坏性变更，升级前需查阅迁移指南。项目与 WhatsApp 官方无任何关联，维护者明确反对垃圾信息、批量自动消息和跟踪类用途，使用可能违反 WhatsApp 服务条款，需自行承担风险。"
+    ],
+    "facts": [
+      {
+        "label": "主要语言",
+        "value": "JavaScript"
+      },
+      {
+        "label": "Stars",
+        "value": "10,483"
+      },
+      {
+        "label": "今日新增 Stars",
+        "value": "+19"
+      },
+      {
+        "label": "Forks",
+        "value": "3,257"
+      },
+      {
+        "label": "许可证",
+        "value": "MIT"
+      },
+      {
+        "label": "最近更新",
+        "value": "2026-07-29"
+      }
+    ],
+    "externalLinks": [
+      {
+        "label": "阅读项目 README",
+        "url": "https://github.com/WhiskeySockets/Baileys#readme"
+      },
+      {
+        "label": "打开项目网站",
+        "url": "https://baileys.wiki/"
+      },
+      {
+        "label": "查看 Releases",
+        "url": "https://github.com/WhiskeySockets/Baileys/releases"
+      }
+    ],
+    "id": "github-trending:WhiskeySockets/Baileys",
+    "title": "Baileys：基于 WebSocket 的 WhatsApp Web API 库",
+    "sourceUrl": "https://github.com/WhiskeySockets/Baileys",
+    "summary": "Baileys 是一个基于 WebSocket 的 TypeScript/JavaScript 库，无需浏览器即可直接与 WhatsApp Web API 交互，支持多设备版本，适用于构建消息收发类应用。",
+    "tags": [
+      "WhatsApp",
+      "WebSocket",
+      "TypeScript",
+      "多设备",
+      "消息API",
+      "Node.js"
+    ],
+    "source": "daily",
+    "sourceLabel": "GitHub Trending",
+    "publishedAt": "2026-07-31T06:11:09.683Z"
+  },
+  {
+    "section": "github",
+    "digestDate": "2026-07-31",
+    "publishedDate": "7/31",
+    "time": "本次更新",
+    "readTime": "3 分钟",
+    "accent": "blue",
+    "inRecentWindow": true,
+    "paragraphs": [
+      "AI agent skill that researches any topic across Reddit, X, YouTube, HN, Polymarket, and the web - then synthesizes a grounded summary",
+      "详细功能请通过下方链接阅读项目 README。"
+    ],
+    "facts": [
+      {
+        "label": "主要语言",
+        "value": "Python"
+      },
+      {
+        "label": "Stars",
+        "value": "55,703"
+      },
+      {
+        "label": "今日新增 Stars",
+        "value": "+378"
+      },
+      {
+        "label": "Forks",
+        "value": "4,795"
+      },
+      {
+        "label": "许可证",
+        "value": "MIT"
+      },
+      {
+        "label": "最近更新",
+        "value": "2026-07-31"
+      }
+    ],
+    "externalLinks": [
+      {
+        "label": "阅读项目 README",
+        "url": "https://github.com/mvanhorn/last30days-skill#readme"
+      },
+      {
+        "label": "查看 Releases",
+        "url": "https://github.com/mvanhorn/last30days-skill/releases"
+      }
+    ],
+    "id": "github-trending:mvanhorn/last30days-skill",
+    "title": "mvanhorn/last30days-skill",
+    "sourceUrl": "https://github.com/mvanhorn/last30days-skill",
+    "summary": "AI agent skill that researches any topic across Reddit, X, YouTube, HN, Polymarket, and the web - then synthesizes a grounded summary",
+    "tags": [
+      "GitHub",
+      "开源"
+    ],
+    "source": "daily",
+    "sourceLabel": "GitHub Trending",
+    "publishedAt": "2026-07-31T06:11:09.683Z"
+  },
+  {
+    "section": "github",
+    "digestDate": "2026-07-31",
+    "publishedDate": "7/31",
+    "time": "本次更新",
+    "readTime": "3 分钟",
+    "accent": "blue",
+    "inRecentWindow": true,
+    "paragraphs": [
+      "ASP.NET Core is a cross-platform .NET framework for building modern cloud-based web applications on Windows, Mac, or Linux.",
+      "详细功能请通过下方链接阅读项目 README。"
+    ],
+    "facts": [
+      {
+        "label": "主要语言",
+        "value": "C#"
+      },
+      {
+        "label": "Stars",
+        "value": "38,315"
+      },
+      {
+        "label": "今日新增 Stars",
+        "value": "+7"
+      },
+      {
+        "label": "Forks",
+        "value": "10,860"
+      },
+      {
+        "label": "许可证",
+        "value": "MIT"
+      },
+      {
+        "label": "最近更新",
+        "value": "2026-07-31"
+      }
+    ],
+    "externalLinks": [
+      {
+        "label": "阅读项目 README",
+        "url": "https://github.com/dotnet/aspnetcore#readme"
+      },
+      {
+        "label": "打开项目网站",
+        "url": "https://asp.net"
+      },
+      {
+        "label": "查看 Releases",
+        "url": "https://github.com/dotnet/aspnetcore/releases"
+      }
+    ],
+    "id": "github-trending:dotnet/aspnetcore",
+    "title": "dotnet/aspnetcore",
+    "sourceUrl": "https://github.com/dotnet/aspnetcore",
+    "summary": "ASP.NET Core is a cross-platform .NET framework for building modern cloud-based web applications on Windows, Mac, or Linux.",
+    "tags": [
+      "GitHub",
+      "开源"
+    ],
+    "source": "daily",
+    "sourceLabel": "GitHub Trending",
+    "publishedAt": "2026-07-31T06:11:09.683Z"
+  },
+  {
+    "section": "github",
+    "digestDate": "2026-07-31",
+    "publishedDate": "7/31",
+    "time": "本次更新",
+    "readTime": "3 分钟",
+    "accent": "blue",
+    "inRecentWindow": true,
+    "paragraphs": [
+      "PowerToys 是微软官方维护的一组 Windows 实用工具合集，目标是帮助用户定制 Windows 体验并简化日常任务。项目以 MIT 协议开源，获得了超过 13 万的 Star，是 Windows 平台上最受欢迎的微软开源项目之一。",
+      "它包含 30 多个功能各异的工具，覆盖多个使用场景：窗口管理方面有 FancyZones（自定义窗口布局）和 Always on Top（窗口置顶）；效率方面有 PowerToys Run（快速启动器）、Command Palette（命令面板）和 Advanced Paste（高级粘贴）；文件处理方面有 PowerRename（批量重命名）、File Locksmith（查看文件占用进程）、Image Resizer（图片缩放）和 File Explorer Add-ons（资源管理器预览增强）；此外还有 Color Picker（取色器）、Screen Ruler（屏幕标尺）、Keyboard Manager（键盘映射）、Mouse Without Borders（跨电脑共享键鼠）、Awake（保持唤醒）、Hosts File Editor、Registry Preview 等系统工具。",
+      "该项目适合所有希望提升 Windows 使用效率的用户，尤其是开发者、设计师和重度办公用户。各工具相互独立，可以在设置中按需启用或禁用，避免资源浪费。",
+      "需要注意的是，PowerToys 仅支持 Windows 系统，部分工具需要较新的系统版本。完整文档可参考官方文档站点，发布说明可在仓库的 Release notes 中查看。"
+    ],
+    "facts": [
+      {
+        "label": "主要语言",
+        "value": "C"
+      },
+      {
+        "label": "Stars",
+        "value": "137,223"
+      },
+      {
+        "label": "今日新增 Stars",
+        "value": "+70"
+      },
+      {
+        "label": "Forks",
+        "value": "8,368"
+      },
+      {
+        "label": "许可证",
+        "value": "MIT"
+      },
+      {
+        "label": "最近更新",
+        "value": "2026-07-31"
+      }
+    ],
+    "externalLinks": [
+      {
+        "label": "阅读项目 README",
+        "url": "https://github.com/microsoft/PowerToys#readme"
+      },
+      {
+        "label": "查看 Releases",
+        "url": "https://github.com/microsoft/PowerToys/releases"
+      }
+    ],
+    "id": "github-trending:microsoft/PowerToys",
+    "title": "Microsoft PowerToys：Windows 系统增强与效率工具集",
+    "sourceUrl": "https://github.com/microsoft/PowerToys",
+    "summary": "微软官方出品的开源 Windows 工具合集，内置 30 多款实用小工具，帮助用户定制系统、简化日常操作、提升工作效率，采用 MIT 许可证。",
+    "tags": [
+      "Windows",
+      "效率工具",
+      "窗口管理",
+      "FancyZones",
+      "PowerToys Run",
+      "批量重命名",
+      "微软",
+      "开源工具"
+    ],
+    "source": "daily",
+    "sourceLabel": "GitHub Trending",
+    "publishedAt": "2026-07-31T06:11:09.683Z"
+  },
+  {
+    "section": "github",
+    "digestDate": "2026-07-31",
+    "publishedDate": "7/31",
+    "time": "本次更新",
+    "readTime": "3 分钟",
+    "accent": "blue",
+    "inRecentWindow": true,
+    "paragraphs": [
+      "Ansible 是一个以“极简”为设计目标的 IT 自动化平台，能够处理配置管理、应用部署、云资源供应、临时任务执行、网络自动化以及多节点编排等场景，还能轻松实现带负载均衡的零停机滚动更新等复杂变更。其核心理念是让基础设施用对人类和机器都友好的语言来描述，语法接近自然英语。",
+      "Ansible 的最大特点是无代理（agentless）架构：它直接利用远程机器上已有的 SSH 服务进行管理，无需在被控端安装任何客户端或开放额外端口，新机器可以立即纳入管理而无需预装软件。它还支持并行快速管理大量机器、以非 root 用户运行，并允许用任何动态语言（不限于 Python）开发模块。",
+      "该项目适合运维工程师、DevOps 团队、系统管理员以及需要自动化部署和云管理的开发团队。安装方式简单，可通过 pip 或系统包管理器安装稳定版；追求最新功能的开发者也可以直接运行 devel 分支，但需注意该分支可能引入破坏性变更。",
+      "注意事项：Ansible 基于 GPL-3.0 协议开源，二次分发需遵守相应条款。项目社区活跃，用户可通过官方论坛提问交流、通过 Bullhorn 邮件列表获取发布公告；贡献代码需遵循开发者指南并向 devel 分支提交 PR，较大改动建议先与社区沟通以避免重复劳动。"
+    ],
+    "facts": [
+      {
+        "label": "主要语言",
+        "value": "Python"
+      },
+      {
+        "label": "Stars",
+        "value": "69,944"
+      },
+      {
+        "label": "今日新增 Stars",
+        "value": "+29"
+      },
+      {
+        "label": "Forks",
+        "value": "24,256"
+      },
+      {
+        "label": "许可证",
+        "value": "GPL-3.0"
+      },
+      {
+        "label": "最近更新",
+        "value": "2026-07-31"
+      }
+    ],
+    "externalLinks": [
+      {
+        "label": "阅读项目 README",
+        "url": "https://github.com/ansible/ansible#readme"
+      },
+      {
+        "label": "打开项目网站",
+        "url": "https://www.ansible.com/"
+      },
+      {
+        "label": "查看 Releases",
+        "url": "https://github.com/ansible/ansible/releases"
+      }
+    ],
+    "id": "github-trending:ansible/ansible",
+    "title": "Ansible：简单易用的无代理 IT 自动化平台",
+    "sourceUrl": "https://github.com/ansible/ansible",
+    "summary": "Ansible 是一个极其简洁的 IT 自动化系统，通过 SSH 以无代理方式实现配置管理、应用部署、云资源编排和网络自动化，采用 GPL-3.0 许可证，由 Python 编写。",
+    "tags": [
+      "IT自动化",
+      "配置管理",
+      "应用部署",
+      "无代理",
+      "SSH",
+      "DevOps",
+      "云编排",
+      "网络自动化",
+      "Python"
+    ],
+    "source": "daily",
+    "sourceLabel": "GitHub Trending",
+    "publishedAt": "2026-07-31T06:11:09.683Z"
+  },
+  {
+    "section": "github",
+    "digestDate": "2026-07-31",
+    "publishedDate": "7/31",
+    "time": "本次更新",
+    "readTime": "3 分钟",
+    "accent": "blue",
+    "inRecentWindow": true,
+    "paragraphs": [
+      "chrome-devtools-mcp 是 Chrome DevTools 团队推出的 Model Context Protocol（MCP）服务器，核心用途是把 Chrome DevTools 的完整能力开放给 AI 编码智能体（如 Antigravity、Claude、Cursor、Copilot）。接入后，智能体可以控制并检查一个正在运行的 Chrome 实例，从而完成网页自动化操作、调试与性能分析。项目同时提供 CLI，脱离 MCP 环境也能使用。",
+      "核心能力分三块：一是性能洞察，借助 Chrome DevTools 录制 trace 并提取可执行的性能优化建议；二是高级浏览器调试，可分析网络请求、截取屏幕截图、查看带有 source map 映射堆栈的控制台消息；三是基于 Puppeteer 的可靠自动化，能自动等待操作结果。此外还提供 --slim 精简模式，适合只需基础浏览器任务的场景。接入方式简单，在 MCP 客户端配置中通过 npx 启动即可，要求 Node.js LTS 与当前稳定版 Chrome。",
+      "适合正在使用 AI 编码助手、希望智能体直接操作浏览器进行端到端验证、调试前端问题或分析页面性能的开发者。需要注意的是：该服务会把浏览器实例的内容暴露给 MCP 客户端，应避免在浏览器中处理敏感或个人信息；官方仅保证支持 Google Chrome 与 Chrome for Testing，其他 Chromium 浏览器可能行为异常；性能工具默认会向 Google CrUX API 发送 trace URL（可用 --no-performance-crux 关闭），且默认收集使用统计（可用 --no-usage-statistics 或环境变量关闭）。"
+    ],
+    "facts": [
+      {
+        "label": "主要语言",
+        "value": "TypeScript"
+      },
+      {
+        "label": "Stars",
+        "value": "48,156"
+      },
+      {
+        "label": "今日新增 Stars",
+        "value": "+80"
+      },
+      {
+        "label": "Forks",
+        "value": "3,267"
+      },
+      {
+        "label": "许可证",
+        "value": "Apache-2.0"
+      },
+      {
+        "label": "最近更新",
+        "value": "2026-07-31"
+      }
+    ],
+    "externalLinks": [
+      {
+        "label": "阅读项目 README",
+        "url": "https://github.com/ChromeDevTools/chrome-devtools-mcp#readme"
+      },
+      {
+        "label": "打开项目网站",
+        "url": "https://npmjs.org/package/chrome-devtools-mcp"
+      },
+      {
+        "label": "查看 Releases",
+        "url": "https://github.com/ChromeDevTools/chrome-devtools-mcp/releases"
+      }
+    ],
+    "id": "github-trending:ChromeDevTools/chrome-devtools-mcp",
+    "title": "Chrome DevTools MCP：让编码智能体操控真实浏览器",
+    "sourceUrl": "https://github.com/ChromeDevTools/chrome-devtools-mcp",
+    "summary": "Chrome 官方出品的 MCP 服务器，让 Claude、Cursor、Copilot 等 AI 编码助手能够控制和检查真实的 Chrome 浏览器，实现可靠自动化、深度调试与性能分析。",
+    "tags": [
+      "MCP",
+      "Chrome DevTools",
+      "AI 编码助手",
+      "浏览器自动化",
+      "Puppeteer",
+      "性能分析",
+      "前端调试",
+      "TypeScript"
+    ],
+    "source": "daily",
+    "sourceLabel": "GitHub Trending",
+    "publishedAt": "2026-07-31T06:11:09.683Z"
+  },
+  {
+    "section": "github",
+    "digestDate": "2026-07-31",
+    "publishedDate": "7/31",
+    "time": "本次更新",
+    "readTime": "3 分钟",
+    "accent": "blue",
+    "inRecentWindow": true,
+    "paragraphs": [
+      "tuicr 解决的是在终端里完成完整代码评审的需求。它在终端中呈现 GitHub 风格的连续 diff，所有变更文件可以在一个流中连续滚动浏览，并支持在行、范围、文件和评审四个层级添加 PR 风格评论。评审进度按文件或 hunk 粒度跟踪，且跨会话持久化，中断后可以接着继续。",
+      "核心能力集中在评审的闭环上：评审完成后有三种导出方式——通过 :submit 推送为真实的 GitHub PR 评审或 GitLab MR 评审（内联评论会落在对应行上），用 y 或 :clip 把带编号和文件/行锚点的结构化 Markdown 复制到剪贴板（方便交给编码代理），或直接通过 --stdout 管道输出。它兼容 git、jj 和 mercurial 三种版本控制系统，可评审未提交的变更、任意提交范围，或指定的 GitHub PR / GitLab MR；再次打开评审过的 PR/MR 时，会自动预选上次提交评审之后的新提交，已覆盖的提交以 ✓ 标记。",
+      "适合习惯 Vim 操作、希望不离开终端就完成评审工作流的开发者，以及需要把评审意见喂给 AI 编码代理的用户。安装方式多样（install 脚本、Homebrew、Cargo、Mise、Nix 或预编译二进制），内置 tuicr update 一键升级。",
+      "注意事项：推送到 GitHub 要求本机 gh CLI 已完成认证，GitLab 则需要 glab 认证；GitLab 的 Request changes 要求账号是被指派的 reviewer，Draft 评审仅 GitHub 支持。自托管 GitLab 实例的配置需参考仓库中的 docs/GITLAB.md。"
+    ],
+    "facts": [
+      {
+        "label": "主要语言",
+        "value": "Rust"
+      },
+      {
+        "label": "Stars",
+        "value": "1,929"
+      },
+      {
+        "label": "今日新增 Stars",
+        "value": "+190"
+      },
+      {
+        "label": "Forks",
+        "value": "163"
+      },
+      {
+        "label": "许可证",
+        "value": "MIT"
+      },
+      {
+        "label": "最近更新",
+        "value": "2026-07-30"
+      }
+    ],
+    "externalLinks": [
+      {
+        "label": "阅读项目 README",
+        "url": "https://github.com/agavra/tuicr#readme"
+      },
+      {
+        "label": "打开项目网站",
+        "url": "https://tuicr.dev/"
+      },
+      {
+        "label": "查看 Releases",
+        "url": "https://github.com/agavra/tuicr/releases"
+      }
+    ],
+    "id": "github-trending:agavra/tuicr",
+    "title": "终端里的 Vim 风格代码评审工具",
+    "sourceUrl": "https://github.com/agavra/tuicr",
+    "summary": "tuicr 是一个运行在终端中的代码评审 TUI，采用 Vim 键位，提供 GitHub 风格的连续 diff 视图，支持行级评论，并可将评审推送到 GitHub、GitLab 或导出为结构化 Markdown。",
+    "tags": [
+      "代码评审",
+      "TUI",
+      "Vim 键位",
+      "GitHub PR",
+      "GitLab MR",
+      "diff",
+      "Rust",
+      "终端工具"
+    ],
+    "source": "daily",
+    "sourceLabel": "GitHub Trending",
+    "publishedAt": "2026-07-31T06:11:09.683Z"
+  },
+  {
+    "section": "x",
+    "digestDate": "2026-07-31",
+    "publishedDate": "7/30",
+    "time": "本次更新",
+    "readTime": "3 分钟",
+    "accent": "green",
+    "inRecentWindow": true,
+    "paragraphs": [],
+    "id": "follow-builders:2082705944782520462",
+    "title": "领域专长叠加 AI 原生能力的人",
+    "sourceUrl": "https://x.com/zarazhangrui/status/2082705944782520462",
+    "summary": "创业者 Zara Zhang 表示:如果一个人既拥有深厚的领域专长与经验,又是",
+    "tags": [
+      "X",
+      "AI"
+    ],
+    "source": "builder",
+    "sourceLabel": "Zara Zhang · Follow Builders",
+    "publishedAt": "2026-07-30T05:52:46.000Z"
+  },
+  {
+    "section": "x",
+    "digestDate": "2026-07-31",
+    "publishedDate": "7/30",
+    "time": "本次更新",
+    "readTime": "3 分钟",
+    "accent": "green",
+    "inRecentWindow": true,
+    "paragraphs": [
+      "擅长营销不仅仅对你的营销有好处；它对你的产品也有好处。\n\n太多技术人员在为想象中的受众开发产品，完全没有接触到人们实际上如何看待和使用这些产品的现实。",
+      "【原文内容】Zara Zhang（根据其简介为开发者、哈佛2017届校友）提出两个观点：其一，营销能力对产品本身有正向作用；其二，许多技术人员开发产品时面向的是'想象中的受众'，缺乏对用户真实感知与实际使用方式的了解。\n【编辑解读】这条推文触及产品开发中的经典议题：技术导向的开发者往往专注于功能实现，却忽视市场反馈和用户真实行为。作者暗示营销思维本质上是一种用户理解能力——懂得营销意味着理解用户如何感知价值，而这种理解可以反过来指导产品决策，这与创业圈倡导的'与真实用户保持接触'理念相呼应。\n【补充说明】推文附有一条链接，当前采集结果未包含链接页详情，无法确认其指向的具体内容。"
+    ],
+    "id": "follow-builders:2082684904136134881",
+    "title": "Zara Zhang：擅长营销对产品本身也有益，技术人员常为想象中的受众开发产品",
+    "sourceUrl": "https://x.com/zarazhangrui/status/2082684904136134881",
+    "summary": "Zara Zhang 认为，擅长营销不仅有利于推广，对产品本身也有好处。她指出，太多技术人员在为想象中的受众开发产品，完全脱离了用户实际感知和使用产品的现实。",
+    "tags": [
+      "产品营销",
+      "用户需求",
+      "技术开发者",
+      "用户洞察",
+      "产品开发"
+    ],
+    "source": "builder",
+    "sourceLabel": "Zara Zhang · Follow Builders",
+    "publishedAt": "2026-07-30T04:29:10.000Z"
+  },
+  {
+    "section": "x",
+    "digestDate": "2026-07-31",
+    "publishedDate": "7/30",
+    "time": "本次更新",
+    "readTime": "3 分钟",
+    "accent": "green",
+    "inRecentWindow": true,
+    "paragraphs": [
+      "Dwarkesh的帖子发人深省。总的来说——随着AI变得更强大——我们应该预期，在边际上，推理（算力）会流向经济上最有用的任务，其他一切都会被价格挤出。\n\n理论上，在一个极度稀缺的环境中，这会导致推理成本飙升，因为那些任务的价值将远高于今天。\n\n但我不认为事情会按照帖子里描述的方式发展，原因很简单：市场力量会争夺推理需求，以此继续压低价格，直到产能跟上。\n\n有太多的模型提供商和基础设施玩家想要承接这些工作负载，因此不会出现帖子所提出的那种效应。但让我们拭目以待！",
+      "【原文内容】Aaron Levie（云内容管理公司Box的CEO）评论科技播客主理人Dwarkesh Patel的一篇帖子（注：推文中未附该帖子链接，当前采集结果未包含帖子原文详情，以下关于帖子观点的描述均转述自Levie本人的概括）。Levie转述的观点是：AI越强大，推理算力越会被分配到"
+    ],
+    "id": "follow-builders:2082658870523248967",
+    "title": "Box CEO Aaron Levie反驳",
+    "sourceUrl": "https://x.com/levie/status/2082658870523248967",
+    "summary": "Box首席执行官Aaron Levie回应Dwarkesh的一篇帖子：随着AI能力增强，推理算力在边际上会流向经济价值最高的任务，其他用途会被价格挤出，理论上稀缺环境会让推理成本飙升。但Levie认为这种情况不会发生，因为众多模型厂商和基础设施公司会争夺推理需求，在产能跟上之前持续压低价格。",
+    "tags": [
+      "AI推理成本",
+      "推理算力供需",
+      "市场竞争",
+      "Dwarkesh Patel",
+      "模型厂商",
+      "基础设施"
+    ],
+    "source": "builder",
+    "sourceLabel": "Aaron Levie · Follow Builders",
+    "publishedAt": "2026-07-30T02:45:43.000Z"
+  },
+  {
+    "section": "x",
+    "digestDate": "2026-07-31",
+    "publishedDate": "7/30",
+    "time": "本次更新",
+    "readTime": "3 分钟",
+    "accent": "green",
+    "inRecentWindow": true,
+    "paragraphs": [
+      "本周的主题是'便宜到无需计量的智能'。明天我们又将发布新品。",
+      "【原文信息】作者为 OpenAI 员工 Thibault Sottiaux。原文只有两句话：'This week is all about intelligence too cheap to meter. Tomorrow we ship again.'（本周的主题是便宜到无需计量的智能。明天我们又将发布新品。）\n【解释与语境】'too cheap to meter' 化用自 1954 年美国原子能委员会主席 Lewis Strauss 关于核能的著名表述'electricity too cheap to meter'（电力便宜到无需计量），此处借用来形容智能（模型推理）的成本大幅下降，暗示相关发布可能与更低的模型使用成本或更高效的推理有关。'ship' 在科技行业语境中指发布产品或功能。推文未说明明日发布的具体内容，不应猜测；该表述仅为作者个人的预告性说法。"
+    ],
+    "id": "follow-builders:2082655731204096275",
+    "title": "OpenAI 员工预告明日再发新品：本周主题是'便宜到无需计量的智能'",
+    "sourceUrl": "https://x.com/thsottiaux/status/2082655731204096275",
+    "summary": "OpenAI 员工 Thibault Sottiaux 预告，本周的主题是'便宜到无需计量的智能'（intelligence too cheap to meter），并称'明天我们又要发布新品'。推文未透露具体发布内容。",
+    "tags": [
+      "OpenAI",
+      "智能成本",
+      "新品发布",
+      "成本下降"
+    ],
+    "source": "builder",
+    "sourceLabel": "Thibault Sottiaux · Follow Builders",
+    "publishedAt": "2026-07-30T02:33:14.000Z"
+  },
+  {
+    "section": "x",
+    "digestDate": "2026-07-31",
+    "publishedDate": "7/30",
+    "time": "本次更新",
+    "readTime": "3 分钟",
+    "accent": "green",
+    "inRecentWindow": true,
+    "paragraphs": [
+      "AI 极大地提升了我的生产力，但我开始意识到自己养成的三个暗黑模式：\n\n1. 变得太懒，什么都不愿读\n\n只看 AI 摘要而不读原文，或者放任智能体随意改动我的文件而不去检查它们到底做了什么，这些都太容易了。\n\n2. 外出时被智能体分散注意力\n\n外出时太容易掏出手机打开 ChatGPT 或 Claude 给我的智能体反馈意见，并感觉自己很“高效”——即使我本该在陪孩子，或做任何别的事情。\n\n3. 宁愿和智能体聊，也不愿和人聊\n\n这是伴随 ChatGPT 语音功能出现的新模式：有时我发现自己宁愿和智能体做头脑风暴，也不愿和房间里真实存在的人交流。",
+      "【原文语境】Peter Yang 是面向忙碌人群的 AI 实用教程与访谈作者。推文中的“dark patterns（暗黑模式）”本是用户体验设计术语，指诱导用户做出非本意行为的界面设计手法；作者借用该词，形容自己在使用 AI 过程中不知不觉形成的三个负面习惯。三点分别指向：信息获取上的“摘要依赖”与对智能体操作缺乏审查；注意力被智能体随时侵占，干扰现实生活（如陪伴孩子的场景）；以及在语音交互足够好用之后，人际沟通被智能体部分替代的风险。\n【编辑解释】这条推文并非批判 AI 本身，而是资深用户的自我警惕，属于个人经验分享。其中第三点提到的 ChatGPT 语音模式，恰与同期网络上对该功能的热烈好评形成呼应——语音体验越好，人们越可能偏向与 AI 交流，这一关联是编辑层面的观察，并非作者原文的表述。"
+    ],
+    "id": "follow-builders:2082642205811106158",
+    "title": "Peter Yang：AI 提升效率的同时，我察觉到自己养成的三个“暗黑模式”",
+    "sourceUrl": "https://x.com/petergyang/status/2082642205811106158",
+    "summary": "Peter Yang 反思 AI 虽提升了他的生产力，但也带来三个不良习惯：懒得读原文、外出时被智能体分散注意力、宁愿与 ChatGPT 语音交流而非与真人讨论。",
+    "tags": [
+      "AI 依赖",
+      "暗黑模式",
+      "AI 摘要",
+      "智能体",
+      "ChatGPT 语音",
+      "效率反思"
+    ],
+    "source": "builder",
+    "sourceLabel": "Peter Yang · Follow Builders",
+    "publishedAt": "2026-07-30T01:39:30.000Z"
+  },
+  {
+    "section": "x",
+    "digestDate": "2026-07-31",
+    "publishedDate": "7/30",
+    "time": "本次更新",
+    "readTime": "3 分钟",
+    "accent": "green",
+    "inRecentWindow": true,
+    "paragraphs": [
+      "@ilanbigio 和 @sandersted 在这项调查和文章上做得非常出色。看起来他们做得很开心。\n\n各位在外要照顾好你们的 harness（智能体运行框架/脚手架），你们的模型会感谢你们的。",
+      "【原文语境】作者 Thibault Sottiaux 在 OpenAI 负责 Codex 与 ChatGPT 相关工作。他转推并表扬了两位同事（@ilanbigio 和 @sandersted）完成的一项调查及配套文章，语气轻松，认为这项工作过程有趣。\n【解释】推文中的 \"harness\" 在 AI 工程语境下通常指包裹大模型的智能体框架/脚手架，包括工具调用、提示词结构、运行环境等外围设施。作者借此强调：模型外围工程的质量会直接影响模型表现，维护好脚手架，模型才能发挥得更好。推文附带一个短链接，指向那篇被称赞的文章；当前采集结果未包含链接页详情，因此无法确认文章具体主题。"
+    ],
+    "id": "follow-builders:2082637967852806207",
+    "title": "OpenAI 工程师称赞同事的调查文章，提醒开发者维护好模型 harness",
+    "sourceUrl": "https://x.com/thsottiaux/status/2082637967852806207",
+    "summary": "OpenAI 员工 Thibault Sottiaux 称赞同事 @ilanbigio 和 @sandersted 的调查与文章，并提醒开发者照顾好自己的 harness（智能体框架/脚手架），模型会因此表现更好。",
+    "tags": [
+      "OpenAI",
+      "Codex",
+      "智能体框架",
+      "模型脚手架",
+      "工程实践"
+    ],
+    "source": "builder",
+    "sourceLabel": "Thibault Sottiaux · Follow Builders",
+    "publishedAt": "2026-07-30T01:22:39.000Z"
+  },
+  {
+    "section": "x",
+    "digestDate": "2026-07-31",
+    "publishedDate": "7/30",
+    "time": "本次更新",
+    "readTime": "3 分钟",
+    "accent": "green",
+    "inRecentWindow": true,
+    "paragraphs": [
+      "7 个月过去了，这一点依然成立。最大的 Alpha（超额收益/优势）在于理解模型前沿。",
+      "【原文信息】作者 Madhu Guru 现任 Meta AI 高级总监，此前在 Google 领导过 Gemini、Veo、Nano Banana 等项目。推文正文称『7 个月过去了，这一点依然成立。最大的 alpha 在于理解模型前沿』，并附有一个 t.co 短链接。推文中的『这一点（this）』表明作者在引用自己约 7 个月前的某个判断或观点，但本次采集结果未包含该被引用内容；短链接 https://t.co/x4EPGKFvSQ 的目标页详情同样未包含在当前采集结果中，无法确认其指向（可能是原推文或外部文章）。【解释与分析】『alpha』一词源自投资语境，指超越市场平均水平的超额收益，在科技圈常被引申为『超额优势、认知差带来的红利』；『模型前沿（model frontier）』指大模型能力的最前沿边界。结合作者的背景（曾领导 Gemini、Veo 等模型项目，现负责 Meta AI），这句话的大意是：无论对投资还是产品/技术决策而言，真正稀缺的竞争优势来自对大模型能力边界的深刻理解，即看清模型能力走向哪里，比追逐表层应用热点更有价值。需要注意，由于 7 个月前的原始观点内容未随本次采集提供，其具体所指（例如关于某类模型能力、产品机会或投资方向的判断）无法进一步确认，以上仅为基于推文文字的合理语境解读。"
+    ],
+    "id": "follow-builders:2082629168035201459",
+    "title": "Meta AI 高管：最大的 Alpha 在于理解模型前沿",
+    "sourceUrl": "https://x.com/realmadhuguru/status/2082629168035201459",
+    "summary": "Meta AI 高级总监 Madhu Guru 发文称，7 个月前的观点至今依然成立：最大的 Alpha（超额优势）在于理解模型前沿。推文附有短链接，但当前采集结果未包含链接页详情，也未包含其所指的 7 个月前原文内容。",
+    "tags": [
+      "模型前沿",
+      "Alpha 超额优势",
+      "Meta AI",
+      "大模型能力",
+      "AI 投资与决策"
+    ],
+    "source": "builder",
+    "sourceLabel": "Madhu Guru · Follow Builders",
+    "publishedAt": "2026-07-30T00:47:41.000Z"
+  },
+  {
+    "section": "x",
+    "digestDate": "2026-07-31",
+    "publishedDate": "7/30",
+    "time": "本次更新",
+    "readTime": "3 分钟",
+    "accent": "green",
+    "inRecentWindow": true,
+    "paragraphs": [
+      "原文：so excited for this.\n\nvery close to models that will significantly accelerate scientific discovery; the best way to do this is for us to empower scientists, not to try to figure out everything ourselves.\n\nwe all deserve the benefits. https://t.co/nzfHpb96re",
+      "中文加工暂未完成，可通过原始链接查看推文。"
+    ],
+    "id": "follow-builders:2082628413769003269",
+    "title": "Sam Altman：so excited for this.\n\nvery close to models that will signi",
+    "sourceUrl": "https://x.com/sama/status/2082628413769003269",
+    "summary": "原始推文已采集；本条中文加工暂未完成。",
+    "tags": [
+      "X",
+      "AI"
+    ],
+    "source": "builder",
+    "sourceLabel": "Sam Altman · Follow Builders",
+    "publishedAt": "2026-07-30T00:44:41.000Z"
+  },
+  {
+    "section": "x",
+    "digestDate": "2026-07-31",
+    "publishedDate": "7/30",
+    "time": "本次更新",
+    "readTime": "3 分钟",
+    "accent": "green",
+    "inRecentWindow": true,
+    "paragraphs": [
+      "哥布林级别的博客文章 https://t.co/pmcqmDjE4f",
+      "【原文内容】推文全文仅有“goblin-level blog post”加一条短链接，没有提供博客标题、作者或任何进一步说明。【背景解释】“goblin（哥布林/地精）”是英语网络俚语，源于曾当选牛津年度词汇的“goblin mode（哥布林模式）”，常用来形容不按常规、带点邋遢搞怪或自我放纵的风格；此处“goblin-level”可能是对该博文风格的调侃式评价，但仅凭推文无法确定是褒是贬。【说明】所附短链接指向的博客正文不在本次采集范围内，当前采集结果未包含链接页详情，无法确认具体是哪篇文章。"
+    ],
+    "id": "follow-builders:2082627724040884667",
+    "title": "Sam Altman 发推分享一篇博客文章，称其为“哥布林级别”",
+    "sourceUrl": "https://x.com/sama/status/2082627724040884667",
+    "summary": "OpenAI CEO Sam Altman 发布一条极简推文，用“goblin-level（哥布林级别）”形容一篇博客文章并附链接，但未说明文章作者、主题或具体评价含义。当前采集结果未包含链接页详情。",
+    "tags": [
+      "Sam Altman",
+      "OpenAI",
+      "博客文章",
+      "网络俚语"
+    ],
+    "source": "builder",
+    "sourceLabel": "Sam Altman · Follow Builders",
+    "publishedAt": "2026-07-30T00:41:57.000Z"
+  },
+  {
+    "section": "x",
+    "digestDate": "2026-07-31",
+    "publishedDate": "7/30",
+    "time": "本次更新",
+    "readTime": "3 分钟",
+    "accent": "green",
+    "inRecentWindow": true,
+    "paragraphs": [
+      "今天我尝试注册 @docusign，结果遇到一个我怎么也解不出来的验证码。\n\n这是一家市值 110 亿美元、人人都讨厌的公司。\n\n那些说'做人们想要的东西'的人并没有看到全貌。",
+      "【原文内容】作者 Swyx（AI 领域知名博主、Latent Space 播客主理人）分享了自己注册 DocuSign 时被验证码（CAPTCHA）卡住的经历，称 DocuSign 是一家市值 110 亿美元但'人人都讨厌'的公司，并由此质疑'make something people want'（做人们想要的东西）这一说法的完整性。\n【编辑解读】'Make something people want' 是 Y Combinator 的标志性口号。Swyx 的言下之意是：商业成功并不必然源于用户真心喜爱——像 DocuSign 这类公司即便用户体验糟糕、口碑不佳，仍可能凭借行业锁定、企业采购惯性、转换成本等因素维持百亿美元级市值。这是对'用户喜爱=商业成功'这一简单等式的反讽，暗示 B2B 软件的成功逻辑与消费者产品并不相同。\n【补充说明】推文附有两条链接（可能为配图或相关页面），当前采集结果未包含链接页详情，无法确认具体内容。文中'$11B'为作者引用的市值数据，实际市值会随市场波动。"
+    ],
+    "id": "follow-builders:2082617801362313527",
+    "title": "Swyx：注册 DocuSign 遭遇无法通过的验证码，质疑'做人们想要的东西'并非全貌",
+    "sourceUrl": "https://x.com/swyx/status/2082617801362313527",
+    "summary": "Swyx 吐槽注册 DocuSign 时遇到无法解出的验证码，称这是一家'人人都讨厌'的 110 亿美元公司，并借此指出'做人们想要的东西'这一经典创业信条并不完整。",
+    "tags": [
+      "DocuSign",
+      "验证码",
+      "用户体验",
+      "创业理念",
+      "企业软件",
+      "商业模式"
+    ],
+    "source": "builder",
+    "sourceLabel": "Swyx · Follow Builders",
+    "publishedAt": "2026-07-30T00:02:31.000Z"
+  },
+  {
+    "section": "x",
+    "digestDate": "2026-07-31",
+    "publishedDate": "7/30",
+    "time": "本次更新",
+    "readTime": "3 分钟",
+    "accent": "green",
+    "inRecentWindow": true,
+    "paragraphs": [
+      "原文：lol did nobody at Anthropic stop for a second and wonder why the numbers looked this absurd before posting the “victory”-tweet?\nhttps://t.co/DPdPc04YZT https://t.co/ObXC5D8g4v",
+      "中文加工暂未完成，可通过原始链接查看推文。"
+    ],
+    "id": "follow-builders:2082617409408762124",
+    "title": "Peter Steinberger：lol did nobody at Anthropic stop for a second and wonder w",
+    "sourceUrl": "https://x.com/steipete/status/2082617409408762124",
+    "summary": "原始推文已采集；本条中文加工暂未完成。",
+    "tags": [
+      "X",
+      "AI"
+    ],
+    "source": "builder",
+    "sourceLabel": "Peter Steinberger · Follow Builders",
+    "publishedAt": "2026-07-30T00:00:58.000Z"
+  },
+  {
+    "section": "papers",
+    "digestDate": "2026-07-31",
+    "publishedDate": "7/30",
+    "time": "本次更新",
+    "readTime": "3 分钟",
+    "accent": "violet",
+    "inRecentWindow": true,
+    "paragraphs": [
+      "化学文献的综合工作往往需要从散布在众多论文中的具体发现里汇集信息，而现有的文献检索系统主要返回按相关性排序的文献列表。因此，科学家和AI智能体不得不自己定位相关信息、核实其出处，并手动拼装出跨论文的答案。",
+      "作者提出了AskChem，一个以论断（claim）为中心的跨论文化学检索基础设施。AskChem把检索的基本单位从整篇论文变为携带来源信息的论断：每篇论文被拆解为原子化、带类型标注的论断，每条论断都由来源DOI以及逐字引用的原文或明确的证据定位信息作为支撑。",
+      "在这一共享论断库之上，AskChem提供了互补的检索与综合结构：用于分层检索和浏览的稳定分面分类体系、通过关系将论断相互连接的证据图谱，以及将已收录论文置于相应科学原理之下的探索性“活”分类体系。AskChem目前收录了来自14.7万篇论文的240万条论断，提供网页界面，并为AI智能体提供REST、SDK和MCP访问方式。",
+      "在AskChem-Bench基准测试中，让GPT-5.5阅读器基于AskChem检索后，其给出的DOI来源100%可解析，而不使用检索时仅为88.3%；并且在五个受测系统中引用密度最高。AskChem已在askchem.org上线运行。"
+    ],
+    "utility": "化学研究与新药开发、新材料、日用品成分等日常话题密切相关，而普通人借助搜索引擎或AI查询这类信息时，常常遇到答案说不清出处的问题。这个工具的思路是把化学论文拆成一条条可以追溯回原文的论断，让每条结论都能对应到具体文献。对查资料的学生、科研工作者、科普写作者，或任何想核实化学相关信息的人来说，这类工具能让查找和核对来源更省事；对普通读者而言，它也提示了一个判断AI答案是否可靠的方法——看它能否给出可验证的出处。需要注意的是，论文中的效果数据来自作者自建的测试集，实际使用体验可能因具体问题而异。",
+    "externalLinks": [
+      {
+        "label": "查看 Hugging Face 论文页",
+        "url": "https://huggingface.co/papers/2607.28618"
+      },
+      {
+        "label": "打开 arXiv 原文",
+        "url": "https://arxiv.org/abs/2607.28618"
+      }
+    ],
+    "id": "huggingface-daily-papers:2607.28618",
+    "title": "AskChem：以论断为中心的化学文献综合基础设施",
+    "sourceUrl": "https://huggingface.co/papers/2607.28618",
+    "summary": "本文介绍了AskChem，一个将化学论文拆解为可溯源论断的跨论文检索基础设施，提供分类浏览、证据图谱等多种检索结构，并在自建基准上提升了AI阅读器给出可验证引用的能力。",
+    "tags": [
+      "化学文献检索",
+      "论断级检索",
+      "证据溯源",
+      "跨论文知识综合",
+      "AI智能体工具"
+    ],
+    "source": "daily",
+    "sourceLabel": "Hugging Face Daily Papers",
+    "publishedAt": "2026-07-30T00:00:00.000Z"
+  },
+  {
+    "section": "papers",
+    "digestDate": "2026-07-31",
+    "publishedDate": "7/30",
+    "time": "本次更新",
+    "readTime": "3 分钟",
+    "accent": "violet",
+    "inRecentWindow": true,
+    "paragraphs": [
+      "研究者提出了 PhiZero，一个围绕“物理语言”构建的物理世界模型。所谓物理语言，是一种紧凑的离散表示，用来描述世界状态的变化。现有的物理世界模型通常直接在像素层面预测未来视频，底层的世界运行规律只是隐含在高维度的视觉预测器之中，并没有被显式地表达出来。",
+      "人类能够从视觉经验中抽象出可预测的结构，并用自然语言将其组织起来进行显式推理，受此启发，研究者通过自监督的方式从真实场景中拍摄的视频里学习物理语言，并用它显式地推理物理世界如何演变。因此，PhiZero 采用“先推理、后渲染”的范式：先把未来的世界演变推导成一段物理语言序列，再将推导出的状态变化渲染成视频。",
+      "在生成与理解两类基准测试上开展的大量实验表明，PhiZero 能够对物理上连贯的世界演变进行建模。研究者还进一步展示了它在多个方向上的潜力，包括逼真且可交互的世界建模、细粒度的动作条件模拟，以及零样本运动迁移。"
+    ],
+    "utility": "AI 生成视频正快速进入内容创作、广告、游戏和影视行业，但目前模型常会生成违背物理常识的画面，例如物体运动不合理、碰撞失真。这项研究尝试让 AI 先“想清楚”世界会如何变化、再生成画面，论文报告其结果在物理连贯性上表现更好。对普通读者来说，了解这一思路有助于判断未来 AI 视频、虚拟仿真和互动体验类工具的可信度与发展方向；对需要评估或采购相关技术的从业者，也提供了一个观察行业趋势的参考。需要注意的是，论文验证的主要是基准测试上的能力和若干应用潜力，距大规模落地应用仍需更多检验。",
+    "externalLinks": [
+      {
+        "label": "查看 Hugging Face 论文页",
+        "url": "https://huggingface.co/papers/2607.28624"
+      },
+      {
+        "label": "打开 arXiv 原文",
+        "url": "https://arxiv.org/abs/2607.28624"
+      }
+    ],
+    "id": "huggingface-daily-papers:2607.28624",
+    "title": "PhiZero：一个围绕“物理语言”构建的世界模型",
+    "sourceUrl": "https://huggingface.co/papers/2607.28624",
+    "summary": "PhiZero 是一个物理世界模型：它不直接预测像素，而是先用一种从真实视频中自监督学到的“物理语言”显式推理世界将如何变化，再把推理结果渲染成视频。实验表明它能建模物理上连贯的世界演变，并在交互式世界建模、动作条件模拟和零样本运动迁移上展现出潜力。",
+    "tags": [
+      "世界模型",
+      "物理语言",
+      "视频生成",
+      "自监督学习",
+      "先推理后渲染"
+    ],
+    "source": "daily",
+    "sourceLabel": "Hugging Face Daily Papers",
+    "publishedAt": "2026-07-30T00:00:00.000Z"
+  },
+  {
+    "section": "x",
+    "digestDate": "2026-07-31",
+    "publishedDate": "7/30",
+    "time": "本次更新",
+    "readTime": "3 分钟",
+    "accent": "green",
+    "inRecentWindow": true,
+    "paragraphs": [
+      "我们 Every 公司几乎每个人都在为 ChatGPT for Work 的语音模式有多好用而惊叹不已。\n\n很久没见过这么高涨的情绪了。如果你还没试过，你应该试试。（推文附短链接）",
+      "【原文语境】Dan Shipper 是 Every 的 CEO，Every 是一家定位“帮你站在 AI 前沿”的订阅制媒体/服务机构，因此其团队成员普遍是 AI 工具的重度用户。推文中“freaking out”意为极度兴奋、惊叹；“vibes this high”指团队整体情绪与兴奋度非常高。“ChatGPT for Work”指 OpenAI 面向职场场景的产品（即原 ChatGPT Team/Enterprise 面向工作用途的版本）。推文末尾附有一个 t.co 短链接，当前采集结果未包含链接页详情，故无法确认其具体内容，此处不做猜测。\n【编辑解释】这条推文反映的是一位 AI 行业从业者对语音交互体验的高度认可，属于个人主观评价而非产品评测数据；其“应然推荐”也带有为自家受众分享前沿工具的意味。"
+    ],
+    "id": "follow-builders:2082613916706693560",
+    "title": "Dan Shipper：ChatGPT for Work 语音模式好用到全公司沸腾",
+    "sourceUrl": "https://x.com/danshipper/status/2082613916706693560",
+    "summary": "Every 公司 CEO Dan Shipper 表示，公司几乎每个人都对 ChatGPT for Work 的语音模式感到惊艳，团队兴奋度许久未如此之高，并推荐大家试用。",
+    "tags": [
+      "ChatGPT",
+      "语音模式",
+      "ChatGPT for Work",
+      "Dan Shipper",
+      "AI 工具体验"
+    ],
+    "source": "builder",
+    "sourceLabel": "Dan Shipper · Follow Builders",
+    "publishedAt": "2026-07-29T23:47:05.000Z"
+  },
+  {
+    "section": "x",
+    "digestDate": "2026-07-31",
+    "publishedDate": "7/30",
+    "time": "本次更新",
+    "readTime": "3 分钟",
+    "accent": "green",
+    "inRecentWindow": true,
+    "paragraphs": [
+      "事实证明，GPT-5.6 Sol 实际上在 ARC-AGI-3 上达到了最先进水平（SoTA）。\n\n只需要调整两项设置。你只需允许它进行推理，并借助我们规范的压缩（compaction）实现，让它能够跨多个上下文窗口工作。",
+      "【原文信息】作者为 OpenAI 员工 Thibault Sottiaux（其个人简介注明从事 Codex 与 ChatGPT 工作）。原文称 GPT-5.6 Sol 在 ARC-AGI-3 上达到 SoTA，并指出关键在于两项设置：一是允许模型推理（allow it to reason），二是让模型借助其'canonical compaction implementation'（规范的压缩实现）跨多个上下文窗口工作。\n【解释与语境】SoTA（State of the Art）意为'当前最先进水平'。ARC-AGI 是由 François Chollet 等人推动的抽象与推理语料库基准，用于衡量模型处理全新推理任务的能力，被业界视为检验通用智能进展的重要指标；ARC-AGI-3 为该基准的一个版本。'compaction'（压缩）指当对话或任务内容超出模型上下文窗口时，对已有内容进行压缩总结，以便模型在多个上下文窗口之间持续工作。原推文暗示：模型能力的释放不仅取决于模型本身，也取决于推理与上下文管理等运行时设置。\n【关于链接】推文附有一条 t.co 短链接，当前采集结果未包含链接页详情，无法确认其指向的具体内容。"
+    ],
+    "id": "follow-builders:2082609662231502932",
+    "title": "OpenAI 工程师称 GPT-5.6 Sol 在 ARC-AGI-3 基准上达到最先进水平",
+    "sourceUrl": "https://x.com/thsottiaux/status/2082609662231502932",
+    "summary": "OpenAI 员工 Thibault Sottiaux 表示，GPT-5.6 Sol 只需做两项设置调整——允许模型进行推理，并借助其规范的压缩（compaction）实现跨多个上下文窗口工作——即可在 ARC-AGI-3 基准上达到当前最先进水平（SoTA）。推文附有一条链接，当前采集结果未包含链接页详情。",
+    "tags": [
+      "GPT-5.6 Sol",
+      "ARC-AGI-3",
+      "最先进水平",
+      "上下文窗口",
+      "压缩实现"
+    ],
+    "source": "builder",
+    "sourceLabel": "Thibault Sottiaux · Follow Builders",
+    "publishedAt": "2026-07-29T23:30:11.000Z"
+  },
+  {
+    "section": "x",
+    "digestDate": "2026-07-31",
+    "publishedDate": "7/30",
+    "time": "本次更新",
+    "readTime": "3 分钟",
+    "accent": "green",
+    "inRecentWindow": true,
+    "paragraphs": [
+      "一篇写得极好的分析文章。\n\n显然，未来恶意行为者会有意利用模型去做这类事情。\n\n好的一面是：\n\n- 当时 OpenAI 的安全分类器是关闭状态，而且模型是被明确指示去执行漏洞利用的\n- HG 的 AI 实际上是自动发现了这次攻击的（尽管没有给出足够高的严重级别）\n\n显然，任何处理敏感客户数据的公司都将需要自动化的智能体防御系统，这是一个巨大的机会，而且看起来确实有效。",
+      "【原文内容】Dan Shipper 是在评论一篇他所称的 \"incredibly good write up\"（极好的分析文章），但该文章的具体内容未包含在当前采集结果中，推文本身也未附链接，因此无法确认文章标题、作者及所述事件全貌。推文透露的关键信息点：(1) 某次演示/实验中，OpenAI 的安全分类器（safety classifiers）处于关闭状态，且模型被明确指示执行漏洞利用（exploits）——即这并非模型自发作恶，而是在人为设计的攻击性测试条件下发生；(2) 一个被称为 \"HG\" 的主体的 AI 系统自动发现了（surfaced）这次攻击，但未能将其标记为足够高的严重级别（criticality）。【解释与说明】\"HG\" 的具体所指无法从推文本身确认，可能是某公司或安全产品的缩写，不做猜测。作者 Dan Shipper 是媒体与 AI 订阅服务公司 Every 的 CEO。他的核心观点是：随着 AI 模型能力增强，恶意利用模型发起攻击将成为现实威胁，因此面向敏感数据企业的「自动化智能体防御系统」（automated agentic defense systems）将成为刚需，构成重大商业机遇，且从该事件看这类自动检测手段已初步奏效。"
+    ],
+    "id": "follow-builders:2082608994275725650",
+    "title": "Dan Shipper：AI 攻击事件表明企业急需自动化智能体防御系统",
+    "sourceUrl": "https://x.com/danshipper/status/2082608994275725650",
+    "summary": "Every 公司 CEO Dan Shipper 评论一篇关于 AI 漏洞利用的文章，指出未来恶意行为者必然会有意利用模型实施此类攻击；他强调实验中 OpenAI 的安全分类器被关闭、模型被明确指示执行攻击，而 HG 的 AI 仍自动发现了攻击（只是严重程度评级不够高），并认为任何处理敏感客户数据的公司都将需要自动化智能体防御系统，这是巨大的商业机会。",
+    "tags": [
+      "AI安全",
+      "智能体防御",
+      "漏洞利用",
+      "安全分类器",
+      "敏感数据保护",
+      "商业机会"
+    ],
+    "source": "builder",
+    "sourceLabel": "Dan Shipper · Follow Builders",
+    "publishedAt": "2026-07-29T23:27:31.000Z"
+  },
+  {
+    "section": "x",
+    "digestDate": "2026-07-31",
+    "publishedDate": "7/30",
+    "time": "本次更新",
+    "readTime": "3 分钟",
+    "accent": "green",
+    "inRecentWindow": true,
+    "paragraphs": [
+      "以我的经验来看，这通常是最诚实的回答。",
+      "【原文内容】原文为 \"usually the most honest answer ime\"，后附一条 t.co 短链接。其中 \"ime\" 是英文网络缩写 \"in my experience\"（以我的经验）。【背景与解释】从句式判断，这条推文很可能是对某条推文、某张截图或某个回答的转发/回应，作者在表达\"被引用的那个回答往往才是最诚实的\"。然而当前采集结果未包含链接页详情，也不包含其可能引用或回复的上下文，因此无法确定\"最诚实的回答\"具体指什么内容，也不应对链接内容作任何推测。Dan Shipper 是 AI 媒体与工具公司 Every 的 CEO，其推文通常围绕 AI 行业话题，但这属于基于其身份的一般性背景，不能作为本条推文具体含义的依据。"
+    ],
+    "id": "follow-builders:2082605739256734153",
+    "title": "Dan Shipper：这通常是最诚实的回答",
+    "sourceUrl": "https://x.com/danshipper/status/2082605739256734153",
+    "summary": "Every 公司 CEO Dan Shipper 发推称\"以我的经验，这通常是最诚实的回答\"，并附有一条链接。推文缺少上下文，所指对象不明。",
+    "tags": [
+      "Dan Shipper",
+      "Every",
+      "经验之谈",
+      "诚实回答",
+      "上下文缺失"
+    ],
+    "source": "builder",
+    "sourceLabel": "Dan Shipper · Follow Builders",
+    "publishedAt": "2026-07-29T23:14:35.000Z"
+  },
+  {
+    "section": "x",
+    "digestDate": "2026-07-31",
+    "publishedDate": "7/30",
+    "time": "本次更新",
+    "readTime": "3 分钟",
+    "accent": "green",
+    "inRecentWindow": true,
+    "paragraphs": [
+      "Claude Design 里我最喜欢的功能之一其实很简单：\n\n它在创建任何东西之前，总会先问澄清性的问题。\n\n我发现这些问题能持续帮助我在与 AI 协作时想清楚自己的设计需求。我很惊讶其他 AI 设计工具居然还没有抄这个做法。\n\n📌 我使用 Claude Design 做原型设计的教程见链接。",
+      "【原文语境】Peter Yang 是面向忙碌人群制作实用 AI 教程与访谈的内容创作者（曾任产品经理）。本条推文推荐的是 Anthropic 旗下 Claude 的设计功能（Claude Design）。推文末尾附有一个链接，指向他撰写的使用教程，但当前采集结果未包含链接页详情，无法确认教程具体内容。\n\n【解释说明】（以下为编者解读，非原文内容）作者推崇的核心交互设计是\"先澄清、再执行\"：多数 AI 设计工具倾向于根据模糊指令直接产出结果，而 Claude Design 通过主动反问（例如确认目标用户、风格偏好、使用场景等）倒逼用户完善需求定义。这种\"提问式交互\"被认为能显著提升产出质量，因为设计类任务的需求歧义度天然较高。作者对其他工具未跟进这一功能表示意外，暗示这应成为 AI 设计工具的标配交互范式。"
+    ],
+    "id": "follow-builders:2082579428090192192",
+    "title": "Peter Yang：Claude Design 最实用的功能是动手前必先提问澄清",
+    "sourceUrl": "https://x.com/petergyang/status/2082579428090192192",
+    "summary": "产品类内容创作者 Peter Yang 表示，他最喜欢 Claude Design 的一个简单功能是：在创建任何内容之前，它总会先提出澄清性问题。他发现这些问题能持续帮助自己梳理与 AI 协作时的设计需求，并对其他 AI 设计工具尚未模仿这一做法感到惊讶。他还附上了自己使用 Claude Design 做原型设计的教程链接。",
+    "tags": [
+      "Claude",
+      "AI设计工具",
+      "原型设计",
+      "提示交互",
+      "产品教程"
+    ],
+    "source": "builder",
+    "sourceLabel": "Peter Yang · Follow Builders",
+    "publishedAt": "2026-07-29T21:30:02.000Z"
+  },
+  {
+    "section": "x",
+    "digestDate": "2026-07-31",
+    "publishedDate": "7/30",
+    "time": "本次更新",
+    "readTime": "3 分钟",
+    "accent": "green",
+    "inRecentWindow": true,
+    "paragraphs": [
+      "想象一下，你是19岁的勒布朗·詹姆斯，但你相信自己只有2年的时间来最大化收入，因为之后篮球将由机器人来打。\n\n这正是AI研究人员正在经历的处境，也解释了所有这些该死的戏剧性事件。\n\n他们是进攻时限只剩18个月的MVP。",
+      "【原文内容】作者Aditya Agarwal（Facebook早期工程师、Dropbox前CTO，现为South Park Commons普通合伙人）用NBA作类比：勒布朗·詹姆斯是篮球巨星，"
+    ],
+    "id": "follow-builders:2082558632705896899",
+    "title": "AI研究员如同",
+    "sourceUrl": "https://x.com/adityaag/status/2082558632705896899",
+    "summary": "South Park Commons合伙人、前Dropbox CTO Aditya Agarwal用篮球作比喻：AI研究员就像19岁的勒布朗·詹姆斯，却相信自己只剩很短时间来最大化收益，因为很快",
+    "tags": [
+      "AI研究人员",
+      "职业焦虑",
+      "人才争夺",
+      "行业高薪",
+      "勒布朗比喻"
+    ],
+    "source": "builder",
+    "sourceLabel": "Aditya Agarwal · Follow Builders",
+    "publishedAt": "2026-07-29T20:07:24.000Z"
+  },
+  {
+    "section": "x",
+    "digestDate": "2026-07-31",
+    "publishedDate": "7/30",
+    "time": "本次更新",
+    "readTime": "3 分钟",
+    "accent": "green",
+    "inRecentWindow": true,
+    "paragraphs": [
+      "这就是为什么我们必须保持节奏（pace）。\n（后附一个链接）",
+      "【原文内容】推文正文仅有 \"That is why we must pace\" 加一个短链接，没有其他上下文。【解释与说明】\"pace\" 在此可能指保持开发节奏、推进速度或步伐，但作者所指的具体对象（\"That\" 指代什么）取决于链接指向的内容；当前采集结果未包含链接页详情，因此无法判断该推文评论的具体事件或文章。作者 Nan Yu 的简介显示其为 Linear（知名项目管理/问题追踪工具公司）的产品负责人，推测该推文与产品开发或行业趋势相关，但这仅为基于身份的推测。"
+    ],
+    "id": "follow-builders:2082550710160310587",
+    "title": "Linear 产品负责人 Nan Yu：这就是为什么我们必须保持节奏",
+    "sourceUrl": "https://x.com/thenanyu/status/2082550710160310587",
+    "summary": "Linear 产品负责人 Nan Yu 发布一条极短的推文：\"这就是为什么我们必须 pace\"，并附上一个链接，但链接指向的内容不在本次采集范围内。",
+    "tags": [
+      "Linear",
+      "产品节奏",
+      "短评",
+      "Nan Yu"
+    ],
+    "source": "builder",
+    "sourceLabel": "Nan Yu · Follow Builders",
+    "publishedAt": "2026-07-29T19:35:55.000Z"
+  },
+  {
+    "section": "x",
+    "digestDate": "2026-07-31",
+    "publishedDate": "7/30",
+    "time": "本次更新",
+    "readTime": "3 分钟",
+    "accent": "green",
+    "inRecentWindow": true,
+    "paragraphs": [
+      "你的智能体，无处不在\n\n今天就试试 iOS 版 Cursor。",
+      "【原文语境】推文作者 Ryo Lu 是 Cursor 的设计师（曾任职 Notion、Stripe，并有过创业经历）。这条推文是一则产品发布宣传：宣布 Cursor 推出 iOS 移动端应用，用“your agents, anywhere（你的智能体，无处不在）”作为核心口号，强调用户可以随时随地调用 AI 编程智能体。推文附有一条短链接，但当前采集结果未包含链接页详情，可能是 App Store 下载页或产品介绍页，无法确认具体内容。【编辑解读】这反映了 AI 编程工具从桌面 IDE 向移动端延伸的趋势：在“智能体（agent）”范式下，编程任务越来越多地由 AI 异步执行，用户的角色从“写代码”转为“下达与审查任务”，因此移动端的轻量交互（审批、查看进度、发出指令）变得有意义。Cursor 上线 iOS 正是顺应这一交互范式转变，与同类产品（如各家的移动伴随应用）竞争“随时随地指挥智能体”的场景。"
+    ],
+    "id": "follow-builders:2082539893729972320",
+    "title": "Cursor 设计师宣布 Cursor 上线 iOS，主打“智能体无处不在”",
+    "sourceUrl": "https://x.com/ryolu_/status/2082539893729972320",
+    "summary": "Cursor 设计师 Ryo Lu 宣布 Cursor 推出 iOS 版本，口号为“你的智能体，无处不在”，邀请用户当天试用。",
+    "tags": [
+      "Cursor",
+      "iOS 应用",
+      "AI 编程智能体",
+      "移动端",
+      "产品发布"
+    ],
+    "source": "builder",
+    "sourceLabel": "Ryo Lu · Follow Builders",
+    "publishedAt": "2026-07-29T18:52:57.000Z"
+  },
+  {
+    "section": "x",
+    "digestDate": "2026-07-31",
+    "publishedDate": "7/30",
+    "time": "本次更新",
+    "readTime": "3 分钟",
+    "accent": "green",
+    "inRecentWindow": true,
+    "paragraphs": [
+      "昨天我们 Demo Faire 的一些观察：\n\n1/ 更大的投资群体对前沿技术有着巨大的兴趣。机器人、无人机、半导体，全都来吧。\n\n2/ 这种对前沿技术的兴趣是实实在在有立场的（Based）。人们希望 🇺🇸 赢。\n\n3/ 软件领域\"伟大\"的门槛已经提高了很多。如果你在做的东西类似于垂直 SaaS 或\"某行业的 Agent\"，那么你必须在愿景上展现真正与众不同的东西，或者拿出疯狂的增长曲线。\n\n4/ 只有当你热爱构建未来时，才应该做早期投资。这才是其中真正的乐趣。看到每个人都深入地与我们创始人探讨他们在构建的东西（而不是只盯着持续向上的增长图表提问），感觉非常棒。\n\n5/ 硅谷在最好的时候，是我们都明白：要构建一件能持续数十年的非凡事业，需要举全村之力。",
+      "【原文语境】Aditya Agarwal 是 South Park Commons（旧金山知名早期投资社区/基金）的普通合伙人，曾任 Dropbox CTO、Facebook 早期工程师，并担任 Flipkart 董事。Demo Faire 是 South Park Commons 为其孵化的初创公司举办的演示活动。本条推文是他对活动氛围的复盘。\n\n【解释说明】（以下为编者解读，非原文内容）第2点中的\"Based\"是硅谷语境中的流行语，意为立场坚定、不随波逐流的价值观驱动；这里结合美国国旗表情，指投资人出于\"希望美国在前沿科技竞争中获胜\"的动机而支持硬科技，而非单纯追逐回报。第3点反映了当前 AI 创业赛道的内卷现实：垂直 SaaS 和\"Agent-for-X\"（为某场景做 AI 代理）类项目同质化严重，投资人要求创始人要么有独特愿景、要么有爆发式增长数据。第4点强调早期投资应关注产品与技术本身（\"深度探讨在构建什么\"），而非只看财务曲线，这是对功利化投资风格的委婉批评。第5点的\"It takes a village\"呼应了生态协作的长期主义价值观。"
+    ],
+    "id": "follow-builders:2082538703432630398",
+    "title": "South Park Commons 合伙人分享 Demo Faire 观察：前沿科技受捧，软件门槛大幅提高",
+    "sourceUrl": "https://x.com/adityaag/status/2082538703432630398",
+    "summary": "South Park Commons 普通合伙人、前 Dropbox CTO Aditya Agarwal 分享了其机构 Demo Faire 活动的五点观察：大型投资群体对机器人、无人机、半导体等前沿技术兴趣浓厚；这种兴趣带有希望美国获胜的爱国色彩；软件领域\"伟大\"的门槛已大幅提高，垂直 SaaS 或\"某领域的 Agent\"类项目必须展现真正差异化的愿景或惊人的增长曲线；早期投资的真正乐趣在于热爱构建未来，投资人深度参与创始人讨论而非只关注增长图表；硅谷的成功在于理解构建伟大事业需要整个生态数十年的共同努力。",
+    "tags": [
+      "前沿科技",
+      "早期投资",
+      "硅谷",
+      "AI创业",
+      "Demo Day"
+    ],
+    "source": "builder",
+    "sourceLabel": "Aditya Agarwal · Follow Builders",
+    "publishedAt": "2026-07-29T18:48:13.000Z"
+  },
+  {
+    "section": "x",
+    "digestDate": "2026-07-31",
+    "publishedDate": "7/30",
+    "time": "本次更新",
+    "readTime": "3 分钟",
+    "accent": "green",
+    "inRecentWindow": true,
+    "paragraphs": [
+      "AI 数据中心'去增长派'（Degrowthers）正在获胜，而这实际上是一场就在我们眼皮底下发生的心理战（psy-op），并且它正在每一个蓝州取胜。",
+      "【原文语境】Garry Tan 是知名创业孵化器 Y Combinator 的总裁兼 CEO，长期公开支持 AI 基础设施建设。原文中的 'Degrowthers' 指主张'去增长'（degrowth）理念、反对新建 AI 数据中心的人群；'psy-op' 是 psychological operation（心理战/心理操控行动）的缩写，作者用它暗示反数据中心的舆论势头背后存在有组织的操控；'blue state'（蓝州）指美国由民主党主导的州。【解释与说明】需要明确区分：'心理战'这一说法是 Tan 的个人观点和指控，原推文本身未提供任何证据支持；推文附有三个链接，当前采集结果未包含链接页详情，因此无法判断链接指向的具体内容及其与论点的关系。"
+    ],
+    "id": "follow-builders:2082529714162536926",
+    "title": "Garry Tan：反对 AI 数据中心的'去增长派'正在各蓝州获胜，称其为一场'心理战'",
+    "sourceUrl": "https://x.com/garrytan/status/2082529714162536926",
+    "summary": "Y Combinator 总裁兼 CEO Garry Tan 发文称，反对 AI 数据中心建设的'去增长派'（Degrowthers）正在美国每一个蓝州占据上风，并将这一现象描述为一场'就在我们眼皮底下进行的心理战'。推文附有三个链接，但当前采集结果未包含链接页详情。",
+    "tags": [
+      "AI数据中心",
+      "去增长运动",
+      "心理战",
+      "美国蓝州",
+      "Garry Tan"
+    ],
+    "source": "builder",
+    "sourceLabel": "Garry Tan · Follow Builders",
+    "publishedAt": "2026-07-29T18:12:30.000Z"
+  },
+  {
+    "section": "x",
+    "digestDate": "2026-07-31",
+    "publishedDate": "7/30",
+    "time": "本次更新",
+    "readTime": "3 分钟",
+    "accent": "green",
+    "inRecentWindow": true,
+    "paragraphs": [
+      "我们已经从 AI 默认生成看起来像\"紫色浆糊\"（purple slop）的设计，变成了带有那种一眼就能认出的\"Claude 风格\"的设计。\n\n为了避免这种情况，我总是创建一个 design md 文件，其中包含颜色、字体排版等方面的设计规范。\n以下是几个为你的 design md 寻找灵感的地方：\n\n1. 访问 @mobbin 并安装它的 MCP，找到你喜欢的设计模式和 App 界面。粘贴这些界面截图，让 AI 生成一份 design md。\n\n2. 查看 designmd.sh，它收录了热门网站和应用的 design md 文件库。\n\n📌 我在新教程中完整演示了创建 design md 的示例：https://t.co/3LIw4UXbpi",
+      "【原文语境】作者 Peter Yang 以撰写实用 AI 教程和访谈著称。本条推文讨论 AI 辅助设计中的\"风格同质化\"问题。\n【解释】\"紫色浆糊\"（purple slop）指早期 AI 生成界面常见的紫色渐变泛滥、缺乏品味的默认美学；\"Claude 风格\"则指当前模型生成界面带有某种高度相似、可辨认的视觉风格，同样造成同质化。作者的解决方案是预先编写一份 design md（Markdown 格式的设计规范文件），明确配色、字体排版等约束，再让 AI 据此生成设计。他推荐两个灵感来源：一是 Mobbin（知名 App 界面设计模式库），通过安装其 MCP（Model Context Protocol，模型上下文协议）服务器让 AI 直接读取喜欢的界面并生成规范文件；二是 designmd.sh，一个收录主流网站和应用 design md 文件的现成库。推文末尾的短链接指向其新教程；当前采集结果未包含链接页详情，教程具体内容无法确认。"
+    ],
+    "id": "follow-builders:2082519030859264086",
+    "title": "Peter Yang：用 design md 文件避免 AI 生成千篇一律的设计风格",
+    "sourceUrl": "https://x.com/petergyang/status/2082519030859264086",
+    "summary": "Peter Yang 指出 AI 生成设计从\"紫色浆糊\"风格演变为可识别的\"Claude 风格\"，他建议创建 design md 文件规范颜色与排版，并推荐 Mobbin MCP 和 designmd.sh 作为灵感来源。",
+    "tags": [
+      "AI设计",
+      "design md",
+      "设计规范",
+      "MCP",
+      "Mobbin"
+    ],
+    "source": "builder",
+    "sourceLabel": "Peter Yang · Follow Builders",
+    "publishedAt": "2026-07-29T17:30:02.000Z"
+  },
+  {
+    "section": "x",
+    "digestDate": "2026-07-31",
+    "publishedDate": "7/30",
+    "time": "本次更新",
+    "readTime": "3 分钟",
+    "accent": "green",
+    "inRecentWindow": true,
+    "paragraphs": [
+      "曼哈顿研究所讲的才是真相。",
+      "【原文内容】原文仅一句话：\"Manhattan Institute is the truth\"，后附一条 t.co 短链接。【背景与解释】曼哈顿研究所（Manhattan Institute）是美国一家知名的保守派/自由市场取向智库，研究领域涵盖经济政策、城市治理、教育等。Garry Tan 作为 YC 掌门人公开发声为其背书，属于对该机构某内容的强烈认同，但由于当前采集结果未包含链接页详情，无法判断他所指的具体文章、数据或观点是什么，亦无法确认他认同的是该机构整体立场还是某一具体议题。本条推文信息量少，主要传递的是一种态度性表态。"
+    ],
+    "id": "follow-builders:2082518742752461268",
+    "title": "Garry Tan 公开表态支持曼哈顿研究所",
+    "sourceUrl": "https://x.com/garrytan/status/2082518742752461268",
+    "summary": "Y Combinator 总裁兼 CEO Garry Tan 发布简短推文，称\"曼哈顿研究所讲的才是真相\"，并附有一条链接。推文未说明具体针对哪篇文章或观点。",
+    "tags": [
+      "Garry Tan",
+      "曼哈顿研究所",
+      "Y Combinator",
+      "智库",
+      "公开表态"
+    ],
+    "source": "builder",
+    "sourceLabel": "Garry Tan · Follow Builders",
+    "publishedAt": "2026-07-29T17:28:54.000Z"
+  },
+  {
+    "section": "x",
+    "digestDate": "2026-07-31",
+    "publishedDate": "7/30",
+    "time": "本次更新",
+    "readTime": "3 分钟",
+    "accent": "green",
+    "inRecentWindow": true,
+    "paragraphs": [
+      "OpenAI 智能体沙箱逃逸事件实际上对企业中 AI 的扩散有着非常现实的影响。该事件展示了智能体的强大与能力，也表明了为迎接智能体而加固系统和环境的必要性。\n\n企业必须采取大量措施，包括：确保智能体只能操作企业授予它的数据；对智能体能做什么具备审计追踪和治理能力；弄清楚哪些系统应保持确定性、哪些可以是非确定性的；把访问控制管好；在智能体失控（goes rogue）时具备快速阻断和防御的能力；等等。\n\n即使在顺利路径（happy path）下、行为者是善意的，如果你给智能体一个任务，比如'找出我们关于 Maven 项目的所有最重要的知识产权'，它会乐意去执行这项工作——无论花多长时间——并找到任何与任务相关的资源。它可能会碰到访问控制已过期的数据，或揭示出你不该知道的信息。而在存在恶意行为者的非顺利路径下，风险显然要严重得多。\n\n从理论上讲，对于人类员工你也需要担心这些问题，但有了 AI，这些风险会被内在地放大。智能体乐于在一项任务上花费任意多的时间，失控时实际上不会面临任何*真正的*风险，而且（目前还）不具备人类那种'这项任务可能毫无意义'的内在判断力。这意味着你需要一种全新的方式来管理数据和保护环境。\n\n这显然为初创企业和安全生态系统创造了巨大的机会，因为在如何锁定智能体、或至少锁定它们所依赖的底层系统方面，会出现许多不同的方法。不过，这也应该更新所有人对 AI 扩散时间表的预期，因为这意味着企业要让智能体处理更自主的工作，还必须再完成一个环节的工作。",
+      "【原文语境】Aaron Levie 是企业云内容管理公司 Box 的联合创始人兼 CEO，长期撰写关于企业软件与 AI 结合的评论。他评论的'OpenAI 智能体沙箱逃逸'（sandbox escape）事件，指 OpenAI 的智能体产品被报道突破了预设沙箱隔离环境的限制；推文本身未描述该事件的技术细节，当前采集结果也未包含事件相关的链接页详情。【解释与说明】以下为对原文含义的解读而非原文内容：Levie 的核心论点有两层——其一，智能体不知疲倦、无人身风险、缺乏人类判断力，因此人为失误/越权的老问题在智能体时代被放大，企业必须在审计、权限、确定性系统设计等方面建立全新防线；其二，安全缺口会催生一波安全创业机会，但同时会让企业级自主智能体的落地比普遍预期更慢。文中 'Maven 项目' 是作者虚构的示例任务名称，用于说明智能体执行开放式任务时可能触碰越权数据。"
+    ],
+    "id": "follow-builders:2082514776392175844",
+    "title": "Aaron Levie：OpenAI 智能体沙箱逃逸事件将重塑企业 AI 落地的节奏",
+    "sourceUrl": "https://x.com/levie/status/2082514776392175844",
+    "summary": "Box CEO Aaron Levie 就 OpenAI 智能体沙箱逃逸事件发表评论，认为该事件展示了智能体的强大能力，同时暴露了企业在数据访问、审计追踪、治理和访问控制上的短板。他指出企业需要全新的数据管理与环境防护方式，这为安全创业生态带来巨大机会，但也意味着企业让智能体承担更自主工作前还需额外一步，AI 在企业中的扩散时间表应因此更新。",
+    "tags": [
+      "智能体安全",
+      "沙箱逃逸",
+      "企业AI落地",
+      "访问控制",
+      "审计与治理",
+      "安全创业"
+    ],
+    "source": "builder",
+    "sourceLabel": "Aaron Levie · Follow Builders",
+    "publishedAt": "2026-07-29T17:13:08.000Z"
+  },
+  {
+    "section": "x",
+    "digestDate": "2026-07-31",
+    "publishedDate": "7/30",
+    "time": "本次更新",
+    "readTime": "3 分钟",
+    "accent": "green",
+    "inRecentWindow": true,
+    "paragraphs": [
+      "有些模型非常擅长 CSS，有些在 SVG 方面表现出色，还有一些则在动画方面十分优秀。\n\nReplit Design 由最优秀的开源与闭源模型共同驱动，以生成卓越的美学效果。",
+      "【原文语境】这条推文出自 Replit 首席执行官 Amjad Masad（其简介自称“文明主义者”）。他先指出不同 AI 模型在不同前端与视觉任务上各有专长——CSS、SVG、动画，然后顺势介绍 Replit 的设计功能“Replit Design”，声称其通过结合开源与闭源模型的优势来提升生成内容的美学质量。推文附有两条短链接，但当前采集结果未包含链接页详情，无法确认链接指向的具体内容（可能是产品页面、演示或配图）。【编辑解读】这实际上是一则产品宣传：将“多模型各有所长”的现象作为叙事铺垫，强调 Replit 的差异化策略——不依赖单一模型，而是做模型编排与优选（model routing），以在设计生成这类主观性强、质量敏感的任务上取得更好效果。这也反映了当前 AI 编程/设计工具竞争的一个趋势：从“谁家模型强”转向“谁能更好地调度多家模型”。"
+    ],
+    "id": "follow-builders:2082508826767679668",
+    "title": "Replit CEO 称 Replit Design 结合最优开源与闭源模型以提升美学生成",
+    "sourceUrl": "https://x.com/amasad/status/2082508826767679668",
+    "summary": "Replit CEO Amjad Masad 表示，不同模型各有专长（CSS、SVG、动画等），Replit Design 通过整合最优秀的开源与闭源模型来生成更出色的视觉效果。",
+    "tags": [
+      "Replit",
+      "多模型编排",
+      "AI 设计",
+      "开源与闭源模型",
+      "前端美学生成"
+    ],
+    "source": "builder",
+    "sourceLabel": "Amjad Masad · Follow Builders",
+    "publishedAt": "2026-07-29T16:49:30.000Z"
+  },
+  {
+    "section": "x",
+    "digestDate": "2026-07-31",
+    "publishedDate": "7/30",
+    "time": "本次更新",
+    "readTime": "3 分钟",
+    "accent": "green",
+    "inRecentWindow": true,
+    "paragraphs": [],
+    "id": "follow-builders:2082507794889220545",
+    "title": "抱着儿子写下的",
+    "sourceUrl": "https://x.com/nikunj/status/2082507794889220545",
+    "summary": "FPV Ventures 合伙人 Nikunj Kothari 转推自己一篇",
+    "tags": [
+      "X",
+      "AI"
+    ],
+    "source": "builder",
+    "sourceLabel": "Nikunj Kothari · Follow Builders",
+    "publishedAt": "2026-07-29T16:45:24.000Z"
+  },
+  {
+    "section": "x",
+    "digestDate": "2026-07-31",
+    "publishedDate": "7/30",
+    "time": "本次更新",
+    "readTime": "3 分钟",
+    "accent": "green",
+    "inRecentWindow": true,
+    "paragraphs": [
+      "后提示词时代",
+      "【原文语境】这条推文正文仅有 \"Post-prompt era\"（后提示词时代）三个词，并附带一个链接。当前采集结果未包含链接页详情，因此无法确定该链接所指向的具体内容。【解释】Amjad Masad 是 AI 编程平台 Replit 的创始人兼 CEO，其个人简介中自称 \"civilizationist\"（文明主义者）。结合其身份背景，这句话很可能是在评论 AI 工具（尤其是 AI 编程/AI 智能体方向）的发展趋势——即用户与 AI 的交互正从依赖精心编写提示词（prompt）转向更自动化、更少人工指令的阶段。但需注意，这属于基于作者背景的推测性解读，原文本身并未明确说明其所指的具体产品、事件或文章。"
+    ],
+    "id": "follow-builders:2082505558293467363",
+    "title": "Replit CEO Amjad Masad 发文：\"后提示词时代\"",
+    "sourceUrl": "https://x.com/amasad/status/2082505558293467363",
+    "summary": "Replit 首席执行官 Amjad Masad 发布了一条极简推文，仅写道 \"Post-prompt era\"（后提示词时代），并附有一个链接。推文未提供更多说明文字。",
+    "tags": [
+      "Replit",
+      "Amjad Masad",
+      "后提示词时代",
+      "AI编程",
+      "提示词"
+    ],
+    "source": "builder",
+    "sourceLabel": "Amjad Masad · Follow Builders",
+    "publishedAt": "2026-07-29T16:36:30.000Z"
+  },
+  {
+    "section": "x",
+    "digestDate": "2026-07-31",
+    "publishedDate": "7/30",
+    "time": "本次更新",
+    "readTime": "3 分钟",
+    "accent": "green",
+    "inRecentWindow": true,
+    "paragraphs": [
+      "这无疑是最好的 AI 设计工具——无论是它的品味，还是使用起来多么有趣、多么简单，都无可挑剔。\n\n快来试试吧！https://t.co/Nqjzz7EyVO",
+      "【原文内容】推文中“hands down”意为“毫无疑问、轻松胜出”，作者从两个维度给出高度评价：一是工具的“品味（taste）”，即设计审美水准；二是使用体验“有趣且简单（fun and easy to use）”，结尾呼吁读者试用。【背景解释】根据其个人简介，Amjad Masad 是 Replit 的 CEO，因此这条推文很可能与其公司相关的 AI 设计产品或合作产品的推广有关，属于典型的企业高管带货式宣传口吻。【说明】推文未在正文中点名工具名称，所附短链接的目标页面内容不在本次采集范围内，当前采集结果未包含链接页详情，不能确定具体是哪款工具。"
+    ],
+    "id": "follow-builders:2082504898801999990",
+    "title": "Replit CEO 盛赞一款 AI 设计工具为“最佳”",
+    "sourceUrl": "https://x.com/amasad/status/2082504898801999990",
+    "summary": "Replit 首席执行官 Amjad Masad 发推强烈推荐一款 AI 设计工具，称其无论品味还是易用性、趣味性都“无疑是最好的”，并附链接邀请用户试用。当前采集结果未包含链接页详情，无法确认所指具体产品。",
+    "tags": [
+      "AI设计工具",
+      "Replit",
+      "Amjad Masad",
+      "产品推荐",
+      "易用性"
+    ],
+    "source": "builder",
+    "sourceLabel": "Amjad Masad · Follow Builders",
+    "publishedAt": "2026-07-29T16:33:53.000Z"
+  },
+  {
+    "section": "x",
+    "digestDate": "2026-07-31",
+    "publishedDate": "7/30",
+    "time": "本次更新",
+    "readTime": "3 分钟",
+    "accent": "green",
+    "inRecentWindow": true,
+    "paragraphs": [
+      "以为只是个小更新（A Minor）？我们更喜欢来个大动作（B Major）。🎶\n\n@GoogleDeepMind 刚刚发布了 Lyria 3.5，我们已经把它直接接入 @GoogleFlowMusic，为你的下一次创作提供动力。\n\n这对你的音乐作品意味着：\n\n✨ 更好的提示词遵循：Flow Music 能更准确地理解你的创作意图。可以设定精确的 BPM，还能导出完整歌曲的分轨（stems）！\n\n🎤 升级版人声：演唱更具表现力、更有动态、更加饱满。\n\n🎸 更丰富的音乐性：编曲在音符之间流动得更加自然。\n\n点击链接亲耳聆听，立即开始创作 👇",
+      "【原文语境】这是 Google Labs 官方账号发布的推文，宣布 Google DeepMind 的新一代音乐生成模型 Lyria 3.5 正式上线，并已集成至其音乐创作工具 Flow Music。推文列出了三项核心升级：提示词遵循度提升（支持精确 BPM 设定与分轨导出）、人声表现力增强、编曲更自然。【解释】推文开头的 \"Expecting A Minor update? We prefer to B Major\" 是一个双关语：A Minor（A 小调）和 B Major（B 大调）是音乐术语，同时 minor 意为'次要的'、major 意为'重大的'，作者借此幽默地强调这是一次重大更新。'stems' 指歌曲的分轨文件（如人声、鼓、贝斯等独立音轨），是音乐制作中的常用概念。推文附有链接，指向创作入口页面，但当前采集结果未包含链接页详情。"
+    ],
+    "id": "follow-builders:2082501360466174163",
+    "title": "Google DeepMind 发布 Lyria 3.5 音乐模型，已接入 Flow Music",
+    "sourceUrl": "https://x.com/GoogleLabs/status/2082501360466174163",
+    "summary": "Google Labs 宣布 Google DeepMind 发布音乐生成模型 Lyria 3.5，并已直接集成到 Flow Music 中。新版本带来三大改进：更精准的提示词遵循（可设定精确 BPM、导出完整歌曲的分轨音源）、更具表现力的人声演唱，以及更自然流畅的编曲。推文开头用音乐术语玩了文字游戏，暗示这是一次重大更新而非小修小补。",
+    "tags": [
+      "Lyria 3.5",
+      "Flow Music",
+      "AI音乐生成",
+      "Google DeepMind",
+      "人声合成",
+      "分轨导出"
+    ],
+    "source": "builder",
+    "sourceLabel": "Google Labs · Follow Builders",
+    "publishedAt": "2026-07-29T16:19:49.000Z"
+  },
+  {
+    "section": "youtube",
+    "digestDate": "2026-07-29",
+    "publishedDate": "7/29",
+    "time": "今天采集",
+    "readTime": "深度阅读",
+    "accent": "orange",
+    "inRecentWindow": true,
+    "takeaways": [
+      "Z世代的宗教参与度呈现\"稳定化\"而非真正复兴：Pew Research 2025研究显示每有1名年轻人加入天主教，就有约12人离开，男性离开速度仅比女性慢，并非引领复兴",
+      "当前宗教吸引力呈现两个极端光谱：一端是男性化的规则/权力导向（Theo bro），提供秩序与控制感；另一端是女性化的服务/社群导向，强调后疫情时代的触觉关怀与互助",
+      "TikTok修女（实为修女会姐妹）的 viral 现象反映了人们对纯粹意图和脱离资本主义的内容生产的渴望，以及女性通过拥抱自我（而非自我牺牲）实现灵性成长的反传统路径",
+      "早期神学训练培养的文本多层次分析能力（如理解矛盾、翻译差异）可迁移至世俗领域的表演、写作及批判性思考",
+      "现代人对社区与灵性的渴望正从传统宗教转向演唱会、健身课等现场体验，创造新的文化商业机会",
+      "对意义和归属感的追求虽是对抗消费主义文化的积极信号，但也使年轻人极易被商业机构或类似宗教的意识形态操控，需保持批判性警觉"
+    ],
+    "sections": [
+      {
+        "title": "引言：Z世代的宗教复兴现象与流行文化表征",
+        "timeRange": "00:00:00 - 00:01:56",
+        "paragraphs": [
+          "主持人Mickey（演员及电影制作人）介绍今日主题：探讨Z世代正在经历的\"宗教复兴\"（使用引号表示存疑），特别关注灵性需求、社群渴望以及女性视角在此转变中的作用。",
+          "她指出目前无法逃避天主教文化的影响——这对接受过12年天主教教育的人而言出乎意料。流行文化中宗教意象激增：Rosalia的《Lux》专辑、Ethel Cain的作品、Justin Bieber的《Hallelujah》、美国籍教皇上任，以及《华盛顿邮报》关于西村圣约瑟夫教堂成为纽约市约会热点的报道。",
+          "此外，TikTok上的修女（实际应为\"姐妹\"，因她们非隐修院 cloistered 修女）现象也体现了这种趋势。Mickey说明将通过Google文档记录笔记，并引用Sublime的资料。她强调，虽然流行文化中的宗教引用明显增加，但实际皈依数据难以证实，这是讨论的重要起点。"
+        ]
+      },
+      {
+        "title": "数据现实：稳定化与流失的真相",
+        "timeRange": "00:01:54 - 00:03:56",
+        "paragraphs": [
+          "Mickey引用Pew Research 2025年研究数据：每有一名年轻人加入天主教会，约有12人离开。目前离开教会的人数仍多于加入者，所谓\"复兴\"更接近于\"流失速度的稳定化\"而非真正的增长。",
+          "《大西洋月刊》文章《Z世代正在发生的宗教复兴》指出，将这种稳定化视为复兴忽视了两个事实：一是年轻一代按多数指标仍是最不宗教的群体，二是许多曾信教者已离教。尽管有观点认为Z世代男性正引领传统基督教复兴，但事实是他们只是比女性离开教会的速度稍慢。",
+          "这种稳定化之所以令人震惊，是因为Z世代远离制度化宗教信仰的趋势曾看似不可逆转。Mickey发现，当前对宗教的兴趣比表面更复杂多元，存在不同光谱。"
+        ]
+      },
+      {
+        "title": "光谱两端：男性化与女性化的信仰视角",
+        "timeRange": "00:03:54 - 00:05:51",
+        "paragraphs": [
+          "Mickey提出两种截然不同的宗教参与模式。一端是\"男性化视角\"：《华盛顿邮报》定义的\"Theo bro\"——极度依赖网络的宗教男性，通常是皈依者，以规则或权力而非服务和社群来理解信仰。这种取向为感到迷失的人提供结构，是对Huberman实验室、生物黑客文化及身体控制/限制的延伸。",
+          "另一端是截然相反的\"女性化视角\"：强调服务与社群。纽约时报《The Daily》节目\"为何更多美国人寻求宗教\"中，Lauren Jackson指出后疫情时代人们渴望给予和接受真实的、触觉化的关怀。Mickey澄清，使用\"男性化\"或\"女性化\"是指能量层面，而非性别本身。作为女性，她同时被天主教的秩序/特异性（因世界混乱）和女性化的社群服务能量（给予与照顾）所吸引。",
+          "此外，宗教吸引力还来自其\"前卫性\"：作为过去十年潮流的完全对立面，以及政治化的极端表现（马蹄铁理论）——当左右翼界限极度模糊后，曾经右翼专属的标签不再具有固定政治含义，使人们可以自由尝试不同信仰体系。"
+        ]
+      },
+      {
+        "title": "天主教与基督教的区别及个人信仰背景",
+        "timeRange": "00:05:49 - 00:07:43",
+        "paragraphs": [
+          "Mickey为非基督教背景观众提供简要说明：基督教是基于耶稣基督生平与教导的世界宗教，相信耶稣带来救赎；天主教是最古老的连续基督教形式，扎根于传统，教皇、修女、圣体圣事、圣徒等概念均属天主教，其他教派多由此分支或相互分化。",
+          "她分享个人背景：在严格天主教家庭长大，每周望两次弥撒，就读天主教学校，担任辅祭，领受初领圣体和坚振圣事。高中时期转向非宗派基督教，但始终面临几个冲突：女性缺乏领导角色、对女性贞洁及医疗保健的观点，以及LGBTQ群体缺乏可见性与权利。这些问题导致她在大学时期离开教会。尽管如此，她现在对宗教和灵性重新产生欣赏，但仍与上述问题存在冲突。"
+        ]
+      },
+      {
+        "title": "TikTok修女现象与女性灵性觉醒",
+        "timeRange": "00:07:40 - 00:09:37",
+        "paragraphs": [
+          "Mickey分析TikTok上的\"修女\"（实为Daughters of Saint Paul修女会成员，因非隐修故应称\"姐妹\"）。 viral 片段\"sister and you are so good at that\"（涉及\"Ultimate Scissor\"游戏）之所以走红，既因与LGBTQ话语中\"sister\"一词的巧妙交集，更因展现出意图的清晰与纯粹。",
+          "据《纽约时报》披露，这些姐妹不亲自管理社交媒体，由制作团队负责录音、剪辑及预测 viral 内容，姐妹仅在事后可能得知表现数据。这种\"去资本主义的乌托邦愿景\"——女性社群生活与内容生产脱节——极具吸引力。",
+          "Mickey引用Anna Howard的视频论文《为何自私的女性治愈社会》：男性的灵性旅程常是学习无私，而女性的自我实现旅程则是学习拥抱自我与 ego，为自己需求创造空间。最后她提及Isabella Greenwood关于2016年讽刺灵性 meme 的文章，指出这种美学主要通过白人和西方媒介传播。"
+        ]
+      },
+      {
+        "title": "灵性美学与修女形象的双重性",
+        "timeRange": "00:09:34 → 00:11:16",
+        "paragraphs": [
+          "在 Anna 的视频 essay 语境中，修女形象之所以引发共鸣，在于其同时展现了自我牺牲（selflessness）与自我实现（selfhood）。特别是那位谈论极限飞盘（ultimate frisbee）的女性，她解释了如何在这一社群中投入真正热爱的活动，从而获得奉献与接受触觉关怀（tactile care）的能力，并在严格的生活方式中实现某种程度的自我身份认同。",
+          "关于灵性美学化，Isabella Greenwood 指出，尽管灵性本身不仅仅是审美，但其审美化无需被轻易否定。若以 playful 态度并具备自我意识地接触宗教符号，其功能更偏向 tongue-in-cheek 的姿态，而非对灵性权威的宣称。这种 playful 的态度甚至可能抵抗灵性及其制度化、教条化形式常产生的深度 virtue signaling 与表演性（performativity）。"
+        ]
+      },
+      {
+        "title": "赞助内容：Mubi 流媒体与电影推荐",
+        "timeRange": "00:11:14 → 00:12:56",
+        "paragraphs": [
+          "本片段由 Mubi 赞助。Mubi 是一个专注于全球优秀电影的策展型流媒体服务，强调人工精选而非算法推荐，涵盖从传奇导演到新兴创作者的作品。推荐影片包括：Lurker（Alex Russell 执导的心理惊悚片，讲述痴迷粉丝渗透进流行歌手核心圈的故事），以及 How to Have Sex（Molly Manning Walker 执导的成长剧情片，讲述 16 岁女孩在希腊度假时经历的性压力与自我发现）。观众可通过 mubi.com/mickeygalvin 获得 30 天免费试用。"
+        ]
+      },
+      {
+        "title": "疫情、社区危机与消费主义社区的悖论",
+        "timeRange": "00:12:54 → 00:14:52",
+        "paragraphs": [
+          "Lauren Jackson 在探讨美国人寻求宗教的原因时指出，疫情是美国生活的极端断裂点。世俗化趋势停滞的时刻与疫情爆发时间重合，人们被迫面对死亡并审视自身生活方式的有效性，许多人意识到现有的生活模式并不奏效，且缺乏渴望中的深度社区联结。",
+          "一段 TikTok 视频批判晚期资本主义使人们没有时间建立社区，转而通过消费构建虚假社区感——例如因购买同款抹茶拿铁或刷同一部电视剧而产生的联结，而非基于地理邻近或真实相处的关系。这引出了核心问题：通过消费获得的社区感与实际的社区建设及服务之间界限何在？",
+          "Washington Post 关于 West Village 教堂的报道显示，一群年轻人每周固定时间聚集于同一空间，但采访中透露出一种将去教堂作为 outward consumption 的荣誉感——通过发帖展示去教堂的行为来吸引他人聚集。这质疑了该群体是否真正在给予和接受触觉关怀，还是仅仅通过消费行为创造身份认同。尽管物理空间的每周聚集可能比纯粹幻觉创造更多真实感，但这种社区对谁有效、在何种程度上有效，仍是一把双刃剑。"
+        ]
+      },
+      {
+        "title": "天主教的社会安全网功能与信号传递",
+        "timeRange": "00:14:50 → 00:17:00",
+        "paragraphs": [
+          "Z 世代对基于规则的天主教（rules-based）的依恋，部分源于其信号传递的清晰性。天主教的视觉体系（creative direction）经过数百年精进，极为精确具体，通过宗教图像（iconography）、生活方式或 Lent（大斋期）放弃某些事物等方式，很容易 signal 自己的成员身份。",
+          "讲述者反思，离开基督教和天主教后意识到，其经历中最具体的 communal care、mutual aid 以及给予与接受行动，大多发生在教会参与期间。天主教本质上是美国最大的非政府社会安全网。当讨论给予和接受触觉关怀时，这一事实不可忽视。因此，一方面存在通过消费信号参与宗教的现象，另一方面天主教又提供了非常真实的社区标志，这种复杂性构成了理解当代宗教吸引力的关键张力。"
+        ]
+      },
+      {
+        "title": "真实性质疑：仪式与信仰的循环论证",
+        "timeRange": "00:16:58 → 00:18:57",
+        "paragraphs": [
+          "关于 Z 世代宗教复兴是否真实的问题，让人联想到过去对仅在复活节和圣诞节去教堂的 Catholics 的调侃——参与社区却不一定投入信仰本身。宗教参与中最困难的部分之一，正是对他人信仰投入程度的持续微妙评估。",
+          "2022 年纽约 Dimes Square 场景中也出现过天主教复兴，当时成为天主教徒并参加弥撒被视为前卫的反文化行为。Honor Levy 在其播客中表述：\"你只需执行仪式，然后它就会成真，即使你最初并不相信。这就是宗教。\" 这种观点存在争议，因为它暗示无需内在信仰或上帝信念，仅通过仪式即可 engagement。",
+          "这引发了 chicken-or-egg 式的本体论问题：是做某事意味着成为某事，还是成为某事才做某事？当代人对仪式（ritual）的强烈吸引——无论是护肤 routine 还是日常仪式——表明我们理解重复行为对身份的塑造作用。Isabella Greenwood 的引用再次相关：playfulness 可能抵抗制度化灵性产生的 virtue signaling。有人选择天主教而非 Episcopalianism（圣公会），视后者为\"diet coke of Catholicism\"，渴望拥有全部仪式和传统的\"真货\"。"
+        ]
+      },
+      {
+        "title": "宗教实践的潜在益处：注意力与忏悔的疗愈",
+        "timeRange": "00:18:54 → 00:21:14",
+        "paragraphs": [
+          "Zimon V 认为注意力是一种祈祷形式：当你给予某物完全、安静、专注的 attention 时，你正在训练灵魂如何 attend to the divine。祈祷无关言辞，而在于注视的深度。这种观点拓展了对 prayer 的理解，也解释了现代人对 slowing down 的渴望—— intense study、focus 或对特定仪式/活动的 devotion 均可成为 prayer。",
+          "Eliza Day 的视频探讨了忏悔（confessing sins）的概念：向信任的人倾诉后悔、内疚或羞耻，并获得\"你依然值得被爱，你可以被宽恕\"的确认，同时获得修复伤害、解决情绪的路径，这是一种极具疗愈性的治疗形式。然而，若教导人们在无自然感受时人工制造内疚、后悔或羞耻，并出于避免永恒惩罚的义务而忏悔，则会创造 artificial guilt structure，极具破坏性。",
+          "这与一张 meme 相关，涉及宗教成长过程中的 conditioning——迫切需要净化自我、被视为 worthy 的强迫性。Rachel Cusk 在 Coventry 文集的《The Last Supper》中描述的感受呼应此点：周日的感觉、身着会服的修女、老旧骨骼、不赞同与羞耻感，这些似乎不是通向天堂或地狱，而是通向绝对和终极的虚无（absolute and final nothingness）。"
+        ]
+      },
+      {
+        "title": "童年困惑与成年矛盾：宗教留下的情感遗产",
+        "timeRange": "[00:21:11 → 00:23:18]",
+        "paragraphs": [
+          "讲者回忆童年时对天主教图像与圣像感到困惑与恐惧，认为其氛围既冰冷又吓人。然而成年后，她虽对教会制度心存疑虑，却强烈渴望宗教曾提供的社区与服务体验。",
+          "她坦承自己在事业成功时感到内疚，甚至考虑皈依基督教，只因想将成就归功于上帝以减轻心理负担。她指出过去三到五年间，真正帮助她灵性成长的竟是早年基督教极力教导的\"放手控制\"与\"向更高力量臣服\"，这种与自己曾逃离的教义重逢的挫败感令她深感困惑。",
+          "讲者进一步分析，她热爱的表演、写作及分析思考能力，实际上根植于早年神学训练——学习理解文本的内在矛盾、翻译的层次差异，以及单一文本可同时承载多重真相。这种能力让她能轻松解读莎士比亚或剧本，但也让她痛苦地意识到，这些世俗才华建立在曾令她恐惧的宗教教育之上。"
+        ]
+      },
+      {
+        "title": "从布道到播客：宗教技能在世俗世界的迁移",
+        "timeRange": "[00:23:16 → 00:25:15]",
+        "paragraphs": [
+          "尽管对教会有诸多不满，讲者承认其公开演讲能力的部分来源正是童年持续聆听布道的经历——她熟悉那种语言节奏、叙事流程以及捕捉个人轶事的技巧，这与她在表演学校所学同等重要。",
+          "她引用Lauren Jackson的播客《为何更多美国人寻求宗教？》，并类比现代世俗替代品：SoulCycle、CrossFit等昂贵健身课程承诺的不仅是健康身体，更是更好的人生；占星应用Co-Star虽未吸引她，但她理解其吸引力——它为生活的混乱提供某种宇宙炼金术般的解释，满足人们对秩序与意义的渴望。",
+          "通过广泛交流旅行，讲者发现自己无法摆脱一个根深蒂固的世界观：她在演唱会、俱乐部、戏剧演出等纽约各类现场社区活动中，处处看到对灵性与信仰的替代性表达。这种观察引导她得出核心论点：对天主教的兴趣或许会带来某种复兴，但更可能催生对能创造归属感与灵性体验的社区及现场活动的强烈需求。她警告这种趋势既可能带来真诚的连接，也极易被商业力量利用——正如她曾在有组织宗教中经历的那样。"
+        ]
+      },
+      {
+        "title": "后宗教时代的灵性寻求：风险与希望并存",
+        "timeRange": "[00:25:12 → 00:26:43]",
+        "paragraphs": [
+          "讲者提及《华盛顿邮报》的文章观点：当下文化将消费主义与职业成就塑造成人生意义，但人们正在寻找比自身产出与购买力更深层次的东西。这种对超越性意义的追求令她欣慰，同时也担忧这使人们极易被利用。",
+          "她预测在未来五到十年，能提供此类灵性体验与社区连接的公司和体验将获得巨大成功。唯一令她感到乐观的\"一线希望\"是：这种趋势与科技界当前推动的\"超个人主义优化\"（hyperindividualistic optimization）截然相反，证明人们实际在主动寻求社区与服务，而非算法推崇的孤立自我提升。",
+          "离开有组织宗教结构后，讲者的灵性探索转向高度个人化的路径。她强调，在这个充满潜力的时代，既能孕育真诚的归属体验，也充斥着被商业或意识形态收编的风险，保持警惕至关重要。"
+        ]
+      }
+    ],
+    "paragraphs": [],
+    "id": "youtube-preview-UCnuffEHe-KtC6jt8BKex6HQ:hqDYBRjxq-E",
+    "title": "Z世代为何重新靠近宗教：秩序、社区与灵性需求",
+    "sourceUrl": "https://www.youtube.com/watch?v=hqDYBRjxq-E",
+    "summary": "Mickey 从流行文化、TikTok 修女、疫情后的社区需求与个人天主教经历出发，讨论 Z 世代为何重新关注宗教和灵性。她认为这并非简单的宗教复兴，而是年轻人正在寻找消费主义和个人优化之外的秩序、照料、归属感与意义。",
+    "tags": [
+      "Gen Z",
+      "Z世代",
+      "宗教复兴",
+      "天主教",
+      "灵性觉醒",
+      "TikTok修女",
+      "Theo bro",
+      "Pew Research"
+    ],
+    "source": "youtube",
+    "sourceLabel": "mickey galvin · 临时示例",
+    "publishedAt": "2026-07-29T10:41:17.318Z"
   },
   {
     "section": "github",
@@ -466,147 +2095,6 @@
     "accent": "blue",
     "inRecentWindow": true,
     "paragraphs": [
-      "ECC 定位为「agent harness」性能优化系统，围绕 AI 编程代理的运行环境提供增强能力，覆盖技能（Skills）、直觉（Instincts）、记忆（Memory）、安全（Security）以及研究优先的开发流程，目标平台包括 Claude Code、Codex、Opencode、Cursor 等主流 AI 编程工具。",
-      "项目以 JavaScript 为主，通过 npm 包 ecc-universal 与 ecc-agentshield 分发，同时提供 GitHub App 和插件（插件标识 ecc@ecc）等多种安装方式；官方文档提供包括简体中文、繁体中文、日语、韩语等在内的多语言版本，社区通过 Discord 进行交流与答疑。",
-      "仓库代码遵循 MIT 协议永久免费，适合希望增强 AI 编程代理能力的个人开发者与团队；托管服务 ECC Pro 是面向私有仓库的 GitHub App（每席位每月 19 美元起），属于付费增值部分，用于资助开源项目的持续开发。",
-      "注意事项：官方特别强调只从经验证的渠道安装——GitHub 仓库、官方 npm 包、GitHub App、插件标识 ecc@ecc 以及官网 ecc.tools；第三方转载或非官方镜像未经项目维护与审查，可能包含恶意软件。"
-    ],
-    "facts": [
-      {
-        "label": "主要语言",
-        "value": "JavaScript"
-      },
-      {
-        "label": "Stars",
-        "value": "235,177"
-      },
-      {
-        "label": "今日新增 Stars",
-        "value": "+636"
-      },
-      {
-        "label": "Forks",
-        "value": "35,822"
-      },
-      {
-        "label": "许可证",
-        "value": "MIT"
-      },
-      {
-        "label": "最近更新",
-        "value": "2026-07-29"
-      }
-    ],
-    "externalLinks": [
-      {
-        "label": "阅读项目 README",
-        "url": "https://github.com/affaan-m/ECC#readme"
-      },
-      {
-        "label": "打开项目网站",
-        "url": "https://ecc.tools"
-      },
-      {
-        "label": "查看 Releases",
-        "url": "https://github.com/affaan-m/ECC/releases"
-      }
-    ],
-    "id": "github-trending:affaan-m/ECC",
-    "title": "ECC：面向 AI 编程代理的运行环境优化系统",
-    "sourceUrl": "https://github.com/affaan-m/ECC",
-    "summary": "为 Claude Code、Codex、Opencode、Cursor 等 AI 编程工具提供技能、记忆、安全与研究驱动开发能力的 agent harness 性能优化系统，MIT 协议开源。",
-    "tags": [
-      "AI 编程代理",
-      "agent harness",
-      "Claude Code",
-      "Codex",
-      "Cursor",
-      "安全",
-      "MIT",
-      "JavaScript"
-    ],
-    "source": "daily",
-    "sourceLabel": "GitHub Trending",
-    "publishedAt": "2026-07-29T09:47:36.699Z"
-  },
-  {
-    "section": "github",
-    "digestDate": "2026-07-29",
-    "publishedDate": "7/29",
-    "time": "今天采集",
-    "readTime": "3 分钟",
-    "accent": "blue",
-    "inRecentWindow": true,
-    "paragraphs": [
-      "speech-to-speech 是 Hugging Face 开源的语音代理流水线，采用 VAD → STT → LLM → TTS 的级联结构，各环节在独立线程中运行并通过队列连接：Silero VAD v5 检测语音边界与话轮转换，STT 转写用户语音（可选实时部分转写），LLM 流式生成回复与工具调用，TTS 合成音频并流式返回客户端。整个服务通过兼容 OpenAI Realtime 协议的 WebSocket API（默认 ws://localhost:8765/v1/realtime）暴露，任何兼容该协议的客户端均可直接接入。该项目已作为数千台 Reachy Mini 机器人的对话后端在生产环境运行。",
-      "核心能力在于全模块化，每个环节都可替换。LLM 环节使用 OpenAI 兼容协议，可指向托管服务商、HF Inference Providers，或本机的 vLLM、llama.cpp 服务器，从而构建完全本地、完全开源的技术栈。默认安装使用 Parakeet TDT 做本地语音识别、Qwen3-TTS 做本地语音合成（非 macOS 平台默认 GGML 后端，Apple Silicon 使用 mlx-audio），macOS 与非 macOS 依赖通过平台标记自动解析。",
-      "适用人群：需要自建低延迟语音助手、语音机器人后端，或希望摆脱闭源语音 API 依赖的开发者。安装简单（pip install speech-to-speech，需 Python 3.10+），项目采用 Apache-2.0 协议，代码以便捷修改为导向，重点关注 Transformers 与 Hugging Face Hub 上可用的模型。",
-      "注意事项：默认快速上手需要 OpenAI 兼容 API 密钥；在 Linux 上使用 Qwen3-TTS 时，PyPI 默认的 qwentts-cpp-python wheel 针对 CUDA 12.8，若环境不匹配，需先从 Hugging Face wheelhouse 安装对应 CUDA 13.x、CUDA 12.4 或纯 CPU 版本的 wheel，再安装 speech-to-speech。"
-    ],
-    "facts": [
-      {
-        "label": "主要语言",
-        "value": "Python"
-      },
-      {
-        "label": "Stars",
-        "value": "7,540"
-      },
-      {
-        "label": "今日新增 Stars",
-        "value": "+227"
-      },
-      {
-        "label": "Forks",
-        "value": "978"
-      },
-      {
-        "label": "许可证",
-        "value": "Apache-2.0"
-      },
-      {
-        "label": "最近更新",
-        "value": "2026-07-28"
-      }
-    ],
-    "externalLinks": [
-      {
-        "label": "阅读项目 README",
-        "url": "https://github.com/huggingface/speech-to-speech#readme"
-      },
-      {
-        "label": "查看 Releases",
-        "url": "https://github.com/huggingface/speech-to-speech/releases"
-      }
-    ],
-    "id": "github-trending:huggingface/speech-to-speech",
-    "title": "speech-to-speech：用开源模型构建本地语音代理",
-    "sourceUrl": "https://github.com/huggingface/speech-to-speech",
-    "summary": "Hugging Face 开源的低延迟、全模块化语音代理流水线（VAD→STT→LLM→TTS），通过兼容 OpenAI Realtime 的 WebSocket API 提供服务，可完全本地化运行。",
-    "tags": [
-      "语音代理",
-      "STT",
-      "TTS",
-      "VAD",
-      "LLM",
-      "OpenAI Realtime",
-      "本地部署",
-      "Apache-2.0",
-      "Python"
-    ],
-    "source": "daily",
-    "sourceLabel": "GitHub Trending",
-    "publishedAt": "2026-07-29T09:47:36.699Z"
-  },
-  {
-    "section": "github",
-    "digestDate": "2026-07-29",
-    "publishedDate": "7/29",
-    "time": "今天采集",
-    "readTime": "3 分钟",
-    "accent": "blue",
-    "inRecentWindow": true,
-    "paragraphs": [
       "项目用途：解决“买了好技术书、读过就忘”的痛点。相比直接搜 PDF 只能得到页码、问 AI 容易幻觉、做笔记又不再翻看，book-to-skill 把整本书蒸馏成结构化的技能（Skill），安装到智能体的技能目录后，只需输入“/书名-slug 主题”，智能体就会读取对应章节并基于真实内容作答。官方实测回答一个问题比把整本书塞进上下文少用 24–51 倍 token。",
       "核心能力：运行一条命令即可生成完整技能包，包括 SKILL.md（核心心智模型与章节索引，约 4000 token）、按章节拆分的 Markdown 文件（按需加载、不占用技能预算）、glossary.md 术语表（含章节引用）、patterns.md（技巧、算法与设计模式汇总）以及 cheatsheet.md（决策表与速查规则）。输入不局限于书籍，内部文档、架构决策记录、运维手册、入门指南等结构化文档同样适用，可对整个 docs/ 目录做提取。",
       "适用人群与注意事项：适合经常翻阅技术书籍的开发者，以及希望把团队文档接入 AI 编程助手的团队。技能遵循开放的 Agent Skills 标准，同一份 SKILL.md 可被 Copilot CLI、Amp、Claude Code 读取，但需宿主环境支持该标准；不同宿主安装路径不同（如 ~/.claude/skills/）。项目基于 Python，采用 MIT 协议。"
@@ -735,76 +2223,6 @@
       "Jupyter",
       "开源",
       "MIT"
-    ],
-    "source": "daily",
-    "sourceLabel": "GitHub Trending",
-    "publishedAt": "2026-07-29T09:47:36.699Z"
-  },
-  {
-    "section": "github",
-    "digestDate": "2026-07-29",
-    "publishedDate": "7/29",
-    "time": "今天采集",
-    "readTime": "3 分钟",
-    "accent": "blue",
-    "inRecentWindow": true,
-    "paragraphs": [
-      "这是一个面向系统化交易（量化交易）的资源导航仓库，本身不提供交易功能，而是汇总了寻找、开发和运行量化策略所需的论文、软件、书籍、文章等各类资源。清单包含 97 个库和软件包、40 多个由机构和学术界描述的策略、55 本入门与专业书籍、23 个视频访谈，以及博客和课程。",
-      "库和软件包部分按编程语言分类并按 Star 数降序排列，覆盖面很广：事件驱动与向量化的回测/实盘框架（如 vnpy、zipline、backtrader、QUANTAXIS 等）、加密货币交易、交易机器人、技术指标与绩效指标计算、组合优化、衍生品定价与风险分析、券商 API、数据源、数据库、图计算、机器学习、时间序列分析和可视化等。策略部分则按资产类别组织，涵盖债券、商品、货币、股票、REITs 和加密货币等。",
-      "适合量化交易初学者、策略研究人员和开发者使用：初学者可以从书籍、视频和课程入门，研究者可以按资产类别查找策略思路，工程师可以按语言和热度挑选回测框架与数据接口。",
-      "需要注意的是，这是一个社区维护的清单，收录的第三方项目质量与维护状态不一（其中不乏已停止维护的老项目），使用前应自行核实；仓库中也带有指向 paperswithbacktest.com 付费内容的推广链接。此外，任何策略资源都不构成投资建议，实盘使用需自行做好回测验证与风险管理。"
-    ],
-    "facts": [
-      {
-        "label": "主要语言",
-        "value": "Python"
-      },
-      {
-        "label": "Stars",
-        "value": "10,034"
-      },
-      {
-        "label": "今日新增 Stars",
-        "value": "+309"
-      },
-      {
-        "label": "Forks",
-        "value": "1,322"
-      },
-      {
-        "label": "许可证",
-        "value": "未标注"
-      },
-      {
-        "label": "最近更新",
-        "value": "2025-01-22"
-      }
-    ],
-    "externalLinks": [
-      {
-        "label": "阅读项目 README",
-        "url": "https://github.com/paperswithbacktest/awesome-systematic-trading#readme"
-      },
-      {
-        "label": "打开项目网站",
-        "url": "https://paperswithbacktest.com"
-      },
-      {
-        "label": "查看 Releases",
-        "url": "https://github.com/paperswithbacktest/awesome-systematic-trading/releases"
-      }
-    ],
-    "id": "github-trending:paperswithbacktest/awesome-systematic-trading",
-    "title": "系统化交易资源精选清单（Awesome Systematic Trading）",
-    "sourceUrl": "https://github.com/paperswithbacktest/awesome-systematic-trading",
-    "summary": "一份精心整理的系统化（量化）交易资源清单，收录了 97 个回测与实盘交易库、40 多个机构与学术策略、55 本书籍、23 个视频以及博客和课程，帮助交易者发现、开发并运行量化交易策略。",
-    "tags": [
-      "量化交易",
-      "系统化交易",
-      "回测框架",
-      "交易策略",
-      "资源清单",
-      "Python"
     ],
     "source": "daily",
     "sourceLabel": "GitHub Trending",
@@ -1018,164 +2436,6 @@
     "publishedAt": "2026-07-29T09:47:36.699Z"
   },
   {
-    "section": "youtube",
-    "digestDate": "2026-07-29",
-    "publishedDate": "7/29",
-    "time": "今天采集",
-    "readTime": "深度阅读",
-    "accent": "orange",
-    "inRecentWindow": true,
-    "takeaways": [
-      "Z世代的宗教参与度呈现\"稳定化\"而非真正复兴：Pew Research 2025研究显示每有1名年轻人加入天主教，就有约12人离开，男性离开速度仅比女性慢，并非引领复兴",
-      "当前宗教吸引力呈现两个极端光谱：一端是男性化的规则/权力导向（Theo bro），提供秩序与控制感；另一端是女性化的服务/社群导向，强调后疫情时代的触觉关怀与互助",
-      "TikTok修女（实为修女会姐妹）的 viral 现象反映了人们对纯粹意图和脱离资本主义的内容生产的渴望，以及女性通过拥抱自我（而非自我牺牲）实现灵性成长的反传统路径",
-      "早期神学训练培养的文本多层次分析能力（如理解矛盾、翻译差异）可迁移至世俗领域的表演、写作及批判性思考",
-      "现代人对社区与灵性的渴望正从传统宗教转向演唱会、健身课等现场体验，创造新的文化商业机会",
-      "对意义和归属感的追求虽是对抗消费主义文化的积极信号，但也使年轻人极易被商业机构或类似宗教的意识形态操控，需保持批判性警觉"
-    ],
-    "sections": [
-      {
-        "title": "引言：Z世代的宗教复兴现象与流行文化表征",
-        "timeRange": "00:00:00 - 00:01:56",
-        "paragraphs": [
-          "主持人Mickey（演员及电影制作人）介绍今日主题：探讨Z世代正在经历的\"宗教复兴\"（使用引号表示存疑），特别关注灵性需求、社群渴望以及女性视角在此转变中的作用。",
-          "她指出目前无法逃避天主教文化的影响——这对接受过12年天主教教育的人而言出乎意料。流行文化中宗教意象激增：Rosalia的《Lux》专辑、Ethel Cain的作品、Justin Bieber的《Hallelujah》、美国籍教皇上任，以及《华盛顿邮报》关于西村圣约瑟夫教堂成为纽约市约会热点的报道。",
-          "此外，TikTok上的修女（实际应为\"姐妹\"，因她们非隐修院 cloistered 修女）现象也体现了这种趋势。Mickey说明将通过Google文档记录笔记，并引用Sublime的资料。她强调，虽然流行文化中的宗教引用明显增加，但实际皈依数据难以证实，这是讨论的重要起点。"
-        ]
-      },
-      {
-        "title": "数据现实：稳定化与流失的真相",
-        "timeRange": "00:01:54 - 00:03:56",
-        "paragraphs": [
-          "Mickey引用Pew Research 2025年研究数据：每有一名年轻人加入天主教会，约有12人离开。目前离开教会的人数仍多于加入者，所谓\"复兴\"更接近于\"流失速度的稳定化\"而非真正的增长。",
-          "《大西洋月刊》文章《Z世代正在发生的宗教复兴》指出，将这种稳定化视为复兴忽视了两个事实：一是年轻一代按多数指标仍是最不宗教的群体，二是许多曾信教者已离教。尽管有观点认为Z世代男性正引领传统基督教复兴，但事实是他们只是比女性离开教会的速度稍慢。",
-          "这种稳定化之所以令人震惊，是因为Z世代远离制度化宗教信仰的趋势曾看似不可逆转。Mickey发现，当前对宗教的兴趣比表面更复杂多元，存在不同光谱。"
-        ]
-      },
-      {
-        "title": "光谱两端：男性化与女性化的信仰视角",
-        "timeRange": "00:03:54 - 00:05:51",
-        "paragraphs": [
-          "Mickey提出两种截然不同的宗教参与模式。一端是\"男性化视角\"：《华盛顿邮报》定义的\"Theo bro\"——极度依赖网络的宗教男性，通常是皈依者，以规则或权力而非服务和社群来理解信仰。这种取向为感到迷失的人提供结构，是对Huberman实验室、生物黑客文化及身体控制/限制的延伸。",
-          "另一端是截然相反的\"女性化视角\"：强调服务与社群。纽约时报《The Daily》节目\"为何更多美国人寻求宗教\"中，Lauren Jackson指出后疫情时代人们渴望给予和接受真实的、触觉化的关怀。Mickey澄清，使用\"男性化\"或\"女性化\"是指能量层面，而非性别本身。作为女性，她同时被天主教的秩序/特异性（因世界混乱）和女性化的社群服务能量（给予与照顾）所吸引。",
-          "此外，宗教吸引力还来自其\"前卫性\"：作为过去十年潮流的完全对立面，以及政治化的极端表现（马蹄铁理论）——当左右翼界限极度模糊后，曾经右翼专属的标签不再具有固定政治含义，使人们可以自由尝试不同信仰体系。"
-        ]
-      },
-      {
-        "title": "天主教与基督教的区别及个人信仰背景",
-        "timeRange": "00:05:49 - 00:07:43",
-        "paragraphs": [
-          "Mickey为非基督教背景观众提供简要说明：基督教是基于耶稣基督生平与教导的世界宗教，相信耶稣带来救赎；天主教是最古老的连续基督教形式，扎根于传统，教皇、修女、圣体圣事、圣徒等概念均属天主教，其他教派多由此分支或相互分化。",
-          "她分享个人背景：在严格天主教家庭长大，每周望两次弥撒，就读天主教学校，担任辅祭，领受初领圣体和坚振圣事。高中时期转向非宗派基督教，但始终面临几个冲突：女性缺乏领导角色、对女性贞洁及医疗保健的观点，以及LGBTQ群体缺乏可见性与权利。这些问题导致她在大学时期离开教会。尽管如此，她现在对宗教和灵性重新产生欣赏，但仍与上述问题存在冲突。"
-        ]
-      },
-      {
-        "title": "TikTok修女现象与女性灵性觉醒",
-        "timeRange": "00:07:40 - 00:09:37",
-        "paragraphs": [
-          "Mickey分析TikTok上的\"修女\"（实为Daughters of Saint Paul修女会成员，因非隐修故应称\"姐妹\"）。 viral 片段\"sister and you are so good at that\"（涉及\"Ultimate Scissor\"游戏）之所以走红，既因与LGBTQ话语中\"sister\"一词的巧妙交集，更因展现出意图的清晰与纯粹。",
-          "据《纽约时报》披露，这些姐妹不亲自管理社交媒体，由制作团队负责录音、剪辑及预测 viral 内容，姐妹仅在事后可能得知表现数据。这种\"去资本主义的乌托邦愿景\"——女性社群生活与内容生产脱节——极具吸引力。",
-          "Mickey引用Anna Howard的视频论文《为何自私的女性治愈社会》：男性的灵性旅程常是学习无私，而女性的自我实现旅程则是学习拥抱自我与 ego，为自己需求创造空间。最后她提及Isabella Greenwood关于2016年讽刺灵性 meme 的文章，指出这种美学主要通过白人和西方媒介传播。"
-        ]
-      },
-      {
-        "title": "灵性美学与修女形象的双重性",
-        "timeRange": "00:09:34 → 00:11:16",
-        "paragraphs": [
-          "在 Anna 的视频 essay 语境中，修女形象之所以引发共鸣，在于其同时展现了自我牺牲（selflessness）与自我实现（selfhood）。特别是那位谈论极限飞盘（ultimate frisbee）的女性，她解释了如何在这一社群中投入真正热爱的活动，从而获得奉献与接受触觉关怀（tactile care）的能力，并在严格的生活方式中实现某种程度的自我身份认同。",
-          "关于灵性美学化，Isabella Greenwood 指出，尽管灵性本身不仅仅是审美，但其审美化无需被轻易否定。若以 playful 态度并具备自我意识地接触宗教符号，其功能更偏向 tongue-in-cheek 的姿态，而非对灵性权威的宣称。这种 playful 的态度甚至可能抵抗灵性及其制度化、教条化形式常产生的深度 virtue signaling 与表演性（performativity）。"
-        ]
-      },
-      {
-        "title": "赞助内容：Mubi 流媒体与电影推荐",
-        "timeRange": "00:11:14 → 00:12:56",
-        "paragraphs": [
-          "本片段由 Mubi 赞助。Mubi 是一个专注于全球优秀电影的策展型流媒体服务，强调人工精选而非算法推荐，涵盖从传奇导演到新兴创作者的作品。推荐影片包括：Lurker（Alex Russell 执导的心理惊悚片，讲述痴迷粉丝渗透进流行歌手核心圈的故事），以及 How to Have Sex（Molly Manning Walker 执导的成长剧情片，讲述 16 岁女孩在希腊度假时经历的性压力与自我发现）。观众可通过 mubi.com/mickeygalvin 获得 30 天免费试用。"
-        ]
-      },
-      {
-        "title": "疫情、社区危机与消费主义社区的悖论",
-        "timeRange": "00:12:54 → 00:14:52",
-        "paragraphs": [
-          "Lauren Jackson 在探讨美国人寻求宗教的原因时指出，疫情是美国生活的极端断裂点。世俗化趋势停滞的时刻与疫情爆发时间重合，人们被迫面对死亡并审视自身生活方式的有效性，许多人意识到现有的生活模式并不奏效，且缺乏渴望中的深度社区联结。",
-          "一段 TikTok 视频批判晚期资本主义使人们没有时间建立社区，转而通过消费构建虚假社区感——例如因购买同款抹茶拿铁或刷同一部电视剧而产生的联结，而非基于地理邻近或真实相处的关系。这引出了核心问题：通过消费获得的社区感与实际的社区建设及服务之间界限何在？",
-          "Washington Post 关于 West Village 教堂的报道显示，一群年轻人每周固定时间聚集于同一空间，但采访中透露出一种将去教堂作为 outward consumption 的荣誉感——通过发帖展示去教堂的行为来吸引他人聚集。这质疑了该群体是否真正在给予和接受触觉关怀，还是仅仅通过消费行为创造身份认同。尽管物理空间的每周聚集可能比纯粹幻觉创造更多真实感，但这种社区对谁有效、在何种程度上有效，仍是一把双刃剑。"
-        ]
-      },
-      {
-        "title": "天主教的社会安全网功能与信号传递",
-        "timeRange": "00:14:50 → 00:17:00",
-        "paragraphs": [
-          "Z 世代对基于规则的天主教（rules-based）的依恋，部分源于其信号传递的清晰性。天主教的视觉体系（creative direction）经过数百年精进，极为精确具体，通过宗教图像（iconography）、生活方式或 Lent（大斋期）放弃某些事物等方式，很容易 signal 自己的成员身份。",
-          "讲述者反思，离开基督教和天主教后意识到，其经历中最具体的 communal care、mutual aid 以及给予与接受行动，大多发生在教会参与期间。天主教本质上是美国最大的非政府社会安全网。当讨论给予和接受触觉关怀时，这一事实不可忽视。因此，一方面存在通过消费信号参与宗教的现象，另一方面天主教又提供了非常真实的社区标志，这种复杂性构成了理解当代宗教吸引力的关键张力。"
-        ]
-      },
-      {
-        "title": "真实性质疑：仪式与信仰的循环论证",
-        "timeRange": "00:16:58 → 00:18:57",
-        "paragraphs": [
-          "关于 Z 世代宗教复兴是否真实的问题，让人联想到过去对仅在复活节和圣诞节去教堂的 Catholics 的调侃——参与社区却不一定投入信仰本身。宗教参与中最困难的部分之一，正是对他人信仰投入程度的持续微妙评估。",
-          "2022 年纽约 Dimes Square 场景中也出现过天主教复兴，当时成为天主教徒并参加弥撒被视为前卫的反文化行为。Honor Levy 在其播客中表述：\"你只需执行仪式，然后它就会成真，即使你最初并不相信。这就是宗教。\" 这种观点存在争议，因为它暗示无需内在信仰或上帝信念，仅通过仪式即可 engagement。",
-          "这引发了 chicken-or-egg 式的本体论问题：是做某事意味着成为某事，还是成为某事才做某事？当代人对仪式（ritual）的强烈吸引——无论是护肤 routine 还是日常仪式——表明我们理解重复行为对身份的塑造作用。Isabella Greenwood 的引用再次相关：playfulness 可能抵抗制度化灵性产生的 virtue signaling。有人选择天主教而非 Episcopalianism（圣公会），视后者为\"diet coke of Catholicism\"，渴望拥有全部仪式和传统的\"真货\"。"
-        ]
-      },
-      {
-        "title": "宗教实践的潜在益处：注意力与忏悔的疗愈",
-        "timeRange": "00:18:54 → 00:21:14",
-        "paragraphs": [
-          "Zimon V 认为注意力是一种祈祷形式：当你给予某物完全、安静、专注的 attention 时，你正在训练灵魂如何 attend to the divine。祈祷无关言辞，而在于注视的深度。这种观点拓展了对 prayer 的理解，也解释了现代人对 slowing down 的渴望—— intense study、focus 或对特定仪式/活动的 devotion 均可成为 prayer。",
-          "Eliza Day 的视频探讨了忏悔（confessing sins）的概念：向信任的人倾诉后悔、内疚或羞耻，并获得\"你依然值得被爱，你可以被宽恕\"的确认，同时获得修复伤害、解决情绪的路径，这是一种极具疗愈性的治疗形式。然而，若教导人们在无自然感受时人工制造内疚、后悔或羞耻，并出于避免永恒惩罚的义务而忏悔，则会创造 artificial guilt structure，极具破坏性。",
-          "这与一张 meme 相关，涉及宗教成长过程中的 conditioning——迫切需要净化自我、被视为 worthy 的强迫性。Rachel Cusk 在 Coventry 文集的《The Last Supper》中描述的感受呼应此点：周日的感觉、身着会服的修女、老旧骨骼、不赞同与羞耻感，这些似乎不是通向天堂或地狱，而是通向绝对和终极的虚无（absolute and final nothingness）。"
-        ]
-      },
-      {
-        "title": "童年困惑与成年矛盾：宗教留下的情感遗产",
-        "timeRange": "[00:21:11 → 00:23:18]",
-        "paragraphs": [
-          "讲者回忆童年时对天主教图像与圣像感到困惑与恐惧，认为其氛围既冰冷又吓人。然而成年后，她虽对教会制度心存疑虑，却强烈渴望宗教曾提供的社区与服务体验。",
-          "她坦承自己在事业成功时感到内疚，甚至考虑皈依基督教，只因想将成就归功于上帝以减轻心理负担。她指出过去三到五年间，真正帮助她灵性成长的竟是早年基督教极力教导的\"放手控制\"与\"向更高力量臣服\"，这种与自己曾逃离的教义重逢的挫败感令她深感困惑。",
-          "讲者进一步分析，她热爱的表演、写作及分析思考能力，实际上根植于早年神学训练——学习理解文本的内在矛盾、翻译的层次差异，以及单一文本可同时承载多重真相。这种能力让她能轻松解读莎士比亚或剧本，但也让她痛苦地意识到，这些世俗才华建立在曾令她恐惧的宗教教育之上。"
-        ]
-      },
-      {
-        "title": "从布道到播客：宗教技能在世俗世界的迁移",
-        "timeRange": "[00:23:16 → 00:25:15]",
-        "paragraphs": [
-          "尽管对教会有诸多不满，讲者承认其公开演讲能力的部分来源正是童年持续聆听布道的经历——她熟悉那种语言节奏、叙事流程以及捕捉个人轶事的技巧，这与她在表演学校所学同等重要。",
-          "她引用Lauren Jackson的播客《为何更多美国人寻求宗教？》，并类比现代世俗替代品：SoulCycle、CrossFit等昂贵健身课程承诺的不仅是健康身体，更是更好的人生；占星应用Co-Star虽未吸引她，但她理解其吸引力——它为生活的混乱提供某种宇宙炼金术般的解释，满足人们对秩序与意义的渴望。",
-          "通过广泛交流旅行，讲者发现自己无法摆脱一个根深蒂固的世界观：她在演唱会、俱乐部、戏剧演出等纽约各类现场社区活动中，处处看到对灵性与信仰的替代性表达。这种观察引导她得出核心论点：对天主教的兴趣或许会带来某种复兴，但更可能催生对能创造归属感与灵性体验的社区及现场活动的强烈需求。她警告这种趋势既可能带来真诚的连接，也极易被商业力量利用——正如她曾在有组织宗教中经历的那样。"
-        ]
-      },
-      {
-        "title": "后宗教时代的灵性寻求：风险与希望并存",
-        "timeRange": "[00:25:12 → 00:26:43]",
-        "paragraphs": [
-          "讲者提及《华盛顿邮报》的文章观点：当下文化将消费主义与职业成就塑造成人生意义，但人们正在寻找比自身产出与购买力更深层次的东西。这种对超越性意义的追求令她欣慰，同时也担忧这使人们极易被利用。",
-          "她预测在未来五到十年，能提供此类灵性体验与社区连接的公司和体验将获得巨大成功。唯一令她感到乐观的\"一线希望\"是：这种趋势与科技界当前推动的\"超个人主义优化\"（hyperindividualistic optimization）截然相反，证明人们实际在主动寻求社区与服务，而非算法推崇的孤立自我提升。",
-          "离开有组织宗教结构后，讲者的灵性探索转向高度个人化的路径。她强调，在这个充满潜力的时代，既能孕育真诚的归属体验，也充斥着被商业或意识形态收编的风险，保持警惕至关重要。"
-        ]
-      }
-    ],
-    "paragraphs": [],
-    "id": "youtube-preview-UCnuffEHe-KtC6jt8BKex6HQ:hqDYBRjxq-E",
-    "title": "Z世代为何重新靠近宗教：秩序、社区与灵性需求",
-    "sourceUrl": "https://www.youtube.com/watch?v=hqDYBRjxq-E",
-    "summary": "Mickey 从流行文化、TikTok 修女、疫情后的社区需求与个人天主教经历出发，讨论 Z 世代为何重新关注宗教和灵性。她认为这并非简单的宗教复兴，而是年轻人正在寻找消费主义和个人优化之外的秩序、照料、归属感与意义。",
-    "tags": [
-      "Gen Z",
-      "Z世代",
-      "宗教复兴",
-      "天主教",
-      "灵性觉醒",
-      "TikTok修女",
-      "Theo bro",
-      "Pew Research"
-    ],
-    "source": "youtube",
-    "sourceLabel": "mickey galvin · 临时示例",
-    "publishedAt": "2026-07-29T10:41:17.318Z"
-  },
-  {
     "section": "x",
     "digestDate": "2026-07-29",
     "publishedDate": "7/29",
@@ -1184,72 +2444,23 @@
     "accent": "green",
     "inRecentWindow": true,
     "paragraphs": [
-      "Sol 的人们，大家好！我已经重置了所有 ChatGPT Work 和 Codex 用户的使用限额。与此同时，快速更新一下关于 GPT-5.6 Sol 使用限额的情况。过去几周，你们中的许多人告诉我们，Sol 消耗你们 Codex 限额的速度比预期更快。明确地说，我们并没有减少……（注：原推文文本在此截断，后续内容缺失）",
-      "【原文内容】该推文由 X 用户 thsottiaux 发布，内容涉及 OpenAI 相关产品：ChatGPT Work、Codex 以及被称为 GPT-5.6 Sol 的模型。作者表示已重置相关用户的使用限额，并承认收到用户关于限额消耗过快的反馈，随后开始作出澄清，但提供的文本在句子中途（“we have not reduced usage on an”）被截断。【编辑解释】由于原文不完整，无法得知澄清的完整内容、限额调整的具体数值或后续措施，不应推测缺失部分。推文提到的“Sol”应为 GPT-5.6 模型的某个版本或代号名称，但原文未给出进一步说明。"
+      "提供大型模型的服务（部署大模型）是件难事。",
+      "【原文内容】推文只有一句简短陈述‘Serving large models is hard’和一个短链接。【解释与局限】链接内容无法访问，因此无法确认作者是在评论某篇文章、某个技术事件、某次故障还是自身经历，此处不作猜测。可确认的信息仅限于：作者表达了大模型推理/部署服务具有较高技术难度这一观点。‘Serving’在大模型语境中通常指模型的在线推理服务与部署运维。另据公开资料，steipete 为知名开发者 Peter Steinberger，此身份属于编者的补充说明，并非推文原文信息。由于推文本身信息不足，无法提供更具体的背景解读。"
     ],
-    "id": "follow-builders:2082317452755751098",
-    "title": "重置 ChatGPT Work 与 Codex 用户的使用限额",
-    "sourceUrl": "https://x.com/thsottiaux/status/2082317452755751098",
-    "summary": "作者宣布已重置所有 ChatGPT Work 和 Codex 用户的使用限额，并就 GPT-5.6 Sol 的使用限额发布简要更新。原文提到许多用户反馈 Sol 消耗 Codex 限额的速度比预期更快，作者开始澄清并未减少用量，但推文文本在此处被截断，后续内容未知。",
+    "id": "follow-builders:2082337130299457652",
+    "title": "steipete：部署大模型服务很难",
+    "sourceUrl": "https://x.com/steipete/status/2082337130299457652",
+    "summary": "作者简短感叹提供大模型服务（serving large models）很困难，并附链接。链接内容无法访问，无法确认其评论的具体对象。",
     "tags": [
-      "X",
-      "AI"
+      "大模型",
+      "模型部署",
+      "推理服务",
+      "技术难度",
+      "信息不足"
     ],
     "source": "builder",
-    "sourceLabel": "thsottiaux · Follow Builders",
-    "publishedAt": "2026-07-29T04:09:00.000Z"
-  },
-  {
-    "section": "x",
-    "digestDate": "2026-07-28",
-    "publishedDate": "7/28",
-    "time": "昨日采集",
-    "readTime": "3 分钟",
-    "accent": "green",
-    "inRecentWindow": true,
-    "paragraphs": [
-      "（推文正文无文字内容，仅为一个链接：https://t.co/Zgd4HPRMyi）",
-      "【原文内容】该推文的全部内容就是一个 X 平台自动生成的 t.co 短链接，作者 levie 未附带任何文字、图片描述或上下文。【编辑解释】按照规定，对于只有链接、缺乏上下文的推文，不猜测链接所指向的网页、图片或视频内容。目前信息不足，无法提供有效翻译或解读。"
-    ],
-    "id": "follow-builders:2082114876873597239",
-    "title": "仅含链接的推文（信息不足，无法判断内容）",
-    "sourceUrl": "https://x.com/levie/status/2082114876873597239",
-    "summary": "该推文由 levie 发布，正文中只有一个 t.co 短链接，不包含任何文字说明，因此无法确定推文所指向的具体内容。",
-    "tags": [
-      "X",
-      "AI"
-    ],
-    "source": "builder",
-    "sourceLabel": "levie · Follow Builders",
-    "publishedAt": "2026-07-28T14:44:00.000Z"
-  },
-  {
-    "section": "x",
-    "digestDate": "2026-07-29",
-    "publishedDate": "7/29",
-    "time": "今天采集",
-    "readTime": "3 分钟",
-    "accent": "green",
-    "inRecentWindow": true,
-    "paragraphs": [
-      "更多开源好东西。我们刚刚发布了一个 CLI 和 TypeScript SDK，用于查找、验证并修复代码中的安全漏洞。它可以扫描代码仓库、审查变更、长期跟踪发现的问题，并在 CI 中运行安全检查。",
-      "【原文内容】推文称该工具以开源形式发布，提供命令行工具（CLI）和 TypeScript SDK，核心能力覆盖漏洞的发现、验证与修复，典型使用场景包括仓库扫描、变更审查、随时间跟踪漏洞（findings），以及在持续集成（CI）中执行安全检查。【编辑解释】CI 指持续集成，即代码提交后自动构建与测试的流程，此处指可将安全扫描嵌入该流程实现自动化拦截。【信息不足说明】推文附带一个 t.co 短链接，指向的具体产品页面或代码仓库无法确认，故不猜测其内容与产品名称；作者背景资料为空，也不对其所属机构做推断。"
-    ],
-    "id": "follow-builders:2082241164850364555",
-    "title": "开源安全工具发布：用于查找与修复漏洞的 CLI 和 TypeScript SDK",
-    "sourceUrl": "https://x.com/thsottiaux/status/2082241164850364555",
-    "summary": "作者宣布开源发布一款安全工具的 CLI 与 TypeScript SDK，功能包括扫描代码仓库、审查变更、长期跟踪漏洞发现，并可在 CI 流程中运行安全检查。",
-    "tags": [
-      "开源",
-      "安全漏洞",
-      "CLI",
-      "TypeScript SDK",
-      "CI",
-      "代码扫描"
-    ],
-    "source": "builder",
-    "sourceLabel": "thsottiaux · Follow Builders",
-    "publishedAt": "2026-07-28T23:05:00.000Z"
+    "sourceLabel": "steipete · Follow Builders",
+    "publishedAt": "2026-07-29T05:27:00.000Z"
   },
   {
     "section": "x",
@@ -1286,24 +2497,23 @@
     "accent": "green",
     "inRecentWindow": true,
     "paragraphs": [
-      "关于当下的招聘市场：对 AI 原生的个人贡献者（IC）/『队员兼教练』型人才来说，这是一个巨大的牛市；对『某某部门负责人』式的管理者来说，则是一个巨大的熊市。我从未见过如此猛烈的两极分化。简单化地说：1 年管理 10 个智能体（agent）的经验 > 10 年管理 10 到 100 人的经验。",
-      "【原文要点】作者借用股市术语作比喻：『牛市』指需求旺盛、身价上涨，『熊市』指需求萎缩、身价下跌；『bifurcation』意为分叉、两极分化。IC（individual contributor）指不带团队、亲自干活的专业人员；『player-coach』指既亲自下场做事又兼顾带队的复合角色；『heads of X』指以纯管理为职责的部门负责人。末句中的『agent』指 AI 智能体。【解释（非原文）】这条推文反映了一种在科技圈流行的观点：随着 AI 智能体能承担越来越多执行层工作，『善于指挥 AI 干活』的实战型人才价值上升，而传统的纯中层管理岗位相对贬值，组织趋向扁平化。需要注意的是，最后那句『1 年管 10 个智能体 > 10 年管 100 人』是作者自己承认的『过度简化』（to oversimplify），属于刻意夸张的修辞，用以强调趋势，不应被视为客观数据或普遍规律。背景上，swyx 是 AI 工程领域的知名作者与评论者，此推文属其个人观点表达。"
+      "这些都是对 Codex 的合理批评，尽管我也很喜欢这款产品！我其实完全不知道 Sol Pro 居然存在——它比 Sol High 更好吗？为什么 Codex 里没有提供？",
+      "【原文要点】这是一条回应他人言论的推文：作者承认针对 Codex 的批评'都是合理的'，同时表达了对 Sol Pro 的惊讶，并提出两个疑问——Sol Pro 是否优于 Sol High、为何 Codex 中没有 Sol Pro。推文末尾附有一个链接（可能是被引用推文或截图），其指向内容从文本本身无法获知，因此这些批评的具体内容、以及 Sol Pro 与 Sol High 的确切定义均无法确认，不作猜测。【解释与背景，非原文信息】Codex 通常指 OpenAI 推出的 AI 编程助手产品；'Sol Pro'与'Sol High'疑似为模型版本或推理强度档位的名称，但仅凭本推文无法证实其含义。"
     ],
-    "id": "follow-builders:2082199414656127010",
-    "title": "swyx：AI 时代招聘市场剧烈分化——AI 原生人才走牛，纯管理者走熊",
-    "sourceUrl": "https://x.com/swyx/status/2082199414656127010",
-    "summary": "作者 swyx 认为当前招聘市场出现罕见的两极分化：AI 原生的个人贡献者（IC）和『队员兼教练』型人才极度抢手，而纯粹的『X 部门负责人』式管理者则遭遇寒流。他自称『过度简化』地表示：1 年管理 10 个 AI 智能体的经验，胜过 10 年管理 10 到 100 人的经验。",
+    "id": "follow-builders:2082323512069685575",
+    "title": "petergyang 回应 Codex 批评，追问 Sol Pro 与 Sol High 的区别",
+    "sourceUrl": "https://x.com/petergyang/status/2082323512069685575",
+    "summary": "作者认同他人对 Codex 的批评，表示自己此前完全不知道 Sol Pro 的存在，并质疑它是否优于 Sol High、为何未在 Codex 中提供。推文附有链接，具体内容无法从文本获知。",
     "tags": [
-      "AI 原生人才",
-      "招聘市场",
-      "个人贡献者",
-      "AI 智能体",
-      "管理者贬值",
-      "职场两极分化"
+      "Codex",
+      "AI 编程工具",
+      "模型档位",
+      "产品反馈",
+      "Sol Pro"
     ],
     "source": "builder",
-    "sourceLabel": "swyx · Follow Builders",
-    "publishedAt": "2026-07-28T20:20:00.000Z"
+    "sourceLabel": "petergyang · Follow Builders",
+    "publishedAt": "2026-07-29T04:33:00.000Z"
   },
   {
     "section": "x",
@@ -1314,77 +2524,20 @@
     "accent": "green",
     "inRecentWindow": true,
     "paragraphs": [
-      "来自扎克伯格的一篇关于 AI 的精彩文章和愿景。（后附链接）",
-      "【原文要点】推文正文只有一句称赞——称扎克伯格的某篇文章/愿景『很棒』，随后附有一条 t.co 短链接。【解释（非原文）】t.co 是 X 平台的链接缩短服务，仅凭推文文本无法判断链接实际指向何处，也无法确认它具体指扎克伯格的哪篇文章、发布于哪个平台、具体内容是什么。本条推文信息不足，根据处理原则不对链接内容做任何猜测。背景上，levie 这一账号通常被认为是云存储公司 Box 的 CEO Aaron Levie，但此身份信息不属于推文内容本身。可以确认的只有：该作者读过一篇出自扎克伯格的 AI 相关文章，并给予了正面评价。"
+      "Sol 的人们，大家好！我已经重置了所有 ChatGPT Work 和 Codex 用户的使用限额。与此同时，快速更新一下关于 GPT-5.6 Sol 使用限额的情况。过去几周，你们中的许多人告诉我们，Sol 消耗你们 Codex 限额的速度比预期更快。明确地说，我们并没有减少……（注：原推文文本在此截断，后续内容缺失）",
+      "【原文内容】该推文由 X 用户 thsottiaux 发布，内容涉及 OpenAI 相关产品：ChatGPT Work、Codex 以及被称为 GPT-5.6 Sol 的模型。作者表示已重置相关用户的使用限额，并承认收到用户关于限额消耗过快的反馈，随后开始作出澄清，但提供的文本在句子中途（“we have not reduced usage on an”）被截断。【编辑解释】由于原文不完整，无法得知澄清的完整内容、限额调整的具体数值或后续措施，不应推测缺失部分。推文提到的“Sol”应为 GPT-5.6 模型的某个版本或代号名称，但原文未给出进一步说明。"
     ],
-    "id": "follow-builders:2082168124733116537",
-    "title": "levie 称赞扎克伯格的 AI 愿景文章（链接内容无法确认）",
-    "sourceUrl": "https://x.com/levie/status/2082168124733116537",
-    "summary": "levie 发文称赞扎克伯格关于 AI 的一篇文章及其愿景，但推文仅附带一条短链接，没有其他上下文，无法确认链接指向的具体内容。",
+    "id": "follow-builders:2082317452755751098",
+    "title": "重置 ChatGPT Work 与 Codex 用户的使用限额",
+    "sourceUrl": "https://x.com/thsottiaux/status/2082317452755751098",
+    "summary": "作者宣布已重置所有 ChatGPT Work 和 Codex 用户的使用限额，并就 GPT-5.6 Sol 的使用限额发布简要更新。原文提到许多用户反馈 Sol 消耗 Codex 限额的速度比预期更快，作者开始澄清并未减少用量，但推文文本在此处被截断，后续内容未知。",
     "tags": [
-      "扎克伯格",
-      "AI 愿景",
-      "文章推荐",
-      "链接内容不明",
-      "信息不足"
+      "X",
+      "AI"
     ],
     "source": "builder",
-    "sourceLabel": "levie · Follow Builders",
-    "publishedAt": "2026-07-28T18:15:00.000Z"
-  },
-  {
-    "section": "x",
-    "digestDate": "2026-07-29",
-    "publishedDate": "7/29",
-    "time": "今天采集",
-    "readTime": "3 分钟",
-    "accent": "green",
-    "inRecentWindow": true,
-    "paragraphs": [
-      "开玩笑没问题，但当涉及到你的生活、你的意图和你的世界观（weltanschauung）时，要他妈的认真。",
-      "【原文内容】推文核心是一句人生态度宣言：幽默可以有，但对人生根本问题要绝对认真。其中 'weltanschauung' 是德语词，意为'世界观'，在英语学术语境中常被直接借用。推文附带一个链接（https://t.co/cgQF2NPElz），链接指向的具体内容无法从推文本身确定，信息不足，不作猜测。【背景解释】Garry Tan 是知名创业孵化器 Y Combinator 的总裁兼 CEO，此类推文符合他一贯面向创业者输出'认真对待人生与使命'的风格。'be earnest as fuck' 用粗口强化语气，意在反对当代互联网文化中'对一切都戏谑反讽'的态度，主张在核心信念上保持真诚与严肃。"
-    ],
-    "id": "follow-builders:2082176112906711452",
-    "title": "Garry Tan：可以开玩笑，但对人生与世界观必须极度认真",
-    "sourceUrl": "https://x.com/garrytan/status/2082176112906711452",
-    "summary": "Y Combinator CEO Garry Tan 发推表示，开玩笑无妨，但涉及个人生活、意图和世界观时，必须极其认真严肃地对待。",
-    "tags": [
-      "人生态度",
-      "世界观",
-      "Garry Tan",
-      "Y Combinator",
-      "认真"
-    ],
-    "source": "builder",
-    "sourceLabel": "garrytan · Follow Builders",
-    "publishedAt": "2026-07-28T18:47:00.000Z"
-  },
-  {
-    "section": "x",
-    "digestDate": "2026-07-28",
-    "publishedDate": "7/28",
-    "time": "昨日采集",
-    "readTime": "3 分钟",
-    "accent": "green",
-    "inRecentWindow": true,
-    "paragraphs": [
-      "我今天早上在沙发上写出了 Codex 的权威历史（definitive history）。文章基于对团队的数小时深度采访，受访者包括 @thsottiaux、@ajambrosino 和 @gdb。我的手一次都没有碰过键盘或鼠标……整件事都是我完成的，包括整理采访内容、构建时间……（注：推文原文在此处被截断，后续内容缺失，疑似为'构建时间线'）",
-      "【原文内容】作者宣称用一早上完成了一篇关于 Codex 的深度历史报道，素材来自对团队成员的数小时采访，且全程未使用键盘鼠标。提到的三人：@gdb 是 OpenAI 联合创始人 Greg Brockman；@thsottiaux（Thibault Sottiaux）是 OpenAI Codex 的工程负责人；@ajambrosino 为 OpenAI Codex 团队成员。【背景解释】这里的 Codex 指 OpenAI 的 AI 编程代理产品。'双手不碰键盘鼠标'暗示作者全程通过语音输入和 AI 工具（很可能包括 Codex 本身或其自家的 AI 写作流程）完成采访整理与写作，意在展示 AI 辅助创作的成熟工作流——这属于基于语境的推断，原文因截断未明确说明所用工具。【信息局限】推文结尾'building a time'后被截断，无法确认完整句意（可能是'timeline'），故不对截断部分做确定性解读。"
-    ],
-    "id": "follow-builders:2082130836485259530",
-    "title": "Dan Shipper：全程不用键盘鼠标，完成 OpenAI Codex 权威发展史报道",
-    "sourceUrl": "https://x.com/danshipper/status/2082130836485259530",
-    "summary": "Every 创始人 Dan Shipper 称，他花一个早上在沙发上完成了一篇关于 Codex 的权威历史文章，素材来自对 Codex 团队数小时的深度采访，全程双手未触碰键盘和鼠标。推文原文在此截断，结尾内容缺失。",
-    "tags": [
-      "OpenAI Codex",
-      "Dan Shipper",
-      "AI 写作",
-      "深度采访",
-      "Greg Brockman"
-    ],
-    "source": "builder",
-    "sourceLabel": "danshipper · Follow Builders",
-    "publishedAt": "2026-07-28T15:47:00.000Z"
+    "sourceLabel": "thsottiaux · Follow Builders",
+    "publishedAt": "2026-07-29T04:09:00.000Z"
   },
   {
     "section": "x",
@@ -1423,71 +2576,20 @@
     "accent": "green",
     "inRecentWindow": true,
     "paragraphs": [
-      "提供大型模型的服务（部署大模型）是件难事。",
-      "【原文内容】推文只有一句简短陈述‘Serving large models is hard’和一个短链接。【解释与局限】链接内容无法访问，因此无法确认作者是在评论某篇文章、某个技术事件、某次故障还是自身经历，此处不作猜测。可确认的信息仅限于：作者表达了大模型推理/部署服务具有较高技术难度这一观点。‘Serving’在大模型语境中通常指模型的在线推理服务与部署运维。另据公开资料，steipete 为知名开发者 Peter Steinberger，此身份属于编者的补充说明，并非推文原文信息。由于推文本身信息不足，无法提供更具体的背景解读。"
-    ],
-    "id": "follow-builders:2082337130299457652",
-    "title": "steipete：部署大模型服务很难",
-    "sourceUrl": "https://x.com/steipete/status/2082337130299457652",
-    "summary": "作者简短感叹提供大模型服务（serving large models）很困难，并附链接。链接内容无法访问，无法确认其评论的具体对象。",
-    "tags": [
-      "大模型",
-      "模型部署",
-      "推理服务",
-      "技术难度",
-      "信息不足"
-    ],
-    "source": "builder",
-    "sourceLabel": "steipete · Follow Builders",
-    "publishedAt": "2026-07-29T05:27:00.000Z"
-  },
-  {
-    "section": "x",
-    "digestDate": "2026-07-29",
-    "publishedDate": "7/29",
-    "time": "今天采集",
-    "readTime": "3 分钟",
-    "accent": "green",
-    "inRecentWindow": true,
-    "paragraphs": [
-      "原文：A decade ago…as I was going through my own Minus One journey and was lost in the fog of uncertainty, I got 2 pieces of deep personal insight: 1/ I want to build new things in the world 2/ I want to work with brilliant and intense people On days such as this both feel abundant. https://t.co/muLvlHqTp",
+      "原文：Imagine SETI@Home, where you donated compute to search for aliens, but instead you donate compute to search math proofs. https://t.co/5Stl475G4a",
       "中文加工暂未完成，可通过下方链接查看原始推文。"
     ],
-    "id": "follow-builders:2082214798935326833",
-    "title": "adityaag：A decade ago…as I was going through my own Minus One journ",
-    "sourceUrl": "https://x.com/adityaag/status/2082214798935326833",
+    "id": "follow-builders:2082316553740284060",
+    "title": "amasad：Imagine SETI@Home, where you donated compute to search for",
+    "sourceUrl": "https://x.com/amasad/status/2082316553740284060",
     "summary": "原始推文已采集；本条中文加工暂未完成。",
     "tags": [
       "X",
       "AI"
     ],
     "source": "builder",
-    "sourceLabel": "adityaag · Follow Builders",
-    "publishedAt": "2026-07-28T21:21:00.000Z"
-  },
-  {
-    "section": "x",
-    "digestDate": "2026-07-29",
-    "publishedDate": "7/29",
-    "time": "今天采集",
-    "readTime": "3 分钟",
-    "accent": "green",
-    "inRecentWindow": true,
-    "paragraphs": [
-      "原文：Sanctuary city policy was never meant to be used to protect fentanyl dealers or violent criminals https://t.co/jLsQzhfcuU",
-      "中文加工暂未完成，可通过下方链接查看原始推文。"
-    ],
-    "id": "follow-builders:2082169572212584877",
-    "title": "garrytan：Sanctuary city policy was never meant to be used to protec",
-    "sourceUrl": "https://x.com/garrytan/status/2082169572212584877",
-    "summary": "原始推文已采集；本条中文加工暂未完成。",
-    "tags": [
-      "X",
-      "AI"
-    ],
-    "source": "builder",
-    "sourceLabel": "garrytan · Follow Builders",
-    "publishedAt": "2026-07-28T18:21:00.000Z"
+    "sourceLabel": "amasad · Follow Builders",
+    "publishedAt": "2026-07-29T04:05:00.000Z"
   },
   {
     "section": "x",
@@ -1514,6 +2616,111 @@
     "source": "builder",
     "sourceLabel": "amasad · Follow Builders",
     "publishedAt": "2026-07-29T04:03:00.000Z"
+  },
+  {
+    "section": "x",
+    "digestDate": "2026-07-29",
+    "publishedDate": "7/29",
+    "time": "今天采集",
+    "readTime": "3 分钟",
+    "accent": "green",
+    "inRecentWindow": true,
+    "paragraphs": [
+      "https://t.co/uwzHs4G1nt（原文仅为一个短链接，无文字内容可翻译）",
+      "【原文内容】该推文由用户 swyx 发布，正文除一个 t.co 短链接外不含任何文字、话题标签或媒体描述。【编辑说明】按照处理规范，对于只有链接、缺乏上下文的推文，不得猜测链接所指向的实际内容（如文章、图片、视频或其他页面）。如需进一步处理，需要补充该链接指向的具体内容或推文的其他上下文信息。"
+    ],
+    "id": "follow-builders:2082287480687272053",
+    "title": "swyx 发布的纯链接推文（信息不足，无法处理）",
+    "sourceUrl": "https://x.com/swyx/status/2082287480687272053",
+    "summary": "该推文正文仅包含一个 X 平台短链接（t.co），没有任何文字说明、图片描述或其他上下文信息，因此无法判断其主题与内容。",
+    "tags": [
+      "纯链接推文",
+      "信息不足",
+      "swyx",
+      "短链接",
+      "无法判断内容"
+    ],
+    "source": "builder",
+    "sourceLabel": "swyx · Follow Builders",
+    "publishedAt": "2026-07-29T02:09:00.000Z"
+  },
+  {
+    "section": "x",
+    "digestDate": "2026-07-29",
+    "publishedDate": "7/29",
+    "time": "今天采集",
+    "readTime": "3 分钟",
+    "accent": "green",
+    "inRecentWindow": true,
+    "paragraphs": [
+      "又或者，原因是你没有我得的这种病——对我来说，费力地跋涉于那些艰深、抽象的句子之中，是一种极致的平静。",
+      "【原文事实】推文以"
+    ],
+    "id": "follow-builders:2082273076352315440",
+    "title": "自嘲：啃艰深抽象句子让我平静",
+    "sourceUrl": "https://x.com/danshipper/status/2082273076352315440",
+    "summary": "作者在回复中自嘲：自己喜欢读艰深抽象的文字，并非因为别的，而是因为患有",
+    "tags": [
+      "抽象文字",
+      "阅读体验",
+      "自嘲幽默",
+      "回复推文",
+      "语境缺失"
+    ],
+    "source": "builder",
+    "sourceLabel": "danshipper · Follow Builders",
+    "publishedAt": "2026-07-29T01:12:00.000Z"
+  },
+  {
+    "section": "x",
+    "digestDate": "2026-07-29",
+    "publishedDate": "7/29",
+    "time": "今天采集",
+    "readTime": "3 分钟",
+    "accent": "green",
+    "inRecentWindow": true,
+    "paragraphs": [
+      "原文：This is why i do anti depressants and stimulants. Dynamism x2. Join me America! https://t.co/yXB5FbDGsJ",
+      "中文加工暂未完成，可通过下方链接查看原始推文。"
+    ],
+    "id": "follow-builders:2082270947793350785",
+    "title": "danshipper：This is why i do anti depressants and stimulants. Dynamism",
+    "sourceUrl": "https://x.com/danshipper/status/2082270947793350785",
+    "summary": "原始推文已采集；本条中文加工暂未完成。",
+    "tags": [
+      "X",
+      "AI"
+    ],
+    "source": "builder",
+    "sourceLabel": "danshipper · Follow Builders",
+    "publishedAt": "2026-07-29T01:04:00.000Z"
+  },
+  {
+    "section": "x",
+    "digestDate": "2026-07-29",
+    "publishedDate": "7/29",
+    "time": "今天采集",
+    "readTime": "3 分钟",
+    "accent": "green",
+    "inRecentWindow": true,
+    "paragraphs": [
+      "我只是如实转述；如果你不喜欢这个趋势，有很多反例：（链接）",
+      "【原文内容】推文只有一句话和一个链接：作者声称自己只是\"在转述/报道\"（i'm just reporting），并指出如果读者不喜欢\"这个趋势\"，链接中有许多反例。【语境与解释】这条推文缺少必要的上下文：其一，\"这个趋势\"（this trend）具体指什么无从得知，它很可能是对某条更早推文或某个话题的回复，但原始语境未随推文提供；其二，所附短链接（t.co）指向的外部内容无法确认，可能是文章、列表或另一组推文。【信息不足声明】由于缺少上下文，无法判断作者讨论的具体话题、立场以及链接内容，以上仅为对字面文字的忠实呈现，不对链接内容做任何推测。"
+    ],
+    "id": "follow-builders:2082255848492183583",
+    "title": "swyx：我只是如实转述，不喜欢这个趋势的话有很多反例",
+    "sourceUrl": "https://x.com/swyx/status/2082255848492183583",
+    "summary": "swyx 表示自己的说法只是如实转述，并附上一个链接，称若有人不喜欢某个趋势，可以找到许多反例。但推文本身缺乏上下文，无法确定所指的\"趋势\"是什么。",
+    "tags": [
+      "swyx",
+      "转述",
+      "反例",
+      "趋势",
+      "上下文缺失"
+    ],
+    "source": "builder",
+    "sourceLabel": "swyx · Follow Builders",
+    "publishedAt": "2026-07-29T00:04:00.000Z"
   },
   {
     "section": "x",
@@ -1552,71 +2759,131 @@
     "accent": "green",
     "inRecentWindow": true,
     "paragraphs": [
-      "原文：Imagine SETI@Home, where you donated compute to search for aliens, but instead you donate compute to search math proofs. https://t.co/5Stl475G4a",
-      "中文加工暂未完成，可通过下方链接查看原始推文。"
+      "我还构建了 Tastemaker，想看看能否用 Claude Design 和 Claude Code 把一个粗略的想法变成一个有用的产品。我制作了一个视频，完整展示了我的整个流程，包括：1. 创建 design.md 和 HTML 规格说明；2. 在 Claude Design 中进行界面原型设计；3. 使用 Claude Code 进行构建和迭代。📌",
+      "【原文内容】作者介绍了自己做的产品 Tastemaker，目标是验证\"从粗略想法到可用产品\"这一过程能否由 Claude Design 和 Claude Code 完成，并配有演示视频。视频涵盖三个步骤：(1) 创建 design.md（设计文档）和 HTML 规格说明；(2) 在 Claude Design 中做屏幕/界面原型；(3) 用 Claude Code 构建并迭代。📌 符号表示这是一条置顶推文。【语境与解释】以下为补充解释，非原文内容：这条推文反映了当前 AI 辅助产品开发的一种典型工作流——先用 Markdown 文档（design.md）把设计需求结构化地写下来，再用 HTML 规格描述界面细节，作为 AI 工具的输入；随后在原型工具中快速生成界面，最后由 AI 编程助手（Claude Code）实现并反复迭代。Peter Yang 是产品管理领域的知名内容创作者，经常分享 AI 工具在 Product Maker/独立开发中的实践。Tastemaker 具体功能在推文中未说明，原文仅提到它是一个\"有用的产品\"。"
     ],
-    "id": "follow-builders:2082316553740284060",
-    "title": "amasad：Imagine SETI@Home, where you donated compute to search for",
-    "sourceUrl": "https://x.com/amasad/status/2082316553740284060",
-    "summary": "原始推文已采集；本条中文加工暂未完成。",
+    "id": "follow-builders:2082254852600873376",
+    "title": "Peter Yang 用 Claude Design 与 Claude Code 把粗略想法做成产品 Tastemaker",
+    "sourceUrl": "https://x.com/petergyang/status/2082254852600873376",
+    "summary": "Peter Yang 分享了他构建的产品 Tastemaker：他想验证能否借助 Claude Design 和 Claude Code 把一个粗略想法变成有用产品，并制作视频完整展示流程，包括编写 design.md 与 HTML 规格、在 Claude Design 中做界面原型、用 Claude Code 构建与迭代三步。",
     "tags": [
-      "X",
-      "AI"
-    ],
-    "source": "builder",
-    "sourceLabel": "amasad · Follow Builders",
-    "publishedAt": "2026-07-29T04:05:00.000Z"
-  },
-  {
-    "section": "x",
-    "digestDate": "2026-07-29",
-    "publishedDate": "7/29",
-    "time": "今天采集",
-    "readTime": "3 分钟",
-    "accent": "green",
-    "inRecentWindow": true,
-    "paragraphs": [
-      "原文：This is why i do anti depressants and stimulants. Dynamism x2. Join me America! https://t.co/yXB5FbDGsJ",
-      "中文加工暂未完成，可通过下方链接查看原始推文。"
-    ],
-    "id": "follow-builders:2082270947793350785",
-    "title": "danshipper：This is why i do anti depressants and stimulants. Dynamism",
-    "sourceUrl": "https://x.com/danshipper/status/2082270947793350785",
-    "summary": "原始推文已采集；本条中文加工暂未完成。",
-    "tags": [
-      "X",
-      "AI"
-    ],
-    "source": "builder",
-    "sourceLabel": "danshipper · Follow Builders",
-    "publishedAt": "2026-07-29T01:04:00.000Z"
-  },
-  {
-    "section": "x",
-    "digestDate": "2026-07-29",
-    "publishedDate": "7/29",
-    "time": "今天采集",
-    "readTime": "3 分钟",
-    "accent": "green",
-    "inRecentWindow": true,
-    "paragraphs": [
-      "这些都是对 Codex 的合理批评，尽管我也很喜欢这款产品！我其实完全不知道 Sol Pro 居然存在——它比 Sol High 更好吗？为什么 Codex 里没有提供？",
-      "【原文要点】这是一条回应他人言论的推文：作者承认针对 Codex 的批评'都是合理的'，同时表达了对 Sol Pro 的惊讶，并提出两个疑问——Sol Pro 是否优于 Sol High、为何 Codex 中没有 Sol Pro。推文末尾附有一个链接（可能是被引用推文或截图），其指向内容从文本本身无法获知，因此这些批评的具体内容、以及 Sol Pro 与 Sol High 的确切定义均无法确认，不作猜测。【解释与背景，非原文信息】Codex 通常指 OpenAI 推出的 AI 编程助手产品；'Sol Pro'与'Sol High'疑似为模型版本或推理强度档位的名称，但仅凭本推文无法证实其含义。"
-    ],
-    "id": "follow-builders:2082323512069685575",
-    "title": "petergyang 回应 Codex 批评，追问 Sol Pro 与 Sol High 的区别",
-    "sourceUrl": "https://x.com/petergyang/status/2082323512069685575",
-    "summary": "作者认同他人对 Codex 的批评，表示自己此前完全不知道 Sol Pro 的存在，并质疑它是否优于 Sol High、为何未在 Codex 中提供。推文附有链接，具体内容无法从文本获知。",
-    "tags": [
-      "Codex",
-      "AI 编程工具",
-      "模型档位",
-      "产品反馈",
-      "Sol Pro"
+      "Claude Code",
+      "Claude Design",
+      "AI 产品开发",
+      "界面原型",
+      "工作流",
+      "Peter Yang"
     ],
     "source": "builder",
     "sourceLabel": "petergyang · Follow Builders",
-    "publishedAt": "2026-07-29T04:33:00.000Z"
+    "publishedAt": "2026-07-29T00:00:00.000Z"
+  },
+  {
+    "section": "x",
+    "digestDate": "2026-07-29",
+    "publishedDate": "7/29",
+    "time": "今天采集",
+    "readTime": "3 分钟",
+    "accent": "green",
+    "inRecentWindow": true,
+    "paragraphs": [
+      "更多开源好东西。我们刚刚发布了一个 CLI 和 TypeScript SDK，用于查找、验证并修复代码中的安全漏洞。它可以扫描代码仓库、审查变更、长期跟踪发现的问题，并在 CI 中运行安全检查。",
+      "【原文内容】推文称该工具以开源形式发布，提供命令行工具（CLI）和 TypeScript SDK，核心能力覆盖漏洞的发现、验证与修复，典型使用场景包括仓库扫描、变更审查、随时间跟踪漏洞（findings），以及在持续集成（CI）中执行安全检查。【编辑解释】CI 指持续集成，即代码提交后自动构建与测试的流程，此处指可将安全扫描嵌入该流程实现自动化拦截。【信息不足说明】推文附带一个 t.co 短链接，指向的具体产品页面或代码仓库无法确认，故不猜测其内容与产品名称；作者背景资料为空，也不对其所属机构做推断。"
+    ],
+    "id": "follow-builders:2082241164850364555",
+    "title": "开源安全工具发布：用于查找与修复漏洞的 CLI 和 TypeScript SDK",
+    "sourceUrl": "https://x.com/thsottiaux/status/2082241164850364555",
+    "summary": "作者宣布开源发布一款安全工具的 CLI 与 TypeScript SDK，功能包括扫描代码仓库、审查变更、长期跟踪漏洞发现，并可在 CI 流程中运行安全检查。",
+    "tags": [
+      "开源",
+      "安全漏洞",
+      "CLI",
+      "TypeScript SDK",
+      "CI",
+      "代码扫描"
+    ],
+    "source": "builder",
+    "sourceLabel": "thsottiaux · Follow Builders",
+    "publishedAt": "2026-07-28T23:05:00.000Z"
+  },
+  {
+    "section": "x",
+    "digestDate": "2026-07-29",
+    "publishedDate": "7/29",
+    "time": "今天采集",
+    "readTime": "3 分钟",
+    "accent": "green",
+    "inRecentWindow": true,
+    "paragraphs": [
+      "原文：A decade ago…as I was going through my own Minus One journey and was lost in the fog of uncertainty, I got 2 pieces of deep personal insight: 1/ I want to build new things in the world 2/ I want to work with brilliant and intense people On days such as this both feel abundant. https://t.co/muLvlHqTp",
+      "中文加工暂未完成，可通过下方链接查看原始推文。"
+    ],
+    "id": "follow-builders:2082214798935326833",
+    "title": "adityaag：A decade ago…as I was going through my own Minus One journ",
+    "sourceUrl": "https://x.com/adityaag/status/2082214798935326833",
+    "summary": "原始推文已采集；本条中文加工暂未完成。",
+    "tags": [
+      "X",
+      "AI"
+    ],
+    "source": "builder",
+    "sourceLabel": "adityaag · Follow Builders",
+    "publishedAt": "2026-07-28T21:21:00.000Z"
+  },
+  {
+    "section": "x",
+    "digestDate": "2026-07-29",
+    "publishedDate": "7/29",
+    "time": "今天采集",
+    "readTime": "3 分钟",
+    "accent": "green",
+    "inRecentWindow": true,
+    "paragraphs": [
+      "关于当下的招聘市场：对 AI 原生的个人贡献者（IC）/『队员兼教练』型人才来说，这是一个巨大的牛市；对『某某部门负责人』式的管理者来说，则是一个巨大的熊市。我从未见过如此猛烈的两极分化。简单化地说：1 年管理 10 个智能体（agent）的经验 > 10 年管理 10 到 100 人的经验。",
+      "【原文要点】作者借用股市术语作比喻：『牛市』指需求旺盛、身价上涨，『熊市』指需求萎缩、身价下跌；『bifurcation』意为分叉、两极分化。IC（individual contributor）指不带团队、亲自干活的专业人员；『player-coach』指既亲自下场做事又兼顾带队的复合角色；『heads of X』指以纯管理为职责的部门负责人。末句中的『agent』指 AI 智能体。【解释（非原文）】这条推文反映了一种在科技圈流行的观点：随着 AI 智能体能承担越来越多执行层工作，『善于指挥 AI 干活』的实战型人才价值上升，而传统的纯中层管理岗位相对贬值，组织趋向扁平化。需要注意的是，最后那句『1 年管 10 个智能体 > 10 年管 100 人』是作者自己承认的『过度简化』（to oversimplify），属于刻意夸张的修辞，用以强调趋势，不应被视为客观数据或普遍规律。背景上，swyx 是 AI 工程领域的知名作者与评论者，此推文属其个人观点表达。"
+    ],
+    "id": "follow-builders:2082199414656127010",
+    "title": "swyx：AI 时代招聘市场剧烈分化——AI 原生人才走牛，纯管理者走熊",
+    "sourceUrl": "https://x.com/swyx/status/2082199414656127010",
+    "summary": "作者 swyx 认为当前招聘市场出现罕见的两极分化：AI 原生的个人贡献者（IC）和『队员兼教练』型人才极度抢手，而纯粹的『X 部门负责人』式管理者则遭遇寒流。他自称『过度简化』地表示：1 年管理 10 个 AI 智能体的经验，胜过 10 年管理 10 到 100 人的经验。",
+    "tags": [
+      "AI 原生人才",
+      "招聘市场",
+      "个人贡献者",
+      "AI 智能体",
+      "管理者贬值",
+      "职场两极分化"
+    ],
+    "source": "builder",
+    "sourceLabel": "swyx · Follow Builders",
+    "publishedAt": "2026-07-28T20:20:00.000Z"
+  },
+  {
+    "section": "x",
+    "digestDate": "2026-07-29",
+    "publishedDate": "7/29",
+    "time": "今天采集",
+    "readTime": "3 分钟",
+    "accent": "green",
+    "inRecentWindow": true,
+    "paragraphs": [
+      "开玩笑没问题，但当涉及到你的生活、你的意图和你的世界观（weltanschauung）时，要他妈的认真。",
+      "【原文内容】推文核心是一句人生态度宣言：幽默可以有，但对人生根本问题要绝对认真。其中 'weltanschauung' 是德语词，意为'世界观'，在英语学术语境中常被直接借用。推文附带一个链接（https://t.co/cgQF2NPElz），链接指向的具体内容无法从推文本身确定，信息不足，不作猜测。【背景解释】Garry Tan 是知名创业孵化器 Y Combinator 的总裁兼 CEO，此类推文符合他一贯面向创业者输出'认真对待人生与使命'的风格。'be earnest as fuck' 用粗口强化语气，意在反对当代互联网文化中'对一切都戏谑反讽'的态度，主张在核心信念上保持真诚与严肃。"
+    ],
+    "id": "follow-builders:2082176112906711452",
+    "title": "Garry Tan：可以开玩笑，但对人生与世界观必须极度认真",
+    "sourceUrl": "https://x.com/garrytan/status/2082176112906711452",
+    "summary": "Y Combinator CEO Garry Tan 发推表示，开玩笑无妨，但涉及个人生活、意图和世界观时，必须极其认真严肃地对待。",
+    "tags": [
+      "人生态度",
+      "世界观",
+      "Garry Tan",
+      "Y Combinator",
+      "认真"
+    ],
+    "source": "builder",
+    "sourceLabel": "garrytan · Follow Builders",
+    "publishedAt": "2026-07-28T18:47:00.000Z"
   },
   {
     "section": "x",
@@ -1643,6 +2910,227 @@
     "source": "builder",
     "sourceLabel": "garrytan · Follow Builders",
     "publishedAt": "2026-07-28T18:26:00.000Z"
+  },
+  {
+    "section": "x",
+    "digestDate": "2026-07-29",
+    "publishedDate": "7/29",
+    "time": "今天采集",
+    "readTime": "3 分钟",
+    "accent": "green",
+    "inRecentWindow": true,
+    "paragraphs": [
+      "原文：Sanctuary city policy was never meant to be used to protect fentanyl dealers or violent criminals https://t.co/jLsQzhfcuU",
+      "中文加工暂未完成，可通过下方链接查看原始推文。"
+    ],
+    "id": "follow-builders:2082169572212584877",
+    "title": "garrytan：Sanctuary city policy was never meant to be used to protec",
+    "sourceUrl": "https://x.com/garrytan/status/2082169572212584877",
+    "summary": "原始推文已采集；本条中文加工暂未完成。",
+    "tags": [
+      "X",
+      "AI"
+    ],
+    "source": "builder",
+    "sourceLabel": "garrytan · Follow Builders",
+    "publishedAt": "2026-07-28T18:21:00.000Z"
+  },
+  {
+    "section": "x",
+    "digestDate": "2026-07-29",
+    "publishedDate": "7/29",
+    "time": "今天采集",
+    "readTime": "3 分钟",
+    "accent": "green",
+    "inRecentWindow": true,
+    "paragraphs": [
+      "来自扎克伯格的一篇关于 AI 的精彩文章和愿景。（后附链接）",
+      "【原文要点】推文正文只有一句称赞——称扎克伯格的某篇文章/愿景『很棒』，随后附有一条 t.co 短链接。【解释（非原文）】t.co 是 X 平台的链接缩短服务，仅凭推文文本无法判断链接实际指向何处，也无法确认它具体指扎克伯格的哪篇文章、发布于哪个平台、具体内容是什么。本条推文信息不足，根据处理原则不对链接内容做任何猜测。背景上，levie 这一账号通常被认为是云存储公司 Box 的 CEO Aaron Levie，但此身份信息不属于推文内容本身。可以确认的只有：该作者读过一篇出自扎克伯格的 AI 相关文章，并给予了正面评价。"
+    ],
+    "id": "follow-builders:2082168124733116537",
+    "title": "levie 称赞扎克伯格的 AI 愿景文章（链接内容无法确认）",
+    "sourceUrl": "https://x.com/levie/status/2082168124733116537",
+    "summary": "levie 发文称赞扎克伯格关于 AI 的一篇文章及其愿景，但推文仅附带一条短链接，没有其他上下文，无法确认链接指向的具体内容。",
+    "tags": [
+      "扎克伯格",
+      "AI 愿景",
+      "文章推荐",
+      "链接内容不明",
+      "信息不足"
+    ],
+    "source": "builder",
+    "sourceLabel": "levie · Follow Builders",
+    "publishedAt": "2026-07-28T18:15:00.000Z"
+  },
+  {
+    "section": "papers",
+    "digestDate": "2026-07-29",
+    "publishedDate": "7/29",
+    "time": "今天采集",
+    "readTime": "3 分钟",
+    "accent": "violet",
+    "inRecentWindow": true,
+    "paragraphs": [
+      "在策略蒸馏（OPD）将逐词元的监督建立在学生模型自己生成的轨迹之上，但存在“前缀失败”问题：一旦学生模型在推理开头走错了方向，后续所有生成内容都建立在这个偏差之上，产生方向错误的续写，既引发不可靠的监督信号，也浪费计算资源。",
+      "研究者发现，在失败的前缀上存在一种“师生续写不对称”现象：面对同样的错误开头，教师模型倾向于扭转方向，而学生模型往往沿原方向继续走下去。他们把这种差异转化为一种无需人工标注的“交接触发信号”，提出接力在策略蒸馏（Relay-OPD）：训练时在检测到的触发点让教师短暂接管，生成一段“教师赛程”，随后学生重新接手，并在拼接而成的接力轨迹上接受优化。有限的接力预算把干预集中在关键的早期位置，同时避免学生策略偏离自身太远。",
+      "实验以 Qwen3-4B-Instruct-2507 为教师、Qwen3-0.6B/1.7B-Non-Thinking 为学生，在八个数学推理基准上，Relay-OPD 在每个基准上都取得最佳或次佳成绩：1.7B 学生模型平均比标准 OPD 高出 5.73 个百分点，比最强基线 FastOPD 高出 1.49 个百分点，0.6B 模型也有一致的提升。此外，训练轨迹长度减少了 50% 以上。"
+    ],
+    "utility": "这项研究解决的是“如何用更少的算力把小模型教得更聪明”的问题。如果方法被采用，普通人可能间接受益：手机、电脑等个人设备上运行的小模型在数学和推理任务上表现更好，AI 服务的训练成本下降也可能让相关产品更便宜、响应更快。对关注 AI 行业的从业者和投资者来说，它展示了提升小模型性价比的一条具体技术路径。需要注意的是，这些结论来自特定模型和数学推理基准上的实验，能否推广到其他任务和场景，论文本身并未覆盖。",
+    "externalLinks": [
+      {
+        "label": "查看 Hugging Face 论文页",
+        "url": "https://huggingface.co/papers/2607.26057"
+      },
+      {
+        "label": "打开 arXiv 原文",
+        "url": "https://arxiv.org/abs/2607.26057"
+      }
+    ],
+    "id": "huggingface-daily-papers:2607.26057",
+    "title": "传递接力棒：基于轨迹接力的在策略蒸馏",
+    "sourceUrl": "https://huggingface.co/papers/2607.26057",
+    "summary": "本文提出一种名为 Relay-OPD 的小模型训练方法：在“在策略蒸馏”过程中，一旦检测到学生模型在推理早期走错方向，就让教师模型短暂接管、纠正方向，再交还学生继续生成。在八个数学推理基准上，该方法全面优于现有蒸馏方法，且训练轨迹长度减少一半以上，明显节省了训练算力。",
+    "tags": [
+      "知识蒸馏",
+      "大语言模型",
+      "小模型训练",
+      "数学推理",
+      "训练效率"
+    ],
+    "source": "daily",
+    "sourceLabel": "Hugging Face Daily Papers",
+    "publishedAt": "2026-07-28T17:59:46Z"
+  },
+  {
+    "section": "papers",
+    "digestDate": "2026-07-29",
+    "publishedDate": "7/29",
+    "time": "今天采集",
+    "readTime": "3 分钟",
+    "accent": "violet",
+    "inRecentWindow": true,
+    "paragraphs": [
+      "通用机器人操作策略越来越普遍地采用建立在大型预训练骨干网络之上的“动作分块”流策略。然而，这些动作块以开环方式执行：一旦开始执行，策略就无法对中途到达的感知信息做出反应，牺牲了“反应性”。更频繁地重新规划本可以恢复反应性，但从感知到动作的整个流程（一个大型骨干网络加上多步去噪过程）速度太慢——这种延迟使频繁重规划成为不可能，导致已承诺执行的动作很快过时。因此，这类策略并不适合需要动态、闭环控制的场景。",
+      "研究者提出了πR²，它在保留大型骨干网络、富有表现力的多模态策略以及多动作预测能力的同时，让这些策略既具备反应性又能实时运行。πR²基于扩散强制（diffusion forcing）中的逐位置噪声调度，贡献了两个核心思路。第一，它将条件输入拆分为快速通道和慢速通道：快速通道承载每个时刻都新鲜更新的本体感知信息（机器人自身关节状态等），慢速通道则异步更新视觉-语言特征。这样，策略在执行一个动作块的过程中就能对本体感知做出即时反应，同时容忍略显过时的视觉信息。第二，一种延迟自适应的流调度机制把正在执行中的动作当作“修补”（inpainting）条件来处理，并在每次调用时仅用一步去噪就输出动作，使同一个训练好的模型能够适应不同硬件的延迟水平。",
+      "πR²只需对现有架构做极少改动，便可从预训练策略微调得到。研究者将其应用于真实 xArm6 机械臂加 XHand 灵巧手平台上的 GR00T-N1.7 模型：闭环重规划速度约为原基础策略的4倍（在一块 A5000 GPU 上达到约25Hz），每40毫秒就能基于一次新的观测采取行动。在仿真和真实世界的操作任务中，与最强基线相比，πR²将成功率在仿真中最高提升23%，在真实世界中最高提升30%。"
+    ],
+    "utility": "这项研究解决的是机器人“反应慢半拍”的问题：目前许多智能机器人一旦开始做一个动作，就无法在中途根据新情况调整，比如抓取移动的物体或避开突然出现的人。πR²让机器人能每40毫秒根据最新感知调整动作，且无需推翻现有模型、改动成本较低。对普通人来说，这意味着未来的家庭服务机器人、仓储物流机器人在动态环境中会更灵活、更安全；对关注自动化投资或职业变化的人来说，这提示机器人在非结构化环境（而非只有流水线）中胜任工作的能力正在稳步进步。需要注意的是，这些成果是在特定机械臂平台和有限任务上验证的，成功率提升也是“最高”而非普遍水平，离普及应用仍有距离。",
+    "externalLinks": [
+      {
+        "label": "查看 Hugging Face 论文页",
+        "url": "https://huggingface.co/papers/2607.26055"
+      },
+      {
+        "label": "打开 arXiv 原文",
+        "url": "https://arxiv.org/abs/2607.26055"
+      }
+    ],
+    "id": "huggingface-daily-papers:2607.26055",
+    "title": "πR²：具备反应能力的实时流策略",
+    "sourceUrl": "https://huggingface.co/papers/2607.26055",
+    "summary": "本文提出πR²，一种让基于大型预训练模型的机器人操作策略在保留原有能力的同时实现实时反应的方法。它将快速更新的本体感知与异步更新的视觉语言信息分通道处理，并以单步去噪输出动作，使机器人能在真实硬件上每40毫秒依据新观测调整行为，操作成功率最高提升30%。",
+    "tags": [
+      "机器人操作策略",
+      "实时闭环控制",
+      "流策略",
+      "反应性",
+      "动作分块",
+      "扩散模型"
+    ],
+    "source": "daily",
+    "sourceLabel": "Hugging Face Daily Papers",
+    "publishedAt": "2026-07-28T17:59:31Z"
+  },
+  {
+    "section": "papers",
+    "digestDate": "2026-07-29",
+    "publishedDate": "7/29",
+    "time": "今天采集",
+    "readTime": "3 分钟",
+    "accent": "violet",
+    "inRecentWindow": true,
+    "paragraphs": [
+      "低秩适配（LoRA）的混合专家（MoE）变体把每个词元路由到固定数量 k 的专家。然而，模型对不同词元的不确定程度各不相同，因此单一的 k 会在简单词元上花费过多，而对困难词元服务不足。研究者观察到，路由器的输出分布本身就是每个词元的不确定性信号：概率质量集中表示模型有把握，分布平坦则表示含糊不清。",
+      "研究者提出 CARE（专家的置信度自适应路由），以\"核采样\"的方式接纳专家：按路由器权重从大到小依次激活专家，直到累积概率质量达到阈值；当被接纳的专家之间意见不一致时，还会小幅扩展。一个\"预算恒温器\"负责校准该阈值，使平均激活的专家数量与任意给定目标相符。CARE 是一种即插即用、只需单次前向传播的规则，不引入任何额外参数。",
+      "在基于 LLaMA-3.1-8B 和 Qwen2.5-7B 的八项常识基准以及数学、代码和知识任务上，CARE 在计算量相同的情况下优于固定的 top-k MoE-LoRA，并在激活更少专家的同时达到与固定 k=4 基线相当的表现。同样的置信度与分歧信号还能改进分布外检测，效果优于 MSP、熵以及多遍代理方法。研究者从核保真度、预算最优性以及分歧的认识论解读等方面为该设计提供了理论支持，并公开了代码。"
+    ],
+    "utility": "这项研究的核心思路是让AI\"量力而行\"：简单内容少花算力，拿不准的内容多投入资源。对普通用户来说，这类技术若被采用，意味着AI助手可能在不牺牲回答质量的前提下响应更快、运行成本更低，未来在手机等本地设备上跑AI也更可行。对在工作中使用或采购AI服务的人来说，论文还展示了一种判断模型\"什么时候没把握\"的信号，有助于识别模型面对陌生输入时可能在\"硬撑\"，这对在医疗、金融等高风险场景中评估AI输出的可信度有参考价值。需要注意，这些结论来自论文所述的基准测试和特定模型，实际收益仍取决于具体应用场景。",
+    "externalLinks": [
+      {
+        "label": "查看 Hugging Face 论文页",
+        "url": "https://huggingface.co/papers/2607.26052"
+      },
+      {
+        "label": "打开 arXiv 原文",
+        "url": "https://arxiv.org/abs/2607.26052"
+      }
+    ],
+    "id": "huggingface-daily-papers:2607.26052",
+    "title": "把专家花在没把握的地方：面向混合专家LoRA的置信度自适应路由",
+    "sourceUrl": "https://huggingface.co/papers/2607.26052",
+    "summary": "大模型微调中常用的混合专家方法会给每个词元分配固定数量的\"专家\"，但模型对不同词元的把握其实不同。本文提出的CARE方法利用路由器的输出分布判断把握大小：有把握时少激活专家、没把握时多激活，并通过一个\"预算恒温器\"把平均开销控制在目标水平。在不增加参数、不增加计算量的前提下，它在多项常识、数学、代码和知识任务上优于固定专家数的做法，还能更好地识别模型没见过的输入。",
+    "tags": [
+      "混合专家模型",
+      "LoRA微调",
+      "置信度自适应路由",
+      "大语言模型",
+      "分布外检测",
+      "计算效率"
+    ],
+    "source": "daily",
+    "sourceLabel": "Hugging Face Daily Papers",
+    "publishedAt": "2026-07-28T17:59:16Z"
+  },
+  {
+    "section": "x",
+    "digestDate": "2026-07-28",
+    "publishedDate": "7/28",
+    "time": "昨日采集",
+    "readTime": "3 分钟",
+    "accent": "green",
+    "inRecentWindow": true,
+    "paragraphs": [
+      "我今天早上在沙发上写出了 Codex 的权威历史（definitive history）。文章基于对团队的数小时深度采访，受访者包括 @thsottiaux、@ajambrosino 和 @gdb。我的手一次都没有碰过键盘或鼠标……整件事都是我完成的，包括整理采访内容、构建时间……（注：推文原文在此处被截断，后续内容缺失，疑似为'构建时间线'）",
+      "【原文内容】作者宣称用一早上完成了一篇关于 Codex 的深度历史报道，素材来自对团队成员的数小时采访，且全程未使用键盘鼠标。提到的三人：@gdb 是 OpenAI 联合创始人 Greg Brockman；@thsottiaux（Thibault Sottiaux）是 OpenAI Codex 的工程负责人；@ajambrosino 为 OpenAI Codex 团队成员。【背景解释】这里的 Codex 指 OpenAI 的 AI 编程代理产品。'双手不碰键盘鼠标'暗示作者全程通过语音输入和 AI 工具（很可能包括 Codex 本身或其自家的 AI 写作流程）完成采访整理与写作，意在展示 AI 辅助创作的成熟工作流——这属于基于语境的推断，原文因截断未明确说明所用工具。【信息局限】推文结尾'building a time'后被截断，无法确认完整句意（可能是'timeline'），故不对截断部分做确定性解读。"
+    ],
+    "id": "follow-builders:2082130836485259530",
+    "title": "Dan Shipper：全程不用键盘鼠标，完成 OpenAI Codex 权威发展史报道",
+    "sourceUrl": "https://x.com/danshipper/status/2082130836485259530",
+    "summary": "Every 创始人 Dan Shipper 称，他花一个早上在沙发上完成了一篇关于 Codex 的权威历史文章，素材来自对 Codex 团队数小时的深度采访，全程双手未触碰键盘和鼠标。推文原文在此截断，结尾内容缺失。",
+    "tags": [
+      "OpenAI Codex",
+      "Dan Shipper",
+      "AI 写作",
+      "深度采访",
+      "Greg Brockman"
+    ],
+    "source": "builder",
+    "sourceLabel": "danshipper · Follow Builders",
+    "publishedAt": "2026-07-28T15:47:00.000Z"
+  },
+  {
+    "section": "x",
+    "digestDate": "2026-07-28",
+    "publishedDate": "7/28",
+    "time": "昨日采集",
+    "readTime": "3 分钟",
+    "accent": "green",
+    "inRecentWindow": true,
+    "paragraphs": [
+      "（推文正文无文字内容，仅为一个链接：https://t.co/Zgd4HPRMyi）",
+      "【原文内容】该推文的全部内容就是一个 X 平台自动生成的 t.co 短链接，作者 levie 未附带任何文字、图片描述或上下文。【编辑解释】按照规定，对于只有链接、缺乏上下文的推文，不猜测链接所指向的网页、图片或视频内容。目前信息不足，无法提供有效翻译或解读。"
+    ],
+    "id": "follow-builders:2082114876873597239",
+    "title": "仅含链接的推文（信息不足，无法判断内容）",
+    "sourceUrl": "https://x.com/levie/status/2082114876873597239",
+    "summary": "该推文由 levie 发布，正文中只有一个 t.co 短链接，不包含任何文字说明，因此无法确定推文所指向的具体内容。",
+    "tags": [
+      "X",
+      "AI"
+    ],
+    "source": "builder",
+    "sourceLabel": "levie · Follow Builders",
+    "publishedAt": "2026-07-28T14:44:00.000Z"
   },
   {
     "section": "x",
@@ -1674,111 +3162,58 @@
   },
   {
     "section": "x",
-    "digestDate": "2026-07-29",
-    "publishedDate": "7/29",
-    "time": "今天采集",
+    "digestDate": "2026-07-28",
+    "publishedDate": "7/28",
+    "time": "昨日采集",
     "readTime": "3 分钟",
     "accent": "green",
     "inRecentWindow": true,
     "paragraphs": [
-      "又或者，原因是你没有我得的这种病——对我来说，费力地跋涉于那些艰深、抽象的句子之中，是一种极致的平静。",
-      "【原文事实】推文以"
+      "标题:如何在 Claude Code 中构建一个 AI 视频工作室。正文预览:「我把 Claude Code 变成了一个真正能运转的电影工作室,现在我要把整套系统交给你:技能、提示词、循环,以及将它们串在一起的六阶段流水线。每个阶段都依托……」(预览在此截断)",
+      "核心观点:把 Claude Code 当作编排中枢,用多智能体 + 技能 + 提示词循环搭建一条分六个阶段的 AI 视频(电影)生产流水线,并以「手把手交给你」的教程形式分享。阅读时需注意的语境:第一,标签中出现 seedance(字节跳动的视频生成模型)、MCP 和 multi-agent,暗示流水线可能调用外部视频生成模型并通过 MCP 连接工具,但预览并未明说,属于合理推测而非事实;第二,「完整系统交给你」是推广性表述,实际可复现程度、API 成本、成片质量都需在正文和评论区验证;第三,预览在「each stage leans」处截断,六个阶段各自的具体职责未知,不应自行脑补细节。作者粉丝量较大,内容带有明显的展示与引流属性。"
     ],
-    "id": "follow-builders:2082273076352315440",
-    "title": "自嘲：啃艰深抽象句子让我平静",
-    "sourceUrl": "https://x.com/danshipper/status/2082273076352315440",
-    "summary": "作者在回复中自嘲：自己喜欢读艰深抽象的文字，并非因为别的，而是因为患有",
-    "tags": [
-      "抽象文字",
-      "阅读体验",
-      "自嘲幽默",
-      "回复推文",
-      "语境缺失"
-    ],
-    "source": "builder",
-    "sourceLabel": "danshipper · Follow Builders",
-    "publishedAt": "2026-07-29T01:12:00.000Z"
-  },
-  {
-    "section": "x",
-    "digestDate": "2026-07-29",
-    "publishedDate": "7/29",
-    "time": "今天采集",
-    "readTime": "3 分钟",
-    "accent": "green",
-    "inRecentWindow": true,
-    "paragraphs": [
-      "我只是如实转述；如果你不喜欢这个趋势，有很多反例：（链接）",
-      "【原文内容】推文只有一句话和一个链接：作者声称自己只是\"在转述/报道\"（i'm just reporting），并指出如果读者不喜欢\"这个趋势\"，链接中有许多反例。【语境与解释】这条推文缺少必要的上下文：其一，\"这个趋势\"（this trend）具体指什么无从得知，它很可能是对某条更早推文或某个话题的回复，但原始语境未随推文提供；其二，所附短链接（t.co）指向的外部内容无法确认，可能是文章、列表或另一组推文。【信息不足声明】由于缺少上下文，无法判断作者讨论的具体话题、立场以及链接内容，以上仅为对字面文字的忠实呈现，不对链接内容做任何推测。"
-    ],
-    "id": "follow-builders:2082255848492183583",
-    "title": "swyx：我只是如实转述，不喜欢这个趋势的话有很多反例",
-    "sourceUrl": "https://x.com/swyx/status/2082255848492183583",
-    "summary": "swyx 表示自己的说法只是如实转述，并附上一个链接，称若有人不喜欢某个趋势，可以找到许多反例。但推文本身缺乏上下文，无法确定所指的\"趋势\"是什么。",
-    "tags": [
-      "swyx",
-      "转述",
-      "反例",
-      "趋势",
-      "上下文缺失"
-    ],
-    "source": "builder",
-    "sourceLabel": "swyx · Follow Builders",
-    "publishedAt": "2026-07-29T00:04:00.000Z"
-  },
-  {
-    "section": "x",
-    "digestDate": "2026-07-29",
-    "publishedDate": "7/29",
-    "time": "今天采集",
-    "readTime": "3 分钟",
-    "accent": "green",
-    "inRecentWindow": true,
-    "paragraphs": [
-      "我还构建了 Tastemaker，想看看能否用 Claude Design 和 Claude Code 把一个粗略的想法变成一个有用的产品。我制作了一个视频，完整展示了我的整个流程，包括：1. 创建 design.md 和 HTML 规格说明；2. 在 Claude Design 中进行界面原型设计；3. 使用 Claude Code 进行构建和迭代。📌",
-      "【原文内容】作者介绍了自己做的产品 Tastemaker，目标是验证\"从粗略想法到可用产品\"这一过程能否由 Claude Design 和 Claude Code 完成，并配有演示视频。视频涵盖三个步骤：(1) 创建 design.md（设计文档）和 HTML 规格说明；(2) 在 Claude Design 中做屏幕/界面原型；(3) 用 Claude Code 构建并迭代。📌 符号表示这是一条置顶推文。【语境与解释】以下为补充解释，非原文内容：这条推文反映了当前 AI 辅助产品开发的一种典型工作流——先用 Markdown 文档（design.md）把设计需求结构化地写下来，再用 HTML 规格描述界面细节，作为 AI 工具的输入；随后在原型工具中快速生成界面，最后由 AI 编程助手（Claude Code）实现并反复迭代。Peter Yang 是产品管理领域的知名内容创作者，经常分享 AI 工具在 Product Maker/独立开发中的实践。Tastemaker 具体功能在推文中未说明，原文仅提到它是一个\"有用的产品\"。"
-    ],
-    "id": "follow-builders:2082254852600873376",
-    "title": "Peter Yang 用 Claude Design 与 Claude Code 把粗略想法做成产品 Tastemaker",
-    "sourceUrl": "https://x.com/petergyang/status/2082254852600873376",
-    "summary": "Peter Yang 分享了他构建的产品 Tastemaker：他想验证能否借助 Claude Design 和 Claude Code 把一个粗略想法变成有用产品，并制作视频完整展示流程，包括编写 design.md 与 HTML 规格、在 Claude Design 中做界面原型、用 Claude Code 构建与迭代三步。",
+    "id": "attentionvc-ai:2082107255449919582",
+    "title": "如何在 Claude Code 里搭建一个 AI 视频工作室",
+    "sourceUrl": "https://x.com/EXM7777/status/2082107255449919582",
+    "summary": "作者声称把 Claude Code 改造成了一个可实际运转的「电影工作室」,并公开完整系统:技能(skills)、提示词、循环机制,以及把它们串联起来的六阶段流水线。",
     "tags": [
       "Claude Code",
-      "Claude Design",
-      "AI 产品开发",
-      "界面原型",
-      "工作流",
-      "Peter Yang"
+      "AI 视频生成",
+      "六阶段流水线",
+      "多智能体",
+      "Seedance",
+      "MCP"
     ],
-    "source": "builder",
-    "sourceLabel": "petergyang · Follow Builders",
-    "publishedAt": "2026-07-29T00:00:00.000Z"
+    "source": "daily",
+    "sourceLabel": "Machina · 技术动态 X 热榜",
+    "publishedAt": "2026-07-28T14:13:48.000Z"
   },
   {
     "section": "x",
-    "digestDate": "2026-07-29",
-    "publishedDate": "7/29",
-    "time": "今天采集",
+    "digestDate": "2026-07-28",
+    "publishedDate": "7/28",
+    "time": "昨日采集",
     "readTime": "3 分钟",
     "accent": "green",
     "inRecentWindow": true,
     "paragraphs": [
-      "https://t.co/uwzHs4G1nt（原文仅为一个短链接，无文字内容可翻译）",
-      "【原文内容】该推文由用户 swyx 发布，正文除一个 t.co 短链接外不含任何文字、话题标签或媒体描述。【编辑说明】按照处理规范，对于只有链接、缺乏上下文的推文，不得猜测链接所指向的实际内容（如文章、图片、视频或其他页面）。如需进一步处理，需要补充该链接指向的具体内容或推文的其他上下文信息。"
+      "标题:Claude Code 的安全设置,要做的事按顺序全部写出来(Claude 官方推荐方法)。正文预览:「我把官方安全插件运行了两个月,把 17,385 行日志全部读完了。25 条检测规则中,实际触发过的只有 1 条。」",
+      "核心观点:这是一篇基于实测数据的 Claude Code 安全加固教程。作者用「两个月、17,385 行日志、25 条规则只触发 1 条」这组具体数字,暗示多数检测规则在真实使用中处于「沉默」状态,从而引出按优先级/顺序配置安全的必要性。阅读时需注意的语境:第一,1/25 的触发率来自作者个人的使用场景和项目类型,样本不具普遍性,不能据此断定插件「没用」——安全规则的价值本就在于低频但关键的拦截;第二,标题声称「Claude 官方推荐法」,读者可对照顾 Anthropic 官方文档核实其依据;第三,预览未透露具体触发的是哪条规则、以及作者给出的操作顺序是什么,这些核心内容需阅读原文确认。作者是日本专注 Claude Code 使用支援的博主。"
     ],
-    "id": "follow-builders:2082287480687272053",
-    "title": "swyx 发布的纯链接推文（信息不足，无法处理）",
-    "sourceUrl": "https://x.com/swyx/status/2082287480687272053",
-    "summary": "该推文正文仅包含一个 X 平台短链接（t.co），没有任何文字说明、图片描述或其他上下文信息，因此无法判断其主题与内容。",
+    "id": "attentionvc-ai:2081962142056792475",
+    "title": "Claude Code 的安全设置:按什么顺序做,我全部写出来(Claude 官方推荐方法)",
+    "sourceUrl": "https://x.com/nobel_824/status/2081962142056792475",
+    "summary": "作者将 Claude 官方安全插件运行了两个月,通读全部 17,385 行日志后发现:25 条检测规则中实际触发的只有 1 条。文章据此按官方推荐方法,完整写出 Claude Code 安全配置的执行顺序。",
     "tags": [
-      "纯链接推文",
-      "信息不足",
-      "swyx",
-      "短链接",
-      "无法判断内容"
+      "Claude Code",
+      "安全插件",
+      "日志分析",
+      "检测规则",
+      "官方推荐配置",
+      "实战复盘"
     ],
-    "source": "builder",
-    "sourceLabel": "swyx · Follow Builders",
-    "publishedAt": "2026-07-29T02:09:00.000Z"
+    "source": "daily",
+    "sourceLabel": "tatsuki | Claude Code活用支援 · 技术动态 X 热榜",
+    "publishedAt": "2026-07-28T04:37:10.000Z"
   }
 ]

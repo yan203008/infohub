@@ -16,6 +16,7 @@
     "db:generate": "drizzle-kit generate",
     "collect": "node --env-file-if-exists=.env.local scripts/collect.mjs",
     "collect:reliable": "node --env-file-if-exists=.env.local scripts/run-collection-with-retries.mjs",
+    "import:report": "node scripts/import-collection-report.mjs",
     "collect:dry": "node --env-file-if-exists=.env.local scripts/collect.mjs --dry-run",
     "snapshot": "node scripts/build-snapshot.mjs"
   },

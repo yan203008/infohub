@@ -44,5 +44,5 @@ for (let attempt = 2; attempt <= maximumAttempts && failedSources.length > 0; at
 
 if (failedSources.length > 0) {
   console.error(`[collect] failed after ${maximumAttempts} attempts: ${failedSources.join(", ")}`);
-  process.exitCode = 1;
+  console.error("[collect] successful sources will still be published; failed sources remain recorded for review");
 }

@@ -13,6 +13,7 @@ const config = JSON.parse(await readFile(join(root, "config/sources.json"), "utf
 const isDryRun = process.argv.includes("--dry-run");
 const now = new Date();
 const cutoff = new Date(`${shanghaiDate(new Date(now.valueOf() - 24 * 60 * 60 * 1000))}T00:00:00+08:00`);
+const runDigestDate = process.env.INFOHUB_DIGEST_DATE?.trim() || shanghaiDate(now);
 const moonshotKey = process.env.MOONSHOT_API_KEY?.trim();
 const moonshotBaseUrl = (process.env.MOONSHOT_BASE_URL || "https://api.moonshot.cn/v1").replace(/\/$/, "");
 const moonshotModel = process.env.MOONSHOT_MODEL || "kimi-k3";
@@ -246,7 +247,7 @@ async function kimiItems(system, inputs, { batchSize = 2, maxTokens = 3_500, con
 function baseBody(section, publishedAt, extra = {}) {
   return {
     section,
-    digestDate: shanghaiDate(new Date(publishedAt)),
+    digestDate: runDigestDate,
     publishedDate: new Intl.DateTimeFormat("zh-CN", {
       timeZone: "Asia/Shanghai",
       month: "numeric",
