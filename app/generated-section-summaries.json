@@ -2,35 +2,40 @@
   {
     "section": "x",
     "label": "X 推特内容",
-    "overview": "本次共整理 16 条内容，代表条目包括《OpenAI Codex 与 ChatGPT 团队 Thibault Sottiaux》、《Sam Altman》、《OpenClaw 的 ClawFather Peter Steinberger》。",
+    "overview": "本批动态里，一线 Builder 的关注点集中在三件事：企业落地、产品与模型能力、以及 AI 对人的影响。Aaron Levie 借 OpenAI 智能体沙箱逃逸事件列出企业部署智能体前必须补上的安全功课，并反驳 Dwarkesh 关于推理成本飙升的推演；OpenAI 内部人士预告 GPT-5.6 Sol 在 ARC-AGI-3 上的新成绩，Sam Altman 则称模型已接近显著加速科学发现。产品侧，Peter Yang 分享用 design md 对抗 AI 设计同质化并反思自己染上的使用坏习惯，Replit 推出主打\"后提示词时代\"的 Design，Google 将 Lyria 3.5 接入 Flow Music，Cursor 登陆 iOS。此外，Zara Zhang 论领域专长加 AI 原生的无敌公式，Aditya Agarwal 复盘 Demo Faire 谈投资门槛抬高，Garry Tan 警告数据中心去增长派的政治压力，Swyx 和 Peter Steinberger 则分别吐槽 DocuSign 验证码与 Anthropic 的战报数字。",
     "trends": [
-      "本批内容的关注点集中在GPT-5.6 Sol、ARC-AGI-3、上下文压缩，具体观点与适用范围以各条正文为准。"
+      "智能体安全成为共同议题：Levie 谈企业侧加固，Shipper 谈自动化防御，两人都把这视为创业机会而非单纯风险，说明行业共识正从能力转向治理。",
+      "多位 Builder 强调差异化门槛上升：领域专长、独特愿景、对抗设计同质化，反映\"套个 agent\"式产品已难获认可。",
+      "头部人物开始谈论 AI 的社会与政治阻力——数据中心去增长派、使用中的坏习惯、加速科学的公共承诺，行业议题正向外部溢出。"
     ],
-    "value": "先通过标题和摘要判断是否值得深入阅读，再进入详情查看完整内容。",
+    "value": "读者可以看出，AI 行业正从\"模型能做什么\"转向\"企业敢不敢用、产品怎么与众不同\"：安全治理是新机会窗口，推理价格走向仍有分歧，而做产品的门槛已被明显抬高。",
     "technicalLevel": "中等",
-    "technicalPercentage": 30
+    "technicalPercentage": 45
   },
   {
     "section": "papers",
     "label": "热门论文",
-    "overview": "本次共整理 2 条内容，代表条目包括《AskChem：以论断为中心的化学文献综合基础设施》、《PhiZero：一个围绕“物理语言”构建的世界模型》。",
+    "overview": "本批内容包含两项探索如何让机器更可靠地组织知识的研究。AskChem 面向化学领域，把 14.7 万篇论文拆解成 240 万条带来源标注的原子化论断，配合分类浏览和证据图谱，让 AI 阅读器给出的引用全部可验证、可追溯到原文；PhiZero 面向物理世界建模，不直接逐像素预测未来画面，而是先从真实视频中自学一种离散的“物理语言”，用它显式推理世界将如何变化，再渲染成视频，从而实现物理上连贯的交互式模拟和动作条件模拟。",
     "trends": [
-      "本批内容的关注点集中在化学文献检索、论断级检索、证据溯源，具体观点与适用范围以各条正文为准。"
+      "两项研究共同的转向是：不再让关键信息隐式藏在模型内部，而是把它显式化——化学知识显式化为可溯源论断，物理规律显式化为可推导的“语言”，再由模型使用。",
+      "两条路径都把“中间表示”当作突破口：AskChem 在论文与答案之间插入论断层，PhiZero 在像素与预测之间插入推理层，可验证性和可控性随之提升。"
     ],
-    "value": "先通过标题和摘要判断是否值得深入阅读，再进入详情查看完整内容。",
-    "technicalLevel": "中高",
-    "technicalPercentage": 65
+    "value": "非技术读者可以看清一个共同判断：AI 的进步正从“直接给答案、直接生成画面”转向“先把依据和推理摆到台面上”，这意味着科研检索能逐条核对出处，视频生成也更可能遵循真实物理规律，结果更可信、更可控。",
+    "technicalLevel": "中等",
+    "technicalPercentage": 55
   },
   {
     "section": "github",
     "label": "GitHub Trending",
-    "overview": "本次共整理 14 条内容，代表条目包括《huggingface/speech-to-speech》、《microsoft/AI-For-Beginners》、《paperswithbacktest/awesome-systematic-trading》。",
+    "overview": "本批 GitHub Trending 覆盖三类方向：一是 AI 编程代理的配套设施，包括为 Claude Code、Cursor 等代理增强能力的 ECC 性能优化系统、让编码助手操控真实 Chrome 浏览器做调试与性能分析的 Chrome DevTools MCP、跨 Reddit、X、YouTube 等平台做调研汇总的 agent 技能，以及 Claude Cowork 的开源替代品 openwork；二是开发基础设施，涵盖老牌 CI/CD 服务器 Jenkins、无代理 IT 自动化平台 Ansible、ASP.NET Core、终端内 Vim 风格代码评审工具 tuicr、免浏览器直连 WhatsApp 的 Baileys 库和基于 WebGPU 的 3D 建筑设计编辑器 Pascal Editor；三是面向普通用户的资源，如微软官方 PowerToys 效率工具集、微软 12 周 AI 入门课程、本地语音代理方案和系统化交易资源清单。",
     "trends": [
-      "本批内容的关注点集中在GitHub、开源、WhatsApp，具体观点与适用范围以各条正文为准。"
+      "AI 编程代理正从单一工具演变为生态：围绕它们出现了能力增强系统、浏览器操控接口、调研技能和开源替代品，工具链配套成为新的开源热点。",
+      "官方团队亲自下场为 AI 开放接口，Chrome DevTools 团队推出 MCP 服务器让代理直接调试真实浏览器，说明浏览器与 IDE 边界正在被代理工作流打破。",
+      "成熟基础设施项目（Jenkins、Ansible、PowerToys）与新兴 AI 工具同榜，反映开发者在追逐代理自动化的同时，仍依赖稳定的自托管运维与效率底座。"
     ],
-    "value": "先通过标题和摘要判断是否值得深入阅读，再进入详情查看完整内容。",
+    "value": "非技术读者可以看出：AI 编程助手正在长出“手脚”——能自己开浏览器调试网页、跨平台查资料、读写开发环境；同时微软等大厂把官方工具开源化，判断 AI 工具时生态配套和官方支持比单一功能更值得关注。",
     "technicalLevel": "中高",
-    "technicalPercentage": 55
+    "technicalPercentage": 65
   },
   {
     "section": "youtube",

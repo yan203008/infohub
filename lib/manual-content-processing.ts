@@ -213,22 +213,25 @@ async function fetchPageTitle(url: string) {
 async function kimiJson(system: string, input: unknown, maxTokens = 12_000) {
   const values = runtimeEnv();
   const apiKey = values.MOONSHOT_API_KEY?.trim();
-  if (!apiKey) throw new Error("Moonshot API Key 未配置");
-  const base = (values.MOONSHOT_BASE_URL || "https://api.moonshot.cn/v1").replace(/\/$/, "");
-  const models = [...new Set([values.MOONSHOT_EDITOR_MODEL || "kimi-k2.5", "moonshot-v1-128k"])];
+  if (!apiKey) throw new Error("Kimi API Key 未配置");
+  const base = (values.MOONSHOT_BASE_URL || "https://api.kimi.com/coding/v1").replace(/\/$/, "");
+  const isKimiCode = base.includes("api.kimi.com/coding");
+  let model = values.MOONSHOT_EDITOR_MODEL || (isKimiCode ? "k3-256k" : "kimi-k2.5");
   let response: Response | undefined;
   let payload: JsonRecord = {};
   let responseContent = "";
-  for (let attempt = 1; attempt <= 4; attempt += 1) {
-    const model = models[Math.min(Math.floor((attempt - 1) / 2), models.length - 1)];
+  const maximumAttempts = 5;
+  for (let attempt = 1; attempt <= maximumAttempts; attempt += 1) {
     response = await fetch(`${base}/chat/completions`, {
       method: "POST",
       headers: { authorization: `Bearer ${apiKey}`, "content-type": "application/json" },
       body: JSON.stringify({
         model,
-        ...(model === "kimi-k3" ? { reasoning_effort: "low" } : {}),
-        ...(model === "kimi-k2.5" ? { thinking: { type: "disabled" } } : {}),
-        temperature: model === "kimi-k2.5" ? 0.6 : 1,
+        ...(isKimiCode && model.startsWith("k3") ? { reasoning_effort: "low" } : {}),
+        ...(!isKimiCode ? {
+          ...(model === "kimi-k2.5" ? { thinking: { type: "disabled" } } : {}),
+          temperature: model === "kimi-k2.5" ? 0.6 : 1,
+        } : {}),
         max_tokens: maxTokens,
         response_format: { type: "json_object" },
         messages: [
@@ -242,18 +245,27 @@ async function kimiJson(system: string, input: unknown, maxTokens = 12_000) {
       const attemptChoices = Array.isArray(payload.choices) ? payload.choices : [];
       responseContent = asString(asRecord(asRecord(attemptChoices[0]).message).content);
       if (responseContent) break;
-      if (attempt < 4) {
+      if (attempt < maximumAttempts) {
         await sleep(attempt * 1_500);
         continue;
       }
       throw new Error("Kimi 多次未返回正文，请稍后重试");
     }
-    if (attempt < 4 && (response.status === 429 || response.status >= 500)) {
-      await sleep(attempt * 1_500);
+    const apiError = asRecord(payload.error);
+    const apiMessage = asString(apiError.message);
+    const canUseStandardModel = isKimiCode
+      && model !== "kimi-for-coding"
+      && response.status === 401
+      && /does not have access|subscription.*access|model id does not exist/i.test(apiMessage);
+    if (canUseStandardModel) {
+      model = "kimi-for-coding";
       continue;
     }
-    const apiError = asRecord(payload.error);
-    throw new Error(asString(apiError.message) || `Kimi 加工失败（${response.status}）`);
+    if (attempt < maximumAttempts && (response.status === 429 || response.status >= 500)) {
+      await sleep(Math.min(90_000, 10_000 * (2 ** (attempt - 1))));
+      continue;
+    }
+    throw new Error(apiMessage || `Kimi 加工失败（${response.status}）`);
   }
   if (!response?.ok) throw new Error("Kimi 暂时不可用，请稍后重试");
   const content = responseContent

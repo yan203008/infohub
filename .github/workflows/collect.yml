@@ -55,8 +55,8 @@ jobs:
       - name: Collect and publish
         env:
           MOONSHOT_API_KEY: ${{ secrets.MOONSHOT_API_KEY }}
-          MOONSHOT_BASE_URL: https://api.moonshot.cn/v1
-          MOONSHOT_MODEL: kimi-k3
+          MOONSHOT_BASE_URL: https://api.kimi.com/coding/v1
+          MOONSHOT_MODEL: k3-256k
           SUPADATA_API_KEY: ${{ secrets.SUPADATA_API_KEY }}
           GETNOTE_API_KEY: ${{ secrets.GETNOTE_API_KEY }}
           GETNOTE_CLIENT_ID: ${{ secrets.GETNOTE_CLIENT_ID }}
