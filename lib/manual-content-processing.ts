@@ -1,4 +1,3 @@
-import { env } from "cloudflare:workers";
 import { jsonrepair } from "jsonrepair";
 
 export type ManualContentType = "youtube" | "podcast" | "article";
@@ -23,7 +22,7 @@ export type ManualExtraction = { title: string; text: string };
 
 type JsonRecord = Record<string, unknown>;
 
-const runtimeEnv = () => env as unknown as Record<string, string | undefined>;
+const runtimeEnv = () => process.env as Record<string, string | undefined>;
 
 function sleep(milliseconds: number) {
   return new Promise((resolve) => setTimeout(resolve, milliseconds));
@@ -176,6 +175,9 @@ async function getNoteContent(url: string, requestId: string) {
 async function fetchArticleFallback(url: string) {
   const response = await fetch(url, { headers: { "user-agent": "InfoHub/1.0" } });
   if (!response.ok) throw new Error(`文章页面无法读取（${response.status}）`);
+  if (response.headers.get("content-type")?.includes("application/pdf")) {
+    throw new Error("PDF 交由内容提取服务读取");
+  }
   const html = await response.text();
   const title = html.match(/<title[^>]*>([\s\S]*?)<\/title>/i)?.[1]
     ?.replace(/<[^>]+>/g, " ").replace(/\s+/g, " ").trim() || "精选文章";

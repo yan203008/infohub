@@ -1,0 +1,12 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "infohub-submission-gateway",
+  "main": "submission-gateway/index.ts",
+  "compatibility_date": "2026-05-22",
+  "workers_dev": true,
+  "vars": {
+    "GITHUB_OWNER": "yan203008",
+    "GITHUB_REPO": "infohub",
+    "ALLOWED_ORIGINS": "https://yan203008.github.io,http://localhost:3000,http://localhost:5173"
+  }
+}

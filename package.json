@@ -17,6 +17,8 @@
     "collect": "node --env-file-if-exists=.env.local scripts/collect.mjs",
     "summaries": "node --env-file-if-exists=.env.local scripts/collect.mjs --summaries-only",
     "collect:reliable": "node --env-file-if-exists=.env.local scripts/run-collection-with-retries.mjs",
+    "curated:process": "tsx --env-file-if-exists=.env.local scripts/process-curated-link.ts",
+    "curated:queue": "tsx --env-file-if-exists=.env.local scripts/process-curated-link.ts --queue",
     "import:report": "node scripts/import-collection-report.mjs",
     "collect:dry": "node --env-file-if-exists=.env.local scripts/collect.mjs --dry-run",
     "snapshot": "node scripts/build-snapshot.mjs"
@@ -42,6 +44,7 @@
     "eslint-config-next": "16.2.6",
     "react-server-dom-webpack": "19.2.6",
     "tailwindcss": "4.2.1",
+    "tsx": "^4.23.1",
     "typescript": "5.9.3",
     "vinext": "0.0.50",
     "vite": "8.0.13",

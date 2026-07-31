@@ -24,6 +24,7 @@ InfoHub 是一个手机优先的信息聚合、阅读与私人笔记 PWA。管�
 - YouTube 文字稿经过 Kimi 二次加工，固定输出 Takeaways 和完整阅读文章
 - 感兴趣列表、完成阅读、下一篇、阅读位置恢复和用户自选文字高亮
 - `/admin` 仅供管理员在自己的电脑本地管理公共信息源和主动提交链接
+- GitHub Pages 版本在“我的”中提供管理员精选入口；通过独立安全网关触发 GitHub Actions，API Key 不进入浏览器
 
 当前 YouTube 频道：
 
@@ -93,7 +94,7 @@ YouTube RSS 发现新视频
 - 只使用 GitHub Pages、GitHub Actions 和管理员自己的电脑
 - 不使用 Vercel、Cloudflare、云数据库、邮箱登录或自定义域名
 - 普通用户无需登录；私人数据不跨手机和电脑同步
-- 管理员提交链接和查看候选暂时只在本地完成
+- 管理员精选链接可在手机端程序内提交；处理任务仍由 GitHub Actions 执行，不要求管理员电脑开机
 
 ## 产品交互约定
 

@@ -1,0 +1,95 @@
+name: Process curated link
+run-name: 精选内容 · ${{ inputs.request_id }}
+
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
+on:
+  workflow_dispatch:
+    inputs:
+      url:
+        description: "公开内容链接"
+        required: true
+        type: string
+      timing:
+        description: "处理时间"
+        required: true
+        default: immediate
+        type: choice
+        options:
+          - immediate
+          - morning
+      request_id:
+        description: "InfoHub 提交编号"
+        required: true
+        type: string
+
+concurrency:
+  group: infohub-publisher
+  cancel-in-progress: false
+
+jobs:
+  process:
+    runs-on: ubuntu-latest
+    timeout-minutes: 80
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - run: npm ci
+
+      - name: Save or process link
+        id: curated_step
+        continue-on-error: true
+        env:
+          MOONSHOT_API_KEY: ${{ secrets.MOONSHOT_API_KEY }}
+          MOONSHOT_BASE_URL: https://api.kimi.com/coding/v1
+          MOONSHOT_MODEL: k3-256k
+          SUPADATA_API_KEY: ${{ secrets.SUPADATA_API_KEY }}
+          GETNOTE_API_KEY: ${{ secrets.GETNOTE_API_KEY }}
+          GETNOTE_CLIENT_ID: ${{ secrets.GETNOTE_CLIENT_ID }}
+          CURATED_URL: ${{ inputs.url }}
+          CURATED_TIMING: ${{ inputs.timing }}
+          CURATED_REQUEST_ID: ${{ inputs.request_id }}
+        run: |
+          if [ "$CURATED_TIMING" = "morning" ]; then
+            npm run curated:process -- --enqueue --id="$CURATED_REQUEST_ID" --url="$CURATED_URL"
+          else
+            npm run curated:process -- --id="$CURATED_REQUEST_ID" --url="$CURATED_URL"
+          fi
+
+      - name: Save result
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add app/generated-feed.json public/generated-submission-status.json config/manual-queue.json
+          if ! git diff --cached --quiet; then
+            git commit -m "content: process curated submission"
+            git push
+          fi
+
+      - name: Build GitHub Pages site
+        run: npm run build:pages
+
+      - uses: actions/configure-pages@v5
+
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: dist-pages
+
+      - name: Publish GitHub Pages site
+        id: deployment
+        uses: actions/deploy-pages@v4
+
+      - name: Mark processing error
+        if: always() && steps.curated_step.outcome == 'failure'
+        run: exit 1

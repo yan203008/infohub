@@ -16,9 +16,14 @@ import {
   Eye,
   EyeOff,
   ExternalLink,
+  Link2,
+  LoaderCircle,
+  LockKeyhole,
+  LogOut,
   PenLine,
   Play,
   Search,
+  Send,
   SlidersHorizontal,
   Sparkles,
   UserRound,
@@ -1975,12 +1980,7 @@ export function InfoHubApp({ user }: { user: ChatGPTUser | null }) {
           </div>
         )}
         {tab === "me" && (
-          <PlaceholderPage
-            icon={<UserRound size={24} />}
-            eyebrow="本地模式"
-            title="你的阅读数据保存在这台设备"
-            description="公开内容无需登录。感兴趣、阅读进度、划线和笔记不会上传，也不会提供给内容生产线。"
-          />
+          <MobileAdminPanel />
         )}
       </div>
 
@@ -2064,6 +2064,259 @@ export function InfoHubApp({ user }: { user: ChatGPTUser | null }) {
         />
       </nav>
     </main>
+  );
+}
+
+type CuratedSubmission = {
+  id: string;
+  url: string;
+  timing: "immediate" | "morning";
+  status: "submitted" | "scheduled" | "processing" | "published" | "failed";
+  step?: "extract" | "ai" | "quality" | "publish";
+  title?: string;
+  error?: string;
+  updatedAt: string;
+};
+
+const submissionStatusLabel: Record<CuratedSubmission["status"], string> = {
+  submitted: "已提交",
+  scheduled: "等待明早处理",
+  processing: "正在处理",
+  published: "已进入公开精选",
+  failed: "处理失败",
+};
+
+const submissionStepLabel: Record<NonNullable<CuratedSubmission["step"]>, string> = {
+  extract: "正在获取原文或文字稿",
+  ai: "正在整理为中文文章",
+  quality: "正在检查内容质量",
+  publish: "正在发布",
+};
+
+function MobileAdminPanel() {
+  const [apiUrl, setApiUrl] = useState("");
+  const [adminOpen, setAdminOpen] = useState(false);
+  const [token, setToken] = useState("");
+  const [password, setPassword] = useState("");
+  const [url, setUrl] = useState("");
+  const [timing, setTiming] = useState<"immediate" | "morning">("immediate");
+  const [message, setMessage] = useState("");
+  const [busy, setBusy] = useState(false);
+  const [submissions, setSubmissions] = useState<CuratedSubmission[]>([]);
+
+  useEffect(() => {
+    const savedToken = window.localStorage.getItem("infohub-admin-token") ?? "";
+    const savedSubmissions = window.localStorage.getItem("infohub-curated-submissions");
+    const timer = window.setTimeout(() => {
+      setToken(savedToken);
+      if (savedToken) setAdminOpen(true);
+      try {
+        const parsed = savedSubmissions ? JSON.parse(savedSubmissions) as CuratedSubmission[] : [];
+        if (Array.isArray(parsed)) setSubmissions(parsed);
+      } catch {
+        setSubmissions([]);
+      }
+    }, 0);
+    void fetch("./infohub-config.json", { cache: "no-store" })
+      .then(async (response) => response.ok ? response.json() as Promise<{ submissionApiUrl?: string }> : null)
+      .then((config) => setApiUrl(config?.submissionApiUrl?.replace(/\/$/, "") ?? ""))
+      .catch(() => setApiUrl(""));
+    return () => window.clearTimeout(timer);
+  }, []);
+
+  useEffect(() => {
+    if (submissions.length === 0) return;
+    let cancelled = false;
+    const sync = async () => {
+      try {
+        const response = await fetch(`./generated-submission-status.json?t=${Date.now()}`, { cache: "no-store" });
+        if (!response.ok) return;
+        const publicStatuses = await response.json() as CuratedSubmission[];
+        if (!Array.isArray(publicStatuses) || cancelled) return;
+        const byId = new Map(publicStatuses.map((item) => [item.id, item]));
+        setSubmissions((current) => {
+          const next = current.map((item) => ({ ...item, ...(byId.get(item.id) ?? {}) }));
+          window.localStorage.setItem("infohub-curated-submissions", JSON.stringify(next));
+          return next;
+        });
+      } catch {
+        // The last known state remains visible when GitHub Pages is redeploying.
+      }
+    };
+    void sync();
+    const timer = window.setInterval(() => void sync(), 20_000);
+    return () => {
+      cancelled = true;
+      window.clearInterval(timer);
+    };
+  }, [submissions.length]);
+
+  async function login(event: React.FormEvent) {
+    event.preventDefault();
+    if (!apiUrl) {
+      setMessage("管理员提交服务正在完成首次配置，请稍后再试。");
+      return;
+    }
+    setBusy(true);
+    setMessage("");
+    try {
+      const response = await fetch(`${apiUrl}/login`, {
+        method: "POST",
+        headers: { "content-type": "application/json" },
+        body: JSON.stringify({ password }),
+      });
+      const result = await response.json() as { token?: string; error?: string };
+      if (!response.ok || !result.token) throw new Error(result.error ?? "登录失败");
+      window.localStorage.setItem("infohub-admin-token", result.token);
+      setToken(result.token);
+      setPassword("");
+      setMessage("管理员身份已确认");
+    } catch (error) {
+      setMessage(error instanceof Error ? error.message : "登录失败");
+    } finally {
+      setBusy(false);
+    }
+  }
+
+  async function submit(event: React.FormEvent) {
+    event.preventDefault();
+    if (!apiUrl || !token || !url.trim()) return;
+    setBusy(true);
+    setMessage("");
+    const requestId = crypto.randomUUID();
+    try {
+      const response = await fetch(`${apiUrl}/submit`, {
+        method: "POST",
+        headers: { authorization: `Bearer ${token}`, "content-type": "application/json" },
+        body: JSON.stringify({ url: url.trim(), timing, requestId }),
+      });
+      const result = await response.json() as { error?: string };
+      if (!response.ok) {
+        if (response.status === 401) {
+          window.localStorage.removeItem("infohub-admin-token");
+          setToken("");
+        }
+        throw new Error(result.error ?? "提交失败");
+      }
+      const entry: CuratedSubmission = {
+        id: requestId,
+        url: url.trim(),
+        timing,
+        status: timing === "morning" ? "scheduled" : "submitted",
+        updatedAt: new Date().toISOString(),
+      };
+      const next = [entry, ...submissions].slice(0, 50);
+      setSubmissions(next);
+      window.localStorage.setItem("infohub-curated-submissions", JSON.stringify(next));
+      setUrl("");
+      setMessage(timing === "morning" ? "链接已保存，明早随日报处理" : "链接已提交，可以继续添加下一条");
+    } catch (error) {
+      setMessage(error instanceof Error ? error.message : "提交失败");
+    } finally {
+      setBusy(false);
+    }
+  }
+
+  function logout() {
+    window.localStorage.removeItem("infohub-admin-token");
+    setToken("");
+    setPassword("");
+    setMessage("");
+  }
+
+  return (
+    <div className="content-area profile-page">
+      <section className="welcome">
+        <div>
+          <p>我的 InfoHub</p>
+          <h1>阅读属于你，内容由管理员统一整理。</h1>
+        </div>
+      </section>
+      <section className="device-privacy-card">
+        <UserRound size={22} />
+        <div>
+          <strong>私人阅读数据保存在当前设备</strong>
+          <span>感兴趣、阅读进度、划线和笔记不会上传，也不会进入公共内容生产线。</span>
+        </div>
+      </section>
+
+      {!adminOpen ? (
+        <button className="admin-entry-button" onClick={() => setAdminOpen(true)}>
+          <LockKeyhole size={18} /> 管理员提交精选内容
+        </button>
+      ) : (
+        <section className="mobile-admin-card">
+          <header>
+            <div>
+              <span>ADMIN</span>
+              <h2>提交精选内容</h2>
+              <p>YouTube、小宇宙、网页文章或公开 PDF 链接</p>
+            </div>
+            {token && <button onClick={logout} aria-label="退出管理员"><LogOut size={18} /></button>}
+          </header>
+
+          {!token ? (
+            <form className="mobile-admin-form" onSubmit={login}>
+              <label>
+                管理员密码
+                <input
+                  type="password"
+                  autoComplete="current-password"
+                  value={password}
+                  onChange={(event) => setPassword(event.target.value)}
+                  placeholder="输入管理员密码"
+                />
+              </label>
+              <button className="primary-button" disabled={busy || !password}>
+                {busy ? <LoaderCircle className="spin" size={18} /> : <LockKeyhole size={18} />}
+                验证身份
+              </button>
+            </form>
+          ) : (
+            <form className="mobile-admin-form" onSubmit={submit}>
+              <label>
+                内容链接
+                <div className="submission-url-field">
+                  <Link2 size={18} />
+                  <input
+                    type="url"
+                    inputMode="url"
+                    value={url}
+                    onChange={(event) => setUrl(event.target.value)}
+                    placeholder="粘贴 https://..."
+                  />
+                </div>
+              </label>
+              <div className="mobile-timing-picker" role="radiogroup" aria-label="处理时间">
+                <button type="button" className={timing === "immediate" ? "active" : ""} onClick={() => setTiming("immediate")}>现在处理</button>
+                <button type="button" className={timing === "morning" ? "active" : ""} onClick={() => setTiming("morning")}>明早处理</button>
+              </div>
+              <button className="primary-button" disabled={busy || !url.trim()}>
+                {busy ? <LoaderCircle className="spin" size={18} /> : <Send size={18} />}
+                {busy ? "正在提交" : "提交链接"}
+              </button>
+            </form>
+          )}
+          {message && <p className="mobile-admin-message">{message}</p>}
+
+          {token && submissions.length > 0 && (
+            <div className="mobile-submission-list">
+              <h3>最近提交</h3>
+              {submissions.map((item) => (
+                <article key={item.id}>
+                  <div>
+                    <a href={item.url} target="_blank" rel="noreferrer">{item.title || item.url}</a>
+                    <span>{item.status === "processing" && item.step ? submissionStepLabel[item.step] : submissionStatusLabel[item.status]}</span>
+                    {item.error && <em>{item.error}</em>}
+                  </div>
+                  <i className={item.status} />
+                </article>
+              ))}
+            </div>
+          )}
+        </section>
+      )}
+    </div>
   );
 }
 
@@ -2213,29 +2466,5 @@ function NavButton({
       <span>{label}</span>
       {!!count && <small className="nav-count">{count}</small>}
     </button>
-  );
-}
-
-function PlaceholderPage({
-  icon,
-  eyebrow,
-  title,
-  description,
-  action,
-}: {
-  icon: React.ReactNode;
-  eyebrow: string;
-  title: string;
-  description: string;
-  action?: React.ReactNode;
-}) {
-  return (
-    <section className="placeholder-page">
-      <div className="placeholder-icon">{icon}</div>
-      <span>{eyebrow}</span>
-      <h1>{title}</h1>
-      <p>{description}</p>
-      {action}
-    </section>
   );
 }
