@@ -7,6 +7,7 @@ const adminFile = new URL("../app/admin/admin-console.tsx", import.meta.url);
 const youtubePromptFile = new URL("../lib/youtube-processing-prompt.ts", import.meta.url);
 const collectorFile = new URL("../scripts/collect.mjs", import.meta.url);
 const workflowFile = new URL("../.github/workflows/collect.yml", import.meta.url);
+const feedFile = new URL("../app/generated-feed.json", import.meta.url);
 
 test("builds the InfoHub daily experience", async () => {
   await access(new URL("../dist/server/index.js", import.meta.url));
@@ -41,6 +42,20 @@ test("builds the InfoHub daily experience", async () => {
   assert.match(source, /中文摘要/);
   assert.match(source, /对非技术读者有什么用/);
   assert.match(source, /链接直达：/);
+  assert.match(source, /搜索整个 InfoHub/);
+  assert.match(source, /笔记 · 划线笔记/);
+  assert.match(source, /infohub-private-backup/);
+  assert.match(source, /不包含管理员密码或令牌/);
+  assert.doesNotMatch(source, /<Bell/);
+  assert.match(source, /getAvailableDailyDates/);
+});
+
+test("restores the missing July 30 digest from existing real content", async () => {
+  const feed = JSON.parse(await readFile(feedFile, "utf8"));
+  const july30 = feed.filter((item) => item.digestDate === "2026-07-30");
+
+  assert.equal(july30.length, 18);
+  assert.ok(july30.every((item) => item.publishedDate === "7/30"));
 });
 
 test("includes the automatic multi-source collector", async () => {

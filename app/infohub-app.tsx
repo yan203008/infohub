@@ -1,7 +1,6 @@
 "use client";
 
 import {
-  Bell,
   Bookmark,
   BookOpen,
   CalendarDays,
@@ -16,6 +15,7 @@ import {
   Eye,
   EyeOff,
   ExternalLink,
+  Download,
   Link2,
   LoaderCircle,
   LockKeyhole,
@@ -26,6 +26,7 @@ import {
   Send,
   SlidersHorizontal,
   Sparkles,
+  Upload,
   UserRound,
   Video,
   X,
@@ -38,6 +39,7 @@ import generatedSectionSummaries from "./generated-section-summaries.json";
 type Source = "youtube" | "podcast" | "daily" | "builder";
 type Tab = "daily" | "reading" | "notes" | "me";
 type ReadingView = "curated" | "interested";
+type SearchScope = "all" | "content" | "note";
 type SectionId = "x" | "papers" | "github" | "youtube" | "podcasts" | "reading";
 type HomeSectionId = "x" | "papers" | "github" | "media";
 
@@ -93,6 +95,17 @@ type SectionSummary = {
   value: string;
   technicalLevel: string;
   technicalPercentage: number;
+};
+
+type SearchResult = {
+  id: string;
+  kind: "content" | "note";
+  title: string;
+  excerpt: string;
+  origin: string;
+  item?: Item;
+  paragraphKey?: string;
+  highlight?: HighlightRange;
 };
 
 const coreItems: Item[] = [
@@ -769,17 +782,13 @@ function normalizeItemCopy(item: Item): Item {
   };
 }
 
-function toIsoDate(date: Date) {
-  return `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, "0")}-${String(date.getDate()).padStart(2, "0")}`;
-}
-
-function getRecentDates(anchorValue?: string) {
-  const anchor = anchorValue ? new Date(`${anchorValue}T12:00:00`) : new Date();
-  return Array.from({ length: 7 }, (_, index) => {
-    const date = new Date(anchor);
-    date.setDate(anchor.getDate() - index);
-    return toIsoDate(date);
-  });
+function getAvailableDailyDates(items: Item[]) {
+  return [...new Set(
+    items
+      .filter((item) => !isCuratedItem(item) && item.inRecentWindow !== false && item.digestDate >= "2026-07-29")
+      .map((item) => item.digestDate)
+      .filter(Boolean),
+  )].sort().reverse();
 }
 
 function displayDay(value: string, compact = false) {
@@ -801,20 +810,16 @@ function isCuratedItem(item: Item) {
 }
 
 export function InfoHubApp({ user }: { user: ChatGPTUser | null }) {
-  const initialDailyDate = useMemo(() =>
-    fallbackItems
-      .filter((item) => !isCuratedItem(item) && item.inRecentWindow !== false)
-      .map((item) => item.digestDate)
-      .filter(Boolean)
-      .sort()
-      .at(-1),
-  []);
-  const recentDates = useMemo(() => getRecentDates(initialDailyDate), [initialDailyDate]);
+  const initialDailyDates = useMemo(() => getAvailableDailyDates(fallbackItems), []);
   const [tab, setTab] = useState<Tab>("daily");
   const [readingView, setReadingView] = useState<ReadingView>("curated");
-  const [selectedDate, setSelectedDate] = useState(recentDates[0]);
+  const [selectedDate, setSelectedDate] = useState(initialDailyDates[0] ?? "2026-07-29");
   const [activeHomeSection, setActiveHomeSection] = useState<HomeSectionId | null>(null);
   const [activeItem, setActiveItem] = useState<Item | null>(null);
+  const [searchOpen, setSearchOpen] = useState(false);
+  const [searchQuery, setSearchQuery] = useState("");
+  const [searchScope, setSearchScope] = useState<SearchScope>("all");
+  const [pendingSearchResultId, setPendingSearchResultId] = useState<string | null>(null);
   const [saved, setSaved] = useState<string[]>([]);
   const [completed, setCompleted] = useState<string[]>([]);
   const [liveItems, setLiveItems] = useState<Item[]>([]);
@@ -845,6 +850,8 @@ export function InfoHubApp({ user }: { user: ChatGPTUser | null }) {
       String(b.publishedAt ?? b.digestDate).localeCompare(String(a.publishedAt ?? a.digestDate)),
     );
   }, [liveItems]);
+  const availableDailyDates = useMemo(() => getAvailableDailyDates(items), [items]);
+  const recentDates = availableDailyDates.slice(0, 7);
   const latestDailyDate = items
     .filter((item) => !isCuratedItem(item) && item.inRecentWindow !== false)
     .map((item) => item.digestDate)
@@ -1040,6 +1047,18 @@ export function InfoHubApp({ user }: { user: ChatGPTUser | null }) {
   }, [toast]);
 
   useEffect(() => {
+    const onKeyDown = (event: KeyboardEvent) => {
+      if ((event.metaKey || event.ctrlKey) && event.key.toLowerCase() === "k") {
+        event.preventDefault();
+        setSearchOpen(true);
+      }
+      if (event.key === "Escape") setSearchOpen(false);
+    };
+    window.addEventListener("keydown", onKeyDown);
+    return () => window.removeEventListener("keydown", onKeyDown);
+  }, []);
+
+  useEffect(() => {
     const stored = window.localStorage.getItem("infohub-section-preferences");
     if (!stored) return;
     try {
@@ -1111,6 +1130,81 @@ export function InfoHubApp({ user }: { user: ChatGPTUser | null }) {
         })),
     );
   }).sort((a, b) => String(b.range.updatedAt ?? "").localeCompare(String(a.range.updatedAt ?? "")));
+  const searchResults = useMemo<SearchResult[]>(() => {
+    const query = searchQuery.trim().toLocaleLowerCase("zh-CN");
+    if (!query) return [];
+    const contentResults = items
+      .filter((item) => [
+        item.title,
+        item.summary,
+        item.sourceLabel,
+        item.tags.join(" "),
+        item.utility ?? "",
+        item.paragraphs.join(" "),
+        item.sections?.flatMap((section) => [section.title, ...section.paragraphs]).join(" ") ?? "",
+      ].join(" ").toLocaleLowerCase("zh-CN").includes(query))
+      .map<SearchResult>((item) => {
+        const sectionLabel = sectionDefinitions.find((section) => section.id === item.section)?.label ?? item.sourceLabel;
+        const origin = isCuratedItem(item)
+          ? "精读 · 管理员精选"
+          : `日报 · ${displayDay(item.digestDate, true)} · ${sectionLabel}${saved.includes(item.id) ? " · 已感兴趣" : ""}`;
+        return {
+          id: `content:${item.id}`,
+          kind: "content",
+          title: item.title,
+          excerpt: item.summary,
+          origin,
+          item,
+        };
+      });
+    const noteResults = highlightNoteEntries
+      .filter(({ item, range }) => `${item.title} ${range.text} ${range.note ?? ""}`.toLocaleLowerCase("zh-CN").includes(query))
+      .map<SearchResult>(({ item, paragraphKey, range, highlightId }) => ({
+        id: `note:${item.id}:${paragraphKey}:${highlightId}`,
+        kind: "note",
+        title: item.title,
+        excerpt: range.note?.trim() || range.text,
+        origin: "笔记 · 划线笔记",
+        item,
+        paragraphKey,
+        highlight: range,
+      }));
+    if (note.toLocaleLowerCase("zh-CN").includes(query)) {
+      noteResults.unshift({
+        id: "note:free",
+        kind: "note",
+        title: "自由笔记",
+        excerpt: note,
+        origin: "笔记 · 自由笔记",
+      });
+    }
+    return [...noteResults, ...contentResults].slice(0, 80);
+  }, [highlightNoteEntries, items, note, saved, searchQuery]);
+  const visibleSearchResults = searchScope === "all"
+    ? searchResults
+    : searchResults.filter((result) => result.kind === searchScope);
+
+  useEffect(() => {
+    if (!pendingSearchResultId) return;
+    const timer = window.setTimeout(() => {
+      const result = searchResults.find((candidate) => candidate.id === pendingSearchResultId);
+      setPendingSearchResultId(null);
+      if (!result) return;
+      setSearchOpen(false);
+      setSearchQuery("");
+      if (!result.item) {
+        setTab("notes");
+        window.scrollTo(0, 0);
+        return;
+      }
+      if (result.kind === "note" && result.paragraphKey && result.highlight) {
+        openSavedHighlight(result.item, result.paragraphKey, result.highlight);
+        return;
+      }
+      openItem(result.item);
+    }, 0);
+    return () => window.clearTimeout(timer);
+  }, [pendingSearchResultId, searchResults]);
 
   function setContentState(id: string, state: "saved" | "completed" | null) {
     const nextSaved = state === "saved"
@@ -1610,6 +1704,11 @@ export function InfoHubApp({ user }: { user: ChatGPTUser | null }) {
           <span>InfoHub</span>
         </div>
         <nav>
+          <button className="sidebar-search-button" onClick={() => setSearchOpen(true)}>
+            <Search size={19} />
+            <span>全局搜索</span>
+            <kbd>⌘ K</kbd>
+          </button>
           <NavButton
             active={tab === "daily"}
             icon={<CalendarDays size={20} />}
@@ -1629,7 +1728,9 @@ export function InfoHubApp({ user }: { user: ChatGPTUser | null }) {
             ))}
             <label className="sidebar-more">
               <span>历史日报</span>
-              <input type="date" value={selectedDate} onChange={(event) => { setSelectedDate(event.target.value); setActiveHomeSection(null); setTab("daily"); }} />
+              <select value={selectedDate} onChange={(event) => { setSelectedDate(event.target.value); setActiveHomeSection(null); setTab("daily"); }}>
+                {availableDailyDates.map((date) => <option key={date} value={date}>{displayDay(date)}</option>)}
+              </select>
             </label>
           </div>
           <NavButton
@@ -1669,12 +1770,8 @@ export function InfoHubApp({ user }: { user: ChatGPTUser | null }) {
             <span>InfoHub</span>
           </div>
           <div className="header-actions">
-            <button className="icon-button" aria-label="搜索">
+            <button className="icon-button" aria-label="全局搜索" onClick={() => setSearchOpen(true)}>
               <Search size={20} />
-            </button>
-            <button className="icon-button notification-button" aria-label="通知">
-              <Bell size={20} />
-              <i />
             </button>
           </div>
         </header>
@@ -1686,9 +1783,9 @@ export function InfoHubApp({ user }: { user: ChatGPTUser | null }) {
                 <p>{displayDay(selectedDate)}</p>
                 <h1>{selectedDate === recentDates[0] ? "最新一期，已经整理好了。" : "这一天，值得读的都在这里。"}</h1>
               </div>
-              <button className="desktop-search" aria-label="搜索内容">
+              <button className="desktop-search" aria-label="全局搜索" onClick={() => setSearchOpen(true)}>
                 <Search size={19} />
-                搜索内容
+                搜索全部内容
                 <kbd>⌘ K</kbd>
               </button>
             </section>
@@ -1709,7 +1806,9 @@ export function InfoHubApp({ user }: { user: ChatGPTUser | null }) {
               <label className="date-picker-button">
                 <CalendarDays size={18} />
                 <span>历史日报</span>
-                <input type="date" value={selectedDate} onChange={(event) => { setSelectedDate(event.target.value); setActiveHomeSection(null); }} />
+                <select value={selectedDate} onChange={(event) => { setSelectedDate(event.target.value); setActiveHomeSection(null); }}>
+                  {availableDailyDates.map((date) => <option key={date} value={date}>{displayDay(date)}</option>)}
+                </select>
               </label>
             </section>
 
@@ -1984,6 +2083,68 @@ export function InfoHubApp({ user }: { user: ChatGPTUser | null }) {
         )}
       </div>
 
+      {searchOpen && (
+        <div className="search-backdrop" onClick={() => setSearchOpen(false)}>
+          <section className="global-search-panel" onClick={(event) => event.stopPropagation()} aria-label="全局搜索">
+            <header>
+              <div className="global-search-field">
+                <Search size={20} />
+                <input
+                  autoFocus
+                  value={searchQuery}
+                  onChange={(event) => setSearchQuery(event.target.value)}
+                  placeholder="搜索标题、关键词、正文或笔记"
+                />
+              </div>
+              <button className="icon-button" onClick={() => setSearchOpen(false)} aria-label="关闭搜索">
+                <X size={20} />
+              </button>
+            </header>
+            <div className="search-scope-tabs" role="tablist" aria-label="搜索范围">
+              {([
+                ["all", "全部"],
+                ["content", "内容"],
+                ["note", "笔记"],
+              ] as const).map(([scope, label]) => (
+                <button
+                  key={scope}
+                  className={searchScope === scope ? "active" : ""}
+                  onClick={() => setSearchScope(scope)}
+                  role="tab"
+                  aria-selected={searchScope === scope}
+                >
+                  {label}
+                </button>
+              ))}
+            </div>
+            <div className="global-search-results">
+              {!searchQuery.trim() ? (
+                <div className="search-empty">
+                  <Search size={24} />
+                  <strong>搜索整个 InfoHub</strong>
+                  <span>日报、精读与当前设备上的私人笔记都会被检索。</span>
+                </div>
+              ) : visibleSearchResults.length > 0 ? (
+                visibleSearchResults.map((result) => (
+                  <button key={result.id} onClick={() => setPendingSearchResultId(result.id)}>
+                    <span className={`search-result-origin ${result.kind}`}>{result.origin}</span>
+                    <strong>{result.title}</strong>
+                    <p>{result.excerpt}</p>
+                    <ChevronRight size={18} />
+                  </button>
+                ))
+              ) : (
+                <div className="search-empty">
+                  <Search size={24} />
+                  <strong>没有找到相关内容</strong>
+                  <span>可以换一个作者、项目名或关键词试试。</span>
+                </div>
+              )}
+            </div>
+          </section>
+        </div>
+      )}
+
       {sectionSettingsOpen && (
         <div className="sheet-backdrop" onClick={() => setSectionSettingsOpen(false)}>
           <section
@@ -2093,6 +2254,22 @@ const submissionStepLabel: Record<NonNullable<CuratedSubmission["step"]>, string
   publish: "正在发布",
 };
 
+const privateBackupKeys = [
+  "infohub-demo-note",
+  "infohub-highlights",
+  "infohub-reading-progress",
+  "infohub-library-state",
+  "infohub-section-preferences",
+  "infohub-curated-submissions",
+] as const;
+
+type PrivateBackup = {
+  format: "infohub-private-backup";
+  version: 1;
+  exportedAt: string;
+  values: Partial<Record<(typeof privateBackupKeys)[number], string>>;
+};
+
 function MobileAdminPanel() {
   const [apiUrl, setApiUrl] = useState("");
   const [adminOpen, setAdminOpen] = useState(false);
@@ -2103,6 +2280,8 @@ function MobileAdminPanel() {
   const [message, setMessage] = useState("");
   const [busy, setBusy] = useState(false);
   const [submissions, setSubmissions] = useState<CuratedSubmission[]>([]);
+  const [backupMessage, setBackupMessage] = useState("");
+  const backupInputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
     const savedToken = window.localStorage.getItem("infohub-admin-token") ?? "";
@@ -2224,6 +2403,58 @@ function MobileAdminPanel() {
     setMessage("");
   }
 
+  function exportPrivateBackup() {
+    const values: PrivateBackup["values"] = {};
+    privateBackupKeys.forEach((key) => {
+      const value = window.localStorage.getItem(key);
+      if (value !== null) values[key] = value;
+    });
+    const backup: PrivateBackup = {
+      format: "infohub-private-backup",
+      version: 1,
+      exportedAt: new Date().toISOString(),
+      values,
+    };
+    const blob = new Blob([JSON.stringify(backup, null, 2)], { type: "application/json" });
+    const downloadUrl = URL.createObjectURL(blob);
+    const link = document.createElement("a");
+    link.href = downloadUrl;
+    link.download = `infohub-backup-${new Date().toISOString().slice(0, 10)}.json`;
+    document.body.appendChild(link);
+    link.click();
+    link.remove();
+    window.setTimeout(() => URL.revokeObjectURL(downloadUrl), 1_000);
+    setBackupMessage("备份文件已导出，请将它保存在安全位置");
+  }
+
+  async function restorePrivateBackup(event: React.ChangeEvent<HTMLInputElement>) {
+    const file = event.target.files?.[0];
+    event.target.value = "";
+    if (!file) return;
+    try {
+      const parsed = JSON.parse(await file.text()) as Partial<PrivateBackup>;
+      if (parsed.format !== "infohub-private-backup" || parsed.version !== 1 || !parsed.values || typeof parsed.values !== "object") {
+        throw new Error("这不是有效的 InfoHub 备份文件");
+      }
+      const values = parsed.values as Record<string, unknown>;
+      for (const key of privateBackupKeys) {
+        const value = values[key];
+        if (value !== undefined && typeof value !== "string") throw new Error("备份文件的数据格式不正确");
+        if (key !== "infohub-demo-note" && typeof value === "string") JSON.parse(value);
+      }
+      if (!window.confirm("恢复备份将替换当前设备上的笔记、划线、阅读进度和感兴趣状态。确定继续吗？")) return;
+      privateBackupKeys.forEach((key) => {
+        const value = values[key];
+        if (typeof value === "string") window.localStorage.setItem(key, value);
+        else window.localStorage.removeItem(key);
+      });
+      window.alert("备份已恢复，InfoHub 将重新加载。");
+      window.location.reload();
+    } catch (error) {
+      setBackupMessage(error instanceof Error ? error.message : "备份恢复失败");
+    }
+  }
+
   return (
     <div className="content-area profile-page">
       <section className="welcome">
@@ -2238,6 +2469,21 @@ function MobileAdminPanel() {
           <strong>私人阅读数据保存在当前设备</strong>
           <span>感兴趣、阅读进度、划线和笔记不会上传，也不会进入公共内容生产线。</span>
         </div>
+      </section>
+
+      <section className="backup-card">
+        <header>
+          <div>
+            <strong>私人数据备份</strong>
+            <span>导出笔记、划线、阅读进度、感兴趣与已读状态；不包含管理员密码或令牌。</span>
+          </div>
+        </header>
+        <div>
+          <button onClick={exportPrivateBackup}><Download size={18} /> 导出全部数据</button>
+          <button onClick={() => backupInputRef.current?.click()}><Upload size={18} /> 恢复备份</button>
+          <input ref={backupInputRef} type="file" accept="application/json,.json" onChange={restorePrivateBackup} />
+        </div>
+        {backupMessage && <p>{backupMessage}</p>}
       </section>
 
       {!adminOpen ? (

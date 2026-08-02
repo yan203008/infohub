@@ -123,17 +123,6 @@ button {
   color: var(--green);
 }
 
-.notification-button i {
-  position: absolute;
-  top: 9px;
-  right: 9px;
-  width: 7px;
-  height: 7px;
-  border: 2px solid var(--paper);
-  border-radius: 50%;
-  background: #e77051;
-}
-
 .content-area {
   width: min(100%, 860px);
   margin: 0 auto;
@@ -240,14 +229,175 @@ button {
   cursor: pointer;
 }
 
-.date-picker-button input,
-.sidebar-more input {
+.date-picker-button select,
+.sidebar-more select {
   position: absolute;
   inset: 0;
   width: 100%;
   height: 100%;
   opacity: 0;
   cursor: pointer;
+}
+
+.search-backdrop {
+  position: fixed;
+  z-index: 120;
+  inset: 0;
+  display: grid;
+  align-items: start;
+  justify-items: center;
+  padding: max(18px, env(safe-area-inset-top)) 14px max(18px, env(safe-area-inset-bottom));
+  background: rgba(20, 31, 24, 0.42);
+  backdrop-filter: blur(8px);
+}
+
+.global-search-panel {
+  display: grid;
+  grid-template-rows: auto auto minmax(0, 1fr);
+  width: min(720px, 100%);
+  max-height: min(760px, calc(100vh - 36px));
+  overflow: hidden;
+  border: 1px solid rgba(219, 227, 220, 0.95);
+  border-radius: 24px;
+  background: #fbfcfa;
+  box-shadow: 0 28px 80px rgba(20, 42, 29, 0.22);
+}
+
+.global-search-panel > header {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 44px;
+  align-items: center;
+  gap: 8px;
+  padding: 14px;
+  border-bottom: 1px solid var(--line);
+}
+
+.global-search-field {
+  display: flex;
+  min-width: 0;
+  align-items: center;
+  gap: 10px;
+  padding: 0 14px;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  background: white;
+  color: var(--muted);
+}
+
+.global-search-field:focus-within {
+  border-color: #7faf94;
+  box-shadow: 0 0 0 3px rgba(31, 107, 75, 0.08);
+}
+
+.global-search-field input {
+  width: 100%;
+  height: 48px;
+  min-width: 0;
+  border: 0;
+  outline: 0;
+  background: transparent;
+  color: var(--ink);
+  font-size: 16px;
+}
+
+.search-scope-tabs {
+  display: flex;
+  gap: 7px;
+  padding: 12px 14px;
+  border-bottom: 1px solid var(--line);
+}
+
+.search-scope-tabs button {
+  min-width: 66px;
+  min-height: 36px;
+  padding: 0 14px;
+  border: 0;
+  border-radius: 999px;
+  background: #eef2ee;
+  color: var(--muted);
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.search-scope-tabs button.active {
+  background: var(--green);
+  color: white;
+}
+
+.global-search-results {
+  min-height: 280px;
+  overflow-y: auto;
+  padding: 8px 14px 18px;
+}
+
+.global-search-results > button {
+  position: relative;
+  display: grid;
+  width: 100%;
+  gap: 6px;
+  padding: 16px 42px 16px 4px;
+  border: 0;
+  border-bottom: 1px solid var(--line);
+  background: transparent;
+  color: var(--ink);
+  text-align: left;
+  cursor: pointer;
+}
+
+.global-search-results > button > svg {
+  position: absolute;
+  top: 50%;
+  right: 10px;
+  color: #9aa39d;
+  transform: translateY(-50%);
+}
+
+.global-search-results > button strong {
+  font-size: 16px;
+  line-height: 1.4;
+}
+
+.global-search-results > button p {
+  display: -webkit-box;
+  overflow: hidden;
+  margin: 0;
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.65;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+}
+
+.search-result-origin {
+  width: fit-content;
+  color: var(--green);
+  font-size: 11px;
+  font-weight: 750;
+}
+
+.search-result-origin.note {
+  color: #8b6b2f;
+}
+
+.search-empty {
+  display: grid;
+  min-height: 280px;
+  place-content: center;
+  justify-items: center;
+  gap: 9px;
+  padding: 30px;
+  color: #98a19b;
+  text-align: center;
+}
+
+.search-empty strong {
+  color: var(--ink);
+}
+
+.search-empty span {
+  max-width: 32ch;
+  font-size: 13px;
+  line-height: 1.65;
 }
 
 .digest-card {
@@ -1923,6 +2073,24 @@ button {
     margin-top: 40px;
   }
 
+  .desktop-sidebar nav .sidebar-search-button {
+    display: flex;
+    min-height: 42px;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 5px;
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    background: white;
+    color: #7f8982;
+  }
+
+  .sidebar-search-button kbd {
+    margin-left: auto;
+    color: #9aa29d;
+    font-size: 9px;
+  }
+
   .sidebar-dates {
     display: grid;
     gap: 2px;
@@ -3080,6 +3248,7 @@ button {
 }
 
 .device-privacy-card,
+.backup-card,
 .mobile-admin-card {
   max-width: 920px;
   margin: 20px auto 0;
@@ -3111,6 +3280,58 @@ button {
   color: var(--muted);
   font-size: 14px;
   line-height: 1.7;
+}
+
+.backup-card {
+  padding: 22px 24px;
+}
+
+.backup-card header div {
+  display: grid;
+  gap: 6px;
+}
+
+.backup-card header strong {
+  font-size: 17px;
+}
+
+.backup-card header span {
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.65;
+}
+
+.backup-card > div {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 9px;
+  margin-top: 17px;
+}
+
+.backup-card button {
+  display: flex;
+  min-height: 46px;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 0 12px;
+  border: 1px solid var(--line);
+  border-radius: 13px;
+  background: #f7faf7;
+  color: var(--green);
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.backup-card input {
+  display: none;
+}
+
+.backup-card > p {
+  margin: 12px 0 0;
+  color: var(--green);
+  font-size: 12px;
+  line-height: 1.55;
 }
 
 .admin-entry-button {
