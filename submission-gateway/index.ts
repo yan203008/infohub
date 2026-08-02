@@ -90,13 +90,15 @@ async function triggerWorkflow(env: Env, url: string, timing: "immediate" | "mor
 
 const gateway = {
   async fetch(request: Request, env: Env): Promise<Response> {
+    const pathname = new URL(request.url).pathname;
+    if (pathname === "/health" && request.method === "GET") {
+      return json({ ok: true }, 200, "*");
+    }
     const origin = allowedOrigin(request, env);
     if (request.method === "OPTIONS") {
       return origin ? new Response(null, { status: 204, headers: corsHeaders(origin) }) : new Response(null, { status: 403 });
     }
     if (!origin) return json({ error: "不允许的访问来源" }, 403, "null");
-    const pathname = new URL(request.url).pathname;
-    if (pathname === "/health" && request.method === "GET") return json({ ok: true }, 200, origin);
     if (pathname === "/login" && request.method === "POST") {
       const payload = await request.json().catch(() => ({})) as { password?: unknown };
       const password = typeof payload.password === "string" ? payload.password : "";
