@@ -3249,6 +3249,7 @@ button {
 
 .device-privacy-card,
 .backup-card,
+.notification-settings-card,
 .mobile-admin-card {
   max-width: 920px;
   margin: 20px auto 0;
@@ -3330,6 +3331,67 @@ button {
 .backup-card > p {
   margin: 12px 0 0;
   color: var(--green);
+  font-size: 12px;
+  line-height: 1.55;
+}
+
+.notification-settings-card {
+  display: grid;
+  gap: 16px;
+  padding: 22px 24px;
+}
+
+.notification-settings-card header {
+  display: flex;
+  align-items: flex-start;
+  gap: 13px;
+  color: var(--green);
+}
+
+.notification-settings-card header div {
+  display: grid;
+  gap: 6px;
+}
+
+.notification-settings-card header strong {
+  color: var(--ink);
+  font-size: 17px;
+}
+
+.notification-settings-card header span {
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.65;
+}
+
+.notification-settings-card > button {
+  display: flex;
+  min-height: 46px;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  border: 1px solid var(--green);
+  border-radius: 13px;
+  background: var(--green);
+  color: white;
+  font-weight: 750;
+  cursor: pointer;
+}
+
+.notification-settings-card > button.is-enabled {
+  border-color: var(--line);
+  background: #f7faf7;
+  color: var(--muted);
+}
+
+.notification-settings-card > button:disabled {
+  opacity: 0.55;
+  cursor: default;
+}
+
+.notification-settings-card > p {
+  margin: -5px 0 0;
+  color: var(--muted);
   font-size: 12px;
   line-height: 1.55;
 }

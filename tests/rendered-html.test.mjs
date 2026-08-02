@@ -8,6 +8,8 @@ const youtubePromptFile = new URL("../lib/youtube-processing-prompt.ts", import.
 const collectorFile = new URL("../scripts/collect.mjs", import.meta.url);
 const workflowFile = new URL("../.github/workflows/collect.yml", import.meta.url);
 const feedFile = new URL("../app/generated-feed.json", import.meta.url);
+const serviceWorkerFile = new URL("../public/sw.js", import.meta.url);
+const gatewayFile = new URL("../submission-gateway/index.ts", import.meta.url);
 
 test("builds the InfoHub daily experience", async () => {
   await access(new URL("../dist/server/index.js", import.meta.url));
@@ -46,8 +48,29 @@ test("builds the InfoHub daily experience", async () => {
   assert.match(source, /笔记 · 划线笔记/);
   assert.match(source, /infohub-private-backup/);
   assert.match(source, /不包含管理员密码或令牌/);
-  assert.doesNotMatch(source, /<Bell/);
+  assert.doesNotMatch(source, /notification-button/);
+  assert.match(source, /每日更新通知/);
+  assert.match(source, /\/push\/subscribe/);
   assert.match(source, /getAvailableDailyDates/);
+});
+
+test("includes opt-in Web Push without exposing private user data", async () => {
+  const [app, serviceWorker, gateway] = await Promise.all([
+    readFile(appFile, "utf8"),
+    readFile(serviceWorkerFile, "utf8"),
+    readFile(gatewayFile, "utf8"),
+  ]);
+
+  assert.match(app, /Notification\.requestPermission/);
+  assert.match(app, /pushManager\.subscribe/);
+  assert.match(app, /关闭每日通知/);
+  assert.match(serviceWorker, /addEventListener\("push"/);
+  assert.match(serviceWorker, /showNotification/);
+  assert.match(serviceWorker, /notificationclick/);
+  assert.match(gateway, /PUSH_SUBSCRIPTIONS/);
+  assert.match(gateway, /sendDailyDigestNotification/);
+  assert.match(gateway, /scheduled\(/);
+  assert.doesNotMatch(gateway, /note|highlight|readingProgress/i);
 });
 
 test("restores the missing July 30 digest from existing real content", async () => {

@@ -3,7 +3,17 @@
   "name": "infohub-submission-gateway",
   "main": "submission-gateway/index.ts",
   "compatibility_date": "2026-05-22",
+  "compatibility_flags": ["nodejs_compat"],
   "workers_dev": true,
+  "kv_namespaces": [
+    {
+      "binding": "PUSH_SUBSCRIPTIONS",
+      "id": "acfba9d22fec41308c94025a777ee465"
+    }
+  ],
+  "triggers": {
+    "crons": ["0,15,30,45 2-4 * * *"]
+  },
   "vars": {
     "GITHUB_OWNER": "yan203008",
     "GITHUB_REPO": "infohub",

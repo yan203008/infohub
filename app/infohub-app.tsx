@@ -1,6 +1,8 @@
 "use client";
 
 import {
+  Bell,
+  BellOff,
   Bookmark,
   BookOpen,
   CalendarDays,
@@ -2270,8 +2272,15 @@ type PrivateBackup = {
   values: Partial<Record<(typeof privateBackupKeys)[number], string>>;
 };
 
+function urlBase64ToUint8Array(value: string) {
+  const padding = "=".repeat((4 - value.length % 4) % 4);
+  const base64 = (value + padding).replace(/-/g, "+").replace(/_/g, "/");
+  return Uint8Array.from(window.atob(base64), (character) => character.charCodeAt(0));
+}
+
 function MobileAdminPanel() {
   const [apiUrl, setApiUrl] = useState("");
+  const [vapidPublicKey, setVapidPublicKey] = useState("");
   const [adminOpen, setAdminOpen] = useState(false);
   const [token, setToken] = useState("");
   const [password, setPassword] = useState("");
@@ -2281,13 +2290,19 @@ function MobileAdminPanel() {
   const [busy, setBusy] = useState(false);
   const [submissions, setSubmissions] = useState<CuratedSubmission[]>([]);
   const [backupMessage, setBackupMessage] = useState("");
+  const [pushSupported, setPushSupported] = useState(true);
+  const [pushEnabled, setPushEnabled] = useState(false);
+  const [pushBusy, setPushBusy] = useState(false);
+  const [pushMessage, setPushMessage] = useState("");
   const backupInputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
     const savedToken = window.localStorage.getItem("infohub-admin-token") ?? "";
     const savedSubmissions = window.localStorage.getItem("infohub-curated-submissions");
+    const supported = "serviceWorker" in navigator && "PushManager" in window && "Notification" in window;
     const timer = window.setTimeout(() => {
       setToken(savedToken);
+      setPushSupported(supported);
       if (savedToken) setAdminOpen(true);
       try {
         const parsed = savedSubmissions ? JSON.parse(savedSubmissions) as CuratedSubmission[] : [];
@@ -2295,10 +2310,18 @@ function MobileAdminPanel() {
       } catch {
         setSubmissions([]);
       }
+      if (supported) {
+        void navigator.serviceWorker.getRegistration().then(async (registration) => {
+          setPushEnabled(Boolean(await registration?.pushManager.getSubscription()));
+        });
+      }
     }, 0);
     void fetch("./infohub-config.json", { cache: "no-store" })
-      .then(async (response) => response.ok ? response.json() as Promise<{ submissionApiUrl?: string }> : null)
-      .then((config) => setApiUrl(config?.submissionApiUrl?.replace(/\/$/, "") ?? ""))
+      .then(async (response) => response.ok ? response.json() as Promise<{ submissionApiUrl?: string; vapidPublicKey?: string }> : null)
+      .then((config) => {
+        setApiUrl(config?.submissionApiUrl?.replace(/\/$/, "") ?? "");
+        setVapidPublicKey(config?.vapidPublicKey ?? "");
+      })
       .catch(() => setApiUrl(""));
     return () => window.clearTimeout(timer);
   }, []);
@@ -2427,6 +2450,60 @@ function MobileAdminPanel() {
     setBackupMessage("备份文件已导出，请将它保存在安全位置");
   }
 
+  async function enablePushNotifications() {
+    if (!pushSupported || !apiUrl || !vapidPublicKey) {
+      setPushMessage("当前设备暂不支持通知，或通知服务尚未准备好");
+      return;
+    }
+    setPushBusy(true);
+    setPushMessage("");
+    try {
+      const permission = await Notification.requestPermission();
+      if (permission !== "granted") throw new Error("你没有允许通知，可以稍后在系统设置中重新开启");
+      const registration = await navigator.serviceWorker.register("./sw.js", { scope: "./" });
+      await navigator.serviceWorker.ready;
+      const existing = await registration.pushManager.getSubscription();
+      const subscription = existing ?? await registration.pushManager.subscribe({
+        userVisibleOnly: true,
+        applicationServerKey: urlBase64ToUint8Array(vapidPublicKey),
+      });
+      const response = await fetch(`${apiUrl}/push/subscribe`, {
+        method: "POST",
+        headers: { "content-type": "application/json" },
+        body: JSON.stringify(subscription.toJSON()),
+      });
+      const result = await response.json() as { error?: string; warning?: string };
+      if (!response.ok) throw new Error(result.error ?? "通知订阅失败");
+      setPushEnabled(true);
+      setPushMessage(result.warning ?? "每日通知已开启，测试通知即将到达");
+    } catch (error) {
+      setPushMessage(error instanceof Error ? error.message : "通知订阅失败");
+    } finally {
+      setPushBusy(false);
+    }
+  }
+
+  async function disablePushNotifications() {
+    setPushBusy(true);
+    setPushMessage("");
+    try {
+      const registration = await navigator.serviceWorker.getRegistration();
+      const subscription = await registration?.pushManager.getSubscription();
+      if (subscription && apiUrl) {
+        await fetch(`${apiUrl}/push/unsubscribe`, {
+          method: "POST",
+          headers: { "content-type": "application/json" },
+          body: JSON.stringify({ endpoint: subscription.endpoint }),
+        }).catch(() => undefined);
+        await subscription.unsubscribe();
+      }
+      setPushEnabled(false);
+      setPushMessage("每日通知已关闭");
+    } finally {
+      setPushBusy(false);
+    }
+  }
+
   async function restorePrivateBackup(event: React.ChangeEvent<HTMLInputElement>) {
     const file = event.target.files?.[0];
     event.target.value = "";
@@ -2484,6 +2561,26 @@ function MobileAdminPanel() {
           <input ref={backupInputRef} type="file" accept="application/json,.json" onChange={restorePrivateBackup} />
         </div>
         {backupMessage && <p>{backupMessage}</p>}
+      </section>
+
+      <section className="notification-settings-card">
+        <header>
+          {pushEnabled ? <Bell size={21} /> : <BellOff size={21} />}
+          <div>
+            <strong>每日更新通知</strong>
+            <span>每天北京时间10:00起检查最新日报，准备完成后发送一次通知。</span>
+          </div>
+        </header>
+        <button
+          className={pushEnabled ? "is-enabled" : ""}
+          disabled={pushBusy || !pushSupported}
+          onClick={pushEnabled ? disablePushNotifications : enablePushNotifications}
+        >
+          {pushBusy ? <LoaderCircle className="spin" size={18} /> : pushEnabled ? <BellOff size={18} /> : <Bell size={18} />}
+          {pushBusy ? "正在设置" : pushEnabled ? "关闭每日通知" : "开启每日通知"}
+        </button>
+        {!pushSupported && <p>当前浏览器不支持 Web Push；iPhone 请将 InfoHub 添加到主屏幕后再打开。</p>}
+        {pushMessage && <p>{pushMessage}</p>}
       </section>
 
       {!adminOpen ? (
