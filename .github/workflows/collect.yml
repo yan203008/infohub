@@ -22,8 +22,8 @@ on:
           - youtube
           - summaries
   schedule:
-    # 北京时间 08:30 开始，给 10:00 前完成采集、AI 加工和发布留出余量。
-    - cron: "30 0 * * *"
+    # UTC 17:17 = 北京时间次日 01:17；避开整点高峰，并为 10:00 前发布预留充足缓冲。
+    - cron: "17 17 * * *"
 
 concurrency:
   group: infohub-publisher
