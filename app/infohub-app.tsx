@@ -902,7 +902,7 @@ export function InfoHubApp({ user }: { user: ChatGPTUser | null }) {
       if (document.visibilityState === "visible") void loadPublicContent();
     };
     void loadPublicContent();
-    const timer = window.setInterval(() => void loadPublicContent(), 60_000);
+    const timer = window.setInterval(() => void loadPublicContent(), 10 * 60_000);
     window.addEventListener("focus", loadPublicContent);
     document.addEventListener("visibilitychange", onVisibilityChange);
     return () => {
