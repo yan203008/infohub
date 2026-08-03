@@ -2281,6 +2281,21 @@ function urlBase64ToUint8Array(value: string) {
   return Uint8Array.from(window.atob(base64), (character) => character.charCodeAt(0));
 }
 
+async function fetchGateway(input: string, init?: RequestInit) {
+  const controller = new AbortController();
+  const timeout = window.setTimeout(() => controller.abort(), 12_000);
+  try {
+    return await fetch(input, { ...init, signal: controller.signal });
+  } catch (error) {
+    if (error instanceof DOMException && error.name === "AbortError") {
+      throw new Error("连接管理员服务超时，请检查网络后重试");
+    }
+    throw error;
+  } finally {
+    window.clearTimeout(timeout);
+  }
+}
+
 function MobileAdminPanel() {
   const [apiUrl, setApiUrl] = useState("");
   const [vapidPublicKey, setVapidPublicKey] = useState("");
@@ -2365,7 +2380,7 @@ function MobileAdminPanel() {
     setBusy(true);
     setMessage("");
     try {
-      const response = await fetch(`${apiUrl}/login`, {
+      const response = await fetchGateway(`${apiUrl}/login`, {
         method: "POST",
         headers: { "content-type": "application/json" },
         body: JSON.stringify({ password }),
@@ -2390,7 +2405,7 @@ function MobileAdminPanel() {
     setMessage("");
     const requestId = crypto.randomUUID();
     try {
-      const response = await fetch(`${apiUrl}/submit`, {
+      const response = await fetchGateway(`${apiUrl}/submit`, {
         method: "POST",
         headers: { authorization: `Bearer ${token}`, "content-type": "application/json" },
         body: JSON.stringify({ url: url.trim(), timing, requestId }),
@@ -2470,7 +2485,7 @@ function MobileAdminPanel() {
         userVisibleOnly: true,
         applicationServerKey: urlBase64ToUint8Array(vapidPublicKey),
       });
-      const response = await fetch(`${apiUrl}/push/subscribe`, {
+      const response = await fetchGateway(`${apiUrl}/push/subscribe`, {
         method: "POST",
         headers: { "content-type": "application/json" },
         body: JSON.stringify(subscription.toJSON()),
