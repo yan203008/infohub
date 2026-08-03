@@ -93,6 +93,9 @@ test("includes the automatic multi-source collector", async () => {
   assert.match(collector, /collectFollowBuilders/);
   assert.match(collector, /collectTechnicalX/);
   assert.match(collector, /collectPapers/);
+  assert.match(collector, /paperLookbackDays = 4/);
+  assert.match(collector, /publishedPaperIds/);
+  assert.match(collector, /!alreadyPublished\.has/);
   assert.match(collector, /collectGithub/);
   assert.match(collector, /collectYoutube/);
   assert.match(collector, /MOONSHOT_API_KEY/);

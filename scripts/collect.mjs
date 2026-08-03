@@ -20,6 +20,7 @@ const isKimiCode = moonshotBaseUrl.includes("api.kimi.com/coding");
 let activeMoonshotModel = process.env.MOONSHOT_MODEL || (isKimiCode ? "k3-256k" : "kimi-k3");
 const supadataKey = process.env.SUPADATA_API_KEY?.trim();
 const summaryOnly = process.argv.includes("--summaries-only");
+const paperLookbackDays = 4;
 
 const sleep = (milliseconds) => new Promise((resolveDelay) => setTimeout(resolveDelay, milliseconds));
 
@@ -593,14 +594,35 @@ async function collectTechnicalX() {
   return items;
 }
 
-function normalizePaper(entry) {
+function normalizePaper(entry, featuredDate = "") {
   const paper = entry.paper || entry;
   return {
     id: paper.id || paper._id || entry.id,
     title: paper.title || entry.title,
     abstract: paper.summary || paper.abstract || entry.summary || entry.abstract,
-    publishedAt: paper.publishedAt || paper.published_at || entry.publishedAt || entry.published_at,
+    publishedAt: paper.publishedAt || paper.published_at || entry.publishedAt || entry.published_at
+      || (featuredDate ? `${featuredDate}T00:00:00.000Z` : ""),
+    featuredDate,
   };
+}
+
+function paperDates() {
+  return Array.from({ length: paperLookbackDays }, (_, index) =>
+    shanghaiDate(new Date(now.valueOf() - index * 24 * 60 * 60 * 1000)));
+}
+
+async function publishedPaperIds() {
+  try {
+    const feed = JSON.parse(await readFile(join(root, "app/generated-feed.json"), "utf8"));
+    if (!Array.isArray(feed)) return new Set();
+    const prefix = `${config.papers.id}:`;
+    return new Set(feed.flatMap((item) => {
+      const id = String(item?.id || "");
+      return id.startsWith(prefix) ? [id.slice(prefix.length)] : [];
+    }));
+  } catch {
+    return new Set();
+  }
 }
 
 function parseArxivFeed(xml) {
@@ -617,7 +639,7 @@ function parseArxivFeed(xml) {
 }
 
 async function recentArxivPapers() {
-  const start = shanghaiDate(new Date(now.valueOf() - 24 * 60 * 60 * 1000)).replaceAll("-", "");
+  const start = shanghaiDate(new Date(now.valueOf() - (paperLookbackDays - 1) * 24 * 60 * 60 * 1000)).replaceAll("-", "");
   const end = shanghaiDate(now).replaceAll("-", "");
   const query = new URLSearchParams({
     search_query: `submittedDate:[${start}0000 TO ${end}2359] AND (cat:cs.AI OR cat:cs.CL OR cat:cs.LG)`,
@@ -631,22 +653,31 @@ async function recentArxivPapers() {
 }
 
 async function collectPapers() {
-  const dates = [shanghaiDate(now), shanghaiDate(new Date(now.valueOf() - 24 * 60 * 60 * 1000))];
+  const dates = paperDates();
+  const alreadyPublished = await publishedPaperIds();
   const pages = await Promise.all(dates.map(async (date) => {
     try {
-      return await fetchJson(`${config.papers.url}?date=${date}`);
+      return { date, entries: await fetchJson(`${config.papers.url}?date=${date}`) };
     } catch {
-      return [];
+      return { date, entries: [] };
     }
   }));
   let papers = pages
-    .flat()
-    .map(normalizePaper)
-    .filter((paper) => paper.id && paper.title && paper.abstract && recent(paper.publishedAt))
+    .flatMap(({ date, entries }) => entries.map((entry) => normalizePaper(entry, date)))
+    .filter((paper) => paper.id && paper.title && paper.abstract && !alreadyPublished.has(String(paper.id)))
     .filter((paper, index, all) => all.findIndex((entry) => entry.id === paper.id) === index)
+    .sort((left, right) => String(right.featuredDate).localeCompare(String(left.featuredDate)))
     .slice(0, 3);
-  if (papers.length === 0) {
-    papers = (await recentArxivPapers()).filter((paper) => recent(paper.publishedAt)).slice(0, 3);
+  if (papers.length < 3) {
+    try {
+      const fallback = (await recentArxivPapers())
+        .filter((paper) => paper.id && paper.title && paper.abstract && !alreadyPublished.has(String(paper.id)))
+        .filter((paper) => !papers.some((entry) => String(entry.id) === String(paper.id)));
+      papers = [...papers, ...fallback].slice(0, 3);
+    } catch (error) {
+      if (papers.length === 0) throw error;
+      console.warn(`[collect] arXiv paper fallback skipped: ${error?.message || String(error)}`);
+    }
   }
   if (papers.length === 0) return [];
 
