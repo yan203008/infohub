@@ -122,7 +122,8 @@ export async function POST(request: Request) {
       const merged = new Map<string, unknown>();
       for (const summary of [...existing, ...sectionSummaries]) {
         if (summary && typeof summary === "object" && "section" in summary) {
-          merged.set(String((summary as { section: unknown }).section), summary);
+          const typed = summary as { section: unknown; digestDate?: unknown };
+          merged.set(`${String(typed.digestDate || "legacy")}:${String(typed.section)}`, summary);
         }
       }
       await db

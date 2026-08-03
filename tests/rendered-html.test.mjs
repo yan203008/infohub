@@ -10,6 +10,7 @@ const workflowFile = new URL("../.github/workflows/collect.yml", import.meta.url
 const feedFile = new URL("../app/generated-feed.json", import.meta.url);
 const serviceWorkerFile = new URL("../public/sw.js", import.meta.url);
 const gatewayFile = new URL("../submission-gateway/index.ts", import.meta.url);
+const getNoteSyncFile = new URL("../scripts/sync-getnote-selected.ts", import.meta.url);
 
 test("builds the InfoHub daily experience", async () => {
   await access(new URL("../dist/server/index.js", import.meta.url));
@@ -38,7 +39,9 @@ test("builds the InfoHub daily experience", async () => {
   assert.match(source, /2026-07-29/);
   assert.match(source, /打开 GitHub 仓库/);
   assert.match(source, /频道更新/);
-  assert.match(source, /首页只展示板块总结/);
+  assert.doesNotMatch(source, /首页只展示板块总结/);
+  assert.match(source, /关注前沿研究动态/);
+  assert.match(source, /summary\.digestDate === selectedDate/);
   assert.match(source, /home-summary-card/);
   assert.match(source, /返回板块总结/);
   assert.match(source, /中文摘要/);
@@ -99,6 +102,21 @@ test("includes the automatic multi-source collector", async () => {
   assert.match(collector, /质量检查/);
   assert.match(workflow, /cron: "17 17 \* \* \*"/);
   assert.match(workflow, /SUPADATA_API_KEY/);
+  assert.match(workflow, /Sync tagged GetNote selections/);
+  assert.match(workflow, /GETNOTE_SYNC_TAG: InfoHub精选/);
+});
+
+test("syncs only explicitly tagged GetNote selections", async () => {
+  const [processor, sync] = await Promise.all([
+    readFile(new URL("../lib/manual-content-processing.ts", import.meta.url), "utf8"),
+    readFile(getNoteSyncFile, "utf8"),
+  ]);
+
+  assert.match(processor, /resource\/note\/list/);
+  assert.match(processor, /tags\.includes\(tag\)/);
+  assert.match(sync, /InfoHub精选/);
+  assert.match(sync, /getnote-\$\{selection\.noteId\}/);
+  assert.match(sync, /merged\.has\(itemId\)/);
 });
 
 test("includes both configured YouTube sources and original links", async () => {

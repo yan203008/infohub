@@ -19,6 +19,7 @@
     "collect:reliable": "node --env-file-if-exists=.env.local scripts/run-collection-with-retries.mjs",
     "curated:process": "tsx --env-file-if-exists=.env.local scripts/process-curated-link.ts",
     "curated:queue": "tsx --env-file-if-exists=.env.local scripts/process-curated-link.ts --queue",
+    "getnote:sync": "tsx --env-file-if-exists=.env.local scripts/sync-getnote-selected.ts",
     "import:report": "node scripts/import-collection-report.mjs",
     "collect:dry": "node --env-file-if-exists=.env.local scripts/collect.mjs --dry-run",
     "snapshot": "node scripts/build-snapshot.mjs"

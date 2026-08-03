@@ -20,6 +20,16 @@ export type ProcessedManualContent = {
 
 export type ManualExtraction = { title: string; text: string };
 
+export type GetNoteSelection = {
+  noteId: string;
+  title: string;
+  url: string;
+  text: string;
+  noteType: string;
+  createdAt: string;
+  tags: string[];
+};
+
 type JsonRecord = Record<string, unknown>;
 
 const runtimeEnv = () => process.env as Record<string, string | undefined>;
@@ -40,6 +50,28 @@ function asStrings(value: unknown) {
   return Array.isArray(value)
     ? value.map(asString).filter(Boolean)
     : [];
+}
+
+function asId(value: unknown) {
+  return typeof value === "string" || typeof value === "number" ? String(value).trim() : "";
+}
+
+function getNoteTagNames(value: unknown) {
+  return Array.isArray(value)
+    ? value.flatMap((raw) => {
+        if (typeof raw === "string") return raw.trim() ? [raw.trim()] : [];
+        const name = asString(asRecord(raw).name);
+        return name ? [name] : [];
+      })
+    : [];
+}
+
+function firstPublicUrl(...values: unknown[]) {
+  for (const value of values) {
+    const match = asString(value).match(/https?:\/\/[^\s<>"']+/i)?.[0];
+    if (match) return match.replace(/[),.;!?，。；！？]+$/, "");
+  }
+  return "";
 }
 
 function youtubeVideoId(url: string) {
@@ -170,6 +202,53 @@ async function getNoteContent(url: string, requestId: string) {
     title: asString(note.title),
     text: original,
   };
+}
+
+export async function listGetNoteSelections(tag = "InfoHub精选", maximumNotes = 100) {
+  const selected: GetNoteSelection[] = [];
+  let cursor = "";
+  let inspected = 0;
+  while (inspected < maximumNotes) {
+    const query = new URLSearchParams({ limit: String(Math.min(20, maximumNotes - inspected)) });
+    if (cursor) query.set("cursor", cursor);
+    const page = await getNoteRequest(`/open/api/v1/resource/note/list?${query}`);
+    const data = asRecord(page.data);
+    const notes = Array.isArray(data.notes) ? data.notes.map(asRecord) : [];
+    if (notes.length === 0) break;
+    inspected += notes.length;
+    for (const summary of notes) {
+      const tags = getNoteTagNames(summary.tags);
+      if (!tags.includes(tag)) continue;
+      const noteId = asId(summary.note_id) || asId(summary.id);
+      if (!noteId) continue;
+      const detail = await getNoteRequest(`/open/api/v1/resource/note/detail?id=${encodeURIComponent(noteId)}`);
+      const note = asRecord(asRecord(detail.data).note);
+      const webPage = asRecord(note.web_page);
+      const audio = asRecord(note.audio);
+      const processedText = asString(note.content);
+      const originalText = asString(audio.original)
+        || asString(webPage.content)
+        || asString(note.web_content)
+        || asString(note.audio_original);
+      const url = firstPublicUrl(webPage.url, note.url, note.link_url, note.ref_content, note.source);
+      const text = processedText.length >= 200 ? processedText : originalText;
+      if (!url || !text) continue;
+      selected.push({
+        noteId,
+        title: asString(note.title) || asString(summary.title) || "得到笔记精选",
+        url,
+        text,
+        noteType: asString(note.note_type) || asString(summary.note_type),
+        createdAt: asString(note.created_at) || asString(summary.created_at),
+        tags: getNoteTagNames(note.tags).length > 0 ? getNoteTagNames(note.tags) : tags,
+      });
+    }
+    if (!data.has_more) break;
+    const nextCursor = asId(data.cursor) || asId(data.next_cursor);
+    if (!nextCursor || nextCursor === cursor) break;
+    cursor = nextCursor;
+  }
+  return selected;
 }
 
 async function fetchArticleFallback(url: string) {

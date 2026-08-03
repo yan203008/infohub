@@ -89,6 +89,19 @@ jobs:
           GETNOTE_CLIENT_ID: ${{ secrets.GETNOTE_CLIENT_ID }}
         run: npm run curated:queue
 
+      - name: Sync tagged GetNote selections
+        if: inputs.source != 'publish-only'
+        id: getnote_sync_step
+        continue-on-error: true
+        env:
+          MOONSHOT_API_KEY: ${{ secrets.MOONSHOT_API_KEY }}
+          MOONSHOT_BASE_URL: https://api.kimi.com/coding/v1
+          MOONSHOT_MODEL: k3-256k
+          GETNOTE_API_KEY: ${{ secrets.GETNOTE_API_KEY }}
+          GETNOTE_CLIENT_ID: ${{ secrets.GETNOTE_CLIENT_ID }}
+          GETNOTE_SYNC_TAG: InfoHub精选
+        run: npm run getnote:sync
+
       - name: Save new public content
         if: inputs.source != 'publish-only'
         run: |
@@ -127,7 +140,7 @@ jobs:
           retention-days: 14
 
       - name: Mark unresolved collection errors
-        if: always() && (steps.collect_step.outcome == 'failure' || steps.curated_step.outcome == 'failure')
+        if: always() && (steps.collect_step.outcome == 'failure' || steps.curated_step.outcome == 'failure' || steps.getnote_sync_step.outcome == 'failure')
         run: |
           echo "采集结果已尽可能发布，但仍有来源或总结在重试后失败。请查看 collection-report。"
           exit 1

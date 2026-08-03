@@ -318,6 +318,7 @@ function fallbackSectionSummary(section, items) {
     .slice(0, 420);
   return {
     section,
+    digestDate: runDigestDate,
     label: sectionLabels[section] || section,
     overview: `本次收录 ${items.length} 条内容。${overview}`,
     trends: keywords.length > 0
@@ -1153,8 +1154,9 @@ async function publishStaticFiles(items, sectionSummaries, runSummary) {
   const feed = [...merged.values()].sort((a, b) =>
     String(b.publishedAt ?? b.digestDate ?? "").localeCompare(String(a.publishedAt ?? a.digestDate ?? "")),
   );
-  const mergedSummaries = new Map(existingSummaries.map((summary) => [summary.section, summary]));
-  for (const summary of sectionSummaries) mergedSummaries.set(summary.section, summary);
+  const summaryKey = (summary) => `${summary.digestDate || "legacy"}:${summary.section}`;
+  const mergedSummaries = new Map(existingSummaries.map((summary) => [summaryKey(summary), summary]));
+  for (const summary of sectionSummaries) mergedSummaries.set(summaryKey(summary), summary);
 
   await Promise.all([
     writeFile(feedPath, `${JSON.stringify(feed, null, 2)}\n`),
@@ -1212,9 +1214,10 @@ async function regenerateSectionSummaries() {
     existing = [];
   }
   const failedSections = new Set(result.failures.map((failure) => failure.source.replace(/^summary:/, "")));
-  const merged = new Map(existing.map((summary) => [summary.section, summary]));
+  const summaryKey = (summary) => `${summary.digestDate || "legacy"}:${summary.section}`;
+  const merged = new Map(existing.map((summary) => [summaryKey(summary), summary]));
   for (const summary of result.summaries) {
-    if (!failedSections.has(summary.section)) merged.set(summary.section, summary);
+    if (!failedSections.has(summary.section)) merged.set(summaryKey(summary), summary);
   }
   await writeFile(summariesPath, `${JSON.stringify([...merged.values()], null, 2)}\n`);
   console.log(JSON.stringify({

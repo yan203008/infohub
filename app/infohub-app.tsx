@@ -91,6 +91,7 @@ type ReadingProgressStore = Record<string, ReadingProgress>;
 
 type SectionSummary = {
   section: SectionId;
+  digestDate?: string;
   label?: string;
   overview: string;
   trends: string[];
@@ -667,7 +668,7 @@ const homeSectionDefinitions: {
   sections: SectionId[];
 }[] = [
   { id: "x", label: "X 推特内容", description: "Follow Builders + 技术动态 X", sections: ["x"] },
-  { id: "papers", label: "热门论文", description: "近期 AI 研究与普通人价值", sections: ["papers"] },
+  { id: "papers", label: "热门论文", description: "关注前沿研究动态", sections: ["papers"] },
   { id: "github", label: "GitHub Trending", description: "热门开源项目与产品趋势", sections: ["github"] },
   { id: "media", label: "频道更新", description: "订阅的 YouTube 与播客最新内容", sections: ["youtube", "podcasts"] },
 ];
@@ -1823,7 +1824,6 @@ export function InfoHubApp({ user }: { user: ChatGPTUser | null }) {
                     <small>{selectedDate === recentDates[0] ? "刚刚更新" : "已完成"}</small>
                   </div>
                   <h2>{homeSections.length} 个板块，{displayedItems.length} 条内容</h2>
-                  <p>首页只展示板块总结。选择一个板块后，再查看其中的全部内容。</p>
                 </section>
 
                 <section className="section-heading section-toolbar">
@@ -1842,8 +1842,11 @@ export function InfoHubApp({ user }: { user: ChatGPTUser | null }) {
                       (item) => item.section && group.sections.includes(item.section),
                     );
                     const firstSection = group.sections[0];
-                    const sectionSummary = selectedDate === latestDailyDate && group.sections.length === 1
-                      ? liveSectionSummaries.find((summary) => summary.section === firstSection)
+                    const sectionSummary = groupItems.length > 0
+                      && selectedDate === latestDailyDate
+                      && group.sections.length === 1
+                      ? liveSectionSummaries.find((summary) =>
+                          summary.section === firstSection && summary.digestDate === selectedDate)
                         ?? fallbackSectionDigest(firstSection, groupItems)
                       : fallbackSectionDigest(firstSection, groupItems);
                     const keywords = sectionKeywords(groupItems);
