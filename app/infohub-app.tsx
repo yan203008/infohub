@@ -846,6 +846,7 @@ export function InfoHubApp({ user }: { user: ChatGPTUser | null }) {
   const progressSaveTimerRef = useRef<number | null>(null);
   const suppressProgressRef = useRef(false);
   const pendingParagraphKeyRef = useRef<string | null>(null);
+  const publicContentVersionRef = useRef("");
   const items = useMemo(() => {
     const merged = new Map(fallbackItems.map((item) => [item.id, item]));
     liveItems.forEach((item) => merged.set(item.id, item));
@@ -864,22 +865,51 @@ export function InfoHubApp({ user }: { user: ChatGPTUser | null }) {
 
   useEffect(() => {
     let cancelled = false;
-    void fetch("/api/feed")
-      .then(async (response) => {
-        if (!response.ok) return null;
-        return (await response.json()) as { items?: Item[]; sectionSummaries?: SectionSummary[] };
-      })
-      .then((data) => {
-        if (!cancelled && Array.isArray(data?.items) && data.items.length > 0) {
+    const loadPublicContent = async () => {
+      try {
+        const cacheKey = Date.now();
+        const [feedResponse, summaryResponse] = await Promise.all([
+          fetch(`./generated-feed.json?t=${cacheKey}`, { cache: "no-store" }),
+          fetch(`./generated-section-summaries.json?t=${cacheKey}`, { cache: "no-store" }),
+        ]);
+        let data: { items?: Item[]; sectionSummaries?: SectionSummary[] } | null = null;
+        if (feedResponse.ok && summaryResponse.ok) {
+          data = {
+            items: await feedResponse.json() as Item[],
+            sectionSummaries: await summaryResponse.json() as SectionSummary[],
+          };
+        } else {
+          const response = await fetch("/api/feed", { cache: "no-store" });
+          if (response.ok) data = await response.json() as { items?: Item[]; sectionSummaries?: SectionSummary[] };
+        }
+        if (cancelled || !data) return;
+        if (Array.isArray(data.items) && data.items.length > 0) {
+          const version = data.items.map((item) => `${item.id}:${item.digestDate}:${item.publishedAt ?? ""}`).join("|");
+          if (publicContentVersionRef.current && publicContentVersionRef.current !== version) {
+            setToast("新内容已更新");
+          }
+          publicContentVersionRef.current = version;
           setLiveItems(data.items);
         }
-        if (!cancelled && Array.isArray(data?.sectionSummaries) && data.sectionSummaries.length > 0) {
+        if (Array.isArray(data.sectionSummaries) && data.sectionSummaries.length > 0) {
           setLiveSectionSummaries(data.sectionSummaries);
         }
-      })
-      .catch(() => undefined);
+      } catch {
+        // Keep the last public snapshot visible while a deployment is switching versions.
+      }
+    };
+    const onVisibilityChange = () => {
+      if (document.visibilityState === "visible") void loadPublicContent();
+    };
+    void loadPublicContent();
+    const timer = window.setInterval(() => void loadPublicContent(), 60_000);
+    window.addEventListener("focus", loadPublicContent);
+    document.addEventListener("visibilitychange", onVisibilityChange);
     return () => {
       cancelled = true;
+      window.clearInterval(timer);
+      window.removeEventListener("focus", loadPublicContent);
+      document.removeEventListener("visibilitychange", onVisibilityChange);
     };
   }, []);
 

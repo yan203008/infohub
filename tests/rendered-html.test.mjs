@@ -55,6 +55,9 @@ test("builds the InfoHub daily experience", async () => {
   assert.match(source, /每日更新通知/);
   assert.match(source, /\/push\/subscribe/);
   assert.match(source, /getAvailableDailyDates/);
+  assert.match(source, /generated-feed\.json\?t=/);
+  assert.match(source, /visibilitychange/);
+  assert.match(source, /新内容已更新/);
 });
 
 test("includes opt-in Web Push without exposing private user data", async () => {
