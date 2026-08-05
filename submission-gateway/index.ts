@@ -87,6 +87,7 @@ type StoredPushSubscription = {
 
 type ArticleType = "podcast" | "video" | "article";
 type PublishStatus = "draft" | "scheduled" | "publishing" | "live" | "failed" | "withdrawn";
+type TakeawayFormat = "simple" | "markdown";
 
 type CuratedDraft = {
   id: string;
@@ -95,6 +96,8 @@ type CuratedDraft = {
   displayDate: string;
   type: ArticleType;
   takeaways: string[];
+  takeawayRaw?: string;
+  takeawayFormat: TakeawayFormat;
   topics: string[];
   body: string;
   sourceUrl?: string;
@@ -181,6 +184,8 @@ function validateCuratedDraft(value: unknown): CuratedDraft {
     displayDate,
     type,
     takeaways: Array.isArray(draft.takeaways) ? draft.takeaways.filter((item): item is string => typeof item === "string").map((item) => item.trim()).filter(Boolean).slice(0, 20) : [],
+    takeawayRaw: typeof draft.takeawayRaw === "string" ? draft.takeawayRaw.trim().slice(0, 50_000) : undefined,
+    takeawayFormat: draft.takeawayFormat === "markdown" ? "markdown" : "simple",
     topics: Array.isArray(draft.topics) ? [...new Set(draft.topics.filter((item): item is string => typeof item === "string").map((item) => item.trim()).filter(Boolean))].slice(0, 2) : [],
     body: body.slice(0, 200_000),
     sourceUrl: sourceUrl || undefined,
@@ -209,7 +214,7 @@ async function listDrafts(env: Env) {
   publicFile.items.map(publicItemToDraft).filter((item): item is CuratedDraft => Boolean(item)).forEach((item) => merged.set(item.id, item));
   storedDrafts.filter((item): item is CuratedDraft => Boolean(item)).forEach((item) => merged.set(item.id, item));
   return [...merged.values()]
-    .map((draft) => ({ ...draft, topics: Array.isArray(draft.topics) ? draft.topics : [] }))
+    .map((draft) => ({ ...draft, topics: Array.isArray(draft.topics) ? draft.topics : [], takeawayFormat: draft.takeawayFormat === "markdown" ? "markdown" as const : "simple" as const }))
     .map((draft) => draft.status === "scheduled" && draft.displayDate <= beijingDate() ? { ...draft, status: "live" as const } : draft)
     .sort((a, b) => b.updatedAt.localeCompare(a.updatedAt));
 }
@@ -243,6 +248,8 @@ function draftToPublicItem(draft: CuratedDraft) {
     paragraphs: sections.length > 0 ? intro : paragraphs,
     ...(sections.length > 0 ? { sections: sections.filter((section) => section.paragraphs.length > 0) } : {}),
     takeaways: draft.takeaways,
+    takeawayRaw: draft.takeawayRaw,
+    takeawayFormat: draft.takeawayFormat,
     section: "reading",
     inRecentWindow: true,
     publishedAt: draft.updatedAt,
@@ -269,6 +276,8 @@ function publicItemToDraft(item: Record<string, unknown>): CuratedDraft | null {
     displayDate,
     type: source === "podcast" ? "podcast" : source === "youtube" ? "video" : "article",
     takeaways: Array.isArray(item.takeaways) ? item.takeaways.filter((value): value is string => typeof value === "string") : [],
+    takeawayRaw: typeof item.takeawayRaw === "string" ? item.takeawayRaw : undefined,
+    takeawayFormat: item.takeawayFormat === "markdown" ? "markdown" : "simple",
     topics: Array.isArray(item.topics) ? item.topics.filter((value): value is string => typeof value === "string").slice(0, 2) : [],
     body: [...paragraphs, ...sectionBody].join("\n\n"),
     sourceUrl: typeof item.sourceUrl === "string" && item.sourceUrl ? item.sourceUrl : undefined,

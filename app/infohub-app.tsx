@@ -38,6 +38,7 @@ import { useEffect, useLayoutEffect, useMemo, useRef, useState } from "react";
 import type { ChatGPTUser } from "./chatgpt-auth";
 import generatedFeed from "./generated-feed.json";
 import generatedSectionSummaries from "./generated-section-summaries.json";
+import { MarkdownTakeaway } from "./markdown-takeaway";
 
 type Source = "youtube" | "podcast" | "article" | "daily" | "builder";
 type Tab = "daily" | "curated" | "library" | "me";
@@ -70,6 +71,8 @@ type Item = {
   externalLinks?: { label: string; url: string }[];
   facts?: { label: string; value: string }[];
   takeaways?: string[];
+  takeawayRaw?: string;
+  takeawayFormat?: "simple" | "markdown";
   utility?: string;
   sections?: { title: string; timeRange: string; paragraphs: string[] }[];
   digestFormat?: "builders-digest";
@@ -799,6 +802,12 @@ function getAvailableDailyDates(items: Item[]) {
       .map((item) => item.digestDate)
       .filter(Boolean),
   )].sort().reverse();
+}
+
+function TakeawayReader({ item }: { item: Item }) {
+  if (item.takeawayFormat === "markdown" && item.takeawayRaw) return <MarkdownTakeaway value={item.takeawayRaw} />;
+  if (!item.takeaways?.length) return null;
+  return <section className="reader-takeaways"><h2>Takeaway</h2><ol>{item.takeaways.slice(0, 10).map((takeaway) => <li key={takeaway}>{takeaway}</li>)}</ol></section>;
 }
 
 function displayDay(value: string, compact = false) {
@@ -1589,16 +1598,7 @@ export function InfoHubApp({ user }: { user: ChatGPTUser | null }) {
             </div>
           )}
           <div className="article-rule" />
-          {activeItem.takeaways && activeItem.takeaways.length > 0 && (
-            <section className="reader-takeaways">
-              <h2>Takeaway</h2>
-              <ol>
-                {activeItem.takeaways.slice(0, 6).map((takeaway) => (
-                  <li key={takeaway}>{takeaway}</li>
-                ))}
-              </ol>
-            </section>
-          )}
+          <TakeawayReader item={activeItem} />
           <h2 className="reader-section-title">阅读原文</h2>
           {activeItem.facts && activeItem.facts.length > 0 && (
             <>

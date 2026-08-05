@@ -2,9 +2,11 @@
 
 import { ArrowDown, ArrowUp, Check, Eye, EyeOff, FileText, LayoutList, LoaderCircle, LogOut, Pencil, Plus, RotateCcw, Send, Tag, Trash2, X } from "lucide-react";
 import { useEffect, useMemo, useState } from "react";
+import { MarkdownTakeaway } from "../markdown-takeaway";
 
 type ArticleType = "podcast" | "video" | "article";
 type PublishStatus = "draft" | "scheduled" | "publishing" | "live" | "failed" | "withdrawn";
+type TakeawayFormat = "simple" | "markdown";
 
 type CuratedDraft = {
   id: string;
@@ -13,6 +15,8 @@ type CuratedDraft = {
   displayDate: string;
   type: ArticleType;
   takeaways: string[];
+  takeawayRaw?: string;
+  takeawayFormat: TakeawayFormat;
   topics: string[];
   body: string;
   sourceUrl?: string;
@@ -33,6 +37,8 @@ const emptyDraft = (): CuratedDraft => ({
   }).format(new Date()),
   type: "article",
   takeaways: [],
+  takeawayRaw: "",
+  takeawayFormat: "simple",
   topics: [],
   body: "",
   sourceUrl: "",
@@ -97,12 +103,20 @@ function publicItemToDraft(item: Record<string, unknown>): CuratedDraft | null {
     displayDate,
     type: source === "podcast" ? "podcast" : source === "youtube" ? "video" : "article",
     takeaways: Array.isArray(item.takeaways) ? item.takeaways.filter((value): value is string => typeof value === "string") : [],
+    takeawayRaw: typeof item.takeawayRaw === "string" ? item.takeawayRaw : undefined,
+    takeawayFormat: item.takeawayFormat === "markdown" ? "markdown" : "simple",
     topics: Array.isArray(item.topics) ? item.topics.filter((value): value is string => typeof value === "string").slice(0, 2) : [],
     body: [...paragraphs, ...sectionBody].join("\n\n"),
     sourceUrl: typeof item.sourceUrl === "string" ? item.sourceUrl : undefined,
     status: displayDate > emptyDraft().displayDate ? "scheduled" : "live",
     updatedAt: typeof item.publishedAt === "string" ? item.publishedAt : `${displayDate}T00:00:00.000Z`,
   };
+}
+
+function parseSimpleTakeaways(raw: string) {
+  return raw.split("\n")
+    .map((line) => line.replace(/^\s*\d+[.、)]\s*/, "").trim())
+    .filter(Boolean);
 }
 
 export function CuratedAdminApp() {
@@ -121,7 +135,7 @@ export function CuratedAdminApp() {
   const [sortDirection, setSortDirection] = useState<"asc" | "desc">("desc");
 
   const canSubmit = Boolean(draft.title.trim() && draft.cardSummary.trim() && draft.displayDate && draft.body.trim());
-  const previewTakeaways = useMemo(() => takeawayText.split("\n").map((line) => line.replace(/^\s*\d+[.、)]\s*/, "").trim()).filter(Boolean), [takeawayText]);
+  const previewTakeaways = useMemo(() => draft.takeawayFormat === "simple" ? parseSimpleTakeaways(takeawayText) : [], [draft.takeawayFormat, takeawayText]);
   const sortedDrafts = useMemo(() => [...drafts].sort((a, b) => {
     const comparison = a[sortKey].localeCompare(b[sortKey]);
     return sortDirection === "asc" ? comparison : -comparison;
@@ -177,7 +191,7 @@ export function CuratedAdminApp() {
         return;
       }
       if (!response.ok) throw new Error(result.error ?? "读取失败");
-      setDrafts((result.drafts ?? []).map((item) => ({ ...item, topics: Array.isArray(item.topics) ? item.topics : [] })));
+      setDrafts((result.drafts ?? []).map((item) => ({ ...item, topics: Array.isArray(item.topics) ? item.topics : [], takeawayFormat: item.takeawayFormat === "markdown" ? "markdown" : "simple" })));
     } catch (error) {
       setMessage(error instanceof Error ? error.message : "读取失败");
     }
@@ -199,7 +213,7 @@ export function CuratedAdminApp() {
 
   function editDraft(item: CuratedDraft) {
     setDraft(item);
-    setTakeawayText(item.takeaways.join("\n"));
+    setTakeawayText(item.takeawayRaw || item.takeaways.join("\n"));
     setTopicInput("");
     setMessage("");
     setEditorOpen(true);
@@ -220,11 +234,11 @@ export function CuratedAdminApp() {
     }
   }
 
-  async function save(status: "draft" | "publish", openPreviewAfterSave = false) {
+  async function save(status: "draft" | "publish") {
     if (!canSubmit) return setMessage("请完整填写标题、卡片摘要、展示日期和正文");
     setBusy(true);
     setMessage(status === "publish" ? "正在发布……" : "正在保存……");
-    const payload = { ...draft, takeaways: previewTakeaways, updatedAt: new Date().toISOString() };
+    const payload = { ...draft, takeaways: previewTakeaways, takeawayRaw: takeawayText.trim(), updatedAt: new Date().toISOString() };
     try {
       const response = await gatewayFetch(`${apiUrl}/curated/${status === "publish" ? "publish" : "save"}`, {
         method: "POST",
@@ -235,10 +249,9 @@ export function CuratedAdminApp() {
       if (response.status === 401) return logout();
       if (!response.ok || !result.draft) throw new Error(result.error ?? "操作失败");
       setDraft(result.draft);
-      setTakeawayText(result.draft.takeaways.join("\n"));
+      setTakeawayText(result.draft.takeawayRaw || result.draft.takeaways.join("\n"));
       setMessage(status === "publish" ? (result.draft.status === "scheduled" ? "发布成功，将在设定日期展示" : "发布成功") : "草稿已保存");
       await loadDrafts();
-      if (openPreviewAfterSave) setPreviewOpen(true);
       if (status === "publish") {
         setPreviewOpen(false);
         setEditorOpen(false);
@@ -253,7 +266,7 @@ export function CuratedAdminApp() {
   async function restore(item: CuratedDraft) {
     if (!window.confirm(`确定恢复展示《${item.title}》吗？`)) return;
     setDraft(item);
-    setTakeawayText(item.takeaways.join("\n"));
+    setTakeawayText(item.takeawayRaw || item.takeaways.join("\n"));
     setBusy(true);
     setMessage("正在恢复展示……");
     try {
@@ -392,7 +405,26 @@ export function CuratedAdminApp() {
         )}
       </section>
     </section>
-    {editorOpen && <div className="admin-editor-backdrop" role="dialog" aria-modal="true"><section className="curated-editor admin-editor-modal"><div className="editor-title"><div><p>{draft.status === "draft" && !draft.title ? "新增文章" : "编辑文章"}</p><h1>{draft.title || "新建精选"}</h1></div><button className="modal-close" onClick={() => setEditorOpen(false)} aria-label="关闭"><X size={20} /></button></div><div className="editor-grid"><label className="field-full"><span>标题 *</span><input value={draft.title} onChange={(event) => setDraft({ ...draft, title: event.target.value })} placeholder="粘贴文章标题" /></label><label className="field-full"><span>卡片摘要 *</span><textarea rows={3} value={draft.cardSummary} onChange={(event) => setDraft({ ...draft, cardSummary: event.target.value })} placeholder="用 2—3 句话告诉用户这篇内容讲什么、为什么值得读" /></label><label><span>展示日期 *</span><input type="date" value={draft.displayDate} onChange={(event) => setDraft({ ...draft, displayDate: event.target.value })} /></label><label><span>类型 *</span><select value={draft.type} onChange={(event) => setDraft({ ...draft, type: event.target.value as ArticleType })}><option value="podcast">播客</option><option value="video">视频</option><option value="article">文章</option></select></label><div className="field-full topic-editor"><span>主题</span><div className="topic-input-row"><Tag size={17} /><input value={topicInput} disabled={draft.topics.length >= 2} onChange={(event) => setTopicInput(event.target.value)} onKeyDown={(event) => { if (event.key === "Enter" || event.key === "," || event.key === "，") { event.preventDefault(); addTopic(); } }} onBlur={() => addTopic()} placeholder={draft.topics.length >= 2 ? "每篇最多设置 2 个主题" : "输入主题后按回车，例如：AI 相关"} /><button type="button" disabled={draft.topics.length >= 2} onClick={() => addTopic()}>添加</button></div>{draft.topics.length > 0 && <div className="topic-list editable">{draft.topics.map((topic) => <button type="button" key={topic} onClick={() => setDraft({ ...draft, topics: draft.topics.filter((value) => value !== topic) })}>{topic}<X size={13} /></button>)}</div>}<small>完全由你手动填写，每篇建议 1—2 个宽泛主题，例如“AI 相关”“健康相关”。</small></div><label className="field-full"><span>Takeaways</span><textarea rows={6} value={takeawayText} onChange={(event) => setTakeawayText(event.target.value)} placeholder={'每行填写一条，系统会自动编号\n例如：这篇内容最值得带走的判断'} /><small>不需要自己输入序号，预览和正文会自动显示 1、2、3……</small></label><label className="field-full"><span>正文 *</span><textarea rows={18} value={draft.body} onChange={(event) => setDraft({ ...draft, body: event.target.value })} placeholder={'直接粘贴处理好的正文。段落之间空一行；小标题单独占一行。'} /><small>无需 Markdown。空行会自动分段，简短的独立行会显示为小标题。</small></label><label className="field-full"><span>来源链接（选填）</span><input type="url" value={draft.sourceUrl ?? ""} onChange={(event) => setDraft({ ...draft, sourceUrl: event.target.value })} placeholder="https://...（播客、视频或原文章链接）" /></label></div><div className="editor-actions"><button className="secondary" onClick={() => setEditorOpen(false)}>取消</button><button className="secondary" disabled={busy || !canSubmit} onClick={() => void save("draft")}><FileText size={18} />保存草稿</button><button className="primary" disabled={busy || !canSubmit} onClick={() => void save("draft", true)}>{busy ? <LoaderCircle className="spin" size={18} /> : <Eye size={18} />}保存并预览</button></div></section></div>}
-    {previewOpen && <div className="admin-preview-backdrop" role="dialog" aria-modal="true"><article className="admin-preview"><button className="preview-close" onClick={() => setPreviewOpen(false)} aria-label="关闭"><X /></button><div className="preview-meta">{draft.displayDate} · {typeLabel[draft.type]}</div><h1>{draft.title}</h1><p className="preview-summary">{draft.cardSummary}</p>{previewTakeaways.length > 0 && <section><h2>Takeaway</h2><ol>{previewTakeaways.map((item) => <li key={item}>{item}</li>)}</ol></section>}<section><h2>阅读原文</h2>{bodyBlocks(draft.body).map((block, index) => block.length <= 30 && !/[。！？.!?]$/.test(block) ? <h3 key={`${block}-${index}`}>{block}</h3> : <p key={`${block}-${index}`}>{block}</p>)}</section>{draft.sourceUrl && <a href={draft.sourceUrl} target="_blank" rel="noreferrer">跳转来源</a>}<footer className="preview-actions"><button onClick={() => { setPreviewOpen(false); setEditorOpen(true); }}><Pencil size={17} />返回修改</button><button className="primary" disabled={busy} onClick={() => void save("publish")}><Send size={17} />确认发布</button></footer></article></div>}
+    {editorOpen && <div className="admin-editor-backdrop" role="dialog" aria-modal="true">
+      <section className="curated-editor admin-editor-modal">
+        <div className="editor-title"><div><p>{draft.status === "draft" && !draft.title ? "新增文章" : "编辑文章"}</p><h1>{draft.title || "新建精选"}</h1></div><button className="modal-close" onClick={() => setEditorOpen(false)} aria-label="关闭"><X size={20} /></button></div>
+        <div className="editor-grid">
+          <label className="field-full"><span>标题 *</span><input value={draft.title} onChange={(event) => setDraft({ ...draft, title: event.target.value })} placeholder="粘贴文章标题" /></label>
+          <label className="field-full"><span>卡片摘要 *</span><textarea rows={3} value={draft.cardSummary} onChange={(event) => setDraft({ ...draft, cardSummary: event.target.value })} placeholder="用 2—3 句话告诉用户这篇内容讲什么、为什么值得读" /></label>
+          <label><span>展示日期 *</span><input type="date" value={draft.displayDate} onChange={(event) => setDraft({ ...draft, displayDate: event.target.value })} /></label>
+          <label><span>类型 *</span><select value={draft.type} onChange={(event) => setDraft({ ...draft, type: event.target.value as ArticleType })}><option value="podcast">播客</option><option value="video">视频</option><option value="article">文章</option></select></label>
+          <div className="field-full topic-editor"><span>主题</span><div className="topic-input-row"><Tag size={17} /><input value={topicInput} disabled={draft.topics.length >= 2} onChange={(event) => setTopicInput(event.target.value)} onKeyDown={(event) => { if (event.key === "Enter" || event.key === "," || event.key === "，") { event.preventDefault(); addTopic(); } }} onBlur={() => addTopic()} placeholder={draft.topics.length >= 2 ? "每篇最多设置 2 个主题" : "输入主题后按回车，例如：AI 相关"} /><button type="button" disabled={draft.topics.length >= 2} onClick={() => addTopic()}>添加</button></div>{draft.topics.length > 0 && <div className="topic-list editable">{draft.topics.map((topic) => <button type="button" key={topic} onClick={() => setDraft({ ...draft, topics: draft.topics.filter((value) => value !== topic) })}>{topic}<X size={13} /></button>)}</div>}<small>完全由你手动填写，每篇建议 1—2 个宽泛主题，例如“AI 相关”“健康相关”。</small></div>
+          <div className="field-full takeaway-editor-field">
+            <div className="takeaway-editor-heading"><span>Takeaways</span><div className="takeaway-format-picker" role="radiogroup" aria-label="Takeaway 输入格式"><button type="button" className={draft.takeawayFormat === "simple" ? "active" : ""} onClick={() => setDraft({ ...draft, takeawayFormat: "simple" })}>简单输入</button><button type="button" className={draft.takeawayFormat === "markdown" ? "active" : ""} onClick={() => setDraft({ ...draft, takeawayFormat: "markdown" })}>Markdown</button></div></div>
+            <textarea rows={draft.takeawayFormat === "markdown" ? 16 : 7} value={takeawayText} onChange={(event) => setTakeawayText(event.target.value)} placeholder={draft.takeawayFormat === "markdown" ? "直接粘贴 Markdown 内容，标题、加粗、列表、段落和分隔线会原样渲染" : "每行填写一条，系统会自动显示 1、2、3……"} />
+            <small>{draft.takeawayFormat === "markdown" ? "Markdown 会按原结构安全渲染；原始 HTML 不会执行。" : "一行就是一条，不需要自己输入序号。"}</small>
+          </div>
+          <label className="field-full"><span>正文 *</span><textarea rows={18} value={draft.body} onChange={(event) => setDraft({ ...draft, body: event.target.value })} placeholder={'直接粘贴处理好的正文。段落之间空一行；小标题单独占一行。'} /><small>无需 Markdown。空行会自动分段，简短的独立行会显示为小标题。</small></label>
+          <label className="field-full"><span>来源链接（选填）</span><input type="url" value={draft.sourceUrl ?? ""} onChange={(event) => setDraft({ ...draft, sourceUrl: event.target.value })} placeholder="https://...（播客、视频或原文章链接）" /></label>
+        </div>
+        <div className="editor-actions"><button className="secondary" onClick={() => setEditorOpen(false)}>取消</button><button className="secondary" disabled={busy || !canSubmit} onClick={() => void save("draft")}><FileText size={18} />保存草稿</button><button className="primary" disabled={!canSubmit} onClick={() => { setEditorOpen(false); setPreviewOpen(true); }}><Eye size={18} />预览文章</button></div>
+      </section>
+    </div>}
+    {previewOpen && <div className="admin-preview-backdrop" role="dialog" aria-modal="true"><article className="admin-preview"><button className="preview-close" onClick={() => setPreviewOpen(false)} aria-label="关闭"><X /></button><div className="preview-meta">{draft.displayDate} · {typeLabel[draft.type]}</div><h1>{draft.title}</h1><p className="preview-summary">{draft.cardSummary}</p>{takeawayText.trim() && (draft.takeawayFormat === "markdown" ? <MarkdownTakeaway value={takeawayText} /> : <section className="takeaway-preview"><h2>Takeaway</h2><ol>{previewTakeaways.map((item) => <li key={item}>{item}</li>)}</ol></section>)}<section><h2>阅读原文</h2>{bodyBlocks(draft.body).map((block, index) => block.length <= 30 && !/[。！？.!?]$/.test(block) ? <h3 key={`${block}-${index}`}>{block}</h3> : <p key={`${block}-${index}`}>{block}</p>)}</section>{draft.sourceUrl && <a href={draft.sourceUrl} target="_blank" rel="noreferrer">跳转来源</a>}<footer className="preview-actions"><button onClick={() => { setPreviewOpen(false); setEditorOpen(true); }}><Pencil size={17} />返回修改</button><button className="primary" disabled={busy} onClick={() => void save("publish")}><Send size={17} />确认发布</button></footer></article></div>}
   </main>;
 }

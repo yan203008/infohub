@@ -38,8 +38,11 @@ test("includes the independent curated editor", async () => {
   assert.match(source, /最后更新/);
   assert.match(source, /展示日期/);
   assert.match(source, /Takeaways/);
+  assert.match(source, /Markdown/);
+  assert.match(source, /takeawayFormat/);
+  assert.match(source, /takeawayRaw/);
   assert.match(source, /保存草稿/);
-  assert.match(source, /保存并预览/);
+  assert.match(source, /预览文章/);
   assert.match(source, /确认发布/);
   assert.match(source, /隐藏/);
   assert.match(source, /恢复展示/);
