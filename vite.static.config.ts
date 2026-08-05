@@ -1,6 +1,7 @@
 import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
 import { readFileSync } from "node:fs";
+import { resolve } from "node:path";
 
 function publicContentSnapshots() {
   return {
@@ -10,6 +11,11 @@ function publicContentSnapshots() {
         type: "asset",
         fileName: "generated-feed.json",
         source: readFileSync(new URL("./app/generated-feed.json", import.meta.url), "utf8"),
+      });
+      this.emitFile({
+        type: "asset",
+        fileName: "generated-curated.json",
+        source: readFileSync(new URL("./public/generated-curated.json", import.meta.url), "utf8"),
       });
       this.emitFile({
         type: "asset",
@@ -26,5 +32,11 @@ export default defineConfig({
   build: {
     outDir: "dist-pages",
     emptyOutDir: true,
+    rollupOptions: {
+      input: {
+        index: resolve(import.meta.dirname, "index.html"),
+        admin: resolve(import.meta.dirname, "admin.html"),
+      },
+    },
   },
 });

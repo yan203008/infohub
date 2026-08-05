@@ -1062,6 +1062,8 @@ async function transcriptFor(videoId) {
   return readFile(filePath, "utf8");
 }
 
+// Legacy on-demand utility retained for old local snapshots; it is not part of the daily collector list.
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 async function collectYoutube() {
   const previewUrl = process.env.INFOHUB_PREVIEW_YOUTUBE_URL?.trim();
   let videos;
@@ -1271,7 +1273,6 @@ async function main() {
     ["technical-x", collectTechnicalX],
     ["papers", collectPapers],
     ["github", collectGithub],
-    ["youtube", collectYoutube],
   ];
   const collectors = requestedSource
     ? allCollectors.filter(([source]) => source === requestedSource)

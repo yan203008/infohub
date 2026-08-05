@@ -19,7 +19,6 @@ on:
           - technical-x
           - papers
           - github
-          - youtube
           - summaries
           - publish-only
   schedule:
@@ -47,14 +46,6 @@ jobs:
 
       - run: npm ci
 
-      - name: Install transcript fallback
-        if: inputs.source != 'publish-only'
-        run: python -m pip install --disable-pip-version-check yt-dlp
-
-      - name: Prepare YouTube transcript skill
-        if: inputs.source != 'publish-only'
-        run: git clone --depth 1 https://github.com/jimliu/baoyu-skills.git "$RUNNER_TEMP/baoyu-skills"
-
       - name: Collect and publish
         if: inputs.source != 'publish-only'
         id: collect_step
@@ -63,10 +54,6 @@ jobs:
           MOONSHOT_API_KEY: ${{ secrets.MOONSHOT_API_KEY }}
           MOONSHOT_BASE_URL: https://api.kimi.com/coding/v1
           MOONSHOT_MODEL: k3-256k
-          SUPADATA_API_KEY: ${{ secrets.SUPADATA_API_KEY }}
-          GETNOTE_API_KEY: ${{ secrets.GETNOTE_API_KEY }}
-          GETNOTE_CLIENT_ID: ${{ secrets.GETNOTE_CLIENT_ID }}
-          BAOYU_TRANSCRIPT_SCRIPT: ${{ runner.temp }}/baoyu-skills/skills/baoyu-youtube-transcript/scripts/main.ts
         run: |
           if [ "${{ inputs.source }}" = "summaries" ]; then
             npm run summaries
@@ -76,38 +63,16 @@ jobs:
             npm run collect:reliable
           fi
 
-      - name: Process scheduled curated links
-        if: inputs.source != 'publish-only'
-        id: curated_step
-        continue-on-error: true
-        env:
-          MOONSHOT_API_KEY: ${{ secrets.MOONSHOT_API_KEY }}
-          MOONSHOT_BASE_URL: https://api.kimi.com/coding/v1
-          MOONSHOT_MODEL: k3-256k
-          SUPADATA_API_KEY: ${{ secrets.SUPADATA_API_KEY }}
-          GETNOTE_API_KEY: ${{ secrets.GETNOTE_API_KEY }}
-          GETNOTE_CLIENT_ID: ${{ secrets.GETNOTE_CLIENT_ID }}
-        run: npm run curated:queue
-
-      - name: Sync tagged GetNote selections
-        if: inputs.source != 'publish-only'
-        id: getnote_sync_step
-        continue-on-error: true
-        env:
-          MOONSHOT_API_KEY: ${{ secrets.MOONSHOT_API_KEY }}
-          MOONSHOT_BASE_URL: https://api.kimi.com/coding/v1
-          MOONSHOT_MODEL: k3-256k
-          GETNOTE_API_KEY: ${{ secrets.GETNOTE_API_KEY }}
-          GETNOTE_CLIENT_ID: ${{ secrets.GETNOTE_CLIENT_ID }}
-          GETNOTE_SYNC_TAG: InfoHub精选
-        run: npm run getnote:sync
-
       - name: Save new public content
+        if: inputs.source != 'publish-only'
+        run: npm run archive:daily
+
+      - name: Commit new public content
         if: inputs.source != 'publish-only'
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add app/generated-feed.json app/generated-section-summaries.json app/generated-run-summary.json public/generated-submission-status.json config/manual-queue.json
+          git add app/generated-feed.json app/generated-section-summaries.json app/generated-run-summary.json public/archive/daily
           if ! git diff --cached --quiet; then
             git commit -m "content: update daily digest"
             git push
@@ -140,7 +105,7 @@ jobs:
           retention-days: 14
 
       - name: Mark unresolved collection errors
-        if: always() && (steps.collect_step.outcome == 'failure' || steps.curated_step.outcome == 'failure' || steps.getnote_sync_step.outcome == 'failure')
+        if: always() && steps.collect_step.outcome == 'failure'
         run: |
           echo "采集结果已尽可能发布，但仍有来源或总结在重试后失败。请查看 collection-report。"
           exit 1

@@ -22,6 +22,7 @@ import {
   LoaderCircle,
   LockKeyhole,
   LogOut,
+  Palette,
   PenLine,
   Play,
   Search,
@@ -38,12 +39,19 @@ import type { ChatGPTUser } from "./chatgpt-auth";
 import generatedFeed from "./generated-feed.json";
 import generatedSectionSummaries from "./generated-section-summaries.json";
 
-type Source = "youtube" | "podcast" | "daily" | "builder";
-type Tab = "daily" | "reading" | "notes" | "me";
-type ReadingView = "curated" | "interested";
+type Source = "youtube" | "podcast" | "article" | "daily" | "builder";
+type Tab = "daily" | "curated" | "library" | "me";
+type LibraryView = "content" | "notes";
 type SearchScope = "all" | "content" | "note";
 type SectionId = "x" | "papers" | "github" | "youtube" | "podcasts" | "reading";
-type HomeSectionId = "x" | "papers" | "github" | "media";
+type HomeSectionId = "x" | "papers" | "github";
+type ThemeId = "original-green" | "smoky-purple" | "cream";
+
+const themeOptions: { id: ThemeId; label: string; colors: string[] }[] = [
+  { id: "original-green", label: "森林绿", colors: ["#1F6B4B", "#E9F4EE", "#FBFCFA"] },
+  { id: "smoky-purple", label: "烟灰紫", colors: ["#6D607B", "#EEE9F3", "#F9F7FA"] },
+  { id: "cream", label: "米白浅灰", colors: ["#666861", "#EEEDE8", "#F8F6EF"] },
+];
 
 type Item = {
   id: string;
@@ -67,6 +75,7 @@ type Item = {
   digestFormat?: "builders-digest";
   section?: SectionId;
   inRecentWindow?: boolean;
+  publishedAt?: string;
 };
 
 type HighlightRange = {
@@ -657,8 +666,6 @@ const sectionDefinitions: { id: SectionId; label: string; description: string }[
   { id: "x", label: "X 推特内容", description: "Follow Builders + 技术动态 X 热榜" },
   { id: "papers", label: "热门论文", description: "Hugging Face Daily Papers" },
   { id: "github", label: "GitHub Trending", description: "每日开源项目热榜" },
-  { id: "youtube", label: "热门 YouTube", description: "已订阅频道最近两天的新视频" },
-  { id: "podcasts", label: "播客", description: "AI Builder 访谈与节目" },
 ];
 
 const homeSectionDefinitions: {
@@ -670,7 +677,6 @@ const homeSectionDefinitions: {
   { id: "x", label: "X 推特内容", description: "Follow Builders + 技术动态 X", sections: ["x"] },
   { id: "papers", label: "热门论文", description: "关注前沿研究动态", sections: ["papers"] },
   { id: "github", label: "GitHub Trending", description: "热门开源项目与产品趋势", sections: ["github"] },
-  { id: "media", label: "频道更新", description: "订阅的 YouTube 与播客最新内容", sections: ["youtube", "podcasts"] },
 ];
 
 type SectionPreference = { id: SectionId; visible: boolean };
@@ -683,6 +689,7 @@ const defaultSectionPreferences: SectionPreference[] = sectionDefinitions.map((s
 const sourceIcon = {
   youtube: Video,
   podcast: Headphones,
+  article: FileText,
   daily: FileText,
   builder: Sparkles,
 };
@@ -815,7 +822,7 @@ function isCuratedItem(item: Item) {
 export function InfoHubApp({ user }: { user: ChatGPTUser | null }) {
   const initialDailyDates = useMemo(() => getAvailableDailyDates(fallbackItems), []);
   const [tab, setTab] = useState<Tab>("daily");
-  const [readingView, setReadingView] = useState<ReadingView>("curated");
+  const [libraryView, setLibraryView] = useState<LibraryView>("content");
   const [selectedDate, setSelectedDate] = useState(initialDailyDates[0] ?? "2026-07-29");
   const [activeHomeSection, setActiveHomeSection] = useState<HomeSectionId | null>(null);
   const [activeItem, setActiveItem] = useState<Item | null>(null);
@@ -824,6 +831,7 @@ export function InfoHubApp({ user }: { user: ChatGPTUser | null }) {
   const [searchScope, setSearchScope] = useState<SearchScope>("all");
   const [pendingSearchResultId, setPendingSearchResultId] = useState<string | null>(null);
   const [saved, setSaved] = useState<string[]>([]);
+  const [savedSnapshots, setSavedSnapshots] = useState<Record<string, Item>>({});
   const [completed, setCompleted] = useState<string[]>([]);
   const [liveItems, setLiveItems] = useState<Item[]>([]);
   const [liveSectionSummaries, setLiveSectionSummaries] = useState<SectionSummary[]>(
@@ -838,6 +846,7 @@ export function InfoHubApp({ user }: { user: ChatGPTUser | null }) {
   const [noteOpen, setNoteOpen] = useState(false);
   const [toast, setToast] = useState("");
   const [sectionSettingsOpen, setSectionSettingsOpen] = useState(false);
+  const [theme, setTheme] = useState<ThemeId>("original-green");
   const [sectionPreferences, setSectionPreferences] = useState<SectionPreference[]>(
     defaultSectionPreferences,
   );
@@ -847,16 +856,50 @@ export function InfoHubApp({ user }: { user: ChatGPTUser | null }) {
   const suppressProgressRef = useRef(false);
   const pendingParagraphKeyRef = useRef<string | null>(null);
   const publicContentVersionRef = useRef("");
-  const items = useMemo(() => {
+
+  useLayoutEffect(() => {
+    const stored = window.localStorage.getItem("infohub-theme");
+    const nextTheme = themeOptions.some((option) => option.id === stored)
+      ? stored as ThemeId
+      : "original-green";
+    document.documentElement.dataset.theme = nextTheme;
+    const timer = window.setTimeout(() => setTheme(nextTheme), 0);
+    return () => window.clearTimeout(timer);
+  }, []);
+
+  function changeTheme(nextTheme: ThemeId) {
+    document.documentElement.dataset.theme = nextTheme;
+    window.localStorage.setItem("infohub-theme", nextTheme);
+    setTheme(nextTheme);
+  }
+  const publicItems = useMemo(() => {
     const merged = new Map(fallbackItems.map((item) => [item.id, item]));
     liveItems.forEach((item) => merged.set(item.id, item));
+    const ordered = [...merged.values()].map(normalizeItemCopy).sort((a, b) =>
+      String(b.publishedAt ?? b.digestDate).localeCompare(String(a.publishedAt ?? a.digestDate)),
+    );
+    const seenCuratedSources = new Set<string>();
+    return ordered.filter((item) => {
+      if (!isCuratedItem(item)) return true;
+      const sourceKey = item.sourceUrl.trim().toLocaleLowerCase();
+      if (!sourceKey) return true;
+      if (seenCuratedSources.has(sourceKey)) return false;
+      seenCuratedSources.add(sourceKey);
+      return true;
+    });
+  }, [liveItems]);
+  const items = useMemo(() => {
+    const merged = new Map(publicItems.map((item) => [item.id, item]));
+    Object.values(savedSnapshots).forEach((item) => {
+      if (!merged.has(item.id)) merged.set(item.id, item);
+    });
     return [...merged.values()].map(normalizeItemCopy).sort((a, b) =>
       String(b.publishedAt ?? b.digestDate).localeCompare(String(a.publishedAt ?? a.digestDate)),
     );
-  }, [liveItems]);
-  const availableDailyDates = useMemo(() => getAvailableDailyDates(items), [items]);
+  }, [publicItems, savedSnapshots]);
+  const availableDailyDates = useMemo(() => getAvailableDailyDates(publicItems), [publicItems]);
   const recentDates = availableDailyDates.slice(0, 7);
-  const latestDailyDate = items
+  const latestDailyDate = publicItems
     .filter((item) => !isCuratedItem(item) && item.inRecentWindow !== false)
     .map((item) => item.digestDate)
     .filter(Boolean)
@@ -868,14 +911,18 @@ export function InfoHubApp({ user }: { user: ChatGPTUser | null }) {
     const loadPublicContent = async () => {
       try {
         const cacheKey = Date.now();
-        const [feedResponse, summaryResponse] = await Promise.all([
+        const [feedResponse, summaryResponse, curatedResponse] = await Promise.all([
           fetch(`./generated-feed.json?t=${cacheKey}`, { cache: "no-store" }),
           fetch(`./generated-section-summaries.json?t=${cacheKey}`, { cache: "no-store" }),
+          fetch(`./generated-curated.json?t=${cacheKey}`, { cache: "no-store" }),
         ]);
         let data: { items?: Item[]; sectionSummaries?: SectionSummary[] } | null = null;
         if (feedResponse.ok && summaryResponse.ok) {
           data = {
-            items: await feedResponse.json() as Item[],
+            items: [
+              ...await feedResponse.json() as Item[],
+              ...(curatedResponse.ok ? await curatedResponse.json() as Item[] : []),
+            ],
             sectionSummaries: await summaryResponse.json() as SectionSummary[],
           };
         } else {
@@ -1032,6 +1079,18 @@ export function InfoHubApp({ user }: { user: ChatGPTUser | null }) {
   }, []);
 
   useEffect(() => {
+    const stored = window.localStorage.getItem("infohub-saved-snapshots");
+    if (!stored) return;
+    try {
+      const parsed = JSON.parse(stored) as Record<string, Item>;
+      const timer = window.setTimeout(() => setSavedSnapshots(parsed), 0);
+      return () => window.clearTimeout(timer);
+    } catch {
+      return;
+    }
+  }, []);
+
+  useEffect(() => {
     if (!user) return;
     let cancelled = false;
     void fetch("/api/preferences/sections")
@@ -1109,14 +1168,14 @@ export function InfoHubApp({ user }: { user: ChatGPTUser | null }) {
 
   const visibleItems = useMemo(
     () =>
-      items.filter(
+      publicItems.filter(
         (item) =>
           item.digestDate === selectedDate &&
           item.section &&
           !isCuratedItem(item) &&
           item.inRecentWindow !== false,
       ),
-    [items, selectedDate],
+    [publicItems, selectedDate],
   );
   const orderedSections = sectionPreferences
     .map((preference) => ({
@@ -1145,10 +1204,17 @@ export function InfoHubApp({ user }: { user: ChatGPTUser | null }) {
   const queueItems = items.filter(
     (item) => saved.includes(item.id) && item.inRecentWindow !== false,
   );
-  const curatedItems = items.filter(
-    (item) => isCuratedItem(item) && item.inRecentWindow !== false,
+  const curatedItems = publicItems.filter(
+    (item) => isCuratedItem(item) && item.inRecentWindow !== false && item.digestDate <= new Intl.DateTimeFormat("en-CA", {
+      timeZone: "Asia/Shanghai",
+      year: "numeric",
+      month: "2-digit",
+      day: "2-digit",
+    }).format(new Date()),
   );
-  const readingListItems = readingView === "curated" ? curatedItems : queueItems;
+  const curatedGroups = [...new Set(curatedItems.map((item) => item.digestDate))]
+    .sort((a, b) => b.localeCompare(a))
+    .map((date) => ({ date, items: curatedItems.filter((item) => item.digestDate === date) }));
   const highlightNoteEntries = Object.entries(highlights).flatMap(([itemId, paragraphs]) => {
     const item = items.find((candidate) => candidate.id === itemId);
     if (!item) return [];
@@ -1226,7 +1292,8 @@ export function InfoHubApp({ user }: { user: ChatGPTUser | null }) {
       setSearchOpen(false);
       setSearchQuery("");
       if (!result.item) {
-        setTab("notes");
+        setLibraryView("notes");
+        setTab("library");
         window.scrollTo(0, 0);
         return;
       }
@@ -1264,10 +1331,20 @@ export function InfoHubApp({ user }: { user: ChatGPTUser | null }) {
   function toggleSaved(id: string) {
     if (saved.includes(id)) {
       setContentState(id, null);
-      setToast("已取消感兴趣");
+      const nextSnapshots = { ...savedSnapshots };
+      delete nextSnapshots[id];
+      setSavedSnapshots(nextSnapshots);
+      window.localStorage.setItem("infohub-saved-snapshots", JSON.stringify(nextSnapshots));
+      setToast("已取消收藏");
     } else {
       setContentState(id, "saved");
-      setToast("已标记为感兴趣，可在“感兴趣”中查看");
+      const item = items.find((candidate) => candidate.id === id);
+      if (item) {
+        const nextSnapshots = { ...savedSnapshots, [id]: item };
+        setSavedSnapshots(nextSnapshots);
+        window.localStorage.setItem("infohub-saved-snapshots", JSON.stringify(nextSnapshots));
+      }
+      setToast("已收藏，可在“收藏 → 内容收藏”中查看");
     }
   }
 
@@ -1438,7 +1515,7 @@ export function InfoHubApp({ user }: { user: ChatGPTUser | null }) {
   }
 
   if (activeItem) {
-    const readerSequence = tab === "reading" ? readingListItems : displayedItems;
+    const readerSequence = tab === "curated" ? curatedItems : tab === "library" ? queueItems : displayedItems;
     const activeIndex = readerSequence.findIndex((item) => item.id === activeItem.id);
     const nextItem = activeIndex >= 0 ? readerSequence[activeIndex + 1] : undefined;
     const itemHighlights = highlights[activeItem.id] ?? {};
@@ -1449,7 +1526,7 @@ export function InfoHubApp({ user }: { user: ChatGPTUser | null }) {
       {
         label: activeItem.section === "github"
           ? "打开 GitHub 仓库"
-          : activeItem.section === "youtube" || activeItem.section === "podcasts"
+          : activeItem.section === "youtube" || activeItem.section === "podcasts" || activeItem.source === "youtube" || activeItem.source === "podcast"
             ? "跳转收听"
             : "查看原始内容",
         url: activeItem.sourceUrl,
@@ -1457,7 +1534,7 @@ export function InfoHubApp({ user }: { user: ChatGPTUser | null }) {
       ...(activeItem.externalLinks ?? []).filter(
         (link) => link.url !== activeItem.sourceUrl,
       ),
-    ];
+    ].filter((link) => Boolean(link.url));
     return (
       <main className="app-shell reader-shell">
         <header className="reader-topbar">
@@ -1477,20 +1554,20 @@ export function InfoHubApp({ user }: { user: ChatGPTUser | null }) {
           <button
             className={`icon-button ${saved.includes(activeItem.id) ? "is-active" : ""}`}
             onClick={() => toggleSaved(activeItem.id)}
-            aria-label={saved.includes(activeItem.id) ? "取消感兴趣" : "标记为感兴趣"}
+            aria-label={saved.includes(activeItem.id) ? "取消收藏" : "收藏内容"}
           >
             <Bookmark size={20} fill={saved.includes(activeItem.id) ? "currentColor" : "none"} />
           </button>
-          <a
-            className="icon-button"
-            href={activeItem.sourceUrl}
-            target="_blank"
-            rel="noreferrer"
-            aria-label={activeItem.section === "youtube" || activeItem.section === "podcasts" ? "跳转收听" : "打开原始内容"}
-            title={activeItem.section === "youtube" || activeItem.section === "podcasts" ? "跳转收听" : "打开原始内容"}
-          >
-            <ExternalLink size={20} />
-          </a>
+          {activeItem.sourceUrl && <a
+              className="icon-button"
+              href={activeItem.sourceUrl}
+              target="_blank"
+              rel="noreferrer"
+              aria-label={activeItem.section === "youtube" || activeItem.section === "podcasts" || activeItem.source === "youtube" || activeItem.source === "podcast" ? "跳转收听" : "打开原始内容"}
+              title={activeItem.section === "youtube" || activeItem.section === "podcasts" || activeItem.source === "youtube" || activeItem.source === "podcast" ? "跳转收听" : "打开原始内容"}
+            >
+              <ExternalLink size={20} />
+            </a>}
         </header>
 
         <article className="reader" ref={readerRef}>
@@ -1596,12 +1673,12 @@ export function InfoHubApp({ user }: { user: ChatGPTUser | null }) {
               ))}
             </div>
           )}
-          {activeItem.section === "x" ? (
+          {activeItem.section === "x" && activeItem.sourceUrl ? (
             <p className="direct-link">
               <strong>链接直达：</strong>
               <a href={activeItem.sourceUrl} target="_blank" rel="noreferrer">{activeItem.sourceUrl}</a>
             </p>
-          ) : (
+          ) : readerLinks.length > 0 ? (
             <section className="source-links" aria-label="相关链接">
               <h2>相关链接</h2>
               {readerLinks.map((link) => (
@@ -1611,7 +1688,7 @@ export function InfoHubApp({ user }: { user: ChatGPTUser | null }) {
                 </a>
               ))}
             </section>
-          )}
+          ) : null}
           <div className="article-end">
             <span>END</span>
           </div>
@@ -1646,25 +1723,16 @@ export function InfoHubApp({ user }: { user: ChatGPTUser | null }) {
             {(note || highlightedEntries.some(({ range }) => range.note?.trim())) && <i />}
           </button>
           <button
-            className={saved.includes(activeItem.id) || completed.includes(activeItem.id) ? "is-active" : ""}
-            onClick={() => {
-              if (saved.includes(activeItem.id)) markCompleted(activeItem.id);
-              else toggleSaved(activeItem.id);
-            }}
+            className={saved.includes(activeItem.id) ? "is-active" : ""}
+            onClick={() => toggleSaved(activeItem.id)}
           >
-            {saved.includes(activeItem.id) ? <Check size={19} /> : <Bookmark size={18} />}
-            <span>
-              {saved.includes(activeItem.id)
-                ? "完成"
-                : completed.includes(activeItem.id)
-                  ? "再次标记"
-                  : "感兴趣"}
-            </span>
+            <Bookmark size={18} fill={saved.includes(activeItem.id) ? "currentColor" : "none"} />
+            <span>{saved.includes(activeItem.id) ? "已收藏" : "收藏"}</span>
           </button>
-          <a href={activeItem.sourceUrl} target="_blank" rel="noreferrer">
+          {activeItem.sourceUrl && <a href={activeItem.sourceUrl} target="_blank" rel="noreferrer">
             <Play size={18} />
-            <span>{activeItem.section === "youtube" || activeItem.section === "podcasts" ? "跳转收听" : "原文"}</span>
-          </a>
+            <span>{activeItem.section === "youtube" || activeItem.section === "podcasts" || activeItem.source === "youtube" || activeItem.source === "podcast" ? "跳转收听" : "原文"}</span>
+          </a>}
         </div>
 
         {noteOpen && (
@@ -1756,7 +1824,7 @@ export function InfoHubApp({ user }: { user: ChatGPTUser | null }) {
                 onClick={() => { setSelectedDate(date); setActiveHomeSection(null); setTab("daily"); }}
               >
                 <span>{index === 0 ? "最新" : index === 1 ? "昨天" : displayDay(date, true)}</span>
-                <small>{items.filter((item) => item.digestDate === date && item.section && !isCuratedItem(item) && item.inRecentWindow !== false).length}</small>
+                <small>{publicItems.filter((item) => item.digestDate === date && item.section && !isCuratedItem(item) && item.inRecentWindow !== false).length}</small>
               </button>
             ))}
             <label className="sidebar-more">
@@ -1767,16 +1835,16 @@ export function InfoHubApp({ user }: { user: ChatGPTUser | null }) {
             </label>
           </div>
           <NavButton
-            active={tab === "reading"}
+            active={tab === "curated"}
             icon={<BookOpen size={20} />}
-            label="精读"
-            onClick={() => setTab("reading")}
+            label="精选"
+            onClick={() => setTab("curated")}
           />
           <NavButton
-            active={tab === "notes"}
-            icon={<BookOpen size={20} />}
-            label="笔记"
-            onClick={() => setTab("notes")}
+            active={tab === "library"}
+            icon={<Bookmark size={20} />}
+            label="收藏"
+            onClick={() => setTab("library")}
           />
           <NavButton
             active={tab === "me"}
@@ -2006,73 +2074,82 @@ export function InfoHubApp({ user }: { user: ChatGPTUser | null }) {
           </div>
         )}
 
-        {tab === "reading" && (
+        {tab === "curated" && (
           <div className="content-area reading-list-page">
             <section className="welcome">
               <div>
-                <p>长期阅读库</p>
-                <h1>好内容不应该被困在某一天。</h1>
+                <p>编辑精选</p>
+                <h1>值得花时间读完的内容。</h1>
               </div>
             </section>
-            <div className="reading-view-tabs" role="tablist" aria-label="精读内容类型">
-              <button
-                className={readingView === "curated" ? "active" : ""}
-                onClick={() => setReadingView("curated")}
-                role="tab"
-                aria-selected={readingView === "curated"}
-              >
-                <Sparkles size={17} />
-                <span><strong>公开精选</strong><small>管理员整理·长期保留</small></span>
-              </button>
-              <button
-                className={readingView === "interested" ? "active" : ""}
-                onClick={() => setReadingView("interested")}
-                role="tab"
-                aria-selected={readingView === "interested"}
-              >
-                <Bookmark size={17} />
-                <span><strong>我的感兴趣</strong><small>私人清单·仅当前设备</small></span>
-              </button>
-            </div>
             <section className="queue-summary">
-              {readingView === "curated" ? <Sparkles size={19} /> : <Bookmark size={19} />}
+              <Sparkles size={19} />
               <div>
-                <strong>{readingListItems.length} 篇{readingView === "curated" ? "公开精选" : "感兴趣内容"}</strong>
-                <span>{readingView === "curated" ? "按最新整理时间排序，不随日报过期" : "保存在当前设备"}</span>
+                <strong>{curatedItems.length} 篇精选</strong>
+                <span>按展示日期排列，没有更新的日期不会出现</span>
               </div>
             </section>
-            {readingListItems.length > 0 ? (
-              <div className="feed">
-                {readingListItems.map((item) => (
-                  <ContentCard
-                    key={item.id}
-                    item={item}
-                    saved={saved.includes(item.id)}
-                    completed={completed.includes(item.id)}
-                    progress={readingProgressStore[item.id]?.percent ?? 0}
-                    onOpen={() => openItem(item)}
-                    onSave={() => toggleSaved(item.id)}
-                  />
+            {curatedGroups.length > 0 ? (
+              <div className="curated-date-groups">
+                {curatedGroups.map((group) => (
+                  <section key={group.date}>
+                    <h2>{displayDay(group.date)}</h2>
+                    <div className="feed">
+                      {group.items.map((item) => (
+                        <ContentCard
+                          key={item.id}
+                          item={item}
+                          saved={saved.includes(item.id)}
+                          completed={completed.includes(item.id)}
+                          progress={readingProgressStore[item.id]?.percent ?? 0}
+                          onOpen={() => openItem(item)}
+                          onSave={() => toggleSaved(item.id)}
+                        />
+                      ))}
+                    </div>
+                  </section>
                 ))}
               </div>
             ) : (
               <div className="empty-daily queue-empty">
-                {readingView === "curated" ? <Sparkles size={24} /> : <Bookmark size={24} />}
-                <h3>{readingView === "curated" ? "还没有公开精选" : "还没有感兴趣的内容"}</h3>
-                <p>{readingView === "curated" ? "管理员提交并处理完成的链接会长期保留在这里。" : "打开内容详情并标记“感兴趣”，内容就会集中到这里。"}</p>
+                <Sparkles size={24} />
+                <h3>还没有精选文章</h3>
+                <p>编辑发布的文章会按展示日期保留在这里。</p>
                 <button onClick={() => setTab("daily")}>返回日报</button>
               </div>
             )}
           </div>
         )}
-        {tab === "notes" && (
+        {tab === "library" && (
           <div className="content-area notes-page">
             <section className="welcome">
               <div>
-                <p>私人笔记</p>
-                <h1>把值得记住的内容留下来。</h1>
+                <p>私人收藏</p>
+                <h1>把值得读和值得记的内容留下来。</h1>
               </div>
             </section>
+            <div className="reading-view-tabs" role="tablist" aria-label="收藏内容类型">
+              <button className={libraryView === "content" ? "active" : ""} onClick={() => setLibraryView("content")} role="tab" aria-selected={libraryView === "content"}>
+                <Bookmark size={17} />
+                <span><strong>内容收藏</strong><small>{queueItems.length} 篇·仅当前设备</small></span>
+              </button>
+              <button className={libraryView === "notes" ? "active" : ""} onClick={() => setLibraryView("notes")} role="tab" aria-selected={libraryView === "notes"}>
+                <BookOpen size={17} />
+                <span><strong>我的笔记</strong><small>{highlightNoteEntries.length} 条划线笔记</small></span>
+              </button>
+            </div>
+            {libraryView === "content" ? (
+              queueItems.length > 0 ? (
+                <div className="feed">
+                  {queueItems.map((item) => (
+                    <ContentCard key={item.id} item={item} saved completed={completed.includes(item.id)} progress={readingProgressStore[item.id]?.percent ?? 0} onOpen={() => openItem(item)} onSave={() => toggleSaved(item.id)} />
+                  ))}
+                </div>
+              ) : (
+                <div className="empty-daily queue-empty"><Bookmark size={24} /><h3>还没有收藏内容</h3><p>在日报或精选详情中点击“收藏”，内容就会出现在这里。</p><button onClick={() => setTab("daily")}>去日报看看</button></div>
+              )
+            ) : (
+              <>
             <section className="notes-summary">
               <BookOpen size={19} />
               <div>
@@ -2108,13 +2185,15 @@ export function InfoHubApp({ user }: { user: ChatGPTUser | null }) {
                 <BookOpen size={24} />
                 <h3>还没有笔记</h3>
                 <p>在文章中选中内容并写下想法，会自动汇总到这里。</p>
-                <button onClick={() => setTab("reading")}>去精读</button>
+                <button onClick={() => setTab("curated")}>去精选</button>
               </div>
             ) : null}
+              </>
+            )}
           </div>
         )}
         {tab === "me" && (
-          <MobileAdminPanel />
+          <UserSettingsPanel theme={theme} onThemeChange={changeTheme} />
         )}
       </div>
 
@@ -2241,16 +2320,16 @@ export function InfoHubApp({ user }: { user: ChatGPTUser | null }) {
           onClick={() => setTab("daily")}
         />
         <NavButton
-          active={tab === "reading"}
+          active={tab === "curated"}
           icon={<BookOpen size={21} />}
-          label="精读"
-          onClick={() => setTab("reading")}
+          label="精选"
+          onClick={() => setTab("curated")}
         />
         <NavButton
-          active={tab === "notes"}
-          icon={<BookOpen size={21} />}
-          label="笔记"
-          onClick={() => setTab("notes")}
+          active={tab === "library"}
+          icon={<Bookmark size={21} />}
+          label="收藏"
+          onClick={() => setTab("library")}
         />
         <NavButton
           active={tab === "me"}
@@ -2294,8 +2373,9 @@ const privateBackupKeys = [
   "infohub-highlights",
   "infohub-reading-progress",
   "infohub-library-state",
+  "infohub-saved-snapshots",
   "infohub-section-preferences",
-  "infohub-curated-submissions",
+  "infohub-theme",
 ] as const;
 
 type PrivateBackup = {
@@ -2309,6 +2389,137 @@ function urlBase64ToUint8Array(value: string) {
   const padding = "=".repeat((4 - value.length % 4) % 4);
   const base64 = (value + padding).replace(/-/g, "+").replace(/_/g, "/");
   return Uint8Array.from(window.atob(base64), (character) => character.charCodeAt(0));
+}
+
+function UserSettingsPanel({
+  theme,
+  onThemeChange,
+}: {
+  theme: ThemeId;
+  onThemeChange: (theme: ThemeId) => void;
+}) {
+  const [apiUrl, setApiUrl] = useState("");
+  const [vapidPublicKey, setVapidPublicKey] = useState("");
+  const [backupMessage, setBackupMessage] = useState("");
+  const [pushSupported, setPushSupported] = useState(true);
+  const [pushEnabled, setPushEnabled] = useState(false);
+  const [pushBusy, setPushBusy] = useState(false);
+  const [pushMessage, setPushMessage] = useState("");
+  const backupInputRef = useRef<HTMLInputElement>(null);
+
+  useEffect(() => {
+    const supported = "serviceWorker" in navigator && "PushManager" in window && "Notification" in window;
+    const timer = window.setTimeout(() => setPushSupported(supported), 0);
+    if (supported) {
+      void navigator.serviceWorker.getRegistration().then(async (registration) => {
+        setPushEnabled(Boolean(await registration?.pushManager.getSubscription()));
+      });
+    }
+    void fetch("./infohub-config.json", { cache: "no-store" })
+      .then(async (response) => response.ok ? response.json() as Promise<{ submissionApiUrl?: string; vapidPublicKey?: string }> : null)
+      .then((config) => {
+        setApiUrl(config?.submissionApiUrl?.replace(/\/$/, "") ?? "");
+        setVapidPublicKey(config?.vapidPublicKey ?? "");
+      })
+      .catch(() => setApiUrl(""));
+    return () => window.clearTimeout(timer);
+  }, []);
+
+  function exportPrivateBackup() {
+    const values: PrivateBackup["values"] = {};
+    privateBackupKeys.forEach((key) => {
+      const value = window.localStorage.getItem(key);
+      if (value !== null) values[key] = value;
+    });
+    const backup: PrivateBackup = { format: "infohub-private-backup", version: 1, exportedAt: new Date().toISOString(), values };
+    const downloadUrl = URL.createObjectURL(new Blob([JSON.stringify(backup, null, 2)], { type: "application/json" }));
+    const link = document.createElement("a");
+    link.href = downloadUrl;
+    link.download = `infohub-backup-${new Date().toISOString().slice(0, 10)}.json`;
+    document.body.appendChild(link);
+    link.click();
+    link.remove();
+    window.setTimeout(() => URL.revokeObjectURL(downloadUrl), 1_000);
+    setBackupMessage("备份文件已导出，请将它保存在安全位置");
+  }
+
+  async function restorePrivateBackup(event: React.ChangeEvent<HTMLInputElement>) {
+    const file = event.target.files?.[0];
+    event.target.value = "";
+    if (!file) return;
+    try {
+      const parsed = JSON.parse(await file.text()) as Partial<PrivateBackup>;
+      if (parsed.format !== "infohub-private-backup" || parsed.version !== 1 || !parsed.values || typeof parsed.values !== "object") throw new Error("这不是有效的 InfoHub 备份文件");
+      const values = parsed.values as Record<string, unknown>;
+      if (!window.confirm("恢复备份将替换当前设备上的笔记、划线、阅读进度和收藏状态。确定继续吗？")) return;
+      privateBackupKeys.forEach((key) => {
+        const value = values[key];
+        if (typeof value === "string") window.localStorage.setItem(key, value);
+        else window.localStorage.removeItem(key);
+      });
+      window.alert("备份已恢复，InfoHub 将重新加载。");
+      window.location.reload();
+    } catch (error) {
+      setBackupMessage(error instanceof Error ? error.message : "备份恢复失败");
+    }
+  }
+
+  async function enablePushNotifications() {
+    if (!pushSupported || !apiUrl || !vapidPublicKey) {
+      setPushMessage("当前设备暂不支持通知，或通知服务尚未准备好");
+      return;
+    }
+    setPushBusy(true);
+    setPushMessage("");
+    try {
+      const permission = await Notification.requestPermission();
+      if (permission !== "granted") throw new Error("你没有允许通知，可以稍后在系统设置中重新开启");
+      const registration = await navigator.serviceWorker.register("./sw.js", { scope: "./" });
+      await navigator.serviceWorker.ready;
+      const existing = await registration.pushManager.getSubscription();
+      const subscription = existing ?? await registration.pushManager.subscribe({ userVisibleOnly: true, applicationServerKey: urlBase64ToUint8Array(vapidPublicKey) });
+      const response = await fetchGateway(`${apiUrl}/push/subscribe`, { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify(subscription.toJSON()) });
+      const result = await response.json() as { error?: string; warning?: string };
+      if (!response.ok) throw new Error(result.error ?? "通知订阅失败");
+      setPushEnabled(true);
+      setPushMessage(result.warning ?? "每日通知已开启，测试通知即将到达");
+    } catch (error) {
+      setPushMessage(error instanceof Error ? error.message : "通知订阅失败");
+    } finally {
+      setPushBusy(false);
+    }
+  }
+
+  async function disablePushNotifications() {
+    setPushBusy(true);
+    try {
+      const registration = await navigator.serviceWorker.getRegistration();
+      const subscription = await registration?.pushManager.getSubscription();
+      if (subscription && apiUrl) {
+        await fetch(`${apiUrl}/push/unsubscribe`, { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify({ endpoint: subscription.endpoint }) }).catch(() => undefined);
+        await subscription.unsubscribe();
+      }
+      setPushEnabled(false);
+      setPushMessage("每日通知已关闭");
+    } finally {
+      setPushBusy(false);
+    }
+  }
+
+  return (
+    <div className="content-area profile-page">
+      <section className="welcome"><div><p>我的 InfoHub</p><h1>阅读属于你，私人数据留在设备里。</h1></div></section>
+      <section className="device-privacy-card"><UserRound size={22} /><div><strong>私人阅读数据保存在当前设备</strong><span>收藏、阅读进度、划线和笔记不会上传，也不会进入公共内容生产线。</span></div></section>
+      <section className="appearance-settings-card">
+        <header><Palette size={21} /><div><strong>页面主题</strong><span>选择你更喜欢的阅读氛围，仅保存在当前设备。</span></div></header>
+        <div className="theme-option-grid" role="radiogroup" aria-label="页面主题">
+          {themeOptions.map((option) => <button type="button" key={option.id} className={theme === option.id ? "active" : ""} role="radio" aria-checked={theme === option.id} onClick={() => onThemeChange(option.id)}><span className="theme-swatches" aria-hidden="true">{option.colors.map((color) => <i key={color} style={{ backgroundColor: color }} />)}</span><span>{option.label}</span>{theme === option.id && <Check size={17} />}</button>)}
+        </div>
+      </section>
+      <section className="backup-card"><header><div><strong>私人数据备份</strong><span>导出收藏、笔记、划线与阅读进度；不包含任何管理员信息。</span></div></header><div><button onClick={exportPrivateBackup}><Download size={18} /> 导出全部数据</button><button onClick={() => backupInputRef.current?.click()}><Upload size={18} /> 恢复备份</button><input ref={backupInputRef} type="file" accept="application/json,.json" onChange={restorePrivateBackup} /></div>{backupMessage && <p>{backupMessage}</p>}</section>
+      <section className="notification-settings-card"><header>{pushEnabled ? <Bell size={21} /> : <BellOff size={21} />}<div><strong>每日更新通知</strong><span>日报和当天精选准备好后，每天只发送一次通知。</span></div></header><button className={pushEnabled ? "is-enabled" : ""} disabled={pushBusy || !pushSupported} onClick={pushEnabled ? disablePushNotifications : enablePushNotifications}>{pushBusy ? <LoaderCircle className="spin" size={18} /> : pushEnabled ? <BellOff size={18} /> : <Bell size={18} />}{pushBusy ? "正在设置" : pushEnabled ? "关闭每日通知" : "开启每日通知"}</button>{!pushSupported && <p>当前浏览器不支持 Web Push；iPhone 请将 InfoHub 添加到主屏幕后再打开。</p>}{pushMessage && <p>{pushMessage}</p>}</section>
+    </div>
+  );
 }
 
 async function fetchGateway(input: string, init?: RequestInit) {
@@ -2326,7 +2537,13 @@ async function fetchGateway(input: string, init?: RequestInit) {
   }
 }
 
-function MobileAdminPanel() {
+export function MobileAdminPanel({
+  theme,
+  onThemeChange,
+}: {
+  theme: ThemeId;
+  onThemeChange: (theme: ThemeId) => void;
+}) {
   const [apiUrl, setApiUrl] = useState("");
   const [vapidPublicKey, setVapidPublicKey] = useState("");
   const [adminOpen, setAdminOpen] = useState(false);
@@ -2593,6 +2810,34 @@ function MobileAdminPanel() {
         <div>
           <strong>私人阅读数据保存在当前设备</strong>
           <span>感兴趣、阅读进度、划线和笔记不会上传，也不会进入公共内容生产线。</span>
+        </div>
+      </section>
+
+      <section className="appearance-settings-card">
+        <header>
+          <Palette size={21} />
+          <div>
+            <strong>页面主题</strong>
+            <span>选择你更喜欢的阅读氛围，仅保存在当前设备。</span>
+          </div>
+        </header>
+        <div className="theme-option-grid" role="radiogroup" aria-label="页面主题">
+          {themeOptions.map((option) => (
+            <button
+              type="button"
+              key={option.id}
+              className={theme === option.id ? "active" : ""}
+              role="radio"
+              aria-checked={theme === option.id}
+              onClick={() => onThemeChange(option.id)}
+            >
+              <span className="theme-swatches" aria-hidden="true">
+                {option.colors.map((color) => <i key={color} style={{ backgroundColor: color }} />)}
+              </span>
+              <span>{option.label}</span>
+              {theme === option.id && <Check size={17} />}
+            </button>
+          ))}
         </div>
       </section>
 
