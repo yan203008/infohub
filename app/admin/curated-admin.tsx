@@ -40,7 +40,7 @@ const emptyDraft = (): CuratedDraft => ({
   type: "article",
   takeaways: [],
   takeawayRaw: "",
-  takeawayFormat: "simple",
+  takeawayFormat: "markdown",
   topics: [],
   body: "",
   bodyFormat: "markdown",

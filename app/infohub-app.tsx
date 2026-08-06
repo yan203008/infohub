@@ -2098,7 +2098,6 @@ export function InfoHubApp({ user }: { user: ChatGPTUser | null }) {
               <Sparkles size={19} />
               <div>
                 <strong>{curatedItems.length} 篇精选</strong>
-                <span>按展示日期排列，没有更新的日期不会出现</span>
               </div>
             </section>
             {curatedGroups.length > 0 ? (
