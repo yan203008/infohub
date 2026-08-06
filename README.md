@@ -37,7 +37,7 @@ GitHub Actions 每日启动
 
 ```text
 管理员打开 admin.html
-→ 填写标题、卡片摘要、日期、类型、Takeaways、正文和可选来源链接
+→ 填写标题、卡片摘要、日期、类型、Takeaways、正文和可选来源链接；Takeaways 与正文均可选择简单输入或 Markdown
 → 预览
 → 发布
 → Cloudflare Worker 将内容写入 public/generated-curated.json

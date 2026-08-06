@@ -41,6 +41,8 @@ test("includes the independent curated editor", async () => {
   assert.match(source, /Markdown/);
   assert.match(source, /takeawayFormat/);
   assert.match(source, /takeawayRaw/);
+  assert.match(source, /bodyFormat/);
+  assert.match(source, /正文输入格式/);
   assert.match(source, /保存草稿/);
   assert.match(source, /预览文章/);
   assert.match(source, /确认发布/);

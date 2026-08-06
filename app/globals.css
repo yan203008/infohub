@@ -2344,6 +2344,78 @@ select {
   background: var(--line);
 }
 
+.markdown-article {
+  color: var(--ink);
+}
+
+.markdown-article h1,
+.markdown-article h2,
+.markdown-article h3,
+.markdown-article h4 {
+  margin: 1.8em 0 0.7em;
+  padding: 10px 13px;
+  border-radius: 9px;
+  background: var(--green-soft);
+  color: var(--green-dark);
+  font-family: Georgia, "Songti SC", "Noto Serif SC", serif;
+  font-weight: 760;
+  line-height: 1.45;
+}
+
+.markdown-article h1 { font-size: 26px; }
+.markdown-article h2 { font-size: 23px; }
+.markdown-article h3 { font-size: 20px; }
+.markdown-article h4 { font-size: 18px; }
+
+.markdown-article p,
+.markdown-article li,
+.markdown-article blockquote {
+  font-size: 18px;
+  line-height: 1.92;
+}
+
+.markdown-article p { margin: 0 0 1.4em; }
+
+.markdown-article ol,
+.markdown-article ul {
+  margin: 0 0 1.5em;
+  padding-left: 30px;
+}
+
+.markdown-article ol { list-style: decimal outside; }
+.markdown-article ul { list-style: disc outside; }
+
+.markdown-article li {
+  display: list-item;
+  margin: 8px 0;
+  padding-left: 4px;
+}
+
+.markdown-article li::marker {
+  color: var(--green);
+  font-weight: 800;
+}
+
+.markdown-article blockquote {
+  margin: 0 0 1.5em;
+  padding: 2px 0 2px 18px;
+  border-left: 4px solid var(--green);
+  color: var(--muted);
+}
+
+.markdown-article a {
+  color: var(--green);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.markdown-article hr {
+  height: 1px;
+  margin: 32px 0;
+  border: 0;
+  background: var(--line);
+}
+
 .reader-section-title {
   margin: 42px 0 26px;
   font-family: Georgia, "Songti SC", "Noto Serif SC", serif;

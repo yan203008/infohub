@@ -2,11 +2,12 @@
 
 import { ArrowDown, ArrowUp, Check, Eye, EyeOff, FileText, LayoutList, LoaderCircle, LogOut, Pencil, Plus, RotateCcw, Send, Tag, Trash2, X } from "lucide-react";
 import { useEffect, useMemo, useState } from "react";
-import { MarkdownTakeaway } from "../markdown-takeaway";
+import { MarkdownArticle, MarkdownTakeaway } from "../markdown-takeaway";
 
 type ArticleType = "podcast" | "video" | "article";
 type PublishStatus = "draft" | "scheduled" | "publishing" | "live" | "failed" | "withdrawn";
 type TakeawayFormat = "simple" | "markdown";
+type BodyFormat = "simple" | "markdown";
 
 type CuratedDraft = {
   id: string;
@@ -19,6 +20,7 @@ type CuratedDraft = {
   takeawayFormat: TakeawayFormat;
   topics: string[];
   body: string;
+  bodyFormat: BodyFormat;
   sourceUrl?: string;
   status: PublishStatus;
   error?: string;
@@ -41,6 +43,7 @@ const emptyDraft = (): CuratedDraft => ({
   takeawayFormat: "simple",
   topics: [],
   body: "",
+  bodyFormat: "markdown",
   sourceUrl: "",
   status: "draft",
   updatedAt: new Date().toISOString(),
@@ -106,7 +109,10 @@ function publicItemToDraft(item: Record<string, unknown>): CuratedDraft | null {
     takeawayRaw: typeof item.takeawayRaw === "string" ? item.takeawayRaw : undefined,
     takeawayFormat: item.takeawayFormat === "markdown" ? "markdown" : "simple",
     topics: Array.isArray(item.topics) ? item.topics.filter((value): value is string => typeof value === "string").slice(0, 2) : [],
-    body: [...paragraphs, ...sectionBody].join("\n\n"),
+    body: item.bodyFormat === "markdown" && typeof item.bodyRaw === "string"
+      ? item.bodyRaw
+      : [...paragraphs, ...sectionBody].join("\n\n"),
+    bodyFormat: item.bodyFormat === "markdown" ? "markdown" : "simple",
     sourceUrl: typeof item.sourceUrl === "string" ? item.sourceUrl : undefined,
     status: displayDate > emptyDraft().displayDate ? "scheduled" : "live",
     updatedAt: typeof item.publishedAt === "string" ? item.publishedAt : `${displayDate}T00:00:00.000Z`,
@@ -191,7 +197,12 @@ export function CuratedAdminApp() {
         return;
       }
       if (!response.ok) throw new Error(result.error ?? "读取失败");
-      setDrafts((result.drafts ?? []).map((item) => ({ ...item, topics: Array.isArray(item.topics) ? item.topics : [], takeawayFormat: item.takeawayFormat === "markdown" ? "markdown" : "simple" })));
+      setDrafts((result.drafts ?? []).map((item) => ({
+        ...item,
+        topics: Array.isArray(item.topics) ? item.topics : [],
+        takeawayFormat: item.takeawayFormat === "markdown" ? "markdown" : "simple",
+        bodyFormat: item.bodyFormat === "markdown" ? "markdown" : "simple",
+      })));
     } catch (error) {
       setMessage(error instanceof Error ? error.message : "读取失败");
     }
@@ -419,12 +430,16 @@ export function CuratedAdminApp() {
             <textarea rows={draft.takeawayFormat === "markdown" ? 16 : 7} value={takeawayText} onChange={(event) => setTakeawayText(event.target.value)} placeholder={draft.takeawayFormat === "markdown" ? "直接粘贴 Markdown 内容，标题、加粗、列表、段落和分隔线会原样渲染" : "每行填写一条，系统会自动显示 1、2、3……"} />
             <small>{draft.takeawayFormat === "markdown" ? "Markdown 会按原结构安全渲染；原始 HTML 不会执行。" : "一行就是一条，不需要自己输入序号。"}</small>
           </div>
-          <label className="field-full"><span>正文 *</span><textarea rows={18} value={draft.body} onChange={(event) => setDraft({ ...draft, body: event.target.value })} placeholder={'直接粘贴处理好的正文。段落之间空一行；小标题单独占一行。'} /><small>无需 Markdown。空行会自动分段，简短的独立行会显示为小标题。</small></label>
+          <div className="field-full takeaway-editor-field">
+            <div className="takeaway-editor-heading"><span>正文 *</span><div className="takeaway-format-picker" role="radiogroup" aria-label="正文输入格式"><button type="button" className={draft.bodyFormat === "simple" ? "active" : ""} onClick={() => setDraft({ ...draft, bodyFormat: "simple" })}>简单输入</button><button type="button" className={draft.bodyFormat === "markdown" ? "active" : ""} onClick={() => setDraft({ ...draft, bodyFormat: "markdown" })}>Markdown</button></div></div>
+            <textarea rows={18} value={draft.body} onChange={(event) => setDraft({ ...draft, body: event.target.value })} placeholder={draft.bodyFormat === "markdown" ? "直接粘贴 Markdown 正文，标题、加粗、列表、引用、链接和分隔线会按原结构渲染" : "直接粘贴处理好的正文。段落之间空一行；小标题单独占一行。"} />
+            <small>{draft.bodyFormat === "markdown" ? "Markdown 会按原结构安全渲染；原始 HTML 不会执行。" : "空行会自动分段，简短的独立行会显示为小标题。"}</small>
+          </div>
           <label className="field-full"><span>来源链接（选填）</span><input type="url" value={draft.sourceUrl ?? ""} onChange={(event) => setDraft({ ...draft, sourceUrl: event.target.value })} placeholder="https://...（播客、视频或原文章链接）" /></label>
         </div>
         <div className="editor-actions"><button className="secondary" onClick={() => setEditorOpen(false)}>取消</button><button className="secondary" disabled={busy || !canSubmit} onClick={() => void save("draft")}><FileText size={18} />保存草稿</button><button className="primary" disabled={!canSubmit} onClick={() => { setEditorOpen(false); setPreviewOpen(true); }}><Eye size={18} />预览文章</button></div>
       </section>
     </div>}
-    {previewOpen && <div className="admin-preview-backdrop" role="dialog" aria-modal="true"><article className="admin-preview"><button className="preview-close" onClick={() => setPreviewOpen(false)} aria-label="关闭"><X /></button><div className="preview-meta">{draft.displayDate} · {typeLabel[draft.type]}</div><h1>{draft.title}</h1><p className="preview-summary">{draft.cardSummary}</p>{takeawayText.trim() && (draft.takeawayFormat === "markdown" ? <MarkdownTakeaway value={takeawayText} /> : <section className="takeaway-preview"><h2>Takeaway</h2><ol>{previewTakeaways.map((item) => <li key={item}>{item}</li>)}</ol></section>)}<section><h2>阅读原文</h2>{bodyBlocks(draft.body).map((block, index) => block.length <= 30 && !/[。！？.!?]$/.test(block) ? <h3 key={`${block}-${index}`}>{block}</h3> : <p key={`${block}-${index}`}>{block}</p>)}</section>{draft.sourceUrl && <a href={draft.sourceUrl} target="_blank" rel="noreferrer">跳转来源</a>}<footer className="preview-actions"><button onClick={() => { setPreviewOpen(false); setEditorOpen(true); }}><Pencil size={17} />返回修改</button><button className="primary" disabled={busy} onClick={() => void save("publish")}><Send size={17} />确认发布</button></footer></article></div>}
+    {previewOpen && <div className="admin-preview-backdrop" role="dialog" aria-modal="true"><article className="admin-preview"><button className="preview-close" onClick={() => setPreviewOpen(false)} aria-label="关闭"><X /></button><div className="preview-meta">{draft.displayDate} · {typeLabel[draft.type]}</div><h1>{draft.title}</h1><p className="preview-summary">{draft.cardSummary}</p>{takeawayText.trim() && (draft.takeawayFormat === "markdown" ? <MarkdownTakeaway value={takeawayText} /> : <section className="takeaway-preview"><h2>Takeaway</h2><ol>{previewTakeaways.map((item) => <li key={item}>{item}</li>)}</ol></section>)}<h2 className="reader-section-title">阅读原文</h2>{draft.bodyFormat === "markdown" ? <MarkdownArticle value={draft.body} /> : <section>{bodyBlocks(draft.body).map((block, index) => block.length <= 30 && !/[。！？.!?]$/.test(block) ? <h3 key={`${block}-${index}`}>{block}</h3> : <p key={`${block}-${index}`}>{block}</p>)}</section>}{draft.sourceUrl && <a href={draft.sourceUrl} target="_blank" rel="noreferrer">跳转来源</a>}<footer className="preview-actions"><button onClick={() => { setPreviewOpen(false); setEditorOpen(true); }}><Pencil size={17} />返回修改</button><button className="primary" disabled={busy} onClick={() => void save("publish")}><Send size={17} />确认发布</button></footer></article></div>}
   </main>;
 }

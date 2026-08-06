@@ -88,6 +88,7 @@ type StoredPushSubscription = {
 type ArticleType = "podcast" | "video" | "article";
 type PublishStatus = "draft" | "scheduled" | "publishing" | "live" | "failed" | "withdrawn";
 type TakeawayFormat = "simple" | "markdown";
+type BodyFormat = "simple" | "markdown";
 
 type CuratedDraft = {
   id: string;
@@ -100,6 +101,7 @@ type CuratedDraft = {
   takeawayFormat: TakeawayFormat;
   topics: string[];
   body: string;
+  bodyFormat: BodyFormat;
   sourceUrl?: string;
   status: PublishStatus;
   error?: string;
@@ -188,6 +190,7 @@ function validateCuratedDraft(value: unknown): CuratedDraft {
     takeawayFormat: draft.takeawayFormat === "markdown" ? "markdown" : "simple",
     topics: Array.isArray(draft.topics) ? [...new Set(draft.topics.filter((item): item is string => typeof item === "string").map((item) => item.trim()).filter(Boolean))].slice(0, 2) : [],
     body: body.slice(0, 200_000),
+    bodyFormat: draft.bodyFormat === "markdown" ? "markdown" : "simple",
     sourceUrl: sourceUrl || undefined,
     status: "draft",
     updatedAt: new Date().toISOString(),
@@ -214,7 +217,12 @@ async function listDrafts(env: Env) {
   publicFile.items.map(publicItemToDraft).filter((item): item is CuratedDraft => Boolean(item)).forEach((item) => merged.set(item.id, item));
   storedDrafts.filter((item): item is CuratedDraft => Boolean(item)).forEach((item) => merged.set(item.id, item));
   return [...merged.values()]
-    .map((draft) => ({ ...draft, topics: Array.isArray(draft.topics) ? draft.topics : [], takeawayFormat: draft.takeawayFormat === "markdown" ? "markdown" as const : "simple" as const }))
+    .map((draft) => ({
+      ...draft,
+      topics: Array.isArray(draft.topics) ? draft.topics : [],
+      takeawayFormat: draft.takeawayFormat === "markdown" ? "markdown" as const : "simple" as const,
+      bodyFormat: draft.bodyFormat === "markdown" ? "markdown" as const : "simple" as const,
+    }))
     .map((draft) => draft.status === "scheduled" && draft.displayDate <= beijingDate() ? { ...draft, status: "live" as const } : draft)
     .sort((a, b) => b.updatedAt.localeCompare(a.updatedAt));
 }
@@ -222,7 +230,7 @@ async function listDrafts(env: Env) {
 function draftToPublicItem(draft: CuratedDraft) {
   const source = draft.type === "video" ? "youtube" : draft.type;
   const label = draft.type === "podcast" ? "播客" : draft.type === "video" ? "视频" : "文章";
-  const paragraphs = draft.body.split(/\n\s*\n/).map((paragraph) => paragraph.trim()).filter(Boolean);
+  const paragraphs = draft.bodyFormat === "markdown" ? [] : draft.body.split(/\n\s*\n/).map((paragraph) => paragraph.trim()).filter(Boolean);
   const intro: string[] = [];
   const sections: { title: string; timeRange: string; paragraphs: string[] }[] = [];
   for (const block of paragraphs) {
@@ -250,6 +258,8 @@ function draftToPublicItem(draft: CuratedDraft) {
     takeaways: draft.takeaways,
     takeawayRaw: draft.takeawayRaw,
     takeawayFormat: draft.takeawayFormat,
+    bodyRaw: draft.bodyFormat === "markdown" ? draft.body : undefined,
+    bodyFormat: draft.bodyFormat,
     section: "reading",
     inRecentWindow: true,
     publishedAt: draft.updatedAt,
@@ -279,7 +289,10 @@ function publicItemToDraft(item: Record<string, unknown>): CuratedDraft | null {
     takeawayRaw: typeof item.takeawayRaw === "string" ? item.takeawayRaw : undefined,
     takeawayFormat: item.takeawayFormat === "markdown" ? "markdown" : "simple",
     topics: Array.isArray(item.topics) ? item.topics.filter((value): value is string => typeof value === "string").slice(0, 2) : [],
-    body: [...paragraphs, ...sectionBody].join("\n\n"),
+    body: item.bodyFormat === "markdown" && typeof item.bodyRaw === "string"
+      ? item.bodyRaw
+      : [...paragraphs, ...sectionBody].join("\n\n"),
+    bodyFormat: item.bodyFormat === "markdown" ? "markdown" : "simple",
     sourceUrl: typeof item.sourceUrl === "string" && item.sourceUrl ? item.sourceUrl : undefined,
     status: displayDate > beijingDate() ? "scheduled" : "live",
     updatedAt: typeof item.publishedAt === "string" ? item.publishedAt : `${displayDate}T00:00:00.000Z`,

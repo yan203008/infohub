@@ -38,7 +38,7 @@ import { useEffect, useLayoutEffect, useMemo, useRef, useState } from "react";
 import type { ChatGPTUser } from "./chatgpt-auth";
 import generatedFeed from "./generated-feed.json";
 import generatedSectionSummaries from "./generated-section-summaries.json";
-import { MarkdownTakeaway } from "./markdown-takeaway";
+import { MarkdownArticle, MarkdownTakeaway } from "./markdown-takeaway";
 
 type Source = "youtube" | "podcast" | "article" | "daily" | "builder";
 type Tab = "daily" | "curated" | "library" | "me";
@@ -73,6 +73,8 @@ type Item = {
   takeaways?: string[];
   takeawayRaw?: string;
   takeawayFormat?: "simple" | "markdown";
+  bodyRaw?: string;
+  bodyFormat?: "simple" | "markdown";
   utility?: string;
   sections?: { title: string; timeRange: string; paragraphs: string[] }[];
   digestFormat?: "builders-digest";
@@ -1613,7 +1615,17 @@ export function InfoHubApp({ user }: { user: ChatGPTUser | null }) {
               {activeItem.section === "github" && <GitHubStarGuide facts={activeItem.facts} />}
             </>
           )}
-          {activeItem.section === "papers" ? (
+          {activeItem.bodyFormat === "markdown" && activeItem.bodyRaw ? (
+            <MarkdownArticle
+              value={activeItem.bodyRaw}
+              renderParagraph={({ children, text, key }) => {
+                const ranges = itemHighlights[key] ?? [];
+                return ranges.length > 0
+                  ? <SelectableParagraph text={text} highlightKey={key} ranges={ranges} onHighlightClick={(range) => openHighlightNote(key, range)} />
+                  : <p data-highlight-key={key}>{children}</p>;
+              }}
+            />
+          ) : activeItem.section === "papers" ? (
             <>
               <section className="paper-abstract">
                 <span>ABSTRACT</span>
