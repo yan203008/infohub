@@ -907,6 +907,87 @@ select {
   font-weight: 450;
 }
 
+.editor-title-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.auto-import-trigger {
+  display: inline-flex;
+  min-height: 38px;
+  padding: 0 13px;
+  align-items: center;
+  gap: 7px;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: var(--green-soft);
+  color: var(--green-dark);
+  cursor: pointer;
+  font-weight: 720;
+}
+
+.auto-import-panel {
+  display: grid;
+  margin: 0 0 20px;
+  padding: 18px;
+  gap: 12px;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  background: var(--green-soft);
+}
+
+.auto-import-panel > div:first-child {
+  display: grid;
+  gap: 4px;
+}
+
+.auto-import-panel span {
+  color: var(--muted);
+  font-size: 13px;
+}
+
+.auto-import-panel textarea {
+  width: 100%;
+  min-height: 220px;
+  padding: 13px 14px;
+  resize: vertical;
+  border: 1px solid var(--line);
+  border-radius: 11px;
+  background: var(--white);
+  color: var(--ink);
+  font: 14px/1.65 ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+}
+
+.auto-import-panel > div:last-child {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+}
+
+.auto-import-panel .auto-import-action {
+  display: inline-flex;
+  min-height: 44px;
+  padding: 0 18px;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  border: 0;
+  border-radius: 11px;
+  background: var(--green);
+  color: var(--white);
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 750;
+  box-shadow: 0 8px 20px rgba(24, 95, 67, 0.16);
+}
+
+.auto-import-panel .auto-import-action:disabled {
+  cursor: not-allowed;
+  opacity: 0.45;
+  box-shadow: none;
+}
+
 .type-chip {
   padding: 5px 9px;
   border-radius: 999px;

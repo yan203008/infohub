@@ -1,6 +1,6 @@
 "use client";
 
-import { ArrowDown, ArrowUp, Check, Eye, EyeOff, FileText, LayoutList, LoaderCircle, LogOut, Pencil, Plus, RotateCcw, Send, Tag, Trash2, X } from "lucide-react";
+import { ArrowDown, ArrowUp, Check, Eye, EyeOff, FileText, LayoutList, LoaderCircle, LogOut, Pencil, Plus, RotateCcw, Send, Sparkles, Tag, Trash2, X } from "lucide-react";
 import { useEffect, useMemo, useState } from "react";
 import { MarkdownArticle, MarkdownTakeaway } from "../markdown-takeaway";
 
@@ -125,12 +125,33 @@ function parseSimpleTakeaways(raw: string) {
     .filter(Boolean);
 }
 
+const generatedBlockNames = ["TITLE", "SUMMARY", "TAKEAWAYS", "ARTICLE"] as const;
+
+function extractGeneratedBlock(raw: string, name: typeof generatedBlockNames[number]) {
+  const pattern = new RegExp(`<<<\\s*${name}\\s*>>>\\s*([\\s\\S]*?)\\s*<<<\\s*\\/${name}\\s*>>>`, "i");
+  return raw.match(pattern)?.[1]?.trim() ?? "";
+}
+
+function parseGeneratedArticle(raw: string) {
+  const blocks = Object.fromEntries(generatedBlockNames.map((name) => [name, extractGeneratedBlock(raw, name)])) as Record<typeof generatedBlockNames[number], string>;
+  const missing = generatedBlockNames.filter((name) => !blocks[name]);
+  if (missing.length > 0) throw new Error(`无法识别：缺少 ${missing.join("、")} 区块。请确认 Bot 使用了指定输出格式。`);
+  return {
+    title: blocks.TITLE.replace(/^#{1,6}\s*/, "").trim(),
+    summary: blocks.SUMMARY.replace(/^#{1,6}\s*(?:摘要|Summary)\s*\n?/i, "").trim(),
+    takeaways: blocks.TAKEAWAYS,
+    article: blocks.ARTICLE,
+  };
+}
+
 export function CuratedAdminApp() {
   const [apiUrl, setApiUrl] = useState("");
   const [token, setToken] = useState(() => typeof window === "undefined" ? "" : window.localStorage.getItem("infohub-admin-token") ?? "");
   const [password, setPassword] = useState("");
   const [draft, setDraft] = useState<CuratedDraft>(emptyDraft);
   const [takeawayText, setTakeawayText] = useState("");
+  const [autoImportOpen, setAutoImportOpen] = useState(false);
+  const [autoImportText, setAutoImportText] = useState("");
   const [topicInput, setTopicInput] = useState("");
   const [drafts, setDrafts] = useState<CuratedDraft[]>([]);
   const [busy, setBusy] = useState(false);
@@ -218,6 +239,8 @@ export function CuratedAdminApp() {
     setDraft(emptyDraft());
     setTakeawayText("");
     setTopicInput("");
+    setAutoImportOpen(false);
+    setAutoImportText("");
     setMessage("");
     setEditorOpen(true);
   }
@@ -226,8 +249,30 @@ export function CuratedAdminApp() {
     setDraft(item);
     setTakeawayText(item.takeawayRaw || item.takeaways.join("\n"));
     setTopicInput("");
+    setAutoImportOpen(false);
+    setAutoImportText("");
     setMessage("");
     setEditorOpen(true);
+  }
+
+  function importGeneratedArticle() {
+    try {
+      const parsed = parseGeneratedArticle(autoImportText);
+      setDraft({
+        ...draft,
+        title: parsed.title,
+        cardSummary: parsed.summary,
+        body: parsed.article,
+        takeawayFormat: "markdown",
+        bodyFormat: "markdown",
+      });
+      setTakeawayText(parsed.takeaways);
+      setMessage("已识别并填入标题、摘要、Takeaway 和正文，请检查后预览发布。");
+      setAutoImportOpen(false);
+      setAutoImportText("");
+    } catch (error) {
+      setMessage(error instanceof Error ? error.message : "自动识别失败");
+    }
   }
 
   function addTopic(rawValue = topicInput) {
@@ -418,7 +463,12 @@ export function CuratedAdminApp() {
     </section>
     {editorOpen && <div className="admin-editor-backdrop" role="dialog" aria-modal="true">
       <section className="curated-editor admin-editor-modal">
-        <div className="editor-title"><div><p>{draft.status === "draft" && !draft.title ? "新增文章" : "编辑文章"}</p><h1>{draft.title || "新建精选"}</h1></div><button className="modal-close" onClick={() => setEditorOpen(false)} aria-label="关闭"><X size={20} /></button></div>
+        <div className="editor-title"><div><p>{draft.status === "draft" && !draft.title ? "新增文章" : "编辑文章"}</p><h1>{draft.title || "新建精选"}</h1></div><div className="editor-title-actions"><button type="button" className="auto-import-trigger" onClick={() => setAutoImportOpen((value) => !value)}><Sparkles size={17} />自动识别</button><button className="modal-close" onClick={() => setEditorOpen(false)} aria-label="关闭"><X size={20} /></button></div></div>
+        {autoImportOpen && <section className="auto-import-panel">
+          <div><strong>粘贴 Bot 的完整结果</strong><span>系统会自动拆分标题、摘要、Takeaway 和正文，现有内容将被替换。</span></div>
+          <textarea rows={12} value={autoImportText} onChange={(event) => setAutoImportText(event.target.value)} placeholder={"从 <<<TITLE>>> 开始，粘贴到 <<</ARTICLE>>> 结束"} autoFocus />
+          <div><button type="button" className="auto-import-action" disabled={!autoImportText.trim()} onClick={importGeneratedArticle}><Sparkles size={17} />开始识别</button></div>
+        </section>}
         <div className="editor-grid">
           <label className="field-full"><span>标题 *</span><input value={draft.title} onChange={(event) => setDraft({ ...draft, title: event.target.value })} placeholder="粘贴文章标题" /></label>
           <label className="field-full"><span>卡片摘要 *</span><textarea rows={3} value={draft.cardSummary} onChange={(event) => setDraft({ ...draft, cardSummary: event.target.value })} placeholder="用 2—3 句话告诉用户这篇内容讲什么、为什么值得读" /></label>
