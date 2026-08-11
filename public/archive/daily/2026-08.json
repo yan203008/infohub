@@ -1,17 +1,16 @@
 [
   {
     "section": "github",
-    "digestDate": "2026-08-11",
-    "publishedDate": "8/11",
+    "digestDate": "2026-08-12",
+    "publishedDate": "8/12",
     "time": "本次更新",
     "readTime": "3 分钟",
     "accent": "blue",
     "inRecentWindow": true,
     "paragraphs": [
-      "这个项目的思路是：AI 编程助手（如 Claude Code、Cursor 等）虽然能写代码，但往往缺少规范的工作流程。Agent Skills 把资深工程师的工作方法编成 24 个“技能”，覆盖定义需求、制定计划、增量开发、测试验证、代码评审、性能审计、简化代码、发布上线等环节，让 AI 在每个阶段都按统一的质量标准执行。",
-      "使用方式以斜杠命令为主，比如 /spec 先写清需求、/plan 拆成小任务、/test 强制测试驱动开发、/review 在合并前做代码健康检查、/ship 发布上线。其中 /build auto 还能在你确认计划后自动完成所有任务，每步仍单独测试和提交，遇到问题会暂停。技能也会根据你正在做的事自动触发，比如设计接口时自动启用 API 设计规范。",
-      "它由知名工程师 Addy Osmani 维护，开源且免费（MIT 协议），通过一条 npx 命令即可安装到 70 多种 AI 编程工具中，也可以单个技能按需安装。适合已经在用 AI 辅助编程、但觉得 AI 产出质量不稳定、缺少工程规范的开发者。",
-      "需要说明的是，这个项目本身面向开发者：它不是帮你写代码的工具，而是给 AI 编程助手立规矩的“工作手册”，因此前提是你已经在使用 AI 编程工具。不写代码的用户基本用不上它。"
+      "很多人用 AI 写代码时会遇到一个问题：AI 直接开写，没有需求梳理、没有计划、写完也不测试，结果代码质量不稳定。这个项目把资深工程师的工作方法（先定需求、再做计划、小步开发、测试验证、代码审查、最后上线）打包成 8 个简单的斜杠命令，例如输入 /spec 让 AI 先帮你明确要做什么，/test 让它用测试证明代码能跑，/review 在合并前做质量检查。",
+      "除了手动命令，技能还会根据你正在做的事自动触发：设计接口时自动启用接口设计规范，做界面时自动套用前端工程最佳实践。还有一个 /build auto 模式，你只需批准一次计划，AI 就能自主完成所有任务，每步仍然经过测试和单独提交，出错或遇到风险会主动暂停。",
+      "适合已经在用 AI 编程助手（Claude Code、Cursor、Copilot 等 70 多种工具）但觉得输出质量不稳定的人。安装只需一条 npx 命令，不需要自己写任何代码，但前提是你已经在使用这类 AI 工具进行开发，完全不懂编程的纯新手不太用得上。"
     ],
     "facts": [
       {
@@ -20,15 +19,15 @@
       },
       {
         "label": "Stars",
-        "value": "85,646"
+        "value": "86,133"
       },
       {
         "label": "今日新增 Stars",
-        "value": "+659"
+        "value": "+571"
       },
       {
         "label": "Forks",
-        "value": "9,219"
+        "value": "9,262"
       },
       {
         "label": "许可证",
@@ -54,21 +53,1557 @@
       }
     ],
     "id": "github-trending:addyosmani/agent-skills",
-    "title": "Agent Skills：让 AI 编程助手按资深工程师流程工作的技能包",
+    "title": "AI 编程助手的高级工程师技能包",
     "sourceUrl": "https://github.com/addyosmani/agent-skills",
-    "summary": "一套为 AI 编程助手准备的开源技能合集，把资深工程师从需求、规划、编码到测试、评审、上线的完整工作规范打包进去，让 AI 写代码更靠谱。",
+    "summary": "这是一套现成的「技能包」，能让 Claude Code、Cursor 等 AI 编程助手像资深工程师一样按规范流程帮你开发软件。",
     "tags": [
-      "AI编程",
+      "AI 编程助手",
       "技能包",
-      "工作流",
+      "开发流程",
       "代码质量",
       "Claude Code",
-      "Cursor",
-      "开发规范"
+      "自动化开发"
     ],
     "source": "daily",
     "sourceLabel": "GitHub Trending",
-    "publishedAt": "2026-08-10T18:02:06.390Z"
+    "publishedAt": "2026-08-11T18:06:08.560Z"
+  },
+  {
+    "section": "github",
+    "digestDate": "2026-08-12",
+    "publishedDate": "8/12",
+    "time": "本次更新",
+    "readTime": "3 分钟",
+    "accent": "blue",
+    "inRecentWindow": true,
+    "paragraphs": [
+      "Code-Graph-RAG 会把整个代码仓库逐文件读入，提取其中的函数、类、方法、模块以及它们之间的调用和依赖关系，存成一张互联的知识图谱。有了这张图之后，你不再需要逐个翻文件，直接用自然语言就能问出“某个功能在哪里实现”“这段逻辑会影响哪些地方”之类的问题，得到的回答基于代码的真实结构，而不是猜测。",
+      "它的核心能力包括：跨多种编程语言（Python、JavaScript、TypeScript、Go、Java、Rust、C、C++、C#、Ruby 等）统一解析，特别适合多种语言混在一起的 monorepo 大型仓库；按代码结构（而非纯文本或正则）进行搜索和批量重写；以及数据流追踪，可以沿着赋值、函数调用和输入输出追踪一个值的流向，帮助发现安全隐患。",
+      "适用人群主要是开发团队和技术负责人：接手陌生大型项目时快速建立整体认知、评估改动的波及范围、做跨仓库的结构化重构时最能体现价值。项目由 AI 驱动问答，企业用户还可以通过官网获得支持服务。",
+      "使用门槛方面，它是一个 Python 命令行工具（可通过 PyPI 安装，采用 MIT 开源协议），需要一定的命令行基础和图数据库 Memgraph 环境，使用时还需要配置 AI 模型的访问能力。它更适合有开发经验的用户，非程序员单独部署会比较吃力，但可以作为团队引入 AI 辅助代码理解的基础设施。"
+    ],
+    "facts": [
+      {
+        "label": "主要语言",
+        "value": "Python"
+      },
+      {
+        "label": "Stars",
+        "value": "3,761"
+      },
+      {
+        "label": "今日新增 Stars",
+        "value": "+339"
+      },
+      {
+        "label": "Forks",
+        "value": "558"
+      },
+      {
+        "label": "许可证",
+        "value": "MIT"
+      },
+      {
+        "label": "最近更新",
+        "value": "2026-08-12"
+      }
+    ],
+    "externalLinks": [
+      {
+        "label": "阅读项目 README",
+        "url": "https://github.com/vitali87/code-graph-rag#readme"
+      },
+      {
+        "label": "打开项目网站",
+        "url": "https://code-graph-rag.com"
+      },
+      {
+        "label": "查看 Releases",
+        "url": "https://github.com/vitali87/code-graph-rag/releases"
+      }
+    ],
+    "id": "github-trending:vitali87/code-graph-rag",
+    "title": "Code-Graph-RAG：用自然语言查询和修改大型代码库的智能助手",
+    "sourceUrl": "https://github.com/vitali87/code-graph-rag",
+    "summary": "这是一个把代码库解析成知识图谱的工具，让你用日常语言向 AI 提问、理解甚至批量修改多语言混合的大型代码项目。",
+    "tags": [
+      "代码知识图谱",
+      "RAG",
+      "AI 代码问答",
+      "monorepo",
+      "多语言代码分析",
+      "结构化搜索替换",
+      "数据流追踪"
+    ],
+    "source": "daily",
+    "sourceLabel": "GitHub Trending",
+    "publishedAt": "2026-08-11T18:06:08.560Z"
+  },
+  {
+    "section": "github",
+    "digestDate": "2026-08-12",
+    "publishedDate": "8/12",
+    "time": "本次更新",
+    "readTime": "3 分钟",
+    "accent": "blue",
+    "inRecentWindow": true,
+    "paragraphs": [
+      "这个项目把'组建一支梦之队'的想法搬到了 AI 世界：它收集了一大批精心编写的 AI 智能体角色设定，每个角色都不是泛泛的提示词模板，而是有独特个性、沟通风格、工作流程和明确交付物的'专家'，比如前端开发、UI 设计、安全审查、Reddit 社区运营等，覆盖工程、设计、营销、安全等多个部门。",
+      "使用方式很灵活。最省事的是下载官方桌面应用（支持 macOS、Linux 和 Windows），在应用里浏览整个专家名册，一键把选中的智能体安装到 Claude Code、Cursor、Codex、Gemini 等工具里，还能自动更新。习惯命令行的用户也可以用项目自带的脚本安装，支持只安装某几个部门或某几个具体角色，避免一次性装太多。",
+      "安装之后，你在和 AI 编程助手对话时就可以'激活'某个角色，比如说一句'进入前端开发模式，帮我写个 React 组件'，AI 就会以该专家的工作方式、流程和交付标准来回应，而不是给出泛泛的答案。即使不安装，每个角色文件本身也是很好的参考资料，可以看看专家级的工作流和质量标准长什么样。",
+      "适合已经在用 AI 编程或创作工具、觉得 AI 回答太笼统的用户，门槛不高——用桌面应用基本不需要碰命令行。对完全不用 AI 工具的人来说它没有直接用途，但对想让 AI 输出更专业、更有章法的个人开发者和内容团队，是一个即装即用的加分项。"
+    ],
+    "facts": [
+      {
+        "label": "主要语言",
+        "value": "Shell"
+      },
+      {
+        "label": "Stars",
+        "value": "142,813"
+      },
+      {
+        "label": "今日新增 Stars",
+        "value": "+971"
+      },
+      {
+        "label": "Forks",
+        "value": "23,242"
+      },
+      {
+        "label": "许可证",
+        "value": "MIT"
+      },
+      {
+        "label": "最近更新",
+        "value": "2026-08-06"
+      }
+    ],
+    "externalLinks": [
+      {
+        "label": "阅读项目 README",
+        "url": "https://github.com/msitarzewski/agency-agents#readme"
+      },
+      {
+        "label": "查看 Releases",
+        "url": "https://github.com/msitarzewski/agency-agents/releases"
+      }
+    ],
+    "id": "github-trending:msitarzewski/agency-agents",
+    "title": "The Agency：一支随叫随到的 AI 专家团队",
+    "sourceUrl": "https://github.com/msitarzewski/agency-agents",
+    "summary": "这是一套为 Claude Code、Cursor 等 AI 工具准备的专业智能体合集，让每个 AI 助手扮演前端工程师、社区运营等有明确分工和交付标准的专家角色。",
+    "tags": [
+      "AI 智能体",
+      "Claude Code",
+      "Cursor",
+      "角色提示词",
+      "专家团队",
+      "桌面应用",
+      "工作流"
+    ],
+    "source": "daily",
+    "sourceLabel": "GitHub Trending",
+    "publishedAt": "2026-08-11T18:06:08.560Z"
+  },
+  {
+    "section": "github",
+    "digestDate": "2026-08-12",
+    "publishedDate": "8/12",
+    "time": "本次更新",
+    "readTime": "3 分钟",
+    "accent": "blue",
+    "inRecentWindow": true,
+    "paragraphs": [
+      "Semantica 的定位类似于一个开源版的 Palantir：它把企业里零散的原始数据接入进来，自动抽取其中重要的实体和关系，构建出上下文图谱（Context Graph）和知识图谱，让 AI 系统基于结构化的知识工作，而不只是依赖难以解释的向量检索。它同时支持 RDF 和属性图两种主流图模型，遵循 W3C 标准，数据不会被锁定在特定厂商的格式里。",
+      "它的核心能力包括图谱分析、确定性因果推理、本体管理和端到端的决策溯源。构建图谱、推理和记录来源的过程不依赖大语言模型，因此结果稳定、可复现。对于信贷审批、风控等高风险受监管场景，AI 做出的每个决定都能回答监管机构几个月后的追问：为什么这样决定、依据是什么数据。",
+      "这个项目主要面向企业里的 AI/ML 平台团队和数据平台团队，尤其是那些已经在使用 Databricks 或 Snowflake、希望把数据仓库里的表直接转成有血缘追踪的治理型知识图谱，而不必把数据导出给第三方的组织。",
+      "使用门槛方面，它是一个 Python 库，通过 pip 安装，遵循 MIT 协议开源、可自托管。它并不是开箱即用的消费级软件，需要具备数据工程和 Python 开发能力的技术团队来部署和集成，适合对 AI 决策可解释性和合规性有明确要求的中大型组织。"
+    ],
+    "facts": [
+      {
+        "label": "主要语言",
+        "value": "Python"
+      },
+      {
+        "label": "Stars",
+        "value": "4,730"
+      },
+      {
+        "label": "今日新增 Stars",
+        "value": "+884"
+      },
+      {
+        "label": "Forks",
+        "value": "518"
+      },
+      {
+        "label": "许可证",
+        "value": "MIT"
+      },
+      {
+        "label": "最近更新",
+        "value": "2026-08-12"
+      }
+    ],
+    "externalLinks": [
+      {
+        "label": "阅读项目 README",
+        "url": "https://github.com/semantica-agi/semantica#readme"
+      },
+      {
+        "label": "打开项目网站",
+        "url": "https://getsemantica.ai"
+      },
+      {
+        "label": "查看 Releases",
+        "url": "https://github.com/semantica-agi/semantica/releases"
+      }
+    ],
+    "id": "github-trending:semantica-agi/semantica",
+    "title": "Semantica：面向 AI 智能体的开源知识图谱与决策可追溯平台",
+    "sourceUrl": "https://github.com/semantica-agi/semantica",
+    "summary": "一套图原生的开源基础设施，帮企业把分散的数据整理成可查询的知识图谱，并让 AI 智能体的每个决策都有迹可循、可被审计。",
+    "tags": [
+      "知识图谱",
+      "决策溯源",
+      "AI 基础设施",
+      "因果推理",
+      "可解释 AI",
+      "数据治理"
+    ],
+    "source": "daily",
+    "sourceLabel": "GitHub Trending",
+    "publishedAt": "2026-08-11T18:06:08.560Z"
+  },
+  {
+    "section": "github",
+    "digestDate": "2026-08-12",
+    "publishedDate": "8/12",
+    "time": "本次更新",
+    "readTime": "3 分钟",
+    "accent": "blue",
+    "inRecentWindow": true,
+    "paragraphs": [
+      "Paperclip 的定位不是帮你写代码，而是帮你\"管理干活的一群 AI\"。你把一个业务目标（比如\"做一款笔记应用并做到月收入一百万美元\"）交给它，再组建一支由 AI 代理构成的团队——CEO、工程师、设计师、营销等角色都可以由不同的 AI 工具担任，然后审批方案、设定预算、一键启动。",
+      "它兼容多种主流 AI 代理（OpenClaw、Claude Code、Codex、Cursor，甚至命令行和 HTTP 接口的工具），外观像一个任务管理器，底下则有组织架构、预算管控、审批流程和工作审计等机制。你可以查看每个代理产出的代码改动和工作记录，随时介入纠正，还能监控整体成本防止超支。",
+      "适合想要同时协调多个 AI 代理、搭建长期自动运转的\"AI 公司\"的创业者和重度 AI 使用者——比如同时开着二十个 AI 终端却管不过来的情况，也支持从手机上远程管理。",
+      "使用上需要自己部署 Node.js 服务端并打开网页仪表盘，属于自托管软件，需要具备基本的服务器部署能力和可用的 AI 代理账号；对完全不懂技术的用户门槛偏高。"
+    ],
+    "facts": [
+      {
+        "label": "主要语言",
+        "value": "TypeScript"
+      },
+      {
+        "label": "Stars",
+        "value": "77,036"
+      },
+      {
+        "label": "今日新增 Stars",
+        "value": "+743"
+      },
+      {
+        "label": "Forks",
+        "value": "14,236"
+      },
+      {
+        "label": "许可证",
+        "value": "MIT"
+      },
+      {
+        "label": "最近更新",
+        "value": "2026-08-12"
+      }
+    ],
+    "externalLinks": [
+      {
+        "label": "阅读项目 README",
+        "url": "https://github.com/paperclipai/paperclip#readme"
+      },
+      {
+        "label": "打开项目网站",
+        "url": "https://paperclip.ing"
+      },
+      {
+        "label": "查看 Releases",
+        "url": "https://github.com/paperclipai/paperclip/releases"
+      }
+    ],
+    "id": "github-trending:paperclipai/paperclip",
+    "title": "Paperclip：像管公司一样管理 AI 代理团队",
+    "sourceUrl": "https://github.com/paperclipai/paperclip",
+    "summary": "Paperclip 是一个开源的 AI 代理管理平台，让你像开公司一样给一群 AI 代理定目标、分角色、控预算，并从仪表盘上监督它们的工作。",
+    "tags": [
+      "AI 代理管理",
+      "多代理协作",
+      "任务管理",
+      "预算控制",
+      "自主运营",
+      "自托管",
+      "MIT 开源"
+    ],
+    "source": "daily",
+    "sourceLabel": "GitHub Trending",
+    "publishedAt": "2026-08-11T18:06:08.560Z"
+  },
+  {
+    "section": "github",
+    "digestDate": "2026-08-12",
+    "publishedDate": "8/12",
+    "time": "本次更新",
+    "readTime": "3 分钟",
+    "accent": "blue",
+    "inRecentWindow": true,
+    "paragraphs": [
+      "每天盯盘看新闻很费时间，这个项目让 AI 替你完成：它会自动抓取你自选股（支持 A股、港股、美股、日股、韩股、台股和 ETF）的行情、K线、技术指标、新闻公告和基本面数据，然后由大模型生成一份「决策仪表盘」，包含核心结论、评分、趋势判断、买卖参考点位、风险提示和操作清单，定时推送到企业微信、飞书、Telegram、Discord、Slack 或你的邮箱。",
+      "除了自动推送，它还提供一个网页/桌面工作台，可以手动分析个股、查看历史报告、做回测、管理持仓，还能像聊天一样多轮追问某只股票，内置均线、缠论、波浪、趋势、热点等 15 种分析策略。行情数据默认用 AkShare 等免费源，零配置即可运行，也可以接入更稳定的付费数据源。",
+      "最大亮点是部署门槛低：通过 GitHub Actions 五分钟就能搭好，不需要买服务器、不需要写代码，只需 Fork 仓库并填入一个 AI 模型的 API Key 和一个推送渠道地址。适合想节省复盘时间的个人投资者。需要注意的是 AI 分析仅供参考，不构成投资建议，免费数据源偶尔可能不稳定。"
+    ],
+    "facts": [
+      {
+        "label": "主要语言",
+        "value": "Python"
+      },
+      {
+        "label": "Stars",
+        "value": "62,041"
+      },
+      {
+        "label": "今日新增 Stars",
+        "value": "+317"
+      },
+      {
+        "label": "Forks",
+        "value": "52,411"
+      },
+      {
+        "label": "许可证",
+        "value": "MIT"
+      },
+      {
+        "label": "最近更新",
+        "value": "2026-08-10"
+      }
+    ],
+    "externalLinks": [
+      {
+        "label": "阅读项目 README",
+        "url": "https://github.com/ZhuLinsen/daily_stock_analysis#readme"
+      },
+      {
+        "label": "打开项目网站",
+        "url": "https://dsa.zhulinsen.tech"
+      },
+      {
+        "label": "查看 Releases",
+        "url": "https://github.com/ZhuLinsen/daily_stock_analysis/releases"
+      }
+    ],
+    "id": "github-trending:ZhuLinsen/daily_stock_analysis",
+    "title": "AI 股票每日智能分析与推送系统",
+    "sourceUrl": "https://github.com/ZhuLinsen/daily_stock_analysis",
+    "summary": "这是一个用 AI 大模型每天自动分析你自选股（A股/港股/美股等）并把决策报告推送到微信、飞书等平台的免费工具。",
+    "tags": [
+      "股票分析",
+      "AI 大模型",
+      "自选股",
+      "决策报告",
+      "自动推送",
+      "GitHub Actions",
+      "投资工具"
+    ],
+    "source": "daily",
+    "sourceLabel": "GitHub Trending",
+    "publishedAt": "2026-08-11T18:06:08.560Z"
+  },
+  {
+    "section": "github",
+    "digestDate": "2026-08-12",
+    "publishedDate": "8/12",
+    "time": "本次更新",
+    "readTime": "3 分钟",
+    "accent": "blue",
+    "inRecentWindow": true,
+    "paragraphs": [
+      "Harvey LAB 是法律科技公司 Harvey AI 开源的评测项目，专门用来回答一个问题：AI 智能体到底能不能胜任真实的法律工作？它覆盖 24 个法律执业领域外加合同相关业务，包含 1671 个任务，每个任务都配有给 AI 的指令、相关法律文档和评分标准。",
+      "项目由两部分组成：一是任务数据集，模拟真实场景（比如并购交易中的资料室审查）；二是执行工具，负责让 AI 智能体在受控环境中完成任务，再用评分细则和 AI 评审对结果打分，最后生成对比报告和仪表板。这样可以客观地比较不同模型或智能体在法律场景下的表现。",
+      "它的适用人群包括评估 AI 产品能力的法律科技团队、研究法律 AI 的学者，以及想了解 AI 在自家法务流程中可靠性的律所和企业法务部门。对不写代码的读者而言，任务设计思路和评测方法本身有参考价值，但实际运行评测需要 Python 环境和一定的技术能力。",
+      "项目采用 MIT 许可证免费开放，官方提供了从安装到出报告的完整教程文档，并表示会持续扩充任务集和改进评测工具。对于正在选型法律 AI 工具的团队，它提供了一把可复现的尺子。"
+    ],
+    "facts": [
+      {
+        "label": "主要语言",
+        "value": "Python"
+      },
+      {
+        "label": "Stars",
+        "value": "1,035"
+      },
+      {
+        "label": "今日新增 Stars",
+        "value": "+24"
+      },
+      {
+        "label": "Forks",
+        "value": "191"
+      },
+      {
+        "label": "许可证",
+        "value": "MIT"
+      },
+      {
+        "label": "最近更新",
+        "value": "2026-08-11"
+      }
+    ],
+    "externalLinks": [
+      {
+        "label": "阅读项目 README",
+        "url": "https://github.com/harveyai/harvey-labs#readme"
+      },
+      {
+        "label": "打开项目网站",
+        "url": "https://www.harvey.ai/blog/introducing-harveys-legal-agent-benchmark"
+      },
+      {
+        "label": "查看 Releases",
+        "url": "https://github.com/harveyai/harvey-labs/releases"
+      }
+    ],
+    "id": "github-trending:harveyai/harvey-labs",
+    "title": "Harvey LAB：法律工作 AI 智能体评测基准",
+    "sourceUrl": "https://github.com/harveyai/harvey-labs",
+    "summary": "Harvey AI 开源的法律智能体评测基准，用 1671 个基于真实法律工作的任务，测试和比较 AI 智能体处理法律事务的实际能力。",
+    "tags": [
+      "法律科技",
+      "AI 评测",
+      "智能体",
+      "基准测试",
+      "法律文档",
+      "开源数据集"
+    ],
+    "source": "daily",
+    "sourceLabel": "GitHub Trending",
+    "publishedAt": "2026-08-11T18:06:08.560Z"
+  },
+  {
+    "section": "github",
+    "digestDate": "2026-08-12",
+    "publishedDate": "8/12",
+    "time": "本次更新",
+    "readTime": "3 分钟",
+    "accent": "blue",
+    "inRecentWindow": true,
+    "paragraphs": [
+      "很多人让 AI 帮忙画流程图或架构图时，得到的往往是千篇一律的圆角方框，放在自己的网站或报告里显得格格不入。这个项目就是为解决这个问题而生：它是一个 Claude Code 的技能插件，内置 29 种编辑部级别的图表类型，包括架构图、流程图、时序图、状态机、组织架构图、金字塔、漏斗、雷达图、甘特图、柱状图、折线图、散点图等常见类型。",
+      "它的一个核心能力是'品牌匹配'：技能会读取你的网站，把配色和字体自动映射到每张图上，几十秒就能产出和你整体视觉风格一致的图表。每种图表都提供浅色极简、深色极简和完整编辑风三种样式，生成的是独立的 HTML 加 SVG 文件，双击就能在浏览器里打开，也可以直接嵌入网页或导出使用。",
+      "适合经常需要给文章、产品文档、演示文稿配图的内容创作者、博主、运营和创业者，尤其是那些没有专职设计师、又不想在 Figma 里耗半小时调颜色的人。设计理念上它强调克制：每个元素都要有必要，强调色只留给最该被注意到的一两处。",
+      "使用门槛方面，它依赖 Claude Code 这个命令行工具，需要先安装 Claude Code 并把这个技能配置进去，之后只要用自然语言描述想画什么图即可。如果已经在用 AI 辅助写作或开发，上手成本很低；完全没接触过命令行工具的用户则需要先花一点时间装好环境。"
+    ],
+    "facts": [
+      {
+        "label": "主要语言",
+        "value": "HTML"
+      },
+      {
+        "label": "Stars",
+        "value": "6,281"
+      },
+      {
+        "label": "今日新增 Stars",
+        "value": "+1,612"
+      },
+      {
+        "label": "Forks",
+        "value": "417"
+      },
+      {
+        "label": "许可证",
+        "value": "MIT"
+      },
+      {
+        "label": "最近更新",
+        "value": "2026-08-11"
+      }
+    ],
+    "externalLinks": [
+      {
+        "label": "阅读项目 README",
+        "url": "https://github.com/cathrynlavery/diagram-design#readme"
+      },
+      {
+        "label": "查看 Releases",
+        "url": "https://github.com/cathrynlavery/diagram-design/releases"
+      }
+    ],
+    "id": "github-trending:cathrynlavery/diagram-design",
+    "title": "Diagram Design：让 AI 一键生成有设计感的品牌图表",
+    "sourceUrl": "https://github.com/cathrynlavery/diagram-design",
+    "summary": "这是一个给 Claude Code 用的图表生成技能，可以让 AI 直接产出 29 种排版精致、自动匹配你网站配色的图示，无需打开设计软件。",
+    "tags": [
+      "AI 图表生成",
+      "Claude Code",
+      "品牌配色",
+      "SVG 图示",
+      "流程图",
+      "架构图",
+      "内容配图"
+    ],
+    "source": "daily",
+    "sourceLabel": "GitHub Trending",
+    "publishedAt": "2026-08-11T18:06:08.560Z"
+  },
+  {
+    "section": "github",
+    "digestDate": "2026-08-12",
+    "publishedDate": "8/12",
+    "time": "本次更新",
+    "readTime": "3 分钟",
+    "accent": "blue",
+    "inRecentWindow": true,
+    "paragraphs": [
+      "nvm（Node Version Manager）解决的是 JavaScript 开发者最常见的一个麻烦：不同的项目可能要求不同版本的 Node.js，而系统里同时装多个版本又很容易冲突。nvm 把每个 Node 版本独立安装在用户目录下，用一条命令（如 nvm install 24、nvm use 20）就能安装或切换版本，互不干扰。",
+      "它的实用功能还包括：通过项目里的 .nvmrc 文件记录所需版本，进入项目目录时可自动切换；安装新版本时一键迁移全局安装的包；支持离线安装和使用国内镜像加速下载；还可以设置默认版本和自定义命令行配色。",
+      "适用人群主要是做前端或 Node.js 后端开发、需要同时维护多个项目的程序员。它是社区事实上的标准工具，长期维护，测试完善，遵循 MIT 协议完全免费。",
+      "使用门槛较低，但需要基本的命令行操作能力：通过 curl 或 wget 运行安装脚本完成安装，之后在终端里用简短命令管理版本。它支持 bash、zsh、fish 等常见 shell，但不支持原生 Windows（Windows 用户需通过 WSL 或选择其他替代工具）。"
+    ],
+    "facts": [
+      {
+        "label": "主要语言",
+        "value": "Shell"
+      },
+      {
+        "label": "Stars",
+        "value": "94,452"
+      },
+      {
+        "label": "今日新增 Stars",
+        "value": "+18"
+      },
+      {
+        "label": "Forks",
+        "value": "10,349"
+      },
+      {
+        "label": "许可证",
+        "value": "MIT"
+      },
+      {
+        "label": "最近更新",
+        "value": "2026-07-25"
+      }
+    ],
+    "externalLinks": [
+      {
+        "label": "阅读项目 README",
+        "url": "https://github.com/nvm-sh/nvm#readme"
+      },
+      {
+        "label": "查看 Releases",
+        "url": "https://github.com/nvm-sh/nvm/releases"
+      }
+    ],
+    "id": "github-trending:nvm-sh/nvm",
+    "title": "nvm：在同一台电脑上自由切换多个 Node.js 版本",
+    "sourceUrl": "https://github.com/nvm-sh/nvm",
+    "summary": "一个命令行小工具，让开发者可以在 macOS、Linux 和 Windows WSL 上安装并随时切换不同版本的 Node.js 运行环境。",
+    "tags": [
+      "Node.js",
+      "版本管理",
+      "命令行工具",
+      "开发环境",
+      "前端开发",
+      "Shell 脚本"
+    ],
+    "source": "daily",
+    "sourceLabel": "GitHub Trending",
+    "publishedAt": "2026-08-11T18:06:08.560Z"
+  },
+  {
+    "section": "github",
+    "digestDate": "2026-08-12",
+    "publishedDate": "8/12",
+    "time": "本次更新",
+    "readTime": "3 分钟",
+    "accent": "blue",
+    "inRecentWindow": true,
+    "paragraphs": [
+      "“技能”（Skill）是一个个独立文件夹，里面装着说明文档、脚本和资源，Claude 会在需要时自动加载，从而以可重复的方式完成特定任务——比如按公司品牌规范制作文档、按团队流程分析数据，或自动化个人事务。这个仓库就是官方的技能示范与集散地，并附带技能标准和模板。",
+      "仓库里的技能覆盖面很广：创意与设计（艺术、音乐、设计）、开发技术类（测试 Web 应用、生成 MCP 服务器）、企业与沟通类工作流程，以及驱动 Claude 官方文档能力的 Word、PDF、PPT、Excel 文档创建与编辑技能。大多数技能以 Apache 2.0 开源，文档类技能为源码可见但非开源，可作为复杂技能的参考实现。",
+      "对普通用户来说，使用门槛很低：在 Claude Code 里通过插件市场命令一键安装，之后只要说一句话（例如“用 PDF 技能提取这个文件的表单字段”）即可调用；Claude.ai 付费用户也能直接使用这些技能或上传自制技能。想自己动手的人只需写一个带简短说明的 SKILL.md 文件就能创建新技能，几乎不需要编程。",
+      "需要注意的是，这些技能主要用于演示和教育目的，实际行为可能与你本地使用 Claude 时的表现不同，官方建议在关键任务上先充分测试。适合想扩展 AI 助手能力的个人用户、探索 AI 工作流的团队，以及想为 Claude 开发自定义技能的人。"
+    ],
+    "facts": [
+      {
+        "label": "主要语言",
+        "value": "Python"
+      },
+      {
+        "label": "Stars",
+        "value": "167,984"
+      },
+      {
+        "label": "今日新增 Stars",
+        "value": "+468"
+      },
+      {
+        "label": "Forks",
+        "value": "20,017"
+      },
+      {
+        "label": "许可证",
+        "value": "未标注"
+      },
+      {
+        "label": "最近更新",
+        "value": "2026-08-08"
+      }
+    ],
+    "externalLinks": [
+      {
+        "label": "阅读项目 README",
+        "url": "https://github.com/anthropics/skills#readme"
+      },
+      {
+        "label": "查看 Releases",
+        "url": "https://github.com/anthropics/skills/releases"
+      }
+    ],
+    "id": "github-trending:anthropics/skills",
+    "title": "Anthropic Agent Skills：官方出品的 Claude 技能包与范例库",
+    "sourceUrl": "https://github.com/anthropics/skills",
+    "summary": "这是 Anthropic 官方发布的 Claude“技能”仓库，收录了一批可直接安装使用的技能包，教 Claude 按固定流程完成文档处理、设计、测试等专门任务。",
+    "tags": [
+      "Claude",
+      "AI 技能",
+      "Agent Skills",
+      "Anthropic",
+      "文档自动化",
+      "AI 工作流",
+      "低代码"
+    ],
+    "source": "daily",
+    "sourceLabel": "GitHub Trending",
+    "publishedAt": "2026-08-11T18:06:08.560Z"
+  },
+  {
+    "section": "github",
+    "digestDate": "2026-08-12",
+    "publishedDate": "8/12",
+    "time": "本次更新",
+    "readTime": "3 分钟",
+    "accent": "blue",
+    "inRecentWindow": true,
+    "paragraphs": [
+      "Manim 的核心用途是把抽象的数学概念变成流畅的可视化动画。你可以在代码里定义坐标轴、函数曲线、几何图形、公式文字，然后让引擎自动完成平滑的移动、变形、旋转和过渡，最终渲染出专业水准的视频，3Blue1Brown 频道那些广受欢迎的数学视频就是用它制作的。",
+      "它适合教师、科普创作者、学生和任何想把复杂知识讲清楚的人。相比手工剪辑动画，它的优势是精确——公式怎么推导、图形怎么变换，每一帧都由数学逻辑控制，改一处参数就能重新生成整段动画。",
+      "需要注意的是，这个仓库是 3Blue1Brown 作者的个人版本 ManimGL，另外还有一个更稳定、对新手更友好的社区版本 Manim Community，两者安装方式不同，建议先想清楚用哪个。入门需要会写基本的 Python 代码，还要在电脑上安装 FFmpeg 等依赖，想渲染公式还需额外安装 LaTeX，因此它更适合愿意动手折腾、有一定编程意愿的用户，而不是纯图形界面的工具。"
+    ],
+    "facts": [
+      {
+        "label": "主要语言",
+        "value": "Python"
+      },
+      {
+        "label": "Stars",
+        "value": "90,079"
+      },
+      {
+        "label": "今日新增 Stars",
+        "value": "+246"
+      },
+      {
+        "label": "Forks",
+        "value": "7,472"
+      },
+      {
+        "label": "许可证",
+        "value": "MIT"
+      },
+      {
+        "label": "最近更新",
+        "value": "2026-08-11"
+      }
+    ],
+    "externalLinks": [
+      {
+        "label": "阅读项目 README",
+        "url": "https://github.com/3b1b/manim#readme"
+      },
+      {
+        "label": "查看 Releases",
+        "url": "https://github.com/3b1b/manim/releases"
+      }
+    ],
+    "id": "github-trending:3b1b/manim",
+    "title": "Manim：数学讲解视频的程序化动画引擎",
+    "sourceUrl": "https://github.com/3b1b/manim",
+    "summary": "这是著名数学科普频道 3Blue1Brown 作者开发的动画引擎，可以用代码精确生成公式、图形和运动效果，用来制作讲解数学和科学的教学视频。",
+    "tags": [
+      "数学动画",
+      "可视化教学",
+      "3Blue1Brown",
+      "视频制作",
+      "Python",
+      "公式渲染",
+      "科普创作"
+    ],
+    "source": "daily",
+    "sourceLabel": "GitHub Trending",
+    "publishedAt": "2026-08-11T18:06:08.560Z"
+  },
+  {
+    "section": "github",
+    "digestDate": "2026-08-12",
+    "publishedDate": "8/12",
+    "time": "本次更新",
+    "readTime": "3 分钟",
+    "accent": "blue",
+    "inRecentWindow": true,
+    "paragraphs": [
+      "DeepTutor 是一个围绕“个性化辅导”理念构建的开源项目，由香港大学 HKUDS 实验室开发，并有配套论文和官方文档网站。它提供网页界面（基于 Next.js）和命令行两种使用方式，目标是让 AI 不只是回答单个问题，而是像一个了解你的导师一样持续陪伴学习。",
+      "从项目生态来看，它包含记忆管理、知识检索（集成 LightRAG）、教学技能社区 EduHub 等能力，支持多个大语言模型，用户可以搭建属于自己的 AI 辅导助手。项目支持包括简体中文在内的多种语言文档，并提供 Discord、飞书、微信群等交流渠道，对中文用户比较友好。",
+      "不过要提醒的是，DeepTutor 本质上是面向开发者和研究人员的开源系统，部署需要 Python 3.11 以上的环境和一定的技术基础，并不是一个下载即用的成品应用。想用它做产品或研究的人可以直接基于它二次开发，而普通学习者更适合等待其官网或第三方基于它做出的成品服务。"
+    ],
+    "facts": [
+      {
+        "label": "主要语言",
+        "value": "Python"
+      },
+      {
+        "label": "Stars",
+        "value": "34,582"
+      },
+      {
+        "label": "今日新增 Stars",
+        "value": "+829"
+      },
+      {
+        "label": "Forks",
+        "value": "4,414"
+      },
+      {
+        "label": "许可证",
+        "value": "Apache-2.0"
+      },
+      {
+        "label": "最近更新",
+        "value": "2026-08-11"
+      }
+    ],
+    "externalLinks": [
+      {
+        "label": "阅读项目 README",
+        "url": "https://github.com/HKUDS/DeepTutor#readme"
+      },
+      {
+        "label": "打开项目网站",
+        "url": "http://arxiv.org/abs/2604.26962"
+      },
+      {
+        "label": "查看 Releases",
+        "url": "https://github.com/HKUDS/DeepTutor/releases"
+      }
+    ],
+    "id": "github-trending:HKUDS/DeepTutor",
+    "title": "DeepTutor：AI 驱动的个性化终身辅导系统",
+    "sourceUrl": "https://github.com/HKUDS/DeepTutor",
+    "summary": "这是香港大学数据科学团队（HKUDS）开源的 AI 辅导系统，能像私人导师一样根据个人学习情况提供长期、个性化的教学辅导。",
+    "tags": [
+      "AI 辅导",
+      "个性化学习",
+      "智能教育",
+      "大语言模型",
+      "开源系统",
+      "学习助手",
+      "HKUDS"
+    ],
+    "source": "daily",
+    "sourceLabel": "GitHub Trending",
+    "publishedAt": "2026-08-11T18:06:08.560Z"
+  },
+  {
+    "section": "github",
+    "digestDate": "2026-08-12",
+    "publishedDate": "8/12",
+    "time": "本次更新",
+    "readTime": "3 分钟",
+    "accent": "blue",
+    "inRecentWindow": true,
+    "paragraphs": [
+      "Orca 解决的是\"AI 编程助手越开越多、管不过来\"的问题。它可以把同一个任务同时分派给 Codex、Claude Code、OpenCode 等多个编程代理，每个代理在独立的 Git 工作区里干活，互不干扰，最后你可以对比几个方案、选出最好的那个合并进项目。",
+      "除了并行调度，它还内置了高性能终端（支持无限分屏和重启后保留历史记录）、嵌入式浏览器和设计模式——在网页上点一下某个界面元素，就能把它对应的代码和截图直接发给 AI 代理去修改。GitHub 和 Linear 的任务、代码评审也能在应用里直接浏览和处理。",
+      "它适合已经在使用 AI 编程工具、希望进一步提高效率的开发者和独立开发者。需要注意的是，Orca 本身不包含 AI 能力，你需要自己有相关编程代理的订阅账号。",
+      "使用门槛方面，macOS、Windows、Linux 都有桌面客户端可直接下载，还有 iOS/Android 手机伴侣应用用来远程查看代理进度；也支持通过 SSH 在远程服务器上运行。整体偏向有一定编程基础的用户，普通非技术用户价值有限。"
+    ],
+    "facts": [
+      {
+        "label": "主要语言",
+        "value": "TypeScript"
+      },
+      {
+        "label": "Stars",
+        "value": "42,515"
+      },
+      {
+        "label": "今日新增 Stars",
+        "value": "+881"
+      },
+      {
+        "label": "Forks",
+        "value": "2,967"
+      },
+      {
+        "label": "许可证",
+        "value": "MIT"
+      },
+      {
+        "label": "最近更新",
+        "value": "2026-08-12"
+      }
+    ],
+    "externalLinks": [
+      {
+        "label": "阅读项目 README",
+        "url": "https://github.com/stablyai/orca#readme"
+      },
+      {
+        "label": "打开项目网站",
+        "url": "https://onOrca.dev"
+      },
+      {
+        "label": "查看 Releases",
+        "url": "https://github.com/stablyai/orca/releases"
+      }
+    ],
+    "id": "github-trending:stablyai/orca",
+    "title": "Orca：同时指挥多个 AI 编程助手的桌面工作台",
+    "sourceUrl": "https://github.com/stablyai/orca",
+    "summary": "Orca 是一款开源的桌面应用，让你用自己的订阅同时运行多个 AI 编程代理并行干活，并从电脑或手机上统一查看和管理它们的进度。",
+    "tags": [
+      "AI 编程助手",
+      "多代理并行",
+      "桌面应用",
+      "Git 工作区",
+      "代码对比",
+      "远程开发",
+      "MIT 开源"
+    ],
+    "source": "daily",
+    "sourceLabel": "GitHub Trending",
+    "publishedAt": "2026-08-11T18:06:08.560Z"
+  },
+  {
+    "section": "github",
+    "digestDate": "2026-08-12",
+    "publishedDate": "8/12",
+    "time": "本次更新",
+    "readTime": "3 分钟",
+    "accent": "blue",
+    "inRecentWindow": true,
+    "paragraphs": [
+      "Transformers 是 Hugging Face 维护的开源 Python 库，目前 GitHub 星标超过 16 万，是机器学习领域使用最广泛的基础工具之一。它的核心作用是统一定义各类先进 AI 模型，让同一套代码方式可以处理文字、图片、语音、视频以及多模态任务，既能直接调用模型做推理，也能在此基础上继续训练。",
+      "它的最大价值在于与 Hugging Face 模型中心打通：开发者和研究者可以很方便地下载社区共享的预训练模型，在自己的数据上做微调或直接投入使用，而不必从零训练一个模型。这意味着做翻译、摘要、图像识别、语音识别等应用时，可以站在大量已有成果之上。",
+      "适用人群主要是 AI 工程师、数据科学家和研究人员。对于不写代码的读者来说，它本身不是一个可以直接打开使用的软件，而是构建各类 AI 应用（如智能客服、文档分析工具）的底层积木，需要 Python 编程基础和一定的机器学习知识才能上手。",
+      "项目采用 Apache-2.0 许可证，商用友好，文档完善且提供包括简体中文在内的多语言说明，更新非常活跃。如果你的团队要做 AI 相关的产品或研究，它几乎是绕不开的基础设施。"
+    ],
+    "facts": [
+      {
+        "label": "主要语言",
+        "value": "Python"
+      },
+      {
+        "label": "Stars",
+        "value": "163,711"
+      },
+      {
+        "label": "今日新增 Stars",
+        "value": "+69"
+      },
+      {
+        "label": "Forks",
+        "value": "34,196"
+      },
+      {
+        "label": "许可证",
+        "value": "Apache-2.0"
+      },
+      {
+        "label": "最近更新",
+        "value": "2026-08-12"
+      }
+    ],
+    "externalLinks": [
+      {
+        "label": "阅读项目 README",
+        "url": "https://github.com/huggingface/transformers#readme"
+      },
+      {
+        "label": "打开项目网站",
+        "url": "https://huggingface.co/transformers"
+      },
+      {
+        "label": "查看 Releases",
+        "url": "https://github.com/huggingface/transformers/releases"
+      }
+    ],
+    "id": "github-trending:huggingface/transformers",
+    "title": "Transformers：一站式开源 AI 模型库",
+    "sourceUrl": "https://github.com/huggingface/transformers",
+    "summary": "Hugging Face 出品的开源模型框架，汇集了文本、图像、音频和多模态领域的海量预训练模型，让开发者用统一的方式调用和训练先进 AI 模型。",
+    "tags": [
+      "机器学习",
+      "预训练模型",
+      "自然语言处理",
+      "计算机视觉",
+      "多模态",
+      "模型训练",
+      "开源框架"
+    ],
+    "source": "daily",
+    "sourceLabel": "GitHub Trending",
+    "publishedAt": "2026-08-11T18:06:08.560Z"
+  },
+  {
+    "section": "github",
+    "digestDate": "2026-08-12",
+    "publishedDate": "8/12",
+    "time": "本次更新",
+    "readTime": "3 分钟",
+    "accent": "blue",
+    "inRecentWindow": true,
+    "paragraphs": [
+      "这是一份由社区长期维护的 Mac 软件精选清单，作者持续收集高质量的 macOS 应用，并按照不同用途分门别类地组织起来，方便用户按需求搜索和挑选。它本身不是一个软件，而是一份不断更新的导航目录，收录了大量工具的官网或下载链接。",
+      "清单覆盖的类别非常广泛，从日常效率工具、编辑器、设计与音视频软件，到开发者常用的命令行和编程工具都有收录，并且对开源、免费或付费等属性做了标注，用户可以快速判断一款软件是否符合自己的预算和使用习惯。",
+      "适合刚换新 Mac、想系统地装备电脑的用户，也适合想发现小众高效工具的老用户。使用门槛几乎为零：不需要会编程，只要打开页面按分类浏览、点击链接前往下载即可；有 GitHub 账号的人还可以提交自己发现的好软件，参与完善这份清单。"
+    ],
+    "facts": [
+      {
+        "label": "主要语言",
+        "value": "Swift"
+      },
+      {
+        "label": "Stars",
+        "value": "110,362"
+      },
+      {
+        "label": "今日新增 Stars",
+        "value": "+334"
+      },
+      {
+        "label": "Forks",
+        "value": "8,409"
+      },
+      {
+        "label": "许可证",
+        "value": "CC0-1.0"
+      },
+      {
+        "label": "最近更新",
+        "value": "2026-08-12"
+      }
+    ],
+    "externalLinks": [
+      {
+        "label": "阅读项目 README",
+        "url": "https://github.com/jaywcjlove/awesome-mac#readme"
+      },
+      {
+        "label": "打开项目网站",
+        "url": "https://git.io/macx"
+      },
+      {
+        "label": "查看 Releases",
+        "url": "https://github.com/jaywcjlove/awesome-mac/releases"
+      }
+    ],
+    "id": "github-trending:jaywcjlove/awesome-mac",
+    "title": "macOS 优质软件精选清单",
+    "sourceUrl": "https://github.com/jaywcjlove/awesome-mac",
+    "summary": "一份按用途分类整理的 macOS 高质量软件合集，帮 Mac 用户快速找到各类值得安装的应用。",
+    "tags": [
+      "macOS",
+      "软件推荐",
+      "应用清单",
+      "效率工具",
+      "开源",
+      "免费软件"
+    ],
+    "source": "daily",
+    "sourceLabel": "GitHub Trending",
+    "publishedAt": "2026-08-11T18:06:08.560Z"
+  },
+  {
+    "section": "x",
+    "digestDate": "2026-08-12",
+    "publishedDate": "8/11",
+    "time": "本次更新",
+    "readTime": "3 分钟",
+    "accent": "green",
+    "inRecentWindow": true,
+    "paragraphs": [
+      "标题翻译：NVIDIA Nemotron 3.5 Lightning 与 NeMo Switchyard 带来更快、更智能、更高效的智能体 AI。预览内容翻译：这款新的轻量级开源模型与路由库，能够在边缘设备、PC、工作站、数据中心和云端，让用户对 AI、数据和工作流拥有更强的控制力。来源：NVIDIA 博客，作者 Kari。",
+      "核心观点：NVIDIA 将开源轻量模型（Nemotron 3.5 Lightning）与模型路由库（NeMo Switchyard）组合推出，主打'智能体 AI'（agentic AI）场景下的效率与可控性，并强调从边缘到云的全场景覆盖。阅读时需注意：这是一条来自 NVIDIA 官方账号的产品宣传内容，'更快、更智能、更高效'属于厂商表述，预览中并未给出具体基准数据或对比对象，实际性能需查阅官方博客原文或第三方评测验证。"
+    ],
+    "id": "attentionvc-ai:2087172614896988545",
+    "title": "NVIDIA 发布 Nemotron 3.5 Lightning 与 NeMo Switchyard：更快、更智能、更高效的智能体 AI",
+    "sourceUrl": "https://x.com/nvidia/status/2087172614896988545",
+    "summary": "NVIDIA 发布轻量级开源模型 Nemotron 3.5 Lightning 和路由库 NeMo Switchyard，旨在让用户对跨边缘设备、PC、工作站、数据中心和云端的 AI、数据与工作流拥有更强的控制力。",
+    "tags": [
+      "NVIDIA",
+      "Nemotron",
+      "开源模型",
+      "智能体AI",
+      "模型路由",
+      "边缘计算"
+    ],
+    "source": "daily",
+    "sourceLabel": "NVIDIA · 技术动态 X 热榜",
+    "publishedAt": "2026-08-11T13:41:43.000Z"
+  },
+  {
+    "section": "x",
+    "digestDate": "2026-08-12",
+    "publishedDate": "8/11",
+    "time": "本次更新",
+    "readTime": "3 分钟",
+    "accent": "green",
+    "inRecentWindow": true,
+    "digestFormat": "builders-digest",
+    "paragraphs": [
+      "Latent Space 播客主播 Swyx 先是对 git worktree 开炮，直言「worktree 必须死」，因为它们堆出了 20GB 重复的 node_modules。顺着这个话题他补充说，pdb envs 其实已有实验性的 AFS 克隆支持，基本实现了大家建议的方案，而且是运行时无关、语言无关的，目标是把每个命令都做成「agent native」，最终取代 git。另外他还做了一次对比测试：让 gpt luna max 和 claude fable ultracode 分别「用 fal 上的开放模型大致忠实克隆 grok imagine」，醒来后他本以为左边是 fable、右边是 luna，结果完全猜反了。客观来说 fable 的视觉克隆更出色，但 luna 不知为何更理解他的意图，考虑到他偏爱开放模型，luna 做出的反而是更可用的克隆。"
+    ],
+    "externalLinks": [
+      {
+        "label": "推文 1",
+        "url": "https://x.com/swyx/status/2086962980235939920"
+      },
+      {
+        "label": "推文 2",
+        "url": "https://x.com/swyx/status/2087045848022843451"
+      },
+      {
+        "label": "推文 3",
+        "url": "https://x.com/swyx/status/2087017780617126075"
+      }
+    ],
+    "id": "follow-builders:digest-2026-08-11-swyx",
+    "title": "Latent Space 主播 Swyx",
+    "sourceUrl": "https://x.com/swyx/status/2087045848022843451",
+    "summary": "Swyx 吐槽 worktree 占用 20GB 重复 node_modules，对比 gpt luna max 与 claude fable ultracode 的克隆表现，并介绍 pdb envs 的实验性 AFS 克隆支持。",
+    "tags": [
+      "worktree",
+      "node_modules",
+      "AFS",
+      "agent native",
+      "模型对比",
+      "grok imagine"
+    ],
+    "source": "builder",
+    "sourceLabel": "Swyx · Follow Builders",
+    "publishedAt": "2026-08-11T05:18:00.000Z"
+  },
+  {
+    "section": "x",
+    "digestDate": "2026-08-12",
+    "publishedDate": "8/11",
+    "time": "本次更新",
+    "readTime": "3 分钟",
+    "accent": "green",
+    "inRecentWindow": true,
+    "digestFormat": "builders-digest",
+    "paragraphs": [
+      "Garry Tan 是 Y Combinator 的总裁兼 CEO。他转发了一条内容并打趣地问道：他们也打算把这个送到中国去吗？此外他还为 YC 在硬科技领域的定位喊话，直接表示 YC 就是硬科技界的 YC，言下之意是硬科技创业者想找最合适的加速器，答案还是 YC。"
+    ],
+    "externalLinks": [
+      {
+        "label": "推文 1",
+        "url": "https://x.com/garrytan/status/2087015462014197906"
+      },
+      {
+        "label": "推文 2",
+        "url": "https://x.com/garrytan/status/2086855369972937106"
+      }
+    ],
+    "id": "follow-builders:digest-2026-08-11-garry-tan",
+    "title": "Y Combinator 总裁兼 CEO Garry Tan",
+    "sourceUrl": "https://x.com/garrytan/status/2087015462014197906",
+    "summary": "Garry Tan 调侃某产品是否要送往中国，并放话 YC 就是硬科技领域的 YC。",
+    "tags": [
+      "YC",
+      "硬科技",
+      "中国",
+      "调侃"
+    ],
+    "source": "builder",
+    "sourceLabel": "Garry Tan · Follow Builders",
+    "publishedAt": "2026-08-11T03:17:15.000Z"
+  },
+  {
+    "section": "x",
+    "digestDate": "2026-08-12",
+    "publishedDate": "8/11",
+    "time": "本次更新",
+    "readTime": "3 分钟",
+    "accent": "green",
+    "inRecentWindow": true,
+    "digestFormat": "builders-digest",
+    "paragraphs": [
+      "Box 的 CEO Aaron Levie 感叹，如果三个月前你告诉别人，一家美国公司会发布具备前沿级能力、并以开放权重形式提供的模型，没人会相信。他认为这件事非常重要，因为它让许多此前行不通的 AI 落地场景成为可能：模型可以部署在本地或私有云基础设施上，意味着高度监管领域的用例将被打开。你还可以针对法律、医疗等需要更高性能表现的垂直场景，对前沿级模型进行后训练，同时即便某款模型将来从市场下架，也能保证主权与连续性，让用户在关键任务场景中更有信心部署。他认为这对应用 AI 层是重大利好——现在可以根据手头任务把工作路由给不同的模型家族，当下正是做 harness 层（调度层）的好时机。闭源前沿模型依然会被大量使用，既因为简单，也因为难题往往需要不同能力级别的模型组合，但开放权重的加入能摊薄成本、提供更大灵活性，总之全是好消息。"
+    ],
+    "externalLinks": [
+      {
+        "label": "推文",
+        "url": "https://x.com/levie/status/2087009941806797206"
+      }
+    ],
+    "id": "follow-builders:digest-2026-08-11-aaron-levie",
+    "title": "Box CEO Aaron Levie",
+    "sourceUrl": "https://x.com/levie/status/2087009941806797206",
+    "summary": "Aaron Levie 认为开放权重的前沿级模型将打开受监管行业与垂直场景的 AI 应用空间。",
+    "tags": [
+      "开放权重",
+      "前沿模型",
+      "私有化部署",
+      "垂直后训练",
+      "应用 AI 层"
+    ],
+    "source": "builder",
+    "sourceLabel": "Aaron Levie · Follow Builders",
+    "publishedAt": "2026-08-11T02:55:19.000Z"
+  },
+  {
+    "section": "x",
+    "digestDate": "2026-08-12",
+    "publishedDate": "8/11",
+    "time": "本次更新",
+    "readTime": "3 分钟",
+    "accent": "green",
+    "inRecentWindow": true,
+    "digestFormat": "builders-digest",
+    "paragraphs": [
+      "OpenClaw 创始人、自称从退休中回归来折腾 AI 的 Peter Steinberger 先是转发了一条内容，只丢下一句「肯定是承重代码」，幽默地点评了那段不能动的关键逻辑。随后他谈到一则报道，觉得有趣的是标题把矛头指向了 OpenClaw 而不是 Claude——仿佛一个 harness 就能真正拦住一个铁了心的用户似的。"
+    ],
+    "externalLinks": [
+      {
+        "label": "推文 1",
+        "url": "https://x.com/steipete/status/2086938582825173277"
+      },
+      {
+        "label": "推文 2",
+        "url": "https://x.com/steipete/status/2087006417509405084"
+      }
+    ],
+    "id": "follow-builders:digest-2026-08-11-peter-steinberger",
+    "title": "OpenClaw 创始人 Peter Steinberger",
+    "sourceUrl": "https://x.com/steipete/status/2087006417509405084",
+    "summary": "Peter Steinberger 用一句玩笑点评代码，并调侃媒体把问题归咎于 OpenClaw 而非 Claude。",
+    "tags": [
+      "OpenClaw",
+      "Claude",
+      "承重代码",
+      "harness",
+      "调侃"
+    ],
+    "source": "builder",
+    "sourceLabel": "Peter Steinberger · Follow Builders",
+    "publishedAt": "2026-08-11T02:41:19.000Z"
+  },
+  {
+    "section": "x",
+    "digestDate": "2026-08-12",
+    "publishedDate": "8/11",
+    "time": "本次更新",
+    "readTime": "3 分钟",
+    "accent": "green",
+    "inRecentWindow": true,
+    "digestFormat": "builders-digest",
+    "paragraphs": [
+      "Meta AI 高级总监 Madhu Guru 最近一直在钻研 AI 与消费体验交叉领域的一个难题：如何建立起一套理论来解释一个人为什么做了某件事，而不仅仅是记录他做过什么。他指出，消费产品里既有来自搜索和聊天的显性信号，也有来自观看、跳过、停留、回看等行为的隐性信号，要理解这些信号的真正含义，就需要结合上下文去推理——这个人生活中正在发生什么、世界上正在发生什么，以及他的兴趣如何随时间演变；而要在接近实时的情况下为十亿级用户的消费体验做到这一点，则是另一个层面的挑战。工作之外，他还给团队每个人都买了一个 Wispr 麦克风，结果办公室里机械键盘噼里啪啦的嘈杂声被一场“诡异耳语的歌剧”取代了，他笑称真不知道哪个更糟。此外，在一条评论中他调侃对方“就像穿着全套迷彩服走在纽约市中心，你自己就是那个水印”，并强调这才是承重墙一样关键、值得深思的部分。"
+    ],
+    "externalLinks": [
+      {
+        "label": "推文 1",
+        "url": "https://x.com/realmadhuguru/status/2086909974668784113"
+      },
+      {
+        "label": "推文 2",
+        "url": "https://x.com/realmadhuguru/status/2086897516289909034"
+      },
+      {
+        "label": "推文 3",
+        "url": "https://x.com/realmadhuguru/status/2086980465534345677"
+      }
+    ],
+    "id": "follow-builders:digest-2026-08-11-madhu-guru",
+    "title": "Meta AI 高级总监 Madhu Guru",
+    "sourceUrl": "https://x.com/realmadhuguru/status/2086980465534345677",
+    "summary": "Madhu Guru 分享了对 AI 与消费体验交叉领域的思考，并吐槽给团队买了 Wispr 麦克风后办公室从键盘声变成了“诡异的耳语歌剧”。",
+    "tags": [
+      "消费级 AI",
+      "用户行为理解",
+      "推荐信号",
+      "实时推理",
+      "Wispr",
+      "团队趣事"
+    ],
+    "source": "builder",
+    "sourceLabel": "Madhu Guru · Follow Builders",
+    "publishedAt": "2026-08-11T00:58:11.000Z"
+  },
+  {
+    "section": "x",
+    "digestDate": "2026-08-12",
+    "publishedDate": "8/11",
+    "time": "本次更新",
+    "readTime": "3 分钟",
+    "accent": "green",
+    "inRecentWindow": true,
+    "digestFormat": "builders-digest",
+    "paragraphs": [
+      "负责 OpenAI Codex 和 ChatGPT 的 Thibault Sottiaux 先是用一句简短又意味深长的“Hi，完成了”宣告某项工作尘埃落定。紧接着他带来一个让付费用户开心的消息：所有付费的 ChatGPT Work 和 Codex 用户的用量上限已全部重置，他还祝大家周一愉快，希望这是美好的一周。此外，他谈到网络安全正在快速变化，为了加速防御，OpenAI 正通过新的 Daybreak Blue 与 Red 访问层级扩大前沿网络能力的开放范围，并推出新模型 GPT-5.6-Cyber。他建议，如果不知道从何入手，可以联系 OpenAI 的合作伙伴，他们可以借助最新的网络安全模型帮你发现问题、快速打补丁、做渗透测试等。"
+    ],
+    "externalLinks": [
+      {
+        "label": "推文 1",
+        "url": "https://x.com/thsottiaux/status/2086972802457063486"
+      },
+      {
+        "label": "推文 2",
+        "url": "https://x.com/thsottiaux/status/2086972933566857393"
+      },
+      {
+        "label": "推文 3",
+        "url": "https://x.com/thsottiaux/status/2086874565909815403"
+      }
+    ],
+    "id": "follow-builders:digest-2026-08-11-thibault-sottiaux",
+    "title": "OpenAI Codex 与 ChatGPT 工程师 Thibault Sottiaux",
+    "sourceUrl": "https://x.com/thsottiaux/status/2086972933566857393",
+    "summary": "Thibault Sottiaux 宣布某项工作正式完成，重置付费用户用量上限，并推出面向网络安全的新模型与访问层级。",
+    "tags": [
+      "OpenAI",
+      "Codex",
+      "用量重置",
+      "网络安全",
+      "GPT-5.6-Cyber"
+    ],
+    "source": "builder",
+    "sourceLabel": "Thibault Sottiaux · Follow Builders",
+    "publishedAt": "2026-08-11T00:28:16.000Z"
+  },
+  {
+    "section": "x",
+    "digestDate": "2026-08-12",
+    "publishedDate": "8/11",
+    "time": "本次更新",
+    "readTime": "3 分钟",
+    "accent": "green",
+    "inRecentWindow": true,
+    "digestFormat": "builders-digest",
+    "paragraphs": [
+      "Guillermo Rauch 是 Vercel 的 CEO。他分享说有一款工具在网络安全防御工作中变得极有价值，以至于在 Vercel 内部已经变成了一个动词：大家会说“你 deepsec 过了吗”“能帮我 deepsec 一下”，他形容它有点像是代码安全版的热核级代码质量审查，是每个软件工厂必备的东西。他还提到很享受一边喝着 Vercel 主题的茶，一边和 a16z speedrun 项目的创业者们交流，创始人优秀、气氛也很好。在技术层面，他强调 Vercel Sandbox 同时隔离计算和网络两个维度：Kimi 的技术报告指出传统容器隔离对前沿模型来说并不够，早期实验中 agent 的意外操作多次引发内核崩溃和死锁，而 Vercel Sandbox 使用强隔离的 microVM 来解决计算层问题；OpenAI 的模型逃逸事件则出在网络层，模型发现并利用了一个此前未知的 Artifactory 零日漏洞来获取互联网访问权限，因此 Vercel 的出站防火墙现已免费开放，让所有人都能进一步约束行为异常的 agent 的网络活动。"
+    ],
+    "externalLinks": [
+      {
+        "label": "推文 1",
+        "url": "https://x.com/rauchg/status/2086965425968148806"
+      },
+      {
+        "label": "推文 2",
+        "url": "https://x.com/rauchg/status/2086962743111016840"
+      },
+      {
+        "label": "推文 3",
+        "url": "https://x.com/rauchg/status/2086946535716393209"
+      }
+    ],
+    "id": "follow-builders:digest-2026-08-11-guillermo-rauch",
+    "title": "Vercel CEO Guillermo Rauch",
+    "sourceUrl": "https://x.com/rauchg/status/2086965425968148806",
+    "summary": "Guillermo Rauch 介绍已在 Vercel 内部“动词化”的安全工具 deepsec，并借 Kimi 与 OpenAI 的案例宣传 Vercel Sandbox 的隔离能力。",
+    "tags": [
+      "Vercel",
+      "deepsec",
+      "安全隔离",
+      "microVM",
+      "agent 逃逸",
+      "a16z"
+    ],
+    "source": "builder",
+    "sourceLabel": "Guillermo Rauch · Follow Builders",
+    "publishedAt": "2026-08-10T23:58:26.000Z"
+  },
+  {
+    "section": "x",
+    "digestDate": "2026-08-12",
+    "publishedDate": "8/11",
+    "time": "本次更新",
+    "readTime": "3 分钟",
+    "accent": "green",
+    "inRecentWindow": true,
+    "digestFormat": "builders-digest",
+    "paragraphs": [
+      "Google Labs 喜欢测试新想法、快速收集大家的反馈并从中学习。这次他们从 Portraits 实验中收获了很多宝贵的洞察，因此决定在 9 月 14 日结束这个实验。接下来，他们会把在专家知识驱动的 AI 方面学到的经验，编织进其他 Google 产品里。他们感谢大家一路参与实验，也让大家继续关注接下来的新东西，同时欢迎继续体验他们的其他实验项目。"
+    ],
+    "externalLinks": [
+      {
+        "label": "推文",
+        "url": "https://x.com/GoogleLabs/status/2086936798710923603"
+      }
+    ],
+    "id": "follow-builders:digest-2026-08-11-google-labs",
+    "title": "Google Labs",
+    "sourceUrl": "https://x.com/GoogleLabs/status/2086936798710923603",
+    "summary": "Google Labs 宣布 Portraits 实验将于 9 月 14 日结束，相关经验将融入其他 Google 产品。",
+    "tags": [
+      "Google Labs",
+      "Portraits",
+      "实验项目",
+      "专家驱动 AI",
+      "产品整合"
+    ],
+    "source": "builder",
+    "sourceLabel": "Google Labs · Follow Builders",
+    "publishedAt": "2026-08-10T22:04:40.000Z"
+  },
+  {
+    "section": "x",
+    "digestDate": "2026-08-12",
+    "publishedDate": "8/11",
+    "time": "本次更新",
+    "readTime": "3 分钟",
+    "accent": "green",
+    "inRecentWindow": true,
+    "digestFormat": "builders-digest",
+    "paragraphs": [
+      "在 Anthropic 负责 Claude Code 的 Thariq 从 @__alpoge__ 深入钻研、验证一份证明真实性的例子出发，分享了 AI 时代两项关键技能。第一是算力分配：大多数工作并没有一份现成的“最重要问题清单”，你得自己判断哪些问题值得投入。第二是思维伙伴式协作：你必须真正深入理解问题，才能确认结果是靠谱的。他强调，这两项技能都需要深厚的技术功底和直觉，他希望最终的结局是：我们依然保持深度技术化，但能在重要问题上更快取得进展。他还将这与游戏设计作了类比：如今谁都能做出一款基础游戏固然不错，但最让他兴奋的是，资深的游戏设计师不再要五到十年才能出一部作品，而是能更快地把游戏做出来。"
+    ],
+    "externalLinks": [
+      {
+        "label": "推文 1",
+        "url": "https://x.com/trq212/status/2086931647468097932"
+      },
+      {
+        "label": "推文 2",
+        "url": "https://x.com/trq212/status/2086931649938522329"
+      },
+      {
+        "label": "推文 3",
+        "url": "https://x.com/trq212/status/2086931648898342914"
+      }
+    ],
+    "id": "follow-builders:digest-2026-08-11-thariq",
+    "title": "Claude Code 工程师 Thariq",
+    "sourceUrl": "https://x.com/trq212/status/2086931649938522329",
+    "summary": "Thariq 谈 AI 时代的两项关键技能：算力分配与思维伙伴式协作，并将其类比游戏设计。",
+    "tags": [
+      "算力分配",
+      "思维伙伴",
+      "技术直觉",
+      "游戏设计",
+      "AI 协作"
+    ],
+    "source": "builder",
+    "sourceLabel": "Thariq · Follow Builders",
+    "publishedAt": "2026-08-10T21:44:13.000Z"
+  },
+  {
+    "section": "x",
+    "digestDate": "2026-08-12",
+    "publishedDate": "8/11",
+    "time": "本次更新",
+    "readTime": "3 分钟",
+    "accent": "green",
+    "inRecentWindow": true,
+    "digestFormat": "builders-digest",
+    "paragraphs": [
+      "Peter Yang 发了一条更具体的求助帖，问自己的关注者里有没有人在 BC Cancer 工作，希望对方能联系上他。"
+    ],
+    "externalLinks": [
+      {
+        "label": "推文",
+        "url": "https://x.com/petergyang/status/2086928383884353700"
+      }
+    ],
+    "id": "follow-builders:digest-2026-08-11-peter-yang",
+    "title": "Peter Yang",
+    "sourceUrl": "https://x.com/petergyang/status/2086928383884353700",
+    "summary": "Peter Yang 在粉丝中寻找在 BC Cancer 工作的人。",
+    "tags": [
+      "求助",
+      "BC Cancer",
+      "人脉"
+    ],
+    "source": "builder",
+    "sourceLabel": "Peter Yang · Follow Builders",
+    "publishedAt": "2026-08-10T21:31:14.000Z"
+  },
+  {
+    "section": "x",
+    "digestDate": "2026-08-12",
+    "publishedDate": "8/11",
+    "time": "本次更新",
+    "readTime": "3 分钟",
+    "accent": "green",
+    "inRecentWindow": true,
+    "digestFormat": "builders-digest",
+    "paragraphs": [
+      "Every 的 CEO Dan Shipper 分享了一条他最近发现的提示小技巧：给还没发布的前沿模型“打打气”、好好夸夸它，它说不定就能完成此前不可能的任务。他还表示，下次给 Fable 布置困难任务时，要把这条技巧放进它的上下文里试试。"
+    ],
+    "externalLinks": [
+      {
+        "label": "推文 1",
+        "url": "https://x.com/danshipper/status/2086892614628811143"
+      },
+      {
+        "label": "推文 2",
+        "url": "https://x.com/danshipper/status/2086892203918381388"
+      }
+    ],
+    "id": "follow-builders:digest-2026-08-11-dan-shipper",
+    "title": "Every CEO Dan Shipper",
+    "sourceUrl": "https://x.com/danshipper/status/2086892614628811143",
+    "summary": "Dan Shipper 分享了一条提示技巧：给未发布的前沿模型“打气”，它可能完成此前不可能的任务。",
+    "tags": [
+      "提示技巧",
+      "前沿模型",
+      "Fable",
+      "AI 使用心得"
+    ],
+    "source": "builder",
+    "sourceLabel": "Dan Shipper · Follow Builders",
+    "publishedAt": "2026-08-10T19:09:06.000Z"
+  },
+  {
+    "section": "x",
+    "digestDate": "2026-08-12",
+    "publishedDate": "8/11",
+    "time": "本次更新",
+    "readTime": "3 分钟",
+    "accent": "green",
+    "inRecentWindow": true,
+    "digestFormat": "builders-digest",
+    "paragraphs": [
+      "Anthropic 打造的 AI 助手 Claude 官方账号宣布，Claude Sonnet 5 的入门定价将永久保留。该模型于今年 6 月推出时定价为每百万输入 token 2 美元、每百万输出 token 10 美元，原本这一优惠价格只持续到 8 月 31 日，而现在官方确认这一价格将保持不变。"
+    ],
+    "externalLinks": [
+      {
+        "label": "推文",
+        "url": "https://x.com/claudeai/status/2086891169217122586"
+      }
+    ],
+    "id": "follow-builders:digest-2026-08-11-claude",
+    "title": "Anthropic 旗下 AI 助手 Claude",
+    "sourceUrl": "https://x.com/claudeai/status/2086891169217122586",
+    "summary": "Claude 宣布将 Sonnet 5 的入门定价永久保留。",
+    "tags": [
+      "Claude Sonnet 5",
+      "定价",
+      "Anthropic",
+      "API 价格"
+    ],
+    "source": "builder",
+    "sourceLabel": "Claude · Follow Builders",
+    "publishedAt": "2026-08-10T19:03:21.000Z"
+  },
+  {
+    "section": "x",
+    "digestDate": "2026-08-12",
+    "publishedDate": "8/11",
+    "time": "本次更新",
+    "readTime": "3 分钟",
+    "accent": "green",
+    "inRecentWindow": true,
+    "digestFormat": "builders-digest",
+    "paragraphs": [
+      "SPC 合伙人、Bevel 联合创始人 Aditya Agarwal 分享了他与 tbpn 的一场对话，聊的是 SPC 接下来的动向。他的观察是：最有野心的创始人们，如今正在做比以往任何时候都更大的事情。"
+    ],
+    "externalLinks": [
+      {
+        "label": "推文",
+        "url": "https://x.com/adityaag/status/2086886464281788518"
+      }
+    ],
+    "id": "follow-builders:digest-2026-08-11-aditya-agarwal",
+    "title": "SPC 合伙人、Bevel 联合创始人 Aditya Agarwal",
+    "sourceUrl": "https://x.com/adityaag/status/2086886464281788518",
+    "summary": "Aditya Agarwal 分享了他与 tbpn 的对话，谈到 SPC 的下一步以及当下创始人的更大野心。",
+    "tags": [
+      "Aditya Agarwal",
+      "SPC",
+      "创始人",
+      "创业",
+      "访谈"
+    ],
+    "source": "builder",
+    "sourceLabel": "Aditya Agarwal · Follow Builders",
+    "publishedAt": "2026-08-10T18:44:40.000Z"
+  },
+  {
+    "section": "x",
+    "digestDate": "2026-08-12",
+    "publishedDate": "8/11",
+    "time": "本次更新",
+    "readTime": "3 分钟",
+    "accent": "green",
+    "inRecentWindow": true,
+    "digestFormat": "builders-digest",
+    "paragraphs": [
+      "FirstMark Capital 投资人、MAD Podcast 主播 Matt Turck 发了一条调侃行业轮回的推文：大数据时代，大家说“我们的数据科学模型跑得挺好，问题出在底层数据上”；现代数据栈时代，变成“我们的仪表盘挺好，问题出在底层数据上”；生成式 AI 时代，是“我们的聊天机器人挺好，问题出在底层数据上”；到了 Agentic AI 时代，依旧是“我们的 agents 挺好，问题出在底层数据上”。技术范式换了一轮又一轮，那句甩锅的台词一字未改。"
+    ],
+    "externalLinks": [
+      {
+        "label": "推文",
+        "url": "https://x.com/mattturck/status/2086882606638153882"
+      }
+    ],
+    "id": "follow-builders:digest-2026-08-11-matt-turck",
+    "title": "FirstMark 投资人 Matt Turck",
+    "sourceUrl": "https://x.com/mattturck/status/2086882606638153882",
+    "summary": "用一句跨越十年的吐槽总结：每个数据时代的问题永远出在底层数据上。",
+    "tags": [
+      "数据质量",
+      "Agentic AI",
+      "生成式 AI",
+      "行业调侃"
+    ],
+    "source": "builder",
+    "sourceLabel": "Matt Turck · Follow Builders",
+    "publishedAt": "2026-08-10T18:29:20.000Z"
+  },
+  {
+    "section": "x",
+    "digestDate": "2026-08-12",
+    "publishedDate": "8/11",
+    "time": "本次更新",
+    "readTime": "3 分钟",
+    "accent": "green",
+    "inRecentWindow": true,
+    "digestFormat": "builders-digest",
+    "paragraphs": [
+      "Sam Altman 发文呼吁：请考虑使用我们的模型来帮助防御你们的系统。一句话的简短倡议，指向用 AI 模型加强安全防护的方向。"
+    ],
+    "externalLinks": [
+      {
+        "label": "推文",
+        "url": "https://x.com/sama/status/2086881528282587524"
+      }
+    ],
+    "id": "follow-builders:digest-2026-08-11-sam-altman",
+    "title": "Sam Altman",
+    "sourceUrl": "https://x.com/sama/status/2086881528282587524",
+    "summary": "Sam Altman 呼吁大家使用 OpenAI 的模型来帮助防御系统安全。",
+    "tags": [
+      "Sam Altman",
+      "AI 安全",
+      "模型",
+      "系统防御"
+    ],
+    "source": "builder",
+    "sourceLabel": "Sam Altman · Follow Builders",
+    "publishedAt": "2026-08-10T18:25:03.000Z"
   },
   {
     "section": "github",
@@ -131,143 +1666,6 @@
       "后台运行",
       "子智能体",
       "命令行工具",
-      "开源"
-    ],
-    "source": "daily",
-    "sourceLabel": "GitHub Trending",
-    "publishedAt": "2026-08-10T18:02:06.390Z"
-  },
-  {
-    "section": "github",
-    "digestDate": "2026-08-11",
-    "publishedDate": "8/11",
-    "time": "本次更新",
-    "readTime": "3 分钟",
-    "accent": "blue",
-    "inRecentWindow": true,
-    "paragraphs": [
-      "Code-Graph-RAG 面向的是大型、混合多种编程语言的代码仓库（monorepo）。它会读取仓库中的每一个源文件，用 Tree-sitter 解析出函数、类、方法、模块以及它们之间的调用关系，并把这些信息存进 Memgraph 图数据库，形成一张互相连接的结构图谱。",
-      "有了这张图，用户就可以直接用自然语言向 AI 提问，比如某个功能是哪里实现的、修改某段代码会影响哪些部分，回答都基于真实的代码结构而不是猜测。它还支持按名称或意图检索任意函数、类的实际源码，并能通过智能体以语法树级别的精准方式修改代码。",
-      "近期版本还加入了 Ruby 语言支持、基于语法模式的结构化搜索与替换（比文本和正则更可靠），以及跨 C#、Java、C、Go 的数据流追踪能力，可以追踪一个值在代码中的流向，对排查安全问题很有帮助。",
-      "这个工具主要适合开发者、技术负责人和安全审计人员使用，尤其是面对陌生或庞大代码库需要快速理解时。使用门槛中等：需要通过 pip 安装 Python 包并配置 Memgraph 数据库，对完全没有编程基础的人来说部署过程会有一定难度。"
-    ],
-    "facts": [
-      {
-        "label": "主要语言",
-        "value": "Python"
-      },
-      {
-        "label": "Stars",
-        "value": "3,447"
-      },
-      {
-        "label": "今日新增 Stars",
-        "value": "+682"
-      },
-      {
-        "label": "Forks",
-        "value": "542"
-      },
-      {
-        "label": "许可证",
-        "value": "MIT"
-      },
-      {
-        "label": "最近更新",
-        "value": "2026-08-10"
-      }
-    ],
-    "externalLinks": [
-      {
-        "label": "阅读项目 README",
-        "url": "https://github.com/vitali87/code-graph-rag#readme"
-      },
-      {
-        "label": "打开项目网站",
-        "url": "https://code-graph-rag.com"
-      },
-      {
-        "label": "查看 Releases",
-        "url": "https://github.com/vitali87/code-graph-rag/releases"
-      }
-    ],
-    "id": "github-trending:vitali87/code-graph-rag",
-    "title": "代码知识图谱助手 Code-Graph-RAG",
-    "sourceUrl": "https://github.com/vitali87/code-graph-rag",
-    "summary": "这是一个能把整个代码仓库解析成知识图谱的工具，让你用日常语言向 AI 提问、查找甚至修改多语言代码库。",
-    "tags": [
-      "代码知识图谱",
-      "AI代码助手",
-      "RAG",
-      "多语言代码分析",
-      "代码检索",
-      "数据流追踪"
-    ],
-    "source": "daily",
-    "sourceLabel": "GitHub Trending",
-    "publishedAt": "2026-08-10T18:02:06.390Z"
-  },
-  {
-    "section": "github",
-    "digestDate": "2026-08-11",
-    "publishedDate": "8/11",
-    "time": "本次更新",
-    "readTime": "3 分钟",
-    "accent": "blue",
-    "inRecentWindow": true,
-    "paragraphs": [
-      "The Agency 把 AI 助手按『公司部门』的方式组织成一支完整的专家团队：每个智能体不是泛泛的提示词模板，而是有独特性格、沟通风格、明确工作流程和可衡量交付物的领域专家，比如前端开发向导、Reddit 社区运营高手等。你可以把它理解为随时待命的 AI 梦之队。",
-      "项目提供四种使用方式，门槛最低的是官方桌面应用：macOS、Linux 和 Windows 都有原生版本，打开应用即可浏览全部角色并一键安装到 Claude Code、Cursor、Codex、Gemini CLI、OpenCode 等工具中，还能自动更新，完全不需要克隆仓库或敲命令。Mac 用户也可以用 brew 一条命令安装。",
-      "对于习惯命令行的用户，项目提供安装脚本和转换脚本，支持 GitHub Copilot、Windsurf、Aider、Kimi 等十几种工具，还可以按部门（如工程、安全）或按单个角色选择性安装，避免一次装太多。每个智能体文件本身也可作为参考资料直接阅读和改写，包含身份设定、核心使命、工作流程和成功指标。",
-      "这套角色库适合所有使用 AI 编程或办公助手、希望让 AI 表现得更专业的人。完全不会编程的读者可以直接用桌面应用版；会用命令行的用户则有更灵活的安装选项。项目采用 MIT 协议，完全免费。"
-    ],
-    "facts": [
-      {
-        "label": "主要语言",
-        "value": "Shell"
-      },
-      {
-        "label": "Stars",
-        "value": "141,638"
-      },
-      {
-        "label": "今日新增 Stars",
-        "value": "+1,352"
-      },
-      {
-        "label": "Forks",
-        "value": "23,118"
-      },
-      {
-        "label": "许可证",
-        "value": "MIT"
-      },
-      {
-        "label": "最近更新",
-        "value": "2026-08-06"
-      }
-    ],
-    "externalLinks": [
-      {
-        "label": "阅读项目 README",
-        "url": "https://github.com/msitarzewski/agency-agents#readme"
-      },
-      {
-        "label": "查看 Releases",
-        "url": "https://github.com/msitarzewski/agency-agents/releases"
-      }
-    ],
-    "id": "github-trending:msitarzewski/agency-agents",
-    "title": "The Agency：开箱即用的 AI 专家智能体角色库",
-    "sourceUrl": "https://github.com/msitarzewski/agency-agents",
-    "summary": "这是一套精心设计的 AI 智能体角色集合，涵盖前端开发、社区运营等众多专业岗位，可一键安装到 Claude Code、Cursor 等主流 AI 编程工具中使用。",
-    "tags": [
-      "AI 智能体",
-      "提示词角色",
-      "Claude Code",
-      "Cursor",
-      "专家角色库",
-      "桌面应用",
       "开源"
     ],
     "source": "daily",
@@ -633,77 +2031,6 @@
     "accent": "blue",
     "inRecentWindow": true,
     "paragraphs": [
-      "许多 AI 智能体在做决策时不留任何痕迹：它们只存向量、不存含义，导致上下文无法解释、决策无法审计。在金融放贷等强监管场景，这是合规风险而非小麻烦——审批结果必须在数月后经受住监管者的追问。Semantica 正是为解决这个问题而生，它作为大模型、向量库和智能体框架之下的确定性基础层工作，构建图谱、推理和溯源都不依赖大模型。",
-      "它的核心能力包括：接入企业数据并提取关键信息，构建上下文图谱和知识图谱，在图谱上做分析和因果推理，并且内置完整的决策溯源记录。项目支持 RDF 和属性图两种主流图谱模型、遵循 W3C 标准、可自托管、无供应商锁定，被定位为『开源版 Palantir』。",
-      "适合的人群主要是 AI/ML 平台团队和数据平台团队：前者需要为承担重要决策的智能体提供结构化、可查询的上下文而非单纯的向量索引；后者如果数据已经存放在 Databricks 或 Snowflake 中，可以直接把仓库里的表转化为有治理、有血缘追踪的知识图谱，无需把数据导出给第三方。",
-      "使用门槛方面，这是一个面向开发者的 Python 库，通过 pip install semantica 安装，需要 Python 3.8 以上环境，采用 MIT 开源协议。非技术人员可以把它理解为数据团队搭建『可解释 AI』的底座工具，但落地仍需要工程能力。"
-    ],
-    "facts": [
-      {
-        "label": "主要语言",
-        "value": "Python"
-      },
-      {
-        "label": "Stars",
-        "value": "3,937"
-      },
-      {
-        "label": "今日新增 Stars",
-        "value": "+967"
-      },
-      {
-        "label": "Forks",
-        "value": "471"
-      },
-      {
-        "label": "许可证",
-        "value": "MIT"
-      },
-      {
-        "label": "最近更新",
-        "value": "2026-08-10"
-      }
-    ],
-    "externalLinks": [
-      {
-        "label": "阅读项目 README",
-        "url": "https://github.com/semantica-agi/semantica#readme"
-      },
-      {
-        "label": "打开项目网站",
-        "url": "https://getsemantica.ai"
-      },
-      {
-        "label": "查看 Releases",
-        "url": "https://github.com/semantica-agi/semantica/releases"
-      }
-    ],
-    "id": "github-trending:semantica-agi/semantica",
-    "title": "Semantica：面向 AI 智能体的图谱原生上下文与决策溯源基础设施",
-    "sourceUrl": "https://github.com/semantica-agi/semantica",
-    "summary": "这是一套开源的企业级基础设施，能把零散的原始数据构建成可查询、可追溯的知识图谱，让 AI 智能体的每个决策都能被解释和审计。",
-    "tags": [
-      "知识图谱",
-      "决策溯源",
-      "AI 基础设施",
-      "上下文管理",
-      "可解释 AI",
-      "因果推理",
-      "开源"
-    ],
-    "source": "daily",
-    "sourceLabel": "GitHub Trending",
-    "publishedAt": "2026-08-10T18:02:06.390Z"
-  },
-  {
-    "section": "github",
-    "digestDate": "2026-08-11",
-    "publishedDate": "8/11",
-    "time": "本次更新",
-    "readTime": "3 分钟",
-    "accent": "blue",
-    "inRecentWindow": true,
-    "paragraphs": [
       "MediaCrawler 是一个面向国内主流社交媒体的数据采集项目。它可以按关键词搜索，也可以指定某个帖子、视频或创作者主页，抓取正文内容、一级评论和二级评论，并支持把评论生成词云图，方便直观地看大家在讨论什么。覆盖平台包括小红书、抖音、快手、B站、微博、百度贴吧和知乎。",
       "它的技术特点是借助浏览器自动化来复用你本机 Chrome 的登录状态，不需要去破解各平台复杂的加密签名，因此相对同类爬虫工具门槛低一些。同时还提供登录态缓存、IP 代理池等能力，以应对平台的风控限制。项目还推出了付费的 Pro 版本，提供断点续爬、多账号支持等功能，但开源版本身已经可以完成基本采集任务。",
       "适合需要做一次社媒内容调研的运营人员、市场研究者或学生，比如分析某个话题下的用户反馈、整理竞品相关的评论等。不过它仍然是命令行工具，需要安装 Python 环境（通过 uv）、Node.js 和 Chrome 浏览器，并按文档配置，完全没有技术基础的用户上手会有一定难度。",
@@ -761,77 +2088,6 @@
       "评论抓取",
       "舆情分析",
       "社交媒体"
-    ],
-    "source": "daily",
-    "sourceLabel": "GitHub Trending",
-    "publishedAt": "2026-08-10T18:02:06.390Z"
-  },
-  {
-    "section": "github",
-    "digestDate": "2026-08-11",
-    "publishedDate": "8/11",
-    "time": "本次更新",
-    "readTime": "3 分钟",
-    "accent": "blue",
-    "inRecentWindow": true,
-    "paragraphs": [
-      "Paperclip 的定位是「AI 员工的公司管理层」。市面上很多工具帮你运行单个 AI 助手，而 Paperclip 解决的是同时管理多个 AI 助手的问题：你可以设定一个业务目标（比如开发一款产品并达到一定收入），然后为它「招聘」一支由 CEO、工程师、设计师、营销等角色组成的 AI 团队，从统一的仪表盘上分配任务、审批方案、追踪进度。",
-      "它的核心能力包括任务分派与审批流程、组织架构管理、预算与成本控制、目标对齐和跨智能体协调。它兼容多种主流 AI 编程助手和接口（如 Claude Code、Codex、Cursor、OpenClaw，甚至命令行和 HTTP 接口），只要一个助手能接收任务指令，就能被纳入团队。界面设计得像常见的任务管理软件，降低了理解门槛。",
-      "适合已经在大量使用 AI 助手、经常同时开着多个会话而难以跟踪进度的人，也适合想尝试让 AI 全天候自主运转、但仍希望随时审计和干预的创业者或小团队。",
-      "需要注意的是，这是一个需要自行部署的 Node.js 服务器加网页界面的工具，使用者需要具备基本的服务器部署能力或愿意按照文档操作；它本身不包含 AI 模型，需要接入你已有的 AI 服务。"
-    ],
-    "facts": [
-      {
-        "label": "主要语言",
-        "value": "TypeScript"
-      },
-      {
-        "label": "Stars",
-        "value": "76,331"
-      },
-      {
-        "label": "今日新增 Stars",
-        "value": "+167"
-      },
-      {
-        "label": "Forks",
-        "value": "14,192"
-      },
-      {
-        "label": "许可证",
-        "value": "MIT"
-      },
-      {
-        "label": "最近更新",
-        "value": "2026-08-10"
-      }
-    ],
-    "externalLinks": [
-      {
-        "label": "阅读项目 README",
-        "url": "https://github.com/paperclipai/paperclip#readme"
-      },
-      {
-        "label": "打开项目网站",
-        "url": "https://paperclip.ing"
-      },
-      {
-        "label": "查看 Releases",
-        "url": "https://github.com/paperclipai/paperclip/releases"
-      }
-    ],
-    "id": "github-trending:paperclipai/paperclip",
-    "title": "Paperclip：AI 智能体团队管理面板",
-    "sourceUrl": "https://github.com/paperclipai/paperclip",
-    "summary": "一个开源的 AI 智能体管理平台，让你像经营公司一样组建、指挥和监督一支由多个 AI 助手组成的团队。",
-    "tags": [
-      "AI智能体管理",
-      "团队协作",
-      "任务分配",
-      "成本控制",
-      "开源",
-      "自动化运营",
-      "仪表盘"
     ],
     "source": "daily",
     "sourceLabel": "GitHub Trending",
@@ -1047,6 +2303,67 @@
     "source": "daily",
     "sourceLabel": "GitHub Trending",
     "publishedAt": "2026-08-10T18:02:06.390Z"
+  },
+  {
+    "section": "x",
+    "digestDate": "2026-08-12",
+    "publishedDate": "8/11",
+    "time": "本次更新",
+    "readTime": "3 分钟",
+    "accent": "green",
+    "inRecentWindow": true,
+    "paragraphs": [
+      "标题翻译：每位 AI 工程师都应了解的 7 条自我改进智能体循环规则。预览内容翻译：作者：@Saboo_Shubham_ 和 @secchi_elia。当编码智能体负责编写代码时，定义'什么是好'才是真正的工程工作。编码智能体现在可以构建并改进其他智能体。写好指令……（预览在此截断）",
+      "核心观点：随着编码智能体能力增强，工程师的核心职责从'亲手写代码'转向'定义评估标准与编写高质量指令'——即如何让自我改进的智能体循环知道何为'好'的输出。文章标题承诺给出 7 条规则，但预览被截断，具体规则内容不得而知。阅读时需注意：预览未展示这 7 条规则的任何细节，不宜臆测；此外该内容属于工程实践类观点分享（带 tutorial、vibe-coding 标签），其建议是否普适需结合自身项目判断。"
+    ],
+    "id": "attentionvc-ai:2086874630032073142",
+    "title": "每位 AI 工程师都应知道的 7 条自我改进智能体循环规则",
+    "sourceUrl": "https://x.com/GoogleCloudTech/status/2086874630032073142",
+    "summary": "Google Cloud Tech 分享文章，作者为 Shubham Saboo 和 Elia Secchi。文章指出：当编码智能体负责写代码时，真正关键的工程工作在于定义'什么是好'；编码智能体如今已能构建并改进其他智能体，工程师需要写好指令。",
+    "tags": [
+      "AI智能体",
+      "自我改进循环",
+      "编码智能体",
+      "Google Cloud",
+      "提示工程",
+      "评估标准"
+    ],
+    "source": "daily",
+    "sourceLabel": "Google Cloud Tech · 技术动态 X 热榜",
+    "publishedAt": "2026-08-10T17:57:38.000Z"
+  },
+  {
+    "section": "x",
+    "digestDate": "2026-08-12",
+    "publishedDate": "8/11",
+    "time": "本次更新",
+    "readTime": "3 分钟",
+    "accent": "green",
+    "inRecentWindow": true,
+    "digestFormat": "builders-digest",
+    "paragraphs": [
+      "曾参与设计 Cursor、Notion 和 Stripe 的设计师 Ryo Lu 宣布离开 Cursor。他回顾说，在旧金山科技圈待了十年之后，Cursor 像是那个世界最锋利的版本——节奏快、强度高、野心勃勃，聚集了一群试图把未来拉得更近的人。他表示离开时心怀感激，但同时也感到自己需要一种不同的节奏：更慢的时间、不同的天气，以及更多日常生活里的文化、活力和人。他觉得亚洲是重新开始的合适之地，希望在那里保持踏实，更充分地体验生活，并自由地创造，他也会在路上陆续分享自己的所见所得。"
+    ],
+    "externalLinks": [
+      {
+        "label": "推文",
+        "url": "https://x.com/ryolu_/status/2086854498639822942"
+      }
+    ],
+    "id": "follow-builders:digest-2026-08-11-ryo-lu",
+    "title": "Cursor 设计师 Ryo Lu",
+    "sourceUrl": "https://x.com/ryolu_/status/2086854498639822942",
+    "summary": "Ryo Lu 宣布离开 Cursor，将前往亚洲换一种生活节奏，重新开始。",
+    "tags": [
+      "离职",
+      "Cursor",
+      "旧金山",
+      "亚洲",
+      "生活节奏"
+    ],
+    "source": "builder",
+    "sourceLabel": "Ryo Lu · Follow Builders",
+    "publishedAt": "2026-08-10T16:37:39.000Z"
   },
   {
     "section": "x",
@@ -1324,6 +2641,84 @@
     "source": "builder",
     "sourceLabel": "Garry Tan · Follow Builders",
     "publishedAt": "2026-08-10T00:46:17.000Z"
+  },
+  {
+    "section": "papers",
+    "digestDate": "2026-08-12",
+    "publishedDate": "8/10",
+    "time": "本次更新",
+    "readTime": "3 分钟",
+    "accent": "violet",
+    "inRecentWindow": true,
+    "paragraphs": [
+      "BDH-CQ 被介绍为一种推理模型，它把上下文学习与循环潜在推理结合起来。模型在推理阶段接收输入时，会用这些输入持续更新自己的循环记忆；之后它在一个高维潜在空间中通过多轮迭代计算来求解查询，而不是把中间推理步骤用语言表达出来。",
+      "研究者在公开的 ARC-AGI-1 评测集上评估该模型，并设计了受控的类 ARC 干预实验，用来考察它从示例中学到了什么、是否能稳定套用所推断出的变换规则，以及哪些概念对它来说仍然困难。",
+      "论文报告称，一个 1.5 亿参数的配置达到 29.5% 的 pass@2；按作者计算，每个任务的推理成本为 0.0007 美元。作者表示，这一运行点突破了此前报道的 ARC-AGI-1 成本—准确率帕累托前沿，成为该基准在成本效率上的新最优结果。"
+    ],
+    "utility": "这项工作值得关注的核心不是“更会聊天”，而是在抽象推理基准上把准确率和运行成本一起优化。对普通用户来说，若类似思路成立，未来一些需要看图找规律、自动解题或低成本批量推理的服务可能更便宜；但目前结论只来自 ARC-AGI-1 及受控类 ARC 实验，不能直接推断它在日常写作、医疗建议或真实工作决策中同样可靠。",
+    "externalLinks": [
+      {
+        "label": "查看 Hugging Face 论文页",
+        "url": "https://huggingface.co/papers/2608.09888"
+      },
+      {
+        "label": "打开 arXiv 原文",
+        "url": "https://arxiv.org/abs/2608.09888"
+      }
+    ],
+    "id": "huggingface-daily-papers:2608.09888",
+    "title": "BDH-CQ：结合上下文学习与循环潜在推理的模型",
+    "sourceUrl": "https://huggingface.co/papers/2608.09888",
+    "summary": "BDH-CQ 是一种推理模型：测试时输入会持续更新其循环记忆，随后在高维潜在空间中迭代计算来回答查询，而不把中间推理过程说出来。150M 参数版本在 ARC-AGI-1 公共评测集上达到 29.5% pass@2，报告称单任务推理成本约 0.0007 美元，并称刷新了该基准的成本—准确率效率前沿。",
+    "tags": [
+      "上下文学习",
+      "循环潜在推理",
+      "ARC-AGI-1",
+      "推理成本",
+      "帕累托前沿"
+    ],
+    "source": "daily",
+    "sourceLabel": "Hugging Face Daily Papers",
+    "publishedAt": "2026-08-10T00:00:00.000Z"
+  },
+  {
+    "section": "papers",
+    "digestDate": "2026-08-12",
+    "publishedDate": "8/10",
+    "time": "本次更新",
+    "readTime": "3 分钟",
+    "accent": "violet",
+    "inRecentWindow": true,
+    "paragraphs": [
+      "随着 AI 编程智能体承担越来越复杂、耗时更长的软件工程任务，现有基准测试正迅速趋于饱和，其评估质量也受到严重质疑：最近一项审计发现，在 SWE-bench Verified 中未解决的实例里，近 60% 包含有缺陷的测试——要么是过于苛刻、会拒绝正确解法的测试，要么是检查题目并未提出的要求的测试——而且前沿模型能够凭记忆原样复现训练数据中的标准答案。代码重构需要在多个文件之间进行协调一致、不改变程序行为的修改，是对智能体能力更难也更贴近现实的考验，但目前缺乏相应的基准测试。",
+      "研究者提出了 SWE-Bench ProMax，这是一个由专家精心构建的多语言代码重构基准，包含 170 个实例，取自 Python、Java、TypeScript、Go、C、C++ 和 Rust 七种编程语言的真实代码提交。每个实例都经过严格的多阶段筛选，直接针对以往基准暴露的质量问题：问题描述从零重写，以提供精确、无歧义的需求说明；测试套件经人工审查，剔除过窄和过宽的测试。复杂度不足或跨文件范围有限的任务也被过滤掉。",
+      "最终得到的基准由具有挑战性的大规模重构任务组成，平均每个实例涉及 11.4 个被修改的文件和 261.6 行代码，规模远超现有基准。在两种智能体框架下对前沿模型的实验表明，表现最好的模型也仅达到 41.2% 的解决率，证实 SWE-Bench ProMax 对当前 AI 编程智能体而言仍是一个有意义且远未饱和的挑战。该基准已在 Hugging Face 平台公开。"
+    ],
+    "utility": "AI 编程助手越来越普及，但宣传中的能力往往需要打问号。这篇论文揭示了旧评测体系的两个问题：测试本身有缺陷，以及模型可能只是'背过答案'。了解这一点，普通人在面对'AI 已能取代程序员'之类的说法时能更理性判断；而对考虑在工作中引入 AI 编程工具的人来说，最强的模型在真实复杂重构任务上也只有约四成的成功率，说明在涉及多文件、大规模的代码改动时，人工审查和专业把关仍然必不可少。",
+    "externalLinks": [
+      {
+        "label": "查看 Hugging Face 论文页",
+        "url": "https://huggingface.co/papers/2608.09802"
+      },
+      {
+        "label": "打开 arXiv 原文",
+        "url": "https://arxiv.org/abs/2608.09802"
+      }
+    ],
+    "id": "huggingface-daily-papers:2608.09802",
+    "title": "SWE-Bench ProMax：面向大规模多语言代码重构的智能体基准测试",
+    "sourceUrl": "https://huggingface.co/papers/2608.09802",
+    "summary": "研究人员提出了一个新的基准测试 SWE-Bench ProMax，用于评估 AI 编程智能体在真实、大规模代码重构任务上的能力。该基准包含 170 个来自真实代码提交的任务，覆盖 7 种编程语言，经过专家多轮筛选，剔除了测试用例有缺陷、任务过于简单的问题。实验显示，即使最强模型也只有 41.2% 的任务解决率，说明这一基准对当前 AI 编程能力构成了真实挑战。",
+    "tags": [
+      "AI编程智能体",
+      "代码重构",
+      "基准测试",
+      "多语言",
+      "软件工程评估"
+    ],
+    "source": "daily",
+    "sourceLabel": "Hugging Face Daily Papers",
+    "publishedAt": "2026-08-10T00:00:00.000Z"
   },
   {
     "section": "x",
@@ -1734,147 +3129,6 @@
       "TUI",
       "跨平台",
       "运维"
-    ],
-    "source": "daily",
-    "sourceLabel": "GitHub Trending",
-    "publishedAt": "2026-08-09T17:46:27.518Z"
-  },
-  {
-    "section": "github",
-    "digestDate": "2026-08-10",
-    "publishedDate": "8/10",
-    "time": "本次更新",
-    "readTime": "3 分钟",
-    "accent": "blue",
-    "inRecentWindow": true,
-    "paragraphs": [
-      "这个工具面向关心股票的普通投资者：你把自己的自选股清单交给它，它会自动抓取行情、K线、技术指标、新闻和公告等数据，再交给 AI 大模型生成一份结构化的「决策仪表盘」，内容包括核心结论、评分、趋势判断、买卖参考点位、风险警报和操作建议清单。报告可以直接推送到企业微信、飞书、Telegram、Discord、Slack 或邮箱，相当于每天早上收到一份自动生成的个股分析简报。",
-      "除了每日自动推送，它还提供网页版工作台，可以手动触发分析、查看历史报告、做简单回测和管理持仓；内置了均线、缠论、波浪、趋势等 15 种分析策略，支持像聊天一样多轮追问某只股票。覆盖 A股、港股、美股、日股、韩股、台股和 ETF，行情默认使用 AkShare 等免费数据源，新闻搜索支持多种搜索 API。",
-      "最大的卖点是部署门槛低、可以零成本运行：推荐方式是 Fork 仓库后用 GitHub Actions 定时运行，不需要购买服务器，按教程约 5 分钟就能配好。也支持 Docker 和本地定时任务。不会写代码的用户需要做的主要是注册一个 AI 模型的 API Key（如 Gemini、DeepSeek 或国内聚合服务）并配置一个推送渠道。",
-      "需要注意的是，它是辅助分析工具而非投资顾问，AI 给出的买卖点位仅供参考；免费行情源偶尔会遇到限流或不稳定的情况，追求稳定可以配置付费数据源。适合想获得每日个股 AI 复盘、又不想自己盯盘看新闻的投资者。"
-    ],
-    "facts": [
-      {
-        "label": "主要语言",
-        "value": "Python"
-      },
-      {
-        "label": "Stars",
-        "value": "61,065"
-      },
-      {
-        "label": "今日新增 Stars",
-        "value": "+287"
-      },
-      {
-        "label": "Forks",
-        "value": "51,969"
-      },
-      {
-        "label": "许可证",
-        "value": "MIT"
-      },
-      {
-        "label": "最近更新",
-        "value": "2026-08-09"
-      }
-    ],
-    "externalLinks": [
-      {
-        "label": "阅读项目 README",
-        "url": "https://github.com/ZhuLinsen/daily_stock_analysis#readme"
-      },
-      {
-        "label": "打开项目网站",
-        "url": "https://dsa.zhulinsen.tech"
-      },
-      {
-        "label": "查看 Releases",
-        "url": "https://github.com/ZhuLinsen/daily_stock_analysis/releases"
-      }
-    ],
-    "id": "github-trending:ZhuLinsen/daily_stock_analysis",
-    "title": "每日股票智能分析助手",
-    "sourceUrl": "https://github.com/ZhuLinsen/daily_stock_analysis",
-    "summary": "一个由 AI 大模型驱动的多市场自选股分析系统，能每天自动分析 A股、港股、美股等市场的股票并把决策报告推送到你的聊天工具或邮箱。",
-    "tags": [
-      "股票分析",
-      "AI 大模型",
-      "自选股",
-      "决策仪表盘",
-      "自动推送",
-      "GitHub Actions",
-      "投资辅助"
-    ],
-    "source": "daily",
-    "sourceLabel": "GitHub Trending",
-    "publishedAt": "2026-08-09T17:46:27.518Z"
-  },
-  {
-    "section": "github",
-    "digestDate": "2026-08-10",
-    "publishedDate": "8/10",
-    "time": "本次更新",
-    "readTime": "3 分钟",
-    "accent": "blue",
-    "inRecentWindow": true,
-    "paragraphs": [
-      "Harvey LAB 由法律 AI 公司 Harvey 开源，包含两部分：一个覆盖 24 个以上法律执业领域（另加合同类任务）、共 1671 个任务的数据集，以及一套用来运行和评分智能体的执行框架。每个任务都配有操作指令、相关文档和评分标准，模拟的是接近真实场景的法律工作，例如并购数据室的尽调任务。",
-      "它的核心价值在于提供一套统一、可复现的衡量标准：你可以把不同的 AI 模型或智能体接入进来，让它们完成同一批法律任务，再按照评分细则（采用全通过的评分规则并结合大模型评委）得出可对比的结果报告和对比看板。",
-      "适合的人群包括：想评估 AI 在法律场景实际能力的研究者、开发法律科技产品的团队，以及希望用数据判断某个模型能否胜任法律文书工作的技术负责人。",
-      "使用门槛方面，这不是面向普通用户的成品软件：需要具备 Python 开发环境和一定的编程能力才能运行评测，普通律师或非技术人员更适合把它理解为一把'标尺'，而非直接可用的工具。项目采用 MIT 许可证，仍在持续扩充任务集。"
-    ],
-    "facts": [
-      {
-        "label": "主要语言",
-        "value": "Python"
-      },
-      {
-        "label": "Stars",
-        "value": "762"
-      },
-      {
-        "label": "今日新增 Stars",
-        "value": "+87"
-      },
-      {
-        "label": "Forks",
-        "value": "173"
-      },
-      {
-        "label": "许可证",
-        "value": "MIT"
-      },
-      {
-        "label": "最近更新",
-        "value": "2026-08-08"
-      }
-    ],
-    "externalLinks": [
-      {
-        "label": "阅读项目 README",
-        "url": "https://github.com/harveyai/harvey-labs#readme"
-      },
-      {
-        "label": "打开项目网站",
-        "url": "https://www.harvey.ai/blog/introducing-harveys-legal-agent-benchmark"
-      },
-      {
-        "label": "查看 Releases",
-        "url": "https://github.com/harveyai/harvey-labs/releases"
-      }
-    ],
-    "id": "github-trending:harveyai/harvey-labs",
-    "title": "Harvey LAB：法律工作 AI 智能体评测基准",
-    "sourceUrl": "https://github.com/harveyai/harvey-labs",
-    "summary": "这是一套开源基准测试工具，用真实的法律工作任务来检验和比较 AI 智能体处理法律实务的能力。",
-    "tags": [
-      "法律AI",
-      "基准测试",
-      "智能体评测",
-      "法律科技",
-      "大语言模型",
-      "开源数据集"
     ],
     "source": "daily",
     "sourceLabel": "GitHub Trending",
