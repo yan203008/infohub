@@ -126,16 +126,53 @@ function parseSimpleTakeaways(raw: string) {
 }
 
 const generatedBlockNames = ["TITLE", "SUMMARY", "TAKEAWAYS", "ARTICLE"] as const;
+type GeneratedBlockName = typeof generatedBlockNames[number];
 
-function extractGeneratedBlock(raw: string, name: typeof generatedBlockNames[number]) {
+const generatedBlockAliases: Record<GeneratedBlockName, string[]> = {
+  TITLE: ["TITLE", "标题"],
+  SUMMARY: ["SUMMARY", "摘要", "卡片摘要"],
+  TAKEAWAYS: ["TAKEAWAYS", "TAKEAWAY", "启示", "核心启示"],
+  ARTICLE: ["ARTICLE", "正文", "阅读原文", "阅读文章"],
+};
+
+function extractGeneratedBlock(raw: string, name: GeneratedBlockName) {
   const pattern = new RegExp(`<<<\\s*${name}\\s*>>>\\s*([\\s\\S]*?)\\s*<<<\\s*\\/${name}\\s*>>>`, "i");
-  return raw.match(pattern)?.[1]?.trim() ?? "";
+  const complete = raw.match(pattern)?.[1]?.trim();
+  if (complete) return complete;
+
+  // Long model outputs occasionally omit the final slash or repeat the opening marker.
+  // Recover the content between the first opening marker and the next marker (or EOF).
+  const opening = raw.match(new RegExp(`<<<\\s*${name}\\s*>>>`, "i"));
+  if (!opening || opening.index === undefined) return "";
+  const contentStart = opening.index + opening[0].length;
+  const remaining = raw.slice(contentStart);
+  const nextMarker = remaining.search(/<<<\s*\/?(?:TITLE|SUMMARY|TAKEAWAYS?|ARTICLE)\s*>>>/i);
+  return remaining.slice(0, nextMarker >= 0 ? nextMarker : undefined).trim();
+}
+
+function parseHeadingBlocks(raw: string) {
+  const headings = [...raw.matchAll(/^#{1,3}\s*(.+?)\s*$/gm)].map((match) => ({
+    label: match[1].replace(/[：:]+$/, "").trim().toUpperCase(),
+    start: match.index ?? 0,
+    contentStart: (match.index ?? 0) + match[0].length,
+  }));
+  const result = {} as Partial<Record<GeneratedBlockName, string>>;
+  for (let index = 0; index < headings.length; index += 1) {
+    const heading = headings[index];
+    const name = generatedBlockNames.find((candidate) => generatedBlockAliases[candidate].some((alias) => alias.toUpperCase() === heading.label));
+    if (!name || result[name]) continue;
+    const end = headings.slice(index + 1).find((candidate) => generatedBlockNames.some((blockName) => generatedBlockAliases[blockName].some((alias) => alias.toUpperCase() === candidate.label)))?.start ?? raw.length;
+    result[name] = raw.slice(heading.contentStart, end).trim();
+  }
+  return result;
 }
 
 function parseGeneratedArticle(raw: string) {
-  const blocks = Object.fromEntries(generatedBlockNames.map((name) => [name, extractGeneratedBlock(raw, name)])) as Record<typeof generatedBlockNames[number], string>;
+  const normalized = raw.replace(/^```(?:text|markdown|md)?\s*\n?/i, "").replace(/\n?```\s*$/i, "").replace(/[\u200B-\u200D\uFEFF]/g, "").trim();
+  const headingBlocks = parseHeadingBlocks(normalized);
+  const blocks = Object.fromEntries(generatedBlockNames.map((name) => [name, extractGeneratedBlock(normalized, name) || headingBlocks[name] || ""])) as Record<GeneratedBlockName, string>;
   const missing = generatedBlockNames.filter((name) => !blocks[name]);
-  if (missing.length > 0) throw new Error(`无法识别：缺少 ${missing.join("、")} 区块。请确认 Bot 使用了指定输出格式。`);
+  if (missing.length > 0) throw new Error(`没有识别到${missing.map((name) => generatedBlockAliases[name][1] || name).join("、")}。请粘贴 Bot 的完整结果，或检查对应区块标题。`);
   return {
     title: blocks.TITLE.replace(/^#{1,6}\s*/, "").trim(),
     summary: blocks.SUMMARY.replace(/^#{1,6}\s*(?:摘要|Summary)\s*\n?/i, "").trim(),
@@ -152,6 +189,7 @@ export function CuratedAdminApp() {
   const [takeawayText, setTakeawayText] = useState("");
   const [autoImportOpen, setAutoImportOpen] = useState(false);
   const [autoImportText, setAutoImportText] = useState("");
+  const [autoImportError, setAutoImportError] = useState("");
   const [topicInput, setTopicInput] = useState("");
   const [drafts, setDrafts] = useState<CuratedDraft[]>([]);
   const [busy, setBusy] = useState(false);
@@ -241,6 +279,7 @@ export function CuratedAdminApp() {
     setTopicInput("");
     setAutoImportOpen(false);
     setAutoImportText("");
+    setAutoImportError("");
     setMessage("");
     setEditorOpen(true);
   }
@@ -251,11 +290,13 @@ export function CuratedAdminApp() {
     setTopicInput("");
     setAutoImportOpen(false);
     setAutoImportText("");
+    setAutoImportError("");
     setMessage("");
     setEditorOpen(true);
   }
 
   function importGeneratedArticle() {
+    setAutoImportError("");
     try {
       const parsed = parseGeneratedArticle(autoImportText);
       setDraft({
@@ -271,7 +312,7 @@ export function CuratedAdminApp() {
       setAutoImportOpen(false);
       setAutoImportText("");
     } catch (error) {
-      setMessage(error instanceof Error ? error.message : "自动识别失败");
+      setAutoImportError(error instanceof Error ? error.message : "自动识别失败");
     }
   }
 
@@ -463,10 +504,11 @@ export function CuratedAdminApp() {
     </section>
     {editorOpen && <div className="admin-editor-backdrop" role="dialog" aria-modal="true">
       <section className="curated-editor admin-editor-modal">
-        <div className="editor-title"><div><p>{draft.status === "draft" && !draft.title ? "新增文章" : "编辑文章"}</p><h1>{draft.title || "新建精选"}</h1></div><div className="editor-title-actions"><button type="button" className="auto-import-trigger" onClick={() => setAutoImportOpen((value) => !value)}><Sparkles size={17} />自动识别</button><button className="modal-close" onClick={() => setEditorOpen(false)} aria-label="关闭"><X size={20} /></button></div></div>
+        <div className="editor-title"><div><p>{draft.status === "draft" && !draft.title ? "新增文章" : "编辑文章"}</p><h1>{draft.title || "新建精选"}</h1></div><div className="editor-title-actions"><button type="button" className="auto-import-trigger" onClick={() => { setAutoImportOpen((value) => !value); setAutoImportError(""); }}><Sparkles size={17} />自动识别</button><button className="modal-close" onClick={() => setEditorOpen(false)} aria-label="关闭"><X size={20} /></button></div></div>
         {autoImportOpen && <section className="auto-import-panel">
           <div><strong>粘贴 Bot 的完整结果</strong><span>系统会自动拆分标题、摘要、Takeaway 和正文，现有内容将被替换。</span></div>
-          <textarea rows={12} value={autoImportText} onChange={(event) => setAutoImportText(event.target.value)} placeholder={"从 <<<TITLE>>> 开始，粘贴到 <<</ARTICLE>>> 结束"} autoFocus />
+          <textarea rows={12} value={autoImportText} onChange={(event) => { setAutoImportText(event.target.value); setAutoImportError(""); }} placeholder={"粘贴带有四组标记，或“标题 / 摘要 / Takeaway / 正文”四个 Markdown 标题的完整结果"} autoFocus />
+          {autoImportError && <p className="auto-import-error" role="alert">{autoImportError}</p>}
           <div><button type="button" className="auto-import-action" disabled={!autoImportText.trim()} onClick={importGeneratedArticle}><Sparkles size={17} />开始识别</button></div>
         </section>}
         <div className="editor-grid">
