@@ -1,6 +1,906 @@
 [
   {
     "section": "github",
+    "digestDate": "2026-08-17",
+    "publishedDate": "8/17",
+    "time": "本次更新",
+    "readTime": "3 分钟",
+    "accent": "blue",
+    "inRecentWindow": true,
+    "paragraphs": [
+      "Needle 是一个体积极小的人工智能模型，整个模型打包后只有 14MB，运行时内存占用约 28MB，却能在基准测试中与体积大它 5 到 70 倍的同类小模型互有胜负。它不做开放式聊天，而是专注三件实事：根据你的话调用对应的程序功能（比如查天气）、从一段文字中提取结构化信息（比如从发票文字里读出金额和日期）、以及在资源有限的设备上完成自动化操作。",
+      "它的几个设计对实际使用很友好：每次回答都附带一个可信度评分，低于你设的门槛就可以转交人工或更大的模型处理，避免出错；可以声明大量工具，模型会自动挑选最相关的几个来用；对话再长内存也不会膨胀。所有输出都被严格限定为你要求的 JSON 格式，不会答非所问。",
+      "这个项目主要面向需要在终端设备上做智能化的开发者和硬件团队——比如手机应用、可穿戴设备、智能家居中控或机器人厂商，以及重视隐私、需要离线运行的场景。模型权重完全开源（MIT 协议），可以从 Hugging Face 免费获取。",
+      "使用门槛方面：虽然目标是“小设备”，但调用方式仍是写 Python 代码——用 pip 安装后，通过装饰器声明工具函数即可让模型自动调用，还内置了浏览器试用界面（playground）和基于 LoRA 的微调流程，可以用自己的工具数据训练出定制版本。适合有基础编程能力的个人开发者或团队，不适合完全不懂代码的终端用户直接使用。"
+    ],
+    "facts": [
+      {
+        "label": "主要语言",
+        "value": "Python"
+      },
+      {
+        "label": "Stars",
+        "value": "6,433"
+      },
+      {
+        "label": "今日新增 Stars",
+        "value": "+447"
+      },
+      {
+        "label": "Forks",
+        "value": "427"
+      },
+      {
+        "label": "许可证",
+        "value": "MIT"
+      },
+      {
+        "label": "最近更新",
+        "value": "2026-08-16"
+      }
+    ],
+    "externalLinks": [
+      {
+        "label": "阅读项目 README",
+        "url": "https://github.com/cactus-compute/needle#readme"
+      },
+      {
+        "label": "打开项目网站",
+        "url": "https://cactuscompute.com"
+      },
+      {
+        "label": "查看 Releases",
+        "url": "https://github.com/cactus-compute/needle/releases"
+      }
+    ],
+    "id": "github-trending:cactus-compute/needle",
+    "title": "Needle：能在手机和小设备上运行的超小工具调用模型",
+    "sourceUrl": "https://github.com/cactus-compute/needle",
+    "summary": "一个只有 14MB 大小的开源小型 AI 模型，专门帮开发者在手机、手表、智能家居和机器人等设备上完成“听懂指令、调用功能、提取信息”这类任务，无需联网。",
+    "tags": [
+      "小型AI模型",
+      "端侧推理",
+      "工具调用",
+      "结构化提取",
+      "离线运行",
+      "LoRA微调",
+      "开源模型"
+    ],
+    "source": "daily",
+    "sourceLabel": "GitHub Trending",
+    "publishedAt": "2026-08-16T17:33:14.568Z"
+  },
+  {
+    "section": "github",
+    "digestDate": "2026-08-17",
+    "publishedDate": "8/17",
+    "time": "本次更新",
+    "readTime": "3 分钟",
+    "accent": "blue",
+    "inRecentWindow": true,
+    "paragraphs": [
+      "Unsloth 提供图形化的桌面应用，支持 Windows、macOS 和 Linux，用户可以直接在本地运行 Qwen、DeepSeek、Gemma、Kimi 等主流大语言模型，以及 FLUX 等图像与视频扩散模型。除了聊天对话，它还支持联网搜索、深度研究、文档问答（RAG）等功能，数据不出本机，适合注重隐私的使用场景。",
+      "它的另一大核心能力是模型微调：通过 LoRA、QLoRA 等技术的优化实现，训练速度可提升约 2 倍、显存占用降低约 70%，让消费级显卡也有机会训练自己的专属模型。训练完成后可导出为 GGUF 等常见格式，方便部署到其他平台使用。",
+      "对于进阶用户，Unsloth 还提供与 OpenAI 兼容的 API 接口，可以把本地模型接入 Claude Code 等编程工具或自建应用；也能通过 Cloudflare 安全地从外部访问家里的模型。应用支持 CPU、NVIDIA、AMD、Intel 等多种硬件，还提供从 PDF、CSV 等文件构建训练数据集的功能。",
+      "适合人群包括想脱离订阅费用使用 AI 的个人用户、需要定制行业模型的从业者，以及 AI 爱好者。使用门槛相对较低：桌面版开箱即用，但运行较大模型仍需要一定的显卡显存或内存，微调训练对硬件的要求更高，建议有一定电脑配置基础的用户尝试。"
+    ],
+    "facts": [
+      {
+        "label": "主要语言",
+        "value": "Python"
+      },
+      {
+        "label": "Stars",
+        "value": "72,408"
+      },
+      {
+        "label": "今日新增 Stars",
+        "value": "+580"
+      },
+      {
+        "label": "Forks",
+        "value": "6,529"
+      },
+      {
+        "label": "许可证",
+        "value": "Apache-2.0"
+      },
+      {
+        "label": "最近更新",
+        "value": "2026-08-17"
+      }
+    ],
+    "externalLinks": [
+      {
+        "label": "阅读项目 README",
+        "url": "https://github.com/unslothai/unsloth#readme"
+      },
+      {
+        "label": "打开项目网站",
+        "url": "https://unsloth.ai/docs"
+      },
+      {
+        "label": "查看 Releases",
+        "url": "https://github.com/unslothai/unsloth/releases"
+      }
+    ],
+    "id": "github-trending:unslothai/unsloth",
+    "title": "Unsloth：本地运行与训练 AI 模型的桌面应用",
+    "sourceUrl": "https://github.com/unslothai/unsloth",
+    "summary": "一款可以在自己电脑上运行、微调和部署大语言模型与图像生成模型的桌面工具，让普通用户无需依赖云端服务也能使用和定制 AI。",
+    "tags": [
+      "本地大模型",
+      "模型微调",
+      "桌面应用",
+      "隐私保护",
+      "LoRA训练",
+      "开源AI工具"
+    ],
+    "source": "daily",
+    "sourceLabel": "GitHub Trending",
+    "publishedAt": "2026-08-16T17:33:14.568Z"
+  },
+  {
+    "section": "github",
+    "digestDate": "2026-08-17",
+    "publishedDate": "8/17",
+    "time": "本次更新",
+    "readTime": "3 分钟",
+    "accent": "blue",
+    "inRecentWindow": true,
+    "paragraphs": [
+      "Cordis 的定位是一个“元框架”，也就是用来搭建其他框架和应用骨架的基础工具。它的核心思想是组合性：把一个大应用拆成许多独立的小插件，每个插件负责一块功能，可以按需加载、卸载和替换，而不用重写整个系统。",
+      "它内置了依赖注入、生命周期管理、事件通信等能力，让各个模块之间既能协作又保持独立。知名的聊天机器人框架 Koishi 就建立在 Cordis 之上，说明它适合支撑长期运行、需要频繁增减功能的大型应用。",
+      "这个项目主要面向有一定 TypeScript/JavaScript 基础的开发者和框架作者。如果你只是想找一个开箱即用的成品软件，它并不合适；但如果你在规划一个需要插件生态、模块热更新的系统，它能帮你省掉大量底层设计工作。",
+      "使用门槛方面，需要熟悉 Node.js 开发环境和 TypeScript 语法，官方文档对核心概念有较系统的讲解，MIT 协议开源，可自由用于商业项目。"
+    ],
+    "facts": [
+      {
+        "label": "主要语言",
+        "value": "TypeScript"
+      },
+      {
+        "label": "Stars",
+        "value": "4,597"
+      },
+      {
+        "label": "今日新增 Stars",
+        "value": "+719"
+      },
+      {
+        "label": "Forks",
+        "value": "238"
+      },
+      {
+        "label": "许可证",
+        "value": "MIT"
+      },
+      {
+        "label": "最近更新",
+        "value": "2026-08-13"
+      }
+    ],
+    "externalLinks": [
+      {
+        "label": "阅读项目 README",
+        "url": "https://github.com/cordiverse/cordis#readme"
+      },
+      {
+        "label": "打开项目网站",
+        "url": "https://deepseek-harness.github.io/deepseek-harness/reference/cordis-primer"
+      },
+      {
+        "label": "查看 Releases",
+        "url": "https://github.com/cordiverse/cordis/releases"
+      }
+    ],
+    "id": "github-trending:cordiverse/cordis",
+    "title": "Cordis：灵活的插件化应用开发框架",
+    "sourceUrl": "https://github.com/cordiverse/cordis",
+    "summary": "Cordis 是一个 TypeScript 元框架，帮助开发者把应用拆成可自由组合、可热插拔的插件模块来构建和管理。",
+    "tags": [
+      "TypeScript",
+      "插件框架",
+      "元框架",
+      "依赖注入",
+      "模块化",
+      "开源"
+    ],
+    "source": "daily",
+    "sourceLabel": "GitHub Trending",
+    "publishedAt": "2026-08-16T17:33:14.568Z"
+  },
+  {
+    "section": "github",
+    "digestDate": "2026-08-17",
+    "publishedDate": "8/17",
+    "time": "本次更新",
+    "readTime": "3 分钟",
+    "accent": "blue",
+    "inRecentWindow": true,
+    "paragraphs": [
+      "这个项目本身不是一个软件，而是一份精心整理的清单，收录了互联网上大量可以免费使用的公共 API（应用程序接口），涵盖天气、金融、新闻、地理位置、航空航班、邮箱验证等众多领域。对于想给自己的产品接入外部数据的人来说，它就像一个目录齐全的工具箱。",
+      "清单由社区成员和 APILayer 团队共同人工维护，多年来持续更新，条目按领域分类，查找方便。项目还提供了配套的 Postman 集合，可以让使用者在不编写代码的情况下快速试用接口，一分钟内就能发起第一次请求。",
+      "适合的人群包括：想为网站或应用接入数据但不知道从哪里找接口的创业者、产品经理，以及需要免费数据源做原型验证的小团队。不会写代码的读者也可以把它当作发现'现成数据服务'的目录，再交给技术人员或低代码工具去对接。",
+      "使用门槛很低：浏览清单不需要任何技术背景，真正调用 API 时才需要少量开发知识，部分服务需要注册账号获取密钥，多数提供免费额度。"
+    ],
+    "facts": [
+      {
+        "label": "主要语言",
+        "value": "Python"
+      },
+      {
+        "label": "Stars",
+        "value": "461,276"
+      },
+      {
+        "label": "今日新增 Stars",
+        "value": "+1,583"
+      },
+      {
+        "label": "Forks",
+        "value": "50,964"
+      },
+      {
+        "label": "许可证",
+        "value": "MIT"
+      },
+      {
+        "label": "最近更新",
+        "value": "2026-08-14"
+      }
+    ],
+    "externalLinks": [
+      {
+        "label": "阅读项目 README",
+        "url": "https://github.com/public-apis/public-apis#readme"
+      },
+      {
+        "label": "打开项目网站",
+        "url": "https://APILayer.com/?utm_source=Github&utm_medium=Referral&utm_campaign=Public-apis-repo"
+      },
+      {
+        "label": "查看 Releases",
+        "url": "https://github.com/public-apis/public-apis/releases"
+      }
+    ],
+    "id": "github-trending:public-apis/public-apis",
+    "title": "免费公共 API 大全",
+    "sourceUrl": "https://github.com/public-apis/public-apis",
+    "summary": "一份由社区长期维护的免费公共 API 索引清单，帮你快速找到天气、股票、地理定位、邮箱验证等各类现成的数据接口。",
+    "tags": [
+      "免费API",
+      "公共接口",
+      "数据服务",
+      "API目录",
+      "开发者资源",
+      "Postman"
+    ],
+    "source": "daily",
+    "sourceLabel": "GitHub Trending",
+    "publishedAt": "2026-08-16T17:33:14.568Z"
+  },
+  {
+    "section": "github",
+    "digestDate": "2026-08-17",
+    "publishedDate": "8/17",
+    "time": "本次更新",
+    "readTime": "3 分钟",
+    "accent": "blue",
+    "inRecentWindow": true,
+    "paragraphs": [
+      "ToolJet 是一个开源的低代码开发平台，主要用来快速搭建企业内部使用的工具，比如库存管理系统、订单看板、数据仪表盘和审批流程等。它提供可视化拖拽编辑器，内置 60 多个现成组件（表格、图表、表单等），还自带一个无需编程的数据库，很多场景下不写代码也能完成搭建。",
+      "它的连接能力是一大亮点：支持 80 多种数据源，包括常见数据库、API 接口、云存储和各类 SaaS 工具，可以把分散在不同系统里的数据汇集到一个界面上操作。支持多人协作编辑、评论、权限控制，也允许在应用里运行 JavaScript 和 Python 代码来扩展功能。",
+      "适合需要内部工具但缺乏开发资源的团队、运营人员和中小企业。社区版可免费自托管（支持 Docker 等方式部署），也可以使用官方云服务快速上手；企业版额外提供 AI 生成应用、AI 辅助查询和调试、工作流智能体等高级功能。",
+      "使用门槛方面，搭建简单页面对非程序员比较友好，但涉及数据源连接和复杂逻辑时仍需要一定的技术理解；自托管部署则需要基本的运维能力或技术人员协助。项目采用 AGPL-3.0 许可证，自用时需留意开源协议要求。"
+    ],
+    "facts": [
+      {
+        "label": "主要语言",
+        "value": "JavaScript"
+      },
+      {
+        "label": "Stars",
+        "value": "39,868"
+      },
+      {
+        "label": "今日新增 Stars",
+        "value": "+446"
+      },
+      {
+        "label": "Forks",
+        "value": "5,320"
+      },
+      {
+        "label": "许可证",
+        "value": "AGPL-3.0"
+      },
+      {
+        "label": "最近更新",
+        "value": "2026-08-14"
+      }
+    ],
+    "externalLinks": [
+      {
+        "label": "阅读项目 README",
+        "url": "https://github.com/ToolJet/ToolJet#readme"
+      },
+      {
+        "label": "打开项目网站",
+        "url": "https://tooljet.com"
+      },
+      {
+        "label": "查看 Releases",
+        "url": "https://github.com/ToolJet/ToolJet/releases"
+      }
+    ],
+    "id": "github-trending:ToolJet/ToolJet",
+    "title": "ToolJet 低代码内部工具搭建平台",
+    "sourceUrl": "https://github.com/ToolJet/ToolJet",
+    "summary": "一个开源的低代码平台，通过拖拽组件就能搭建内部管理工具、仪表盘和业务应用，还能连接数据库和各种 SaaS 服务。",
+    "tags": [
+      "低代码",
+      "内部工具",
+      "可视化搭建",
+      "开源平台",
+      "数据仪表盘",
+      "工作流",
+      "自托管"
+    ],
+    "source": "daily",
+    "sourceLabel": "GitHub Trending",
+    "publishedAt": "2026-08-16T17:33:14.568Z"
+  },
+  {
+    "section": "github",
+    "digestDate": "2026-08-17",
+    "publishedDate": "8/17",
+    "time": "本次更新",
+    "readTime": "3 分钟",
+    "accent": "blue",
+    "inRecentWindow": true,
+    "paragraphs": [
+      "OpenCut 是一个面向普通创作者的视频编辑工具，目标是提供剪映式的易用剪辑体验，同时保持完全免费和开源。它基于 MIT 许可证发布，任何人都可以自由使用，不用担心订阅费用或平台锁定。",
+      "需要注意的是，项目当前正在从头重写，新版将采用 Rust 内核，实现网页、桌面和移动端共用一套代码，并计划支持第三方插件、编辑器脚本、AI 代理接入（MCP）以及无界面批量渲染等高级功能。在新版完成之前，官方建议日常使用仍选择旧版（OpenCut Classic），opencut.app 网站上运行的就是这一稳定版本。",
+      "对于不想写代码的普通用户，直接使用官网的在线版本即可开始剪辑，无需安装和配置开发环境；GitHub 仓库中的构建命令主要面向想参与开发的程序员。项目目前暂不接收外部代码贡献，但可以通过 Discord 社区跟进进展和提问。",
+      "适合人群包括短视频创作者、自媒体运营者，以及希望摆脱商业剪辑软件限制、支持开源工具的用户。它尤其适合关注数据自主、希望使用免费工具完成日常剪辑任务的人。"
+    ],
+    "facts": [
+      {
+        "label": "主要语言",
+        "value": "TypeScript"
+      },
+      {
+        "label": "Stars",
+        "value": "83,705"
+      },
+      {
+        "label": "今日新增 Stars",
+        "value": "+134"
+      },
+      {
+        "label": "Forks",
+        "value": "8,272"
+      },
+      {
+        "label": "许可证",
+        "value": "MIT"
+      },
+      {
+        "label": "最近更新",
+        "value": "2026-08-11"
+      }
+    ],
+    "externalLinks": [
+      {
+        "label": "阅读项目 README",
+        "url": "https://github.com/OpenCut-app/OpenCut#readme"
+      },
+      {
+        "label": "打开项目网站",
+        "url": "https://opencut.app"
+      },
+      {
+        "label": "查看 Releases",
+        "url": "https://github.com/OpenCut-app/OpenCut/releases"
+      }
+    ],
+    "id": "github-trending:OpenCut-app/OpenCut",
+    "title": "OpenCut：免费开源的剪映替代品",
+    "sourceUrl": "https://github.com/OpenCut-app/OpenCut",
+    "summary": "一款免费、开源的视频剪辑软件，定位为 CapCut（剪映）的开源替代，可在网页、桌面和手机上使用。",
+    "tags": [
+      "视频剪辑",
+      "开源软件",
+      "剪映替代",
+      "免费工具",
+      "跨平台",
+      "创作者工具"
+    ],
+    "source": "daily",
+    "sourceLabel": "GitHub Trending",
+    "publishedAt": "2026-08-16T17:33:14.568Z"
+  },
+  {
+    "section": "github",
+    "digestDate": "2026-08-17",
+    "publishedDate": "8/17",
+    "time": "本次更新",
+    "readTime": "3 分钟",
+    "accent": "blue",
+    "inRecentWindow": true,
+    "paragraphs": [
+      "Omarchy 不是一个从零开始的新系统，而是一套“观点鲜明”的 Linux 配置方案：作者 DHH（Ruby on Rails 之父）替你选好了窗口管理器、主题、快捷键和常用软件，装完后立刻得到一个美观、风格统一、以键盘操作为主的桌面环境，省去了自己慢慢调教 Linux 的几周时间。",
+      "它预装了开发者和日常用户需要的大部分东西：终端、Neovim 编辑器、AI 工具、浏览器、截图录屏、剪贴板历史、PDF 填写、游戏支持，甚至还能跑 Windows 虚拟机。系统自带多套主题可以一键切换，还有系统快照功能，改坏了也能回滚。",
+      "适合两类人：一是想从 Mac 或 Windows 转到 Linux 但不想折腾配置的用户，官方手册专门写了“从 Mac/Windows 迁移”指南；二是喜欢高效键盘操作、统一美观界面的开发者。日常操作基本通过快捷键和图形界面完成，不一定需要写代码。",
+      "使用门槛是：安装过程需要给电脑装 Linux 系统（支持双系统方案），前期需要适应以键盘为中心的操作方式。项目基于 MIT 协议开源，更新活跃，配有详细的图文手册。"
+    ],
+    "facts": [
+      {
+        "label": "主要语言",
+        "value": "Shell"
+      },
+      {
+        "label": "Stars",
+        "value": "25,239"
+      },
+      {
+        "label": "今日新增 Stars",
+        "value": "+225"
+      },
+      {
+        "label": "Forks",
+        "value": "2,573"
+      },
+      {
+        "label": "许可证",
+        "value": "MIT"
+      },
+      {
+        "label": "最近更新",
+        "value": "2026-08-16"
+      }
+    ],
+    "externalLinks": [
+      {
+        "label": "阅读项目 README",
+        "url": "https://github.com/basecamp/omarchy#readme"
+      },
+      {
+        "label": "打开项目网站",
+        "url": "https://omarchy.org"
+      },
+      {
+        "label": "查看 Releases",
+        "url": "https://github.com/basecamp/omarchy/releases"
+      }
+    ],
+    "id": "github-trending:basecamp/omarchy",
+    "title": "Omarchy：开箱即用的美观现代 Linux 系统",
+    "sourceUrl": "https://github.com/basecamp/omarchy",
+    "summary": "Omarchy 是 DHH 打造的一套预配置好的 Linux 桌面方案，装好系统就拥有美观统一的界面和整套开发、办公工具。",
+    "tags": [
+      "Linux",
+      "桌面系统",
+      "DHH",
+      "开箱即用",
+      "键盘操作",
+      "主题美化",
+      "开发者工具"
+    ],
+    "source": "daily",
+    "sourceLabel": "GitHub Trending",
+    "publishedAt": "2026-08-16T17:33:14.568Z"
+  },
+  {
+    "section": "x",
+    "digestDate": "2026-08-17",
+    "publishedDate": "8/16",
+    "time": "本次更新",
+    "readTime": "3 分钟",
+    "accent": "green",
+    "inRecentWindow": true,
+    "digestFormat": "builders-digest",
+    "paragraphs": [
+      "Replit CEO Amjad Masad 反驳了一种流行论调：有人认为 AI 因为目前吃算力，所以会「结构性地集中权力」。他指出，这种观点忽视了过去 125 年算力性价比超指数增长的历史——算法的改进和硬件效率的持续提升意味着，没有理由假定 AGI 级别的能力永远需要一个数据中心才能跑起来。他强调，Scaling laws 并不是物理定律，只是针对特定架构、目标和数据集观察到的经验关系，改变其中任何一个因素就会得到一条不同的曲线。如果以人脑为参照，真正的 AGI 大概率会非常高效；甚至当下的 Scaling laws 可能是个 bug 而不是 feature，它恰恰暴露了目前人类发现的机器学习算法有多低效。"
+    ],
+    "externalLinks": [
+      {
+        "label": "推文",
+        "url": "https://x.com/amasad/status/2088867492907327573"
+      }
+    ],
+    "id": "follow-builders:digest-2026-08-16-amjad-masad",
+    "title": "Replit CEO Amjad Masad",
+    "sourceUrl": "https://x.com/amasad/status/2088867492907327573",
+    "summary": "Amjad Masad 反驳「AI 必然导致权力中心化」的观点，认为算力性价比的超指数增长意味着 AGI 未必永远依赖数据中心。",
+    "tags": [
+      "AI 权力集中",
+      "Scaling laws",
+      "算力效率",
+      "AGI",
+      "算法改进"
+    ],
+    "source": "builder",
+    "sourceLabel": "Amjad Masad · Follow Builders",
+    "publishedAt": "2026-08-16T05:56:34.000Z"
+  },
+  {
+    "section": "x",
+    "digestDate": "2026-08-17",
+    "publishedDate": "8/16",
+    "time": "本次更新",
+    "readTime": "3 分钟",
+    "accent": "green",
+    "inRecentWindow": true,
+    "digestFormat": "builders-digest",
+    "paragraphs": [
+      "OpenAI 负责 Codex 与 ChatGPT 的 Thibault Sottiaux 最近情绪很高，先感叹 OpenAI 内部正在发生不可思议的事情、能量拉满，接着直接向企业用户发问：如果你的公司还在用 Opus 而不是 Sol，是为什么，价格难道不重要吗，什么才能说服你切换？他随后兑现承诺，写了一篇关于 token 与每 token 定价的长文：OpenAI 的 token 并不等于别家模型的 token，大家习惯用每百万 token 的美元价格来比较 AI 成本，仿佛 token 是像克或千瓦时一样的标准单位，但它不是——不同模型处理同一段文字所用的 token 数完全不同，所以每 token 单价低并不一定意味着账单更低。他打了个披萨的比方：两张一模一样的披萨，一张切成 8 片每片 2 美元，另一张切成 16 片每片 1.25 美元，第二家单片更便宜，但整张披萨要 20 美元而不是 16 美元，你的胃可不在乎你吃了几片。回到 token 上，在一项涵盖英语、技术、多语言和数字文本的小型对比中，GPT-5.6 Sol 用的 tokenizer 只花了 766 个 token，而 Claude Opus 5 估计要 1170 个，少了约 34.5%，同样的文字却要多付那些 token 的钱，单价根本反映不出这一点。不过他认为即使修正 tokenizer 差异也没抓住重点——真正重要的是每个成功结果的成本，benchmark 只能当起点，最终还得在自己的场景里实测。结尾他写道：就说这么多，愿 token 长流。"
+    ],
+    "externalLinks": [
+      {
+        "label": "推文 1",
+        "url": "https://x.com/thsottiaux/status/2088725514542575903"
+      },
+      {
+        "label": "推文 2",
+        "url": "https://x.com/thsottiaux/status/2088850995430477882"
+      },
+      {
+        "label": "推文 3",
+        "url": "https://x.com/thsottiaux/status/2088866513008873560"
+      }
+    ],
+    "id": "follow-builders:digest-2026-08-16-thibault-sottiaux",
+    "title": "OpenAI Codex 与 ChatGPT 团队成员 Thibault Sottiaux",
+    "sourceUrl": "https://x.com/thsottiaux/status/2088866513008873560",
+    "summary": "Thibault 感叹 OpenAI 内部能量高涨，并借机向企业用户发问为何还在用 Opus 而非 Sol，随后长文解释为何按每百万 token 比价会误导人。",
+    "tags": [
+      "token定价",
+      "GPT-5.6 Sol",
+      "Claude Opus",
+      "OpenAI",
+      "成本对比"
+    ],
+    "source": "builder",
+    "sourceLabel": "Thibault Sottiaux · Follow Builders",
+    "publishedAt": "2026-08-16T05:52:40.000Z"
+  },
+  {
+    "section": "x",
+    "digestDate": "2026-08-17",
+    "publishedDate": "8/16",
+    "time": "本次更新",
+    "readTime": "3 分钟",
+    "accent": "green",
+    "inRecentWindow": true,
+    "digestFormat": "builders-digest",
+    "paragraphs": [
+      "Vercel CEO Guillermo Rauch 认为，很多人没有意识到 React 的成功有多大程度其实要归功于 shadcn。他曾经把 React 称为真正的「成年人的乐高积木」，但现在他觉得那更像是在描述积木的几何形状，也就是一份规格说明；而 shadcn 才是人们真正想从 React 得到的东西——可复用、高质量、同时又可以调优的组件。他把它称为一种「伪库」：虽然有代码，但这些代码其实是被设计来放进你的上下文窗口里消化和重新混搭的。随后他还发了一条简短动态，只写了「递归式自我改进」并附上了链接。"
+    ],
+    "externalLinks": [
+      {
+        "label": "推文 1",
+        "url": "https://x.com/rauchg/status/2088757738037989755"
+      },
+      {
+        "label": "推文 2",
+        "url": "https://x.com/rauchg/status/2088838302367732178"
+      }
+    ],
+    "id": "follow-builders:digest-2026-08-16-guillermo-rauch",
+    "title": "Vercel CEO Guillermo Rauch",
+    "sourceUrl": "https://x.com/rauchg/status/2088838302367732178",
+    "summary": "Guillermo Rauch 认为 React 的成功很大程度上要归功于 shadcn，并分享了一条关于「递归式自我改进」的动态。",
+    "tags": [
+      "React",
+      "shadcn",
+      "组件库",
+      "上下文窗口",
+      "Vercel"
+    ],
+    "source": "builder",
+    "sourceLabel": "Guillermo Rauch · Follow Builders",
+    "publishedAt": "2026-08-16T04:00:34.000Z"
+  },
+  {
+    "section": "x",
+    "digestDate": "2026-08-17",
+    "publishedDate": "8/16",
+    "time": "本次更新",
+    "readTime": "3 分钟",
+    "accent": "green",
+    "inRecentWindow": true,
+    "digestFormat": "builders-digest",
+    "paragraphs": [
+      "Linear 产品负责人 Nan Yu 分享了他的梦想工作方式：整天坐在公园里和伙伴们录内容，然后让一队 agent 把这些内容转化为行动和能跑的软件。他在转发相关讨论时感叹，这两位（指被转发内容中的人）早在他们的时代之前就想到了这些。"
+    ],
+    "externalLinks": [
+      {
+        "label": "推文 1",
+        "url": "https://x.com/thenanyu/status/2088810666958196988"
+      },
+      {
+        "label": "推文 2",
+        "url": "https://x.com/thenanyu/status/2088811172090769461"
+      }
+    ],
+    "id": "follow-builders:digest-2026-08-16-nan-yu",
+    "title": "Linear 产品负责人 Nan Yu",
+    "sourceUrl": "https://x.com/thenanyu/status/2088811172090769461",
+    "summary": "Nan Yu 畅想坐在公园里录内容、让 agent 团队把内容变成行动和软件的工作方式，并感慨有人早已走在时代前面。",
+    "tags": [
+      "agent 工作流",
+      "内容创作",
+      "未来工作方式",
+      "Linear"
+    ],
+    "source": "builder",
+    "sourceLabel": "Nan Yu · Follow Builders",
+    "publishedAt": "2026-08-16T02:12:46.000Z"
+  },
+  {
+    "section": "x",
+    "digestDate": "2026-08-17",
+    "publishedDate": "8/16",
+    "time": "本次更新",
+    "readTime": "3 分钟",
+    "accent": "green",
+    "inRecentWindow": true,
+    "digestFormat": "builders-digest",
+    "paragraphs": [
+      "Every 的 CEO Dan Shipper 转发了一条内容，并简单评论说：Dario 真的应该多发推文，言语间透着一点期待这位 Anthropic 掌舵人更多公开表达的调侃。"
+    ],
+    "externalLinks": [
+      {
+        "label": "推文",
+        "url": "https://x.com/danshipper/status/2088780884048552202"
+      }
+    ],
+    "id": "follow-builders:digest-2026-08-16-dan-shipper",
+    "title": "Every CEO Dan Shipper",
+    "sourceUrl": "https://x.com/danshipper/status/2088780884048552202",
+    "summary": "Dan Shipper 认为 Anthropic 的 Dario 应该多发推文。",
+    "tags": [
+      "Dario",
+      "Anthropic",
+      "发推",
+      "AI 动态"
+    ],
+    "source": "builder",
+    "sourceLabel": "Dan Shipper · Follow Builders",
+    "publishedAt": "2026-08-16T00:12:25.000Z"
+  },
+  {
+    "section": "x",
+    "digestDate": "2026-08-17",
+    "publishedDate": "8/16",
+    "time": "本次更新",
+    "readTime": "3 分钟",
+    "accent": "green",
+    "inRecentWindow": true,
+    "digestFormat": "builders-digest",
+    "paragraphs": [
+      "Peter Yang 是 Grok Bot 的粉丝，但他发现一个很别扭的问题：X 本该是 Grok 最有差异化价值的第一数据源，可连接器似乎根本不能用，他甚至没法在云电脑上登录 X，忍不住问是不是自己哪里操作错了。另外，他完全赞同 Dario 的观点：用 AI 治愈疾病、加快 AI 医疗突破的监管审批，给人类带来的好处可能是其他所有事情加起来的十倍。"
+    ],
+    "externalLinks": [
+      {
+        "label": "推文 1",
+        "url": "https://x.com/petergyang/status/2088773343629750535"
+      },
+      {
+        "label": "推文 2",
+        "url": "https://x.com/petergyang/status/2088772605323214999"
+      }
+    ],
+    "id": "follow-builders:digest-2026-08-16-peter-yang",
+    "title": "AI 教程与访谈创作者 Peter Yang",
+    "sourceUrl": "https://x.com/petergyang/status/2088773343629750535",
+    "summary": "Peter Yang 吐槽 Grok 无法接入 X 数据，并赞同 Dario 关于 AI 治病价值的观点。",
+    "tags": [
+      "Grok",
+      "X 数据源",
+      "AI 医疗",
+      "Dario",
+      "监管审批"
+    ],
+    "source": "builder",
+    "sourceLabel": "Peter Yang · Follow Builders",
+    "publishedAt": "2026-08-15T23:42:27.000Z"
+  },
+  {
+    "section": "x",
+    "digestDate": "2026-08-17",
+    "publishedDate": "8/16",
+    "time": "本次更新",
+    "readTime": "3 分钟",
+    "accent": "green",
+    "inRecentWindow": true,
+    "digestFormat": "builders-digest",
+    "paragraphs": [
+      "Swyx 聊到一个他在职业生涯走到这个阶段才越来越确定的事：如果你不活在科技圈的信息茧房里，可能会惊讶于顶级人物之间其实很少真正见面或认识彼此。作为局外人，他原本也以为大家都在某种秘密的“光明会”式群聊里互通消息，但实际情况是，那种群聊确实存在，却都是转瞬即逝的例外，远不是常态。你在头条新闻里看到的东西，基本上也就是这些大人物自己看到的东西。他觉得这也可以理解为：大多数人把精力花在做事上，而不是经营叙事或传播八卦。对他而言，这个事实在职业生涯走到如今反而相当令人安心。"
+    ],
+    "externalLinks": [
+      {
+        "label": "推文",
+        "url": "https://x.com/swyx/status/2088755688361378082"
+      }
+    ],
+    "id": "follow-builders:digest-2026-08-16-swyx",
+    "title": "Swyx",
+    "sourceUrl": "https://x.com/swyx/status/2088755688361378082",
+    "summary": "Swyx 分享了一个反直觉的观察：科技圈顶级人物之间其实很少互相认识，所谓秘密小圈子少之又少。",
+    "tags": [
+      "科技圈",
+      "人脉观察",
+      "八卦",
+      "叙事",
+      "职业感悟"
+    ],
+    "source": "builder",
+    "sourceLabel": "Swyx · Follow Builders",
+    "publishedAt": "2026-08-15T22:32:17.000Z"
+  },
+  {
+    "section": "x",
+    "digestDate": "2026-08-17",
+    "publishedDate": "8/16",
+    "time": "本次更新",
+    "readTime": "3 分钟",
+    "accent": "green",
+    "inRecentWindow": true,
+    "digestFormat": "builders-digest",
+    "paragraphs": [
+      "SPC 合伙人、Bevel Health 联合创始人 Aditya Agarwal 感慨道，美国今年早些时候刚满 250 岁，而印度今天迎来 80 岁——还很年轻的 80 年。他指出建设一个国家真的很难：美国在建国 80 年的时候还在内战中挣扎，因此印度人应该为自己建设起来的这个国家感到无比骄傲。他同时表示，和美国一样，印度还想要更多，想变得更好、更强、更成功，而他相信她终会做到。"
+    ],
+    "externalLinks": [
+      {
+        "label": "推文",
+        "url": "https://x.com/adityaag/status/2088734739893293175"
+      }
+    ],
+    "id": "follow-builders:digest-2026-08-16-aditya-agarwal",
+    "title": "SPC 合伙人、Bevel Health 联合创始人 Aditya Agarwal",
+    "sourceUrl": "https://x.com/adityaag/status/2088734739893293175",
+    "summary": "Aditya Agarwal 在印度独立 80 周年之际，赞扬印度建国 80 年取得的成就，并对其未来充满信心。",
+    "tags": [
+      "印度",
+      "独立80周年",
+      "国家建设",
+      "美国",
+      "乐观"
+    ],
+    "source": "builder",
+    "sourceLabel": "Aditya Agarwal · Follow Builders",
+    "publishedAt": "2026-08-15T21:09:03.000Z"
+  },
+  {
+    "section": "x",
+    "digestDate": "2026-08-17",
+    "publishedDate": "8/16",
+    "time": "本次更新",
+    "readTime": "3 分钟",
+    "accent": "green",
+    "inRecentWindow": true,
+    "digestFormat": "builders-digest",
+    "paragraphs": [
+      "在 Anthropic 做 Claude Code 的 Thariq 分享说，不损失质量的水印技术其实有点反直觉，感觉上它就不应该成立。为了搞清楚它的原理，他用 Claude 做了一个 artifact 来帮助自己理解，并把成果分享出来，希望对别人也有帮助。"
+    ],
+    "externalLinks": [
+      {
+        "label": "推文",
+        "url": "https://x.com/trq212/status/2088721023223132213"
+      }
+    ],
+    "id": "follow-builders:digest-2026-08-16-thariq",
+    "title": "Anthropic Claude Code 工程师 Thariq",
+    "sourceUrl": "https://x.com/trq212/status/2088721023223132213",
+    "summary": "Thariq 用 Claude 做了一个交互式 artifact，帮助理解不损失质量的水印技术为何可行。",
+    "tags": [
+      "水印",
+      "Claude",
+      "artifact",
+      "Anthropic"
+    ],
+    "source": "builder",
+    "sourceLabel": "Thariq · Follow Builders",
+    "publishedAt": "2026-08-15T20:14:33.000Z"
+  },
+  {
+    "section": "x",
+    "digestDate": "2026-08-17",
+    "publishedDate": "8/16",
+    "time": "本次更新",
+    "readTime": "3 分钟",
+    "accent": "green",
+    "inRecentWindow": true,
+    "digestFormat": "builders-digest",
+    "paragraphs": [
+      "FPV Ventures 合伙人 Nikunj Kothari 上周和一位 stealth 被投公司的创始人聊天，对方所在的领域按湾区标准相当不性感，正在为一堆关键合同和合作发愁——这些合同能带来信誉、收入和网络效应，但都卡在最后一码。这是个高度碎片化的市场，而且问题纯粹出在官僚流程上：支持者、条款全都谈好了，本来是双赢，就因为夏天和某个莫名其妙的条款卡着，可能拖慢他们激进的进度。Nikunj 坐在那里先是微笑，后来笑出了声，对方问他笑什么，他反问：你知道别人要做到同样的事得花多久吗——何况对方还没有你现成的杠杆和关系。短期内这种卡壳确实痛苦，但长期看正是最强的护城河，未来他们会回过头笑自己为什么为几天时间担心，因为正是这些壁垒会让他们成为世界上最大的公司之一。他强调：没必要的痛苦、表演式的 996 都不是护城河，但花大力气建立深入捆绑的软件和关系，才是真正的护城河。"
+    ],
+    "externalLinks": [
+      {
+        "label": "推文",
+        "url": "https://x.com/nikunj/status/2088716743615352963"
+      }
+    ],
+    "id": "follow-builders:digest-2026-08-16-nikunj-kothari",
+    "title": "FPV Ventures 合伙人 Nikunj Kothari",
+    "sourceUrl": "https://x.com/nikunj/status/2088716743615352963",
+    "summary": "Nikunj Kothari 分享与一家 stealth 被投创始人的对话：短期看似卡住的官僚流程，长期其实是护城河。",
+    "tags": [
+      "护城河",
+      "创业",
+      "B2B销售",
+      "碎片化市场",
+      "风险投资"
+    ],
+    "source": "builder",
+    "sourceLabel": "Nikunj Kothari · Follow Builders",
+    "publishedAt": "2026-08-15T19:57:32.000Z"
+  },
+  {
+    "section": "x",
+    "digestDate": "2026-08-17",
+    "publishedDate": "8/16",
+    "time": "本次更新",
+    "readTime": "3 分钟",
+    "accent": "green",
+    "inRecentWindow": true,
+    "digestFormat": "builders-digest",
+    "paragraphs": [
+      "Meta AI 高级总监、此前在 Google 领导过 Gemini、Veo 和 Nano Banana 的 Madhu Guru 表示：B2B 软件再也没有借口保持那么糟糕的用户体验了。拜 AI 所赐，每一款软件产品都可以、也应该像最好的消费级软件一样易用。"
+    ],
+    "externalLinks": [
+      {
+        "label": "推文",
+        "url": "https://x.com/realmadhuguru/status/2088710566689018103"
+      }
+    ],
+    "id": "follow-builders:digest-2026-08-16-madhu-guru",
+    "title": "Meta AI 高级总监 Madhu Guru",
+    "sourceUrl": "https://x.com/realmadhuguru/status/2088710566689018103",
+    "summary": "Madhu Guru 认为，有了 AI，B2B 软件再没有借口做得难用。",
+    "tags": [
+      "AI",
+      "B2B软件",
+      "用户体验",
+      "消费级体验"
+    ],
+    "source": "builder",
+    "sourceLabel": "Madhu Guru · Follow Builders",
+    "publishedAt": "2026-08-15T19:33:00.000Z"
+  },
+  {
+    "section": "x",
+    "digestDate": "2026-08-17",
+    "publishedDate": "8/16",
+    "time": "本次更新",
+    "readTime": "3 分钟",
+    "accent": "green",
+    "inRecentWindow": true,
+    "paragraphs": [
+      "TL;DR：我目前的 AI 编程配置是 Pi、Opencode Go 和 Herdr。\n今年，我们正在见证\"马具工程\"（harness engineering）的蓬勃发展。最初它只是围绕 LLM 的简单脚手架，如今已成为最……（预览在此截断）",
+      "核心观点：AI 编程的关键正在从\"选哪个模型\"转向\"如何搭建围绕模型的工具体系\"。作者以自己使用的三个开源工具（Pi、Opencode Go、Herdr）为例，说明 harness engineering 已从小众技巧变成系统性实践。\n阅读时需注意的语境：1）预览内容在关键处被截断，文章对这三款工具的具体评测细节、对比结论均不可得，无法确认作者最终推荐哪一款；2）从标签（openclaw、claude-code、mcp、vibe-coding）推测，文章涉及 MCP 协议生态和 Claude Code 类编程代理的实践，但具体内容应以原文为准；3）这些是快速迭代的小众开源项目，文中提到的功能与体验可能很快过时，参考时请核实项目最新状态。"
+    ],
+    "id": "attentionvc-ai:2088708859133333552",
+    "title": "三位一体：pi、herdr 与 opencode go",
+    "sourceUrl": "https://x.com/TheGlobalMinima/status/2088708859133333552",
+    "summary": "作者 Aarno 分享自己当前的 AI 编程工具组合：Pi、Opencode Go 和 Herdr。文章指出，今年围绕大模型的\"马具工程\"（harness engineering，即为 LLM 搭建外围脚手架与工具链）正迎来爆发——最初只是简单的脚手架，如今已发展成更复杂、更重要的领域。",
+    "tags": [
+      "AI 编程工具",
+      "harness engineering",
+      "Opencode Go",
+      "Herdr",
+      "Pi",
+      "工具链评测"
+    ],
+    "source": "daily",
+    "sourceLabel": "Aarno · 技术动态 X 热榜",
+    "publishedAt": "2026-08-15T19:26:13.000Z"
+  },
+  {
+    "section": "github",
     "digestDate": "2026-08-16",
     "publishedDate": "8/16",
     "time": "本次更新",
@@ -62,77 +962,6 @@
       "SVG",
       "技术写作",
       "设计自动化"
-    ],
-    "source": "daily",
-    "sourceLabel": "GitHub Trending",
-    "publishedAt": "2026-08-15T17:33:56.985Z"
-  },
-  {
-    "section": "github",
-    "digestDate": "2026-08-16",
-    "publishedDate": "8/16",
-    "time": "本次更新",
-    "readTime": "3 分钟",
-    "accent": "blue",
-    "inRecentWindow": true,
-    "paragraphs": [
-      "Needle 是一个超小型的开源 AI 模型，整个模型只有 14MB，运行时占用约 28MB 内存。它不像 ChatGPT 那样用于自由聊天，而是专注于两件实事：理解你的指令后自动调用对应的工具函数，以及从一段文字中提取出结构化的数据（比如从发票文字里提取金额和日期）。因为体积极小且完全离线运行，它可以装进手机、手表、智能音箱甚至机器人里。",
-      "它的几个核心能力包括：返回结果自带可信度评分，你可以设置门槛，分数低就转交给人或更大的模型处理；可以声明大量工具，模型每轮自动挑选最相关的五个；无论对话多长，内存占用都稳定在近 28MB。开发者只需用 Python 装饰器描述自己的函数，模型就能自动决定何时调用并填好参数。",
-      "这个项目主要面向需要在设备端嵌入 AI 能力的开发者和硬件团队，典型场景包括没有网络的设备、对隐私要求高的场景、以及云端大模型成本太高或延迟太大的产品。使用门槛是需要会写 Python（pip 安装即可），官方提供了浏览器试玩界面和 LoRA 微调工具，可以针对自己的工具集优化效果。",
-      "对普通非技术读者来说，它的意义在于证明 AI 不一定需要庞大的服务器：一个十几 MB 的文件就能让日常设备具备理解指令、执行操作的能力。"
-    ],
-    "facts": [
-      {
-        "label": "主要语言",
-        "value": "Python"
-      },
-      {
-        "label": "Stars",
-        "value": "5,959"
-      },
-      {
-        "label": "今日新增 Stars",
-        "value": "+551"
-      },
-      {
-        "label": "Forks",
-        "value": "399"
-      },
-      {
-        "label": "许可证",
-        "value": "MIT"
-      },
-      {
-        "label": "最近更新",
-        "value": "2026-08-16"
-      }
-    ],
-    "externalLinks": [
-      {
-        "label": "阅读项目 README",
-        "url": "https://github.com/cactus-compute/needle#readme"
-      },
-      {
-        "label": "打开项目网站",
-        "url": "https://cactuscompute.com"
-      },
-      {
-        "label": "查看 Releases",
-        "url": "https://github.com/cactus-compute/needle/releases"
-      }
-    ],
-    "id": "github-trending:cactus-compute/needle",
-    "title": "Needle：只有 14MB 的超小 AI 模型，跑在手机和智能设备上",
-    "sourceUrl": "https://github.com/cactus-compute/needle",
-    "summary": "Needle 是一个仅 14MB 的开源小型 AI 模型，专为工具调用和结构化信息提取设计，能在手机、可穿戴设备、智能家居和机器人等内存有限的设备上离线运行。",
-    "tags": [
-      "端侧 AI",
-      "小模型",
-      "工具调用",
-      "结构化提取",
-      "离线运行",
-      "Python",
-      "LoRA 微调"
     ],
     "source": "daily",
     "sourceLabel": "GitHub Trending",
@@ -492,218 +1321,6 @@
     "accent": "blue",
     "inRecentWindow": true,
     "paragraphs": [
-      "Unsloth 是一款面向普通用户的 AI 桌面应用，支持 Windows、macOS 和 Linux，下载安装包即可使用。它可以在你本地运行 Qwen、Gemma、DeepSeek、Kimi 等主流开源大语言模型，以及 FLUX 这类图像和视频生成模型，所有数据和对话都留在自己电脑上，隐私更有保障。",
-      "它的另一大特色是模型训练（微调）：官方宣称训练速度提升 2 倍、显存占用减少 70%，意味着用普通游戏显卡也能训练自己的专属模型。支持 LoRA、QLoRA、全量微调、强化学习等主流训练方式，训练好的模型还能导出为 GGUF 等格式部署到别处。",
-      "软件还内置了不少实用功能：可以把 PDF、Word、CSV 文件加工成训练数据集；提供与 OpenAI 兼容的接口，方便接入 Claude Code 等编程助手；支持联网搜索、文档问答（RAG），甚至能通过 Cloudflare 安全地从外地访问家里的模型。",
-      "适合想本地玩大模型、注重隐私、或想用自有数据训练专属模型的用户。只是运行现成模型门槛较低，图形界面操作即可；但模型微调仍属于进阶功能，需要理解训练数据等概念，且本地跑大模型对电脑配置（尤其是显卡显存）有一定要求。"
-    ],
-    "facts": [
-      {
-        "label": "主要语言",
-        "value": "Python"
-      },
-      {
-        "label": "Stars",
-        "value": "71,903"
-      },
-      {
-        "label": "今日新增 Stars",
-        "value": "+435"
-      },
-      {
-        "label": "Forks",
-        "value": "6,481"
-      },
-      {
-        "label": "许可证",
-        "value": "Apache-2.0"
-      },
-      {
-        "label": "最近更新",
-        "value": "2026-08-16"
-      }
-    ],
-    "externalLinks": [
-      {
-        "label": "阅读项目 README",
-        "url": "https://github.com/unslothai/unsloth#readme"
-      },
-      {
-        "label": "打开项目网站",
-        "url": "https://unsloth.ai/docs"
-      },
-      {
-        "label": "查看 Releases",
-        "url": "https://github.com/unslothai/unsloth/releases"
-      }
-    ],
-    "id": "github-trending:unslothai/unsloth",
-    "title": "Unsloth：本地运行和训练 AI 模型的桌面应用",
-    "sourceUrl": "https://github.com/unslothai/unsloth",
-    "summary": "一款免费开源的桌面软件，让你在自己的电脑上运行、微调大语言模型和图像生成模型，无需把数据交给云端。",
-    "tags": [
-      "本地大模型",
-      "模型微调",
-      "桌面应用",
-      "开源免费",
-      "隐私保护",
-      "图像生成",
-      "低显存训练"
-    ],
-    "source": "daily",
-    "sourceLabel": "GitHub Trending",
-    "publishedAt": "2026-08-15T17:33:56.985Z"
-  },
-  {
-    "section": "github",
-    "digestDate": "2026-08-16",
-    "publishedDate": "8/16",
-    "time": "本次更新",
-    "readTime": "3 分钟",
-    "accent": "blue",
-    "inRecentWindow": true,
-    "paragraphs": [
-      "Cordis 的定位是“元框架”——它本身不是一个直接面向用户的软件，而是给开发者提供一套组织代码的底层方法论和工具。它的核心理念是“时空可组合性”：代码模块既能在同一时间并存协作，也能在应用运行的不同阶段被加载、替换或卸载。",
-      "借助这种设计，开发者可以把应用拆成独立的插件式模块，按需组合。这对于需要长期维护、功能不断增减的项目（例如聊天机器人、工具平台）尤其有价值，因为新增功能不必改动已有代码。",
-      "需要明确的是，Cordis 面向的是有编程基础的开发者，使用 TypeScript 编写。它不提供图形界面，也没有开箱即用的成品功能；如果你不写代码，这个项目对你没有直接用途，但你使用的某个软件可能正是建立在它之上。",
-      "该项目采用 MIT 协议开源，社区关注度较高（近四千 star），说明其设计思路在技术圈内获得了认可。想评估它是否适合自己的项目，需要具备一定的后端或框架开发经验。"
-    ],
-    "facts": [
-      {
-        "label": "主要语言",
-        "value": "TypeScript"
-      },
-      {
-        "label": "Stars",
-        "value": "3,918"
-      },
-      {
-        "label": "今日新增 Stars",
-        "value": "+616"
-      },
-      {
-        "label": "Forks",
-        "value": "190"
-      },
-      {
-        "label": "许可证",
-        "value": "MIT"
-      },
-      {
-        "label": "最近更新",
-        "value": "2026-08-13"
-      }
-    ],
-    "externalLinks": [
-      {
-        "label": "阅读项目 README",
-        "url": "https://github.com/cordiverse/cordis#readme"
-      },
-      {
-        "label": "打开项目网站",
-        "url": "https://deepseek-harness.github.io/deepseek-harness/reference/cordis-primer"
-      },
-      {
-        "label": "查看 Releases",
-        "url": "https://github.com/cordiverse/cordis/releases"
-      }
-    ],
-    "id": "github-trending:cordiverse/cordis",
-    "title": "Cordis：可组合的应用开发元框架",
-    "sourceUrl": "https://github.com/cordiverse/cordis",
-    "summary": "Cordis 是一个用 TypeScript 编写的“元框架”，主打在时间与空间维度上自由组合代码模块，帮助开发者搭建结构清晰、易于扩展的应用。",
-    "tags": [
-      "元框架",
-      "TypeScript",
-      "模块化",
-      "插件系统",
-      "可组合架构",
-      "开发者工具",
-      "开源框架"
-    ],
-    "source": "daily",
-    "sourceLabel": "GitHub Trending",
-    "publishedAt": "2026-08-15T17:33:56.985Z"
-  },
-  {
-    "section": "github",
-    "digestDate": "2026-08-16",
-    "publishedDate": "8/16",
-    "time": "本次更新",
-    "readTime": "3 分钟",
-    "accent": "blue",
-    "inRecentWindow": true,
-    "paragraphs": [
-      "Public APIs 是 GitHub 上最受欢迎的仓库之一，本身不是一个软件，而是一份精心整理的资源目录。它按分类收录了来自各领域的大量免费或提供免费额度的公开 API（应用程序接口），比如天气查询、股票行情、新闻资讯、IP 定位、邮件验证等，每个条目会标注是否需要注册、是否支持 HTTPS 等关键信息。",
-      "对开发者来说，它解决了'想做某个功能但不知道去哪里找数据'的问题。比如想做一个显示天气的小应用，可以在这份清单里找到多个免费天气接口，对比后选择合适的接入，省去到处搜索和踩坑的时间。",
-      "这份清单由社区成员和 APILayer 公司共同维护，MIT 协议开放，持续更新。需要注意的是，随着项目发展，目前仓库重点推荐 APILayer 旗下的商业 API 服务（提供统一账号管理多个接口），但清单中仍包含大量第三方免费接口。",
-      "适合正在开发网站、应用或自动化脚本、需要外部数据的程序员和编程学习者。纯非技术用户使用价值有限，因为 API 本身需要写代码调用；但如果你在学编程或找练手项目的数据源，这是很好的起点。"
-    ],
-    "facts": [
-      {
-        "label": "主要语言",
-        "value": "Python"
-      },
-      {
-        "label": "Stars",
-        "value": "459,805"
-      },
-      {
-        "label": "今日新增 Stars",
-        "value": "+2,476"
-      },
-      {
-        "label": "Forks",
-        "value": "50,825"
-      },
-      {
-        "label": "许可证",
-        "value": "MIT"
-      },
-      {
-        "label": "最近更新",
-        "value": "2026-08-14"
-      }
-    ],
-    "externalLinks": [
-      {
-        "label": "阅读项目 README",
-        "url": "https://github.com/public-apis/public-apis#readme"
-      },
-      {
-        "label": "打开项目网站",
-        "url": "https://APILayer.com/?utm_source=Github&utm_medium=Referral&utm_campaign=Public-apis-repo"
-      },
-      {
-        "label": "查看 Releases",
-        "url": "https://github.com/public-apis/public-apis/releases"
-      }
-    ],
-    "id": "github-trending:public-apis/public-apis",
-    "title": "Public APIs：免费公开接口资源大全",
-    "sourceUrl": "https://github.com/public-apis/public-apis",
-    "summary": "一份由社区长期维护的免费 API 清单，汇集了天气、新闻、金融、娱乐等各领域的公开数据接口，方便开发者查找可用的数据来源。",
-    "tags": [
-      "免费API",
-      "开发资源",
-      "数据接口",
-      "资源清单",
-      "社区维护",
-      "编程工具"
-    ],
-    "source": "daily",
-    "sourceLabel": "GitHub Trending",
-    "publishedAt": "2026-08-15T17:33:56.985Z"
-  },
-  {
-    "section": "github",
-    "digestDate": "2026-08-16",
-    "publishedDate": "8/16",
-    "time": "本次更新",
-    "readTime": "3 分钟",
-    "accent": "blue",
-    "inRecentWindow": true,
-    "paragraphs": [
       "Soup 解决的是大模型微调过程中的基础设施痛苦：不用 SSH 登录远程 GPU 服务器，不用写复杂的训练脚本，只要准备好一份 YAML 配置，运行 soup train 就能开始训练。批量大小、GPU 检测、量化等参数都会自动处理。",
       "它最亮眼的能力是“逐层流式训练”（layer streaming）：把冻结的基座模型留在内存里，每次只把一个解码层送入显卡，从而让 Llama-3.1-8B 这样的 80 亿参数模型在 4GB 显存的笔记本 GPU 上完成微调，官方实测峰值显存仅 3.32GB。该功能目前仍是 Beta 且需手动开启。",
       "除了训练，Soup 还提供 soup ship 等发布前校验命令，帮助判断微调后的模型是否真的变好了、有没有被训坏。支持 QLoRA 本地训练，不依赖云端服务。",
@@ -761,77 +1378,6 @@
       "QLoRA",
       "本地训练",
       "YAML配置"
-    ],
-    "source": "daily",
-    "sourceLabel": "GitHub Trending",
-    "publishedAt": "2026-08-15T17:33:56.985Z"
-  },
-  {
-    "section": "github",
-    "digestDate": "2026-08-16",
-    "publishedDate": "8/16",
-    "time": "本次更新",
-    "readTime": "3 分钟",
-    "accent": "blue",
-    "inRecentWindow": true,
-    "paragraphs": [
-      "ToolJet 解决的是很多公司常见的痛点：内部需要的管理后台、订单系统、库存看板等工具，找外包太贵，自己开发又太慢。它提供一个可视化的应用构建器，内置 60 多种现成组件（表格、图表、表单、列表、进度条等），用鼠标拖拽拼在一起，就能搭出一个真正能用的业务应用。",
-      "它的核心能力是连接数据：支持接入 80 多种数据源，包括常见数据库、API 接口、云存储和各类 SaaS 服务，还自带一个无需写代码的内置数据库。应用支持多页面、多人同时编辑、评论和精细的权限控制，适合团队协作开发。有一定技术基础的用户还可以在应用里运行 JavaScript 和 Python 代码来扩展功能。",
-      "开源社区版可以免费自托管（支持 Docker、Kubernetes、AWS 等），也有官方云服务可以注册即用。商业版 ToolJet AI 额外提供用自然语言生成应用、AI 辅助查询和调试、智能体构建等能力，面向有更严格要求的企业。",
-      "对于不写代码的读者：如果你所在团队需要一个内部管理工具但没有开发资源，ToolJet 的云服务版本门槛很低，值得一试；自托管则需要有人会用 Docker 部署和维护服务器。需要注意开源版采用 AGPL-3.0 许可证，商用前建议了解其条款。"
-    ],
-    "facts": [
-      {
-        "label": "主要语言",
-        "value": "JavaScript"
-      },
-      {
-        "label": "Stars",
-        "value": "39,409"
-      },
-      {
-        "label": "今日新增 Stars",
-        "value": "+553"
-      },
-      {
-        "label": "Forks",
-        "value": "5,285"
-      },
-      {
-        "label": "许可证",
-        "value": "AGPL-3.0"
-      },
-      {
-        "label": "最近更新",
-        "value": "2026-08-14"
-      }
-    ],
-    "externalLinks": [
-      {
-        "label": "阅读项目 README",
-        "url": "https://github.com/ToolJet/ToolJet#readme"
-      },
-      {
-        "label": "打开项目网站",
-        "url": "https://tooljet.com"
-      },
-      {
-        "label": "查看 Releases",
-        "url": "https://github.com/ToolJet/ToolJet/releases"
-      }
-    ],
-    "id": "github-trending:ToolJet/ToolJet",
-    "title": "ToolJet：开源的低代码内部工具搭建平台",
-    "sourceUrl": "https://github.com/ToolJet/ToolJet",
-    "summary": "ToolJet 是一个开源的低代码平台，让不懂编程的人也能通过拖拽组件快速搭建公司内部的管理系统、数据看板和工作流应用。",
-    "tags": [
-      "低代码平台",
-      "内部工具",
-      "可视化搭建",
-      "数据看板",
-      "拖拽组件",
-      "自托管",
-      "工作流"
     ],
     "source": "daily",
     "sourceLabel": "GitHub Trending",
@@ -907,6 +1453,38 @@
     "source": "daily",
     "sourceLabel": "GitHub Trending",
     "publishedAt": "2026-08-15T17:33:56.985Z"
+  },
+  {
+    "section": "x",
+    "digestDate": "2026-08-17",
+    "publishedDate": "8/16",
+    "time": "本次更新",
+    "readTime": "3 分钟",
+    "accent": "green",
+    "inRecentWindow": true,
+    "digestFormat": "builders-digest",
+    "paragraphs": [
+      "Garry Tan 分享了一条洗白时间线的“白丸”内容：进步与富足的模样，就是农作物产量逐年刷新纪录、曲线持续向上向右。他认为这是市场与技术数千年协作的成果。"
+    ],
+    "externalLinks": [
+      {
+        "label": "推文",
+        "url": "https://x.com/garrytan/status/2088661047913914847"
+      }
+    ],
+    "id": "follow-builders:digest-2026-08-16-garry-tan",
+    "title": "Y Combinator 总裁兼 CEO Garry Tan",
+    "sourceUrl": "https://x.com/garrytan/status/2088661047913914847",
+    "summary": "Garry Tan 用创纪录的粮食产量展现市场与技术协作带来的进步与富足。",
+    "tags": [
+      "技术进步",
+      "粮食产量",
+      "市场",
+      "富足"
+    ],
+    "source": "builder",
+    "sourceLabel": "Garry Tan · Follow Builders",
+    "publishedAt": "2026-08-15T16:16:13.000Z"
   },
   {
     "section": "x",
@@ -1881,77 +2459,6 @@
       "开源",
       "跨平台",
       "数据隐私"
-    ],
-    "source": "daily",
-    "sourceLabel": "GitHub Trending",
-    "publishedAt": "2026-08-14T18:05:35.959Z"
-  },
-  {
-    "section": "github",
-    "digestDate": "2026-08-15",
-    "publishedDate": "8/15",
-    "time": "本次更新",
-    "readTime": "3 分钟",
-    "accent": "blue",
-    "inRecentWindow": true,
-    "paragraphs": [
-      "OpenCut 是一个对标剪映（CapCut）的开源视频编辑工具，目标是让普通人不用订阅商业软件、不担心隐私数据被上传，就能完成日常的视频剪辑工作。它采用 MIT 许可证，代码完全公开，任何人都可以免费使用。",
-      "项目最大的特点是跨平台：同一套代码计划同时支持网页浏览器、桌面应用和手机端，未来还将引入插件系统，让第三方开发者可以为它扩展功能；此外还规划了自动化批处理、编辑器内置脚本等面向进阶用户的能力。",
-      "它适合短视频创作者、自媒体博主，以及想要替代剪映但又介意付费和数据隐私的普通用户。当前官网 opencut.app 上运行的是稳定可用的经典版本，直接打开网页即可使用，不需要任何编程知识。",
-      "需要注意的是，这个项目正在进行底层重写，新架构尚在开发中，功能和稳定性仍在完善阶段；想要参与贡献的开发者需要等待项目开放外部协作，普通用户建议先使用经典版本。"
-    ],
-    "facts": [
-      {
-        "label": "主要语言",
-        "value": "TypeScript"
-      },
-      {
-        "label": "Stars",
-        "value": "83,021"
-      },
-      {
-        "label": "今日新增 Stars",
-        "value": "+238"
-      },
-      {
-        "label": "Forks",
-        "value": "8,225"
-      },
-      {
-        "label": "许可证",
-        "value": "MIT"
-      },
-      {
-        "label": "最近更新",
-        "value": "2026-08-11"
-      }
-    ],
-    "externalLinks": [
-      {
-        "label": "阅读项目 README",
-        "url": "https://github.com/OpenCut-app/OpenCut#readme"
-      },
-      {
-        "label": "打开项目网站",
-        "url": "https://opencut.app"
-      },
-      {
-        "label": "查看 Releases",
-        "url": "https://github.com/OpenCut-app/OpenCut/releases"
-      }
-    ],
-    "id": "github-trending:OpenCut-app/OpenCut",
-    "title": "OpenCut：免费开源的剪映替代品",
-    "sourceUrl": "https://github.com/OpenCut-app/OpenCut",
-    "summary": "一款免费开源的跨平台视频编辑器，让用户在网页、桌面和手机上无需付费订阅就能剪辑视频。",
-    "tags": [
-      "视频剪辑",
-      "开源软件",
-      "剪映替代品",
-      "跨平台",
-      "免费工具",
-      "视频编辑器",
-      "隐私友好"
     ],
     "source": "daily",
     "sourceLabel": "GitHub Trending",
@@ -3518,6 +4025,47 @@
       "多模态学习",
       "强化学习",
       "时间序列预测"
+    ],
+    "source": "daily",
+    "sourceLabel": "Hugging Face Daily Papers",
+    "publishedAt": "2026-08-13T00:00:00.000Z"
+  },
+  {
+    "section": "papers",
+    "digestDate": "2026-08-17",
+    "publishedDate": "8/13",
+    "time": "本次更新",
+    "readTime": "3 分钟",
+    "accent": "violet",
+    "inRecentWindow": true,
+    "paragraphs": [
+      "把多模态素材转化为浓缩、结构化的媒体输出，本质上可以看作一个以模型框架系统为核心的长周期智能体过程。理想的框架系统应当符合人类的设计先验，并能通过实践探索积累可复用的经验，从而实现递归式的自我改进，但现有范式大多是静态的，不具备这种能力。",
+      "为此，作者提出了 AutoDesign 框架。它遵循人类设计先验，由一个元框架优化器指导代码智能体，根据实际运行的反馈递归地改进设计框架。为落地和评估该框架，作者聚焦于学术论文自动生成海报的任务，并构建了 PosterBench 基准：包含覆盖五个学科的 100 篇论文的主赛道，以及一个共享的 10 篇论文子集 PosterBench-mini 用于受控对比。",
+      "在 PosterBench 主赛道上，AutoDesign 取得 78.32 的最高分，比闭源商业系统 Claude Design 高出 7.45 分。在七种受控的代码智能体与模型组合中，融入学习得到的 DesignHarness 均能稳定提升表现，平均 PosterBench 得分从 54.99 提高到 67.39（+12.4%）。在完全自主的长周期运行中，系统在 40 分钟内执行了 253 次工具调用和 11 轮编辑，成本不足 3 美元，人工评估达到会议海报的平均水平。",
+      "一项不知晓系统来源的人工盲测进一步表明，在所有参评系统中，AutoDesign 获得了最高的人类偏好。"
+    ],
+    "utility": "这项技术展示了 AI 如何自动把长篇学术论文转化为会议海报，且成本仅几美元、耗时不到一小时。对科研人员和学生而言，它可能显著减轻制作学术海报、演示材料等排版设计工作的负担；对普通读者来说，它说明 AI 智能体正在学会通过实践不断自我改进，未来类似工具可能改变内容设计和知识传播的工作方式。",
+    "externalLinks": [
+      {
+        "label": "查看 Hugging Face 论文页",
+        "url": "https://huggingface.co/papers/2608.13560"
+      },
+      {
+        "label": "打开 arXiv 原文",
+        "url": "https://arxiv.org/abs/2608.13560"
+      }
+    ],
+    "id": "huggingface-daily-papers:2608.13560",
+    "title": "AutoDesign：面向长周期智能体设计的元框架优化",
+    "sourceUrl": "https://huggingface.co/papers/2608.13560",
+    "summary": "提出 AutoDesign 框架，让代码智能体在元框架优化器指导下依据反馈递归改进设计流程，并在论文转海报任务上取得领先表现。",
+    "tags": [
+      "AutoDesign",
+      "智能体框架",
+      "元优化",
+      "学术海报生成",
+      "PosterBench",
+      "递归自我改进"
     ],
     "source": "daily",
     "sourceLabel": "Hugging Face Daily Papers",
@@ -7150,6 +7698,45 @@
       "多智能体",
       "自适应环境",
       "AI安全"
+    ],
+    "source": "daily",
+    "sourceLabel": "Hugging Face Daily Papers",
+    "publishedAt": "2026-08-10T00:00:00.000Z"
+  },
+  {
+    "section": "papers",
+    "digestDate": "2026-08-17",
+    "publishedDate": "8/10",
+    "time": "本次更新",
+    "readTime": "3 分钟",
+    "accent": "violet",
+    "inRecentWindow": true,
+    "paragraphs": [
+      "随着大语言模型日益参与科学评估，研究者考察了一种潜在的“奖励劫持”形式：当论文报告的科学内容保持不变时，修辞选择如何左右AI审稿人的判断，以及这些效应在不同评审条件下如何变化。他们构建了一个受控语料库，从120篇匿名的ICLR 2026投稿衍生出4200篇完整论文稿件，用两个大语言模型改写器沿相反方向调整六个修辞维度，并让五个大语言模型审稿人在标准和严格两种评审协议下评估这些稿件，还测试了联合改写、递归改写和审稿人引导的改写。",
+      "结果表明，修辞敏感性是有结构的而非均匀一致的：证据框架和新意立场在总体评价上产生最大的正负对比，范围框架构成较弱的第二梯队，其余维度的影响较小或不够稳定。这一层次结构在不同人工评估质量水平上持续存在，但分数变化强烈取决于AI审稿人给出的原始分数：低分倾向于上升，高分倾向于下降，而方向性对比在中等分数区间最为明显。更复杂的工作流程并不能可靠地带来更大收益：联合改写强烈依赖改写器本身，审稿人引导并不总能胜过无引导的二次改写，反复改写的收益递减且取决于具体配置。在所有条件下，改写器主要决定对立变体之间的分离程度，而审稿人决定其分数效应的大小和方向。严格评审使平均总体评分降低1.36分，但并未持续改变修辞敏感性。",
+      "这些发现揭示了修辞表达在何时会影响AI科学评审，并推动建设对科学写作中不改变内容的修辞变化更具鲁棒性的评估系统。"
+    ],
+    "utility": "越来越多期刊和会议开始用AI辅助审稿，这项研究提醒人们：同样的科学内容，仅仅换一种表达方式就可能改变AI给出的分数。这提示依赖AI审稿的机构需要防范“包装取胜”的漏洞，也提醒作者和读者在看待AI生成的评审意见时多一分审慎。",
+    "externalLinks": [
+      {
+        "label": "查看 Hugging Face 论文页",
+        "url": "https://huggingface.co/papers/2608.08975"
+      },
+      {
+        "label": "打开 arXiv 原文",
+        "url": "https://arxiv.org/abs/2608.08975"
+      }
+    ],
+    "id": "huggingface-daily-papers:2608.08975",
+    "title": "修辞如何“奖励劫持”AI审稿人？剖析基于AI的同行评审中的修辞敏感性",
+    "sourceUrl": "https://huggingface.co/papers/2608.08975",
+    "summary": "随着大语言模型越来越多地参与科学评估，本研究考察一种潜在的“奖励劫持”形式：在论文科学内容不变的情况下，修辞选择如何影响AI审稿的判断，以及这种效应在不同评审条件下有何差异。研究发现修辞敏感性是有结构层次的：证据框架和新意立场所产生的正负对比最大；分数变化还强烈依赖AI审稿人的原始评分——低分容易上升、高分容易下降。严格评审协议会降低平均分，但未必改变修辞敏感性。",
+    "tags": [
+      "AI同行评审",
+      "大语言模型",
+      "奖励劫持",
+      "修辞敏感性",
+      "科研评估"
     ],
     "source": "daily",
     "sourceLabel": "Hugging Face Daily Papers",
