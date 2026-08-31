@@ -15,9 +15,12 @@ const now = new Date();
 const cutoff = new Date(`${shanghaiDate(new Date(now.valueOf() - 24 * 60 * 60 * 1000))}T00:00:00+08:00`);
 const runDigestDate = process.env.INFOHUB_DIGEST_DATE?.trim() || shanghaiDate(now);
 const moonshotKey = process.env.MOONSHOT_API_KEY?.trim();
-const moonshotBaseUrl = (process.env.MOONSHOT_BASE_URL || "https://api.kimi.com/coding/v1").replace(/\/$/, "");
-const isKimiCode = moonshotBaseUrl.includes("api.kimi.com/coding");
-let activeMoonshotModel = process.env.MOONSHOT_MODEL || (isKimiCode ? "k3-256k" : "kimi-k3");
+const configuredMoonshotBaseUrl = (process.env.MOONSHOT_BASE_URL || "https://api.moonshot.cn/v1").replace(/\/$/, "");
+const legacyKimiCodeConfig = configuredMoonshotBaseUrl.includes("api.kimi.com/coding");
+const moonshotBaseUrl = legacyKimiCodeConfig ? "https://api.moonshot.cn/v1" : configuredMoonshotBaseUrl;
+const activeMoonshotModel = legacyKimiCodeConfig
+  ? "kimi-k3"
+  : process.env.MOONSHOT_MODEL || "kimi-k3";
 const supadataKey = process.env.SUPADATA_API_KEY?.trim();
 const summaryOnly = process.argv.includes("--summaries-only");
 const paperLookbackDays = 4;
@@ -219,9 +222,9 @@ async function kimiJson(system, input, { maxTokens = 5_000, timeoutMs = 240_000 
     try {
       const body = JSON.stringify({
         model: activeMoonshotModel,
-        max_tokens: maxTokens,
+        max_completion_tokens: maxTokens,
         response_format: { type: "json_object" },
-        ...(isKimiCode ? { reasoning_effort: "low" } : { temperature: 1 }),
+        ...(activeMoonshotModel === "kimi-k3" ? { reasoning_effort: "low" } : {}),
         messages: [
           { role: "system", content: system },
           { role: "user", content: JSON.stringify(input) },
@@ -237,15 +240,6 @@ async function kimiJson(system, input, { maxTokens = 5_000, timeoutMs = 240_000 
         return JSON.parse(jsonrepair(jsonText));
       }
     } catch (error) {
-      const canUseStandardModel = isKimiCode
-        && activeMoonshotModel !== "kimi-for-coding"
-        && error?.status === 401
-        && /does not have access|subscription.*access|model id does not exist/i.test(error?.message || "");
-      if (canUseStandardModel) {
-        console.warn(`[kimi] ${activeMoonshotModel} is unavailable for this subscription; switching to kimi-for-coding`);
-        activeMoonshotModel = "kimi-for-coding";
-        continue;
-      }
       const retryable = error?.status === 429
         || error?.status >= 500
         || /timed out|lost connection|overloaded|繁忙/i.test(error?.message || "");
