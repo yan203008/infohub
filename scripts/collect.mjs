@@ -383,6 +383,34 @@ function summaryInput(item) {
   };
 }
 
+function compactSummaryText(value, maximumLength) {
+  const text = String(value || "").replace(/\s+/g, " ").trim();
+  if (text.length <= maximumLength) return text;
+  const candidate = text.slice(0, maximumLength);
+  const punctuationIndex = Math.max(
+    candidate.lastIndexOf("。"),
+    candidate.lastIndexOf("！"),
+    candidate.lastIndexOf("？"),
+  );
+  if (punctuationIndex >= Math.floor(maximumLength * 0.6)) {
+    return candidate.slice(0, punctuationIndex + 1);
+  }
+  return `${candidate.slice(0, maximumLength - 1).trimEnd()}…`;
+}
+
+function normalizeSectionSummary(summary) {
+  if (!summary || typeof summary !== "object") return summary;
+  const rawTrends = Array.isArray(summary.trends)
+    ? summary.trends
+    : summary.trends ? [summary.trends] : [];
+  return {
+    ...summary,
+    overview: compactSummaryText(summary.overview, 110),
+    trends: rawTrends.slice(0, 2).map((trend) => compactSummaryText(trend, 65)).filter(Boolean),
+    value: compactSummaryText(summary.value, 70),
+  };
+}
+
 function usefulSectionSummary(summary) {
   if (!summary || typeof summary !== "object") return false;
   const overview = String(summary.overview || "").trim();
@@ -415,17 +443,17 @@ async function buildSectionSummaries(items) {
   for (const entry of fallback) {
     const sectionItems = groups[entry.section] || [];
     try {
-      let processed = await deepseekJson(
+      let processed = normalizeSectionSummary(await deepseekJson(
         sectionPrompt(entry.section),
         { section: entry.section, label: entry.label, items: sectionItems.map(summaryInput) },
         { maxTokens: 1_600, timeoutMs: 180_000 },
-      );
+      ));
       if (!usefulSectionSummary(processed)) {
-        processed = await deepseekJson(
+        processed = normalizeSectionSummary(await deepseekJson(
           "你是中文信息编辑。把输入的板块导读压缩成首页卡片文案，不增加新事实。只返回 JSON：{section,overview,trends,value,technicalLevel,technicalPercentage}。overview 55-90 个中文字、最多 3 句；trends 只留 1-2 条、每条 25-45 字；value 30-55 个中文字。删除人名和项目名罗列，只保留最重要的内容范围、一个共同趋势和对非技术读者的具体价值。",
           processed,
           { maxTokens: 800, timeoutMs: 120_000 },
-        );
+        ));
       }
       if (!usefulSectionSummary(processed)) throw new Error("DeepSeek section summary did not pass the usefulness check after compression");
       summaries.push({
