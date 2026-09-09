@@ -77,7 +77,7 @@ export async function createManualSubmission(url: string, timing: ManualSubmissi
 function friendlyProcessingError(error: unknown) {
   const message = error instanceof Error ? error.message : "处理失败";
   if (/engine is currently overloaded|engine_overloaded|模型繁忙/i.test(message)) {
-    return "Kimi 当前繁忙，任务已保留。可以稍后重试，或改为明早处理。";
+    return "DeepSeek 当前繁忙，任务已保留。可以稍后重试，或改为明早处理。";
   }
   return message;
 }

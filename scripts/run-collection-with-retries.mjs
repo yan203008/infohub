@@ -6,11 +6,18 @@ import { join, resolve } from "node:path";
 
 const root = resolve(import.meta.dirname, "..");
 const maximumAttempts = 5;
+const digestDateArgument = process.argv.find((argument) => argument.startsWith("--date="));
 const sleep = (milliseconds) => new Promise((resolveDelay) => setTimeout(resolveDelay, milliseconds));
+
+function nonRetryableSourceError(source) {
+  return /DeepSeek returned HTTP (401|402|403)|insufficient balance|余额不足|recharge|suspended|invalid api key/i
+    .test(String(source?.error || ""));
+}
 
 function runCollector({ source, summariesOnly = false } = {}) {
   return new Promise((resolveRun) => {
     const args = [join(root, "scripts/collect.mjs")];
+    if (digestDateArgument) args.push(digestDateArgument);
     if (summariesOnly) args.push("--summaries-only");
     else if (source) args.push(`--source=${source}`);
     const child = spawn(process.execPath, args, { cwd: root, env: process.env, stdio: "inherit" });
@@ -26,8 +33,11 @@ async function readReport(source) {
 await runCollector();
 const aggregate = await readReport();
 const attempts = Object.fromEntries(aggregate.sources.map((source) => [source.id, 1]));
+const terminalSources = new Set(aggregate.sources
+  .filter((source) => source.status === "failed" && nonRetryableSourceError(source))
+  .map((source) => source.id));
 let failedSources = aggregate.sources
-  .filter((source) => source.status === "failed")
+  .filter((source) => source.status === "failed" && !terminalSources.has(source.id))
   .map((source) => source.id);
 let summaryNeedsRetry = aggregate.stages.find((stage) => stage.id === "summarize")?.status === "failed";
 
@@ -80,9 +90,14 @@ aggregate.errors = aggregate.errors.filter((error) => !aggregate.sources.some(
 if (!summaryFailed) {
   aggregate.errors = aggregate.errors.filter((error) => !String(error.source).startsWith("summary"));
 }
-for (const source of failedSources) {
+for (const source of [...failedSources, ...terminalSources]) {
   if (!aggregate.errors.some((error) => error.source === source)) {
-    aggregate.errors.push({ source, message: `Failed after ${maximumAttempts} attempts` });
+    aggregate.errors.push({
+      source,
+      message: terminalSources.has(source)
+        ? "API authentication or balance error; skipped automatic retries"
+        : `Failed after ${maximumAttempts} attempts`,
+    });
   }
 }
 if (summaryFailed && !aggregate.errors.some((error) => String(error.source).startsWith("summary"))) {
@@ -93,7 +108,7 @@ try {
 } catch {
   // Keep the summaries from the initial report if the public file is unavailable.
 }
-aggregate.status = failedSources.length > 0 || summaryFailed ? "completed_with_errors" : "completed";
+aggregate.status = failedSources.length > 0 || terminalSources.size > 0 || summaryFailed ? "completed_with_errors" : "completed";
 const collectStage = aggregate.stages.find((stage) => stage.id === "collect");
 if (collectStage) {
   collectStage.status = successfulSources.length > 0 ? "completed" : "failed";
@@ -115,16 +130,16 @@ await Promise.all([
   writeFile(join(root, "outputs/last-collection.json"), `${JSON.stringify(aggregate, null, 2)}\n`),
   writeFile(join(root, "app/generated-run-summary.json"), `${JSON.stringify(aggregate, null, 2)}\n`),
   writeFile(join(root, "outputs/collection-status.json"), `${JSON.stringify({
-    ok: failedSources.length === 0 && !summaryFailed,
-    failedSources,
+    ok: failedSources.length === 0 && terminalSources.size === 0 && !summaryFailed,
+    failedSources: [...failedSources, ...terminalSources],
     summaryFailed,
     attempts,
     finishedAt: aggregate.finishedAt,
   }, null, 2)}\n`),
 ]);
 
-if (failedSources.length > 0) {
-  console.error(`[collect] failed after ${maximumAttempts} attempts: ${failedSources.join(", ")}`);
+if (failedSources.length > 0 || terminalSources.size > 0) {
+  console.error(`[collect] failed sources: ${[...failedSources, ...terminalSources].join(", ")}`);
   console.error("[collect] successful sources were preserved and published; failed sources remain visible in the report");
 }
-if (failedSources.length > 0 || summaryFailed) process.exitCode = 1;
+if (failedSources.length > 0 || terminalSources.size > 0 || summaryFailed) process.exitCode = 1;

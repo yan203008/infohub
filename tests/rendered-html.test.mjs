@@ -63,6 +63,8 @@ test("keeps daily automation limited to X, papers and GitHub", async () => {
   assert.match(collector, /\["papers", collectPapers\]/);
   assert.match(collector, /\["github", collectGithub\]/);
   assert.doesNotMatch(collector, /\["youtube", collectYoutube\]/);
+  assert.match(collector, /deepseek-v4-flash/);
+  assert.match(collector, /thinking: \{ type: "disabled" \}/);
   assert.match(workflow, /MOONSHOT_API_KEY/);
   assert.doesNotMatch(workflow, /SUPADATA_API_KEY|GETNOTE_API_KEY|GETNOTE_CLIENT_ID/);
   assert.match(workflow, /archive:daily/);

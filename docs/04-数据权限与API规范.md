@@ -22,7 +22,7 @@
 
 ## 密钥
 
-- GitHub Actions：`MOONSHOT_API_KEY`。
+- GitHub Actions：`MOONSHOT_API_KEY`（迁移期沿用旧 Secret 名称，值已替换为 DeepSeek API Key）。
 - Cloudflare Worker：`ADMIN_PASSWORD`、`SESSION_SECRET`、`GITHUB_TOKEN`、`GITHUB_OWNER`、`GITHUB_REPO`、`ALLOWED_ORIGINS`、`VAPID_PRIVATE_KEY`。
 
-Get笔记与 Supadata 不再是正式依赖。密钥不得进入前端、公共 JSON、日志或仓库。
+日报实际调用 `https://api.deepseek.com/chat/completions`，模型为 `deepseek-v4-flash`，并显式关闭思考模式。Get笔记与 Supadata 不再是正式依赖。密钥不得进入前端、公共 JSON、日志或仓库。

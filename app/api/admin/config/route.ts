@@ -37,7 +37,7 @@ export async function GET() {
   if (!user) return unauthorized();
   const runtimeEnv = env as unknown as Record<string, string | undefined>;
   const providerStatus = {
-    moonshot: Boolean(runtimeEnv.MOONSHOT_API_KEY),
+    deepseek: Boolean(runtimeEnv.DEEPSEEK_API_KEY || runtimeEnv.MOONSHOT_API_KEY),
     supadata: Boolean(runtimeEnv.SUPADATA_API_KEY),
     getnote: Boolean(runtimeEnv.GETNOTE_API_KEY && runtimeEnv.GETNOTE_CLIENT_ID),
   };

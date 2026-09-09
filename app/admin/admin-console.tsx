@@ -56,7 +56,7 @@ type RunSummary = {
 };
 
 type ProviderStatus = {
-  moonshot: boolean;
+  deepseek: boolean;
   supadata: boolean;
   getnote: boolean;
 };
@@ -97,7 +97,7 @@ export function AdminConsole({ adminName }: { adminName: string }) {
   const [message, setMessage] = useState("");
   const [runSummary, setRunSummary] = useState<RunSummary | null>(null);
   const [providerStatus, setProviderStatus] = useState<ProviderStatus>({
-    moonshot: false,
+    deepseek: false,
     supadata: false,
     getnote: false,
   });
@@ -110,9 +110,9 @@ export function AdminConsole({ adminName }: { adminName: string }) {
   const [submissions, setSubmissions] = useState<ManualSubmission[]>([]);
   const [processingIds, setProcessingIds] = useState<string[]>([]);
   const [settings, setSettings] = useState({
-    aiProvider: "kimi",
-    aiBaseUrl: "https://api.kimi.com/coding/v1",
-    aiModel: "k3-256k",
+    aiProvider: "deepseek",
+    aiBaseUrl: "https://api.deepseek.com",
+    aiModel: "deepseek-v4-flash",
     digestTime: "08:00",
     articlePrompt:
       "将字幕整理成结构清晰、忠于原意的中文文章，删除口语赘词，保留关键论据与案例。",
@@ -136,7 +136,17 @@ export function AdminConsole({ adminName }: { adminName: string }) {
       setRunSummary(data.runSummary ?? null);
       if (data.providerStatus) setProviderStatus(data.providerStatus);
       setSubmissions(data.submissions ?? []);
-      setSettings((current) => ({ ...current, ...data.settings }));
+      const migratedSettings = { ...data.settings };
+      if (!migratedSettings.aiProvider || migratedSettings.aiProvider === "kimi") {
+        migratedSettings.aiProvider = "deepseek";
+      }
+      if (!migratedSettings.aiBaseUrl || /kimi|moonshot/i.test(migratedSettings.aiBaseUrl)) {
+        migratedSettings.aiBaseUrl = "https://api.deepseek.com";
+      }
+      if (!migratedSettings.aiModel || /^(?:k3|kimi)/i.test(migratedSettings.aiModel)) {
+        migratedSettings.aiModel = "deepseek-v4-flash";
+      }
+      setSettings((current) => ({ ...current, ...migratedSettings }));
     } catch {
       setMessage("暂时无法读取配置，请稍后重试");
     } finally {
@@ -554,7 +564,7 @@ export function AdminConsole({ adminName }: { adminName: string }) {
                         setSettings({ ...settings, aiProvider: event.target.value })
                       }
                     >
-                      <option value="kimi">Kimi / Moonshot</option>
+                      <option value="deepseek">DeepSeek</option>
                       <option value="openai">OpenAI</option>
                       <option value="custom">OpenAI 兼容服务</option>
                     </select>
@@ -610,7 +620,7 @@ export function AdminConsole({ adminName }: { adminName: string }) {
                 </div>
               </div>
               {[
-                ["Kimi / Moonshot", providerStatus.moonshot],
+                ["DeepSeek", providerStatus.deepseek],
                 ["Supadata", providerStatus.supadata],
                 ["Get笔记", providerStatus.getnote],
               ].map(([label, configured]) => (

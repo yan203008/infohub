@@ -28,7 +28,7 @@ InfoHub 是一个手机优先的 AI 日报、编辑精选与私人阅读 PWA。
 ```text
 GitHub Actions 每日启动
 → 采集 Follow Builders + 技术动态 X + Hugging Face 论文 + GitHub Trending
-→ Kimi 中文整理与板块总结
+→ DeepSeek V4 Flash（非思考模式）中文整理与板块总结
 → 质量检查
 → 更新公开 JSON、月度归档并发布 GitHub Pages
 ```
@@ -59,7 +59,14 @@ GitHub Actions 每日启动
 
 ### GitHub Actions
 
-- `MOONSHOT_API_KEY`：仅用于日报的中文整理与板块总结。
+- `MOONSHOT_API_KEY`：暂时沿用旧 Secret 名称，但其中保存的是 **DeepSeek API Key**。日报程序只把它作为迁移兼容入口，不再调用 Kimi。
+
+### 本地环境
+
+- `DEEPSEEK_API_KEY`：DeepSeek 开放平台生成的 Key。
+- `DEEPSEEK_BASE_URL=https://api.deepseek.com`
+- `DEEPSEEK_MODEL=deepseek-v4-flash`
+- `DEEPSEEK_EDITOR_MODEL=deepseek-v4-flash`
 
 ### Cloudflare Worker
 
@@ -92,6 +99,8 @@ npm test
 npm run collect:dry
 npm run collect
 npm run collect:reliable
+# 补跑指定日期（使用当日定时任务的时间窗口，并保留自动重试）
+npm run collect:reliable -- --date=2026-09-06
 ```
 
 ## 数据与备份

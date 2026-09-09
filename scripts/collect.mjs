@@ -11,16 +11,26 @@ const execFileAsync = promisify(execFile);
 const root = resolve(import.meta.dirname, "..");
 const config = JSON.parse(await readFile(join(root, "config/sources.json"), "utf8"));
 const isDryRun = process.argv.includes("--dry-run");
-const now = new Date();
+const digestDateArgument = process.argv.find((argument) => argument.startsWith("--date="))?.split("=")[1];
+const requestedDigestDate = digestDateArgument || process.env.INFOHUB_DIGEST_DATE?.trim();
+if (requestedDigestDate && !/^\d{4}-\d{2}-\d{2}$/.test(requestedDigestDate)) {
+  throw new Error(`Invalid digest date: ${requestedDigestDate}`);
+}
+// A backfill uses the same 03:30 Shanghai reference point as the scheduled job,
+// so its 24-hour source filters do not accidentally include later news.
+const now = requestedDigestDate
+  ? new Date(`${requestedDigestDate}T03:30:00+08:00`)
+  : new Date();
+if (Number.isNaN(now.valueOf()) || (requestedDigestDate && shanghaiDate(now) !== requestedDigestDate)) {
+  throw new Error(`Invalid digest date: ${requestedDigestDate}`);
+}
 const cutoff = new Date(`${shanghaiDate(new Date(now.valueOf() - 24 * 60 * 60 * 1000))}T00:00:00+08:00`);
-const runDigestDate = process.env.INFOHUB_DIGEST_DATE?.trim() || shanghaiDate(now);
-const moonshotKey = process.env.MOONSHOT_API_KEY?.trim();
-const configuredMoonshotBaseUrl = (process.env.MOONSHOT_BASE_URL || "https://api.moonshot.cn/v1").replace(/\/$/, "");
-const legacyKimiCodeConfig = configuredMoonshotBaseUrl.includes("api.kimi.com/coding");
-const moonshotBaseUrl = legacyKimiCodeConfig ? "https://api.moonshot.cn/v1" : configuredMoonshotBaseUrl;
-const activeMoonshotModel = legacyKimiCodeConfig
-  ? "kimi-k3"
-  : process.env.MOONSHOT_MODEL || "kimi-k3";
+const runDigestDate = requestedDigestDate || shanghaiDate(now);
+// MOONSHOT_API_KEY remains a temporary fallback so the existing GitHub Actions
+// secret can be replaced in place without exposing or renaming it in the workflow.
+const deepseekKey = process.env.DEEPSEEK_API_KEY?.trim() || process.env.MOONSHOT_API_KEY?.trim();
+const deepseekBaseUrl = (process.env.DEEPSEEK_BASE_URL || "https://api.deepseek.com").replace(/\/$/, "");
+const activeDeepseekModel = process.env.DEEPSEEK_MODEL || "deepseek-v4-flash";
 const supadataKey = process.env.SUPADATA_API_KEY?.trim();
 const summaryOnly = process.argv.includes("--summaries-only");
 const paperLookbackDays = 4;
@@ -152,7 +162,7 @@ async function curlJsonPost(url, { headers = {}, body = "", timeoutMs = 240_000 
       timeout: timeoutMs + 5_000,
     }));
   } catch {
-    throw new Error("Moonshot request timed out or lost connection");
+    throw new Error("DeepSeek request timed out or lost connection");
   }
   const marker = "\n__INFOHUB_STATUS__";
   const markerIndex = stdout.lastIndexOf(marker);
@@ -169,7 +179,7 @@ async function curlJsonPost(url, { headers = {}, body = "", timeoutMs = 240_000 
     } catch {
       detail = "";
     }
-    const error = new Error(`Moonshot returned HTTP ${status}${detail ? `: ${detail}` : ""}`);
+    const error = new Error(`DeepSeek returned HTTP ${status}${detail ? `: ${detail}` : ""}`);
     error.status = status;
     throw error;
   }
@@ -210,29 +220,30 @@ async function fetchJson(url, options) {
   return (await fetchWithRetry(url, options)).json();
 }
 
-async function kimiJson(system, input, { maxTokens = 5_000, timeoutMs = 240_000 } = {}) {
-  if (!moonshotKey) throw new Error("MOONSHOT_API_KEY is not configured");
-  const url = `${moonshotBaseUrl}/chat/completions`;
+async function deepseekJson(system, input, { maxTokens = 5_000, timeoutMs = 240_000 } = {}) {
+  if (!deepseekKey) throw new Error("DEEPSEEK_API_KEY is not configured");
+  const url = `${deepseekBaseUrl}/chat/completions`;
   const headers = {
-    authorization: `Bearer ${moonshotKey}`,
+    authorization: `Bearer ${deepseekKey}`,
     "content-type": "application/json",
   };
   const maximumAttempts = 5;
   for (let attempt = 1; attempt <= maximumAttempts; attempt += 1) {
     try {
       const body = JSON.stringify({
-        model: activeMoonshotModel,
-        max_completion_tokens: maxTokens,
+        model: activeDeepseekModel,
+        max_tokens: maxTokens,
         response_format: { type: "json_object" },
-        ...(activeMoonshotModel === "kimi-k3" ? { reasoning_effort: "low" } : {}),
+        thinking: { type: "disabled" },
+        temperature: 0.6,
         messages: [
-          { role: "system", content: system },
+          { role: "system", content: `${system}\n输出必须是可直接解析的有效 JSON（json），不要使用 Markdown 代码块。` },
           { role: "user", content: JSON.stringify(input) },
         ],
       });
       const payload = await curlJsonPost(url, { headers, body, timeoutMs });
       const content = payload.choices?.[0]?.message?.content;
-      if (!content) throw new Error("Kimi returned an empty response");
+      if (!content) throw new Error("DeepSeek returned an empty response");
       const jsonText = content.trim().replace(/^```(?:json)?\s*/i, "").replace(/\s*```$/, "");
       try {
         return JSON.parse(jsonText);
@@ -240,19 +251,23 @@ async function kimiJson(system, input, { maxTokens = 5_000, timeoutMs = 240_000 
         return JSON.parse(jsonrepair(jsonText));
       }
     } catch (error) {
-      const retryable = error?.status === 429
+      const terminalAccountError = error?.status === 401
+        || error?.status === 402
+        || error?.status === 403
+        || /insufficient balance|余额不足|recharge|suspended|invalid api key/i.test(error?.message || "");
+      const retryable = !terminalAccountError && (error?.status === 429
         || error?.status >= 500
-        || /timed out|lost connection|overloaded|繁忙/i.test(error?.message || "");
+        || /timed out|lost connection|overloaded|繁忙/i.test(error?.message || ""));
       if (!retryable || attempt === maximumAttempts) throw error;
       const delayMs = Math.min(90_000, 10_000 * (2 ** (attempt - 1))) + Math.floor(Math.random() * 2_000);
-      console.warn(`[kimi] temporary failure (${attempt}/${maximumAttempts}): ${error.message}; retrying in ${Math.ceil(delayMs / 1000)}s`);
+      console.warn(`[deepseek] temporary failure (${attempt}/${maximumAttempts}): ${error.message}; retrying in ${Math.ceil(delayMs / 1000)}s`);
       await sleep(delayMs);
     }
   }
-  throw new Error("Kimi retry loop ended unexpectedly");
+  throw new Error("DeepSeek retry loop ended unexpectedly");
 }
 
-async function kimiItems(system, inputs, { batchSize = 2, maxTokens = 3_500, concurrency = 2 } = {}) {
+async function deepseekItems(system, inputs, { batchSize = 2, maxTokens = 3_500, concurrency = 2 } = {}) {
   const batches = [];
   for (let index = 0; index < inputs.length; index += batchSize) {
     batches.push(inputs.slice(index, index + batchSize));
@@ -263,16 +278,21 @@ async function kimiItems(system, inputs, { batchSize = 2, maxTokens = 3_500, con
     while (cursor < batches.length) {
       const batchIndex = cursor++;
       try {
-        const processed = await kimiJson(system, batches[batchIndex], {
+        const processed = await deepseekJson(system, batches[batchIndex], {
           maxTokens,
           timeoutMs: 3 * 60 * 1000,
         });
         results[batchIndex] = processed.items || [];
-        console.log(`[kimi] batch ${batchIndex + 1}/${batches.length} completed`);
+        console.log(`[deepseek] batch ${batchIndex + 1}/${batches.length} completed`);
         await sleep(1_500);
       } catch (error) {
+        const terminalAccountError = error?.status === 401
+          || error?.status === 402
+          || error?.status === 403
+          || /insufficient balance|余额不足|recharge|suspended|invalid api key/i.test(error?.message || "");
+        if (terminalAccountError) throw error;
         results[batchIndex] = [];
-        console.warn(`[kimi] batch ${batchIndex + 1}/${batches.length} skipped: ${error.message}`);
+        console.warn(`[deepseek] batch ${batchIndex + 1}/${batches.length} skipped: ${error.message}`);
       }
     }
   }
@@ -384,8 +404,8 @@ async function buildSectionSummaries(items) {
   const fallback = Object.entries(groups)
     .filter(([section]) => sectionLabels[section])
     .map(([section, sectionItems]) => fallbackSectionSummary(section, sectionItems || []));
-  if (!moonshotKey || fallback.length === 0) {
-    return { summaries: fallback, failures: moonshotKey ? [] : [{ source: "summary", message: "MOONSHOT_API_KEY is not configured" }] };
+  if (!deepseekKey || fallback.length === 0) {
+    return { summaries: fallback, failures: deepseekKey ? [] : [{ source: "summary", message: "DEEPSEEK_API_KEY is not configured" }] };
   }
 
   const summaries = [];
@@ -395,19 +415,19 @@ async function buildSectionSummaries(items) {
   for (const entry of fallback) {
     const sectionItems = groups[entry.section] || [];
     try {
-      let processed = await kimiJson(
+      let processed = await deepseekJson(
         sectionPrompt(entry.section),
         { section: entry.section, label: entry.label, items: sectionItems.map(summaryInput) },
         { maxTokens: 1_600, timeoutMs: 180_000 },
       );
       if (!usefulSectionSummary(processed)) {
-        processed = await kimiJson(
+        processed = await deepseekJson(
           "你是中文信息编辑。把输入的板块导读压缩成首页卡片文案，不增加新事实。只返回 JSON：{section,overview,trends,value,technicalLevel,technicalPercentage}。overview 55-90 个中文字、最多 3 句；trends 只留 1-2 条、每条 25-45 字；value 30-55 个中文字。删除人名和项目名罗列，只保留最重要的内容范围、一个共同趋势和对非技术读者的具体价值。",
           processed,
           { maxTokens: 800, timeoutMs: 120_000 },
         );
       }
-      if (!usefulSectionSummary(processed)) throw new Error("Kimi section summary did not pass the usefulness check after compression");
+      if (!usefulSectionSummary(processed)) throw new Error("DeepSeek section summary did not pass the usefulness check after compression");
       summaries.push({
         ...entry,
         overview: processed.overview,
@@ -482,7 +502,7 @@ async function collectFollowBuilders() {
   );
 
   const buildersPrompt = "你是 AI Builders Digest 的中文编辑。把同一位 Builder 在过去 24 小时的全部推文合并成一段像懂行朋友介绍动态的自然中文，不做评价、推荐、延伸分析或链接页猜测。所有英文内容必须翻译成自然中文，中文正文统一使用全角中文标点；产品名、人名和必要术语可以保留英文。保留具体产品、人名、数字、观点和幽默语气；多条推文之间有关系时自然串联，没有关系时用清楚的转折分开。人物身份只能来自 bio；bio 不足时只写姓名。返回 JSON：{items:[{id,title,summary,paragraph,keywords}]}。title 为“身份 + 姓名”或姓名；summary 为一句话概览；paragraph 为完整中文介绍；keywords 为 3-6 个中文关键词。链接由系统另行展示，不要写入 paragraph。";
-  const processedItems = await kimiItems(
+  const processedItems = await deepseekItems(
     buildersPrompt,
     grouped,
     { batchSize: 2, maxTokens: 4_000, concurrency: 2 },
@@ -496,7 +516,7 @@ async function collectFollowBuilders() {
   ));
   if (missingGroups.length > 0) {
     console.warn(`[collect] retrying ${missingGroups.length} incomplete Follow Builders entries`);
-    processedItems.push(...await kimiItems(
+    processedItems.push(...await deepseekItems(
       buildersPrompt,
       missingGroups,
       { batchSize: 1, maxTokens: 3_500, concurrency: 1 },
@@ -506,7 +526,7 @@ async function collectFollowBuilders() {
     [...processedItems].reverse().find((entry) => String(entry.id) === String(group.id)),
   ));
   if (unresolvedGroups.length > 0) {
-    throw new Error(`Kimi did not finish ${unresolvedGroups.length} Follow Builders entries`);
+    throw new Error(`DeepSeek did not finish ${unresolvedGroups.length} Follow Builders entries`);
   }
 
   return grouped.map((group) => {
@@ -546,7 +566,7 @@ async function collectTechnicalX() {
     .slice(0, 3);
   if (entries.length === 0) return [];
 
-  const processed = await kimiJson(
+  const processed = await deepseekJson(
     "你是中文科技编辑。根据 X 长文标题和预览内容，忠实翻译并介绍，不得把预览中没有的信息写成事实。返回 JSON：{items:[{id,title,summary,translation,detail,keywords}]}。translation 是中文翻译；detail 解释其核心观点和阅读时需要注意的语境；keywords 为 3-6 个。",
     entries.map((entry) => ({
       id: entry.tweetId,
@@ -583,7 +603,7 @@ async function collectTechnicalX() {
     }];
   });
   if (items.length !== entries.length) {
-    throw new Error(`Kimi completed ${items.length}/${entries.length} technical X entries`);
+    throw new Error(`DeepSeek completed ${items.length}/${entries.length} technical X entries`);
   }
   return items;
 }
@@ -678,7 +698,7 @@ async function collectPapers() {
   const processedItems = [];
   for (const paper of papers) {
     try {
-      const item = await kimiJson(
+      const item = await deepseekJson(
         "你是面向普通读者的论文编辑。只根据给定英文标题和摘要处理，不得补充摘要外的研究结果。严格返回 JSON 对象：{id,titleZh,summaryZh,paragraphs,keywords,utility}。paragraphs 是忠实、完整、清楚的中文摘要翻译，可分 2-4 段；keywords 为 3-6 个中文关键词；utility 用非技术语言说明普通人为什么值得了解、可能影响什么生活或工作判断，不能夸大论文结论。",
         paper,
         { maxTokens: 4_000, timeoutMs: 4 * 60 * 1000 },
@@ -691,7 +711,7 @@ async function collectPapers() {
       console.error(`[collect] paper ${paper.id} skipped: ${error?.message || String(error)}`);
     }
   }
-  if (processedItems.length === 0) throw new Error("Kimi did not return a complete paper entry");
+  if (processedItems.length === 0) throw new Error("DeepSeek did not return a complete paper entry");
 
   return processedItems.flatMap((item) => {
     const paper = papers.find((entry) => String(entry.id) === String(item.id));
@@ -777,7 +797,7 @@ async function collectGithub() {
   }
 
   const githubPrompt = "你是面向非程序员的开源项目编辑。根据仓库元数据与 README，返回 JSON：{items:[{repository,titleZh,summaryZh,paragraphs,keywords}]}。titleZh 使用清楚的中文产品式标题；summaryZh 用一句话说明这是什么、能帮助人做什么；paragraphs 必须用 2-4 段自然中文具体说明项目用途、核心能力、适用人群和使用门槛，让不写代码的读者也能判断它是否有价值。不得只让读者去看 README，不得用 README 缺少细节作为正文，不得编造没有的功能；keywords 为 4-7 个中文关键词。";
-  const processedItems = await kimiItems(
+  const processedItems = await deepseekItems(
     githubPrompt,
     details,
     { batchSize: 2, maxTokens: 4_500, concurrency: 2 },
@@ -794,7 +814,7 @@ async function collectGithub() {
   ));
   if (missingRepositories.length > 0) {
     console.warn(`[collect] retrying ${missingRepositories.length} incomplete GitHub entries`);
-    processedItems.push(...await kimiItems(
+    processedItems.push(...await deepseekItems(
       githubPrompt,
       missingRepositories,
       { batchSize: 1, maxTokens: 3_500, concurrency: 1 },
@@ -804,7 +824,7 @@ async function collectGithub() {
     [...processedItems].reverse().find((entry) => entry.repository === repo.repository),
   ));
   if (unresolvedRepositories.length > 0) {
-    throw new Error(`Kimi did not finish ${unresolvedRepositories.length} GitHub entries`);
+    throw new Error(`DeepSeek did not finish ${unresolvedRepositories.length} GitHub entries`);
   }
 
   return details.map((repo) => {
@@ -1003,26 +1023,26 @@ async function processYoutubeTranscript(title, transcript) {
   const chunks = splitTranscript(transcript);
   const prompt = "你是 YouTube 长内容编辑。忠实处理给定的连续文字稿片段，不能删减论点、论据、案例、步骤、条件、例外和重要细节；只删除无信息量口头禅和完全重复。返回 JSON：{items:[{id,titleZh,summary,keywords,takeaways,sections:[{title,timeRange,paragraphs}]}]}。titleZh 是适合中文阅读的标题；takeaways 为该片段最可应用的内容；sections 按时间顺序整理成阅读友好的中文文章，每节必须使用片段中真实的起止时间戳；不得补充文字稿外信息。";
   const inputs = chunks.map((transcriptChunk, id) => ({ id, title, transcript: transcriptChunk }));
-  const processed = await kimiItems(
+  const processed = await deepseekItems(
     prompt,
     inputs,
     { batchSize: 1, maxTokens: 6_500, concurrency: 2 },
   );
   for (const input of inputs.filter((entry) => !processed.some((item) => Number(item.id) === entry.id))) {
     try {
-      const retry = await kimiJson(prompt, [input], { maxTokens: 6_500, timeoutMs: 5 * 60 * 1000 });
+      const retry = await deepseekJson(prompt, [input], { maxTokens: 6_500, timeoutMs: 5 * 60 * 1000 });
       processed.push(...(retry.items || []));
-      console.log(`[kimi] youtube segment ${input.id + 1}/${inputs.length} recovered`);
+      console.log(`[deepseek] youtube segment ${input.id + 1}/${inputs.length} recovered`);
     } catch (error) {
-      console.warn(`[kimi] youtube segment ${input.id + 1}/${inputs.length} retry failed: ${error.message}`);
+      console.warn(`[deepseek] youtube segment ${input.id + 1}/${inputs.length} retry failed: ${error.message}`);
     }
   }
   if (inputs.some((entry) => !processed.some((item) => Number(item.id) === entry.id))) {
-    throw new Error("Kimi did not process every YouTube transcript segment");
+    throw new Error("DeepSeek did not process every YouTube transcript segment");
   }
   processed.sort((a, b) => Number(a.id) - Number(b.id));
   const sections = processed.flatMap((item) => Array.isArray(item.sections) ? item.sections : []);
-  if (sections.length === 0) throw new Error("Kimi did not return YouTube article sections");
+  if (sections.length === 0) throw new Error("DeepSeek did not return YouTube article sections");
   const summaries = processed.map((item) => item.summary).filter(Boolean);
   return {
     title: processed.find((item) => item.titleZh)?.titleZh || title,
@@ -1092,7 +1112,7 @@ async function collectYoutube() {
       const transcript = await transcriptFor(video.videoId);
       const processed = await processYoutubeTranscript(video.title, transcript);
       if (!Array.isArray(processed.takeaways) || !Array.isArray(processed.sections)) {
-        throw new Error("Kimi did not return complete YouTube sections");
+        throw new Error("DeepSeek did not return complete YouTube sections");
       }
       const keywords = Array.isArray(processed.keywords) ? processed.keywords : ["YouTube"];
       items.push({

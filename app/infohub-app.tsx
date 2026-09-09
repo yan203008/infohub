@@ -213,7 +213,7 @@ const coreItems: Item[] = [
       "技术动态任务本次从公开源抓取到 13 个 GitHub Trending 项目，并同步检查 OpenAI、DeepMind、Hugging Face、TLDR AI、Smol AI News、Latent Space 等 AI 新闻源。",
       "OpenAI 最新文章讨论科学家如何使用 AI 编程 Agent 改造科学计算软件，并以基因组学等场景说明 Agent 不只生成代码，也能参与旧系统现代化与研究工作流。",
       "GitHub Trending 中，aisuite 提供多个生成式 AI 服务的统一调用方式；ECC 聚焦 Claude Code、Codex、Cursor 等 Agent 工具的技能、记忆、安全和性能优化；Airi 则探索自托管实时语音与游戏互动角色。",
-      "这里展示的是“技术动态”部分，不混入财经、行情和国际时政。后续每日任务会继续合并去重，再由 Kimi 生成中文摘要。",
+      "这里展示的是“技术动态”部分，不混入财经、行情和国际时政。后续每日任务会继续合并去重，再由 DeepSeek 生成中文摘要。",
     ],
     externalLinks: [
       { label: "OpenAI：Agentic AI 与科学计算", url: "https://openai.com/index/scientific-computing-agentic-ai" },

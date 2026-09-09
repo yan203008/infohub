@@ -291,13 +291,13 @@ async function fetchPageTitle(url: string) {
   }
 }
 
-async function kimiJson(system: string, input: unknown, maxTokens = 12_000) {
+async function deepseekJson(system: string, input: unknown, maxTokens = 12_000) {
   const values = runtimeEnv();
-  const apiKey = values.MOONSHOT_API_KEY?.trim();
-  if (!apiKey) throw new Error("Kimi API Key 未配置");
-  const base = (values.MOONSHOT_BASE_URL || "https://api.kimi.com/coding/v1").replace(/\/$/, "");
-  const isKimiCode = base.includes("api.kimi.com/coding");
-  let model = values.MOONSHOT_EDITOR_MODEL || (isKimiCode ? "k3-256k" : "kimi-k2.5");
+  // The old secret name is retained as a migration fallback for existing hosts.
+  const apiKey = values.DEEPSEEK_API_KEY?.trim() || values.MOONSHOT_API_KEY?.trim();
+  if (!apiKey) throw new Error("DeepSeek API Key 未配置");
+  const base = (values.DEEPSEEK_BASE_URL || "https://api.deepseek.com").replace(/\/$/, "");
+  const model = values.DEEPSEEK_EDITOR_MODEL || values.DEEPSEEK_MODEL || "deepseek-v4-flash";
   let response: Response | undefined;
   let payload: JsonRecord = {};
   let responseContent = "";
@@ -308,15 +308,12 @@ async function kimiJson(system: string, input: unknown, maxTokens = 12_000) {
       headers: { authorization: `Bearer ${apiKey}`, "content-type": "application/json" },
       body: JSON.stringify({
         model,
-        ...(isKimiCode && model.startsWith("k3") ? { reasoning_effort: "low" } : {}),
-        ...(!isKimiCode ? {
-          ...(model === "kimi-k2.5" ? { thinking: { type: "disabled" } } : {}),
-          temperature: model === "kimi-k2.5" ? 0.6 : 1,
-        } : {}),
+        thinking: { type: "disabled" },
+        temperature: 0.6,
         max_tokens: maxTokens,
         response_format: { type: "json_object" },
         messages: [
-          { role: "system", content: system },
+          { role: "system", content: `${system}\n输出必须是可直接解析的有效 JSON（json），不要使用 Markdown 代码块。` },
           { role: "user", content: JSON.stringify(input) },
         ],
       }),
@@ -330,29 +327,21 @@ async function kimiJson(system: string, input: unknown, maxTokens = 12_000) {
         await sleep(attempt * 1_500);
         continue;
       }
-      throw new Error("Kimi 多次未返回正文，请稍后重试");
+      throw new Error("DeepSeek 多次未返回正文，请稍后重试");
     }
     const apiError = asRecord(payload.error);
     const apiMessage = asString(apiError.message);
-    const canUseStandardModel = isKimiCode
-      && model !== "kimi-for-coding"
-      && response.status === 401
-      && /does not have access|subscription.*access|model id does not exist/i.test(apiMessage);
-    if (canUseStandardModel) {
-      model = "kimi-for-coding";
-      continue;
-    }
     if (attempt < maximumAttempts && (response.status === 429 || response.status >= 500)) {
       await sleep(Math.min(90_000, 10_000 * (2 ** (attempt - 1))));
       continue;
     }
-    throw new Error(apiMessage || `Kimi 加工失败（${response.status}）`);
+    throw new Error(apiMessage || `DeepSeek 加工失败（${response.status}）`);
   }
-  if (!response?.ok) throw new Error("Kimi 暂时不可用，请稍后重试");
+  if (!response?.ok) throw new Error("DeepSeek 暂时不可用，请稍后重试");
   const content = responseContent
     .replace(/^```(?:json)?\s*/i, "")
     .replace(/\s*```$/, "");
-  if (!content) throw new Error("Kimi 没有返回加工结果");
+  if (!content) throw new Error("DeepSeek 没有返回加工结果");
   try {
     return asRecord(JSON.parse(content));
   } catch {
@@ -368,7 +357,7 @@ function splitText(text: string, size = 20_000) {
   return chunks;
 }
 
-async function processWithKimi(type: ManualContentType, originalTitle: string, text: string) {
+async function processWithDeepSeek(type: ManualContentType, originalTitle: string, text: string) {
   const chunks = splitText(text);
   const results: JsonRecord[] = [];
   const format = `只返回 JSON：{"title":"中文标题","summary":"2-3句具体摘要","keywords":["关键词"],"takeaways":["可行动或值得记住的结论"],"sections":[{"title":"章节标题","timeRange":"若原文有时间戳则填写，否则留空","paragraphs":["完整、适合阅读的中文段落"]}]}`;
@@ -379,7 +368,7 @@ async function processWithKimi(type: ManualContentType, originalTitle: string, t
 Takeaways 必须放在文章前。${format}`
     : `你是中文内容编辑。把原文整理成忠实、清晰、适合精读的文章，保留关键事实、论证、例子和限制，不添加原文没有的信息。${format}`;
   for (let index = 0; index < chunks.length; index += 1) {
-    results.push(await kimiJson(instruction, {
+    results.push(await deepseekJson(instruction, {
       originalTitle,
       part: index + 1,
       totalParts: chunks.length,
@@ -390,7 +379,7 @@ Takeaways 必须放在文章前。${format}`
   if (allSections.length === 0) throw new Error("AI 加工结果缺少正文段落");
   const combined = chunks.length === 1
     ? results[0]
-    : await kimiJson(
+    : await deepseekJson(
       `根据各部分的摘要生成整篇内容的中文标题、简短的 2-3 句摘要（总长度 120-180 个中文字）、5-8个关键词和 6 条 Takeaways。不要添加材料外信息。只返回 JSON：{"title":"","summary":"","keywords":[],"takeaways":[]}`,
       results.map((result) => ({
         title: result.title,
@@ -466,7 +455,7 @@ export async function processManualContent(
   await options.onExtracted?.(extracted);
 
   await options.onStep?.("ai");
-  const processed = await processWithKimi(type, extracted.title, extracted.text);
+  const processed = await processWithDeepSeek(type, extracted.title, extracted.text);
   await options.onStep?.("quality");
   if (!processed.title || !processed.summary || processed.sections.length === 0) {
     throw new Error("质量检查未通过：标题、摘要或正文不完整");
