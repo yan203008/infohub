@@ -1,18 +1,18 @@
 {
-  "id": "collection-2026-09-21T21:02:29.342Z",
-  "generatedAt": "2026-09-21T21:02:29.342Z",
-  "windowStart": "2026-09-20T16:00:00.000Z",
+  "id": "collection-2026-09-22T20:11:17.166Z",
+  "generatedAt": "2026-09-22T20:11:17.166Z",
+  "windowStart": "2026-09-21T16:00:00.000Z",
   "mode": "production",
   "status": "completed",
-  "itemCount": 27,
-  "validItemCount": 27,
-  "publishedCount": 27,
+  "itemCount": 24,
+  "validItemCount": 24,
+  "publishedCount": 24,
   "stages": [
     {
       "id": "collect",
       "label": "采集",
       "status": "completed",
-      "detail": "完成 4/4 个来源，共 27 条内容"
+      "detail": "完成 4/4 个来源，共 24 条内容"
     },
     {
       "id": "summarize",
@@ -24,13 +24,13 @@
       "id": "quality",
       "label": "质量检查",
       "status": "completed",
-      "detail": "通过 27 条公开内容"
+      "detail": "通过 24 条公开内容"
     },
     {
       "id": "publish",
       "label": "发布",
       "status": "completed",
-      "detail": "已写入 27 条公开内容"
+      "detail": "已写入 24 条公开内容"
     }
   ],
   "sources": [
@@ -39,8 +39,8 @@
       "label": "Follow Builders",
       "status": "completed",
       "itemCount": 10,
-      "startedAt": "2026-09-21T21:02:29.363Z",
-      "finishedAt": "2026-09-21T21:02:39.603Z",
+      "startedAt": "2026-09-22T20:11:17.181Z",
+      "finishedAt": "2026-09-22T20:11:29.112Z",
       "retryAttempts": 1
     },
     {
@@ -48,26 +48,26 @@
       "label": "技术动态 X",
       "status": "completed",
       "itemCount": 3,
-      "startedAt": "2026-09-21T21:02:39.604Z",
-      "finishedAt": "2026-09-21T21:02:44.010Z",
-      "retryAttempts": 1
+      "startedAt": "2026-09-22T20:12:36.425Z",
+      "finishedAt": "2026-09-22T20:12:40.500Z",
+      "retryAttempts": 2
     },
     {
       "id": "papers",
       "label": "热门论文",
       "status": "completed",
-      "itemCount": 2,
-      "startedAt": "2026-09-21T21:02:44.010Z",
-      "finishedAt": "2026-09-21T21:02:55.829Z",
+      "itemCount": 3,
+      "startedAt": "2026-09-22T20:11:32.901Z",
+      "finishedAt": "2026-09-22T20:11:44.476Z",
       "retryAttempts": 1
     },
     {
       "id": "github",
       "label": "GitHub Trending",
       "status": "completed",
-      "itemCount": 12,
-      "startedAt": "2026-09-21T21:02:55.829Z",
-      "finishedAt": "2026-09-21T21:03:17.094Z",
+      "itemCount": 8,
+      "startedAt": "2026-09-22T20:11:44.477Z",
+      "finishedAt": "2026-09-22T20:12:01.492Z",
       "retryAttempts": 1
     }
   ],
@@ -1999,51 +1999,91 @@
       "value": "非技术读者能看清 AI 正从“会聊天”转向“会操作软件、能交接任务”，并据此判断哪些自动化值得信任、哪些产出仍需人工复核。",
       "technicalLevel": "中高",
       "technicalPercentage": 78
+    },
+    {
+      "section": "x",
+      "digestDate": "2026-09-23",
+      "label": "X 推特内容",
+      "overview": "本批内容呈现三条方向：用 AI 组合自动筛选美股候选并捕捉结构性信号；把大量 AI 视频经验沉淀为可复用的 Skill 与提示语模版并开源；面向非专业读者解释一个非传统 LLM 的新模型。",
+      "trends": [
+        "AI 用法正从单次提问转向可复用的模版、Skill 与自动化流程，个人经验开始被沉淀为开源资产。",
+        "讨论对象扩展到垂直场景：投资信号识别与视频创作，同时出现面向普通人的新模型科普。"
+      ],
+      "value": "非技术读者可看到 AI 在投资筛选、视频创作和新模型认知上的具体用法，但需注意这些多为个人经验分享，尚无回测或效果验证，不能直接当作收益或…",
+      "technicalLevel": "低",
+      "technicalPercentage": 20
+    },
+    {
+      "section": "papers",
+      "digestDate": "2026-09-23",
+      "label": "热门论文",
+      "overview": "本期三篇论文分别关注智能体框架的自我改进、视频世界模型的长时一致性，以及游戏玩法能力的标准化评测。核心问题都是让 AI 在长时间、多步骤任务中保持稳定表现，而不是只在单一场景里刷高分。",
+      "trends": [
+        "三篇研究都在从单次任务表现转向长时程、跨场景的稳定性评估，过拟合与一致性成为共同关注点。",
+        "智能体、视频生成与游戏评测开始共享同一套思路：用可复现的标准化测试替代高方差的在线结果。"
+      ],
+      "value": "非技术读者可以判断：AI 智能体和视频生成正在从“能演示”走向“能长时间稳定工作”，而游戏正成为衡量这类综合能力的新标尺。",
+      "technicalLevel": "中高",
+      "technicalPercentage": 72
+    },
+    {
+      "section": "github",
+      "digestDate": "2026-09-23",
+      "label": "GitHub Trending",
+      "overview": "本批内容集中呈现 AI 智能体从对话走向可执行任务的趋势：金融、编程、视频剪辑等垂直场景出现现成工具箱，同时底层运行、编排与工具调用基础设施同步完善。此外，移动取证类工具提醒人们关注智能体之外的安全议题。",
+      "trends": [
+        "智能体正从通用对话转向垂直行业落地，金融、编程、视频剪辑等场景出现开箱即用的工作流模板。",
+        "围绕智能体的运行底座、编排调度和工具市场同步涌现，解决隔离、高密度部署与外部能力调用问题。"
+      ],
+      "value": "非技术读者能判断：AI 智能体已能接手金融建模、视频剪辑、编程配置等具体案头工作，但输出仍需人工复核；同时移动取证工具提醒设备安全风险需要…",
+      "technicalLevel": "中高",
+      "technicalPercentage": 72
     }
   ],
   "errors": [],
-  "finishedAt": "2026-09-21T21:03:47.498Z",
+  "finishedAt": "2026-09-22T20:13:00.522Z",
   "items": [
     {
-      "externalId": "digest-2026-09-21-aaron-levie",
+      "externalId": "digest-2026-09-22-thibault-sottiaux",
       "source": {
         "id": "follow-builders",
         "type": "builder",
-        "name": "Aaron Levie · Follow Builders",
+        "name": "Thibault Sottiaux · Follow Builders",
         "url": "https://github.com/zarazhangrui/follow-builders"
       },
-      "title": "Box CEO Aaron Levie",
-      "sourceUrl": "https://x.com/levie/status/2101731574668747081",
-      "summary": "Aaron Levie 用一句调侃表示某个东西对智能体集群来说简直无法攻破。",
-      "publishedAt": "2026-09-20T17:53:50.000Z",
+      "title": "OpenAI 的 Thibault Sottiaux",
+      "sourceUrl": "https://x.com/thsottiaux/status/2102254445082116335",
+      "summary": "Thibault Sottiaux 预告周二将有一场“重启”，并让大家准备好引擎。",
+      "publishedAt": "2026-09-22T04:31:32.000Z",
       "keywords": [
-        "Aaron Levie",
-        "Box",
-        "智能体集群",
-        "调侃"
+        "OpenAI",
+        "Codex",
+        "ChatGPT",
+        "重启预告",
+        "周二"
       ],
       "body": {
         "section": "x",
-        "digestDate": "2026-09-22",
-        "publishedDate": "9/21",
+        "digestDate": "2026-09-23",
+        "publishedDate": "9/22",
         "time": "本次更新",
         "readTime": "3 分钟",
         "accent": "green",
         "inRecentWindow": true,
         "digestFormat": "builders-digest",
         "paragraphs": [
-          "Box 的 CEO Aaron Levie 发了一条带图的推文，说某个东西“对智能体集群来说简直密不透风、无法攻破”。他没有多作解释，语气更像是在调侃某种防线或壁垒的牢固程度。"
+          "OpenAI 的 Thibault Sottiaux 发了一条预告：女士们先生们，发动……你们的……引擎。他说马上就周二了，而他之前承诺过周二会来一次重启，另外还有一些别的事情。最后一句是“回头见”。"
         ],
         "externalLinks": [
           {
             "label": "推文",
-            "url": "https://x.com/levie/status/2101731574668747081"
+            "url": "https://x.com/thsottiaux/status/2102254445082116335"
           }
         ]
       }
     },
     {
-      "externalId": "digest-2026-09-21-peter-steinberger",
+      "externalId": "digest-2026-09-22-peter-steinberger",
       "source": {
         "id": "follow-builders",
         "type": "builder",
@@ -2051,167 +2091,38 @@
         "url": "https://github.com/zarazhangrui/follow-builders"
       },
       "title": "Peter Steinberger",
-      "sourceUrl": "https://x.com/steipete/status/2101748928274419843",
-      "summary": "Peter Steinberger 宣布新基准测试发布，并说他的 claw 现在能给你打 FaceTime 视频通话。",
-      "publishedAt": "2026-09-20T19:02:47.000Z",
+      "sourceUrl": "https://x.com/steipete/status/2102116206371315854",
+      "summary": "Peter Steinberger 澄清“Meta 使用 OpenClaw”的传闻，说 Meta 是受启发自建了 agent。",
+      "publishedAt": "2026-09-21T19:22:13.000Z",
       "keywords": [
-        "Peter Steinberger",
-        "基准测试",
-        "FaceTime",
         "OpenClaw",
-        "AI"
+        "Meta",
+        "agent",
+        "自建",
+        "澄清"
       ],
       "body": {
         "section": "x",
-        "digestDate": "2026-09-22",
-        "publishedDate": "9/21",
+        "digestDate": "2026-09-23",
+        "publishedDate": "9/22",
         "time": "本次更新",
         "readTime": "3 分钟",
         "accent": "green",
         "inRecentWindow": true,
         "digestFormat": "builders-digest",
         "paragraphs": [
-          "Peter Steinberger 先宣布“新基准测试发布了”，随后又补了一条：你的 claw 现在可以给你打 FaceTime 了。两条推文都带着链接，延续了他一贯围绕 AI 和 OpenClaw 的轻松玩梗风格。"
-        ],
-        "externalLinks": [
-          {
-            "label": "推文 1",
-            "url": "https://x.com/steipete/status/2101748820237500557"
-          },
-          {
-            "label": "推文 2",
-            "url": "https://x.com/steipete/status/2101748928274419843"
-          }
-        ]
-      }
-    },
-    {
-      "externalId": "digest-2026-09-21-amjad-masad",
-      "source": {
-        "id": "follow-builders",
-        "type": "builder",
-        "name": "Amjad Masad · Follow Builders",
-        "url": "https://github.com/zarazhangrui/follow-builders"
-      },
-      "title": "Replit CEO Amjad Masad",
-      "sourceUrl": "https://x.com/amasad/status/2101852258468299182",
-      "summary": "Amjad Masad 给儿子组装了人生第一台电脑。",
-      "publishedAt": "2026-09-21T01:53:23.000Z",
-      "keywords": [
-        "Replit",
-        "Amjad Masad",
-        "第一台电脑",
-        "父子"
-      ],
-      "body": {
-        "section": "x",
-        "digestDate": "2026-09-22",
-        "publishedDate": "9/21",
-        "time": "本次更新",
-        "readTime": "3 分钟",
-        "accent": "green",
-        "inRecentWindow": true,
-        "digestFormat": "builders-digest",
-        "paragraphs": [
-          "Replit 的 CEO Amjad Masad 晒出给儿子装好的第一台电脑，还配了图。"
+          "Peter Steinberger 针对正在流传的“Meta 使用 OpenClaw”的说法做了澄清：Meta 其实是受启发后自己做了 agent，Nat 和他的团队干得很漂亮，值得点赞。"
         ],
         "externalLinks": [
           {
             "label": "推文",
-            "url": "https://x.com/amasad/status/2101852258468299182"
+            "url": "https://x.com/steipete/status/2102116206371315854"
           }
         ]
       }
     },
     {
-      "externalId": "digest-2026-09-21-thariq",
-      "source": {
-        "id": "follow-builders",
-        "type": "builder",
-        "name": "Thariq · Follow Builders",
-        "url": "https://github.com/zarazhangrui/follow-builders"
-      },
-      "title": "Anthropic Claude Code 的 Thariq",
-      "sourceUrl": "https://x.com/trq212/status/2101844435353145452",
-      "summary": "Thariq 聊到电子游戏给年轻人提供现实里难以获得的高风险与责任，但也要知道何时该毕业。",
-      "publishedAt": "2026-09-21T01:22:18.000Z",
-      "keywords": [
-        "电子游戏",
-        "年轻人",
-        "高风险",
-        "责任",
-        "Claude Code"
-      ],
-      "body": {
-        "section": "x",
-        "digestDate": "2026-09-22",
-        "publishedDate": "9/21",
-        "time": "本次更新",
-        "readTime": "3 分钟",
-        "accent": "green",
-        "inRecentWindow": true,
-        "digestFormat": "builders-digest",
-        "paragraphs": [
-          "在 Anthropic 负责 Claude Code 的 Thariq 说，电子游戏有种特别之处，能给那些在现实里拿不到高风险和责任的年轻人这些东西；不过这是一条很细的线，到了某个时候你得毕业。"
-        ],
-        "externalLinks": [
-          {
-            "label": "推文",
-            "url": "https://x.com/trq212/status/2101844435353145452"
-          }
-        ]
-      }
-    },
-    {
-      "externalId": "digest-2026-09-21-peter-yang",
-      "source": {
-        "id": "follow-builders",
-        "type": "builder",
-        "name": "Peter Yang · Follow Builders",
-        "url": "https://github.com/zarazhangrui/follow-builders"
-      },
-      "title": "AI 教程与访谈作者 Peter Yang",
-      "sourceUrl": "https://x.com/petergyang/status/2101917073081598255",
-      "summary": "Peter Yang 用“纸上谈兵”的方式点评个人智能体竞赛：Muse、ChatGPT、Grok Bot、Google Spark 与 Apple Siri 各自的处境，并指出多人协作 AI 是下一个大解锁。",
-      "publishedAt": "2026-09-21T06:10:56.000Z",
-      "keywords": [
-        "个人智能体",
-        "Muse",
-        "ChatGPT",
-        "Grok Bot",
-        "多人 AI",
-        "Siri"
-      ],
-      "body": {
-        "section": "x",
-        "digestDate": "2026-09-22",
-        "publishedDate": "9/21",
-        "time": "本次更新",
-        "readTime": "3 分钟",
-        "accent": "green",
-        "inRecentWindow": true,
-        "digestFormat": "builders-digest",
-        "paragraphs": [
-          "Peter Yang 用“纸上谈兵”的方式聊了聊个人智能体竞赛。他认为 Muse 有望成为领跑者：应用本身很直观，Meta 又在自家全线产品里猛推；用过 Muse 之后会发现，智能体住在 iMessage 这类现有聊天应用里其实没太大意义。除非 Meta 算力不够，他觉得这会成为 Facebook 之后该公司最成功的自研应用，规模会远超 Threads。ChatGPT 大概仍是个智能体领域的领先者，毕竟已有 10 亿以上用户，OpenAI 的模型、computer use 和语音逐项比下来可能都强于 Muse。但把工作和个人用途做进同一个产品很难，用同一套体验同时服务企业和消费者更难；即便在工作场景里，他也开始用 Grok Bot，因为 Work 和 Codex 的拆分还是太让人困惑。他相信团队正在憋大招，接下来几周会有好东西。Grok Bot 其实不算 Muse 的竞争对手，因为它聚焦工作；在他看来，多个 bot 天然适合团队型知识工作，他对 Grok Bot 的乐观预期是：再补几个功能，它就能变成面向 bot 和人类的多人协作版 agentic Slack。Google 显然是黑马候选：这些个人智能体都靠 Gmail、Google Calendar 和 Google 应用的数据活着，Google 自己的个人智能体 Spark 上次看还只是 Gemini 里的一个次级标签页，他认为 Google 得激进得多地把 Spark 做成主要体验，做得直观、能跟 Muse 竞争；不过 Google 在多人 AI 上的历史战绩并不好。说到多人，目前没人真正解决这件事：他没法轻松把配偶加进 Muse 聊天一起规划假期，也没法把同事拉进 ChatGPT 或 Grok Bot 的会话线程，今天所谓的多人 AI 基本就是在 Slack 里 @ 一下 bot；各家大厂大概都在做，他觉得这是下一个大解锁。他目前的个人 AI 组合是：Muse 管个人事务，Grok Bot 管云端任务，Claude 用于特定场景，ChatGPT 兜底其他一切。他还补了一条：忘了提 Apple 和 Siri，它们有全部设备和很好的隐私口碑，本可以轻松赢下这场竞赛，但拖后腿的是每年一次的大版本更新节奏，而且不在 X 等平台上收集用户反馈；从外面看，Siri 的迭代速度实在太慢，难以竞争。最后他建议大家把自己的个人技能和文件设计成容易在不同 harness 和 agent 之间迁移的形式，否则一半时间都会花在从一个工具搬到另一个工具上。"
-        ],
-        "externalLinks": [
-          {
-            "label": "推文 1",
-            "url": "https://x.com/petergyang/status/2101862331345154469"
-          },
-          {
-            "label": "推文 2",
-            "url": "https://x.com/petergyang/status/2101865476145959373"
-          },
-          {
-            "label": "推文 3",
-            "url": "https://x.com/petergyang/status/2101917073081598255"
-          }
-        ]
-      }
-    },
-    {
-      "externalId": "digest-2026-09-21-guillermo-rauch",
+      "externalId": "digest-2026-09-22-guillermo-rauch",
       "source": {
         "id": "follow-builders",
         "type": "builder",
@@ -2219,153 +2130,215 @@
         "url": "https://github.com/zarazhangrui/follow-builders"
       },
       "title": "Vercel CEO Guillermo Rauch",
-      "sourceUrl": "https://x.com/rauchg/status/2101846262840799251",
-      "summary": "Guillermo Rauch 感叹 agent 测试和 QA 软件的彻底程度无人能及，会一路深挖到用 iPhone 模拟器验证修复。",
-      "publishedAt": "2026-09-21T01:29:34.000Z",
+      "sourceUrl": "https://x.com/rauchg/status/2102205684544852121",
+      "summary": "Guillermo Rauch 测试 Grok 4.7 逆向工程二进制文件并称赞其速度，同时宣布 AI Gateway 新增通过 HTTP 使用 Jev 的能力。",
+      "publishedAt": "2026-09-22T01:17:46.000Z",
       "keywords": [
-        "agent",
-        "QA",
-        "Vercel",
-        "iPhone 模拟器",
-        "软件质量"
-      ],
-      "body": {
-        "section": "x",
-        "digestDate": "2026-09-22",
-        "publishedDate": "9/21",
-        "time": "本次更新",
-        "readTime": "3 分钟",
-        "accent": "green",
-        "inRecentWindow": true,
-        "digestFormat": "builders-digest",
-        "paragraphs": [
-          "Vercel CEO Guillermo Rauch 感叹 agent 测试和 QA 软件的彻底程度无人能及。他指出移动端（应用内）浏览器里有个东西渲染不对，agent 就一路深挖到“魔多”深处去复现、模拟、修复、部署、验证，甚至专门建了一个临时的 Vercel 部署丢给 iPhone 模拟器跑。他说这些家伙真是拼到极致，人类根本达不到这种强度：我们会没电、会外推、会指望它自己好起来。未来的软件会达到我们从未体验过的质量和性能，看着这种转变很惊人。"
-        ],
-        "externalLinks": [
-          {
-            "label": "推文",
-            "url": "https://x.com/rauchg/status/2101846262840799251"
-          }
-        ]
-      }
-    },
-    {
-      "externalId": "digest-2026-09-21-swyx",
-      "source": {
-        "id": "follow-builders",
-        "type": "builder",
-        "name": "Swyx · Follow Builders",
-        "url": "https://github.com/zarazhangrui/follow-builders"
-      },
-      "title": "Swyx",
-      "sourceUrl": "https://x.com/swyx/status/2101873256097804529",
-      "summary": "Swyx 预告 Latent Space 播客明天将上线 Jev 的节目。",
-      "publishedAt": "2026-09-21T03:16:49.000Z",
-      "keywords": [
-        "Latent Space",
-        "播客",
+        "Grok 4.7",
+        "逆向工程",
+        "AI Gateway",
         "Jev",
-        "订阅",
-        "预告"
+        "TypeSafe API"
       ],
       "body": {
         "section": "x",
-        "digestDate": "2026-09-22",
-        "publishedDate": "9/21",
+        "digestDate": "2026-09-23",
+        "publishedDate": "9/22",
         "time": "本次更新",
         "readTime": "3 分钟",
         "accent": "green",
         "inRecentWindow": true,
         "digestFormat": "builders-digest",
         "paragraphs": [
-          "Swyx 预告说，明天 Latent Space 播客会有一期 Jev 的节目，可以在 Apple 或 YouTube 上订阅 @latentspacepod。他还特别感谢了 @allenpark 和 Ke 促成这件事。"
+          "Guillermo Rauch 说他刚给 Grok 4.7 出了一道相当难的题，涉及逆向工程一个正在运行的二进制文件，结果它漂亮地解决了，而且速度非常快。随后他转发了一条内容并配文“Game recognizing game”。他还提到，除了他们那套类型安全的 TypeSafe @aisdk API（名字你懂的），现在在 AI Gateway 里也可以通过 HTTP 使用 Jev 了。"
         ],
         "externalLinks": [
           {
-            "label": "推文",
-            "url": "https://x.com/swyx/status/2101873256097804529"
+            "label": "推文 1",
+            "url": "https://x.com/rauchg/status/2102089968860721335"
+          },
+          {
+            "label": "推文 2",
+            "url": "https://x.com/rauchg/status/2102126936592191695"
+          },
+          {
+            "label": "推文 3",
+            "url": "https://x.com/rauchg/status/2102205684544852121"
           }
         ]
       }
     },
     {
-      "externalId": "digest-2026-09-21-matt-turck",
+      "externalId": "digest-2026-09-22-thariq",
       "source": {
         "id": "follow-builders",
         "type": "builder",
-        "name": "Matt Turck · Follow Builders",
+        "name": "Thariq · Follow Builders",
         "url": "https://github.com/zarazhangrui/follow-builders"
       },
-      "title": "FirstMark Capital 投资人 Matt Turck",
-      "sourceUrl": "https://x.com/mattturck/status/2101820308009206077",
-      "summary": "Matt Turck 调侃大家现在都迷 Jev，而上周还在热议 Instinct。",
-      "publishedAt": "2026-09-20T23:46:26.000Z",
+      "title": "Anthropic Claude Code 的 Thariq",
+      "sourceUrl": "https://x.com/trq212/status/2102186805034635576",
+      "summary": "Thariq 说自己现在每天要多次输入“用大图、少用字”这句话。",
+      "publishedAt": "2026-09-22T00:02:45.000Z",
       "keywords": [
-        "Jev",
-        "Instinct",
-        "调侃",
-        "热点",
-        "记忆"
+        "Claude Code",
+        "提示词",
+        "大图少字"
       ],
       "body": {
         "section": "x",
-        "digestDate": "2026-09-22",
-        "publishedDate": "9/21",
+        "digestDate": "2026-09-23",
+        "publishedDate": "9/22",
         "time": "本次更新",
         "readTime": "3 分钟",
         "accent": "green",
         "inRecentWindow": true,
         "digestFormat": "builders-digest",
         "paragraphs": [
-          "Matt Turck 打趣说，现在所有人都对 Jev 着迷，但他年纪够大，还记得就在上周中，大家还聊 Instinct 聊得停不下来。那时候真简单啊。"
+          "Thariq 说他现在一天要打好几次“use big pictures and few words”这句话。"
         ],
         "externalLinks": [
           {
             "label": "推文",
-            "url": "https://x.com/mattturck/status/2101820308009206077"
+            "url": "https://x.com/trq212/status/2102186805034635576"
           }
         ]
       }
     },
     {
-      "externalId": "digest-2026-09-21-dan-shipper",
+      "externalId": "digest-2026-09-22-amjad-masad",
       "source": {
         "id": "follow-builders",
         "type": "builder",
-        "name": "Dan Shipper · Follow Builders",
+        "name": "Amjad Masad · Follow Builders",
         "url": "https://github.com/zarazhangrui/follow-builders"
       },
-      "title": "Every 首席执行官 Dan Shipper",
-      "sourceUrl": "https://x.com/danshipper/status/2101816740741329218",
-      "summary": "Dan Shipper 强烈推荐一本书，称这是他最喜欢的书。",
-      "publishedAt": "2026-09-20T23:32:15.000Z",
+      "title": "Replit CEO Amjad Masad",
+      "sourceUrl": "https://x.com/amasad/status/2102120769232978174",
+      "summary": "Amjad Masad 认为 AI 正在让美国梦重新焕发生机。",
+      "publishedAt": "2026-09-21T19:40:21.000Z",
       "keywords": [
-        "读书推荐",
-        "个人喜好",
-        "Dan Shipper"
+        "AI",
+        "美国梦",
+        "Replit",
+        "Amjad Masad"
       ],
       "body": {
         "section": "x",
-        "digestDate": "2026-09-22",
-        "publishedDate": "9/21",
+        "digestDate": "2026-09-23",
+        "publishedDate": "9/22",
         "time": "本次更新",
         "readTime": "3 分钟",
         "accent": "green",
         "inRecentWindow": true,
         "digestFormat": "builders-digest",
         "paragraphs": [
-          "Dan Shipper 强烈推荐一本书，说这是他最喜欢的书。"
+          "Replit 的 CEO Amjad Masad 表示，AI 正在让美国梦重新焕发生机。"
         ],
         "externalLinks": [
           {
             "label": "推文",
-            "url": "https://x.com/danshipper/status/2101816740741329218"
+            "url": "https://x.com/amasad/status/2102120769232978174"
           }
         ]
       }
     },
     {
-      "externalId": "digest-2026-09-21-nikunj-kothari",
+      "externalId": "digest-2026-09-22-peter-yang",
+      "source": {
+        "id": "follow-builders",
+        "type": "builder",
+        "name": "Peter Yang · Follow Builders",
+        "url": "https://github.com/zarazhangrui/follow-builders"
+      },
+      "title": "Peter Yang",
+      "sourceUrl": "https://x.com/petergyang/status/2102215701255844074",
+      "summary": "Peter Yang 谈广告市场将因 AI 智能体而面临冲击，并分享自己已从邮件和短信转向与智能体聊天，以及 ChatGPT Finances 帮人追回款项的案例。",
+      "publishedAt": "2026-09-22T01:57:35.000Z",
+      "keywords": [
+        "广告市场",
+        "AI 智能体",
+        "ChatGPT Finances",
+        "退款",
+        "聊天交互"
+      ],
+      "body": {
+        "section": "x",
+        "digestDate": "2026-09-23",
+        "publishedDate": "9/22",
+        "time": "本次更新",
+        "readTime": "3 分钟",
+        "accent": "green",
+        "inRecentWindow": true,
+        "digestFormat": "builders-digest",
+        "paragraphs": [
+          "Peter Yang 认为，广告市场接下来会迎来一次不太愉快的觉醒：如果一门生意的很大一部分收入来自向人类投放定向展示广告，那么当智能体自己浏览你的网站、直接把事情办完、人类根本看不到广告时，会发生什么？他还说，自己已经不再生活在邮件和短信里，而是生活在与自己的智能体（们）的聊天里。此外，他分享了 ChatGPT Finances 的一个用途：帮你发现漏掉的扣款并要回钱。ChatGPT Finances 的产品负责人 Ethan 讲了自己的经历——他用积分订了酒店，结果还是被扣了钱，他完全不知道这事发生了，但 ChatGPT 发现了，跟客服沟通后他最终拿到了退款。Peter Yang 随后也告诉 Ethan，自己有类似经历：他让 ChatGPT 帮父母取消一笔酒店预订，并盯着回复、一直跟进，直到把钱要回来。"
+        ],
+        "externalLinks": [
+          {
+            "label": "推文 1",
+            "url": "https://x.com/petergyang/status/2102215701255844074"
+          },
+          {
+            "label": "推文 2",
+            "url": "https://x.com/petergyang/status/2102181024507765167"
+          },
+          {
+            "label": "推文 3",
+            "url": "https://x.com/petergyang/status/2102186174911746151"
+          }
+        ]
+      }
+    },
+    {
+      "externalId": "digest-2026-09-22-garry-tan",
+      "source": {
+        "id": "follow-builders",
+        "type": "builder",
+        "name": "Garry Tan · Follow Builders",
+        "url": "https://github.com/zarazhangrui/follow-builders"
+      },
+      "title": "Y Combinator 总裁兼 CEO Garry Tan",
+      "sourceUrl": "https://x.com/garrytan/status/2102233173833007536",
+      "summary": "Garry Tan 分享了自己最近最爱的 agentic 编程工具 Capy，并回顾了 Cluely 作为实时思考助手的价值。",
+      "publishedAt": "2026-09-22T03:07:00.000Z",
+      "keywords": [
+        "Capy",
+        "agentic 编程",
+        "GBrain",
+        "Cluely",
+        "Codex"
+      ],
+      "body": {
+        "section": "x",
+        "digestDate": "2026-09-23",
+        "publishedDate": "9/22",
+        "time": "本次更新",
+        "readTime": "3 分钟",
+        "accent": "green",
+        "inRecentWindow": true,
+        "digestFormat": "builders-digest",
+        "paragraphs": [
+          "Garry Tan 说他不太确定 Capy（@capydotai）是怎么做到的，但它确实能跟踪多步骤工作流，而且做大型 PR 比 Codex 或 Claude Code 单打独斗更快，是他过去一周军火库里最喜欢的新 agentic 编程秘密武器。他还举了个例子：Capy 正在对 GBrain 执行一波野心很大的 bug 修复，任务划分非常清晰、自动并行化，GitHub PR 和 CI 流程也很干净。另外他提到，仔细想想，Cluely 作为一个带持续上下文的实时思考助手、半对抗式助理，仍然是个好主意。"
+        ],
+        "externalLinks": [
+          {
+            "label": "推文 1",
+            "url": "https://x.com/garrytan/status/2102095924893827501"
+          },
+          {
+            "label": "推文 2",
+            "url": "https://x.com/garrytan/status/2102233173833007536"
+          },
+          {
+            "label": "推文 3",
+            "url": "https://x.com/garrytan/status/2102096495847551011"
+          }
+        ]
+      }
+    },
+    {
+      "externalId": "digest-2026-09-22-nikunj-kothari",
       "source": {
         "id": "follow-builders",
         "type": "builder",
@@ -2373,603 +2346,256 @@
         "url": "https://github.com/zarazhangrui/follow-builders"
       },
       "title": "FPV Ventures 合伙人 Nikunj Kothari",
-      "sourceUrl": "https://x.com/nikunj/status/2101742225906655315",
-      "summary": "Nikunj Kothari 开玩笑想开一家叫“次日咖喱”的云厨房，因为他觉得剩菜隔夜后更好吃。",
-      "publishedAt": "2026-09-20T18:36:09.000Z",
+      "sourceUrl": "https://x.com/nikunj/status/2102186665863463199",
+      "summary": "Nikunj Kothari 称自己长期把 Codex 当主力 agent，感叹现在是产品客户的黄金时代。",
+      "publishedAt": "2026-09-22T00:02:12.000Z",
       "keywords": [
-        "云厨房",
-        "剩菜",
-        "咖喱",
-        "美食",
-        "玩笑"
+        "Codex",
+        "Computer Use",
+        "Instinct",
+        "Muse",
+        "黄金时代"
       ],
       "body": {
         "section": "x",
-        "digestDate": "2026-09-22",
-        "publishedDate": "9/21",
+        "digestDate": "2026-09-23",
+        "publishedDate": "9/22",
         "time": "本次更新",
         "readTime": "3 分钟",
         "accent": "green",
         "inRecentWindow": true,
         "digestFormat": "builders-digest",
         "paragraphs": [
-          "Nikunj Kothari 开玩笑说想开一家叫“次日咖喱”（next day curry）的云厨房：先买来最好的咖喱，放上一夜，第二天再端出来。他说这话时正狼吞虎咽地吃着剩下的满洲里（Manchurian），并表示拉面、印度菜、泰式咖喱等都有完全一样的体验。他承认这对纯粹主义者来说可能有点亵渎，但隔夜之后确实好吃太多了。"
+          "Nikunj Kothari 说他用 Codex 当主力 agent 已经很久，久到忘了普通人根本没用过。他觉得 Instinct 和 Muse 很棒，尤其在手机上做浏览器操作时，零配置就能让大众体验到好 agent 是什么样。但 Mac 上的 Codex 在 Computer Use 能做的所有事情上简直无敌，他建议大家试试把一个手动工作流交给 Codex 一把梭。他很期待 Codex 团队据称即将面向大众发布的 \"agent\"，唯一的请求是展示成果、让普通人容易上手。他说现在能当这些产品的客户真是特权，是真正的黄金时代。随后有人私信他要证据，说他 \"公开\" 的 GitHub 上绿格子不多，他回应说：我可不只是表面看起来那样 👀。"
+        ],
+        "externalLinks": [
+          {
+            "label": "推文 1",
+            "url": "https://x.com/nikunj/status/2102186665863463199"
+          },
+          {
+            "label": "推文 2",
+            "url": "https://x.com/nikunj/status/2102136369191800888"
+          }
+        ]
+      }
+    },
+    {
+      "externalId": "digest-2026-09-22-aaron-levie",
+      "source": {
+        "id": "follow-builders",
+        "type": "builder",
+        "name": "Aaron Levie · Follow Builders",
+        "url": "https://github.com/zarazhangrui/follow-builders"
+      },
+      "title": "Box CEO Aaron Levie",
+      "sourceUrl": "https://x.com/levie/status/2102253246807261579",
+      "summary": "Aaron Levie 认为 AI agent 使用软件的频率将远超人类，核心基础能力反而更重要，并看好个人 agent 带来的商业变现机会。",
+      "publishedAt": "2026-09-22T04:26:46.000Z",
+      "keywords": [
+        "AI agent",
+        "核心基础能力",
+        "安全护栏",
+        "商业变现",
+        "个人 agent"
+      ],
+      "body": {
+        "section": "x",
+        "digestDate": "2026-09-23",
+        "publishedDate": "9/22",
+        "time": "本次更新",
+        "readTime": "3 分钟",
+        "accent": "green",
+        "inRecentWindow": true,
+        "digestFormat": "builders-digest",
+        "paragraphs": [
+          "Box 的 CEO Aaron Levie 谈了两件相互关联的事。第一，AI agent 使用软件的量会是人类的 100 倍。即便界面逐渐退到幕后、你主要是在跟 agent 打交道，这些 agent 依然需要人类用过的许多核心基础能力。事实上，当 agent 能在我们的系统里做出破坏性操作，或者它们访问的上下文能决定工作流成败时，这些核心基础能力在很多方面反而变得更加重要。这一点同样适用于你存放 CRM、ERP，以及结构化或非结构化数据平台的地方。那些最能充当 agent 的安全层和护栏、为 agent 和人类管理数据、并为工作流编排业务逻辑的平台，眼下机会巨大。这对全新创业公司成立，对跑得够快的现有平台也成立。\n\n第二，代表你进行交易的个人 agent，其变现潜力相当可观。如果你设想 agent 能端到端处理任意复杂的任务，那么最终会有相当大一部分商业活动不可避免地经过它们。一开始你会把每天简单又烦人的任务丢给 agent；等人们习惯了，就会开始把更复杂的任务也扔过去，最终通过这些系统产生的支出会比以前更多。如果你能降低商业和服务的摩擦，结果就是你花得更多。这既为 agent 提供方（比如 Muse 等）创造了大量机会，也带来了全新的机会去搭建 agent 想要对接的那一层（商业、本地、B2B 服务等）。对多个层级来说都是双赢。"
+        ],
+        "externalLinks": [
+          {
+            "label": "推文 1",
+            "url": "https://x.com/levie/status/2102235949430354273"
+          },
+          {
+            "label": "推文 2",
+            "url": "https://x.com/levie/status/2102253246807261579"
+          }
+        ]
+      }
+    },
+    {
+      "externalId": "digest-2026-09-22-swyx",
+      "source": {
+        "id": "follow-builders",
+        "type": "builder",
+        "name": "Swyx · Follow Builders",
+        "url": "https://github.com/zarazhangrui/follow-builders"
+      },
+      "title": "Swyx",
+      "sourceUrl": "https://x.com/swyx/status/2102160025666101658",
+      "summary": "Swyx 宣布 Latent Space 播客新一期已在各平台上线。",
+      "publishedAt": "2026-09-21T22:16:21.000Z",
+      "keywords": [
+        "Latent Space",
+        "播客",
+        "上线"
+      ],
+      "body": {
+        "section": "x",
+        "digestDate": "2026-09-23",
+        "publishedDate": "9/22",
+        "time": "本次更新",
+        "readTime": "3 分钟",
+        "accent": "green",
+        "inRecentWindow": true,
+        "digestFormat": "builders-digest",
+        "paragraphs": [
+          "Swyx 转发了 Latent Space 播客的消息，说新一期节目现在已经在各种优质播客平台上架了，包括邮件、Apple Podcasts 和 YouTube。"
         ],
         "externalLinks": [
           {
             "label": "推文",
-            "url": "https://x.com/nikunj/status/2101742225906655315"
+            "url": "https://x.com/swyx/status/2102160025666101658"
           }
         ]
       }
     },
     {
-      "externalId": "2101779116056088732",
-      "source": {
-        "id": "attentionvc-ai",
-        "type": "daily",
-        "name": "Obie Fernandez · 技术动态 X 热榜",
-        "url": "https://reply-vc-90459984647.us-central1.run.app/v1/articles/leaderboard?window=3d&category=ai&lang=en&limit=30"
-      },
-      "title": "你早已是一个“肉身代理”",
-      "sourceUrl": "https://x.com/obie/status/2101779116056088732",
-      "summary": "作者表示自己对一个未来感到兴奋，但预判这个未来对许多老朋友和他所爱的某些人会非常艰难；让他比以往更成功的技术，也正是带来这种冲击的技术。",
-      "publishedAt": "2026-09-20T21:02:45.000Z",
-      "keywords": [
-        "未来工作",
-        "职业",
-        "技能",
-        "AI冲击",
-        "观点"
-      ],
-      "body": {
-        "section": "x",
-        "digestDate": "2026-09-22",
-        "publishedDate": "9/21",
-        "time": "本次更新",
-        "readTime": "3 分钟",
-        "accent": "green",
-        "inRecentWindow": true,
-        "paragraphs": [
-          "你早已是一个“肉身代理”",
-          "核心观点：作者把“人”比作“肉代理”（meat proxy），暗示在技术（尤其是 AI）驱动的未来中，人可能被当作某种中间层或可替代的代理。他一方面对技术带来的个人成功感到兴奋，另一方面也清醒地预判这种变化会让许多长期朋友和所爱之人面临困境。阅读时需要注意：预览只给出了情绪和判断，并未说明具体技术、行业或“代理”的具体机制，因此不应把任何未提及的细节当作事实。"
-        ]
-      }
-    },
-    {
-      "externalId": "2101745550752428340",
-      "source": {
-        "id": "attentionvc-ai",
-        "type": "daily",
-        "name": "Dhravya Shah · 技术动态 X 热榜",
-        "url": "https://reply-vc-90459984647.us-central1.run.app/v1/articles/leaderboard?window=3d&category=ai&lang=en&limit=30"
-      },
-      "title": "我逆向工程了 Instinct 的记忆机制，以下就是它的工作原理",
-      "sourceUrl": "https://x.com/DhravyaShah/status/2101745550752428340",
-      "summary": "作者称 Instinct 在过去两周席卷市场，是他用过最好的 iMessage 助手之一；他决定像对待每个产品一样，逆向工程 Instinct 的记忆机制，以弄清其运作方式。",
-      "publishedAt": "2026-09-20T18:49:22.000Z",
-      "keywords": [
-        "Instinct",
-        "记忆机制",
-        "逆向工程",
-        "iMessage助手",
-        "产品拆解"
-      ],
-      "body": {
-        "section": "x",
-        "digestDate": "2026-09-22",
-        "publishedDate": "9/21",
-        "time": "本次更新",
-        "readTime": "3 分钟",
-        "accent": "green",
-        "inRecentWindow": true,
-        "paragraphs": [
-          "我逆向工程了 Instinct 的记忆机制。以下就是它的确切工作原理",
-          "核心观点：这是一篇产品拆解/逆向工程类文章，目标对象是 iMessage 助手 Instinct，重点在其“记忆”能力。作者以“像对待每个产品一样”的口吻，说明他会通过逆向工程来理解产品内部机制。阅读时需要注意：预览只表明作者进行了逆向工程并要解释工作原理，但没有给出任何具体实现细节、架构或结论，因此不能把“多代理”“Supermemory”等标签直接写成文章已证实的技术事实。"
-        ]
-      }
-    },
-    {
-      "externalId": "2101993381303820704",
-      "source": {
-        "id": "attentionvc-ai",
-        "type": "daily",
-        "name": "余温 · 技术动态 X 热榜",
-        "url": "https://reply-vc-90459984647.us-central1.run.app/v1/articles/leaderboard?window=3d&category=ai&lang=en&limit=30"
-      },
-      "title": "被 Claude 封了 N 次之后，我终于搞定了全套海外基础设施（出海必备保姆级教程）",
-      "sourceUrl": "https://x.com/gkxspace/status/2101993381303820704",
-      "summary": "作者称自己已被 Claude 封过多次，被迫总结了很多经验，最终用上了 Claude；他将详细讲解整套配置流程，包括时区、IP、代理配置、手机号和支付卡，帮助读者不再被 Claude 封号困扰。",
-      "publishedAt": "2026-09-21T11:14:09.000Z",
-      "keywords": [
-        "Claude",
-        "封号",
-        "海外基础设施",
-        "代理配置",
-        "教程"
-      ],
-      "body": {
-        "section": "x",
-        "digestDate": "2026-09-22",
-        "publishedDate": "9/21",
-        "time": "本次更新",
-        "readTime": "3 分钟",
-        "accent": "green",
-        "inRecentWindow": true,
-        "paragraphs": [
-          "被 Claude 封了 N 次之后，我终于搞定了全套海外基础设施（出海必备保姆级教程）",
-          "核心观点：这是一篇面向需要海外基础设施的用户的实操教程，核心痛点是 Claude 账号被封，解决方案围绕时区、IP、代理、手机号和支付卡等配置展开。阅读时需要注意：预览只列出了教程覆盖的配置项，并未给出具体服务商、参数或操作步骤；标题中的“出海必备”和“保姆级”属于作者自述定位，不应据此推断教程内容一定完整或适用于所有地区/账号情况。"
-        ]
-      }
-    },
-    {
-      "externalId": "2609.22068",
+      "externalId": "2609.24972",
       "source": {
         "id": "huggingface-daily-papers",
         "type": "daily",
         "name": "Hugging Face Daily Papers",
         "url": "https://huggingface.co/papers"
       },
-      "title": "CodeMidas：从代码本身扩展智能体编程强化学习环境",
-      "sourceUrl": "https://huggingface.co/papers/2609.22068",
-      "summary": "通过强化学习训练有能力的编程智能体，需要多样化且具备可靠验证器的任务。开源代码库提供了这类任务的丰富来源，但现有方法通常依赖开发过程产物（如 issue 和 commit），限制了可提取任务的范围。为了更好地扩展强化学习环境，我们提出 CodeMidas——一个智能体流水线，仅以源代码作为任务特定输入，将现有代码库中已实现的功能转化为可执行的强化学习环境。CodeMidas 在环境构建的每个阶段都投入智能体计算：智能体探索已实现的功能以形成行为规格，基于原始代码的执行构建测试，并通过执行检查和重复求解尝试来验证和筛选候选任务。由此得到的数据集包含来自 3,185 个开源代码库的 5,545 个训练任务，覆盖 23 种编程语言和 15 个技术领域。在这些任务上用 GRPO 训练 MiMo-V2.5，在五个不同基准上均取得提升，涵盖问题修复（DeepSWE +11.7%）、整程序构建（ProgramBench +17%）和终端操作（Terminal-Bench v2.1 +8.5%）。消融实验表明，增加高质量训练任务的数量能提升性能。轨迹分析显示，经强化学习训练的智能体表现出更好的行为，例如增加对代码库的探索以及更多样的自我验证。这些结果确立了源代码作为构建强化学习环境的可扩展基础，能够提升编程智能体在多种软件任务上的表现。",
-      "publishedAt": "2026-09-18T00:00:00.000Z",
+      "title": "RRSI：智能体框架的正则化递归自我改进",
+      "sourceUrl": "https://huggingface.co/papers/2609.24972",
+      "summary": "大语言模型智能体的能力在很大程度上由其“框架”放大，即围绕冻结的主干模型的提示词、控制流、工具、记忆和上下文管理。近期方法越来越多地通过迭代地提出并选择智能体框架的组件级修改来自动化这一过程，实际上在智能体系统层面建立了一种递归自我改进（RSI）。然而，这种递归演化可能通过记忆训练任务而出现过拟合，表现为分布内大幅提升，但在分布外基准上缩小甚至消失。我们提出智能体框架的正则化递归自我改进（RRSI），将正则化原则引入框架自我改进，通过约束演化候选的提出与选择来实现。提出器采用时间退火预算，限制单个候选可以捆绑的修改数量，并基于演化历史鼓励探索未走过的轨迹。选择器配备批评器和修剪器：批评器筛选针对特定基准的提案，修剪器则移除过小、代价过高或不再有用的改动。这些约束共同倾向于可复用的智能体机制，而非特定于基准的机制甚至噪声。在涵盖编码、智能体工作空间和工程设计任务的八个基准上，RRSI 在其演化所针对的划分上最多提升 14.1 分，在五个分布外基准上最多提升 4.7 分，同时产生的框架比未正则化演化少用 30% 的策略 token。代码见 https://github.com/google-research/rrsi，项目页面为 https://regularized-rsi.com/。",
+      "publishedAt": "2026-09-21T00:00:00.000Z",
       "keywords": [
-        "强化学习环境",
-        "编程智能体",
-        "源代码",
-        "任务自动生成",
-        "智能体流水线",
-        "基准评测"
+        "智能体框架",
+        "递归自我改进",
+        "正则化",
+        "分布外泛化",
+        "大语言模型智能体",
+        "自动化演化"
       ],
       "body": {
         "section": "papers",
-        "digestDate": "2026-09-22",
-        "publishedDate": "9/18",
+        "digestDate": "2026-09-23",
+        "publishedDate": "9/21",
         "time": "本次更新",
         "readTime": "3 分钟",
         "accent": "violet",
         "inRecentWindow": true,
         "paragraphs": [
-          "通过强化学习训练有能力的编程智能体，需要多样化且具备可靠验证器的任务。开源代码库提供了这类任务的丰富来源，但现有方法通常依赖开发过程产物（如 issue 和 commit），限制了可提取任务的范围。",
-          "为了更好地扩展强化学习环境，我们提出 CodeMidas——一个智能体流水线，仅以源代码作为任务特定输入，将现有代码库中已实现的功能转化为可执行的强化学习环境。CodeMidas 在环境构建的每个阶段都投入智能体计算：智能体探索已实现的功能以形成行为规格，基于原始代码的执行构建测试，并通过执行检查和重复求解尝试来验证和筛选候选任务。",
-          "由此得到的数据集包含来自 3,185 个开源代码库的 5,545 个训练任务，覆盖 23 种编程语言和 15 个技术领域。在这些任务上用 GRPO 训练 MiMo-V2.5，在五个不同基准上均取得提升，涵盖问题修复（DeepSWE +11.7%）、整程序构建（ProgramBench +17%）和终端操作（Terminal-Bench v2.1 +8.5%）。消融实验表明，增加高质量训练任务的数量能提升性能。轨迹分析显示，经强化学习训练的智能体表现出更好的行为，例如增加对代码库的探索以及更多样的自我验证。",
-          "这些结果确立了源代码作为构建强化学习环境的可扩展基础，能够提升编程智能体在多种软件任务上的表现。"
+          "大语言模型智能体的能力在很大程度上由其“框架”放大，即围绕冻结的主干模型的提示词、控制流、工具、记忆和上下文管理。近期方法越来越多地通过迭代地提出并选择智能体框架的组件级修改来自动化这一过程，实际上在智能体系统层面建立了一种递归自我改进（RSI）。",
+          "然而，这种递归演化可能通过记忆训练任务而出现过拟合，表现为分布内大幅提升，但在分布外基准上缩小甚至消失。我们提出智能体框架的正则化递归自我改进（RRSI），将正则化原则引入框架自我改进，通过约束演化候选的提出与选择来实现。",
+          "提出器采用时间退火预算，限制单个候选可以捆绑的修改数量，并基于演化历史鼓励探索未走过的轨迹。选择器配备批评器和修剪器：批评器筛选针对特定基准的提案，修剪器则移除过小、代价过高或不再有用的改动。这些约束共同倾向于可复用的智能体机制，而非特定于基准的机制甚至噪声。",
+          "在涵盖编码、智能体工作空间和工程设计任务的八个基准上，RRSI 在其演化所针对的划分上最多提升 14.1 分，在五个分布外基准上最多提升 4.7 分，同时产生的框架比未正则化演化少用 30% 的策略 token。代码见 https://github.com/google-research/rrsi，项目页面为 https://regularized-rsi.com/。"
         ],
-        "utility": "这项研究说明，AI 编程助手的训练可以不再依赖人工整理的 issue 或提交记录，而是直接从现成开源代码中自动生成练习任务。对普通人来说，这意味着未来编程助手可能更擅长修复 bug、从零搭建程序和在终端里完成操作，从而影响日常开发效率和软件质量；但它仍是研究阶段的结果，实际产品中的表现还需进一步验证。",
+        "utility": "对普通人来说，这项研究提示：让 AI 智能体自动改进自身配置时，容易只记住特定任务而换个场景就失灵；加入“正则化”约束后，改进更可能变成可复用的通用能力，而不是针对某个测试的临时技巧。这可能影响你未来使用 AI 编程助手、自动化办公或工程工具时的稳定性和跨场景表现，也提醒人们不要只看单一测试上的分数提升。",
         "externalLinks": [
           {
             "label": "查看 Hugging Face 论文页",
-            "url": "https://huggingface.co/papers/2609.22068"
+            "url": "https://huggingface.co/papers/2609.24972"
           },
           {
             "label": "打开 arXiv 原文",
-            "url": "https://arxiv.org/abs/2609.22068"
+            "url": "https://arxiv.org/abs/2609.24972"
           }
         ]
       }
     },
     {
-      "externalId": "2609.05571",
+      "externalId": "2609.24984",
       "source": {
         "id": "huggingface-daily-papers",
         "type": "daily",
         "name": "Hugging Face Daily Papers",
         "url": "https://huggingface.co/papers"
       },
-      "title": "面向智能体智能的大规模代码驱动技能合成",
-      "sourceUrl": "https://huggingface.co/papers/2609.05571",
-      "summary": "可复用的技能为智能体提供可迁移的程序性知识，因此可扩展地获取技能对于让智能体超越以往经验至关重要。现有方法存在两个局限：基于轨迹的合成需要与特定环境交互，而从文档中提取的技能可能缺乏可执行证据和验证。源代码提供了一条互补路径：它不需要智能体具备先验经验，却能为抽象提供可执行的证据。我们提出 Code2Skill，一个全自动流水线，将选定的代码单元转化为以实现为锚定的记录，涵盖原子操作、复合工作流和重复出现的模式，然后通过“源主体盲重建”和“源感知比较”对每条记录进行验证。",
-      "publishedAt": "2026-09-04T00:00:00.000Z",
+      "title": "WorldCrafter：具有隐式三维感知记忆的一致视频世界模型",
+      "sourceUrl": "https://huggingface.co/papers/2609.24984",
+      "summary": "视频世界模型支持对动态环境进行交互式探索，但在长时间跨度与不同视角下难以保持对先前观测的一致性。为此，我们提出 WorldCrafter，一种学习可相机查询的隐式三维感知记忆的视频世界模型。其核心思想是让所请求的视角决定多视角证据如何被压缩进视频生成器有限的 token 预算中。记忆编码器与姿态条件读出模块与视频生成器联合训练，在去噪之前将历史观测整合为一组固定的目标视角特定 token，而无需显式的基于深度的对应关系。通过将该记忆与近期时间上下文以及少步蒸馏相结合，WorldCrafter 能够从单张输入图像或文本提示出发，实现流式场景探索。在静态与动态场景上的实验表明，在分钟级探索过程中，该方法在长时间跨度一致性与相机控制精度上取得显著提升，同时保持视觉质量。",
+      "publishedAt": "2026-09-21T00:00:00.000Z",
       "keywords": [
-        "智能体技能",
-        "代码合成",
-        "程序性知识",
-        "技能库",
-        "可迁移学习",
-        "代码仓库"
+        "视频世界模型",
+        "隐式三维感知记忆",
+        "长时间一致性",
+        "相机控制",
+        "流式场景探索",
+        "少步蒸馏"
       ],
       "body": {
         "section": "papers",
-        "digestDate": "2026-09-22",
-        "publishedDate": "9/4",
+        "digestDate": "2026-09-23",
+        "publishedDate": "9/21",
         "time": "本次更新",
         "readTime": "3 分钟",
         "accent": "violet",
         "inRecentWindow": true,
         "paragraphs": [
-          "可复用的技能为智能体提供可迁移的程序性知识，因此可扩展地获取技能对于让智能体超越以往经验至关重要。现有方法存在两个局限：基于轨迹的合成需要与特定环境交互，而从文档中提取的技能可能缺乏可执行证据和验证。源代码提供了一条互补路径：它不需要智能体具备先验经验，却能为抽象提供可执行的证据。",
-          "我们提出 Code2Skill，一个全自动流水线，将选定的代码单元转化为以实现为锚定的记录，涵盖原子操作、复合工作流和重复出现的模式，然后通过“源主体盲重建”和“源感知比较”对每条记录进行验证。将其应用于 19,769 个热门且积极维护的 GitHub 仓库后，Code2Skill 生成了 CodeSkillBank，这是一个包含 1,006,822 条被接受记录的有依据技能库，带有工作流、边界、来源和源证据元数据。",
-          "在覆盖九种模型设置和八个基准的 72 项协议匹配评估中，使用检索到的 CodeSkillBank 技能增强的模型平均比匹配基线提升 11.7%，并在 57 个案例中优于基线。在统一的下游接口下，Code2Skill 在全部七个共享基准上也优于由轨迹衍生的技能库，表明仓库衍生的技能可以在智能体积累足够交互经验之前提供有用的程序性知识。从经过测试的 AI 生成代码中合成的技能通过率为 93.50%，而人类编写代码为 93.00%，这提供了初步证据，表明该流水线可以随着 AI 生成软件数量的增长而扩展。",
-          "总体而言，Code2Skill 将嵌入在代码仓库中的程序性知识转化为有依据、可验证且可迁移的智能体技能。"
+          "视频世界模型支持对动态环境进行交互式探索，但在长时间跨度与不同视角下难以保持对先前观测的一致性。为此，我们提出 WorldCrafter，一种学习可相机查询的隐式三维感知记忆的视频世界模型。",
+          "其核心思想是让所请求的视角决定多视角证据如何被压缩进视频生成器有限的 token 预算中。记忆编码器与姿态条件读出模块与视频生成器联合训练，在去噪之前将历史观测整合为一组固定的目标视角特定 token，而无需显式的基于深度的对应关系。",
+          "通过将该记忆与近期时间上下文以及少步蒸馏相结合，WorldCrafter 能够从单张输入图像或文本提示出发，实现流式场景探索。",
+          "在静态与动态场景上的实验表明，在分钟级探索过程中，该方法在长时间跨度一致性与相机控制精度上取得显著提升，同时保持视觉质量。"
         ],
-        "utility": "这项研究提示，未来 AI 智能体可能不再只靠反复试错或阅读文档来学习做事方法，而是直接从公开代码仓库中提炼可复用的操作技能。对普通人来说，这意味着 AI 助手或自动化工具可能更快掌握新任务、减少对特定环境的依赖；如果你从事软件开发、自动化或 AI 应用相关工作，可以关注这类“从代码中学习技能”的思路如何影响工具选型和技能复用方式。不过，这些结论来自论文中的特定评估，实际效果仍取决于具体任务和系统实现。",
+        "utility": "这项研究让 AI 生成的视频在长时间探索中更不容易“忘记”之前看到的内容，并且能更准确地响应相机视角的变化。对普通人来说，未来可能意味着更流畅、更逼真的交互式虚拟场景体验，比如在游戏、虚拟旅游或影视预览中，视角切换时画面更稳定、更符合直觉。不过目前仍属研究阶段，实际应用效果还需进一步验证。",
         "externalLinks": [
           {
             "label": "查看 Hugging Face 论文页",
-            "url": "https://huggingface.co/papers/2609.05571"
+            "url": "https://huggingface.co/papers/2609.24984"
           },
           {
             "label": "打开 arXiv 原文",
-            "url": "https://arxiv.org/abs/2609.05571"
+            "url": "https://arxiv.org/abs/2609.24984"
           }
         ]
       }
     },
     {
-      "externalId": "BuilderIO/agent-native",
+      "externalId": "2609.25001",
       "source": {
-        "id": "github-trending",
+        "id": "huggingface-daily-papers",
         "type": "daily",
-        "name": "GitHub Trending",
-        "url": "https://github.com/trending?since=daily"
+        "name": "Hugging Face Daily Papers",
+        "url": "https://huggingface.co/papers"
       },
-      "title": "Agent-Native：让 AI 智能体与界面协同工作的应用框架",
-      "sourceUrl": "https://github.com/BuilderIO/agent-native",
-      "summary": "这是一个开源框架，帮助开发者把 AI 智能体的自动化能力和一个可视化操作界面结合起来，让智能体能干活、人也能看得见、改得动。",
-      "publishedAt": "2026-09-21T21:02:29.342Z",
+      "title": "GameHorizon Suite：游戏玩法中的多时间跨度数据与评估",
+      "sourceUrl": "https://huggingface.co/papers/2609.25001",
+      "summary": "现代电子游戏为AI模型提供了一个可测量的测试平台，它综合了视觉理解、指令分解、目标规划以及在多个时间跨度上精确控制动作的能力。然而，现有的数据集和基准测试要么覆盖的游戏范围狭窄，要么缺乏语言指令，要么依赖高方差的在线运行结果。为了解决这些挑战，我们推出了GameHorizon，这是一个统一的数据与评估套件，用于衡量不同模型家族在不同时间跨度上的游戏玩法能力。GameHorizon Suite包含三个组成部分。第一，GameHorizon-Annotator是一个可扩展且自动化的多时间跨度指令标注流水线。第二，利用该流水线，我们构建了GameHorizon-Data，这是首个大规模AAA游戏玩法数据集，包含时间对齐的视频、玩家动作和多时间跨度指令。它包含来自21款游戏的5000小时录像，由100名人类专家玩家收集。第三，我们构建了GameHorizon-Bench，具有可复现的离线测试和逐步在线测试。离线赛道使用数千个标准化问题组织成三个主要任务和一系列诊断变体，实现可复现评估；在线赛道则测试离线分数是否反映实际游戏玩法能力，并将失败定位到长时程游戏玩法中的具体步骤。基于我们的GameHorizon Suite，我们通过超过一百万次模型调用评估了47个模型，揭示了任务难度的有意义的层次结构和模型能力之间的显著差异。我们的工作可以为评估跨时间跨度和模型家族的游戏玩法能力提供一个标准化标尺。我们将发布数据集、标注器和基准测试，以促进未来研究。",
+      "publishedAt": "2026-09-21T00:00:00.000Z",
       "keywords": [
-        "AI智能体",
-        "应用框架",
-        "TypeScript",
-        "开源",
-        "可视化界面",
-        "自动化",
-        "权限管理"
+        "游戏AI",
+        "多时间跨度",
+        "数据集",
+        "基准测试",
+        "模型评估",
+        "指令标注"
       ],
       "body": {
-        "section": "github",
-        "digestDate": "2026-09-22",
-        "publishedDate": "9/22",
+        "section": "papers",
+        "digestDate": "2026-09-23",
+        "publishedDate": "9/21",
         "time": "本次更新",
         "readTime": "3 分钟",
-        "accent": "blue",
+        "accent": "violet",
         "inRecentWindow": true,
         "paragraphs": [
-          "Agent-Native 是一个用 TypeScript 编写的开源框架，目标是解决一个常见问题：AI 智能体虽然能自动完成很多任务，但用户往往只能通过一个聊天框和它互动，看不到它到底做了什么、用了什么工具、结果对不对。这个框架让每个能力只定义一次，智能体把它当工具调用，界面也从代码里调用同一个能力，两边共用同一套校验、权限和实现逻辑。",
-          "它的核心思路是“共享”：共享动作、共享数据、共享应用状态。智能体做的工作会出现在界面里，界面里的操作也能被智能体感知，比如当前页面、选中的记录或正在查看的视图。智能体不是去模拟点击界面，而是走和界面相同的动作层。框架还内置了智能体对话、身份认证与权限、技能与记忆、定时或事件触发的自动化、智能体团队协作，以及 PostgreSQL 后端（本地开发用 PGlite）。",
-          "它适合想构建“有界面”的智能体应用的产品团队和开发者，尤其是知识工作类场景，比如需要让人检查、编辑、批准、分享智能体产出的工作。项目提供了 Clips（会议与屏幕记录理解）、Design 等开源示例应用，可以拿来直接用，也可以作为自己项目的起点。",
-          "使用门槛方面，它面向开发者，需要会写 TypeScript 和 React，并自行准备大模型、SQL 数据库和基础设施。项目提供命令行快速创建模板，文档和入门指南齐全，但非程序员无法直接上手使用，更适合有一定开发能力、希望把智能体能力产品化的团队。"
+          "现代电子游戏为AI模型提供了一个可测量的测试平台，它综合了视觉理解、指令分解、目标规划以及在多个时间跨度上精确控制动作的能力。然而，现有的数据集和基准测试要么覆盖的游戏范围狭窄，要么缺乏语言指令，要么依赖高方差的在线运行结果。为了解决这些挑战，我们推出了GameHorizon，这是一个统一的数据与评估套件，用于衡量不同模型家族在不同时间跨度上的游戏玩法能力。",
+          "GameHorizon Suite包含三个组成部分。第一，GameHorizon-Annotator是一个可扩展且自动化的多时间跨度指令标注流水线。第二，利用该流水线，我们构建了GameHorizon-Data，这是首个大规模AAA游戏玩法数据集，包含时间对齐的视频、玩家动作和多时间跨度指令。它包含来自21款游戏的5000小时录像，由100名人类专家玩家收集。第三，我们构建了GameHorizon-Bench，具有可复现的离线测试和逐步在线测试。离线赛道使用数千个标准化问题组织成三个主要任务和一系列诊断变体，实现可复现评估；在线赛道则测试离线分数是否反映实际游戏玩法能力，并将失败定位到长时程游戏玩法中的具体步骤。",
+          "基于我们的GameHorizon Suite，我们通过超过一百万次模型调用评估了47个模型，揭示了任务难度的有意义的层次结构和模型能力之间的显著差异。我们的工作可以为评估跨时间跨度和模型家族的游戏玩法能力提供一个标准化标尺。我们将发布数据集、标注器和基准测试，以促进未来研究。"
         ],
-        "facts": [
-          {
-            "label": "主要语言",
-            "value": "TypeScript"
-          },
-          {
-            "label": "Stars",
-            "value": "5,819"
-          },
-          {
-            "label": "今日新增 Stars",
-            "value": "+607"
-          },
-          {
-            "label": "Forks",
-            "value": "533"
-          },
-          {
-            "label": "许可证",
-            "value": "未标注"
-          },
-          {
-            "label": "最近更新",
-            "value": "2026-09-22"
-          }
-        ],
+        "utility": "这项研究提供了一个标准化的游戏AI评估套件，普通人可以了解AI在理解指令、规划目标和执行动作方面的能力差异。它可能影响未来游戏AI的开发方向，以及人们对AI在复杂任务中表现的判断，但具体结论仍需进一步验证。",
         "externalLinks": [
           {
-            "label": "阅读项目 README",
-            "url": "https://github.com/BuilderIO/agent-native#readme"
+            "label": "查看 Hugging Face 论文页",
+            "url": "https://huggingface.co/papers/2609.25001"
           },
           {
-            "label": "打开项目网站",
-            "url": "https://www.agent-native.com"
-          },
-          {
-            "label": "查看 Releases",
-            "url": "https://github.com/BuilderIO/agent-native/releases"
-          }
-        ]
-      }
-    },
-    {
-      "externalId": "trycua/cua",
-      "source": {
-        "id": "github-trending",
-        "type": "daily",
-        "name": "GitHub Trending",
-        "url": "https://github.com/trending?since=daily"
-      },
-      "title": "Cua：给 AI 智能体一台可以操作的电脑",
-      "sourceUrl": "https://github.com/trycua/cua",
-      "summary": "这是一个开源项目，提供桌面自动化、云端隔离电脑、本地 macOS 虚拟机和评测基准，让 AI 智能体能像人一样操作软件完成任务。",
-      "publishedAt": "2026-09-21T21:02:29.342Z",
-      "keywords": [
-        "电脑操作智能体",
-        "桌面自动化",
-        "云端桌面",
-        "虚拟机",
-        "评测基准",
-        "开源",
-        "AI"
-      ],
-      "body": {
-        "section": "github",
-        "digestDate": "2026-09-22",
-        "publishedDate": "9/22",
-        "time": "本次更新",
-        "readTime": "3 分钟",
-        "accent": "blue",
-        "inRecentWindow": true,
-        "paragraphs": [
-          "Cua 要解决的问题是：让 AI 智能体真正拥有一台“可以用的电脑”。它提供开源的桌面自动化能力、隔离的云端桌面、本地 macOS 虚拟机，以及专门用于评估电脑操作智能体的基准测试。这样智能体不仅能读写文字，还能打开软件、点击按钮、填写表格、截图核对结果。",
-          "项目包含几个主要部分。Cua Fleets 可以在云端批量准备隔离的 Linux 桌面，你的程序从池子里领取一台，然后运行命令、截图、操作应用；Cua Driver 能在 macOS、Windows 和 Linux 上检查和操作应用程序；Lume 让 Apple Silicon 电脑上运行本地 macOS 和 Linux 虚拟机；Cua Bench 用来创建任务、评测智能体并导出操作轨迹；CUA-S1 则是一系列专门为电脑操作决策设计的小型专用模型。",
-          "它适合研究电脑操作智能体的开发者、需要大规模评测或生成训练数据的团队，以及想把 AI 自动化接入真实软件流程的企业。你可以自带智能体和模型，Cua 负责提供电脑和自动化工具，官方也提供在线试用入口。",
-          "使用门槛偏高：需要一定的开发能力，涉及命令行、云端资源申请和虚拟机操作，部分云端桌面服务可能产生费用。对于不写代码的普通用户，目前还不能直接拿来日常使用，更适合技术团队做智能体研发、评测和数据生成。"
-        ],
-        "facts": [
-          {
-            "label": "主要语言",
-            "value": "HTML"
-          },
-          {
-            "label": "Stars",
-            "value": "25,647"
-          },
-          {
-            "label": "今日新增 Stars",
-            "value": "+609"
-          },
-          {
-            "label": "Forks",
-            "value": "1,766"
-          },
-          {
-            "label": "许可证",
-            "value": "MIT"
-          },
-          {
-            "label": "最近更新",
-            "value": "2026-09-22"
-          }
-        ],
-        "externalLinks": [
-          {
-            "label": "阅读项目 README",
-            "url": "https://github.com/trycua/cua#readme"
-          },
-          {
-            "label": "打开项目网站",
-            "url": "https://cua.ai"
-          },
-          {
-            "label": "查看 Releases",
-            "url": "https://github.com/trycua/cua/releases"
-          }
-        ]
-      }
-    },
-    {
-      "externalId": "Open-Dev-Society/OpenStock",
-      "source": {
-        "id": "github-trending",
-        "type": "daily",
-        "name": "GitHub Trending",
-        "url": "https://github.com/trending?since=daily"
-      },
-      "title": "OpenStock：免费开源的实时股票行情与公司洞察平台",
-      "sourceUrl": "https://github.com/Open-Dev-Society/OpenStock",
-      "summary": "OpenStock 是一个免费开源的股票市场追踪工具，可以查看实时价格、设置个性化提醒并浏览公司详细信息，替代昂贵的商业行情平台。",
-      "publishedAt": "2026-09-21T21:02:29.342Z",
-      "keywords": [
-        "股票行情",
-        "开源免费",
-        "实时价格",
-        "股价提醒",
-        "公司洞察",
-        "投资工具"
-      ],
-      "body": {
-        "section": "github",
-        "digestDate": "2026-09-22",
-        "publishedDate": "9/22",
-        "time": "本次更新",
-        "readTime": "3 分钟",
-        "accent": "blue",
-        "inRecentWindow": true,
-        "paragraphs": [
-          "OpenStock 是一个面向普通投资者的开源股票行情平台，定位是昂贵商业行情软件的免费替代品。它让你在一个网页界面里追踪实时股价、为关注的股票设置个性化提醒，并查看公司的详细资料，所有功能都公开构建、永久免费。",
-          "核心能力包括实时价格追踪、可自定义的股价提醒，以及公司层面的深度信息浏览。项目由社区共同建设，不是券商平台，行情数据可能因数据提供方的规则和你的配置而有所延迟，这一点在使用前需要了解。",
-          "它适合关注股市但不想为行情软件付费的个人投资者、学习投资的学生，以及希望自建或研究行情工具的技术爱好者。由于是开源项目，任何人都可以查看代码、提出改进或自行部署。",
-          "使用门槛方面，项目提供了在线演示地址，普通用户可以直接打开网页使用；如果想自行部署或修改，则需要一定的技术能力，并且需要遵守 AGPL-3.0 许可证的要求。"
-        ],
-        "facts": [
-          {
-            "label": "主要语言",
-            "value": "TypeScript"
-          },
-          {
-            "label": "Stars",
-            "value": "17,603"
-          },
-          {
-            "label": "今日新增 Stars",
-            "value": "+843"
-          },
-          {
-            "label": "Forks",
-            "value": "2,184"
-          },
-          {
-            "label": "许可证",
-            "value": "AGPL-3.0"
-          },
-          {
-            "label": "最近更新",
-            "value": "2026-09-22"
-          }
-        ],
-        "externalLinks": [
-          {
-            "label": "阅读项目 README",
-            "url": "https://github.com/Open-Dev-Society/OpenStock#readme"
-          },
-          {
-            "label": "打开项目网站",
-            "url": "https://openstock-ods.vercel.app"
-          },
-          {
-            "label": "查看 Releases",
-            "url": "https://github.com/Open-Dev-Society/OpenStock/releases"
-          }
-        ]
-      }
-    },
-    {
-      "externalId": "akitaonrails/ai-memory",
-      "source": {
-        "id": "github-trending",
-        "type": "daily",
-        "name": "GitHub Trending",
-        "url": "https://github.com/trending?since=daily"
-      },
-      "title": "ai-memory：让 AI 编程助手拥有跨工具长期记忆",
-      "sourceUrl": "https://github.com/akitaonrails/ai-memory",
-      "summary": "ai-memory 为 AI 编程助手提供长期记忆，让你在不同 AI 工具和不同电脑之间无缝交接任务，无需反复解释项目背景。",
-      "publishedAt": "2026-09-21T21:02:29.342Z",
-      "keywords": [
-        "AI编程助手",
-        "长期记忆",
-        "跨工具交接",
-        "开源工具",
-        "团队协作",
-        "Markdown存储"
-      ],
-      "body": {
-        "section": "github",
-        "digestDate": "2026-09-22",
-        "publishedDate": "9/22",
-        "time": "本次更新",
-        "readTime": "3 分钟",
-        "accent": "blue",
-        "inRecentWindow": true,
-        "paragraphs": [
-          "ai-memory 解决的是 AI 编程助手“记不住事”的问题。你可以在一个任务中途退出 Claude Code，然后在同一目录下打开 OpenAI Codex，下一个助手就能接着之前的工作继续，不用重新解释项目架构、失败过的尝试和还没解决的问题。",
-          "它的核心能力是跨助手、跨机器的记忆共享。它支持二十多种 AI 编程工具，包括 Claude Code、Codex、Cursor、Gemini CLI 等，所有工具共享同一份记忆。记忆存储在你自己的服务器上，因此你在台式机上中断的项目，可以在笔记本上继续。团队使用时，大家指向同一台服务器，一个人的会话经验可以被所有人的助手检索到。",
-          "记忆的原始内容以普通的 Markdown 文件形式保存在一个 Git 仓库中，你可以用 grep 搜索、用 Obsidian 打开、手动编辑或同步备份，数据库只是可随时重建的索引。它通过生命周期钩子静默记录提示词、工具调用和会话边界，默认路径不需要调用任何大模型 API，也不需要 API 密钥。",
-          "适用人群是经常使用多种 AI 编程工具、需要在不同设备或团队成员之间交接工作的开发者。使用门槛中等：它支持 Linux、macOS 和 WSL2 下的 Windows，原生 Windows 尚属实验性；需要自行运行一个服务器，但项目提供单一可执行文件，并内置多用户认证、操作审计日志和明确的删除命令。"
-        ],
-        "facts": [
-          {
-            "label": "主要语言",
-            "value": "Rust"
-          },
-          {
-            "label": "Stars",
-            "value": "7,614"
-          },
-          {
-            "label": "今日新增 Stars",
-            "value": "+217"
-          },
-          {
-            "label": "Forks",
-            "value": "518"
-          },
-          {
-            "label": "许可证",
-            "value": "MIT"
-          },
-          {
-            "label": "最近更新",
-            "value": "2026-09-22"
-          }
-        ],
-        "externalLinks": [
-          {
-            "label": "阅读项目 README",
-            "url": "https://github.com/akitaonrails/ai-memory#readme"
-          },
-          {
-            "label": "查看 Releases",
-            "url": "https://github.com/akitaonrails/ai-memory/releases"
-          }
-        ]
-      }
-    },
-    {
-      "externalId": "coder/coder",
-      "source": {
-        "id": "github-trending",
-        "type": "daily",
-        "name": "GitHub Trending",
-        "url": "https://github.com/trending?since=daily"
-      },
-      "title": "Coder：自托管的云端开发环境与AI编程代理平台",
-      "sourceUrl": "https://github.com/coder/coder",
-      "summary": "Coder 是一个可部署在自己服务器上的平台，用配置文件定义开发环境，让开发者几秒内获得统一的工作空间，并能把编码任务交给运行在自有基础设施上的 AI 代理。",
-      "publishedAt": "2026-09-21T21:02:29.342Z",
-      "keywords": [
-        "自托管开发环境",
-        "云端工作空间",
-        "Terraform",
-        "AI编程代理",
-        "资源自动关闭",
-        "团队协作"
-      ],
-      "body": {
-        "section": "github",
-        "digestDate": "2026-09-22",
-        "publishedDate": "9/22",
-        "time": "本次更新",
-        "readTime": "3 分钟",
-        "accent": "blue",
-        "inRecentWindow": true,
-        "paragraphs": [
-          "Coder 解决的是开发环境搭建慢、配置不统一的问题。它把每个开发者的工作空间（包含编辑器、依赖和配置）用 Terraform 模板描述出来，可以运行在 EC2 虚拟机、Kubernetes Pod、Docker 容器等基础设施上，然后通过安全的 Wireguard 隧道连接给使用者。新成员加入时不再需要花几天装环境，几秒钟就能拿到一个可用的开发工作空间。",
-          "它的另一个核心能力是成本与资源管理：闲置的工作空间会自动关闭，避免云资源一直开着产生浪费。对于团队管理员来说，这意味着可以在自己的服务器或云账号里统一管理所有开发环境，而不是依赖外部托管服务。",
-          "项目还提供 Coder Agents，一个运行在你自己基础设施上的 AI 编程代理。它支持接入 Anthropic、OpenAI、Google、Bedrock 或自托管模型，AI 的调用凭证不会放进工作空间里，每次操作都绑定用户身份，方便做集中化的模型治理、成本追踪和审计日志。",
-          "适合需要统一管理开发环境的中大型技术团队、有合规或数据安全要求的企业，以及想在自己服务器上运行 AI 编程助手的组织。使用门槛中等偏高：需要有人会写或维护 Terraform 模板，生产部署还需要准备 PostgreSQL 数据库和外部访问地址，但官方提供安装脚本和文档，Linux 和 macOS 上一条命令即可试用。"
-        ],
-        "facts": [
-          {
-            "label": "主要语言",
-            "value": "Go"
-          },
-          {
-            "label": "Stars",
-            "value": "16,384"
-          },
-          {
-            "label": "今日新增 Stars",
-            "value": "+461"
-          },
-          {
-            "label": "Forks",
-            "value": "1,562"
-          },
-          {
-            "label": "许可证",
-            "value": "AGPL-3.0"
-          },
-          {
-            "label": "最近更新",
-            "value": "2026-09-22"
-          }
-        ],
-        "externalLinks": [
-          {
-            "label": "阅读项目 README",
-            "url": "https://github.com/coder/coder#readme"
-          },
-          {
-            "label": "打开项目网站",
-            "url": "https://coder.com"
-          },
-          {
-            "label": "查看 Releases",
-            "url": "https://github.com/coder/coder/releases"
+            "label": "打开 arXiv 原文",
+            "url": "https://arxiv.org/abs/2609.25001"
           }
         ]
       }
@@ -2982,31 +2608,32 @@
         "name": "GitHub Trending",
         "url": "https://github.com/trending?since=daily"
       },
-      "title": "Claude 金融服务代理：投行、研究与财富管理的工作流助手",
+      "title": "Claude 金融服务智能体工具箱",
       "sourceUrl": "https://github.com/anthropics/financial-services",
-      "summary": "这是 Anthropic 为金融服务行业提供的参考代理、技能和数据连接器集合，覆盖投行、股票研究、私募和财富管理等场景，帮助专业人员自动起草模型、备忘录和研究笔记。",
-      "publishedAt": "2026-09-21T21:02:29.342Z",
+      "summary": "一套面向投行、股票研究、私募股权和财富管理场景的现成 AI 工作流智能体与技能包，可安装到 Claude 中使用，帮助金融从业者快速起草模型、备忘录和研究笔记。",
+      "publishedAt": "2026-09-22T20:11:17.166Z",
       "keywords": [
-        "金融服务",
-        "Claude代理",
-        "投资银行",
+        "金融智能体",
+        "投行工具",
         "股票研究",
-        "财务建模",
-        "合规审查"
+        "私募股权",
+        "财富管理",
+        "Claude插件",
+        "财务自动化"
       ],
       "body": {
         "section": "github",
-        "digestDate": "2026-09-22",
-        "publishedDate": "9/22",
+        "digestDate": "2026-09-23",
+        "publishedDate": "9/23",
         "time": "本次更新",
         "readTime": "3 分钟",
         "accent": "blue",
         "inRecentWindow": true,
         "paragraphs": [
-          "这个项目面向金融服务行业最常见的几类工作流：投资银行、股票研究、私募股权和财富管理。它提供了一批命名清晰的端到端代理，例如 Pitch Agent 负责从可比公司分析、先例交易到 LBO 模型再到品牌化路演材料的全流程；Market Researcher 从行业或主题出发生成行业概览、竞争格局和同行比较；Model Builder 可以在 Excel 里搭建 DCF、LBO、三表模型和可比公司分析。",
-          "除了完整代理，项目还按金融垂直领域打包了底层技能、斜杠命令和数据连接器。如果你只需要某个具体功能，比如 /comps、/dcf、/earnings，可以单独安装这些垂直插件，而不必引入整个代理。项目还包含合作伙伴（如 LSEG、S&P Global）构建的插件，以及用于微软 365 加载项的管理工具。",
-          "这些代理的输出定位是“分析师工作底稿”，包括模型、备忘录、研究笔记和对账结果，供合格专业人员审阅。项目明确声明不构成投资、法律、税务或会计建议，代理不会做出投资推荐、执行交易、承担风险、记账或批准开户，所有输出都需要人工签字确认。",
-          "使用方式有两种：作为 Claude Cowork 插件安装，或通过 Claude Managed Agents API 部署在你自己的工作流引擎后面，两者共享同一套系统提示词和技能。适合投行、研究、私募和财富管理领域的从业者或技术团队，但需要具备 Claude 相关产品的使用经验，并且使用者需自行确保输出符合所在机构的合规要求。"
+          "这是一个面向金融行业的 AI 工作流集合，把投资银行、股票研究、私募股权和财富管理中最常见的工作任务，做成了可以直接安装使用的智能体（Agent）和技能包。它同时提供两种使用方式：既可以作为 Claude Cowork 的插件安装，也可以通过 Claude 托管智能体接口部署到企业自己的系统中，系统提示和技能完全一致，由使用者决定在哪里运行。",
+          "仓库中内置了多个按职能命名的智能体，例如负责可比公司分析、先例交易和杠杆收购并生成路演材料的 Pitch Agent，会前准备简报的 Meeting Prep Agent，做行业概览和竞争格局的 Market Researcher，处理财报电话会和文件并更新模型的 Earnings Reviewer，以及在 Excel 中搭建 DCF、LBO、三表模型的 Model Builder。基金行政和财务运营方向还有估值复核、总账对账、月末结账、LP 对账单审计和 KYC 筛查等智能体。此外还提供按行业垂直划分的技能包和数据连接器，以及 LSEG、S&P Global 等合作方构建的插件。",
+          "这些工具适合投行分析师、研究员、私募和财富管理从业者，以及基金行政、财务运营和合规团队使用，用来把重复性的案头工作自动化，把时间留给判断和沟通。需要注意的是，项目明确声明所有输出都不构成投资、法律、税务或会计建议，智能体只负责起草分析工作成果，不会做出投资推荐、执行交易、绑定风险、记账或批准开户，每一份结果都需要具备资质的专业人员复核签字，使用者仍需对输出内容和所在机构的合规要求负责。",
+          "使用门槛方面，普通用户可以在 Claude Cowork 的设置中通过粘贴仓库地址或上传压缩包来安装插件；有一定技术能力的团队则可以通过命令行添加插件市场并安装所需智能体和技能包，或参考托管智能体手册进行部署。项目采用 Apache-2.0 开源许可，安装本身不复杂，但要真正用于实际业务，需要结合本机构的流程调整提示词、技能和连接器，并建立人工复核机制。"
         ],
         "facts": [
           {
@@ -3015,15 +2642,15 @@
           },
           {
             "label": "Stars",
-            "value": "35,767"
+            "value": "36,251"
           },
           {
             "label": "今日新增 Stars",
-            "value": "+425"
+            "value": "+436"
           },
           {
             "label": "Forks",
-            "value": "5,265"
+            "value": "5,307"
           },
           {
             "label": "许可证",
@@ -3031,7 +2658,7 @@
           },
           {
             "label": "最近更新",
-            "value": "2026-09-19"
+            "value": "2026-09-22"
           }
         ],
         "externalLinks": [
@@ -3047,77 +2674,303 @@
       }
     },
     {
-      "externalId": "cloudflare/quiche",
+      "externalId": "agent-substrate/substrate",
       "source": {
         "id": "github-trending",
         "type": "daily",
         "name": "GitHub Trending",
         "url": "https://github.com/trending?since=daily"
       },
-      "title": "quiche：让网站更快更稳的 QUIC 与 HTTP/3 底层引擎",
-      "sourceUrl": "https://github.com/cloudflare/quiche",
-      "summary": "quiche 是 Cloudflare 开源的 QUIC 传输协议与 HTTP/3 实现，为开发者提供构建更快、更安全网络连接的基础组件。",
-      "publishedAt": "2026-09-21T21:02:29.342Z",
+      "title": "Agent Substrate 智能体运行底座",
+      "sourceUrl": "https://github.com/agent-substrate/substrate",
+      "summary": "一个面向大规模 AI 智能体的安全执行运行时，能在少量物理资源上高密度运行海量沙箱，支持秒级挂起与恢复，适合需要规模化部署智能体的团队。",
+      "publishedAt": "2026-09-22T20:11:17.166Z",
       "keywords": [
-        "QUIC协议",
-        "HTTP/3",
-        "网络传输",
-        "Rust开发库",
-        "Cloudflare",
-        "低层API"
+        "智能体运行时",
+        "沙箱隔离",
+        "高密度部署",
+        "挂起恢复",
+        "Kubernetes",
+        "零信任安全",
+        "基础设施"
       ],
       "body": {
         "section": "github",
-        "digestDate": "2026-09-22",
-        "publishedDate": "9/22",
+        "digestDate": "2026-09-23",
+        "publishedDate": "9/23",
         "time": "本次更新",
         "readTime": "3 分钟",
         "accent": "blue",
         "inRecentWindow": true,
         "paragraphs": [
-          "quiche 是一个用 Rust 语言编写的网络协议实现，主要处理 QUIC 传输协议和 HTTP/3。QUIC 是新一代互联网传输标准，它让网页加载、视频播放等网络通信更快、更稳定，尤其在网络切换或信号不佳时表现更好。quiche 把协议细节封装成可复用的代码库，让开发者不必从零实现这些复杂规则。",
-          "它的核心能力是提供低层 API 来处理 QUIC 数据包和管理连接状态，应用程序只需负责网络读写和定时器事件循环。quiche 被 Cloudflare 边缘网络用于支撑 HTTP/3 服务，也被 Android 的 DNS 解析器用来实现基于 HTTP/3 的 DNS 查询，还可以集成到 curl 中让命令行工具支持 HTTP/3。",
-          "这个项目主要面向网络协议开发者、基础设施工程师和需要高性能网络传输的软件团队。它不是一个可以直接安装使用的终端产品，而是需要编写代码调用的开发库，使用门槛较高，要求使用者熟悉 Rust 编程和网络编程基础。",
-          "quiche 采用 BSD-2-Clause 开源协议，代码托管在 GitHub 上，已有超过一万两千颗星标。项目文档和命令行示例工具可以帮助开发者快速上手测试，但官方也提醒示例工具不适合直接用于生产环境。"
+          "Agent Substrate 是一个为自主智能体时代设计的执行运行时，核心目标是用比传统容器方案高得多的密度来运行大量沙箱。它把数量庞大的“actor”（也就是智能体这类应用）映射到数量较少的就绪“worker”上，利用智能体大部分时间处于空闲状态的特点实现高度复用，从而在同样硬件上承载更多工作负载。官方演示中，它把约 250 个有状态 actor 复用到了 8 个物理 Pod 上。",
+          "它的关键能力包括：亚秒级的挂起与恢复，官方称恢复操作在 500 毫秒以内，每秒可完成 500 次以上的挂起/恢复；通过完整状态快照，在休眠周期之间保留内存中的工作状态和文件系统状态；原生提供零信任的内核与网络隔离，并支持 microVM、gVisor 等多种沙箱技术，对所有沙箱类型提供一致的生命周期操作。它底层借助 Kubernetes 做基础设施供给和 worker 生命周期管理，同时叠加了面向智能体的调度与控制来降低延迟。",
+          "这个项目并不绑定具体的智能体框架，可以承载基于 ADK、LangChain 构建的智能体，也支持 Claude Code、CodeX 这类需要保留会话和文件系统状态的高密度编码环境，还可以把 MCP 服务器作为沙箱化 actor 部署，为各种模型提供持久工具。生态中已有 Agent Executor、kagent 等项目基于它构建分布式智能体运行时。",
+          "需要特别注意的是，项目目前处于早期开发阶段，官方明确表示尚不适合生产环境使用，接口几乎肯定会发生变化，也不对向后兼容做保证。它主要面向需要大规模、多租户运行智能体的平台工程师和基础设施团队，而不是给普通用户直接使用的应用，部署和运维需要具备 Kubernetes 相关经验。项目采用 Apache-2.0 许可，但并非 Google 官方支持产品。"
         ],
         "facts": [
           {
             "label": "主要语言",
-            "value": "Rust"
+            "value": "Go"
           },
           {
             "label": "Stars",
-            "value": "12,312"
+            "value": "2,890"
           },
           {
             "label": "今日新增 Stars",
-            "value": "+69"
+            "value": "+301"
           },
           {
             "label": "Forks",
-            "value": "1,131"
+            "value": "380"
           },
           {
             "label": "许可证",
-            "value": "BSD-2-Clause"
+            "value": "Apache-2.0"
           },
           {
             "label": "最近更新",
-            "value": "2026-09-21"
+            "value": "2026-09-23"
           }
         ],
         "externalLinks": [
           {
             "label": "阅读项目 README",
-            "url": "https://github.com/cloudflare/quiche#readme"
-          },
-          {
-            "label": "打开项目网站",
-            "url": "https://docs.quic.tech/quiche/"
+            "url": "https://github.com/agent-substrate/substrate#readme"
           },
           {
             "label": "查看 Releases",
-            "url": "https://github.com/cloudflare/quiche/releases"
+            "url": "https://github.com/agent-substrate/substrate/releases"
+          }
+        ]
+      }
+    },
+    {
+      "externalId": "dream-num/univer",
+      "source": {
+        "id": "github-trending",
+        "type": "daily",
+        "name": "GitHub Trending",
+        "url": "https://github.com/trending?since=daily"
+      },
+      "title": "Univer：可嵌入的在线表格、文档与演示 SDK",
+      "sourceUrl": "https://github.com/dream-num/univer",
+      "summary": "Univer 是一套开源办公套件开发工具包，让开发者把电子表格、文档、演示等能力直接嵌入自己的产品或 AI 应用中。",
+      "publishedAt": "2026-09-22T20:11:17.166Z",
+      "keywords": [
+        "办公套件",
+        "电子表格",
+        "文档编辑",
+        "插件架构",
+        "AI 协作",
+        "开发工具包"
+      ],
+      "body": {
+        "section": "github",
+        "digestDate": "2026-09-23",
+        "publishedDate": "9/23",
+        "time": "本次更新",
+        "readTime": "3 分钟",
+        "accent": "blue",
+        "inRecentWindow": true,
+        "paragraphs": [
+          "Univer 是一个用于在自有产品里构建办公应用的开发工具包（SDK）。它提供电子表格、文档、演示、关系型表格、看板等模块的底层能力，开发者不需要从零实现编辑、公式计算、渲染等复杂功能，也不需要依赖某个固定的在线办公网站。",
+          "它的核心能力包括：基于画布的高性能渲染、公式引擎、插件式架构，以及一套在浏览器和 Node.js 服务端都能使用的统一接口。开发者可以只挑选需要的功能组合，也可以从预设方案快速起步，还能通过自定义插件、命令和界面组件来扩展行为。",
+          "它适合需要把表格或文档编辑嵌入 SaaS 产品、内部工具、商业智能流程或 AI 应用的团队，也适合希望在服务器端处理工作簿和文档的场景。围绕 Univer 还衍生出工作区、命令行工具和面向 AI 智能体的办公插件等项目，让人类和 AI 可以在同一份文件上协作。",
+          "使用门槛在于：这是给开发者用的底层框架，不是开箱即用的成品办公软件。要真正用起来，需要具备一定的前端或服务端编程能力，并阅读官方文档来了解插件、接口和授权方式。项目采用 Apache-2.0 开源协议，可免费使用和修改。"
+        ],
+        "facts": [
+          {
+            "label": "主要语言",
+            "value": "TypeScript"
+          },
+          {
+            "label": "Stars",
+            "value": "15,267"
+          },
+          {
+            "label": "今日新增 Stars",
+            "value": "+202"
+          },
+          {
+            "label": "Forks",
+            "value": "1,363"
+          },
+          {
+            "label": "许可证",
+            "value": "Apache-2.0"
+          },
+          {
+            "label": "最近更新",
+            "value": "2026-09-22"
+          }
+        ],
+        "externalLinks": [
+          {
+            "label": "阅读项目 README",
+            "url": "https://github.com/dream-num/univer#readme"
+          },
+          {
+            "label": "打开项目网站",
+            "url": "https://docs.univer.ai"
+          },
+          {
+            "label": "查看 Releases",
+            "url": "https://github.com/dream-num/univer/releases"
+          }
+        ]
+      }
+    },
+    {
+      "externalId": "davila7/claude-code-templates",
+      "source": {
+        "id": "github-trending",
+        "type": "daily",
+        "name": "GitHub Trending",
+        "url": "https://github.com/trending?since=daily"
+      },
+      "title": "Claude Code 模板库：一键配置 AI 编程助手",
+      "sourceUrl": "https://github.com/davila7/claude-code-templates",
+      "summary": "这是一个为 Claude Code 提供现成配置模板的命令行工具，帮助用户快速安装 AI 代理、命令、钩子和外部集成。",
+      "publishedAt": "2026-09-22T20:11:17.166Z",
+      "keywords": [
+        "Claude Code",
+        "配置模板",
+        "命令行工具",
+        "AI 代理",
+        "开发效率",
+        "外部集成"
+      ],
+      "body": {
+        "section": "github",
+        "digestDate": "2026-09-23",
+        "publishedDate": "9/23",
+        "time": "本次更新",
+        "readTime": "3 分钟",
+        "accent": "blue",
+        "inRecentWindow": true,
+        "paragraphs": [
+          "Claude Code Templates 是面向 Anthropic 公司 Claude Code 编程助手的配置集合与安装工具。它把大量可复用的配置整理成模板，包括 AI 代理、自定义命令、设置项、钩子（hooks）和外部集成（MCP），用户不必自己从零编写这些配置。",
+          "使用方式以命令行工具为主。用户可以通过 npx 命令安装一整套开发配置，也可以进入交互式界面逐项浏览和选择。项目配套的网站提供可视化浏览，方便查看和挑选超过一百种代理、命令、设置、钩子和 MCP 组件。",
+          "它适合已经在使用 Claude Code、希望提升开发效率的程序员和技术团队。比如想加入代码审查代理、测试生成命令、Git 提交前校验钩子，或接入 GitHub 等外部服务时，可以直接安装现成模板，减少重复配置工作。",
+          "使用门槛相对较低，但前提是用户已经安装并会使用 Claude Code，并且习惯在终端里执行命令。项目采用 MIT 开源协议，可自由使用和修改；部分模板涉及第三方服务（如网页数据抓取），可能需要额外的账号或订阅。"
+        ],
+        "facts": [
+          {
+            "label": "主要语言",
+            "value": "Python"
+          },
+          {
+            "label": "Stars",
+            "value": "31,050"
+          },
+          {
+            "label": "今日新增 Stars",
+            "value": "+113"
+          },
+          {
+            "label": "Forks",
+            "value": "3,535"
+          },
+          {
+            "label": "许可证",
+            "value": "MIT"
+          },
+          {
+            "label": "最近更新",
+            "value": "2026-09-22"
+          }
+        ],
+        "externalLinks": [
+          {
+            "label": "阅读项目 README",
+            "url": "https://github.com/davila7/claude-code-templates#readme"
+          },
+          {
+            "label": "打开项目网站",
+            "url": "https://aitmpl.com"
+          },
+          {
+            "label": "查看 Releases",
+            "url": "https://github.com/davila7/claude-code-templates/releases"
+          }
+        ]
+      }
+    },
+    {
+      "externalId": "google/ax",
+      "source": {
+        "id": "github-trending",
+        "type": "daily",
+        "name": "GitHub Trending",
+        "url": "https://github.com/trending?since=daily"
+      },
+      "title": "AX：面向智能体任务的高吞吐编排运行时",
+      "sourceUrl": "https://github.com/google/ax",
+      "summary": "AX 是一个声明式的高吞吐编排器，用于在集群中运行大规模自主智能体任务，提供沙箱隔离、工作区预配置和网络管控。",
+      "publishedAt": "2026-09-22T20:11:17.166Z",
+      "keywords": [
+        "智能体编排",
+        "沙箱隔离",
+        "声明式配置",
+        "高吞吐",
+        "集群运行",
+        "工作区管理",
+        "网络白名单"
+      ],
+      "body": {
+        "section": "github",
+        "digestDate": "2026-09-23",
+        "publishedDate": "9/23",
+        "time": "本次更新",
+        "readTime": "3 分钟",
+        "accent": "blue",
+        "inRecentWindow": true,
+        "paragraphs": [
+          "AX 是 Google 开源的一个智能体编排运行时，目标是在集群中运行数十亿级别的自主智能体任务。它把智能体视为一种新的工作负载，既不是无状态微服务，也不是一次性批处理作业，而是会积累状态、需要严格隔离、会调用模型 API 和工具服务器、并且可能在没有监控时持续消耗资源的任务。AX 通过几个简单的声明式原语来管理这些任务。",
+          "核心能力围绕四个原语展开：Task 用于在隔离沙箱中运行不可信代码并限制 CPU/内存；Workspace 用于预先接入 Git 仓库、MCP 服务器和技能包，让每个智能体启动时就已经准备好环境；Gateway 用于把出站流量锁定到明确的主机白名单；Model 用于配置平台自身使用哪个大模型，并从 Kubernetes 密钥中获取凭据。此外还提供暂停/恢复空闲智能体、通过 SSH 进入运行中沙箱查看状态等操作。",
+          "AX 适合需要大规模运行自主智能体任务、并且希望用声明式方式管理隔离、网络和模型配置的团队或平台工程师。它建立在 Agent Substrate 之上，需要 Kubernetes 集群、容器镜像仓库以及可访问的 Agent Substrate 控制 API，使用门槛偏向有集群运维经验的用户。",
+          "当前项目仍处于早期阶段，核心概念、协议和规范还在积极完善中，稳定版发布前可能会有重大破坏性变更。对于不写代码的读者，可以把它理解为“智能体任务的 Kubernetes”，但实际使用需要一定的命令行和集群操作基础。"
+        ],
+        "facts": [
+          {
+            "label": "主要语言",
+            "value": "Go"
+          },
+          {
+            "label": "Stars",
+            "value": "7,387"
+          },
+          {
+            "label": "今日新增 Stars",
+            "value": "+2,324"
+          },
+          {
+            "label": "Forks",
+            "value": "348"
+          },
+          {
+            "label": "许可证",
+            "value": "Apache-2.0"
+          },
+          {
+            "label": "最近更新",
+            "value": "2026-09-20"
+          }
+        ],
+        "externalLinks": [
+          {
+            "label": "阅读项目 README",
+            "url": "https://github.com/google/ax#readme"
+          },
+          {
+            "label": "打开项目网站",
+            "url": "https://agentexecutor.io"
+          },
+          {
+            "label": "查看 Releases",
+            "url": "https://github.com/google/ax/releases"
           }
         ]
       }
@@ -3130,31 +2983,32 @@
         "name": "GitHub Trending",
         "url": "https://github.com/trending?since=daily"
       },
-      "title": "MVT：检测手机是否被间谍软件感染的取证工具",
+      "title": "MVT：移动设备入侵痕迹取证工具包",
       "sourceUrl": "https://github.com/mvt-project/mvt",
-      "summary": "MVT 是国际特赦组织开发的移动设备取证工具，帮助调查人员检查安卓和 iOS 手机中是否存在间谍软件感染的痕迹。",
-      "publishedAt": "2026-09-21T21:02:29.342Z",
+      "summary": "MVT 是一套用于收集和分析 Android 与 iOS 设备取证痕迹的工具，帮助识别设备是否可能被间谍软件入侵。",
+      "publishedAt": "2026-09-22T20:11:17.166Z",
       "keywords": [
         "移动取证",
         "间谍软件检测",
-        "安卓安全",
-        "iOS安全",
         "入侵指标",
-        "国际特赦组织"
+        "Android",
+        "iOS",
+        "命令行工具",
+        "数字取证"
       ],
       "body": {
         "section": "github",
-        "digestDate": "2026-09-22",
-        "publishedDate": "9/22",
+        "digestDate": "2026-09-23",
+        "publishedDate": "9/23",
         "time": "本次更新",
         "readTime": "3 分钟",
         "accent": "blue",
         "inRecentWindow": true,
         "paragraphs": [
-          "MVT 全称 Mobile Verification Toolkit，是一套用于简化移动设备取证流程的工具集合。它最初由国际特赦组织安全实验室在 2021 年发布，与 Pegasus 项目调查相关，用于发现安卓和 iOS 设备可能被入侵的线索。它通过分析手机备份或系统记录，寻找已知间谍软件的痕迹。",
-          "MVT 支持使用公开的入侵指标（IOC）来扫描设备，这些指标来自国际特赦组织和其他研究机构发布的间谍软件特征库。它提供 mvt-ios 和 mvt-android 两个主要命令，分别处理两个平台的设备数据，还支持插件包来扩展额外的取证模块。",
-          "这个工具主要面向数字取证研究人员、安全调查人员和技术记者，需要使用者了解数字取证方法并会使用命令行工具。官方明确说明它不适用于普通用户自行评估设备安全，如果担心手机安全，应寻求专业机构帮助。",
-          "MVT 可以通过 pip 或 uv 安装，使用门槛较高，需要一定的技术背景。官方也提醒，仅依赖公开的入侵指标不足以判断设备是否安全，可能漏掉最新的攻击痕迹，因此专业调查通常需要结合非公开的情报和深入分析。"
+          "MVT（Mobile Verification Toolkit）由 Amnesty International 安全实验室开发，最初在 Pegasus 项目背景下发布，用于简化和自动化移动设备的取证痕迹收集过程，以判断设备是否存在被入侵的迹象。它支持 Android 和 iOS 两个平台，通过命令行工具对设备备份或采集数据进行分析。",
+          "MVT 的核心能力包括：使用公开的入侵指标（IOC）扫描移动设备，查找已知间谍软件活动的潜在痕迹；提供 mvt-ios 和 mvt-android 两个平台专用命令，以及一个通用的 mvt 命令来管理版本、插件和下载 IOC。它还可以通过插件包扩展额外的取证模块。",
+          "该工具主要面向技术专家和调查人员，需要理解数字取证并使用命令行工具，并不适合普通用户自行评估设备安全。官方明确提示，公开的入侵指标不足以断定设备“干净”，仅依赖公开指标可能漏掉近期痕迹并带来虚假安全感，可靠全面的取证支持需要非公开指标、研究和威胁情报。",
+          "安装方面，MVT 可以通过 pip 或 uv 从 PyPI 安装，使用门槛在于需要一定的命令行操作能力和取证知识。对于担心设备安全的普通用户，官方建议寻求专业帮助，而不是自行使用该工具。"
         ],
         "facts": [
           {
@@ -3163,15 +3017,15 @@
           },
           {
             "label": "Stars",
-            "value": "13,529"
+            "value": "13,973"
           },
           {
             "label": "今日新增 Stars",
-            "value": "+177"
+            "value": "+441"
           },
           {
             "label": "Forks",
-            "value": "1,320"
+            "value": "1,348"
           },
           {
             "label": "许可证",
@@ -3179,7 +3033,7 @@
           },
           {
             "label": "最近更新",
-            "value": "2026-09-22"
+            "value": "2026-09-23"
           }
         ],
         "externalLinks": [
@@ -3199,38 +3053,38 @@
       }
     },
     {
-      "externalId": "zhouxiaoka/autoclip",
+      "externalId": "superdesigndev/treg",
       "source": {
         "id": "github-trending",
         "type": "daily",
         "name": "GitHub Trending",
         "url": "https://github.com/trending?since=daily"
       },
-      "title": "AutoClip：AI 自动从长视频里剪出高光片段",
-      "sourceUrl": "https://github.com/zhouxiaoka/autoclip",
-      "summary": "AutoClip 是一款用 AI 分析视频字幕、自动找出精彩片段并剪成短视频的工具，适合把访谈、播客、课程和直播回放快速变成可发布的切片。",
-      "publishedAt": "2026-09-21T21:02:29.342Z",
+      "title": "Treg：给 AI 智能体用的工具市场（工具的 OpenRouter）",
+      "sourceUrl": "https://github.com/superdesigndev/treg",
+      "summary": "把 3000 多个外部数据与内容工具（SEO、社交媒体、公司信息、抓取、图像视频生成等）集中到一个入口，让 AI 智能体按次调用、按分计费，无需逐个注册各平台账号。",
+      "publishedAt": "2026-09-22T20:11:17.166Z",
       "keywords": [
-        "视频剪辑",
-        "AI高光提取",
-        "短视频二创",
-        "自动切片",
-        "播客切片",
-        "开源工具"
+        "AI 智能体工具",
+        "工具目录",
+        "按次计费",
+        "API 网关",
+        "凭证管理",
+        "开源可自托管"
       ],
       "body": {
         "section": "github",
-        "digestDate": "2026-09-22",
-        "publishedDate": "9/22",
+        "digestDate": "2026-09-23",
+        "publishedDate": "9/23",
         "time": "本次更新",
         "readTime": "3 分钟",
         "accent": "blue",
         "inRecentWindow": true,
         "paragraphs": [
-          "AutoClip 解决的是长视频二次剪辑费时费力的问题。你导入一段本地视频、YouTube 或 B 站链接，它可以配合已有的 SRT 字幕，或者先做语音转写，然后由 AI 分析内容，找出值得分享的高光时刻。",
-          "它的核心能力包括：从字幕提取大纲、话题时间线和精彩度评分，自动生成视频切片和推荐合集，还能生成片段标题。导出时提供抖音、小红书、YouTube Shorts 和 B 站等平台的预设，支持烧录字幕和标题卡，也可以手动调整片段顺序。",
-          "使用方式有三种：macOS 和 Windows 有桌面安装包，内置 Python 和 FFmpeg，下载后即可使用；也可以用 Docker 在浏览器里操作；还提供命令行和 MCP 接口，方便批量处理或接入其他自动化流程。模型方面支持通义千问、OpenAI 兼容接口、Gemini、硅基流动，以及 Ollama、LM Studio 等本地模型。",
-          "适合做视频二创、播客切片、课程精华和直播回放的创作者与运营人员。桌面版门槛最低，但需要先配置一个可用的 AI 模型服务；Docker 和命令行方式需要一定的技术基础。项目采用 MIT 开源协议，界面和文档支持中文等多语言。"
+          "Treg 是一个面向 AI 智能体的工具目录和调用网关。它把原本散落在各家服务商背后的接口——比如 SEO 与反向链接数据、社交平台与趋势数据、人物和公司信息补全、广告数据、网页抓取、图像与视频生成等——统一收进一个目录，覆盖 60 多家服务商、3000 多个接口。你只需要给智能体一个地址和一个令牌，它就能按任务去搜索、比价、调用，而不必知道这些数据具体由哪家公司提供。",
+          "它解决的核心问题是：很多专业工具的单次使用被昂贵的月费挡在门外（例如 Semrush 每月 139 美元、Moz 每月 99 美元、Crunchbase 每月 99 美元、Apollo 每席位 59 美元），或者根本没有公开接口。Treg 自己承担这些账号，按调用次数向使用者收取极小的费用，从一分钱起。除了公共目录，你还可以把自己团队的付费接口、OAuth 连接、命令行工具或技能文件注册进来，供所有同事的智能体调用，而密钥始终留在服务器端，不会泄露给调用方。",
+          "对不写代码的人来说，它的价值在于把“想用某个数据能力”变成“直接说任务”。你可以用命令行按功能搜索工具，比如查某个域名的反向链接，然后直接调用并查看这次调用花了多少钱。它还提供了 Claude Code 插件和技能安装方式，安装时不需要令牌和配置，首次运行会引导你完成命令行安装、登录和接入。新注册的验证账号在创建符合条件的团队后可获得一次性 1 美元免费额度。",
+          "使用门槛中等偏低：需要能运行命令行、完成一次登录（支持 GitHub、邮箱验证码或令牌方式），并理解“按次计费”的概念。它适合需要让智能体完成真实业务任务的产品团队、增长与市场人员，以及希望统一管理团队内部工具凭证的开发者。项目本身是开源的，也可以自行部署。"
         ],
         "facts": [
           {
@@ -3239,15 +3093,91 @@
           },
           {
             "label": "Stars",
-            "value": "8,173"
+            "value": "2,137"
           },
           {
             "label": "今日新增 Stars",
-            "value": "+266"
+            "value": "+197"
           },
           {
             "label": "Forks",
-            "value": "1,568"
+            "value": "213"
+          },
+          {
+            "label": "许可证",
+            "value": "NOASSERTION"
+          },
+          {
+            "label": "最近更新",
+            "value": "2026-09-23"
+          }
+        ],
+        "externalLinks": [
+          {
+            "label": "阅读项目 README",
+            "url": "https://github.com/superdesigndev/treg#readme"
+          },
+          {
+            "label": "打开项目网站",
+            "url": "https://treg.to"
+          },
+          {
+            "label": "查看 Releases",
+            "url": "https://github.com/superdesigndev/treg/releases"
+          }
+        ]
+      }
+    },
+    {
+      "externalId": "browser-use/video-use",
+      "source": {
+        "id": "github-trending",
+        "type": "daily",
+        "name": "GitHub Trending",
+        "url": "https://github.com/trending?since=daily"
+      },
+      "title": "video-use：用对话让 AI 帮你剪视频",
+      "sourceUrl": "https://github.com/browser-use/video-use",
+      "summary": "把原始视频素材放进文件夹，用自然语言和 Claude Code 等编程智能体聊天，就能自动得到剪好的成片，自动去口癖、调色、加字幕和动画。",
+      "publishedAt": "2026-09-22T20:11:17.166Z",
+      "keywords": [
+        "视频剪辑",
+        "AI 智能体",
+        "自动字幕",
+        "自动调色",
+        "口癖去除",
+        "开源工具"
+      ],
+      "body": {
+        "section": "github",
+        "digestDate": "2026-09-23",
+        "publishedDate": "9/23",
+        "time": "本次更新",
+        "readTime": "3 分钟",
+        "accent": "blue",
+        "inRecentWindow": true,
+        "paragraphs": [
+          "video-use 是一个开源的视频剪辑技能，它把剪辑工作交给能执行命令的 AI 智能体（如 Claude Code、Codex 等）。你只需要把未经整理的原始素材放进一个文件夹，然后对智能体说一句“把这些剪成一个发布视频”，它就会先盘点素材、提出剪辑策略，等你确认后自动产出成片 final.mp4。它不依赖预设模板或菜单，适用于口播、混剪、教程、旅行、访谈等各种内容。",
+          "它的核心能力包括：自动剪掉“嗯”“啊”等口癖词和废镜头之间的空白；对每个片段自动调色（暖色电影感、中性锐利或自定义 ffmpeg 链条）；在每个剪切点加 30 毫秒音频淡入淡出，避免爆音；按你的风格烧录字幕，默认是两词大写分块；还能通过 HyperFrames、Remotion、Manim 或 PIL 生成动画叠加层，每个动画由并行的子智能体分别完成。渲染完成后，它会在每个剪切边界自检画面跳动、音频爆音和字幕遮挡，有问题就修复并重新渲染，最多三次。",
+          "它的工作方式很省资源：AI 并不“看”视频，而是“读”视频。第一层是音频转写，一次调用就能得到词级时间戳、说话人区分和音频事件（如笑声、掌声），所有素材打包成约 12KB 的文本供 AI 阅读；第二层是按需生成的视觉合成图，把胶片条、波形、词标签拼成一张图，只在判断模糊停顿或检查剪切点时调用。相比逐帧读取可能产生数千万 token 的噪声，这种方式把信息量压缩到了极小。",
+          "使用门槛不算高，但需要一点动手能力：要安装 ffmpeg、克隆仓库、注册技能，并提供一个 ElevenLabs API 密钥用于转写。仓库提供了一段可以直接粘贴给智能体的安装提示，智能体会自动完成大部分配置。它适合内容创作者、播客和视频团队，以及希望用 AI 自动化重复剪辑流程的人。项目采用 MIT 许可证，完全开源。"
+        ],
+        "facts": [
+          {
+            "label": "主要语言",
+            "value": "Python"
+          },
+          {
+            "label": "Stars",
+            "value": "25,743"
+          },
+          {
+            "label": "今日新增 Stars",
+            "value": "+155"
+          },
+          {
+            "label": "Forks",
+            "value": "3,111"
           },
           {
             "label": "许可证",
@@ -3255,247 +3185,17 @@
           },
           {
             "label": "最近更新",
-            "value": "2026-09-22"
+            "value": "2026-08-30"
           }
         ],
         "externalLinks": [
           {
             "label": "阅读项目 README",
-            "url": "https://github.com/zhouxiaoka/autoclip#readme"
-          },
-          {
-            "label": "打开项目网站",
-            "url": "https://zhouxiaoka.github.io/autoclip_intro/"
+            "url": "https://github.com/browser-use/video-use#readme"
           },
           {
             "label": "查看 Releases",
-            "url": "https://github.com/zhouxiaoka/autoclip/releases"
-          }
-        ]
-      }
-    },
-    {
-      "externalId": "ruanyf/weekly",
-      "source": {
-        "id": "github-trending",
-        "type": "daily",
-        "name": "GitHub Trending",
-        "url": "https://github.com/trending?since=daily"
-      },
-      "title": "科技爱好者周刊：每周五更新的科技内容精选",
-      "sourceUrl": "https://github.com/ruanyf/weekly",
-      "summary": "这是一份由阮一峰维护、每周五发布的科技周刊，汇集值得分享的科技文章、软件、资源和行业观点，帮助读者了解技术圈动态。",
-      "publishedAt": "2026-09-21T21:02:29.342Z",
-      "keywords": [
-        "科技周刊",
-        "技术资讯",
-        "内容精选",
-        "程序员",
-        "行业动态",
-        "开源社区"
-      ],
-      "body": {
-        "section": "github",
-        "digestDate": "2026-09-22",
-        "publishedDate": "9/22",
-        "time": "本次更新",
-        "readTime": "3 分钟",
-        "accent": "blue",
-        "inRecentWindow": true,
-        "paragraphs": [
-          "科技爱好者周刊是一个持续更新的内容合集，每周五发布一期，记录作者认为值得分享的科技内容。每期通常包含若干篇文章推荐、软件工具介绍、资源链接和科技新闻评论，内容覆盖编程、人工智能、互联网产品、创业和行业趋势等话题。",
-          "它的价值在于筛选和整理。面对每天大量的技术信息，周刊帮你挑出其中值得一读的内容，并附上简短点评。读者可以按时间顺序翻阅往期，从第 300 多期一直追溯到最新一期，也可以只关注自己感兴趣的主题。",
-          "周刊还设有《谁在招人》讨论区，是一个免费的程序员招聘信息帖，提供工作与实习岗位信息，对求职者和招聘方都有参考价值。投稿可以通过提交 issue 的方式进行。",
-          "这份周刊适合对科技行业感兴趣的人阅读，包括程序员、产品经理、创业者和科技爱好者。阅读本身没有门槛，只需要访问 GitHub 仓库即可查看各期内容，不需要安装任何软件或具备编程能力。"
-        ],
-        "facts": [
-          {
-            "label": "主要语言",
-            "value": "未标注"
-          },
-          {
-            "label": "Stars",
-            "value": "103,891"
-          },
-          {
-            "label": "今日新增 Stars",
-            "value": "+221"
-          },
-          {
-            "label": "Forks",
-            "value": "4,446"
-          },
-          {
-            "label": "许可证",
-            "value": "未标注"
-          },
-          {
-            "label": "最近更新",
-            "value": "2026-09-19"
-          }
-        ],
-        "externalLinks": [
-          {
-            "label": "阅读项目 README",
-            "url": "https://github.com/ruanyf/weekly#readme"
-          },
-          {
-            "label": "查看 Releases",
-            "url": "https://github.com/ruanyf/weekly/releases"
-          }
-        ]
-      }
-    },
-    {
-      "externalId": "Crosstalk-Solutions/project-nomad",
-      "source": {
-        "id": "github-trending",
-        "type": "daily",
-        "name": "GitHub Trending",
-        "url": "https://github.com/trending?since=daily"
-      },
-      "title": "Project NOMAD：离线知识教育服务器",
-      "sourceUrl": "https://github.com/Crosstalk-Solutions/project-nomad",
-      "summary": "Project NOMAD 是一个自建、离线优先的知识与教育服务器，把维基百科、电子书、课程、地图和本地 AI 装进你自己的硬件里，断网也能随时查阅学习。",
-      "publishedAt": "2026-09-21T21:02:29.342Z",
-      "keywords": [
-        "离线知识库",
-        "自托管服务器",
-        "本地AI问答",
-        "离线教育",
-        "电子书图书馆",
-        "离线地图",
-        "数据自主"
-      ],
-      "body": {
-        "section": "github",
-        "digestDate": "2026-09-22",
-        "publishedDate": "9/22",
-        "time": "本次更新",
-        "readTime": "3 分钟",
-        "accent": "blue",
-        "inRecentWindow": true,
-        "paragraphs": [
-          "Project NOMAD 解决的是“没有网络或网络不稳定时，如何继续获得可靠知识和学习资源”的问题。它把大量原本需要在线访问的内容——离线维基百科、医学参考资料、生存指南、电子书、可汗学院课程、区域地图——打包成一套可以在本地运行的服务器，所有数据都存在你自己的设备上，不需要连接互联网。",
-          "它通过一个叫“指挥中心”的管理界面来统一安装、配置和更新这些工具，内置能力包括：基于本地 AI 的知识库问答（支持上传文档并做语义搜索）、离线信息图书馆、带进度跟踪的教育平台、可下载的离线地图、数据加密与编码分析工具、本地笔记、硬件跑分与社区排行榜，以及一个可以一键安装更多应用的应用目录。",
-          "适合人群包括：需要为断网环境（如野外、灾区、船上、偏远地区）准备知识库的个人或组织；希望给孩子提供离线学习资源的家庭或学校；重视数据自主、不想依赖云服务的知识工作者；以及想体验本地 AI 与自托管服务的爱好者。",
-          "使用门槛主要在安装环节：需要一台基于 Debian 的系统（推荐 Ubuntu），通过终端命令安装，并要求管理员权限。安装完成后，日常使用只需要浏览器访问本机地址即可，不需要桌面环境。官方也提供了 Windows 的 WSL2 安装指南，但属于社区支持路径。"
-        ],
-        "facts": [
-          {
-            "label": "主要语言",
-            "value": "TypeScript"
-          },
-          {
-            "label": "Stars",
-            "value": "37,793"
-          },
-          {
-            "label": "今日新增 Stars",
-            "value": "+360"
-          },
-          {
-            "label": "Forks",
-            "value": "3,764"
-          },
-          {
-            "label": "许可证",
-            "value": "Apache-2.0"
-          },
-          {
-            "label": "最近更新",
-            "value": "2026-09-14"
-          }
-        ],
-        "externalLinks": [
-          {
-            "label": "阅读项目 README",
-            "url": "https://github.com/Crosstalk-Solutions/project-nomad#readme"
-          },
-          {
-            "label": "打开项目网站",
-            "url": "https://www.projectnomad.us"
-          },
-          {
-            "label": "查看 Releases",
-            "url": "https://github.com/Crosstalk-Solutions/project-nomad/releases"
-          }
-        ]
-      }
-    },
-    {
-      "externalId": "yynxxxxx/Codex-X",
-      "source": {
-        "id": "github-trending",
-        "type": "daily",
-        "name": "GitHub Trending",
-        "url": "https://github.com/trending?since=daily"
-      },
-      "title": "Codex-X：Codex 可视化管理工具",
-      "sourceUrl": "https://github.com/yynxxxxx/Codex-X",
-      "summary": "Codex-X 是一款面向 OpenAI Codex 桌面端和命令行工具的跨平台管理软件，把提示词、API 供应商、会话、Skills/MCP 和配置文件都放进可视化界面，不用再手动改文件。",
-      "publishedAt": "2026-09-21T21:02:29.342Z",
-      "keywords": [
-        "Codex管理工具",
-        "提示词管理",
-        "API供应商切换",
-        "会话同步",
-        "Skills与MCP",
-        "配置可视化",
-        "跨平台桌面应用"
-      ],
-      "body": {
-        "section": "github",
-        "digestDate": "2026-09-22",
-        "publishedDate": "9/22",
-        "time": "本次更新",
-        "readTime": "3 分钟",
-        "accent": "blue",
-        "inRecentWindow": true,
-        "paragraphs": [
-          "Codex-X 解决的是“同时使用 Codex 桌面端、命令行、多个第三方 API、多套提示词时，配置散落各处、难以管理”的问题。它把这些高频操作集中到一个桌面应用里，让当前状态看得见，常用操作点一下就能完成。",
-          "核心能力包括：像管理插件一样管理提示词（分类、导入 Markdown、自定义编辑、一键启用或禁用，内置多套模板并支持从 GitHub 同步）；管理多个官方登录和第三方 API 供应商，支持一键复制、切换和连接检测；同步、搜索、按项目路径整理和删除本地会话；可视化查看和开关 Skills 与 MCP；集中查看 config.toml 与 auth.json 并在重要写入前自动备份；以及按日期和模型查看本地 Token 用量趋势。",
-          "适合人群主要是使用 OpenAI Codex 进行开发或写作的用户，尤其是需要频繁切换不同模型、不同 API 供应商、不同提示词模板的人，以及希望把 Codex 相关配置统一管理、不想反复手改文件的进阶用户。",
-          "使用门槛较低：它提供 macOS、Windows 和 Linux 的安装包，安装版可以在应用内直接下载和安装更新，便携版则手动下载。用户不需要懂编程语言，但需要已经了解或使用 Codex 本身，才能发挥它的管理价值。"
-        ],
-        "facts": [
-          {
-            "label": "主要语言",
-            "value": "Rust"
-          },
-          {
-            "label": "Stars",
-            "value": "3,651"
-          },
-          {
-            "label": "今日新增 Stars",
-            "value": "+79"
-          },
-          {
-            "label": "Forks",
-            "value": "460"
-          },
-          {
-            "label": "许可证",
-            "value": "MIT"
-          },
-          {
-            "label": "最近更新",
-            "value": "2026-09-18"
-          }
-        ],
-        "externalLinks": [
-          {
-            "label": "阅读项目 README",
-            "url": "https://github.com/yynxxxxx/Codex-X#readme"
-          },
-          {
-            "label": "打开项目网站",
-            "url": "https://codex-x.site"
-          },
-          {
-            "label": "查看 Releases",
-            "url": "https://github.com/yynxxxxx/Codex-X/releases"
+            "url": "https://github.com/browser-use/video-use/releases"
           }
         ]
       }
