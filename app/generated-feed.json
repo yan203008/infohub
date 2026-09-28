@@ -1,17 +1,17 @@
 [
   {
     "section": "github",
-    "digestDate": "2026-09-28",
-    "publishedDate": "9/28",
+    "digestDate": "2026-09-29",
+    "publishedDate": "9/29",
     "time": "本次更新",
     "readTime": "3 分钟",
     "accent": "blue",
     "inRecentWindow": true,
     "paragraphs": [
-      "Univer 不是又一个在线表格网站，而是一套用来“造办公应用”的底层工具。它提供电子表格、文档、演示等能力的构建模块，你可以把这些编辑体验嵌入到自己的 SaaS 产品、内部工具、数据分析流程或 AI 应用里，而不必被迫使用某个托管服务或固定界面。",
-      "它的能力覆盖比较广：同一套架构既能跑在浏览器里，也能在服务器端处理工作簿和文档；功能通过插件组合，你可以只挑需要的部分，也可以用预设快速起步；还支持用自定义插件、命令、服务和界面组件来扩展行为。官方把它定位为“面向 AI 智能体的 Office 底座”，人和 AI 可以在同一份文件上协作。",
-      "适用的场景包括：在产品里加入表格或文档编辑、在服务器上批量处理工作簿、围绕办公数据搭建带图表和控件的交互式小应用等。官方还提供了一个开源可自托管的 Univer Workspace 作为完整参考实现，方便开发者学习如何集成。",
-      "使用门槛偏技术向：它面向的是要写代码做集成的开发者，而不是只想打开表格编辑文件的普通用户。项目以 Apache-2.0 协议开源，文档、API 参考和示例都比较齐全，同时有开源版与商业版之分，采用前需要先确认所需功能属于哪个范围。"
+      "Univer 不是给人直接使用的在线办公软件，而是一套给开发者用的“办公能力积木”。它提供表格、文档、演示文稿、关系表、看板和 PDF 等组件的底层实现，让企业可以把类似 Excel、Word、PPT 的编辑体验直接嵌入到自己的 SaaS 产品、内部工具、数据分析流程或 AI 应用里，而不必依赖某个固定的在线办公平台。",
+      "它的特点是架构统一：浏览器端和服务器端使用同一套运行方式，公式引擎、画布渲染和一套统一的接口可以同时工作；功能按插件拆分，开发者可以只挑选需要的部分，也可以从预设开始快速搭建，再通过自定义插件、命令和服务扩展行为。不同办公工具之间还能共享数据与引用，让内容互相联动。",
+      "它适合需要自建办公功能的软件团队，例如想把电子表格嵌入报表系统的产品开发者、要在服务器上批量处理工作簿的工程团队，以及希望让 AI 代理直接操作表格和文档的应用开发者。仓库里还提供了一个可自托管的工作区参考实现，方便学习完整的集成方式。",
+      "使用门槛偏高：这是面向程序员的 SDK，需要具备前端或 Node.js 开发经验，并阅读文档、API 参考才能上手。普通用户无法直接安装使用，但如果你的团队正在考虑“自己做一个办公功能”，它提供了可自由定制、可私有部署的开源方案。"
     ],
     "facts": [
       {
@@ -20,15 +20,15 @@
       },
       {
         "label": "Stars",
-        "value": "20,081"
+        "value": "21,198"
       },
       {
         "label": "今日新增 Stars",
-        "value": "+920"
+        "value": "+1,105"
       },
       {
         "label": "Forks",
-        "value": "1,701"
+        "value": "1,797"
       },
       {
         "label": "许可证",
@@ -36,7 +36,7 @@
       },
       {
         "label": "最近更新",
-        "value": "2026-09-28"
+        "value": "2026-09-29"
       }
     ],
     "externalLinks": [
@@ -54,21 +54,984 @@
       }
     ],
     "id": "github-trending:dream-num/univer",
-    "title": "Univer：可嵌入自己产品的开源 Office 套件",
+    "title": "Univer：把表格、文档、幻灯片做进自己产品里的开源办公 SDK",
     "sourceUrl": "https://github.com/dream-num/univer",
-    "summary": "一套开源 SDK，让你把电子表格、文档、演示等办公编辑能力直接嵌进自己的产品里，浏览器和服务器端共用同一套架构。",
+    "summary": "一套开源的办公文档开发工具包，让开发者在自己的软件里嵌入表格、文档、幻灯片、看板等编辑能力。",
     "tags": [
-      "开源 Office SDK",
+      "办公 SDK",
       "电子表格",
-      "在线文档",
-      "可嵌入编辑器",
-      "插件架构",
-      "AI 智能体",
-      "Apache-2.0"
+      "文档编辑",
+      "幻灯片",
+      "开源",
+      "可嵌入",
+      "AI 代理"
     ],
     "source": "daily",
     "sourceLabel": "GitHub Trending",
-    "publishedAt": "2026-09-27T20:09:43.415Z"
+    "publishedAt": "2026-09-28T22:32:02.511Z"
+  },
+  {
+    "section": "github",
+    "digestDate": "2026-09-29",
+    "publishedDate": "9/29",
+    "time": "本次更新",
+    "readTime": "3 分钟",
+    "accent": "blue",
+    "inRecentWindow": true,
+    "paragraphs": [
+      "Hindsight 解决的是 AI 智能体\"记不住、学不会\"的问题。普通聊天机器人只能记住当前对话，超过上下文长度就会遗忘；而 Hindsight 专门为长期记忆设计，让智能体不仅能回忆历史对话，还能从过往经验中提炼出可复用的知识，从而在后续交互中变得更聪明。它明确表示自己不是简单的对话历史回放，而是面向\"学习型智能体\"。",
+      "在能力上，Hindsight 通过保留（retain）、回忆（recall）、反思（reflect）三类操作管理记忆，并引入\"观察\"、\"心智模型\"和\"知识页面\"等概念，把零散信息组织成结构化认知。它支持多种记忆类型和记忆库（banks）隔离，官方称在 LongMemEval 长期记忆基准上达到当前最优水平，相关结果由弗吉尼亚理工和《华盛顿邮报》的研究人员独立复现。",
+      "使用方式对非程序员也比较友好：可以通过 Docker 一条命令启动服务，自带网页界面（默认 9999 端口），并支持 25 种以上大模型提供商，包括 OpenAI、Anthropic、Gemini 以及本地运行的 Ollama。它还提供 LLM 包装器（两行代码接入）、各类集成、MCP 服务器和 Python 嵌入式模式，能接入 Claude Code、Cursor 等编程助手。",
+      "它适合正在构建 AI 助手、客服机器人、个人知识管理或长期陪伴类应用的团队和个人，也适合希望让智能体记住用户偏好、项目背景和历史决策的开发者。使用门槛中等：基础用法只需 Docker 和模型 API Key，但若要做深度定制或自建部署，需要一定的工程能力。项目采用 MIT 许可证，可商用。"
+    ],
+    "facts": [
+      {
+        "label": "主要语言",
+        "value": "Python"
+      },
+      {
+        "label": "Stars",
+        "value": "40,873"
+      },
+      {
+        "label": "今日新增 Stars",
+        "value": "+4,413"
+      },
+      {
+        "label": "Forks",
+        "value": "5,525"
+      },
+      {
+        "label": "许可证",
+        "value": "MIT"
+      },
+      {
+        "label": "最近更新",
+        "value": "2026-09-29"
+      }
+    ],
+    "externalLinks": [
+      {
+        "label": "阅读项目 README",
+        "url": "https://github.com/vectorize-io/hindsight#readme"
+      },
+      {
+        "label": "打开项目网站",
+        "url": "https://hindsight.vectorize.io/"
+      },
+      {
+        "label": "查看 Releases",
+        "url": "https://github.com/vectorize-io/hindsight/releases"
+      }
+    ],
+    "id": "github-trending:vectorize-io/hindsight",
+    "title": "Hindsight：会学习的 AI 智能体长期记忆系统",
+    "sourceUrl": "https://github.com/vectorize-io/hindsight",
+    "summary": "Hindsight 是一套让 AI 智能体拥有长期记忆并能随时间学习进步的开源记忆系统，帮助智能体在长期对话和任务中表现得更准确。",
+    "tags": [
+      "AI智能体记忆",
+      "长期记忆",
+      "智能体学习",
+      "开源项目",
+      "大模型集成",
+      "Docker部署",
+      "长期对话"
+    ],
+    "source": "daily",
+    "sourceLabel": "GitHub Trending",
+    "publishedAt": "2026-09-28T22:32:02.511Z"
+  },
+  {
+    "section": "github",
+    "digestDate": "2026-09-29",
+    "publishedDate": "9/29",
+    "time": "本次更新",
+    "readTime": "3 分钟",
+    "accent": "blue",
+    "inRecentWindow": true,
+    "paragraphs": [
+      "Paperclip 是一个用来管理 AI 智能体团队的网页应用。它把多个不同来源的智能体（比如 OpenClaw、Claude Code、Codex、Cursor 等）组织成一个有层级的团队，你定目标、招成员、批预算，然后从仪表盘上查看谁在做什么、花了多少钱。官方把它比作：如果单个智能体是员工，Paperclip 就是那家公司。",
+      "它的工作方式分三步：先定义目标，例如“做一个 AI 笔记应用并做到 100 万美元月收入”；再组建团队，给 CEO、CTO、工程师、设计师、市场等角色分配任意智能体；最后审批策略、设定预算并启动，之后在仪表盘上持续监控。平台围绕任务、组织、培训和基础设施四个方面构建，提供任务与审批流程、可审计的例行工作流、成本监控与预算控制，还能在手机上查看进度。",
+      "它适合已经在同时运行多个 AI 智能体、容易搞不清谁在干什么的人；想让智能体 7×24 小时自主工作但仍要能审查和随时介入的人；以及需要控制 AI 使用成本、给团队设预算的运营者。如果你希望用类似任务管理器的方式来管理自动化业务，它会比较合适。",
+      "使用门槛在于它本质上是一个需要自己部署的 Node.js 服务加网页界面，不是点开即用的消费级产品。你需要有一定的自托管能力，并且已经拥有或愿意接入若干 AI 智能体账号。README 提供了快速开始和文档链接，但配置和日常维护仍需要技术背景。"
+    ],
+    "facts": [
+      {
+        "label": "主要语言",
+        "value": "TypeScript"
+      },
+      {
+        "label": "Stars",
+        "value": "92,642"
+      },
+      {
+        "label": "今日新增 Stars",
+        "value": "+3,185"
+      },
+      {
+        "label": "Forks",
+        "value": "15,874"
+      },
+      {
+        "label": "许可证",
+        "value": "MIT"
+      },
+      {
+        "label": "最近更新",
+        "value": "2026-09-29"
+      }
+    ],
+    "externalLinks": [
+      {
+        "label": "阅读项目 README",
+        "url": "https://github.com/paperclipai/paperclip#readme"
+      },
+      {
+        "label": "打开项目网站",
+        "url": "https://paperclip.ing"
+      },
+      {
+        "label": "查看 Releases",
+        "url": "https://github.com/paperclipai/paperclip/releases"
+      }
+    ],
+    "id": "github-trending:paperclipai/paperclip",
+    "title": "Paperclip：像管理公司一样管理 AI 智能体团队",
+    "sourceUrl": "https://github.com/paperclipai/paperclip",
+    "summary": "一个开源的管理平台，让你给多个 AI 智能体分配目标、审批工作并监控成本，像经营一家公司一样运营自动化业务。",
+    "tags": [
+      "AI 智能体",
+      "团队管理",
+      "任务管理",
+      "成本监控",
+      "自动化运营",
+      "开源平台",
+      "自托管"
+    ],
+    "source": "daily",
+    "sourceLabel": "GitHub Trending",
+    "publishedAt": "2026-09-28T22:32:02.511Z"
+  },
+  {
+    "section": "github",
+    "digestDate": "2026-09-29",
+    "publishedDate": "9/29",
+    "time": "本次更新",
+    "readTime": "3 分钟",
+    "accent": "blue",
+    "inRecentWindow": true,
+    "paragraphs": [
+      "VoiceStudio 是 ElevenLabs 这类云端语音服务的开源本地替代品。它的最大特点是所有处理都在你自己的电脑上完成，声音素材不必上传到别人的服务器，隐私更有保障。它提供桌面应用界面，把语音克隆、配音、听写、转录和有声书制作整合在一个工作台里。",
+      "核心能力分几块：一是语音克隆，用一段干净的参考录音就能复制某个人的声音；二是语音设计，用文字描述你想要的声音风格来生成新嗓音；三是视频配音，把视频里的对白换成另一种语言并配上时间轴；四是听写与转录，把说话内容变成文字；五是批量制作故事、有声书等长音频。它内置本地模型管理，需要时按提示下载模型即可，也支持接入本地 API 供其他程序调用。",
+      "它适合内容创作者、播客与有声书制作者、需要给视频做多语言配音的团队，以及在意隐私、不想把声音数据交给云服务的个人用户。因为支持 646 种语言，跨语言内容创作也是它的主要使用场景。",
+      "使用门槛主要在硬件上：本地运行语音模型需要一定的显卡或处理器性能，不同引擎的要求不一样，官方有性能说明可参考。安装方面，macOS 和 Linux 提供一条命令安装，Windows、macOS、Linux 和 Docker 都有对应指南；也可以把安装任务交给编程助手按文档自动完成。界面操作本身不需要写代码。"
+    ],
+    "facts": [
+      {
+        "label": "主要语言",
+        "value": "Python"
+      },
+      {
+        "label": "Stars",
+        "value": "43,798"
+      },
+      {
+        "label": "今日新增 Stars",
+        "value": "+3,274"
+      },
+      {
+        "label": "Forks",
+        "value": "5,079"
+      },
+      {
+        "label": "许可证",
+        "value": "AGPL-3.0"
+      },
+      {
+        "label": "最近更新",
+        "value": "2026-09-29"
+      }
+    ],
+    "externalLinks": [
+      {
+        "label": "阅读项目 README",
+        "url": "https://github.com/debpalash/VoiceStudio#readme"
+      },
+      {
+        "label": "打开项目网站",
+        "url": "https://voicestudio.sh"
+      },
+      {
+        "label": "查看 Releases",
+        "url": "https://github.com/debpalash/VoiceStudio/releases"
+      }
+    ],
+    "id": "github-trending:debpalash/VoiceStudio",
+    "title": "VoiceStudio：本地运行的语音克隆与配音工作室",
+    "sourceUrl": "https://github.com/debpalash/VoiceStudio",
+    "summary": "一个完全在本地电脑上运行的语音工具，能克隆声音、设计新嗓音、给视频配音、听写转文字并制作有声书，支持 646 种语言。",
+    "tags": [
+      "语音克隆",
+      "视频配音",
+      "本地部署",
+      "语音转文字",
+      "有声书制作",
+      "多语言",
+      "开源替代"
+    ],
+    "source": "daily",
+    "sourceLabel": "GitHub Trending",
+    "publishedAt": "2026-09-28T22:32:02.511Z"
+  },
+  {
+    "section": "github",
+    "digestDate": "2026-09-29",
+    "publishedDate": "9/29",
+    "time": "本次更新",
+    "readTime": "3 分钟",
+    "accent": "blue",
+    "inRecentWindow": true,
+    "paragraphs": [
+      "OpenRig 是一个面向 AI 编程代理的“编排工具”。平时使用 Claude Code 或 Codex 这类工具时，每个代理往往只是终端里的一个独立会话，任务一多就容易乱。OpenRig 把这些代理组织成一个有角色分工的团队，比如一个负责开发的“负责人”和一个负责检查的“验收员”，让它们围绕同一个仓库协同工作。",
+      "它的核心能力是：用 YAML 定义团队结构，一条命令启动整个团队；通过一个共享的终端界面查看每个代理的运行状态、所用模型、上下文和当前进展；你只需要向“负责人”说明想要的结果，它会安排任务、跟踪队列，并把需要你决策的事项反馈回来。所有工作都留在同一个项目地址上，上下文不会因为会话关闭而丢失。",
+      "它适合已经在用 AI 编程助手、并且希望把零散会话变成稳定工作流的开发者或技术团队，尤其是需要让 AI 持续处理同一个代码库、并希望有人复核结果的人。对于完全不写代码的读者，它的价值在于理解“让多个 AI 分工协作”这种工作方式，但实际使用仍需要一定的开发环境操作。",
+      "使用门槛不低：需要 macOS 或 Linux 系统，安装 Node.js 22 或 24 以及 tmux，并提前登录好 Codex。原生 Windows 暂不支持，WSL2 也未经测试。安装过程会修改本机的代理钩子和工作区信任设置，官方建议先备份相关文件、用 dry-run 预览再正式执行。"
+    ],
+    "facts": [
+      {
+        "label": "主要语言",
+        "value": "TypeScript"
+      },
+      {
+        "label": "Stars",
+        "value": "1,658"
+      },
+      {
+        "label": "今日新增 Stars",
+        "value": "+781"
+      },
+      {
+        "label": "Forks",
+        "value": "134"
+      },
+      {
+        "label": "许可证",
+        "value": "Apache-2.0"
+      },
+      {
+        "label": "最近更新",
+        "value": "2026-09-29"
+      }
+    ],
+    "externalLinks": [
+      {
+        "label": "阅读项目 README",
+        "url": "https://github.com/mvschwarz/openrig#readme"
+      },
+      {
+        "label": "打开项目网站",
+        "url": "https://openrig.dev"
+      },
+      {
+        "label": "查看 Releases",
+        "url": "https://github.com/mvschwarz/openrig/releases"
+      }
+    ],
+    "id": "github-trending:mvschwarz/openrig",
+    "title": "OpenRig：把多个 AI 编程助手编成一支团队",
+    "sourceUrl": "https://github.com/mvschwarz/openrig",
+    "summary": "用一份 YAML 配置把 Claude Code、Codex 等多个 AI 编程代理组织成有分工的团队，统一指挥、统一查看进度。",
+    "tags": [
+      "AI 编程代理",
+      "多代理协作",
+      "Claude Code",
+      "Codex",
+      "终端工具",
+      "任务编排"
+    ],
+    "source": "daily",
+    "sourceLabel": "GitHub Trending",
+    "publishedAt": "2026-09-28T22:32:02.511Z"
+  },
+  {
+    "section": "github",
+    "digestDate": "2026-09-29",
+    "publishedDate": "9/29",
+    "time": "本次更新",
+    "readTime": "3 分钟",
+    "accent": "blue",
+    "inRecentWindow": true,
+    "paragraphs": [
+      "AERIS-10 的目标是让雷达技术不再被少数机构垄断。它是一套完整的开源相控阵雷达系统，工作在 10.5GHz 频段，采用脉冲线性调频（LFM）调制，硬件原理图、PCB 布局、固件和软件全部公开，任何人都可以研究、复刻和改造。项目提供两个版本：AERIS-10N（Nexus）探测距离约 3 公里，使用 8x16 贴片天线阵；AERIS-10E（Extended）探测距离约 20 公里，使用 32x16 介质填充缝隙波导阵列。",
+      "系统由多个模块组成：电源管理板负责多路电压供给与上电时序；频率合成板提供低抖动时钟基准；主板上集成 DAC 产生雷达 chirp、混频器、四片四通道移相器（ADAR1000）用于收发波束成形、16 片前端芯片负责低噪声放大和功率放大，以及 XC7A50T FPGA 和 STM32F746 微控制器。FPGA 负责脉冲压缩、多普勒 FFT、MTI 和 CFAR 等信号处理，实现±45°的方位与俯仰电子波束扫描。",
+      "软件侧提供 Python 图形界面并集成地图显示，还支持 GPS/IMU 实时位置与姿态校正。它面向大学研究人员、无人机开发者以及有经验的软件无线电（SDR）爱好者，可用于波束成形、脉冲压缩、多普勒处理和目标跟踪等实验。项目目前处于 Alpha 阶段，功能仍在持续开发中。",
+      "使用门槛较高：这不是插电即用的成品，而是需要自行采购元器件、焊接组装、烧录固件并调试射频链路的硬件项目，适合有电子工程和射频基础的团队或个人。硬件采用 CERN-OHL-P 开源许可，软件采用 MIT 许可，但仓库许可证标注为 NOASSERTION，使用前建议确认具体条款。"
+    ],
+    "facts": [
+      {
+        "label": "主要语言",
+        "value": "PLSQL"
+      },
+      {
+        "label": "Stars",
+        "value": "25,731"
+      },
+      {
+        "label": "今日新增 Stars",
+        "value": "+145"
+      },
+      {
+        "label": "Forks",
+        "value": "5,884"
+      },
+      {
+        "label": "许可证",
+        "value": "NOASSERTION"
+      },
+      {
+        "label": "最近更新",
+        "value": "2026-06-17"
+      }
+    ],
+    "externalLinks": [
+      {
+        "label": "阅读项目 README",
+        "url": "https://github.com/NawfalMotii79/PLFM_RADAR#readme"
+      },
+      {
+        "label": "查看 Releases",
+        "url": "https://github.com/NawfalMotii79/PLFM_RADAR/releases"
+      }
+    ],
+    "id": "github-trending:NawfalMotii79/PLFM_RADAR",
+    "title": "AERIS-10：开源低成本 10.5GHz 相控阵雷达系统",
+    "sourceUrl": "https://github.com/NawfalMotii79/PLFM_RADAR",
+    "summary": "AERIS-10 是一套开源、低成本的 10.5GHz 脉冲线性调频相控阵雷达，提供 3 公里和 20 公里两个版本，供研究人员和爱好者动手实验雷达技术。",
+    "tags": [
+      "相控阵雷达",
+      "开源硬件",
+      "10.5GHz",
+      "脉冲压缩",
+      "波束成形",
+      "软件无线电",
+      "无人机探测"
+    ],
+    "source": "daily",
+    "sourceLabel": "GitHub Trending",
+    "publishedAt": "2026-09-28T22:32:02.511Z"
+  },
+  {
+    "section": "github",
+    "digestDate": "2026-09-29",
+    "publishedDate": "9/29",
+    "time": "本次更新",
+    "readTime": "3 分钟",
+    "accent": "blue",
+    "inRecentWindow": true,
+    "paragraphs": [
+      "这是美国伊利诺伊大学厄巴纳-香槟分校 CS 341 系统编程课程使用的开源教材，由师生持续维护。它把原本分散的维基内容整理成结构清晰、可引用的正式书稿，目标是让系统编程知识更严谨、更开放地传播。",
+      "全书用 C 语言讲解，因为 C 是 Linux 内核的事实标准语言。内容涵盖操作系统与程序如何交互、内存管理、进程与线程、并发与同步等底层主题，并配有引用、脚注、扩展阅读和术语表，方便读者查证与深入学习。",
+      "教材提供 PDF、HTML、EPUB 和 Markdown 多种导出格式，可在线浏览或下载离线阅读，适合自学编程的学生、准备系统方向面试的求职者，以及想补足计算机底层知识的开发者。",
+      "阅读前需要具备一门编程语言的基础，并对汇编指令有基本了解。教材本身免费开放，但内容有一定难度，更适合愿意动手写代码、逐步啃硬骨头的读者。"
+    ],
+    "facts": [
+      {
+        "label": "主要语言",
+        "value": "TeX"
+      },
+      {
+        "label": "Stars",
+        "value": "2,477"
+      },
+      {
+        "label": "今日新增 Stars",
+        "value": "+316"
+      },
+      {
+        "label": "Forks",
+        "value": "235"
+      },
+      {
+        "label": "许可证",
+        "value": "未标注"
+      },
+      {
+        "label": "最近更新",
+        "value": "2026-09-27"
+      }
+    ],
+    "externalLinks": [
+      {
+        "label": "阅读项目 README",
+        "url": "https://github.com/cs341-illinois/coursebook#readme"
+      },
+      {
+        "label": "打开项目网站",
+        "url": "https://cs341.cs.illinois.edu/coursebook"
+      },
+      {
+        "label": "查看 Releases",
+        "url": "https://github.com/cs341-illinois/coursebook/releases"
+      }
+    ],
+    "id": "github-trending:cs341-illinois/coursebook",
+    "title": "伊利诺伊大学系统编程开源教材",
+    "sourceUrl": "https://github.com/cs341-illinois/coursebook",
+    "summary": "一本面向初学者的系统编程开源教科书，帮助读者理解 Linux 环境下 C 语言、内存与并发等底层原理。",
+    "tags": [
+      "系统编程",
+      "C语言",
+      "开源教材",
+      "Linux",
+      "并发",
+      "内存管理",
+      "计算机教育"
+    ],
+    "source": "daily",
+    "sourceLabel": "GitHub Trending",
+    "publishedAt": "2026-09-28T22:32:02.511Z"
+  },
+  {
+    "section": "github",
+    "digestDate": "2026-09-29",
+    "publishedDate": "9/29",
+    "time": "本次更新",
+    "readTime": "3 分钟",
+    "accent": "blue",
+    "inRecentWindow": true,
+    "paragraphs": [
+      "这是一本由韩先凯（笔名离谱）撰写的持续更新书稿，副标题为“AI 时代终身学习指南”。它从英语学习出发，逐步扩展到 AI 学习、项目开发、创业失败、身体恢复与人生复盘，核心是帮助普通人在快速变化的世界里保持学习与创造的能力。",
+      "书稿提出一个可反复练习的循环：发现问题、主动学习、与 AI 协作、完成真实任务、保存证据、复盘迁移。它强调 AI 让答案变得廉价，但提问、辨别证据、把建议变成作品并承担责任的能力依然稀缺，因此全书始终区分研究结论、个人经验和待验证假设三类信息。",
+      "内容覆盖建立基础（英语、语法、写作）、借工具放大能力（用 AI 学习、AI 项目与资源层创业）、进入真实生活（海外求职、家庭学习、人生复盘）等路径，并提供 PDF 和 EPUB 下载，适合希望系统提升学习能力、探索 AI 应用或经历人生转折的普通读者。",
+      "阅读门槛较低，不要求读者先成为专家或意志坚定的人，也不需要编程基础。书稿以中文为主并提供英文版本，采用 CC BY-NC 4.0 许可，读者可以免费阅读、下载和参考其中的实践模板。"
+    ],
+    "facts": [
+      {
+        "label": "主要语言",
+        "value": "JavaScript"
+      },
+      {
+        "label": "Stars",
+        "value": "64,618"
+      },
+      {
+        "label": "今日新增 Stars",
+        "value": "+310"
+      },
+      {
+        "label": "Forks",
+        "value": "6,509"
+      },
+      {
+        "label": "许可证",
+        "value": "NOASSERTION"
+      },
+      {
+        "label": "最近更新",
+        "value": "2026-09-20"
+      }
+    ],
+    "externalLinks": [
+      {
+        "label": "阅读项目 README",
+        "url": "https://github.com/byoungd/up#readme"
+      },
+      {
+        "label": "打开项目网站",
+        "url": "https://biezou.com"
+      },
+      {
+        "label": "查看 Releases",
+        "url": "https://github.com/byoungd/up/releases"
+      }
+    ],
+    "id": "github-trending:byoungd/up",
+    "title": "人生进阶指南：AI 时代终身学习手册",
+    "sourceUrl": "https://github.com/byoungd/up",
+    "summary": "一份面向普通人的持续更新书稿，帮助读者在 AI 时代用英语、AI 工具和真实项目实现终身学习与人生复盘。",
+    "tags": [
+      "终身学习",
+      "AI学习",
+      "英语学习",
+      "人生复盘",
+      "真实项目",
+      "个人成长",
+      "开源书稿"
+    ],
+    "source": "daily",
+    "sourceLabel": "GitHub Trending",
+    "publishedAt": "2026-09-28T22:32:02.511Z"
+  },
+  {
+    "section": "x",
+    "digestDate": "2026-09-29",
+    "publishedDate": "9/28",
+    "time": "本次更新",
+    "readTime": "3 分钟",
+    "accent": "green",
+    "inRecentWindow": true,
+    "paragraphs": [
+      "我在3天内用Opus 5.5制作了10多个动态视频。这是完整的流程（开源）",
+      "核心观点：作者用Opus 5.5在3天内完成10多个动态视频，并公开整个流程。预览指出常见障碍：首次渲染效果一般（居中文字、渐变、淡入）、音乐与画面分离等。阅读时需注意：预览仅列举了部分问题，未提供具体解决方案或流程细节。"
+    ],
+    "id": "attentionvc-ai:2104502744010629269",
+    "title": "i made 10+ motion videos with opus 5.5 in 3 days. here's the whole pipeline (open source)",
+    "sourceUrl": "https://x.com/RaphaelAubryy/status/2104502744010629269",
+    "summary": "作者在3天内用Opus 5.5制作了10多个动态视频，并分享了整个开源流程；预览提到多数人尝试动态设计时会遇到首次渲染效果平庸、音乐与画面脱节等问题。",
+    "tags": [
+      "Opus 5.5",
+      "动态视频",
+      "开源",
+      "流程",
+      "动态设计"
+    ],
+    "source": "daily",
+    "sourceLabel": "Raphael aubry · 技术动态 X 热榜",
+    "publishedAt": "2026-09-28T09:25:28.000Z"
+  },
+  {
+    "section": "x",
+    "digestDate": "2026-09-29",
+    "publishedDate": "9/28",
+    "time": "本次更新",
+    "readTime": "3 分钟",
+    "accent": "green",
+    "inRecentWindow": true,
+    "digestFormat": "builders-digest",
+    "paragraphs": [
+      "FPV Ventures 合伙人 Nikunj Kothari 说 Astra 简直离谱：只要给它足够难、可验证的端到端任务，再配上合适的工具，它就能直接飞起来。他还提到自己跟 ChatGPT 来回聊了很久、说明自己偏好的书之后，让对方推荐书单，并欢迎大家再补充。他目前正在读的是 TinkeredThinker 的《White Mirror》和 HigginbothamA 的《Challenger》。另外，他展示的那台是尺寸更大的 13.3 英寸版本，带有文艺复兴艺术元素。"
+    ],
+    "externalLinks": [
+      {
+        "label": "推文 1",
+        "url": "https://x.com/nikunj/status/2104444216017637575"
+      },
+      {
+        "label": "推文 2",
+        "url": "https://x.com/nikunj/status/2104261968043663591"
+      },
+      {
+        "label": "推文 3",
+        "url": "https://x.com/nikunj/status/2104254321131245653"
+      }
+    ],
+    "id": "follow-builders:digest-2026-09-28-nikunj-kothari",
+    "title": "FPV Ventures 合伙人 Nikunj Kothari",
+    "sourceUrl": "https://x.com/nikunj/status/2104444216017637575",
+    "summary": "Nikunj Kothari 夸 Astra 在可验证的端到端任务上表现出色，并分享了自己用 ChatGPT 求书单、正在读的两本书以及一台 13.3 英寸文艺复兴艺术主题设备。",
+    "tags": [
+      "Astra",
+      "ChatGPT",
+      "书单",
+      "阅读",
+      "13.3 英寸",
+      "文艺复兴艺术"
+    ],
+    "source": "builder",
+    "sourceLabel": "Nikunj Kothari · Follow Builders",
+    "publishedAt": "2026-09-28T05:32:54.000Z"
+  },
+  {
+    "section": "x",
+    "digestDate": "2026-09-29",
+    "publishedDate": "9/28",
+    "time": "本次更新",
+    "readTime": "3 分钟",
+    "accent": "green",
+    "inRecentWindow": true,
+    "digestFormat": "builders-digest",
+    "paragraphs": [
+      "Guillermo Rauch 说他用 Opus 5.5 和 Sol 6 把 Mini 网页浏览器移植到了 Rust 和 Swift。结果它更快、更安全，而且出乎意料地比 Electron + Bun 更好迭代。他一直想要 Safari 那样的体验，但实际用的是 Chrome，多亏 cef crate，他可以打包最新的 Chromium。fx acp 让他能在不让应用变臃肿的情况下嵌入一个 agent，它通过 ACP 与他本地的 fx CLI 通信，fx 再通过 MCP server 管理浏览器。摆脱 Electron 之后，他得到了 Liquid Glass、更快的启动速度和更 Mac 原生的感觉；像细粒度焦点和输入控制这种在 JS 里是噩梦的东西，现在直接就能用。他认为原生是桌面和云端的未来，并猜测整个软件世界“原生化”的速度会比人们意识到的更快，就像 DHH 在 Rails World 上暗示的那样。他也很兴奋 Vercel 对 Fluid 的押注能支持这一点，无论你选择 Rust、Go、Zig 还是 scriptc。他提到自己是在这个过程中了解到某个项目，现在对此非常兴奋，它将提供一种更安全、更直接的方式来暴露 MCP 工具。"
+    ],
+    "externalLinks": [
+      {
+        "label": "推文",
+        "url": "https://x.com/rauchg/status/2104428800134013205"
+      }
+    ],
+    "id": "follow-builders:digest-2026-09-28-guillermo-rauch",
+    "title": "Vercel CEO Guillermo Rauch",
+    "sourceUrl": "https://x.com/rauchg/status/2104428800134013205",
+    "summary": "Guillermo Rauch 把 Mini 浏览器移植到 Rust 和 Swift，称其更快、更安全，也比 Electron + Bun 更好迭代。",
+    "tags": [
+      "Rust",
+      "Swift",
+      "Electron",
+      "MCP",
+      "原生",
+      "浏览器"
+    ],
+    "source": "builder",
+    "sourceLabel": "Guillermo Rauch · Follow Builders",
+    "publishedAt": "2026-09-28T04:31:39.000Z"
+  },
+  {
+    "section": "x",
+    "digestDate": "2026-09-29",
+    "publishedDate": "9/28",
+    "time": "本次更新",
+    "readTime": "3 分钟",
+    "accent": "green",
+    "inRecentWindow": true,
+    "digestFormat": "builders-digest",
+    "paragraphs": [
+      "Replit 的 CEO Amjad Masad 发了一条动态，说很高兴看到 Replit 在 Chan-Zuckerberg 家里也很受欢迎。紧接着他又发了一条，配文“Love to see it 😂”，看起来是被某条内容逗乐了。"
+    ],
+    "externalLinks": [
+      {
+        "label": "推文 1",
+        "url": "https://x.com/amasad/status/2104428789417857436"
+      },
+      {
+        "label": "推文 2",
+        "url": "https://x.com/amasad/status/2104344877798719516"
+      }
+    ],
+    "id": "follow-builders:digest-2026-09-28-amjad-masad",
+    "title": "Replit CEO Amjad Masad",
+    "sourceUrl": "https://x.com/amasad/status/2104428789417857436",
+    "summary": "Amjad Masad 分享 Replit 在 Chan-Zuckerberg 家受欢迎，并转发一条让他开心的内容。",
+    "tags": [
+      "Replit",
+      "Chan-Zuckerberg",
+      "动态"
+    ],
+    "source": "builder",
+    "sourceLabel": "Amjad Masad · Follow Builders",
+    "publishedAt": "2026-09-28T04:31:36.000Z"
+  },
+  {
+    "section": "x",
+    "digestDate": "2026-09-29",
+    "publishedDate": "9/28",
+    "time": "本次更新",
+    "readTime": "3 分钟",
+    "accent": "green",
+    "inRecentWindow": true,
+    "digestFormat": "builders-digest",
+    "paragraphs": [
+      "即将加入 OpenAI 产品团队、此前在 Linear 担任产品负责人的 Nan Yu 发了一句感慨：我们是在黄金时代成长起来的。"
+    ],
+    "externalLinks": [
+      {
+        "label": "推文",
+        "url": "https://x.com/thenanyu/status/2104424388309496182"
+      }
+    ],
+    "id": "follow-builders:digest-2026-09-28-nan-yu",
+    "title": "OpenAI 产品团队成员 Nan Yu",
+    "sourceUrl": "https://x.com/thenanyu/status/2104424388309496182",
+    "summary": "Nan Yu 感叹他们是在黄金时代成长起来的。",
+    "tags": [
+      "黄金时代",
+      "产品",
+      "Linear",
+      "OpenAI",
+      "成长"
+    ],
+    "source": "builder",
+    "sourceLabel": "Nan Yu · Follow Builders",
+    "publishedAt": "2026-09-28T04:14:07.000Z"
+  },
+  {
+    "section": "x",
+    "digestDate": "2026-09-29",
+    "publishedDate": "9/28",
+    "time": "本次更新",
+    "readTime": "3 分钟",
+    "accent": "green",
+    "inRecentWindow": true,
+    "digestFormat": "builders-digest",
+    "paragraphs": [
+      "Peter Yang 先自嘲了一句“没错我就是千禧一代🙂”。接着他抛出一个观察：几乎没人对当年用过的 SaaS 或商业软件留有美好回忆，但每个人都记得自己最爱的游戏——游戏才是真正在我们记忆里留存最久的软件，而 LLM 模型大概正好相反😂。另外他还提醒大家去关注 @David_Wise，说这位大神创作了超棒的《大金刚国度》配乐。"
+    ],
+    "externalLinks": [
+      {
+        "label": "推文 1",
+        "url": "https://x.com/petergyang/status/2104405655406923922"
+      },
+      {
+        "label": "推文 2",
+        "url": "https://x.com/petergyang/status/2104414495376564517"
+      },
+      {
+        "label": "推文 3",
+        "url": "https://x.com/petergyang/status/2104406922216808505"
+      }
+    ],
+    "id": "follow-builders:digest-2026-09-28-peter-yang",
+    "title": "Peter Yang",
+    "sourceUrl": "https://x.com/petergyang/status/2104414495376564517",
+    "summary": "Peter Yang 自认是千禧一代，并比较了游戏与 SaaS 在记忆中的留存差异，还顺带推荐了《大金刚国度》配乐作者。",
+    "tags": [
+      "千禧一代",
+      "游戏记忆",
+      "SaaS",
+      "LLM 模型",
+      "大金刚国度"
+    ],
+    "source": "builder",
+    "sourceLabel": "Peter Yang · Follow Builders",
+    "publishedAt": "2026-09-28T03:34:48.000Z"
+  },
+  {
+    "section": "x",
+    "digestDate": "2026-09-29",
+    "publishedDate": "9/28",
+    "time": "本次更新",
+    "readTime": "3 分钟",
+    "accent": "green",
+    "inRecentWindow": true,
+    "digestFormat": "builders-digest",
+    "paragraphs": [
+      "Thariq 说他最害怕的一件事，就是我们只是变得更懒，从而把 agent 带来的生产力增益白白吃掉。随后他又发了一条自嘲：用 Neopets 来暴露自己的年龄，这让他有点慌。"
+    ],
+    "externalLinks": [
+      {
+        "label": "推文 1",
+        "url": "https://x.com/trq212/status/2104273243599405395"
+      },
+      {
+        "label": "推文 2",
+        "url": "https://x.com/trq212/status/2104403711699423680"
+      }
+    ],
+    "id": "follow-builders:digest-2026-09-28-thariq",
+    "title": "Claude Code @anthropicai 的 Thariq",
+    "sourceUrl": "https://x.com/trq212/status/2104403711699423680",
+    "summary": "Thariq 担心我们把 agent 带来的生产力提升浪费在变得更懒上，并自嘲用 Neopets 暴露了年龄。",
+    "tags": [
+      "agent",
+      "生产力",
+      "懒惰",
+      "Neopets",
+      "自嘲"
+    ],
+    "source": "builder",
+    "sourceLabel": "Thariq · Follow Builders",
+    "publishedAt": "2026-09-28T02:51:57.000Z"
+  },
+  {
+    "section": "x",
+    "digestDate": "2026-09-29",
+    "publishedDate": "9/28",
+    "time": "本次更新",
+    "readTime": "3 分钟",
+    "accent": "green",
+    "inRecentWindow": true,
+    "digestFormat": "builders-digest",
+    "paragraphs": [
+      "Y Combinator 总裁兼 CEO Garry Tan 在推文里聊到反爬虫，语气挺冲。他直接说“反爬虫是给输家准备的”，随后又补了一句：有人觉得“我用 CDP 就能搞定”，哈哈，那你根本没碰到过真正的反爬虫。"
+    ],
+    "externalLinks": [
+      {
+        "label": "推文 1",
+        "url": "https://x.com/garrytan/status/2104402742517420517"
+      },
+      {
+        "label": "推文 2",
+        "url": "https://x.com/garrytan/status/2104288345547591747"
+      }
+    ],
+    "id": "follow-builders:digest-2026-09-28-garry-tan",
+    "title": "Y Combinator 总裁兼 CEO Garry Tan",
+    "sourceUrl": "https://x.com/garrytan/status/2104402742517420517",
+    "summary": "Garry Tan 嘲讽反爬虫技术，认为用 CDP 就能绕过的说法是没遇到过真正的反爬虫。",
+    "tags": [
+      "反爬虫",
+      "CDP",
+      "Garry Tan",
+      "Y Combinator",
+      "爬虫"
+    ],
+    "source": "builder",
+    "sourceLabel": "Garry Tan · Follow Builders",
+    "publishedAt": "2026-09-28T02:48:06.000Z"
+  },
+  {
+    "section": "x",
+    "digestDate": "2026-09-29",
+    "publishedDate": "9/28",
+    "time": "本次更新",
+    "readTime": "3 分钟",
+    "accent": "green",
+    "inRecentWindow": true,
+    "paragraphs": [
+      "我整理了GPT-Image 2.5的12种玩法，希望能承包你的整个假期朋友圈。",
+      "核心观点：作者基于GPT-Image 2.5整理了12种玩法，面向假期朋友圈场景。阅读时需注意：预览内容仅提及中秋已过、国庆假期将至，以及作者整理了12种玩法，并未具体说明玩法内容或效果。"
+    ],
+    "id": "attentionvc-ai:2104401048324743646",
+    "title": "我整理了GPT-Image 2.5的12种玩法，希望能承包你的整个假期朋友圈。",
+    "sourceUrl": "https://x.com/Khazix0918/status/2104401048324743646",
+    "summary": "作者在中秋刚过、国庆假期将至的背景下，整理了GPT-Image 2.5的12种玩法，旨在帮助用户丰富假期朋友圈内容。",
+    "tags": [
+      "GPT-Image 2.5",
+      "玩法",
+      "朋友圈",
+      "假期",
+      "整理"
+    ],
+    "source": "daily",
+    "sourceLabel": "数字生命卡兹克 · 技术动态 X 热榜",
+    "publishedAt": "2026-09-28T02:41:22.000Z"
+  },
+  {
+    "section": "x",
+    "digestDate": "2026-09-29",
+    "publishedDate": "9/28",
+    "time": "本次更新",
+    "readTime": "3 分钟",
+    "accent": "green",
+    "inRecentWindow": true,
+    "digestFormat": "builders-digest",
+    "paragraphs": [
+      "Box 的 CEO Aaron Levie 聊到一个很有意思的设想：当 AI 代理开始替用户做出最好或最高效的选择时，世界会变成什么样。他说，一方面，经济里有一部分行业本来就靠用户懒得改变习惯所产生的那点摩擦来获利，在这些领域，转换成本会降下来，竞争会急剧升温，直到颠覆性方案和现有玩家之间达到某种新的平衡。另一方面，也有很多市场恰恰被大量摩擦拖累，代理会让以前因为太麻烦而没人买的商品或服务变得容易得多，从而释放出各种经济活动。医疗、旅行、本地服务、某些信息服务，以及一些全新的市场，很可能都是代理的净受益方。Levie 的结论是：无论如何，一个由不知疲倦地为我们和目标工作的代理深度介入的未来，不可能和今天一模一样地运转。这会很疯狂。"
+    ],
+    "externalLinks": [
+      {
+        "label": "推文",
+        "url": "https://x.com/levie/status/2104350592290406849"
+      }
+    ],
+    "id": "follow-builders:digest-2026-09-28-aaron-levie",
+    "title": "Box CEO Aaron Levie",
+    "sourceUrl": "https://x.com/levie/status/2104350592290406849",
+    "summary": "Aaron Levie 思考当 AI 代理开始替用户做最优选择时，各行业将面临的竞争与机会。",
+    "tags": [
+      "AI代理",
+      "转换成本",
+      "市场竞争",
+      "经济活动",
+      "未来"
+    ],
+    "source": "builder",
+    "sourceLabel": "Aaron Levie · Follow Builders",
+    "publishedAt": "2026-09-27T23:20:52.000Z"
+  },
+  {
+    "section": "x",
+    "digestDate": "2026-09-29",
+    "publishedDate": "9/28",
+    "time": "本次更新",
+    "readTime": "3 分钟",
+    "accent": "green",
+    "inRecentWindow": true,
+    "paragraphs": [
+      "这不仅仅是该死的沙盒",
+      "核心观点：关于AI事件的讨论多来自外部视角，缺少亲历其中的安全人员的内部视角。阅读时需注意：预览仅表达了这一视角缺失的观察，并未展开具体事件或结论。"
+    ],
+    "id": "attentionvc-ai:2104335929293127851",
+    "title": "Its not just the f*cking sandbox",
+    "sourceUrl": "https://x.com/joedaroo/status/2104335929293127851",
+    "summary": "作者指出关于AI事件的许多观点都是从外部视角分享的，很少从内部安全人员的视角来讲述。",
+    "tags": [
+      "AI事件",
+      "安全",
+      "内部视角",
+      "观点",
+      "沙盒"
+    ],
+    "source": "daily",
+    "sourceLabel": "Joe · 技术动态 X 热榜",
+    "publishedAt": "2026-09-27T22:22:36.000Z"
+  },
+  {
+    "section": "x",
+    "digestDate": "2026-09-29",
+    "publishedDate": "9/28",
+    "time": "本次更新",
+    "readTime": "3 分钟",
+    "accent": "green",
+    "inRecentWindow": true,
+    "digestFormat": "builders-digest",
+    "paragraphs": [
+      "FirstMark Capital 的投资人 Matt Turck 观察到一件持续值得注意的事：很多真正理解 AI 运作方式的 AI 研究者，既不相信 AI 会带来末日，也不相信会出现大规模、无法控制的加速；反倒是那些对 AI 了解有限的非 AI 研究者，在这个话题上有着非常明确且笃定的观点。"
+    ],
+    "externalLinks": [
+      {
+        "label": "推文",
+        "url": "https://x.com/mattturck/status/2104331402385002831"
+      }
+    ],
+    "id": "follow-builders:digest-2026-09-28-matt-turck",
+    "title": "FirstMark Capital 投资人 Matt Turck",
+    "sourceUrl": "https://x.com/mattturck/status/2104331402385002831",
+    "summary": "Matt Turck 指出，真正懂 AI 的研究者往往既不相信 AI 末日论，也不相信失控式加速，而了解有限的非 AI 研究者反而立场异常笃定。",
+    "tags": [
+      "AI 研究者",
+      "末日论",
+      "加速",
+      "认知差异",
+      "AI 观点"
+    ],
+    "source": "builder",
+    "sourceLabel": "Matt Turck · Follow Builders",
+    "publishedAt": "2026-09-27T22:04:37.000Z"
+  },
+  {
+    "section": "x",
+    "digestDate": "2026-09-29",
+    "publishedDate": "9/28",
+    "time": "本次更新",
+    "readTime": "3 分钟",
+    "accent": "green",
+    "inRecentWindow": true,
+    "digestFormat": "builders-digest",
+    "paragraphs": [
+      "Peter Steinberger 表示自己也有同样的感受。他提到 @useblacksmith 一直是很棒的赞助商，但负载需要分散开来。他的计划是让 codex 决定哪些测试实际上真的需要运行，从而大幅砍掉 CI，并改成每小时跑一次测试。"
+    ],
+    "externalLinks": [
+      {
+        "label": "推文",
+        "url": "https://x.com/steipete/status/2104305554760114488"
+      }
+    ],
+    "id": "follow-builders:digest-2026-09-28-peter-steinberger",
+    "title": "Polyagentmorous ClawFather Peter Steinberger",
+    "sourceUrl": "https://x.com/steipete/status/2104305554760114488",
+    "summary": "Peter Steinberger 说他的 CI 需要分流，打算让 codex 决定哪些测试真正要跑，大幅削减 CI 并改成每小时跑一次测试。",
+    "tags": [
+      "CI",
+      "codex",
+      "测试",
+      "负载分流",
+      "赞助"
+    ],
+    "source": "builder",
+    "sourceLabel": "Peter Steinberger · Follow Builders",
+    "publishedAt": "2026-09-27T20:21:55.000Z"
+  },
+  {
+    "section": "x",
+    "digestDate": "2026-09-29",
+    "publishedDate": "9/28",
+    "time": "本次更新",
+    "readTime": "3 分钟",
+    "accent": "green",
+    "inRecentWindow": true,
+    "digestFormat": "builders-digest",
+    "paragraphs": [
+      "Dan Shipper 发了一条带点黑色幽默的观察：一个建立在“把人建模为理性主体”之上的行业，如今正因为人类开始采用理性主体而陷入恐慌。"
+    ],
+    "externalLinks": [
+      {
+        "label": "推文",
+        "url": "https://x.com/danshipper/status/2104302924251951553"
+      }
+    ],
+    "id": "follow-builders:digest-2026-09-28-dan-shipper",
+    "title": "Every CEO Dan Shipper",
+    "sourceUrl": "https://x.com/danshipper/status/2104302924251951553",
+    "summary": "Dan Shipper 调侃建立在“把人建模为理性主体”之上的行业，正因人类开始采用理性主体而陷入恐慌。",
+    "tags": [
+      "理性主体",
+      "行业恐慌",
+      "AI 建模",
+      "Dan Shipper"
+    ],
+    "source": "builder",
+    "sourceLabel": "Dan Shipper · Follow Builders",
+    "publishedAt": "2026-09-27T20:11:27.000Z"
   },
   {
     "section": "github",
@@ -135,216 +1098,6 @@
       "MCP协议",
       "免费开源",
       "系统学习"
-    ],
-    "source": "daily",
-    "sourceLabel": "GitHub Trending",
-    "publishedAt": "2026-09-27T20:09:43.415Z"
-  },
-  {
-    "section": "github",
-    "digestDate": "2026-09-28",
-    "publishedDate": "9/28",
-    "time": "本次更新",
-    "readTime": "3 分钟",
-    "accent": "blue",
-    "inRecentWindow": true,
-    "paragraphs": [
-      "Hindsight 解决的是 AI 智能体“记不住、学不会”的问题。大多数记忆系统只关注回放对话历史，而 Hindsight 的目标是让智能体从经验中学习，形成可复用的长期记忆。根据项目说明，它在 LongMemEval 长期记忆基准测试中达到了当前最先进的准确率，并且结果被弗吉尼亚理工大学和《华盛顿邮报》的研究人员独立复现，说明其性能有第三方验证。",
-      "它的核心操作包括保留、回忆和反思三种：智能体可以把重要信息存入记忆库，在需要时准确回忆，并通过反思机制提炼出观察结论和心智模型。Hindsight 还支持知识页面和记忆银行等概念，让不同项目或角色拥有独立的记忆空间，避免信息互相干扰。项目提供 Docker 一键启动方式，支持超过 25 种大语言模型提供商，包括 OpenAI、Anthropic、Gemini 以及本地运行的 Ollama 等。",
-      "Hindsight 适合正在构建对话式 AI、客服机器人、个人助理或任何需要长期上下文的智能体应用的开发者与产品团队。它已经被财富 500 强企业和多家 AI 初创公司用于生产环境。如果你希望自己的 AI 助手能记住用户偏好、跨会话保持一致性，或者从历史交互中不断改进回答质量，Hindsight 提供了比传统 RAG 和知识图谱更专注长期记忆的解决方案。",
-      "使用门槛中等：项目提供 Python 和 Node.js 客户端，也有嵌入模式可以免服务器运行，但初次部署仍需要配置大模型 API 密钥和运行环境。它提供详细的文档、集成指南和示例代码，还有 Slack 社区可供交流。对于不写代码的读者，可以把它理解为给 AI 应用加装一个“长期记忆大脑”，具体集成需要技术人员协助完成。"
-    ],
-    "facts": [
-      {
-        "label": "主要语言",
-        "value": "Python"
-      },
-      {
-        "label": "Stars",
-        "value": "36,973"
-      },
-      {
-        "label": "今日新增 Stars",
-        "value": "+4,463"
-      },
-      {
-        "label": "Forks",
-        "value": "4,817"
-      },
-      {
-        "label": "许可证",
-        "value": "MIT"
-      },
-      {
-        "label": "最近更新",
-        "value": "2026-09-26"
-      }
-    ],
-    "externalLinks": [
-      {
-        "label": "阅读项目 README",
-        "url": "https://github.com/vectorize-io/hindsight#readme"
-      },
-      {
-        "label": "打开项目网站",
-        "url": "https://hindsight.vectorize.io/"
-      },
-      {
-        "label": "查看 Releases",
-        "url": "https://github.com/vectorize-io/hindsight/releases"
-      }
-    ],
-    "id": "github-trending:vectorize-io/hindsight",
-    "title": "Hindsight：让 AI 智能体真正学会记忆与学习",
-    "sourceUrl": "https://github.com/vectorize-io/hindsight",
-    "summary": "Hindsight 是一个开源的智能体记忆系统，帮助 AI 在长期对话和任务中记住关键信息并持续学习，而不仅仅是复述历史记录。",
-    "tags": [
-      "AI 记忆系统",
-      "智能体学习",
-      "长期记忆",
-      "开源框架",
-      "对话式 AI",
-      "大模型集成"
-    ],
-    "source": "daily",
-    "sourceLabel": "GitHub Trending",
-    "publishedAt": "2026-09-27T20:09:43.415Z"
-  },
-  {
-    "section": "github",
-    "digestDate": "2026-09-28",
-    "publishedDate": "9/28",
-    "time": "本次更新",
-    "readTime": "3 分钟",
-    "accent": "blue",
-    "inRecentWindow": true,
-    "paragraphs": [
-      "Paperclip 把 AI 智能体当成一支团队来管理，而不是零散的工具。你可以先定义一个业务目标，比如“打造排名第一的 AI 笔记应用并实现 100 万美元月收入”，然后像招聘一样为项目配置 CEO、CTO、工程师、设计师和营销人员等不同角色的智能体。它支持 OpenClaw、Claude Code、Codex、Cursor、Bash、HTTP 等多种智能体来源，只要对方能接收心跳信号，就能被纳入团队。",
-      "它的核心能力围绕四个支柱展开：任务管理、组织架构、训练与基础设施。在任务层面，你可以声明意图、让智能体自主工作，然后通过审批和审查关卡来验证输出；在组织层面，它提供类似公司架构的层级关系、预算控制和治理规则，确保每个智能体在权限和成本范围内运行。所有工作过程和成本都能在一个仪表盘中追踪，方便你随时介入调整。",
-      "Paperclip 适合那些同时运行大量 AI 智能体、需要统一协调和审计的人。比如你手头有二十个 Claude Code 终端在跑不同任务，容易失去全局掌控；或者你希望智能体 7×24 小时自主工作，但仍要能查看进度、控制预算并随时发表意见。它尤其适合想构建“自主 AI 组织”的团队，把管理智能体变成像使用任务管理器一样自然，甚至可以从手机上管理整个业务。",
-      "使用门槛方面，Paperclip 是一个基于 Node.js 的服务端加 React 前端应用，需要一定的技术能力来部署和配置。不过它的设计目标就是让非程序员也能通过可视化界面管理智能体团队，日常操作类似使用任务管理工具。项目采用 MIT 许可证，代码开源，文档和社区渠道齐全，适合愿意投入初期设置、换取长期自动化管理效率的用户。"
-    ],
-    "facts": [
-      {
-        "label": "主要语言",
-        "value": "TypeScript"
-      },
-      {
-        "label": "Stars",
-        "value": "89,438"
-      },
-      {
-        "label": "今日新增 Stars",
-        "value": "+2,527"
-      },
-      {
-        "label": "Forks",
-        "value": "15,620"
-      },
-      {
-        "label": "许可证",
-        "value": "MIT"
-      },
-      {
-        "label": "最近更新",
-        "value": "2026-09-28"
-      }
-    ],
-    "externalLinks": [
-      {
-        "label": "阅读项目 README",
-        "url": "https://github.com/paperclipai/paperclip#readme"
-      },
-      {
-        "label": "打开项目网站",
-        "url": "https://paperclip.ing"
-      },
-      {
-        "label": "查看 Releases",
-        "url": "https://github.com/paperclipai/paperclip/releases"
-      }
-    ],
-    "id": "github-trending:paperclipai/paperclip",
-    "title": "Paperclip：像管理公司一样管理 AI 智能体团队",
-    "sourceUrl": "https://github.com/paperclipai/paperclip",
-    "summary": "Paperclip 是一个开源应用，用类似任务管理器的界面帮你组织、指派和监控多个 AI 智能体，让它们协同完成业务目标。",
-    "tags": [
-      "AI 智能体管理",
-      "开源任务管理器",
-      "多智能体协作",
-      "预算与治理",
-      "自动化组织",
-      "成本监控"
-    ],
-    "source": "daily",
-    "sourceLabel": "GitHub Trending",
-    "publishedAt": "2026-09-27T20:09:43.415Z"
-  },
-  {
-    "section": "github",
-    "digestDate": "2026-09-28",
-    "publishedDate": "9/28",
-    "time": "本次更新",
-    "readTime": "3 分钟",
-    "accent": "blue",
-    "inRecentWindow": true,
-    "paragraphs": [
-      "VoiceStudio 被定位为开源且完全本地化的 ElevenLabs 替代品，核心卖点是你的声音数据不必上传到云端。它把语音克隆、语音设计、视频配音、听写、转录和有声书制作整合在一个桌面应用里，官方称覆盖 646 种语言。对于不想把录音交给第三方、又需要多语言语音能力的用户，这是一个可以自己掌控的选项。",
-      "它提供几个明确的工作区：在语音克隆里，你可以选择一个已有声音或添加一段干净的参考录音，再输入文字生成语音；语音设计允许你直接描述想要的声音；视频配音可以为视频配上时间对齐的语音；此外还有悬浮听写小部件、故事和有声书制作以及批量任务。应用还提供本地 API 和面向智能体的 MCP 接口，方便把语音能力接入其他自动化流程。",
-      "默认引擎基于 k2-fsa/OmniVoice，但项目也支持选择其他引擎，并提供本地模型的管理与安装界面。官方强调本地工作流运行在你自己的硬件上，远程服务是可选的，使用分析数据需要你同意。这意味着硬件性能会直接影响生成速度和质量，不同引擎对电脑配置的要求也不一样。",
-      "使用门槛方面，macOS 和 Linux 用户可以用一条命令安装 Electron 桌面版，Windows、Docker 等平台有各自的安装文档；也可以从 Releases 下载安装包。源码构建需要 Git、Node.js 22+、Bun、Rust/Cargo 和平台构建工具，对普通用户来说更适合走安装包或安装脚本。项目采用 AGPL-3.0 许可证，适合愿意接受开源许可、并希望把语音数据留在本地的创作者、开发者和内容团队。"
-    ],
-    "facts": [
-      {
-        "label": "主要语言",
-        "value": "Python"
-      },
-      {
-        "label": "Stars",
-        "value": "39,688"
-      },
-      {
-        "label": "今日新增 Stars",
-        "value": "+3,060"
-      },
-      {
-        "label": "Forks",
-        "value": "4,714"
-      },
-      {
-        "label": "许可证",
-        "value": "AGPL-3.0"
-      },
-      {
-        "label": "最近更新",
-        "value": "2026-09-27"
-      }
-    ],
-    "externalLinks": [
-      {
-        "label": "阅读项目 README",
-        "url": "https://github.com/debpalash/VoiceStudio#readme"
-      },
-      {
-        "label": "打开项目网站",
-        "url": "https://voicestudio.sh"
-      },
-      {
-        "label": "查看 Releases",
-        "url": "https://github.com/debpalash/VoiceStudio/releases"
-      }
-    ],
-    "id": "github-trending:debpalash/VoiceStudio",
-    "title": "VoiceStudio：本地运行的AI语音克隆与配音工作台",
-    "sourceUrl": "https://github.com/debpalash/VoiceStudio",
-    "summary": "这是一个完全在你自己电脑上运行的语音工具，可以克隆声音、设计新声音、给视频配音、听写和转录，并制作有声书，支持646种语言。",
-    "tags": [
-      "语音克隆",
-      "本地部署",
-      "视频配音",
-      "多语言语音",
-      "有声书制作",
-      "开源语音工具"
     ],
     "source": "daily",
     "sourceLabel": "GitHub Trending",
@@ -499,77 +1252,6 @@
     "accent": "blue",
     "inRecentWindow": true,
     "paragraphs": [
-      "OpenRig 解决的是这样一个问题：当你同时使用多个 AI 编程助手时，它们通常只是散落在各个终端窗口里的独立会话，彼此不知道对方在做什么，上下文也难以延续。OpenRig 把这些助手当作一个系统来管理，你可以用 YAML 定义团队里有谁、各自负责什么，然后用一条命令把整支队伍启动起来。",
-      "它的核心用法是：你只跟一个“负责人”助手对话，说明你想要的结果；负责人会去协调不同角色的成员（例如开发者和检查者），把任务记录到队列里，最后把成果和需要你拍板的决策交回给你。项目本身提供了共享的终端仪表盘，可以看到每个成员的状态、模型、上下文和运行情况，还支持随时切回同一个视图。",
-      "这个项目适合已经在用 Claude Code、Codex 这类命令行 AI 编程工具、并且希望把零散会话变成有组织工作流的开发者或小团队。它要求你熟悉命令行操作，机器上需要安装 Node.js（20、22 或 24）和 tmux，并且 Codex 需要先登录。安装和首次启动前，项目建议先做 dry-run 检查，因为启动过程会写入提供商钩子和工作区信任设置，官方也提醒你先备份相关文件。",
-      "需要注意的是，OpenRig 会修改你机器上的配置（包括信任设置和可执行钩子），因此上手门槛不只是敲命令，还包括理解这些改动。项目以 Apache-2.0 协议开源，提供 npm 包和引导式首次使用文档，适合愿意花一点时间做环境准备、换取长期团队化协作体验的用户。"
-    ],
-    "facts": [
-      {
-        "label": "主要语言",
-        "value": "TypeScript"
-      },
-      {
-        "label": "Stars",
-        "value": "854"
-      },
-      {
-        "label": "今日新增 Stars",
-        "value": "+114"
-      },
-      {
-        "label": "Forks",
-        "value": "93"
-      },
-      {
-        "label": "许可证",
-        "value": "Apache-2.0"
-      },
-      {
-        "label": "最近更新",
-        "value": "2026-09-28"
-      }
-    ],
-    "externalLinks": [
-      {
-        "label": "阅读项目 README",
-        "url": "https://github.com/mvschwarz/openrig#readme"
-      },
-      {
-        "label": "打开项目网站",
-        "url": "https://openrig.dev"
-      },
-      {
-        "label": "查看 Releases",
-        "url": "https://github.com/mvschwarz/openrig/releases"
-      }
-    ],
-    "id": "github-trending:mvschwarz/openrig",
-    "title": "OpenRig：把多个 AI 编程助手编成一支团队",
-    "sourceUrl": "https://github.com/mvschwarz/openrig",
-    "summary": "用一份 YAML 配置把 Claude Code、Codex 等 AI 编程助手组织成一个可长期运行的协作团队，由你向负责人下达目标，它再调度其他成员完成并交付结果。",
-    "tags": [
-      "AI 编程助手",
-      "多智能体协作",
-      "命令行工具",
-      "YAML 配置",
-      "Claude Code",
-      "Codex",
-      "任务队列"
-    ],
-    "source": "daily",
-    "sourceLabel": "GitHub Trending",
-    "publishedAt": "2026-09-27T20:09:43.415Z"
-  },
-  {
-    "section": "github",
-    "digestDate": "2026-09-28",
-    "publishedDate": "9/28",
-    "time": "本次更新",
-    "readTime": "3 分钟",
-    "accent": "blue",
-    "inRecentWindow": true,
-    "paragraphs": [
       "Madeira 想解决的问题很直接：iPhone 本身不能运行 Windows 游戏，而越狱又会带来安全和保修上的麻烦。它把三套成熟的开源技术拼在一起——Wine 负责运行 Windows 程序，FEX-Emu 把 x86-64 指令翻译成 iPhone 能执行的 ARM64 指令，DXMT 则把游戏的 Direct3D 11 图形调用转换成苹果的 Metal 图形接口。整个系统在 iOS 上以单个进程运行，wineserver 作为线程而非独立进程存在。",
       "从实际效果看，它已经能让部分游戏真正可玩。项目说明中提到 Thumper 和 ULTRAKILL 可以正常游玩，Marvel Cosmic Invasion 能进入游戏画面但操作还不够可靠，也曾出现过不明原因的崩溃；其他一些游戏能以较低帧率进入游戏。作者明确表示这是一个研究项目而非成熟产品，不同游戏各有各的毛病，版本更新也可能带来破坏性变化。",
       "使用门槛不低。你需要一台未越狱的 iPhone（开发主要在 A15 芯片的 iPhone 13 Pro 上进行），需要 JIT 即时编译能力，而在 iOS 上这要求附加调试器，项目使用 StikDebug 来实现。你还需要一个 Apple ID 用于签名，免费账号的配置文件 7 天就会过期，因此必须每周重新构建并安装一次；好在应用容器在重装后仍然保留，游戏存档和配置不会丢失。由于 JIT 需要调试器附加，这款应用无法上架 App Store，只能通过侧载方式安装。",
@@ -627,6 +1309,76 @@
     "source": "daily",
     "sourceLabel": "GitHub Trending",
     "publishedAt": "2026-09-27T20:09:43.415Z"
+  },
+  {
+    "section": "x",
+    "digestDate": "2026-09-29",
+    "publishedDate": "9/28",
+    "time": "本次更新",
+    "readTime": "3 分钟",
+    "accent": "green",
+    "inRecentWindow": true,
+    "digestFormat": "builders-digest",
+    "paragraphs": [
+      "Amanda Askell 想知道，自己讨厌香水是不是只因为从没拥有过一瓶好香水。于是她研究了一堆最贵、评价最好的香水，每种买了一小瓶样品。现在她可以自信地确认：所有香水闻起来都很恶心。她也承认自己对很多气味都比较排斥，但她喜欢新鲜橙子那种味道；而那些号称写实、柑橘调的香水，闻起来顶多是橙子叠在臭鼬上面。"
+    ],
+    "externalLinks": [
+      {
+        "label": "推文 1",
+        "url": "https://x.com/AmandaAskell/status/2104261424625381528"
+      },
+      {
+        "label": "推文 2",
+        "url": "https://x.com/AmandaAskell/status/2104266890726309908"
+      }
+    ],
+    "id": "follow-builders:digest-2026-09-28-amanda-askell",
+    "title": "AnthropicAI 哲学家与伦理学家 Amanda Askell",
+    "sourceUrl": "https://x.com/AmandaAskell/status/2104266890726309908",
+    "summary": "Amanda Askell 为了验证自己是不是只是没拥有过好香水才讨厌香水，买来一堆顶级香水小样，结果确认所有香水都很难闻。",
+    "tags": [
+      "香水",
+      "气味",
+      "橙子",
+      "小样",
+      "厌恶"
+    ],
+    "source": "builder",
+    "sourceLabel": "Amanda Askell · Follow Builders",
+    "publishedAt": "2026-09-27T17:48:16.000Z"
+  },
+  {
+    "section": "x",
+    "digestDate": "2026-09-29",
+    "publishedDate": "9/28",
+    "time": "本次更新",
+    "readTime": "3 分钟",
+    "accent": "green",
+    "inRecentWindow": true,
+    "digestFormat": "builders-digest",
+    "paragraphs": [
+      "Builder Zara Zhang 回应了那些问她“为什么一直发内容却不赚钱”的人。她说这些人不明白两件事：第一，自我表达是人类与生俱来的本能，不需要理由，也不需要功利动机；第二，影响力比金钱有价值得多。"
+    ],
+    "externalLinks": [
+      {
+        "label": "推文",
+        "url": "https://x.com/zarazhangrui/status/2104253882025341231"
+      }
+    ],
+    "id": "follow-builders:digest-2026-09-28-zara-zhang",
+    "title": "Builder Zara Zhang",
+    "sourceUrl": "https://x.com/zarazhangrui/status/2104253882025341231",
+    "summary": "Zara Zhang 回应“为什么不靠内容变现”的疑问，认为自我表达是本能，影响力比钱更值钱。",
+    "tags": [
+      "自我表达",
+      "影响力",
+      "内容变现",
+      "Zara Zhang",
+      "发帖"
+    ],
+    "source": "builder",
+    "sourceLabel": "Zara Zhang · Follow Builders",
+    "publishedAt": "2026-09-27T16:56:35.000Z"
   },
   {
     "section": "x",
@@ -3132,6 +3884,46 @@
     "source": "builder",
     "sourceLabel": "Dan Shipper · Follow Builders",
     "publishedAt": "2026-09-25T00:42:00.000Z"
+  },
+  {
+    "section": "papers",
+    "digestDate": "2026-09-29",
+    "publishedDate": "9/25",
+    "time": "本次更新",
+    "readTime": "3 分钟",
+    "accent": "violet",
+    "inRecentWindow": true,
+    "paragraphs": [
+      "表示自编码器（RAE）复用预训练视觉编码器的特征作为重建与扩散的潜变量，从而把强视觉表示引入图像生成。然而，RAE仍需决定用哪些编码器层构成生成器和像素解码器共享的潜空间，这一选择涉及权衡：较浅层更利于保留精细像素细节，较深层则往往带来更好的生成指标。固定的启发式层融合因此把两个受益于不同信息的阶段耦合在一起。",
+      "我们提出FuseReg，用对编码器层随机子集的训练取代启发式特征选择，并从理论上分析其机制：子集采样会显式惩罚对跨层分歧的敏感性。在ImageNet-256上使用DINOv3-L时，单个FuseReg解码器无需重新训练即可从完整、稀疏和单层融合中重建，PSNR高于专门针对固定融合训练的解码器。",
+      "这种灵活性也有益于生成：在RAEv2 DiT-XL生成器不变的情况下，仅替换解码器就使无引导gFID降低27%。同一正则化原则还可扩展到扩散训练，对两个阶段联合正则化在DiT-Base上使无引导gFID降低29%。这些结果表明，为层融合鲁棒性训练下游模型可在不修改预训练编码器的情况下缩小重建—生成差距。"
+    ],
+    "utility": "这项研究帮助普通人理解：图像生成模型内部“用哪些层特征”会影响画质与细节，而通过训练方式让模型对层选择更鲁棒，可以在不改动已有大模型的前提下同时改善重建清晰度和生成质量。对关注AI绘画、图像压缩或生成工具效果的人来说，它提示未来工具可能更稳定、更少因内部设置不同而出现明显质量波动；但结论基于特定数据集和模型，实际产品效果仍需进一步验证。",
+    "externalLinks": [
+      {
+        "label": "查看 Hugging Face 论文页",
+        "url": "https://huggingface.co/papers/2609.31620"
+      },
+      {
+        "label": "打开 arXiv 原文",
+        "url": "https://arxiv.org/abs/2609.31620"
+      }
+    ],
+    "id": "huggingface-daily-papers:2609.31620",
+    "title": "FuseReg：正则化层融合缓解表示自编码器中的重建—生成差距",
+    "sourceUrl": "https://huggingface.co/papers/2609.31620",
+    "summary": "表示自编码器（RAE）复用预训练视觉编码器的特征作为重建与扩散的潜变量，从而把强视觉表示引入图像生成。但RAE仍需决定用哪些编码器层构成生成器和像素解码器共享的潜空间，这一选择存在权衡：较浅层更利于保留精细像素细节，较深层则往往带来更好的生成指标。固定的启发式层融合因此把两个受益于不同信息的阶段耦合在一起。我们提出FuseReg，用对编码器层随机子集的训练取代启发式特征选择，并从理论上分析其机制：子集采样会显式惩罚对跨层分歧的敏感性。在ImageNet-256上使用DINOv3-L时，单个FuseReg解码器无需重新训练即可从完整、稀疏和单层融合中重建，PSNR高于专门针对固定融合训练的解码器。这种灵活性也有益于生成：在RAEv2 DiT-XL生成器不变的情况下，仅替换解码器就使无引导gFID降低27%。同一正则化原则还可扩展到扩散训练，对两个阶段联合正则化在DiT-Base上使无引导gFID降低29%。这些结果表明，为层融合鲁棒性训练下游模型可在不修改预训练编码器的情况下缩小重建—生成差距。",
+    "tags": [
+      "表示自编码器",
+      "层融合",
+      "正则化",
+      "图像生成",
+      "扩散模型",
+      "重建—生成差距"
+    ],
+    "source": "daily",
+    "sourceLabel": "Hugging Face Daily Papers",
+    "publishedAt": "2026-09-25T00:00:00.000Z"
   },
   {
     "section": "x",
@@ -12520,6 +13312,47 @@
       "音视频生成",
       "模型评估",
       "多模态整合"
+    ],
+    "source": "daily",
+    "sourceLabel": "Hugging Face Daily Papers",
+    "publishedAt": "2026-09-16T00:00:00.000Z"
+  },
+  {
+    "section": "papers",
+    "digestDate": "2026-09-29",
+    "publishedDate": "9/16",
+    "time": "本次更新",
+    "readTime": "3 分钟",
+    "accent": "violet",
+    "inRecentWindow": true,
+    "paragraphs": [
+      "为基础模型准备高质量训练数据，需要可扩展的流水线，把异构文档和视频转换为结构化记录。这类流水线会把每个父项扩展为一个有序且依赖输入的序列，子项数量可能呈长尾分布。GPU 应当跨父项批量处理子项，同时保留父子关系、子项顺序、完成状态和结果路由。",
+      "现有系统要么把并行性隐藏在粗粒度作业中，要么暴露扁平记录，迫使应用自行管理血缘和重新分组。我们提出 RayOrch，一种编程模型和分布式执行引擎，在执行全程保留父子关系。程序声明有序的可变基数扩展和与之匹配的收集操作。编译器验证每一对扩展与收集，运行时记录子项归属、直接父项、不可变序号和终止状态。",
+      "按调用先进先出的就绪队列跨父项批量处理就绪子项。收集操作依据声明的归属和序号重建结果，而不是依据批次边界或完成顺序。父项一旦所有必需子项都进入终止状态即可推进。带类型、以父项为作用域的失败会抑制失败父项尚未派发的兄弟子项，同时允许无关父项继续运行。",
+      "在 NVIDIA H20 GPU 上，RayOrch 将 MinerU 从 4 块扩展到 64 块 GPU 时取得 15.14 倍加速，将视频流水线从 8 块扩展到 64 块 GPU 时取得 7.82 倍加速。在 MinerU 上，它相比 Ray Data 将端到端时间减少 13.1%，相比 Daft 减少 29.0%；在 Docling 上，相比 Ray Data 减少 16.0%。代码见 https://github.com/OpenDCAI/RayOrch 。"
+    ],
+    "utility": "普通人可以借此了解：训练大模型所需的数据处理，正从粗放式任务调度转向能保留文档、视频内部结构关系的精细流水线。这类技术进步可能让数据准备更快、更省算力，从而间接影响模型训练成本、迭代速度以及相关产品的可用性。不过，论文报告的是特定硬件和流水线下的性能结果，并不直接说明普通人日常使用的模型效果会立刻提升。",
+    "externalLinks": [
+      {
+        "label": "查看 Hugging Face 论文页",
+        "url": "https://huggingface.co/papers/2609.18703"
+      },
+      {
+        "label": "打开 arXiv 原文",
+        "url": "https://arxiv.org/abs/2609.18703"
+      }
+    ],
+    "id": "huggingface-daily-papers:2609.18703",
+    "title": "RayOrch：面向基础模型数据准备的血缘可控多粒度数据流编程与执行",
+    "sourceUrl": "https://huggingface.co/papers/2609.18703",
+    "summary": "为基础模型准备高质量训练数据，需要可扩展的流水线，把异构文档和视频转换为结构化记录。这类流水线会把每个父项扩展为一个有序且依赖输入的序列，子项数量可能呈长尾分布。GPU 应当跨父项批量处理子项，同时保留父子关系、子项顺序、完成状态和结果路由。现有系统要么把并行性隐藏在粗粒度作业中，要么暴露扁平记录，迫使应用自行管理血缘和重新分组。我们提出 RayOrch，一种编程模型和分布式执行引擎，在执行全程保留父子关系。程序声明有序的可变基数扩展和与之匹配的收集操作。编译器验证每一对扩展与收集，运行时记录子项归属、直接父项、不可变序号和终止状态。按调用先进先出的就绪队列跨父项批量处理就绪子项。收集操作依据声明的归属和序号重建结果，而不是依据批次边界或完成顺序。父项一旦所有必需子项都进入终止状态即可推进。带类型、以父项为作用域的失败会抑制失败父项尚未派发的兄弟子项，同时允许无关父项继续运行。在 NVIDIA H20 GPU 上，RayOrch 将 MinerU 从 4 块扩展到 64 块 GPU 时取得 15.14 倍加速，将视频流水线从 8 块扩展到 64 块 GPU 时取得 7.82 倍加速。在 MinerU 上，它相比 Ray Data 将端到端时间减少 13.1%，相比 Daft 减少 29.0%；在 Docling 上，相比 Ray Data 减少 16.0%。代码见 https://github.com/OpenDCAI/RayOrch 。",
+    "tags": [
+      "基础模型数据准备",
+      "数据流编程模型",
+      "父子血缘",
+      "分布式执行引擎",
+      "GPU 批处理",
+      "长尾子项"
     ],
     "source": "daily",
     "sourceLabel": "Hugging Face Daily Papers",
@@ -38874,73 +39707,6 @@
       "网页应用",
       "隐私友好",
       "视频编辑器"
-    ],
-    "source": "daily",
-    "sourceLabel": "GitHub Trending",
-    "publishedAt": "2026-08-18T17:40:57.188Z"
-  },
-  {
-    "section": "github",
-    "digestDate": "2026-08-19",
-    "publishedDate": "8/19",
-    "time": "本次更新",
-    "readTime": "3 分钟",
-    "accent": "blue",
-    "inRecentWindow": true,
-    "paragraphs": [
-      "AERIS-10 提供从电路原理图、PCB 设计、FPGA 固件到上位机软件的完整开源资料，目标是降低雷达技术的门槛。它采用脉冲线性调频（PLFM）体制，分为两个版本：3 公里探测距离的 AERIS-10N 和 20 公里探测距离的 AERIS-10E，分别使用不同的天线阵列。",
-      "核心能力包括 ±45° 的电子波束扫描（无需机械转动天线即可改变探测方向）、板载 FPGA 完成的脉冲压缩、多普勒分析、动目标显示（MTI）和恒虚警检测（CFAR）等专业信号处理，还集成了 GPS/IMU 做位置和姿态校正，并配有带地图界面的 Python 图形界面。",
-      "适合人群是高校雷达与通信研究者、无人机与反无人机方向的创业团队，以及有深厚软件无线电（SDR）和硬件基础的资深爱好者。这是一个真正的硬件项目，需要自行采购元器件、打样 PCB 并焊接组装。",
-      "需要注意的是，项目目前处于 Alpha 阶段、功能仍在开发中，使用门槛很高：涉及微波射频电路、FPGA 编程和嵌入式开发，且实际发射雷达信号可能受到各国无线电法规的严格管制，动手前需要充分了解当地法律要求。"
-    ],
-    "facts": [
-      {
-        "label": "主要语言",
-        "value": "PLSQL"
-      },
-      {
-        "label": "Stars",
-        "value": "24,234"
-      },
-      {
-        "label": "今日新增 Stars",
-        "value": "+204"
-      },
-      {
-        "label": "Forks",
-        "value": "5,580"
-      },
-      {
-        "label": "许可证",
-        "value": "NOASSERTION"
-      },
-      {
-        "label": "最近更新",
-        "value": "2026-06-17"
-      }
-    ],
-    "externalLinks": [
-      {
-        "label": "阅读项目 README",
-        "url": "https://github.com/NawfalMotii79/PLFM_RADAR#readme"
-      },
-      {
-        "label": "查看 Releases",
-        "url": "https://github.com/NawfalMotii79/PLFM_RADAR/releases"
-      }
-    ],
-    "id": "github-trending:NawfalMotii79/PLFM_RADAR",
-    "title": "AERIS-10 开源相控阵雷达系统",
-    "sourceUrl": "https://github.com/NawfalMotii79/PLFM_RADAR",
-    "summary": "这是一套完全开源的低成本 10.5 GHz 相控阵雷达硬件与软件方案，让研究者、无人机开发者和资深无线电爱好者能以远低于商用设备的价格自行搭建并实验真正的雷达系统。",
-    "tags": [
-      "相控阵雷达",
-      "开源硬件",
-      "10.5GHz",
-      "FPGA",
-      "波束成形",
-      "无人机",
-      "软件无线电"
     ],
     "source": "daily",
     "sourceLabel": "GitHub Trending",
