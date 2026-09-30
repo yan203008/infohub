@@ -1,0 +1,1773 @@
+[
+  {
+    "section": "github",
+    "digestDate": "2026-10-01",
+    "publishedDate": "10/1",
+    "time": "本次更新",
+    "readTime": "3 分钟",
+    "accent": "blue",
+    "inRecentWindow": true,
+    "paragraphs": [
+      "VoiceStudio 是一个开源、完全本地运行的语音工作台，定位是 ElevenLabs 的替代方案。它把语音克隆、语音设计、视频配音、听写、转录和有声书制作集中在一个桌面应用里，官方称支持 646 种语言。所有本地工作流都在你自己的硬件上完成，远程服务是可选项，使用数据统计也需要你同意。",
+      "主要功能分成三类：创作方面可以克隆已有声音，或通过描述设计一个全新声音；生产方面可以给视频配上时间轴对齐的语音，也能批量生成故事和有声书；连接方面提供本地 API 和 MCP，方便智能体调用，还支持可选的远程工作节点。默认引擎是 k2-fsa/OmniVoice，也可以换成其他引擎。",
+      "它适合内容创作者、播客和视频制作者、有声书生产者，以及希望语音数据不出本地的个人或团队。听写功能配有一个浮动小部件，方便随时调用。",
+      "使用门槛中等：macOS 和 Linux 可以用一条命令安装，Windows、Linux 和 Docker 也有各自指南。硬件需求因所选引擎而异，首次使用某个功能时需要按提示下载对应模型，模型体积和运行速度取决于你的显卡和内存。"
+    ],
+    "facts": [
+      {
+        "label": "主要语言",
+        "value": "Python"
+      },
+      {
+        "label": "Stars",
+        "value": "50,291"
+      },
+      {
+        "label": "今日新增 Stars",
+        "value": "+3,481"
+      },
+      {
+        "label": "Forks",
+        "value": "5,585"
+      },
+      {
+        "label": "许可证",
+        "value": "AGPL-3.0"
+      },
+      {
+        "label": "最近更新",
+        "value": "2026-09-29"
+      }
+    ],
+    "externalLinks": [
+      {
+        "label": "阅读项目 README",
+        "url": "https://github.com/debpalash/VoiceStudio#readme"
+      },
+      {
+        "label": "打开项目网站",
+        "url": "https://voicestudio.sh"
+      },
+      {
+        "label": "查看 Releases",
+        "url": "https://github.com/debpalash/VoiceStudio/releases"
+      }
+    ],
+    "id": "github-trending:debpalash/VoiceStudio",
+    "title": "VoiceStudio：完全本地运行的开源语音克隆与配音工作台",
+    "sourceUrl": "https://github.com/debpalash/VoiceStudio",
+    "summary": "它把语音克隆、配音、听写、转录和有声书制作整合到一个本地桌面应用里，支持 646 种语言，不需要把声音数据上传到云端。",
+    "tags": [
+      "语音克隆",
+      "视频配音",
+      "本地运行",
+      "语音转文字",
+      "有声书",
+      "多语言",
+      "开源"
+    ],
+    "source": "daily",
+    "sourceLabel": "GitHub Trending",
+    "publishedAt": "2026-09-30T21:27:51.182Z"
+  },
+  {
+    "section": "github",
+    "digestDate": "2026-10-01",
+    "publishedDate": "10/1",
+    "time": "本次更新",
+    "readTime": "3 分钟",
+    "accent": "blue",
+    "inRecentWindow": true,
+    "paragraphs": [
+      "OpenRig 解决的是“AI 编程助手越用越多、终端窗口越来越乱”的问题。通常每个 AI 助手都只是一个独立的命令行会话，你需要在不同窗口之间来回切换、重复交代背景。OpenRig 把这些会话收拢成一个“团队”：你在一份 YAML 配置里定义有哪些角色、各自用哪个模型，然后用一条命令把整支队伍启动起来，Claude Code 和 Codex 可以同时出现在同一个团队里，被当作一个整体来管理。",
+      "它的核心能力包括：用配置文件定义团队（谁负责、用什么模型），一键启动和停止；通过一个“负责人”助手来协调其他专职助手，你只需要向负责人描述想要的结果，由它去分派任务并汇总需要你拍板的决定；提供一个终端界面，把整个团队显示成一张图或一张表，直观看到每个席位的运行状态、所用模型、上下文和当前状态。团队的工作记录和上下文会保留在固定的位置，方便持续跟进。",
+      "这个项目适合已经在使用 Claude Code 或 Codex 等 AI 编程助手、并且希望同时调度多个助手完成较复杂开发任务的开发者或技术团队。它并不要求你额外订阅新的 AI 服务，可以复用你已有的 Claude Code、Codex 账号，也可以两者混用。",
+      "使用门槛不低：需要 macOS 或 Linux 系统，安装 Node.js 22 或 24 以及 tmux，原生 Windows 暂不支持，WSL2 也未经过测试。安装和启动过程会修改你机器上的部分配置（例如写入提供方钩子和工作区信任设置），官方建议先阅读它具体改动了什么并备份相关文件，再执行安装。首次启动前助手会询问是否允许免重复授权运行 OpenRig 命令，可以选择拒绝并保持原有提示行为。"
+    ],
+    "facts": [
+      {
+        "label": "主要语言",
+        "value": "TypeScript"
+      },
+      {
+        "label": "Stars",
+        "value": "2,958"
+      },
+      {
+        "label": "今日新增 Stars",
+        "value": "+622"
+      },
+      {
+        "label": "Forks",
+        "value": "204"
+      },
+      {
+        "label": "许可证",
+        "value": "Apache-2.0"
+      },
+      {
+        "label": "最近更新",
+        "value": "2026-10-01"
+      }
+    ],
+    "externalLinks": [
+      {
+        "label": "阅读项目 README",
+        "url": "https://github.com/mvschwarz/openrig#readme"
+      },
+      {
+        "label": "打开项目网站",
+        "url": "https://openrig.dev"
+      },
+      {
+        "label": "查看 Releases",
+        "url": "https://github.com/mvschwarz/openrig/releases"
+      }
+    ],
+    "id": "github-trending:mvschwarz/openrig",
+    "title": "OpenRig：把多个AI编程助手编成一支团队",
+    "sourceUrl": "https://github.com/mvschwarz/openrig",
+    "summary": "OpenRig 是一个用配置文件把 Claude Code、Codex 等多个 AI 编程助手组织成一个协作团队并统一启动管理的工具，让它们像一支有分工的队伍一样围绕你的代码仓库持续工作。",
+    "tags": [
+      "AI编程助手",
+      "多智能体协作",
+      "Claude Code",
+      "Codex",
+      "命令行工具",
+      "团队编排"
+    ],
+    "source": "daily",
+    "sourceLabel": "GitHub Trending",
+    "publishedAt": "2026-09-30T21:27:51.182Z"
+  },
+  {
+    "section": "github",
+    "digestDate": "2026-10-01",
+    "publishedDate": "10/1",
+    "time": "本次更新",
+    "readTime": "3 分钟",
+    "accent": "blue",
+    "inRecentWindow": true,
+    "paragraphs": [
+      "OpenShell 是 NVIDIA 推出的运行时环境，专门用来安全地运行大量自主 AI 智能体。智能体越能自由地操作电脑，就越有用，但也越容易越界。OpenShell 的做法是：你先声明每个智能体可以访问什么，它负责强制执行这条边界。",
+      "它的核心能力有两块。第一是内核级隔离：每个智能体跑在独立沙箱里，系统会限制它能读哪些文件、能做哪些系统调用，每次联网请求都要先通过策略检查。智能体本身看不到真实凭证，只有发往被批准地址的请求才会被临时附上密钥。第二是策略变更的验证：在一条新权限被批准前，系统会用形式化验证提前标出它可能带来的风险，比如带着凭证访问新主机，这类改动会先等人审核。",
+      "它适合需要让 AI 智能体真正动手干活、同时又对数据安全和合规有要求的团队，例如企业内部自动化、需要接触敏感系统的智能体部署。项目也提供网关、Kubernetes 部署和扩展机制，方便规模化使用。",
+      "使用门槛偏技术型：需要 Linux、Apple Silicon 上的 macOS，或实验性的 Windows WSL 2，并安装 Docker、Podman 或主机虚拟化。官方提供一行安装命令和逐步教程，但让智能体跑起来仍需要一定的命令行和运维基础。"
+    ],
+    "facts": [
+      {
+        "label": "主要语言",
+        "value": "Rust"
+      },
+      {
+        "label": "Stars",
+        "value": "12,403"
+      },
+      {
+        "label": "今日新增 Stars",
+        "value": "+1,280"
+      },
+      {
+        "label": "Forks",
+        "value": "1,531"
+      },
+      {
+        "label": "许可证",
+        "value": "Apache-2.0"
+      },
+      {
+        "label": "最近更新",
+        "value": "2026-10-01"
+      }
+    ],
+    "externalLinks": [
+      {
+        "label": "阅读项目 README",
+        "url": "https://github.com/NVIDIA/OpenShell#readme"
+      },
+      {
+        "label": "打开项目网站",
+        "url": "https://docs.nvidia.com/openshell/latest/"
+      },
+      {
+        "label": "查看 Releases",
+        "url": "https://github.com/NVIDIA/OpenShell/releases"
+      }
+    ],
+    "id": "github-trending:NVIDIA/OpenShell",
+    "title": "OpenShell：给自主 AI 智能体用的安全隔离运行环境",
+    "sourceUrl": "https://github.com/NVIDIA/OpenShell",
+    "summary": "它让 AI 智能体可以读文件、装软件、调接口，但只能碰你明确允许的内容，避免它们随意接触你的数据、密钥和网络。",
+    "tags": [
+      "AI 智能体",
+      "安全沙箱",
+      "权限策略",
+      "内核隔离",
+      "凭证保护",
+      "NVIDIA"
+    ],
+    "source": "daily",
+    "sourceLabel": "GitHub Trending",
+    "publishedAt": "2026-09-30T21:27:51.182Z"
+  },
+  {
+    "section": "github",
+    "digestDate": "2026-10-01",
+    "publishedDate": "10/1",
+    "time": "本次更新",
+    "readTime": "3 分钟",
+    "accent": "blue",
+    "inRecentWindow": true,
+    "paragraphs": [
+      "DBX 是一个数据库管理客户端，主要解决“数据库种类多、工具装一堆”的问题。它支持 100 多种数据库，包括常见的 MySQL、PostgreSQL、SQLite、Redis、MongoDB、DuckDB、SQL Server，以及国产的达梦数据库。无论你是开发人员、数据分析师还是运维人员，都可以用它来连接、浏览和操作不同来源的数据。",
+      "它的一个显著特点是体积小，安装包约 25 MB，且跨平台运行。除了常规的桌面应用，DBX 还提供 Docker 镜像和命令行（CLI）版本，方便在服务器、容器环境或自动化脚本中使用。项目内置了 AI 助手和 MCP Server，可以在管理数据库的过程中获得智能辅助，但具体能力以官方说明为准。",
+      "适用人群包括需要同时管理多种数据库的开发者、需要快速查看数据的运营或分析人员，以及希望在服务器上通过命令行或容器方式操作数据库的运维人员。对于不写代码的用户，桌面端图形界面是主要入口，可以像使用普通软件一样连接数据库并查看数据。",
+      "使用门槛方面，DBX 是开源软件（Apache-2.0 协议），可以免费下载使用。桌面端安装后即可通过图形界面操作，不需要编程基础；Docker 和 CLI 方式则更适合有一定技术背景的用户。项目在 GitHub 上已有超过 2.3 万颗星，更新活跃，并有 QQ 群和微信群提供交流渠道。"
+    ],
+    "facts": [
+      {
+        "label": "主要语言",
+        "value": "Rust"
+      },
+      {
+        "label": "Stars",
+        "value": "23,110"
+      },
+      {
+        "label": "今日新增 Stars",
+        "value": "+1,133"
+      },
+      {
+        "label": "Forks",
+        "value": "2,142"
+      },
+      {
+        "label": "许可证",
+        "value": "Apache-2.0"
+      },
+      {
+        "label": "最近更新",
+        "value": "2026-10-01"
+      }
+    ],
+    "externalLinks": [
+      {
+        "label": "阅读项目 README",
+        "url": "https://github.com/t8y2/dbx#readme"
+      },
+      {
+        "label": "打开项目网站",
+        "url": "https://dbxio.com"
+      },
+      {
+        "label": "查看 Releases",
+        "url": "https://github.com/t8y2/dbx/releases"
+      }
+    ],
+    "id": "github-trending:t8y2/dbx",
+    "title": "DBX：轻量级跨平台数据库管理工具，支持 100+ 种数据库",
+    "sourceUrl": "https://github.com/t8y2/dbx",
+    "summary": "DBX 是一款只有约 25 MB 的数据库管理客户端，让你在一个工具里连接和管理 MySQL、PostgreSQL、SQLite、Redis、MongoDB、达梦等 100 多种数据库，并提供桌面端、Docker、命令行和内置 AI 助手。",
+    "tags": [
+      "数据库管理工具",
+      "跨平台",
+      "轻量级",
+      "多数据库支持",
+      "开源软件",
+      "AI 助手",
+      "命令行工具"
+    ],
+    "source": "daily",
+    "sourceLabel": "GitHub Trending",
+    "publishedAt": "2026-09-30T21:27:51.182Z"
+  },
+  {
+    "section": "github",
+    "digestDate": "2026-10-01",
+    "publishedDate": "10/1",
+    "time": "本次更新",
+    "readTime": "3 分钟",
+    "accent": "blue",
+    "inRecentWindow": true,
+    "paragraphs": [
+      "这份书稿由作者韩先凯（笔名“离谱”）撰写，最初在 2017 年以《离谱的英语学习指南》起步，如今已扩展为一份覆盖英语学习、AI 学习、项目开发、创业复盘与身心恢复的长期指南。它不承诺某个工具能替你改变命运，而是想陪普通人一遍遍重新学习：面对陌生问题，借助 AI，同时保留自己的判断。",
+      "书中反复练习一个循环：发现问题、主动学习、与 AI 协作、完成真实任务、保存证据、复盘迁移。内容分为建立基础（英语、语法、写作与异步交付）、借工具放大能力（用 AI 学习、AI 项目与资源层创业）、进入真实生活（海外求职、家庭与中学生学习、人生复盘与恢复）等几个方向，并配有学习状态表、工具箱总览、术语索引等可直接使用的模板。",
+      "它适合不写代码但想提升学习效率、想用 AI 辅助工作与生活、或正处在人生低谷需要重新建立秩序的人。作者明确区分研究结论、个人经验与待验证假设，并公开自己的身份与商业关系，让读者能判断哪些内容可以借鉴、哪些需要自己验证。",
+      "使用门槛很低：正文以中文书稿形式呈现，提供中文 EPUB 与 PDF 下载，也可以直接在网页上按阅读路径浏览。不需要编程或技术背景，只要愿意按“发现问题—行动—留证据—复盘”的方式动手实践即可。"
+    ],
+    "facts": [
+      {
+        "label": "主要语言",
+        "value": "JavaScript"
+      },
+      {
+        "label": "Stars",
+        "value": "66,353"
+      },
+      {
+        "label": "今日新增 Stars",
+        "value": "+714"
+      },
+      {
+        "label": "Forks",
+        "value": "6,635"
+      },
+      {
+        "label": "许可证",
+        "value": "NOASSERTION"
+      },
+      {
+        "label": "最近更新",
+        "value": "2026-09-20"
+      }
+    ],
+    "externalLinks": [
+      {
+        "label": "阅读项目 README",
+        "url": "https://github.com/byoungd/up#readme"
+      },
+      {
+        "label": "打开项目网站",
+        "url": "https://biezou.com"
+      },
+      {
+        "label": "查看 Releases",
+        "url": "https://github.com/byoungd/up/releases"
+      }
+    ],
+    "id": "github-trending:byoungd/up",
+    "title": "人生进阶指南：AI 时代的终身学习手册",
+    "sourceUrl": "https://github.com/byoungd/up",
+    "summary": "这是一本面向普通人的持续更新中文书稿，讲如何借助英语、AI 和真实项目，在快速变化的时代里持续学习和重新开始。",
+    "tags": [
+      "终身学习",
+      "AI 学习",
+      "英语学习",
+      "人生复盘",
+      "真实项目",
+      "学习指南",
+      "普通人成长"
+    ],
+    "source": "daily",
+    "sourceLabel": "GitHub Trending",
+    "publishedAt": "2026-09-30T21:27:51.182Z"
+  },
+  {
+    "section": "github",
+    "digestDate": "2026-10-01",
+    "publishedDate": "10/1",
+    "time": "本次更新",
+    "readTime": "3 分钟",
+    "accent": "blue",
+    "inRecentWindow": true,
+    "paragraphs": [
+      "很多人用 AI 写代码时最常遇到的问题，不是 AI 不会写，而是它根本没搞懂你想要什么。这个项目提供了一组可以安装到 AI 编程助手里的“技能”，其中最受欢迎的是“拷问我”和“带文档拷问”：你准备做一个改动时，先让 AI 反过来问你一堆细节问题，把模糊的想法逼成清晰的方案，然后再开始写。",
+      "除了对齐需求，它还覆盖真实开发中的常见痛点。作者认为很多现成的 AI 开发流程框架虽然想帮你管流程，却也夺走了你的控制权，出问题时很难排查。所以这里的技能刻意做得小、容易改、可以自由组合，并且不绑定某一种模型，任何主流 AI 编程助手都能用。",
+      "安装方式对非程序员也相对友好：在 Claude Code 里可以像装插件一样一条命令装好并自动更新；也可以把技能文件复制进自己的项目，当成普通文件随意修改。装完后每个项目运行一次初始化命令，它会问你用哪个任务管理工具（GitHub、Linear 或本地文件）、打什么标签、文档放哪里。",
+      "它适合已经在用 AI 编程助手、但经常被“AI 做出来的东西不对”困扰的人，包括独立开发者和小团队。门槛在于你需要愿意花几分钟做安装和初始化，并且接受“先被 AI 追问、再动手”的工作方式；如果你完全不用任何 AI 编程助手，这套技能暂时用不上。"
+    ],
+    "facts": [
+      {
+        "label": "主要语言",
+        "value": "Shell"
+      },
+      {
+        "label": "Stars",
+        "value": "272,927"
+      },
+      {
+        "label": "今日新增 Stars",
+        "value": "+908"
+      },
+      {
+        "label": "Forks",
+        "value": "22,954"
+      },
+      {
+        "label": "许可证",
+        "value": "MIT"
+      },
+      {
+        "label": "最近更新",
+        "value": "2026-09-29"
+      }
+    ],
+    "externalLinks": [
+      {
+        "label": "阅读项目 README",
+        "url": "https://github.com/mattpocock/skills#readme"
+      },
+      {
+        "label": "打开项目网站",
+        "url": "https://aihero.dev/skills"
+      },
+      {
+        "label": "查看 Releases",
+        "url": "https://github.com/mattpocock/skills/releases"
+      }
+    ],
+    "id": "github-trending:mattpocock/skills",
+    "title": "真实工程技能包：让 AI 编程助手先问清楚再做",
+    "sourceUrl": "https://github.com/mattpocock/skills",
+    "summary": "这是一套给 AI 编程助手使用的“技能”集合，帮助你在动手写代码前把需求问清楚、把项目结构理明白，减少 AI 做出来不是你想要的返工。",
+    "tags": [
+      "AI编程助手",
+      "需求对齐",
+      "技能插件",
+      "开发流程",
+      "代码生成",
+      "开源工具"
+    ],
+    "source": "daily",
+    "sourceLabel": "GitHub Trending",
+    "publishedAt": "2026-09-30T21:27:51.182Z"
+  },
+  {
+    "section": "github",
+    "digestDate": "2026-10-01",
+    "publishedDate": "10/1",
+    "time": "本次更新",
+    "readTime": "3 分钟",
+    "accent": "blue",
+    "inRecentWindow": true,
+    "paragraphs": [
+      "做视频通常要打开剪辑软件，一帧一帧调。HyperFrames 换了个思路：你把画面写成 HTML 和 CSS，加上图片、视频、音乐和可定位的动画，它就能把这些内容稳定地渲染成 MP4 视频文件。因为输入是代码，所以同样的内容每次渲染出来的结果都一样，适合需要批量、重复生成的场景。",
+      "它特别为 AI 编程助手做了适配。项目提供了 21 个可被助手按需加载的技能，其中 /hyperframes 是总入口，会根据“帮我做一个十秒产品介绍”这类请求自动挑选合适的工作流。技能会教 AI 走完整个制作流程：先规划视频，再写合法的 HTML，接上可定位动画，加入媒体素材，然后检查、预览、渲染。",
+      "使用方式有三种：在本地用命令行工具；在 Claude Code、Codex、Cursor、Gemini CLI 等支持技能的 AI 助手里安装插件或技能；或者把它当作托管式创作工具背后的渲染核心。项目还提供了在线演示场和素材目录，方便先看看效果再决定要不要用。",
+      "它适合想用代码方式批量做视频的开发者、需要让 AI 自动产出视频内容的产品团队，以及想把视频生成能力集成进自己产品的人。门槛在于需要 Node.js 22 或更高版本，并且要理解 HTML/CSS 的基本写法；对完全不懂网页技术的普通用户来说，直接上手会有一定难度。"
+    ],
+    "facts": [
+      {
+        "label": "主要语言",
+        "value": "TypeScript"
+      },
+      {
+        "label": "Stars",
+        "value": "54,659"
+      },
+      {
+        "label": "今日新增 Stars",
+        "value": "+352"
+      },
+      {
+        "label": "Forks",
+        "value": "4,969"
+      },
+      {
+        "label": "许可证",
+        "value": "Apache-2.0"
+      },
+      {
+        "label": "最近更新",
+        "value": "2026-10-01"
+      }
+    ],
+    "externalLinks": [
+      {
+        "label": "阅读项目 README",
+        "url": "https://github.com/heygen-com/hyperframes#readme"
+      },
+      {
+        "label": "查看 Releases",
+        "url": "https://github.com/heygen-com/hyperframes/releases"
+      }
+    ],
+    "id": "github-trending:heygen-com/hyperframes",
+    "title": "HyperFrames：用 HTML 写代码，渲染出 MP4 视频",
+    "sourceUrl": "https://github.com/heygen-com/hyperframes",
+    "summary": "这是一个把 HTML、CSS、媒体素材和动画直接渲染成确定性 MP4 视频的开源框架，让你或 AI 助手用写网页的方式做视频。",
+    "tags": [
+      "视频渲染",
+      "HTML转视频",
+      "AI编程助手",
+      "动画",
+      "开源框架",
+      "批量生成"
+    ],
+    "source": "daily",
+    "sourceLabel": "GitHub Trending",
+    "publishedAt": "2026-09-30T21:27:51.182Z"
+  },
+  {
+    "section": "github",
+    "digestDate": "2026-10-01",
+    "publishedDate": "10/1",
+    "time": "本次更新",
+    "readTime": "3 分钟",
+    "accent": "blue",
+    "inRecentWindow": true,
+    "paragraphs": [
+      "Context Mode 针对的是 AI 编程助手“上下文窗口不够用”的痛点。每次调用外部工具（比如抓取网页快照、读取一批 GitHub 议题、查看访问日志）都会把大量原始数据直接塞进对话上下文，几十 KB 的数据很快就能吃掉大量空间；当助手为了腾地方而压缩对话时，又容易忘记正在编辑哪些文件、有哪些任务在进行、你最后要求了什么。",
+      "它的解决方式有四条：第一，把工具输出放进沙箱，只把精简后的结果交给模型，官方给出的数字是 315 KB 压缩到 5.4 KB，减少约 98%；第二，把每一次文件编辑、Git 操作、任务、错误和用户决定记录到 SQLite 中，对话压缩后不是把旧数据重新灌回上下文，而是建立索引、按需检索相关内容，让助手从断点继续；第三，鼓励模型“用代码思考”，把一部分推理交给可执行代码而不是自然语言；第四，通过 MCP 加钩子的方式，在多个平台上统一执行这套路由规则。",
+      "它适合经常使用 AI 编程助手处理长任务、大仓库或需要反复读取外部数据的开发者。对于被上下文长度限制困扰、或者发现助手在任务中途“失忆”的人，这个工具能直接改善体验。项目 README 提到它被多家大型科技公司的团队使用，并曾在 Hacker News 上登顶。",
+      "使用门槛中等：它以 MCP 服务器形式接入，需要在你所用的 AI 编程助手环境中完成配置，并了解 hooks 和路由的基本概念。它支持 17 个平台，但具体配置方式因平台而异；项目采用 ELv2 许可证，商用前需要留意许可条款。不写代码的用户不太可能直接使用它，它主要面向技术使用者。"
+    ],
+    "facts": [
+      {
+        "label": "主要语言",
+        "value": "TypeScript"
+      },
+      {
+        "label": "Stars",
+        "value": "24,448"
+      },
+      {
+        "label": "今日新增 Stars",
+        "value": "+88"
+      },
+      {
+        "label": "Forks",
+        "value": "1,767"
+      },
+      {
+        "label": "许可证",
+        "value": "NOASSERTION"
+      },
+      {
+        "label": "最近更新",
+        "value": "2026-09-30"
+      }
+    ],
+    "externalLinks": [
+      {
+        "label": "阅读项目 README",
+        "url": "https://github.com/mksglu/context-mode#readme"
+      },
+      {
+        "label": "打开项目网站",
+        "url": "https://context-mode.com"
+      },
+      {
+        "label": "查看 Releases",
+        "url": "https://github.com/mksglu/context-mode/releases"
+      }
+    ],
+    "id": "github-trending:mksglu/context-mode",
+    "title": "Context Mode：为AI编程助手节省上下文并保持会话记忆",
+    "sourceUrl": "https://github.com/mksglu/context-mode",
+    "summary": "Context Mode 是一个给 AI 编程助手用的上下文优化工具，通过沙箱化工具输出、持久化会话记忆和统一路由，显著减少上下文占用并让助手在长任务中不丢失进度。",
+    "tags": [
+      "上下文优化",
+      "AI编程助手",
+      "会话记忆",
+      "MCP",
+      "工具输出沙箱",
+      "长任务"
+    ],
+    "source": "daily",
+    "sourceLabel": "GitHub Trending",
+    "publishedAt": "2026-09-30T21:27:51.182Z"
+  },
+  {
+    "section": "github",
+    "digestDate": "2026-10-01",
+    "publishedDate": "10/1",
+    "time": "本次更新",
+    "readTime": "3 分钟",
+    "accent": "blue",
+    "inRecentWindow": true,
+    "paragraphs": [
+      "Ponytail 解决的是一个很常见的问题：当你让 AI 助手帮你写代码时，它往往会把简单需求做成大工程。比如你只想要一个日期选择器，它可能先安装第三方库、再写包装组件、加样式表，最后还讨论起时区问题。Ponytail 给 AI 助手注入一种“能少写就少写”的判断力，优先使用浏览器或系统本身就有的能力，把几十行代码压缩成一行。",
+      "根据项目给出的实测数据，在真实的 AI 编程会话中，装上 Ponytail 后代码量平均减少约 54%，最多可达 94%；同时消耗的 token 减少约 22%、费用降低约 20%、耗时缩短约 27%，并且安全防护没有因此丢失。它的口号是“最好的代码是你从没写过的代码”，核心能力就是替 AI 做减法，而不是替它加功能。",
+      "它适合谁？适合日常用 AI 助手写代码、但经常被“过度设计”困扰的人，包括独立开发者、产品原型制作者、以及希望控制 AI 使用成本的团队。项目支持约 20 种 AI 助手，采用 MIT 开源协议，本身是一个 JavaScript 生态的插件式技能，安装门槛不高。",
+      "需要注意的是，Ponytail 并不是让 AI 偷工减料，它保留了必要的安全防护；它的效果也取决于任务本身——代码已经足够精简时收益很小，而在 AI 容易“过度搭建”的场景下收益最明显。如果你希望 AI 给出的方案更短、更便宜、更快，同时不牺牲可靠性，这个项目值得了解。"
+    ],
+    "facts": [
+      {
+        "label": "主要语言",
+        "value": "JavaScript"
+      },
+      {
+        "label": "Stars",
+        "value": "149,083"
+      },
+      {
+        "label": "今日新增 Stars",
+        "value": "+865"
+      },
+      {
+        "label": "Forks",
+        "value": "8,013"
+      },
+      {
+        "label": "许可证",
+        "value": "MIT"
+      },
+      {
+        "label": "最近更新",
+        "value": "2026-09-14"
+      }
+    ],
+    "externalLinks": [
+      {
+        "label": "阅读项目 README",
+        "url": "https://github.com/DietrichGebert/ponytail#readme"
+      },
+      {
+        "label": "打开项目网站",
+        "url": "https://ponytail.dev"
+      },
+      {
+        "label": "查看 Releases",
+        "url": "https://github.com/DietrichGebert/ponytail/releases"
+      }
+    ],
+    "id": "github-trending:DietrichGebert/ponytail",
+    "title": "Ponytail：让 AI 编程助手学会“少写代码”",
+    "sourceUrl": "https://github.com/DietrichGebert/ponytail",
+    "summary": "这是一个给 AI 编程助手加装的“极简主义”技能包，让它像公司里最懒但最有经验的资深工程师那样，用最少的代码解决问题。",
+    "tags": [
+      "AI 编程助手",
+      "代码精简",
+      "降低开发成本",
+      "提示词技能",
+      "开源工具",
+      "效率提升"
+    ],
+    "source": "daily",
+    "sourceLabel": "GitHub Trending",
+    "publishedAt": "2026-09-30T21:27:51.182Z"
+  },
+  {
+    "section": "github",
+    "digestDate": "2026-10-01",
+    "publishedDate": "10/1",
+    "time": "本次更新",
+    "readTime": "3 分钟",
+    "accent": "blue",
+    "inRecentWindow": true,
+    "paragraphs": [
+      "Claude 技能（Skills）是给 AI 助手看的「操作说明书」：每个技能是一个文件夹，里面有一个 SKILL.md 文件，写明这个技能叫什么、适合什么场景、按什么步骤做。它和普通的插件不同——技能定义的是「怎么做」，而不是「连接到哪里」。这个仓库把 1000 多个经过整理、可直接使用的技能按用途分类，涵盖文档处理、开发与代码工具、数据分析、商业营销、沟通写作、创意媒体、效率整理、协作项目管理、安全与系统等方向。",
+      "技能采用「按需加载」的方式：会话开始时 AI 只看到每个技能的名字和一句描述，大约 100 个词；只有当它判断某个技能和当前任务相关时，才会读取完整的说明和附带的脚本、参考资料。这样即使一个助手挂载几百个技能，也不会把上下文塞满。该格式由 Anthropic 在 2025 年推出并作为开放标准发布，目前已被 Claude Code、Claude.ai、Claude API、OpenAI Codex、Cursor、Gemini CLI、Antigravity、Windsurf 等支持。",
+      "仓库还介绍了一个连接外部应用的插件：安装后按提示填入 API 密钥，Claude 就能发邮件、创建工单、在 Slack 发消息，背后通过 Composio 连接 1000 多个应用，并带有认证、团队权限和审计日志。",
+      "适用人群是希望扩展 AI 助手实际能力的普通用户和团队，尤其是想把 AI 从「会聊天」变成「会办事」的人。使用门槛主要在安装和配置环节：连接外部应用需要注册并获取 API 密钥，部分技能可能还需要额外的软件环境，但清单本身按目录分类，查找和了解某个技能不需要写代码。"
+    ],
+    "facts": [
+      {
+        "label": "主要语言",
+        "value": "Python"
+      },
+      {
+        "label": "Stars",
+        "value": "76,095"
+      },
+      {
+        "label": "今日新增 Stars",
+        "value": "+118"
+      },
+      {
+        "label": "Forks",
+        "value": "8,879"
+      },
+      {
+        "label": "许可证",
+        "value": "未标注"
+      },
+      {
+        "label": "最近更新",
+        "value": "2026-09-18"
+      }
+    ],
+    "externalLinks": [
+      {
+        "label": "阅读项目 README",
+        "url": "https://github.com/ComposioHQ/awesome-claude-skills#readme"
+      },
+      {
+        "label": "查看 Releases",
+        "url": "https://github.com/ComposioHQ/awesome-claude-skills/releases"
+      }
+    ],
+    "id": "github-trending:ComposioHQ/awesome-claude-skills",
+    "title": "Awesome Claude Skills：让 AI 助手学会具体工作流的技能清单",
+    "sourceUrl": "https://github.com/ComposioHQ/awesome-claude-skills",
+    "summary": "这是一个收录 1000 多个 Claude 技能与插件的精选清单，帮你在 Claude 及各类编程助手中快速找到可复用的工作流，并让 AI 能真正操作邮箱、Slack、工单等外部应用。",
+    "tags": [
+      "Claude技能",
+      "AI工作流",
+      "精选清单",
+      "应用自动化",
+      "插件",
+      "开放标准",
+      "效率工具"
+    ],
+    "source": "daily",
+    "sourceLabel": "GitHub Trending",
+    "publishedAt": "2026-09-30T21:27:51.182Z"
+  },
+  {
+    "section": "github",
+    "digestDate": "2026-10-01",
+    "publishedDate": "10/1",
+    "time": "本次更新",
+    "readTime": "3 分钟",
+    "accent": "blue",
+    "inRecentWindow": true,
+    "paragraphs": [
+      "OpenClaw 的定位是「真正会做事的 AI 助手」。它不依赖某个厂商的云端账号，而是运行在你自己的设备上，同时接入你已经在用的聊天渠道——Discord、iMessage、Slack、Teams、Telegram、WhatsApp 等 20 多个平台，并提供 macOS、iOS、Android、Windows、Linux 的原生应用。也就是说，你不必打开一个新网站，在平时聊天的地方就能指挥它。",
+      "它的核心是一个本地「网关」，负责管理会话、工具、事件和各渠道连接；你通过控制界面、命令行或终端界面与它交互。状态、记忆和凭据都保存在你自己的硬件上，模型和代理框架（Claude、Codex、本地模型等）以插件形式存在，可以随时替换而不影响其他部分。默认情况下，OpenClaw 本身除了每天检查一次版本外不会向外发送数据，匿名功能统计需要你主动开启。",
+      "适用人群包括希望数据留在自己手里、又想在日常聊天工具里获得 AI 助手的个人用户，以及需要共享部署的小团队——同一套网关，个人助手和团队部署之间只差配置。项目由独立的 OpenClaw 基金会管理，没有付费版、托管服务或代币。",
+      "使用门槛方面，官方安装脚本支持 macOS、Linux 和 Windows，会按需准备 Node.js 运行环境；装好后运行引导向导，验证模型访问、创建工作区并配置网关，随后用一条命令打开控制界面即可开始对话。想接入哪些聊天渠道、用哪个模型，都需要在配置里自行选择和填写，对完全不懂技术的人来说仍需要一定的动手能力。"
+    ],
+    "facts": [
+      {
+        "label": "主要语言",
+        "value": "TypeScript"
+      },
+      {
+        "label": "Stars",
+        "value": "390,960"
+      },
+      {
+        "label": "今日新增 Stars",
+        "value": "+136"
+      },
+      {
+        "label": "Forks",
+        "value": "82,215"
+      },
+      {
+        "label": "许可证",
+        "value": "NOASSERTION"
+      },
+      {
+        "label": "最近更新",
+        "value": "2026-10-01"
+      }
+    ],
+    "externalLinks": [
+      {
+        "label": "阅读项目 README",
+        "url": "https://github.com/openclaw/openclaw#readme"
+      },
+      {
+        "label": "打开项目网站",
+        "url": "https://openclaw.ai"
+      },
+      {
+        "label": "查看 Releases",
+        "url": "https://github.com/openclaw/openclaw/releases"
+      }
+    ],
+    "id": "github-trending:openclaw/openclaw",
+    "title": "OpenClaw：跑在自己设备上的开源AI助手",
+    "sourceUrl": "https://github.com/openclaw/openclaw",
+    "summary": "OpenClaw 是一个开源 AI 助手，安装在你自己的电脑上，并直接在你常用的聊天软件里（如 WhatsApp、Telegram、Slack、Discord、iMessage 等）与你对话和干活。",
+    "tags": [
+      "开源AI助手",
+      "本地部署",
+      "聊天软件集成",
+      "隐私保护",
+      "多平台",
+      "插件模型",
+      "团队共享"
+    ],
+    "source": "daily",
+    "sourceLabel": "GitHub Trending",
+    "publishedAt": "2026-09-30T21:27:51.182Z"
+  },
+  {
+    "section": "github",
+    "digestDate": "2026-10-01",
+    "publishedDate": "10/1",
+    "time": "本次更新",
+    "readTime": "3 分钟",
+    "accent": "blue",
+    "inRecentWindow": true,
+    "paragraphs": [
+      "MoneyPrinterTurbo 面向的是想做短视频但不想逐帧剪辑的人。你只需要提供一个主题或几个关键词，它会自动生成视频脚本，再根据脚本匹配画面素材、生成字幕、配上背景音乐，最后合成为一条高清短视频。整个流程由 AI 大模型和自动化工作流串联，省去了大量手工找素材和剪辑的时间。",
+      "项目提供两种使用方式：一个是图形化的 Web 界面，适合不写代码的用户直接操作；另一个是 API 接口，方便有技术能力的人把它接入自己的系统或批量调用。它支持 Windows、macOS 和 Linux，核心运行环境是 Python 3.11 及以上，采用 MIT 开源协议，可以免费使用和修改。",
+      "从定位看，它主要服务于内容创作者、自媒体运营者、电商和营销人员，以及想快速验证短视频选题的个人。README 中展示了赞助商提供的多种大模型与视频生成 API 选项，说明它可以通过配置不同服务商来驱动文案和画面生成，用户对成本和质量有一定选择空间。",
+      "使用门槛方面，普通用户可以通过 Web 界面操作，但仍需要自行准备可用的 AI 模型 API 密钥，并按说明完成本地安装或部署；对于完全不懂技术的用户，初次配置仍有一定学习成本。总体而言，它适合愿意花一点时间搭好环境、之后希望批量快速产出短视频的人。"
+    ],
+    "facts": [
+      {
+        "label": "主要语言",
+        "value": "Python"
+      },
+      {
+        "label": "Stars",
+        "value": "127,492"
+      },
+      {
+        "label": "今日新增 Stars",
+        "value": "+464"
+      },
+      {
+        "label": "Forks",
+        "value": "19,944"
+      },
+      {
+        "label": "许可证",
+        "value": "MIT"
+      },
+      {
+        "label": "最近更新",
+        "value": "2026-09-30"
+      }
+    ],
+    "externalLinks": [
+      {
+        "label": "阅读项目 README",
+        "url": "https://github.com/harry0703/MoneyPrinterTurbo#readme"
+      },
+      {
+        "label": "查看 Releases",
+        "url": "https://github.com/harry0703/MoneyPrinterTurbo/releases"
+      }
+    ],
+    "id": "github-trending:harry0703/MoneyPrinterTurbo",
+    "title": "MoneyPrinterTurbo：输入一句话，自动生成高清短视频",
+    "sourceUrl": "https://github.com/harry0703/MoneyPrinterTurbo",
+    "summary": "这是一个一站式 AI 短视频生成工具，只要给出视频主题或关键词，就能自动完成脚本、素材、字幕、配乐和合成。",
+    "tags": [
+      "AI 短视频",
+      "一键生成",
+      "自动化工作流",
+      "内容创作",
+      "开源工具",
+      "Web 界面"
+    ],
+    "source": "daily",
+    "sourceLabel": "GitHub Trending",
+    "publishedAt": "2026-09-30T21:27:51.182Z"
+  },
+  {
+    "section": "github",
+    "digestDate": "2026-10-01",
+    "publishedDate": "10/1",
+    "time": "本次更新",
+    "readTime": "3 分钟",
+    "accent": "blue",
+    "inRecentWindow": true,
+    "paragraphs": [
+      "Firebase 苹果应用开发工具包是谷歌 Firebase 平台在苹果设备上的开源实现，涵盖了除分析工具之外的大部分 Firebase 功能模块。它让开发 iPhone、iPad 和 Mac 应用的人不必从零搭建后台服务，直接调用现成能力即可完成账号登录、数据存储、消息推送等常见需求。",
+      "这个仓库包含一系列可独立使用的产品模块，例如身份验证、云数据库 Firestore、实时数据库、云函数、云消息推送、崩溃报告 Crashlytics、性能监控、远程配置、应用内消息、应用分发、存储以及新推出的 AI 逻辑功能。开发者可以按需挑选模块集成到自己的应用中，而不是一次性引入全部功能。",
+      "它主要面向使用苹果平台开发应用的程序员和开发团队，尤其是希望缩短后台开发周期、把精力放在界面和业务逻辑上的团队。对不写代码的人来说，这个项目本身不提供可以直接使用的成品应用，而是支撑应用背后功能的底层工具。",
+      "使用门槛方面，需要具备苹果应用开发基础，并通过 Swift Package Manager 或 CocoaPods 等包管理工具把库集成到项目中。需要注意的是，CocoaPods 渠道将在 2026 年 10 月后不再发布新版本，届时需要参考官方迁移指南改用其他安装方式。"
+    ],
+    "facts": [
+      {
+        "label": "主要语言",
+        "value": "C++"
+      },
+      {
+        "label": "Stars",
+        "value": "6,747"
+      },
+      {
+        "label": "今日新增 Stars",
+        "value": "+4"
+      },
+      {
+        "label": "Forks",
+        "value": "1,798"
+      },
+      {
+        "label": "许可证",
+        "value": "Apache-2.0"
+      },
+      {
+        "label": "最近更新",
+        "value": "2026-10-01"
+      }
+    ],
+    "externalLinks": [
+      {
+        "label": "阅读项目 README",
+        "url": "https://github.com/firebase/firebase-ios-sdk#readme"
+      },
+      {
+        "label": "打开项目网站",
+        "url": "https://firebase.google.com"
+      },
+      {
+        "label": "查看 Releases",
+        "url": "https://github.com/firebase/firebase-ios-sdk/releases"
+      }
+    ],
+    "id": "github-trending:firebase/firebase-ios-sdk",
+    "title": "Firebase 苹果应用开发工具包",
+    "sourceUrl": "https://github.com/firebase/firebase-ios-sdk",
+    "summary": "这是谷歌 Firebase 面向 iPhone、iPad 和 Mac 应用的官方开发库合集，帮助开发者快速为苹果应用加入登录、数据库、推送、崩溃分析等常用功能。",
+    "tags": [
+      "苹果应用开发",
+      "Firebase",
+      "后端服务",
+      "推送通知",
+      "崩溃分析",
+      "Swift 开发"
+    ],
+    "source": "daily",
+    "sourceLabel": "GitHub Trending",
+    "publishedAt": "2026-09-30T21:27:51.182Z"
+  },
+  {
+    "section": "github",
+    "digestDate": "2026-10-01",
+    "publishedDate": "10/1",
+    "time": "本次更新",
+    "readTime": "3 分钟",
+    "accent": "blue",
+    "inRecentWindow": true,
+    "paragraphs": [
+      "模型上下文协议服务器合集是 Model Context Protocol（简称 MCP）的官方参考实现集合。MCP 是一套让大语言模型与外部工具、数据源进行连接的开放协议，这个仓库用多个小型示例服务器展示协议的各种能力，帮助开发者理解如何把模型接入真实世界的资源。",
+      "仓库中收录的参考服务器包括：用于测试协议全部功能的 Everything、抓取并转换网页内容的 Fetch、带访问控制的安全文件操作 Filesystem、读写和搜索 Git 仓库的 Git、基于知识图谱的持久记忆 Memory、辅助分步推理的 Sequential Thinking，以及处理时间和时区转换的 Time。每个服务器通常基于官方提供的某种语言 SDK 实现。",
+      "它适合正在开发自己 MCP 服务器的工程师，以及想了解大语言模型如何安全调用外部工具的开发者。对于不写代码的读者，这个项目本身不提供开箱即用的产品，但它所代表的思路是让 AI 助手能够更可靠地操作文件和网络资源，理解这一点有助于判断相关 AI 工具的能力边界。",
+      "使用时需要具备一定的编程经验，并熟悉至少一种 MCP 官方 SDK（如 Python、TypeScript 等）。需要特别注意的是，仓库中的服务器定位为教学和演示用途，并非生产级方案，使用前应自行评估安全风险并采取相应防护措施。"
+    ],
+    "facts": [
+      {
+        "label": "主要语言",
+        "value": "TypeScript"
+      },
+      {
+        "label": "Stars",
+        "value": "90,784"
+      },
+      {
+        "label": "今日新增 Stars",
+        "value": "+48"
+      },
+      {
+        "label": "Forks",
+        "value": "11,722"
+      },
+      {
+        "label": "许可证",
+        "value": "NOASSERTION"
+      },
+      {
+        "label": "最近更新",
+        "value": "2026-09-30"
+      }
+    ],
+    "externalLinks": [
+      {
+        "label": "阅读项目 README",
+        "url": "https://github.com/modelcontextprotocol/servers#readme"
+      },
+      {
+        "label": "打开项目网站",
+        "url": "https://modelcontextprotocol.io"
+      },
+      {
+        "label": "查看 Releases",
+        "url": "https://github.com/modelcontextprotocol/servers/releases"
+      }
+    ],
+    "id": "github-trending:modelcontextprotocol/servers",
+    "title": "MCP 参考服务器合集",
+    "sourceUrl": "https://github.com/modelcontextprotocol/servers",
+    "summary": "这是一组示范性的模型上下文协议服务器，用来演示如何让大语言模型安全、可控地访问文件、网页、代码仓库等外部工具和数据。",
+    "tags": [
+      "模型上下文协议",
+      "大语言模型",
+      "外部工具接入",
+      "参考实现",
+      "开发者示例",
+      "安全访问"
+    ],
+    "source": "daily",
+    "sourceLabel": "GitHub Trending",
+    "publishedAt": "2026-09-30T21:27:51.182Z"
+  },
+  {
+    "section": "github",
+    "digestDate": "2026-10-01",
+    "publishedDate": "10/1",
+    "time": "本次更新",
+    "readTime": "3 分钟",
+    "accent": "blue",
+    "inRecentWindow": true,
+    "paragraphs": [
+      "CodeGraph 是一个完全在本地运行的代码知识图谱工具。它会先扫描并索引你的整个代码库，把文件、函数、调用关系等整理成一张结构化的“地图”，然后在代码发生变化时自动同步更新。这样，当你使用 AI 编程助手提问或改代码时，助手不必反复翻遍整个项目，而是能直接拿到最相关的上下文。",
+      "它的核心价值是减少 AI 的“无效阅读”：更少的 token 消耗、更少的工具调用次数，同时提高回答的准确度。它支持 Claude Code、Cursor、Codex、OpenCode、Gemini、GitHub Copilot 等多种主流 AI 编程工具，覆盖 Windows、macOS 和 Linux，安装后通过一条命令即可接入你正在使用的助手。",
+      "这个项目主要面向使用 AI 辅助写代码的开发者，尤其是项目规模较大、AI 经常“看不懂上下文”或回答跑偏的团队与个人。由于索引和查询都在本地完成，代码不会因此被上传到外部服务，对在意代码隐私的人比较友好。",
+      "使用门槛属于中等：需要在自己的电脑上运行安装命令并连接 AI 工具，涉及命令行操作，不写代码的人基本用不上。但如果你已经在用 AI 编程助手，它的接入步骤相对简单，装好后基本是后台自动工作。"
+    ],
+    "facts": [
+      {
+        "label": "主要语言",
+        "value": "C"
+      },
+      {
+        "label": "Stars",
+        "value": "72,563"
+      },
+      {
+        "label": "今日新增 Stars",
+        "value": "+159"
+      },
+      {
+        "label": "Forks",
+        "value": "4,661"
+      },
+      {
+        "label": "许可证",
+        "value": "MIT"
+      },
+      {
+        "label": "最近更新",
+        "value": "2026-10-01"
+      }
+    ],
+    "externalLinks": [
+      {
+        "label": "阅读项目 README",
+        "url": "https://github.com/colbymchenry/codegraph#readme"
+      },
+      {
+        "label": "打开项目网站",
+        "url": "https://colbymchenry.github.io/codegraph/"
+      },
+      {
+        "label": "查看 Releases",
+        "url": "https://github.com/colbymchenry/codegraph/releases"
+      }
+    ],
+    "id": "github-trending:colbymchenry/codegraph",
+    "title": "CodeGraph：为 AI 编程助手准备的本地代码知识图谱",
+    "sourceUrl": "https://github.com/colbymchenry/codegraph",
+    "summary": "它把整个代码库预先整理成一张可查询的知识图谱，让 Claude Code、Cursor 等 AI 编程助手更准、更省地理解你的项目。",
+    "tags": [
+      "代码知识图谱",
+      "AI 编程助手",
+      "本地运行",
+      "代码索引",
+      "上下文优化",
+      "开发者工具",
+      "隐私安全"
+    ],
+    "source": "daily",
+    "sourceLabel": "GitHub Trending",
+    "publishedAt": "2026-09-30T21:27:51.182Z"
+  },
+  {
+    "section": "x",
+    "digestDate": "2026-10-01",
+    "publishedDate": "9/30",
+    "time": "本次更新",
+    "readTime": "3 分钟",
+    "accent": "green",
+    "inRecentWindow": true,
+    "digestFormat": "builders-digest",
+    "paragraphs": [
+      "Thibault Sottiaux 表示，几天内就会有数百万个 dot 上线，在一个如此多元且庞大的社区里处理各种事情。他很期待了解大家喜欢什么、以及哪些地方还不够神奇。他个人在使用两三天后就感到明显提升，因为教会了它更多自己的偏好和正在想的事情；它学得很快，能变得非常有用，还能独立承担一些出人意料的大任务。团队正在观察大家如何使用自己的主 dot，之后再发布创建一整队 dot 的能力。他还提到在 DevDay 线下见到很多人非常开心，现场氛围极好，看到大家一整天都在构建东西也很有趣。最后他打了个招呼：“What’s up dot”。"
+    ],
+    "externalLinks": [
+      {
+        "label": "推文 1",
+        "url": "https://x.com/thsottiaux/status/2105105086506840421"
+      },
+      {
+        "label": "推文 2",
+        "url": "https://x.com/thsottiaux/status/2105102820706058498"
+      },
+      {
+        "label": "推文 3",
+        "url": "https://x.com/thsottiaux/status/2105178959327756396"
+      }
+    ],
+    "id": "follow-builders:digest-2026-09-30-thibault-sottiaux",
+    "title": "OpenAI Codex 与 ChatGPT 团队成员 Thibault Sottiaux",
+    "sourceUrl": "https://x.com/thsottiaux/status/2105178959327756396",
+    "summary": "Thibault Sottiaux 分享 Dots 上线后的使用感受与 DevDay 见闻。",
+    "tags": [
+      "Dots",
+      "DevDay",
+      "偏好学习",
+      "社区",
+      "主 dot"
+    ],
+    "source": "builder",
+    "sourceLabel": "Thibault Sottiaux · Follow Builders",
+    "publishedAt": "2026-09-30T06:12:30.000Z"
+  },
+  {
+    "section": "x",
+    "digestDate": "2026-10-01",
+    "publishedDate": "9/30",
+    "time": "本次更新",
+    "readTime": "3 分钟",
+    "accent": "green",
+    "inRecentWindow": true,
+    "digestFormat": "builders-digest",
+    "paragraphs": [
+      "Nan Yu 发了一句“新的待攀登基准”，并附上链接，没有展开更多说明。"
+    ],
+    "externalLinks": [
+      {
+        "label": "推文",
+        "url": "https://x.com/thenanyu/status/2105154553327026643"
+      }
+    ],
+    "id": "follow-builders:digest-2026-09-30-nan-yu",
+    "title": "OpenAI 产品负责人 Nan Yu",
+    "sourceUrl": "https://x.com/thenanyu/status/2105154553327026643",
+    "summary": "Nan Yu 提到出现了一个新的待攀登基准。",
+    "tags": [
+      "基准",
+      "benchmark",
+      "产品"
+    ],
+    "source": "builder",
+    "sourceLabel": "Nan Yu · Follow Builders",
+    "publishedAt": "2026-09-30T04:35:32.000Z"
+  },
+  {
+    "section": "x",
+    "digestDate": "2026-10-01",
+    "publishedDate": "9/30",
+    "time": "本次更新",
+    "readTime": "3 分钟",
+    "accent": "green",
+    "inRecentWindow": true,
+    "digestFormat": "builders-digest",
+    "paragraphs": [
+      "fpvventures 合伙人 Nikunj Kothari 分享了对当下市场的两点坦率想法。第一点关于人：他说现在比以往任何时候都更难找到“传教士”型的人，看到有人离开自己联合创办的公司去加入那些“显而易见的赢家”，上市公司 CEO 离职去实验室任职，创始人们说走就走、转眼又加入新的实验室，公司被“Windsurf 式”地拆分，只有被选中的人才能进入未来的新公司；创始人们用分批估值融资，却不太在意下一位加入的员工拿到的 409A 会让早期行权变得不可能。作为早期投资人，他们常常就是在押注人，而当这些人说走就走时，剩下的公司通常就变成了一个空壳。他觉得现在像是做“雇佣兵”的好时候，每个人都感觉自己是雇佣兵，尽管真正的传教士依然存在。第二点关于护城河：他说关于 moat 的讨论已经很多，他不想再重复，但想指出的是，以现在事情发展的速度，护城河不再是“某一个”东西。尤其在应用层，那套 harness 就像是一千件小事都做对了，而且很多是看不见的；竞争如此激烈、新玩家一夜之间冒出来，你必须深挖细节才能看出某家公司到底哪里不同——他们的优势是什么，以及他们在产品、技术和 GTM 上叠加起来的综合优势是什么。而很多时候即便挖到这一步，你还是会回到“真正的护城河是创始人”，而在创始人身上，护城河就是他们的执行速度和对市场的适应能力。在已经没有“蓝海”市场的今天，这成了每个创始人的新门槛；就算真有蓝海，任何稍微有点热度的公司，一夜之间都会冒出大量竞争者。他说，尽管自认还挺擅长找到那些有创始人-市场匹配度的最好的人，但当前这种环境真的很难，同时在考验他所有的先验判断和耐心。他知道这不是真的，但感觉每个人都只是为了捞一笔，并不真的在乎自己想建造的东西会留下什么 legacy，如果你不是这样，请联系他。另外，Nikunj 还提到，从一件事过渡到另一件事往往既有趣又压力很大，感觉像是处在曲速飞行的阶段；如果你正处在这种状态，他和 @lolawajs 很乐意在一场早餐会上见到你，尽他们所能帮忙，私信开放。"
+    ],
+    "externalLinks": [
+      {
+        "label": "推文 1",
+        "url": "https://x.com/nikunj/status/2105148927599423752"
+      },
+      {
+        "label": "推文 2",
+        "url": "https://x.com/nikunj/status/2105097936455786536"
+      }
+    ],
+    "id": "follow-builders:digest-2026-09-30-nikunj-kothari",
+    "title": "fpvventures 合伙人 Nikunj Kothari",
+    "sourceUrl": "https://x.com/nikunj/status/2105148927599423752",
+    "summary": "Nikunj Kothari 谈当前市场两点观察：传教士型人才越来越难找，以及护城河不再是单一的东西。",
+    "tags": [
+      "早期投资",
+      "传教士与雇佣兵",
+      "护城河",
+      "创始人",
+      "执行速度",
+      "早餐会"
+    ],
+    "source": "builder",
+    "sourceLabel": "Nikunj Kothari · Follow Builders",
+    "publishedAt": "2026-09-30T04:13:10.000Z"
+  },
+  {
+    "section": "x",
+    "digestDate": "2026-10-01",
+    "publishedDate": "9/30",
+    "time": "本次更新",
+    "readTime": "3 分钟",
+    "accent": "green",
+    "inRecentWindow": true,
+    "digestFormat": "builders-digest",
+    "paragraphs": [
+      "Peter Yang 说他在 OpenAI Dev Day 玩得很开心，虽然除了主题演讲之外一场分会都没参加，而是花了一整天和老朋友们叙旧，于是决定“公开处刑”一下这些人：Lenny San 是他有幸做朋友的人里最友善、最谦逊的成功人士；Ben 是喜剧传奇，在 YouTube 搜“krazam microservices”就能笑出来，他的梦想是在 Ben 的短剧里演产品经理；Dan Shipper 的 vibe check 堪称传奇；Ben Tossell 是那位穿粉色衣服的高个子威尔士绅士，在 Ben's Bites 有一份很棒的 newsletter；Nanyu 是把品味和匠心带进一切的人，从 Linear 到 OpenAI 都是如此；Illscience 是他见过最喜欢的 a16z 合伙人，因为 Josh Elman 至今还没跟他线下见过面；Fishman 是出色的产品负责人，但更重要的是史上最强壮的爸爸；Tom Krcha 是 Pendev 的创始人，那是一款他最喜欢的 AI 设计工具；Victor Nunez 在 OpenAI 工作、还有三个孩子，却仍然会抽时间在晚上 11 点回复他那些很蠢的私信。随后他惊讶地发现原来还有这么一个开关，表示马上要去试试，因为他很讨厌 YouTube 上那些 AI 垃圾短视频。他还回复 Neal Mohan，建议让用户、至少让家长能够完全选择不看 Shorts。"
+    ],
+    "externalLinks": [
+      {
+        "label": "推文 1",
+        "url": "https://x.com/petergyang/status/2105114973819244676"
+      },
+      {
+        "label": "推文 2",
+        "url": "https://x.com/petergyang/status/2105127506701644024"
+      },
+      {
+        "label": "推文 3",
+        "url": "https://x.com/petergyang/status/2105097073448407083"
+      }
+    ],
+    "id": "follow-builders:digest-2026-09-30-peter-yang",
+    "title": "Peter Yang",
+    "sourceUrl": "https://x.com/petergyang/status/2105127506701644024",
+    "summary": "Peter Yang 分享 OpenAI Dev Day 见闻、YouTube 短视频开关和让用户退出 Shorts 的建议。",
+    "tags": [
+      "OpenAI Dev Day",
+      "YouTube Shorts",
+      "AI 短视频",
+      "产品经理",
+      "AI 设计工具"
+    ],
+    "source": "builder",
+    "sourceLabel": "Peter Yang · Follow Builders",
+    "publishedAt": "2026-09-30T02:48:03.000Z"
+  },
+  {
+    "section": "x",
+    "digestDate": "2026-10-01",
+    "publishedDate": "9/30",
+    "time": "本次更新",
+    "readTime": "3 分钟",
+    "accent": "green",
+    "inRecentWindow": true,
+    "digestFormat": "builders-digest",
+    "paragraphs": [
+      "Aaron Levie 认为，在可预见的未来，AI 行业完全有可能通过一套共享的标准和实践来应对安全与安保问题。随着能力不断进步，某个时点必然会出现更强的监督、测试以及更多层的责任与监管，但眼下仍处于行业能够集体在这些努力上达成一致的阶段。他很高兴看到这件事这么快就成形，整个行业都在支持进步，同时没有削弱竞争。他认为这无疑指向一个更加光明的 AI 未来。"
+    ],
+    "externalLinks": [
+      {
+        "label": "推文",
+        "url": "https://x.com/levie/status/2105111520913039530"
+      }
+    ],
+    "id": "follow-builders:digest-2026-09-30-aaron-levie",
+    "title": "Box CEO Aaron Levie",
+    "sourceUrl": "https://x.com/levie/status/2105111520913039530",
+    "summary": "Aaron Levie 认为 AI 行业短期内可以通过共享标准与规范来应对安全与安保问题。",
+    "tags": [
+      "AI 安全",
+      "行业标准",
+      "监管",
+      "竞争",
+      "责任"
+    ],
+    "source": "builder",
+    "sourceLabel": "Aaron Levie · Follow Builders",
+    "publishedAt": "2026-09-30T01:44:32.000Z"
+  },
+  {
+    "section": "x",
+    "digestDate": "2026-10-01",
+    "publishedDate": "9/30",
+    "time": "本次更新",
+    "readTime": "3 分钟",
+    "accent": "green",
+    "inRecentWindow": true,
+    "digestFormat": "builders-digest",
+    "paragraphs": [
+      "Zara Zhang 给自己的水杯做了一个营销网站，整个网站由 Opus 5.5 完成，一共只用了 6 条提示词。过程中还调用了 Elevenlabs 生成音乐、Meshy 生成 3D 素材、OpenAI API 生成图片。她提醒记得打开声音。"
+    ],
+    "externalLinks": [
+      {
+        "label": "推文",
+        "url": "https://x.com/zarazhangrui/status/2105096296831017078"
+      }
+    ],
+    "id": "follow-builders:digest-2026-09-30-zara-zhang",
+    "title": "Builder Zara Zhang",
+    "sourceUrl": "https://x.com/zarazhangrui/status/2105096296831017078",
+    "summary": "Zara Zhang 用 Opus 5.5 只写了 6 条提示词，就为自己的水杯做出了一个营销网站。",
+    "tags": [
+      "水杯",
+      "营销网站",
+      "Opus 5.5",
+      "Elevenlabs",
+      "Meshy",
+      "OpenAI API"
+    ],
+    "source": "builder",
+    "sourceLabel": "Zara Zhang · Follow Builders",
+    "publishedAt": "2026-09-30T00:44:02.000Z"
+  },
+  {
+    "section": "x",
+    "digestDate": "2026-10-01",
+    "publishedDate": "9/30",
+    "time": "本次更新",
+    "readTime": "3 分钟",
+    "accent": "green",
+    "inRecentWindow": true,
+    "digestFormat": "builders-digest",
+    "paragraphs": [
+      "Dan Shipper 说，自己虽然有偏向，但真的为 Every 的 Dev Day 报道感到无比自豪。这次报道包括两篇 vibe check、实时信息流、直播，还有与 Sam Altman 的播客，播客明天上线。他说团队为此付出了惊人的努力。他随后提醒，如果还没看的话，去读那篇 vibe check；想拿到相关内容，就订阅 Every。"
+    ],
+    "externalLinks": [
+      {
+        "label": "推文 1",
+        "url": "https://x.com/danshipper/status/2105066959822114972"
+      },
+      {
+        "label": "推文 2",
+        "url": "https://x.com/danshipper/status/2105073259507331233"
+      },
+      {
+        "label": "推文 3",
+        "url": "https://x.com/danshipper/status/2105064711431897369"
+      }
+    ],
+    "id": "follow-builders:digest-2026-09-30-dan-shipper",
+    "title": "Every 首席执行官 Dan Shipper",
+    "sourceUrl": "https://x.com/danshipper/status/2105073259507331233",
+    "summary": "Dan Shipper 为 Every 的 Dev Day 报道感到自豪，并推荐大家阅读 vibe check 和订阅 Every。",
+    "tags": [
+      "Every",
+      "Dev Day",
+      "vibe check",
+      "Sam Altman",
+      "播客"
+    ],
+    "source": "builder",
+    "sourceLabel": "Dan Shipper · Follow Builders",
+    "publishedAt": "2026-09-29T23:12:30.000Z"
+  },
+  {
+    "section": "x",
+    "digestDate": "2026-10-01",
+    "publishedDate": "9/30",
+    "time": "本次更新",
+    "readTime": "3 分钟",
+    "accent": "green",
+    "inRecentWindow": true,
+    "digestFormat": "builders-digest",
+    "paragraphs": [
+      "Thariq 问大家有没有试过对 Claude 说“我们有能力做任何事，请更勇敢一点”，紧接着又补了一句：那你有没有试过对自己说同样的话。他还提到 Anthropic 博客里一篇讲他们如何让 Claude 变快的文章，并附上了查看链接。"
+    ],
+    "externalLinks": [
+      {
+        "label": "推文 1",
+        "url": "https://x.com/trq212/status/2105065127892734076"
+      },
+      {
+        "label": "推文 2",
+        "url": "https://x.com/trq212/status/2105065175711924492"
+      },
+      {
+        "label": "推文 3",
+        "url": "https://x.com/trq212/status/2104983042536460435"
+      }
+    ],
+    "id": "follow-builders:digest-2026-09-30-thariq",
+    "title": "Claude Code @anthropicai 的 Thariq",
+    "sourceUrl": "https://x.com/trq212/status/2105065175711924492",
+    "summary": "Thariq 分享了让 Claude 更勇敢的提示词，并提到团队关于让 Claude 变快的博客文章。",
+    "tags": [
+      "Claude",
+      "提示词",
+      "勇敢",
+      "速度优化",
+      "Anthropic"
+    ],
+    "source": "builder",
+    "sourceLabel": "Thariq · Follow Builders",
+    "publishedAt": "2026-09-29T22:40:22.000Z"
+  },
+  {
+    "section": "x",
+    "digestDate": "2026-10-01",
+    "publishedDate": "9/30",
+    "time": "本次更新",
+    "readTime": "3 分钟",
+    "accent": "green",
+    "inRecentWindow": true,
+    "digestFormat": "builders-digest",
+    "paragraphs": [
+      "Swyx 说，Latent Space 播客的朋友们注意了，他们马上会在 gateway pavilion 向 AriX 和 nikunjhanda 提问，把大家最关心的 Dots、Sol 6.1、CUA 和 Decisions API 问题都问一遍，几分钟后就开始，欢迎来现场。他还提到，一年一度的最佳 AI 播客排名刚刚出炉。另外他打趣说自己有一群最棒的回复网友。"
+    ],
+    "externalLinks": [
+      {
+        "label": "推文 1",
+        "url": "https://x.com/swyx/status/2105000738745376769"
+      },
+      {
+        "label": "推文 2",
+        "url": "https://x.com/swyx/status/2105057391490498660"
+      },
+      {
+        "label": "推文 3",
+        "url": "https://x.com/swyx/status/2104984576703844750"
+      }
+    ],
+    "id": "follow-builders:digest-2026-09-30-swyx",
+    "title": "Swyx",
+    "sourceUrl": "https://x.com/swyx/status/2105057391490498660",
+    "summary": "Swyx 预告 Latent Space 播客的现场问答，并分享 AI 播客年度排名。",
+    "tags": [
+      "Latent Space",
+      "播客",
+      "AI 播客排名",
+      "现场问答",
+      "Dots"
+    ],
+    "source": "builder",
+    "sourceLabel": "Swyx · Follow Builders",
+    "publishedAt": "2026-09-29T22:09:26.000Z"
+  },
+  {
+    "section": "x",
+    "digestDate": "2026-10-01",
+    "publishedDate": "9/30",
+    "time": "本次更新",
+    "readTime": "3 分钟",
+    "accent": "green",
+    "inRecentWindow": true,
+    "digestFormat": "builders-digest",
+    "paragraphs": [
+      "Vercel 的 CEO Guillermo Rauch 宣布 AI SDK 的周下载量已经达到 3000 万次。他提到自己用 fframes、某个工具加上 opus 一次性做出了这条视频，还让 𝚏𝚡 去查看相关页面，把 500 万、1000 万、2000 万、3000 万这几个里程碑高亮出来。他强调这条视频是用 Rust 写的，并且在 GPU 上渲染，还感谢了 @neogoose_btw。\n\n此外，他还发了一句：你完全可以直接把东西发出去（顺便沉浸在制图学的花饰里）。\n\n接着他又晒出一张图，标出了产品缺陷和下载量之间的反向关系，并感谢了 @anthonysheww。"
+    ],
+    "externalLinks": [
+      {
+        "label": "推文 1",
+        "url": "https://x.com/rauchg/status/2105043144975011982"
+      },
+      {
+        "label": "推文 2",
+        "url": "https://x.com/rauchg/status/2105012176952164777"
+      },
+      {
+        "label": "推文 3",
+        "url": "https://x.com/rauchg/status/2105053919642829001"
+      }
+    ],
+    "id": "follow-builders:digest-2026-09-30-guillermo-rauch",
+    "title": "Vercel CEO Guillermo Rauch",
+    "sourceUrl": "https://x.com/rauchg/status/2105053919642829001",
+    "summary": "Guillermo Rauch 宣布 AI SDK 周下载量达到 3000 万，并顺带聊了用 fframes 做视频和产品缺陷与下载量的反向关系。",
+    "tags": [
+      "Guillermo Rauch",
+      "Vercel",
+      "AI SDK",
+      "下载量",
+      "fframes",
+      "Rust"
+    ],
+    "source": "builder",
+    "sourceLabel": "Guillermo Rauch · Follow Builders",
+    "publishedAt": "2026-09-29T21:55:39.000Z"
+  },
+  {
+    "section": "x",
+    "digestDate": "2026-10-01",
+    "publishedDate": "9/30",
+    "time": "本次更新",
+    "readTime": "3 分钟",
+    "accent": "green",
+    "inRecentWindow": true,
+    "digestFormat": "builders-digest",
+    "paragraphs": [
+      "Peter Steinberger 说“这相当惊艳”，随后又提到那个 /goal 还在运行中。"
+    ],
+    "externalLinks": [
+      {
+        "label": "推文 1",
+        "url": "https://x.com/steipete/status/2105048996549116268"
+      },
+      {
+        "label": "推文 2",
+        "url": "https://x.com/steipete/status/2105049100983132648"
+      }
+    ],
+    "id": "follow-builders:digest-2026-09-30-peter-steinberger",
+    "title": "Peter Steinberger",
+    "sourceUrl": "https://x.com/steipete/status/2105049100983132648",
+    "summary": "Peter Steinberger 感叹某个东西相当惊艳，并提到那个 /goal 还在跑。",
+    "tags": [
+      "AI",
+      "/goal",
+      "运行",
+      "惊艳"
+    ],
+    "source": "builder",
+    "sourceLabel": "Peter Steinberger · Follow Builders",
+    "publishedAt": "2026-09-29T21:36:30.000Z"
+  },
+  {
+    "section": "x",
+    "digestDate": "2026-10-01",
+    "publishedDate": "9/30",
+    "time": "本次更新",
+    "readTime": "3 分钟",
+    "accent": "green",
+    "inRecentWindow": true,
+    "digestFormat": "builders-digest",
+    "paragraphs": [
+      "Garry Tan 说，他刚把 OpenClaw 的 test-audit 技能的一个版本合并进了 GStack。他认为测试膨胀是个真实存在的问题，好在如今智能随手可得。"
+    ],
+    "externalLinks": [
+      {
+        "label": "推文",
+        "url": "https://x.com/garrytan/status/2105049005147525231"
+      }
+    ],
+    "id": "follow-builders:digest-2026-09-30-garry-tan",
+    "title": "Y Combinator 总裁兼首席执行官 Garry Tan",
+    "sourceUrl": "https://x.com/garrytan/status/2105049005147525231",
+    "summary": "Garry Tan 把 OpenClaw 的测试审计技能合并进 GStack，并指出测试膨胀是个真问题。",
+    "tags": [
+      "OpenClaw",
+      "GStack",
+      "测试审计",
+      "测试膨胀"
+    ],
+    "source": "builder",
+    "sourceLabel": "Garry Tan · Follow Builders",
+    "publishedAt": "2026-09-29T21:36:07.000Z"
+  },
+  {
+    "section": "x",
+    "digestDate": "2026-10-01",
+    "publishedDate": "9/30",
+    "time": "本次更新",
+    "readTime": "3 分钟",
+    "accent": "green",
+    "inRecentWindow": true,
+    "paragraphs": [
+      "Teamily 与 OpenAI Dots：‘点之团队’的愿景已经到来，并有数百万用户在使用",
+      "核心观点：OpenAI 刚分享了 Dots 的愿景——今天是一个始终在线的个人智能体，未来会演变为由多个专业化智能体协同工作的团队；Teamily 认为这正是 AI 的发展方向，并暗示自身产品已经实现或接近这一愿景。需要注意的语境：这是 Teamily 的对比性/观点性内容，预览中只提到 OpenAI 的愿景和 Teamily 的认同，并未给出“百万用户”的具体证据或细节，因此“已有百万用户在使用”应视为作者方的说法，而非预览中可验证的事实。"
+    ],
+    "id": "attentionvc-ai:2105025063762489426",
+    "title": "Teamily vs. OpenAI Dots: The Vision \"Team of Dots\" is Already Here, Using by Million of Users",
+    "sourceUrl": "https://x.com/Teamily_AI/status/2105025063762489426",
+    "summary": "Teamily AI 对比 OpenAI 提出的 Dots 愿景，称其“团队化智能体”方向与自身一致，并声称已有百万用户在使用。",
+    "tags": [
+      "多智能体",
+      "OpenAI Dots",
+      "Teamily",
+      "个人智能体",
+      "智能体团队"
+    ],
+    "source": "daily",
+    "sourceLabel": "Teamily AI · 技术动态 X 热榜",
+    "publishedAt": "2026-09-29T20:00:59.000Z"
+  },
+  {
+    "section": "x",
+    "digestDate": "2026-10-01",
+    "publishedDate": "9/30",
+    "time": "本次更新",
+    "readTime": "3 分钟",
+    "accent": "green",
+    "inRecentWindow": true,
+    "paragraphs": [
+      "为编码智能体构建设计系统",
+      "核心观点：让智能体构建页面时，你需要修正间距、替换输入组件、说明该用哪个按钮；而下一个智能体又会做出不同选择，于是你不得不反复重来。如果仓库里有某种统一的设计系统或规范，就能减少这种不一致和重复劳动。作者由此讨论为编码智能体构建设计系统的方向。需要注意的语境：预览以具体痛点开场，强调多智能体协作中设计决策不一致的问题；它并未说明具体实现方案，重点在于问题定义和构建设计系统的动机。"
+    ],
+    "id": "attentionvc-ai:2105001306503139816",
+    "title": "Building a design system for coding agents",
+    "sourceUrl": "https://x.com/arlanoska/status/2105001306503139816",
+    "summary": "指出不同编码智能体在构建页面时选择不一致，导致重复返工，并引出为编码智能体构建设计系统的必要性。",
+    "tags": [
+      "编码智能体",
+      "设计系统",
+      "vibe coding",
+      "多智能体",
+      "自动化"
+    ],
+    "source": "daily",
+    "sourceLabel": "Arlan · 技术动态 X 热榜",
+    "publishedAt": "2026-09-29T18:26:35.000Z"
+  },
+  {
+    "section": "x",
+    "digestDate": "2026-10-01",
+    "publishedDate": "9/30",
+    "time": "本次更新",
+    "readTime": "3 分钟",
+    "accent": "green",
+    "inRecentWindow": true,
+    "digestFormat": "builders-digest",
+    "paragraphs": [
+      "Replit 的 CEO Amjad Masad 发了一条推文，讲的是如何设计和构建一个 harness，用一小部分成本就能达到前沿水平的性能。"
+    ],
+    "externalLinks": [
+      {
+        "label": "推文",
+        "url": "https://x.com/amasad/status/2104996638817386820"
+      }
+    ],
+    "id": "follow-builders:digest-2026-09-30-amjad-masad",
+    "title": "Replit CEO Amjad Masad",
+    "sourceUrl": "https://x.com/amasad/status/2104996638817386820",
+    "summary": "Amjad Masad 分享如何以极低成本设计并构建达到前沿性能的 harness。",
+    "tags": [
+      "Amjad Masad",
+      "Replit",
+      "harness",
+      "前沿性能",
+      "低成本"
+    ],
+    "source": "builder",
+    "sourceLabel": "Amjad Masad · Follow Builders",
+    "publishedAt": "2026-09-29T18:08:02.000Z"
+  },
+  {
+    "section": "x",
+    "digestDate": "2026-10-01",
+    "publishedDate": "9/30",
+    "time": "本次更新",
+    "readTime": "3 分钟",
+    "accent": "green",
+    "inRecentWindow": true,
+    "digestFormat": "builders-digest",
+    "paragraphs": [
+      "Sam Altman 宣布 Dots 正式上线，称这是一种全新的 AI 使用方式，可以 7×24 小时为你工作，让你把更多时间和注意力收回到更高层次的工作上。他还提到 Ultrafast 快得让他再也不想回头。此外，他介绍了 6.1 Sol：价格只有 Astra 的五分之一，缓存读取折扣高达 95%，并称这是一个能力极强的模型。"
+    ],
+    "externalLinks": [
+      {
+        "label": "推文 1",
+        "url": "https://x.com/sama/status/2104995014208258235"
+      },
+      {
+        "label": "推文 2",
+        "url": "https://x.com/sama/status/2104994601140711896"
+      },
+      {
+        "label": "推文 3",
+        "url": "https://x.com/sama/status/2104994395980533804"
+      }
+    ],
+    "id": "follow-builders:digest-2026-09-30-sam-altman",
+    "title": "OpenAI 联合创始人兼 CEO Sam Altman",
+    "sourceUrl": "https://x.com/sama/status/2104995014208258235",
+    "summary": "Sam Altman 宣布 Dots 上线，并介绍新模型 6.1 Sol 与 Ultrafast 体验。",
+    "tags": [
+      "Dots",
+      "Ultrafast",
+      "6.1 Sol",
+      "Astra",
+      "缓存折扣"
+    ],
+    "source": "builder",
+    "sourceLabel": "Sam Altman · Follow Builders",
+    "publishedAt": "2026-09-29T18:01:34.000Z"
+  },
+  {
+    "section": "x",
+    "digestDate": "2026-10-01",
+    "publishedDate": "9/30",
+    "time": "本次更新",
+    "readTime": "3 分钟",
+    "accent": "green",
+    "inRecentWindow": true,
+    "paragraphs": [
+      "解放模型：前沿场景下的 harness 设计",
+      "核心观点：当前模型路由器（model routers）非常普遍，但存在根本性限制；无论路由器是基于高级启发式规则，还是基于一个读取每轮对话并选择使用哪个 LLM 的小模型，这种路由方式都有其局限。作者由此转向讨论前沿场景中的 harness 设计，可能涉及如何更灵活地编排和调用模型，而不是简单依赖路由器。需要注意的语境：预览只点出了路由器的局限并引出 harness 设计，没有展开具体方案或结论；标题中的“Free the models”暗示对模型自由调用/不被路由器束缚的倡导，但具体论证需阅读全文。"
+    ],
+    "id": "attentionvc-ai:2104976589180252218",
+    "title": "Free the models: harness design at the frontier",
+    "sourceUrl": "https://x.com/pirroh/status/2104976589180252218",
+    "summary": "讨论模型路由器的根本局限，并引出前沿场景下的 harness 设计问题。",
+    "tags": [
+      "模型路由器",
+      "harness设计",
+      "多智能体",
+      "自动化",
+      "LLM编排"
+    ],
+    "source": "daily",
+    "sourceLabel": "Michele Catasta · 技术动态 X 热榜",
+    "publishedAt": "2026-09-29T16:48:22.000Z"
+  },
+  {
+    "section": "papers",
+    "digestDate": "2026-10-01",
+    "publishedDate": "9/28",
+    "time": "本次更新",
+    "readTime": "3 分钟",
+    "accent": "violet",
+    "inRecentWindow": true,
+    "paragraphs": [
+      "通用机器人必须推断新任务的要求，并将这种理解转化为恰当的身体动作。面向机器人的上下文学习（ICL）通过在部署期间保持神经参数固定，利用演示和交互来引导已有能力，从而支持这一过程。",
+      "本文围绕连接上下文证据与执行的接口来组织文献综述，区分出四个方法族：上下文条件策略、几何演示迁移、基于世界模型的控制，以及基于技能和智能体的执行。通过比较这些接口，本文阐明了它们各自的迁移假设，以及训练、对应关系和记忆在使上下文发挥作用中的角色。",
+      "在操作与导航任务中，本文考察了当物体、环境和执行条件变化时，这些机制如何保持所教授的要求。该分析将方法设计与评估实践联系起来，以区分对教学的响应性、物理迁移以及从保留经验中获得的收益。",
+      "由此形成的研究议程将组合式任务获取和忠实迁移与物理递归自我改进联系起来，即经验提升学习后续任务的能力。"
+    ],
+    "utility": "普通人了解机器人如何通过少量演示和交互来学习新任务，有助于判断未来机器人在家庭、工厂或服务场景中能否灵活适应变化，以及这种技术可能对工作方式和生活便利性带来的影响。",
+    "externalLinks": [
+      {
+        "label": "查看 Hugging Face 论文页",
+        "url": "https://huggingface.co/papers/2609.36012"
+      },
+      {
+        "label": "打开 arXiv 原文",
+        "url": "https://arxiv.org/abs/2609.36012"
+      }
+    ],
+    "id": "huggingface-daily-papers:2609.36012",
+    "title": "面向机器人的上下文学习：方法与应用",
+    "sourceUrl": "https://huggingface.co/papers/2609.36012",
+    "summary": "通用机器人需要推断新任务的要求，并将这种理解转化为恰当的身体动作。面向机器人的上下文学习（ICL）通过在部署期间保持神经参数固定，利用演示和交互来引导已有能力，从而支持这一过程。本文围绕连接上下文证据与执行的接口来组织文献综述，区分出四个方法族：上下文条件策略、几何演示迁移、基于世界模型的控制，以及基于技能和智能体的执行。通过比较这些接口，本文阐明了它们各自的迁移假设，以及训练、对应关系和记忆在使上下文发挥作用中的角色。在操作与导航任务中，本文考察了当物体、环境和执行条件变化时，这些机制如何保持所教授的要求。该分析将方法设计与评估实践联系起来，以区分对教学的响应性、物理迁移以及从保留经验中获得的收益。由此形成的研究议程将组合式任务获取和忠实迁移与物理递归自我改进联系起来，即经验提升学习后续任务的能力。",
+    "tags": [
+      "上下文学习",
+      "机器人",
+      "演示迁移",
+      "世界模型",
+      "技能执行",
+      "递归自我改进"
+    ],
+    "source": "daily",
+    "sourceLabel": "Hugging Face Daily Papers",
+    "publishedAt": "2026-09-28T00:00:00.000Z"
+  },
+  {
+    "section": "papers",
+    "digestDate": "2026-10-01",
+    "publishedDate": "9/28",
+    "time": "本次更新",
+    "readTime": "3 分钟",
+    "accent": "violet",
+    "inRecentWindow": true,
+    "paragraphs": [
+      "可执行程序能对图像和视频的构建方式提供明确控制，但生成可运行的代码只是视觉创作的起点。程序可能正确执行，却违背所要求的构图、外观或运动。我们把这种差异定义为“程序到视觉”（P2V）鸿沟，并提出 MaLiang-Harness——一个统一框架，把由多模态大语言模型（MLLM）驱动的视觉生成组织为一个持续的构建、检查与修订过程。",
+      "其核心设计是让不断演化的视觉程序、它的构建历史以及它的验证共享同一份修订参照。我们定义“持久可执行生成”（PEG）状态来保存程序和任务上下文；“可追踪生成过程”（TGP）把编辑与渲染证据连接起来；“修订感知编辑与验证”（REV）支持恢复，并在完成前检查当前修订。这些机制共同协调跨渲染后端的规划、执行与视觉反馈。",
+      "我们在 MaLiang-IBench 上评测了 11 个强大的闭源 MLLM，在 MaLiang-VBench 上评测了 4 个，衡量生成成功率、视觉质量和计算成本。GPT-6-Astra 在两个基准上都达到 100% 的生成成功率，其中 96.0% 的图像任务和 76.9% 的视频任务满足全部质量阈值。对比还揭示出通用能力得分与视觉生成表现之间存在错位：得分相近的模型在满足视觉要求的能力上差异很大。",
+      "MaLiang-Harness 为研究 MLLM 如何把可执行代码转化为视觉结果提供了系统基础，既展现了可编程生成的潜力，也暴露了通用基准作为这种能力预测指标的局限。项目地址为 https://github.com/gulucaptain/MaLiang-Harness。"
+    ],
+    "utility": "这项研究提醒普通人：AI 能写出“看起来正确”的生成代码，并不等于生成的画面或视频真的符合要求。了解这一点，有助于你在使用 AI 做设计、广告或视频内容时，不只看它是否跑通，还要检查构图、外观和运动是否达标；同时也说明，模型在通用测试里得分高，未必代表它更会做视觉生成，选工具时不能只看排行榜分数。",
+    "externalLinks": [
+      {
+        "label": "查看 Hugging Face 论文页",
+        "url": "https://huggingface.co/papers/2609.34309"
+      },
+      {
+        "label": "打开 arXiv 原文",
+        "url": "https://arxiv.org/abs/2609.34309"
+      }
+    ],
+    "id": "huggingface-daily-papers:2609.34309",
+    "title": "MaLiang-Harness：通往图像与视频生成的可编程路径",
+    "sourceUrl": "https://huggingface.co/papers/2609.34309",
+    "summary": "可执行程序能对图像和视频的构建方式提供明确控制，但生成可运行的代码只是视觉创作的起点。程序可能正确执行，却违背所要求的构图、外观或运动。我们把这种差异定义为“程序到视觉”（P2V）鸿沟，并提出 MaLiang-Harness——一个统一框架，把由多模态大语言模型（MLLM）驱动的视觉生成组织为一个持续的构建、检查与修订过程。其核心设计是让不断演化的视觉程序、它的构建历史以及它的验证共享同一份修订参照。我们定义“持久可执行生成”（PEG）状态来保存程序和任务上下文；“可追踪生成过程”（TGP）把编辑与渲染证据连接起来；“修订感知编辑与验证”（REV）支持恢复，并在完成前检查当前修订。这些机制共同协调跨渲染后端的规划、执行与视觉反馈。我们在 MaLiang-IBench 上评测了 11 个强大的闭源 MLLM，在 MaLiang-VBench 上评测了 4 个，衡量生成成功率、视觉质量和计算成本。GPT-6-Astra 在两个基准上都达到 100% 的生成成功率，其中 96.0% 的图像任务和 76.9% 的视频任务满足全部质量阈值。对比还揭示出通用能力得分与视觉生成表现之间存在错位：得分相近的模型在满足视觉要求的能力上差异很大。MaLiang-Harness 为研究 MLLM 如何把可执行代码转化为视觉结果提供了系统基础，既展现了可编程生成的潜力，也暴露了通用基准作为这种能力预测指标的局限。项目地址为 https://github.com/gulucaptain/MaLiang-Harness。",
+    "tags": [
+      "程序到视觉鸿沟",
+      "多模态大语言模型",
+      "图像视频生成",
+      "可编程生成",
+      "基准评测"
+    ],
+    "source": "daily",
+    "sourceLabel": "Hugging Face Daily Papers",
+    "publishedAt": "2026-09-28T00:00:00.000Z"
+  },
+  {
+    "section": "papers",
+    "digestDate": "2026-10-01",
+    "publishedDate": "9/27",
+    "time": "本次更新",
+    "readTime": "3 分钟",
+    "accent": "violet",
+    "inRecentWindow": true,
+    "paragraphs": [
+      "随着大语言模型不断进步，人工智能体正从孤立、特定领域的任务，转向长周期、跨领域的工作流。这一转变暴露出两个挑战：一方面，驾驭框架（harness）的复杂度不断上升，使人工设计难以规模化；另一方面，与特定领域的紧密耦合限制了单一驾驭框架的通用性。因此，核心问题从“如何为某一领域设计更强的驾驭框架”，转变为“如何自主构建专用的驾驭框架、通过经验改进它们，并跨领域进行编排”。",
+      "我们提出 Raven，即“驾驭之驾驭”，这是一个开源的多智能体生态系统，能够为特定模型和领域自动构建并演化模块化的驾驭框架，将每个可执行的“模型—驾驭框架”组合视为一个可组合的智能单元。为支持“全域协作网络”，其宿主智能体负责分解目标、将子任务匹配到专用智能体、协调执行依赖并整合结果；同时，宿主档案库与 EverOS 跨任务保存经验，Skill Forge 则将这些经验转化为可复用的流程。",
+      "我们的理论给出了充分条件，说明在共享资源预算下，这种组合能够将可靠任务覆盖范围扩展到超过现有单个智能体所能达到的水平。在复杂且长周期的任务上，Raven 显著优于当前最先进的智能体系统，推动了可组合智能体智能的前沿。"
+    ],
+    "utility": "普通人可以借此了解 AI 智能体正从单一任务工具走向跨领域协作系统。未来在工作或生活中，若遇到需要多步骤、跨专业配合的复杂任务，这类“智能体组合”可能比单个 AI 助手更可靠；但论文结论主要基于特定实验条件，实际效果仍取决于任务类型与资源投入，不宜简单外推为通用能力。",
+    "externalLinks": [
+      {
+        "label": "查看 Hugging Face 论文页",
+        "url": "https://huggingface.co/papers/2609.33439"
+      },
+      {
+        "label": "打开 arXiv 原文",
+        "url": "https://arxiv.org/abs/2609.33439"
+      }
+    ],
+    "id": "huggingface-daily-papers:2609.33439",
+    "title": "Raven：面向可组合智能体智能的“驾驭之驾驭”",
+    "sourceUrl": "https://huggingface.co/papers/2609.33439",
+    "summary": "随着大语言模型不断进步，人工智能体正从孤立、特定领域的任务，转向长周期、跨领域的工作流。这一转变暴露出两个挑战：一方面，驾驭框架（harness）的复杂度不断上升，使人工设计难以规模化；另一方面，与特定领域的紧密耦合限制了单一驾驭框架的通用性。因此，核心问题从“如何为某一领域设计更强的驾驭框架”，转变为“如何自主构建专用的驾驭框架、通过经验改进它们，并跨领域进行编排”。我们提出 Raven，即“驾驭之驾驭”，这是一个开源的多智能体生态系统，能够为特定模型和领域自动构建并演化模块化的驾驭框架，将每个可执行的“模型—驾驭框架”组合视为一个可组合的智能单元。为支持“全域协作网络”，其宿主智能体负责分解目标、将子任务匹配到专用智能体、协调执行依赖并整合结果；同时，宿主档案库与 EverOS 跨任务保存经验，Skill Forge 则将这些经验转化为可复用的流程。我们的理论给出了充分条件，说明在共享资源预算下，这种组合能够将可靠任务覆盖范围扩展到超过现有单个智能体所能达到的水平。在复杂且长周期的任务上，Raven 显著优于当前最先进的智能体系统，推动了可组合智能体智能的前沿。",
+    "tags": [
+      "多智能体系统",
+      "可组合智能",
+      "驾驭框架",
+      "跨领域协作",
+      "长周期任务",
+      "经验复用"
+    ],
+    "source": "daily",
+    "sourceLabel": "Hugging Face Daily Papers",
+    "publishedAt": "2026-09-27T00:00:00.000Z"
+  }
+]
