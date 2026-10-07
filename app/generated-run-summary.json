@@ -1,18 +1,18 @@
 {
-  "id": "collection-2026-10-06T21:36:58.454Z",
-  "generatedAt": "2026-10-06T21:36:58.454Z",
-  "windowStart": "2026-10-05T16:00:00.000Z",
+  "id": "collection-2026-10-07T21:58:00.314Z",
+  "generatedAt": "2026-10-07T21:58:00.314Z",
+  "windowStart": "2026-10-06T16:00:00.000Z",
   "mode": "production",
   "status": "completed_with_errors",
-  "itemCount": 17,
-  "validItemCount": 17,
-  "publishedCount": 17,
+  "itemCount": 19,
+  "validItemCount": 19,
+  "publishedCount": 19,
   "stages": [
     {
       "id": "collect",
       "label": "采集",
       "status": "completed",
-      "detail": "完成 3/4 个来源，共 17 条内容"
+      "detail": "完成 3/4 个来源，共 19 条内容"
     },
     {
       "id": "summarize",
@@ -24,13 +24,13 @@
       "id": "quality",
       "label": "质量检查",
       "status": "completed",
-      "detail": "通过 17 条公开内容"
+      "detail": "通过 19 条公开内容"
     },
     {
       "id": "publish",
       "label": "发布",
       "status": "completed",
-      "detail": "已写入 17 条公开内容"
+      "detail": "已写入 19 条公开内容"
     }
   ],
   "sources": [
@@ -38,18 +38,18 @@
       "id": "follow-builders",
       "label": "Follow Builders",
       "status": "completed",
-      "itemCount": 11,
-      "startedAt": "2026-10-06T21:36:58.464Z",
-      "finishedAt": "2026-10-06T21:37:10.442Z",
+      "itemCount": 16,
+      "startedAt": "2026-10-07T21:58:00.324Z",
+      "finishedAt": "2026-10-07T21:58:15.629Z",
       "retryAttempts": 1
     },
     {
       "id": "technical-x",
       "label": "技术动态 X",
       "status": "completed",
-      "itemCount": 3,
-      "startedAt": "2026-10-06T21:37:10.443Z",
-      "finishedAt": "2026-10-06T21:37:14.323Z",
+      "itemCount": 0,
+      "startedAt": "2026-10-07T21:58:15.630Z",
+      "finishedAt": "2026-10-07T21:58:15.734Z",
       "retryAttempts": 1
     },
     {
@@ -57,8 +57,8 @@
       "label": "热门论文",
       "status": "completed",
       "itemCount": 3,
-      "startedAt": "2026-10-06T21:37:14.324Z",
-      "finishedAt": "2026-10-06T21:37:25.831Z",
+      "startedAt": "2026-10-07T21:58:15.734Z",
+      "finishedAt": "2026-10-07T21:58:27.640Z",
       "retryAttempts": 1
     },
     {
@@ -67,8 +67,8 @@
       "status": "failed",
       "itemCount": 0,
       "error": "DeepSeek did not finish 1 GitHub entries",
-      "startedAt": "2026-10-06T21:37:25.831Z",
-      "finishedAt": "2026-10-06T21:37:54.313Z",
+      "startedAt": "2026-10-07T21:58:27.641Z",
+      "finishedAt": "2026-10-07T21:59:00.025Z",
       "retryAttempts": 5
     }
   ],
@@ -2528,6 +2528,32 @@
       "value": "非技术读者可判断：AI 生成正从短片段、单模态，走向带同步声音的长视频，并更注重质量与效率的平衡。",
       "technicalLevel": "中高",
       "technicalPercentage": 72
+    },
+    {
+      "section": "x",
+      "digestDate": "2026-10-08",
+      "label": "X 推特内容",
+      "overview": "一线 AI Builder 今天集中讨论 agent 进入团队协作与企业安全：agent 自动找代码负责人、公司级 agent 在 Slack 内共享技能、云端大脑配本地双手。",
+      "trends": [
+        "agent 从个人工具转向团队基础设施，接入工作流、代码维护和企业安全。",
+        "讨论重心从模型能力转向提示词简洁化、验证机制与规模化决策效率。"
+      ],
+      "value": "非技术读者可判断：agent 正成为企业协作与安全的标配，安全岗位压力与机会同步上升，软件事实开源趋势加速。",
+      "technicalLevel": "中等",
+      "technicalPercentage": 45
+    },
+    {
+      "section": "papers",
+      "digestDate": "2026-10-08",
+      "label": "热门论文",
+      "overview": "本批论文聚焦大模型训练效率与生成质量：跨分词器蒸馏从追求对齐覆盖转向监督可靠性；MoE强化学习FP4量化通过轨迹引导对齐训练与推理路径；少步视频生成引入联合-边缘分布匹配提升视觉与语义表现。",
+      "trends": [
+        "训练与推理路径的量化一致性成为低精度强化学习的新焦点，而非独立优化各路径。",
+        "蒸馏与生成任务中，监督信号的可靠性比覆盖范围更受重视，弱对齐信号可能损害效果。"
+      ],
+      "value": "非技术读者可判断：大模型训练正从堆覆盖转向提纯信号，低精度强化学习与视频生成在效率和质量上均有可感知的提升路径。",
+      "technicalLevel": "高",
+      "technicalPercentage": 88
     }
   ],
   "errors": [
@@ -2536,190 +2562,195 @@
       "message": "DeepSeek did not finish 1 GitHub entries"
     }
   ],
-  "finishedAt": "2026-10-06T21:40:42.722Z",
+  "finishedAt": "2026-10-07T22:02:05.401Z",
   "items": [
     {
-      "externalId": "digest-2026-10-06-thibault-sottiaux",
+      "externalId": "digest-2026-10-07-thibault-sottiaux",
       "source": {
         "id": "follow-builders",
         "type": "builder",
         "name": "Thibault Sottiaux · Follow Builders",
         "url": "https://github.com/zarazhangrui/follow-builders"
       },
-      "title": "OpenAI Codex 与 ChatGPT 团队成员 Thibault Sottiaux",
-      "sourceUrl": "https://x.com/thsottiaux/status/2107311729768353844",
-      "summary": "Thibault Sottiaux 说这是他在 OpenAI 最好的一天，并提到 Sergio 正在 ChatGPT 里打磨协作空间。",
-      "publishedAt": "2026-10-06T03:27:22.000Z",
+      "title": "OpenAI Codex 与 ChatGPT 成员 Thibault Sottiaux",
+      "sourceUrl": "https://x.com/thsottiaux/status/2107676653895967106",
+      "summary": "Thibault Sottiaux 宣布游戏重置已处理，已上线的四项改进不会撤回，并预告 Day 3。",
+      "publishedAt": "2026-10-07T03:37:27.000Z",
       "keywords": [
-        "OpenAI",
-        "ChatGPT",
-        "协作空间",
-        "Sergio",
-        "Codex"
+        "游戏重置",
+        "社区投票",
+        "改进上线",
+        "Day 3",
+        "校准"
       ],
       "body": {
         "section": "x",
-        "digestDate": "2026-10-07",
-        "publishedDate": "10/6",
+        "digestDate": "2026-10-08",
+        "publishedDate": "10/7",
         "time": "本次更新",
         "readTime": "3 分钟",
         "accent": "green",
         "inRecentWindow": true,
         "digestFormat": "builders-digest",
         "paragraphs": [
-          "Thibault Sottiaux 说，这可能是他到 OpenAI 以来过得最好的一天，乐趣和强度都大得离谱，未来很光明。他还转了一句话，说“真正的故事是这一个”。另外他提到 Sergio 正在 ChatGPT 里把协作空间（collaborative space）做出魔法般的效果，每天都在大幅进步。"
+          "Thibault Sottiaux 说，他们上线了四样被评为“好到极好”的东西，还有一些数学证明，但投票结果很明确，社区要求重置。他确实做了校准，感觉游戏似乎被调得偏向重置这一边，不过目前规则就是这样。所以重置已经处理完毕，祝大家玩得开心。他还补充说，那些改进不会被撤下，大家可以既保住蛋糕又把它吃掉，明天 Day 3 见。最后顺带打了声招呼：晚上好！"
         ],
         "externalLinks": [
           {
             "label": "推文 1",
-            "url": "https://x.com/thsottiaux/status/2107311729768353844"
+            "url": "https://x.com/thsottiaux/status/2107676072871600470"
           },
           {
             "label": "推文 2",
-            "url": "https://x.com/thsottiaux/status/2107295839655952486"
+            "url": "https://x.com/thsottiaux/status/2107676261099426030"
           },
           {
             "label": "推文 3",
-            "url": "https://x.com/thsottiaux/status/2107200530477101461"
+            "url": "https://x.com/thsottiaux/status/2107676653895967106"
           }
         ]
       }
     },
     {
-      "externalId": "digest-2026-10-06-thariq",
+      "externalId": "digest-2026-10-07-boris-cherny",
+      "source": {
+        "id": "follow-builders",
+        "type": "builder",
+        "name": "Boris Cherny · Follow Builders",
+        "url": "https://github.com/zarazhangrui/follow-builders"
+      },
+      "title": "Anthropic Claude Code 成员 Boris Cherny",
+      "sourceUrl": "https://x.com/bcherny/status/2107565497680314831",
+      "summary": "Boris Cherny 分享自己给 Claude 写提示词的方式，强调像跟同事说话一样，不必过度设计。",
+      "publishedAt": "2026-10-06T20:15:45.000Z",
+      "keywords": [
+        "提示词",
+        "Claude",
+        "目标",
+        "精力",
+        "验证"
+      ],
+      "body": {
+        "section": "x",
+        "digestDate": "2026-10-08",
+        "publishedDate": "10/7",
+        "time": "本次更新",
+        "readTime": "3 分钟",
+        "accent": "green",
+        "inRecentWindow": true,
+        "digestFormat": "builders-digest",
+        "paragraphs": [
+          "Boris Cherny 表示，大家对他这样给 Claude 写提示词感到惊讶，这让他有点意外。他的做法就是像跟同事说话一样跟 Claude 交流，提示词没有什么秘密，大多数任务不需要过度搭建脚手架或写得特别指令化，给 Claude 一个目标，它自己会想明白。他说在 Sonnet 3.5 那会儿，提示词怎么写非常重要，而如今更重要的是向模型传达三件事：你想让它做什么、你希望它花多少精力、以及它该如何验证自己做得对不对。他还另外贴出了自己实际使用的提示词作为例子。"
+        ],
+        "externalLinks": [
+          {
+            "label": "推文 1",
+            "url": "https://x.com/bcherny/status/2107565388250874193"
+          },
+          {
+            "label": "推文 2",
+            "url": "https://x.com/bcherny/status/2107565497680314831"
+          }
+        ]
+      }
+    },
+    {
+      "externalId": "digest-2026-10-07-sam-altman",
+      "source": {
+        "id": "follow-builders",
+        "type": "builder",
+        "name": "Sam Altman · Follow Builders",
+        "url": "https://github.com/zarazhangrui/follow-builders"
+      },
+      "title": "OpenAI 使命代表 Sam Altman",
+      "sourceUrl": "https://x.com/sama/status/2107691577015755196",
+      "summary": "Sam Altman 在夜里仰望星空，感慨宇宙之浩瀚与人类技术积累之不易。",
+      "publishedAt": "2026-10-07T04:36:45.000Z",
+      "keywords": [
+        "仰望星空",
+        "敬畏",
+        "技术积累",
+        "OpenAI",
+        "现实结构"
+      ],
+      "body": {
+        "section": "x",
+        "digestDate": "2026-10-08",
+        "publishedDate": "10/7",
+        "time": "本次更新",
+        "readTime": "3 分钟",
+        "accent": "green",
+        "inRecentWindow": true,
+        "digestFormat": "builders-digest",
+        "paragraphs": [
+          "Sam Altman 今晚带着格外的敬畏仰望星空，引用了那句“thy sea is so great and my boat is so small”（你的海如此辽阔，我的船如此渺小）。他感谢无数人一代又一代像砌砖一样投入技术工作，才让这样的奇迹成为可能；也感谢机器和现实本身的结构，让我们得以多理解一点点这个世界。"
+        ],
+        "externalLinks": [
+          {
+            "label": "推文 1",
+            "url": "https://x.com/sama/status/2107691261776052633"
+          },
+          {
+            "label": "推文 2",
+            "url": "https://x.com/sama/status/2107691577015755196"
+          },
+          {
+            "label": "推文 3",
+            "url": "https://x.com/sama/status/2107691262795239805"
+          }
+        ]
+      }
+    },
+    {
+      "externalId": "digest-2026-10-07-thariq",
       "source": {
         "id": "follow-builders",
         "type": "builder",
         "name": "Thariq · Follow Builders",
         "url": "https://github.com/zarazhangrui/follow-builders"
       },
-      "title": "Anthropic Claude Code 团队成员 Thariq",
-      "sourceUrl": "https://x.com/trq212/status/2107340728380870868",
-      "summary": "Thariq 聊了这种规划方式比原始 HTML 更省 token，还给“本地双手”模式起了名，并分享了游戏设计学习资源。",
-      "publishedAt": "2026-10-06T05:22:36.000Z",
+      "title": "Claude Code 成员 Thariq",
+      "sourceUrl": "https://x.com/trq212/status/2107580787277340835",
+      "summary": "Thariq 谈抽象层级与编码智能体，并展望 Claude 云端大脑加本地双手的形态。",
+      "publishedAt": "2026-10-06T21:16:31.000Z",
       "keywords": [
-        "Claude Code",
-        "token 效率",
-        "local hands",
-        "cowork",
-        "游戏设计"
+        "抽象层级",
+        "编码智能体",
+        "Claude",
+        "云端大脑",
+        "本地双手",
+        "同步"
       ],
       "body": {
         "section": "x",
-        "digestDate": "2026-10-07",
-        "publishedDate": "10/6",
+        "digestDate": "2026-10-08",
+        "publishedDate": "10/7",
         "time": "本次更新",
         "readTime": "3 分钟",
         "accent": "green",
         "inRecentWindow": true,
         "digestFormat": "builders-digest",
         "paragraphs": [
-          "Thariq 说，用这种方式做规划的一大优势是比直接写原始 HTML 省 token 得多：模型不用为了状态机、图表、代码片段这些常见东西重新造组件或逻辑。他最喜欢的叫法是“local hands”（本地双手）——Claude 跑在云端，但能访问你本地的文件，这个能力之后也会进 cowork。最后他还说，如果你想入门游戏设计，外面有太多好东西可以学。"
+          "Thariq 认为，在更高抽象层级上工作一直都需要理解更低的层级，他不觉得编码智能体会改变这一点。他还谈到，未来会越来越走向 Claude 的“大脑”在云端、同时给 Claude“本地双手”来操作你的电脑。他提到这有一些棘手的技术问题要解决：如果 Claude 只能在你电脑在线时访问你的文件，那它可能会被卡住、直到你的电脑重新开机才能干活，所以也许需要某种同步机制，但那里也存在不少边缘情况。"
         ],
         "externalLinks": [
           {
             "label": "推文 1",
-            "url": "https://x.com/trq212/status/2107294499282293017"
+            "url": "https://x.com/trq212/status/2107504677143368163"
           },
           {
             "label": "推文 2",
-            "url": "https://x.com/trq212/status/2107229483015258493"
+            "url": "https://x.com/trq212/status/2107580785456976085"
           },
           {
             "label": "推文 3",
-            "url": "https://x.com/trq212/status/2107340728380870868"
+            "url": "https://x.com/trq212/status/2107580787277340835"
           }
         ]
       }
     },
     {
-      "externalId": "digest-2026-10-06-ryo-lu",
-      "source": {
-        "id": "follow-builders",
-        "type": "builder",
-        "name": "Ryo Lu · Follow Builders",
-        "url": "https://github.com/zarazhangrui/follow-builders"
-      },
-      "title": "设计师 Ryo Lu",
-      "sourceUrl": "https://x.com/ryolu_/status/2107246891977335049",
-      "summary": "Ryo Lu 发布了一款支持双语字幕的语言学习工具，并写下长文回忆史蒂夫·乔布斯如何影响他走上界面设计之路。",
-      "publishedAt": "2026-10-05T23:09:44.000Z",
-      "keywords": [
-        "语言学习",
-        "Netflix 字幕",
-        "界面设计",
-        "乔布斯",
-        "iMac"
-      ],
-      "body": {
-        "section": "x",
-        "digestDate": "2026-10-07",
-        "publishedDate": "10/6",
-        "time": "本次更新",
-        "readTime": "3 分钟",
-        "accent": "green",
-        "inRecentWindow": true,
-        "digestFormat": "builders-digest",
-        "paragraphs": [
-          "Ryo Lu 做了个小东西给语言学习者：用任意两种语言的字幕看 Netflix，还带日语、中文和韩语的发音指南，样式可以自定义，默认样式是他亲手挑的，他让大家尽情享用。他还补了一条，说可以把 ryOS Subtitles 加到 Chrome 里。\n\n另一条推文里，他写下了对史蒂夫·乔布斯的回忆。他说自己是伴着米色机箱长大的，后来搬到加拿大，看到了 iMac G4，心想电脑怎么能这么美。他买不起 Mac，就把自己的 PC 改装成 Mac 的样子：换图标、换字体、换窗口样式，还学会了做那种闪亮、让人想舔一口的按钮——他就是这么走进界面设计的。他刻录乔布斯发布会的 DVD，反复研究，看了一遍又一遍。产品里有那么多用心，向人们展示产品能做什么时又有那么多快乐。他的第一台 iPod 是黑色 nano，走到哪带到哪，后来 iPhone 出现，改变了世界，那时候感觉一切皆有可能。\n\n他说，乔布斯去世之后，他觉得大家陷入了一个循环：不断打磨、优化供应链、想出更多让人一直刷下去的办法，那么多才华花在微小的改进上，留给真正伟大、真正有心的东西的空间却那么少。发布会一年比一年更像电影，但他还是怀念现场演示——有人在台上摆弄自己参与做出来的东西，那种兴奋、那些玩笑、那些出岔子的地方，感觉很有人味，很好玩。\n\n他说，我们把电脑做得更快、手机做得更薄、加了更多摄像头、让机器在越来越多事情上比人更聪明，可不知怎么的，我们也变得更疏离、更孤独。我们花那么多精力去打败人类，他希望能多花点时间了解人们的生活，让生活变得更好。工作时他有时还会想：乔布斯会怎么做？他永远不会知道答案，也很遗憾没能和乔布斯共事，但乔布斯的作品传到了一个用着米色 PC 的孩子那里，改变了他的人生轨迹。他想知道还有多少人和他有类似的故事。他一直记着这句话：“那些疯狂到以为自己能改变世界的人，才是真正改变世界的人。”还有那么多值得做的东西，可以倾注心血的东西，能让人感受到他第一次看到那台 iMac 时的感受。谢谢史蒂夫。"
-        ],
-        "externalLinks": [
-          {
-            "label": "推文 1",
-            "url": "https://x.com/ryolu_/status/2107146629338042853"
-          },
-          {
-            "label": "推文 2",
-            "url": "https://x.com/ryolu_/status/2107246891977335049"
-          },
-          {
-            "label": "推文 3",
-            "url": "https://x.com/ryolu_/status/2107146721591726323"
-          }
-        ]
-      }
-    },
-    {
-      "externalId": "digest-2026-10-06-garry-tan",
-      "source": {
-        "id": "follow-builders",
-        "type": "builder",
-        "name": "Garry Tan · Follow Builders",
-        "url": "https://github.com/zarazhangrui/follow-builders"
-      },
-      "title": "Y Combinator 总裁兼 CEO Garry Tan",
-      "sourceUrl": "https://x.com/garrytan/status/2107173670699622830",
-      "summary": "Garry Tan 认为 AGI 科学循环即将到来，并看好 Halmos 在做这件事。",
-      "publishedAt": "2026-10-05T18:18:47.000Z",
-      "keywords": [
-        "AGI",
-        "科学循环",
-        "Halmos",
-        "Muse",
-        "Instinct"
-      ],
-      "body": {
-        "section": "x",
-        "digestDate": "2026-10-07",
-        "publishedDate": "10/6",
-        "time": "本次更新",
-        "readTime": "3 分钟",
-        "accent": "green",
-        "inRecentWindow": true,
-        "digestFormat": "builders-digest",
-        "paragraphs": [
-          "Garry Tan 说，AGI 科学循环（AGI Science Loops）就要来了，而这些 AGI 科学循环会有自己的 Muse 和 Instinct，Halmos 正在做这件事。"
-        ],
-        "externalLinks": [
-          {
-            "label": "推文",
-            "url": "https://x.com/garrytan/status/2107173670699622830"
-          }
-        ]
-      }
-    },
-    {
-      "externalId": "digest-2026-10-06-amjad-masad",
+      "externalId": "digest-2026-10-07-amjad-masad",
       "source": {
         "id": "follow-builders",
         "type": "builder",
@@ -2727,89 +2758,174 @@
         "url": "https://github.com/zarazhangrui/follow-builders"
       },
       "title": "Replit CEO Amjad Masad",
-      "sourceUrl": "https://x.com/amasad/status/2107252697162543255",
-      "summary": "Amjad Masad 谈美国开源权重模型追赶、Replit 服务家庭企业，以及用 Replit 做 TikTok 推广。",
-      "publishedAt": "2026-10-05T23:32:48.000Z",
+      "sourceUrl": "https://x.com/amasad/status/2107671204639465961",
+      "summary": "Amjad Masad 感叹 AI 驱动的逆向工程与反编译进展疯狂，并预告软件将事实上全面开源。",
+      "publishedAt": "2026-10-07T03:15:48.000Z",
       "keywords": [
-        "Replit",
-        "开源权重模型",
-        "家族企业",
-        "TikTok",
-        "应用推广"
+        "逆向工程",
+        "反编译",
+        "开源",
+        "AI",
+        "Replit"
       ],
       "body": {
         "section": "x",
-        "digestDate": "2026-10-07",
-        "publishedDate": "10/6",
+        "digestDate": "2026-10-08",
+        "publishedDate": "10/7",
         "time": "本次更新",
         "readTime": "3 分钟",
         "accent": "green",
         "inRecentWindow": true,
         "digestFormat": "builders-digest",
         "paragraphs": [
-          "Amjad Masad 说，美国在开源权重模型上正在追赶。他也表示，非常自豪有这么多家族企业靠 Replit 运转起来。随后他发了一句“帮我的应用在 TikTok 上做推广”，像是在展示用 Replit 直接完成这类需求。"
+          "Replit 的 CEO Amjad Masad 说，AI 驱动的逆向工程和反编译领域现在发生的事简直疯狂，照这个趋势，很快所有软件都会变成事实上的开源。他还补了一句：AI 正在找上每一件事、每一个人。另外他分享了一段完整对话的链接。"
         ],
         "externalLinks": [
           {
             "label": "推文 1",
-            "url": "https://x.com/amasad/status/2107222388429766970"
+            "url": "https://x.com/amasad/status/2107671204639465961"
           },
           {
             "label": "推文 2",
-            "url": "https://x.com/amasad/status/2107222889946898893"
-          },
-          {
-            "label": "推文 3",
-            "url": "https://x.com/amasad/status/2107252697162543255"
+            "url": "https://x.com/amasad/status/2107544111482118237"
           }
         ]
       }
     },
     {
-      "externalId": "digest-2026-10-06-aditya-agarwal",
+      "externalId": "digest-2026-10-07-claude",
       "source": {
         "id": "follow-builders",
         "type": "builder",
-        "name": "Aditya Agarwal · Follow Builders",
+        "name": "Claude · Follow Builders",
         "url": "https://github.com/zarazhangrui/follow-builders"
       },
-      "title": "SPC 普通合伙人 Aditya Agarwal",
-      "sourceUrl": "https://x.com/adityaag/status/2107171589783748608",
-      "summary": "Aditya Agarwal 介绍机器人学习算法专家 Sergey Levine 将到 SPC 分享，并提醒名额将满。",
-      "publishedAt": "2026-10-05T18:10:31.000Z",
+      "title": "Claude",
+      "sourceUrl": "https://x.com/claudeai/status/2107574198482927900",
+      "summary": "Claude 介绍 Every 团队用 Claude Managed Agents 搭建公司级 agent，以及 Claude 内可直接协作编辑 Google 文档的新功能。",
+      "publishedAt": "2026-10-06T20:50:20.000Z",
       "keywords": [
-        "SPC",
-        "Sergey Levine",
-        "机器人学习",
-        "Physical Intelligence",
-        "伯克利"
+        "Claude",
+        "Managed Agents",
+        "Slack",
+        "Google 文档",
+        "协作编辑",
+        "beta"
       ],
       "body": {
         "section": "x",
-        "digestDate": "2026-10-07",
-        "publishedDate": "10/6",
+        "digestDate": "2026-10-08",
+        "publishedDate": "10/7",
         "time": "本次更新",
         "readTime": "3 分钟",
         "accent": "green",
         "inRecentWindow": true,
         "digestFormat": "builders-digest",
         "paragraphs": [
-          "Aditya Agarwal 介绍了一位嘉宾：三个斯坦福学位、2016 年起在伯克利 EECS 任教、Physical Intelligence 联合创始人 Sergey Levine。他说 Sergey Levine 研究的是让机器人从经验中学习的算法，把机器人看到的东西和它们如何移动联系起来。Sergey Levine 第二天会到 SPC 来。Aditya 还补了一句，最后几个名额了。"
+          "Claude 这边介绍了一个案例：Every 团队尽可能把工作都交给 agent 跑，为了让整个团队在新模型发布时共享技能，他们在 Claude Managed Agents 上搭了一个公司 agent，全团队都在 Slack 里用它。这个做法在内部流行起来之后，他们又把它开放给了自己的订阅用户。想看完整对话，可以去看与 Dan Shipper 和 Willie Williams 聊他们怎么搭建它的视频。另外，Claude 还上线了一个新功能：在 Claude 里粘贴一个 Google 文件链接，或者直接让它新建文档、表格、幻灯片，它就会在聊天旁边打开，让你和 Claude 一起编辑，访问权限跟随你的 Google 共享设置。该功能在所有付费套餐中处于 beta 阶段。"
         ],
         "externalLinks": [
           {
             "label": "推文 1",
-            "url": "https://x.com/adityaag/status/2107171588194152936"
+            "url": "https://x.com/claudeai/status/2107574195978641911"
           },
           {
             "label": "推文 2",
-            "url": "https://x.com/adityaag/status/2107171589783748608"
+            "url": "https://x.com/claudeai/status/2107522599530139767"
+          },
+          {
+            "label": "推文 3",
+            "url": "https://x.com/claudeai/status/2107574198482927900"
           }
         ]
       }
     },
     {
-      "externalId": "digest-2026-10-06-aaron-levie",
+      "externalId": "digest-2026-10-07-dan-shipper",
+      "source": {
+        "id": "follow-builders",
+        "type": "builder",
+        "name": "Dan Shipper · Follow Builders",
+        "url": "https://github.com/zarazhangrui/follow-builders"
+      },
+      "title": "Every 首席执行官 Dan Shipper",
+      "sourceUrl": "https://x.com/danshipper/status/2107575089441181861",
+      "summary": "Dan Shipper 分享了 Every agent 背后的 Claude Managed Agents、Slack 市场新应用，并转发了一条他认为确实属实的说法。",
+      "publishedAt": "2026-10-06T20:53:52.000Z",
+      "keywords": [
+        "Every",
+        "Claude Managed Agents",
+        "Slack 市场",
+        "AI agent"
+      ],
+      "body": {
+        "section": "x",
+        "digestDate": "2026-10-08",
+        "publishedDate": "10/7",
+        "time": "本次更新",
+        "readTime": "3 分钟",
+        "accent": "green",
+        "inRecentWindow": true,
+        "digestFormat": "builders-digest",
+        "paragraphs": [
+          "Dan Shipper 说，Every 的 agent 离不开 Claude Managed Agents，能坐下来聊聊这件事特别有意思。他还提到 Slack 市场上出现了一个挺酷的新精选应用。此外，他转发了一条内容，并表示这确实是真的。"
+        ],
+        "externalLinks": [
+          {
+            "label": "推文 1",
+            "url": "https://x.com/danshipper/status/2107520182789005726"
+          },
+          {
+            "label": "推文 2",
+            "url": "https://x.com/danshipper/status/2107575089441181861"
+          },
+          {
+            "label": "推文 3",
+            "url": "https://x.com/danshipper/status/2107507471807881262"
+          }
+        ]
+      }
+    },
+    {
+      "externalId": "digest-2026-10-07-guillermo-rauch",
+      "source": {
+        "id": "follow-builders",
+        "type": "builder",
+        "name": "Guillermo Rauch · Follow Builders",
+        "url": "https://github.com/zarazhangrui/follow-builders"
+      },
+      "title": "Vercel 首席执行官 Guillermo Rauch",
+      "sourceUrl": "https://x.com/rauchg/status/2107606246350266469",
+      "summary": "Guillermo Rauch 提出一个简单但可能对大规模 AI 决策影响极大的功能：在置信度阈值下让模型“想得快一点，少慢一点”。",
+      "publishedAt": "2026-10-06T22:57:41.000Z",
+      "keywords": [
+        "Vercel",
+        "AI 决策",
+        "置信度阈值",
+        "快思考慢思考"
+      ],
+      "body": {
+        "section": "x",
+        "digestDate": "2026-10-08",
+        "publishedDate": "10/7",
+        "time": "本次更新",
+        "readTime": "3 分钟",
+        "accent": "green",
+        "inRecentWindow": true,
+        "digestFormat": "builders-digest",
+        "paragraphs": [
+          "Guillermo Rauch 把“快思考与慢思考”改写成“快思考，以及在置信度阈值下稍微不那么慢地思考”。他认为这是一个非常简单的功能，但对规模化 AI 决策会极其有影响力。"
+        ],
+        "externalLinks": [
+          {
+            "label": "推文",
+            "url": "https://x.com/rauchg/status/2107606246350266469"
+          }
+        ]
+      }
+    },
+    {
+      "externalId": "digest-2026-10-07-aaron-levie",
       "source": {
         "id": "follow-builders",
         "type": "builder",
@@ -2817,420 +2933,450 @@
         "url": "https://github.com/zarazhangrui/follow-builders"
       },
       "title": "Box CEO Aaron Levie",
-      "sourceUrl": "https://x.com/levie/status/2107283615247999257",
-      "summary": "Aaron Levie 认为，企业采用和部署 agent 的一大瓶颈在于缺少真实工作环境来测试、调优和优化 agent。",
-      "publishedAt": "2026-10-06T01:35:39.000Z",
+      "sourceUrl": "https://x.com/levie/status/2107680435644039269",
+      "summary": "Aaron Levie 认为网络安全将成为 AI 未来几年最关键的领域之一，企业将面临大量新安全挑战，同时也孕育着巨大机会。",
+      "publishedAt": "2026-10-07T03:52:29.000Z",
       "keywords": [
-        "agent 部署",
-        "评测",
-        "模拟环境",
-        "企业 AI",
-        "基础设施"
+        "网络安全",
+        "AI agent",
+        "企业安全",
+        "vibe coding",
+        "agentic 攻击"
       ],
       "body": {
         "section": "x",
-        "digestDate": "2026-10-07",
-        "publishedDate": "10/6",
+        "digestDate": "2026-10-08",
+        "publishedDate": "10/7",
         "time": "本次更新",
         "readTime": "3 分钟",
         "accent": "green",
         "inRecentWindow": true,
         "digestFormat": "builders-digest",
         "paragraphs": [
-          "Box 的 CEO Aaron Levie 谈到，agent 的采用和部署有相当一部分卡在同一个地方：没法在“真实”的工作环境里测试、调优和优化它们，比如 agent 需要访问的文件、CRM 环境、邮件等等。如果你不清楚 agent 在你的评测上执行得怎么样，也不知道换一个模型或升级工作流之后它未来会表现如何，那就根本无从判断 agent 的实际表现。目前每家企业都得一家一家地自己来做这件事，显然又慢又繁琐。他认为，未来每家企业都会有人专门负责管理评测、搭建和运行评测与模拟环境的基础设施等等。这是个大空间。"
+          "Box 的 CEO Aaron Levie 说，网络安全会是未来几年 AI 最具决定性的领域之一，也会是大多数企业重点投入的方向。他指出，AI 会为安全团队带来一整层全新的工作：处理越来越多的 vibe coding 问题、agentic 攻击，甚至还有意外游荡、到处找数据的 agent 集群。OpenAI 加 Hugging Face 这件事，只是未来局面的一个预演。安全团队在企业里往往本来就是资源最紧张的一批人，现在压力只会更大。当然，AI agent 也会成为这个问题的解法，接下来会看到一系列新的 agentic 产品，用来保护代码、企业系统、关键任务基础设施和企业数据。他认为眼下这里机会巨大，而且对于能有效在企业里部署安全 agent 的网络安全专业人士来说，市场会非常繁荣——现在正是做安全的好时候。"
         ],
         "externalLinks": [
           {
             "label": "推文",
-            "url": "https://x.com/levie/status/2107283615247999257"
+            "url": "https://x.com/levie/status/2107680435644039269"
           }
         ]
       }
     },
     {
-      "externalId": "digest-2026-10-06-dan-shipper",
+      "externalId": "digest-2026-10-07-zara-zhang",
       "source": {
         "id": "follow-builders",
         "type": "builder",
-        "name": "Dan Shipper · Follow Builders",
+        "name": "Zara Zhang · Follow Builders",
         "url": "https://github.com/zarazhangrui/follow-builders"
       },
-      "title": "Every CEO Dan Shipper",
-      "sourceUrl": "https://x.com/danshipper/status/2107173061313388636",
-      "summary": "Dan Shipper 用一句话概括 Every 的承诺：前沿往前走，你也跟着往前走。",
-      "publishedAt": "2026-10-05T18:16:21.000Z",
+      "title": "Zara Zhang",
+      "sourceUrl": "https://x.com/zarazhangrui/status/2107604881926459802",
+      "summary": "Zara Zhang 感叹现在几乎不可能想出好的产品名字，好名字都已经被占光了。",
+      "publishedAt": "2026-10-06T22:52:15.000Z",
       "keywords": [
-        "Every",
-        "前沿",
-        "AI 订阅"
+        "产品命名",
+        "创业",
+        "Builder"
       ],
       "body": {
         "section": "x",
-        "digestDate": "2026-10-07",
-        "publishedDate": "10/6",
+        "digestDate": "2026-10-08",
+        "publishedDate": "10/7",
         "time": "本次更新",
         "readTime": "3 分钟",
         "accent": "green",
         "inRecentWindow": true,
         "digestFormat": "builders-digest",
         "paragraphs": [
-          "Every 的 CEO Dan Shipper 用一句话说出了他对 Every 的承诺：随着前沿不断推进，你也会跟着一起前进。"
+          "Builder Zara Zhang 发了一条感慨：现在几乎不可能想出一个好的产品名字，因为所有好名字都已经被人占走了。"
         ],
         "externalLinks": [
           {
             "label": "推文",
-            "url": "https://x.com/danshipper/status/2107173061313388636"
+            "url": "https://x.com/zarazhangrui/status/2107604881926459802"
           }
         ]
       }
     },
     {
-      "externalId": "digest-2026-10-06-madhu-guru",
+      "externalId": "digest-2026-10-07-josh-woodward",
       "source": {
         "id": "follow-builders",
         "type": "builder",
-        "name": "Madhu Guru · Follow Builders",
+        "name": "Josh Woodward · Follow Builders",
         "url": "https://github.com/zarazhangrui/follow-builders"
       },
-      "title": "Meta AI 高级总监 Madhu Guru",
-      "sourceUrl": "https://x.com/realmadhuguru/status/2107292113214091355",
-      "summary": "Madhu Guru 认为团队最常见的错误是把评估当成智能体做完之后的额外质检，而 AI 产品的评估本身就是产品规格。",
-      "publishedAt": "2026-10-06T02:09:26.000Z",
+      "title": "Google 副总裁 Josh Woodward",
+      "sourceUrl": "https://x.com/joshwoodward/status/2107679061854273656",
+      "summary": "Josh Woodward 表示基于蒙版的编辑是他今天最喜欢的部分，更多功能即将推出。",
+      "publishedAt": "2026-10-07T03:47:01.000Z",
       "keywords": [
-        "评估",
-        "智能体",
-        "产品规格",
-        "AI 产品",
-        "QA"
+        "蒙版编辑",
+        "Google",
+        "Gemini",
+        "功能更新",
+        "Josh Woodward"
       ],
       "body": {
         "section": "x",
-        "digestDate": "2026-10-07",
-        "publishedDate": "10/6",
+        "digestDate": "2026-10-08",
+        "publishedDate": "10/7",
         "time": "本次更新",
         "readTime": "3 分钟",
         "accent": "green",
         "inRecentWindow": true,
         "digestFormat": "builders-digest",
         "paragraphs": [
-          "Meta AI 高级总监 Madhu Guru 指出，团队最常犯的错误，是把评估（evals）当成智能体建好之后再补上的一个额外 QA 步骤。他说 AI 产品在本质上不一样：你的 evals 就是你的产品规格。"
+          "Google 副总裁 Josh Woodward 分享说，基于蒙版的编辑（mask-based editing）是他今天最喜欢的部分，而且还有更多内容即将推出。"
         ],
         "externalLinks": [
           {
             "label": "推文",
-            "url": "https://x.com/realmadhuguru/status/2107292113214091355"
+            "url": "https://x.com/joshwoodward/status/2107679061854273656"
           }
         ]
       }
     },
     {
-      "externalId": "digest-2026-10-06-matt-turck",
+      "externalId": "digest-2026-10-07-peter-steinberger",
       "source": {
         "id": "follow-builders",
         "type": "builder",
-        "name": "Matt Turck · Follow Builders",
+        "name": "Peter Steinberger · Follow Builders",
         "url": "https://github.com/zarazhangrui/follow-builders"
       },
-      "title": "FirstMark Capital 投资人 Matt Turck",
-      "sourceUrl": "https://x.com/mattturck/status/2107182105201696858",
-      "summary": "Matt Turck 发了一条关于“觉得自己入场加密货币太晚的人”的内容。",
-      "publishedAt": "2026-10-05T18:52:18.000Z",
+      "title": "Peter Steinberger",
+      "sourceUrl": "https://x.com/steipete/status/2107697554448421160",
+      "summary": "Peter Steinberger 把团队 claw 接入 X 以更快触发工作，并让 agent 自动找相关代码负责人。",
+      "publishedAt": "2026-10-07T05:00:30.000Z",
       "keywords": [
-        "加密货币",
-        "投资",
-        "入场时机"
+        "claw",
+        "agent",
+        "X",
+        "热重载",
+        "团队协作",
+        "插件"
       ],
       "body": {
         "section": "x",
-        "digestDate": "2026-10-07",
-        "publishedDate": "10/6",
+        "digestDate": "2026-10-08",
+        "publishedDate": "10/7",
         "time": "本次更新",
         "readTime": "3 分钟",
         "accent": "green",
         "inRecentWindow": true,
         "digestFormat": "builders-digest",
         "paragraphs": [
-          "FirstMark Capital 的投资人 Matt Turck 发了一条动态，讲的是那个觉得自己入场加密货币投资太晚的人。"
+          "Peter Steinberger 说，他把团队的 claw 接入了 X，用来更快触发工作。未被认领的会话任何人都可以接手。他们的 agent 会查看相关代码最近是谁在维护，然后在服务器上 ping 对应的人。他还提到，整个过程就是一段提示词，团队服务器自己就扩展好了，因为现在插件支持热重载。"
         ],
         "externalLinks": [
           {
             "label": "推文",
-            "url": "https://x.com/mattturck/status/2107182105201696858"
+            "url": "https://x.com/steipete/status/2107697554448421160"
           }
         ]
       }
     },
     {
-      "externalId": "digest-2026-10-06-nan-yu",
+      "externalId": "digest-2026-10-07-garry-tan",
+      "source": {
+        "id": "follow-builders",
+        "type": "builder",
+        "name": "Garry Tan · Follow Builders",
+        "url": "https://github.com/zarazhangrui/follow-builders"
+      },
+      "title": "Y Combinator 总裁兼 CEO Garry Tan",
+      "sourceUrl": "https://x.com/garrytan/status/2107674122612555953",
+      "summary": "Garry Tan 连发两推，批评 Connie Chan 反对让旧金山和加州繁荣的政策，并指责有人以新闻之名行 activism 之实操纵旧金山政治。",
+      "publishedAt": "2026-10-07T03:27:24.000Z",
+      "keywords": [
+        "Garry Tan",
+        "Connie Chan",
+        "旧金山政治",
+        "boom loop",
+        "activism"
+      ],
+      "body": {
+        "section": "x",
+        "digestDate": "2026-10-08",
+        "publishedDate": "10/7",
+        "time": "本次更新",
+        "readTime": "3 分钟",
+        "accent": "green",
+        "inRecentWindow": true,
+        "digestFormat": "builders-digest",
+        "paragraphs": [
+          "Y Combinator 总裁兼 CEO Garry Tan 把矛头对准了 Connie Chan，说她不想看到一个强大的民主党推动旧金山和加州形成 boom loop。在他看来，Connie Chan 投票反对一切能让这座城市和这个州变得有活力的东西，还攻击任何为他们而战的人。紧接着，他又把另一件事称为“以新闻为幌子的 activism 操纵旧金山政治的案例研究”。"
+        ],
+        "externalLinks": [
+          {
+            "label": "推文 1",
+            "url": "https://x.com/garrytan/status/2107674122612555953"
+          },
+          {
+            "label": "推文 2",
+            "url": "https://x.com/garrytan/status/2107636543808840168"
+          }
+        ]
+      }
+    },
+    {
+      "externalId": "digest-2026-10-07-peter-yang",
+      "source": {
+        "id": "follow-builders",
+        "type": "builder",
+        "name": "Peter Yang · Follow Builders",
+        "url": "https://github.com/zarazhangrui/follow-builders"
+      },
+      "title": "Peter Yang",
+      "sourceUrl": "https://x.com/petergyang/status/2107639917287440537",
+      "summary": "Peter Yang 一边设想 muse 能替自己等电话、等真人上线再把自己接进去，一边说住在无聊郊区的话每周喝几杯酒完全值得。",
+      "publishedAt": "2026-10-07T01:11:28.000Z",
+      "keywords": [
+        "Peter Yang",
+        "muse",
+        "等电话",
+        "郊区生活",
+        "喝酒"
+      ],
+      "body": {
+        "section": "x",
+        "digestDate": "2026-10-08",
+        "publishedDate": "10/7",
+        "time": "本次更新",
+        "readTime": "3 分钟",
+        "accent": "green",
+        "inRecentWindow": true,
+        "digestFormat": "builders-digest",
+        "paragraphs": [
+          "Peter Yang 先聊到一个他不太确定能不能实现、但觉得会非常棒的功能：让 muse 帮他等电话，等到对面有真人接听时再把他拨进去。随后他话锋一转，说这件事的反面是，如果你像他一样住在无聊的郊区，那每周喝上几杯酒是完全值得的。"
+        ],
+        "externalLinks": [
+          {
+            "label": "推文 1",
+            "url": "https://x.com/petergyang/status/2107605650398462178"
+          },
+          {
+            "label": "推文 2",
+            "url": "https://x.com/petergyang/status/2107639917287440537"
+          }
+        ]
+      }
+    },
+    {
+      "externalId": "digest-2026-10-07-nan-yu",
       "source": {
         "id": "follow-builders",
         "type": "builder",
         "name": "Nan Yu · Follow Builders",
         "url": "https://github.com/zarazhangrui/follow-builders"
       },
-      "title": "OpenAI Codex 产品负责人 Nan Yu",
-      "sourceUrl": "https://x.com/thenanyu/status/2107262460675891640",
-      "summary": "Nan Yu 表示，遇到问题直接动手修就好。",
-      "publishedAt": "2026-10-06T00:11:36.000Z",
+      "title": "OpenAI 产品、前 Linear 产品负责人 Nan Yu",
+      "sourceUrl": "https://x.com/thenanyu/status/2107506074370920796",
+      "summary": "Nan Yu 担心 AI 会让那些没人愿意维护却必须有人维护的系统严重退化。",
+      "publishedAt": "2026-10-06T16:19:38.000Z",
       "keywords": [
-        "Nan Yu",
-        "OpenAI",
-        "Codex",
-        "Linear",
+        "系统维护",
+        "退化",
+        "AI 影响",
         "产品"
       ],
       "body": {
         "section": "x",
-        "digestDate": "2026-10-07",
-        "publishedDate": "10/6",
+        "digestDate": "2026-10-08",
+        "publishedDate": "10/7",
         "time": "本次更新",
         "readTime": "3 分钟",
         "accent": "green",
         "inRecentWindow": true,
         "digestFormat": "builders-digest",
         "paragraphs": [
-          "OpenAI Codex 产品负责人 Nan Yu（此前在 Linear 担任产品负责人）发了一条简短的话：你完全可以直接把东西修好。"
+          "OpenAI 产品、前 Linear 产品负责人 Nan Yu 说，他担心这会让人不愿意维护、但又必须有人维护的系统出现极度退化。"
         ],
         "externalLinks": [
           {
             "label": "推文",
-            "url": "https://x.com/thenanyu/status/2107262460675891640"
+            "url": "https://x.com/thenanyu/status/2107506074370920796"
           }
         ]
       }
     },
     {
-      "externalId": "2107180306390544775",
+      "externalId": "digest-2026-10-07-swyx",
       "source": {
-        "id": "attentionvc-ai",
-        "type": "daily",
-        "name": "LiveAvatar · 技术动态 X 热榜",
-        "url": "https://reply-vc-90459984647.us-central1.run.app/v1/articles/leaderboard?window=3d&category=ai&lang=en&limit=30"
+        "id": "follow-builders",
+        "type": "builder",
+        "name": "Swyx · Follow Builders",
+        "url": "https://github.com/zarazhangrui/follow-builders"
       },
-      "title": "每个语言学习者现在都能拥有一位导师",
-      "sourceUrl": "https://x.com/TryLiveAvatar/status/2107180306390544775",
-      "summary": "文章认为，语言学习最好的方式一直是耐心的导师，而如今首次人人都能拥有这样一位导师，并探讨这对学习者、教师和学校带来的变化；同时指出最难的部分是开口说。",
-      "publishedAt": "2026-10-05T18:45:09.000Z",
+      "title": "Swyx",
+      "sourceUrl": "https://x.com/swyx/status/2107646238585950540",
+      "summary": "Swyx 问大家，在 2026 年 10 月，默认或主力用的编码 agent 是什么。",
+      "publishedAt": "2026-10-07T01:36:36.000Z",
       "keywords": [
-        "语言学习",
-        "AI导师",
-        "口语练习",
-        "教育变革",
-        "观点"
+        "编码 agent",
+        "默认工具",
+        "主力工具",
+        "2026 年 10 月"
       ],
       "body": {
         "section": "x",
-        "digestDate": "2026-10-07",
-        "publishedDate": "10/6",
+        "digestDate": "2026-10-08",
+        "publishedDate": "10/7",
         "time": "本次更新",
         "readTime": "3 分钟",
         "accent": "green",
         "inRecentWindow": true,
+        "digestFormat": "builders-digest",
         "paragraphs": [
-          "每个语言学习者现在都能拥有一位导师",
-          "核心观点是：过去语言学习最有效的方式是有一位耐心的导师，而现在（作者认为）首次让所有人都能获得这种导师式学习体验。预览中只提到这会改变学习者、教师和学校的情况，并强调“最难的部分是开口说”，但没有展开具体如何实现或使用何种技术。阅读时需要注意：这是作者的观点性表述，预览未给出具体产品、数据或验证方式，不应把“人人都有导师”当作已被证实的事实。"
+          "Swyx 发问：在 2026 年 10 月，你现在默认使用、或者当作主力的编码 agent 是什么？"
+        ],
+        "externalLinks": [
+          {
+            "label": "推文",
+            "url": "https://x.com/swyx/status/2107646238585950540"
+          }
         ]
       }
     },
     {
-      "externalId": "2107347834668224687",
-      "source": {
-        "id": "attentionvc-ai",
-        "type": "daily",
-        "name": "花叔 · 技术动态 X 热榜",
-        "url": "https://reply-vc-90459984647.us-central1.run.app/v1/articles/leaderboard?window=3d&category=ai&lang=en&limit=30"
-      },
-      "title": "huashu-art-motion发布！可能是最有审美的动画skill。",
-      "sourceUrl": "https://x.com/AlchainHust/status/2107347834668224687",
-      "summary": "作者发布名为 huashu-art-motion 的动画 skill，并展示了两支用该 skill 制作的视频：一支2分08秒的一镜到底艺术穿越片，以及一支讲 SpaceX 这24年的白板版视频。",
-      "publishedAt": "2026-10-06T05:50:51.000Z",
-      "keywords": [
-        "动画skill",
-        "huashu-art-motion",
-        "一镜到底",
-        "SpaceX",
-        "创作工具"
-      ],
-      "body": {
-        "section": "x",
-        "digestDate": "2026-10-07",
-        "publishedDate": "10/6",
-        "time": "本次更新",
-        "readTime": "3 分钟",
-        "accent": "green",
-        "inRecentWindow": true,
-        "paragraphs": [
-          "huashu-art-motion发布！可能是最有审美的动画skill。",
-          "核心内容是作者发布了一个名为 huashu-art-motion 的动画 skill，并强调其审美表现。预览中给出的证据是两支视频：一支是2分08秒的一镜到底艺术穿越片，另一支是更适合实际工作、讲 SpaceX 这24年的白板版视频，且同样由该 skill 制作。阅读时需要注意：标题中的“可能是最有审美的动画skill”属于作者的主观评价；预览没有说明该 skill 的具体功能、使用方式或技术细节，不应自行补充。"
-        ]
-      }
-    },
-    {
-      "externalId": "2107475087075197239",
-      "source": {
-        "id": "attentionvc-ai",
-        "type": "daily",
-        "name": "Mustafa Suleyman · 技术动态 X 热榜",
-        "url": "https://reply-vc-90459984647.us-central1.run.app/v1/articles/leaderboard?window=3d&category=ai&lang=en&limit=30"
-      },
-      "title": "AI不会很快抢走你的工作。10年内，人类所做的工作中只有5%会被AI取代",
-      "sourceUrl": "https://x.com/mustafasuleyman/status/2107475087075197239",
-      "summary": "这是诺贝尔奖得主达龙·阿西莫格鲁在 MAI 出版的新杂志《The Humanist Review》创刊号中做出的预测；他主张我们需要停止某种做法，但预览未说明具体是什么。",
-      "publishedAt": "2026-10-06T14:16:30.000Z",
-      "keywords": [
-        "AI与就业",
-        "达龙·阿西莫格鲁",
-        "未来预测",
-        "自动化",
-        "The Humanist Review"
-      ],
-      "body": {
-        "section": "x",
-        "digestDate": "2026-10-07",
-        "publishedDate": "10/6",
-        "time": "本次更新",
-        "readTime": "3 分钟",
-        "accent": "green",
-        "inRecentWindow": true,
-        "paragraphs": [
-          "AI不会很快抢走你的工作。10年内，人类所做的工作中只有5%会被AI取代",
-          "核心观点来自诺贝尔奖得主达龙·阿西莫格鲁：他预测未来10年内，人类所做的事情中只有5%会被AI取代，因此AI不会很快取代人类工作。该预测发表于 MAI 出版的新杂志《The Humanist Review》创刊号，这本杂志探讨AI的未来。预览还提到他主张“我们需要停止”，但句子在此中断，没有说明停止什么。阅读时需要注意：这是个人预测而非既定事实；预览未给出预测依据、统计口径或“5%”的具体定义，不应过度解读。"
-        ]
-      }
-    },
-    {
-      "externalId": "2610.05608",
+      "externalId": "2610.08448",
       "source": {
         "id": "huggingface-daily-papers",
         "type": "daily",
         "name": "Hugging Face Daily Papers",
         "url": "https://huggingface.co/papers"
       },
-      "title": "Kandinsky 6.0 Video：同步视频与音频生成的基础模型",
-      "sourceUrl": "https://huggingface.co/papers/2610.05608",
-      "summary": "我们提出 Kandinsky 6.0 Video，这是一个用于同步文本到音频-视频生成的基础扩散模型系列，包含 Kandinsky 6.0 Video Lite（30 亿参数）和 Kandinsky 6.0 Video Pro（290 亿参数）两个模型。两个模型都能生成 5 秒的视频片段，并配有同步的 44 kHz 音频，包括唇形同步，支持文本到音频-视频（T2AV）和图像到音频-视频（I2AV）两种模式；内置的超分辨率模型可将输出分辨率提升至全高清（1920×1080）。在 Kandinsky 5.0 的视频生成能力基础上，Kandinsky 6.0 Video 采用双流 CrossDiT 架构，通过双向交叉注意力连接预训练的视频流和新训练的音频流，以实现时间与语义上的对齐。我们的连续预训练策略首先在大规模音频语料上从零训练音频流，然后在成对的音频-视频数据上联合训练两个流，同时保持单模态保真度；预训练之后是监督微调、基于强化学习的后训练以及蒸馏。在并排人工评估中，Kandinsky 6.0 Video Pro 明显优于其前代 Kandinsky 5.0 Video Pro，并与领先的音频-视频生成模型保持竞争力，尤其在语音质量方面。为加速多媒体生成领域的开放研究与部署，我们以 MIT 许可证发布代码、模型检查点和 diffusers 集成。",
-      "publishedAt": "2026-10-04T00:00:00.000Z",
+      "title": "重新思考跨分词器在线策略蒸馏：从对齐覆盖到监督可靠性",
+      "sourceUrl": "https://huggingface.co/papers/2610.08448",
+      "summary": "在线策略蒸馏（OPD）让学生模型基于自身生成的文本，利用教师模型的反馈进行训练。当教师和学生使用不同的分词器时，比较二者的预测需要在序列和词表两个层面进行对齐。本文考察扩大这种对齐覆盖范围是否能改善学习效果。在数学推理和代码生成任务上，针对三组异构的教师-学生模型对，尽管词表差异很大，严格的1:1对齐分组已经覆盖了学生生成的大部分词元。在蒸馏前从学生模型采样的回答上，平均而言，共享词表在严格对齐位置保留了几乎全部的教师和学生概率质量。在每个严格对齐位置，将反向KL散度限制在学生从共享词表中选出的前16个子集上，可以达到与使用完整共享词表的OPD相当的准确率，并优于所评估的跨分词器基线方法。在不对齐分组中，对跨度对数概率添加均方误差监督可以实现完全的监督覆盖，但反而降低了准确率。在仅使用严格损失的训练检查点上，跨度梯度与严格梯度的方向一致性较弱甚至为负，且相对于严格梯度其幅度在增大。这些诊断结果可能有助于解释添加跨度监督后准确率下降的原因。我们的发现促使人们从最大化对齐覆盖转向优先考虑监督可靠性：在严格对齐位置进行紧凑的监督，可能比引入弱对齐或冲突训练信号的更广覆盖更有效。",
+      "publishedAt": "2026-10-06T00:00:00.000Z",
       "keywords": [
-        "同步音视频生成",
-        "扩散模型",
-        "唇形同步",
-        "文本到音频-视频",
-        "图像到音频-视频",
-        "开源模型"
+        "在线策略蒸馏",
+        "跨分词器",
+        "知识蒸馏",
+        "监督可靠性",
+        "对齐覆盖",
+        "大语言模型"
       ],
       "body": {
         "section": "papers",
-        "digestDate": "2026-10-07",
-        "publishedDate": "10/4",
+        "digestDate": "2026-10-08",
+        "publishedDate": "10/6",
         "time": "本次更新",
         "readTime": "3 分钟",
         "accent": "violet",
         "inRecentWindow": true,
         "paragraphs": [
-          "我们提出 Kandinsky 6.0 Video，这是一个用于同步文本到音频-视频生成的基础扩散模型系列，包含 Kandinsky 6.0 Video Lite（30 亿参数）和 Kandinsky 6.0 Video Pro（290 亿参数）两个模型。两个模型都能生成 5 秒的视频片段，并配有同步的 44 kHz 音频，包括唇形同步，支持文本到音频-视频（T2AV）和图像到音频-视频（I2AV）两种模式；内置的超分辨率模型可将输出分辨率提升至全高清（1920×1080）。",
-          "在 Kandinsky 5.0 的视频生成能力基础上，Kandinsky 6.0 Video 采用双流 CrossDiT 架构，通过双向交叉注意力连接预训练的视频流和新训练的音频流，以实现时间与语义上的对齐。我们的连续预训练策略首先在大规模音频语料上从零训练音频流，然后在成对的音频-视频数据上联合训练两个流，同时保持单模态保真度；预训练之后是监督微调、基于强化学习的后训练以及蒸馏。",
-          "在并排人工评估中，Kandinsky 6.0 Video Pro 明显优于其前代 Kandinsky 5.0 Video Pro，并与领先的音频-视频生成模型保持竞争力，尤其在语音质量方面。为加速多媒体生成领域的开放研究与部署，我们以 MIT 许可证发布代码、模型检查点和 diffusers 集成。"
+          "在线策略蒸馏（OPD）让学生模型基于自身生成的文本，利用教师模型的反馈进行训练。当教师和学生使用不同的分词器时，比较二者的预测需要在序列和词表两个层面进行对齐。本文考察扩大这种对齐覆盖范围是否能改善学习效果。",
+          "在数学推理和代码生成任务上，针对三组异构的教师-学生模型对，尽管词表差异很大，严格的1:1对齐分组已经覆盖了学生生成的大部分词元。在蒸馏前从学生模型采样的回答上，平均而言，共享词表在严格对齐位置保留了几乎全部的教师和学生概率质量。在每个严格对齐位置，将反向KL散度限制在学生从共享词表中选出的前16个子集上，可以达到与使用完整共享词表的OPD相当的准确率，并优于所评估的跨分词器基线方法。",
+          "在不对齐分组中，对跨度对数概率添加均方误差监督可以实现完全的监督覆盖，但反而降低了准确率。在仅使用严格损失的训练检查点上，跨度梯度与严格梯度的方向一致性较弱甚至为负，且相对于严格梯度其幅度在增大。这些诊断结果可能有助于解释添加跨度监督后准确率下降的原因。",
+          "我们的发现促使人们从最大化对齐覆盖转向优先考虑监督可靠性：在严格对齐位置进行紧凑的监督，可能比引入弱对齐或冲突训练信号的更广覆盖更有效。"
         ],
-        "utility": "这项研究让普通人可以了解一种能同时生成画面和声音、并让口型与语音对上的 AI 模型。它可能影响你对短视频、虚拟主播、在线课程或广告素材制作方式的判断：未来这类内容或许能由 AI 快速生成，而不必真人拍摄和配音。论文还公开了代码和模型，意味着相关工具可能更容易被开发者和创作者使用。不过，摘要只报告了模型能力和人工评估结果，实际使用效果、成本与适用场景仍需进一步验证。",
+        "utility": "这项研究提示，在训练AI模型时，并非覆盖越多越好，监督信号的质量和可靠性可能更关键。对于关注AI模型训练效率或使用AI工具的人来说，了解这一点有助于理解为什么有些看似更全面的训练方法反而效果不佳，也可能影响未来AI产品在推理和代码生成等任务上的表现判断。",
         "externalLinks": [
           {
             "label": "查看 Hugging Face 论文页",
-            "url": "https://huggingface.co/papers/2610.05608"
+            "url": "https://huggingface.co/papers/2610.08448"
           },
           {
             "label": "打开 arXiv 原文",
-            "url": "https://arxiv.org/abs/2610.05608"
+            "url": "https://arxiv.org/abs/2610.08448"
           }
         ]
       }
     },
     {
-      "externalId": "2610.04198",
+      "externalId": "2610.03543",
       "source": {
         "id": "huggingface-daily-papers",
         "type": "daily",
         "name": "Hugging Face Daily Papers",
         "url": "https://huggingface.co/papers"
       },
-      "title": "ALoDLM：自适应循环扩散语言模型",
-      "sourceUrl": "https://huggingface.co/papers/2610.04198",
-      "summary": "扩散语言模型（DLM）通过并行预测多个词元实现快速生成，但与同等规模的自回归（AR）模型相比，其生成质量始终存在差距，限制了实际应用。作者将这一差距归因于计算难度不匹配：在部分可观测的序列中，某些未知词元容易预测，另一些则需要多得多的计算量。然而现有 DLM 在每个去噪步骤中对所有未知位置施加统一的计算深度。为此，作者提出 ALoDLM，用词元自适应的潜在循环替代统一计算。在每个去噪步骤，ALoDLM 迭代地精炼潜在表示，并根据词元难度分配计算量：已可确定的词元被反馈为离散上下文，尚未解决的词元则保留潜在状态并通过额外的循环传递进一步精炼。为联合学习词元预测与计算分配，作者将逐词元的计算调度建模为潜在变量，并推导出条件负证据下界（NELBO）。作者在 1.7B 和 8B 参数规模上训练 ALoDLM。在十一个基准测试中，ALoDLM 在两个规模上的平均基准得分均优于所有被评估的 DLM 以及相应的 AR 基线。ALoDLM 同时保留了快速并行解码能力，在优化推理引擎下，于被评估的自回归模型和扩散模型之间取得了良好的质量—效率权衡。",
-      "publishedAt": "2026-10-03T00:00:00.000Z",
-      "keywords": [
-        "扩散语言模型",
-        "自适应计算",
-        "潜在循环",
-        "并行解码",
-        "质量效率权衡"
-      ],
-      "body": {
-        "section": "papers",
-        "digestDate": "2026-10-07",
-        "publishedDate": "10/3",
-        "time": "本次更新",
-        "readTime": "3 分钟",
-        "accent": "violet",
-        "inRecentWindow": true,
-        "paragraphs": [
-          "扩散语言模型（DLM）通过并行预测多个词元实现快速生成，但与同等规模的自回归（AR）模型相比，其生成质量始终存在差距，限制了实际应用。作者将这一差距归因于计算难度不匹配：在部分可观测的序列中，某些未知词元容易预测，另一些则需要多得多的计算量。然而现有 DLM 在每个去噪步骤中对所有未知位置施加统一的计算深度。",
-          "为此，作者提出 ALoDLM，用词元自适应的潜在循环替代统一计算。在每个去噪步骤，ALoDLM 迭代地精炼潜在表示，并根据词元难度分配计算量：已可确定的词元被反馈为离散上下文，尚未解决的词元则保留潜在状态并通过额外的循环传递进一步精炼。为联合学习词元预测与计算分配，作者将逐词元的计算调度建模为潜在变量，并推导出条件负证据下界（NELBO）。",
-          "作者在 1.7B 和 8B 参数规模上训练 ALoDLM。在十一个基准测试中，ALoDLM 在两个规模上的平均基准得分均优于所有被评估的 DLM 以及相应的 AR 基线。ALoDLM 同时保留了快速并行解码能力，在优化推理引擎下，于被评估的自回归模型和扩散模型之间取得了良好的质量—效率权衡。"
-        ],
-        "utility": "这项研究关注的是让 AI 生成文字时既快又准。普通人可以借此理解：未来使用聊天机器人、写作辅助或翻译工具时，生成速度与内容质量可能不再只能二选一。不过该结论来自特定基准测试和模型规模，实际产品中的表现仍需进一步验证，不宜直接推断为所有场景都会同样改善。",
-        "externalLinks": [
-          {
-            "label": "查看 Hugging Face 论文页",
-            "url": "https://huggingface.co/papers/2610.04198"
-          },
-          {
-            "label": "打开 arXiv 原文",
-            "url": "https://arxiv.org/abs/2610.04198"
-          }
-        ]
-      }
-    },
-    {
-      "externalId": "2610.03120",
-      "source": {
-        "id": "huggingface-daily-papers",
-        "type": "daily",
-        "name": "Hugging Face Daily Papers",
-        "url": "https://huggingface.co/papers"
-      },
-      "title": "测试时分布内强制用于长视频生成",
-      "sourceUrl": "https://huggingface.co/papers/2610.03120",
-      "summary": "现代自回归（AR）视频扩散模型在短时长视频生成方面表现出色，但生成长视频仍然充满挑战，原因在于漂移现象：颜色和纹理会发生偏移，运动动态也会衰减。现有工作主要依赖 KV 条件化，即通过选择或修改缓存的键值（KV）条目来缓解漂移。然而，我们观察到仅靠 KV 条件化是不够的，因为它假设缓存的 KV 条目仍处于分布内。这一假设在超出训练时长后便会失效：在推演过程中没有任何机制约束 KV 条目的构建，从而引发 KV 溯源问题，即缓存条目本身变得分布外（OOD）。为了解决这一问题，我们提出了分布内强制（ID-Forcing），这是一个测试时框架，使 KV 缓存和 KV 条件化都与训练配置保持一致。其关键机制——自缓存——从源头上防止了 OOD KV 条目的产生。每个块在缓存时不关注先前的 KV 条目，从而使滚动窗口严格保持在分布内。因此，ID-Forcing 能够无缝地将短时长模型扩展到分钟级视频生成。大量评估表明，我们的方法在标准视频生成基准上保持竞争力，同时在缓解漂移方面显著优于先前工作，这一点已通过我们的漂移指标和用户研究得到验证。",
+      "title": "DuoMatching：面向少步视频生成的联合-边缘分布匹配",
+      "sourceUrl": "https://huggingface.co/papers/2610.03543",
+      "summary": "流式视频生成受益于分布匹配蒸馏（DMD），它通过将视频帧的联合分布与视频教师模型对真实视频分布的近似进行匹配来工作。尽管这种联合匹配缓解了自回归展开过程中的漂移问题，但在视觉质量和语义对齐方面仍存在局限。为解决这些局限，我们提出 DuoMatching——一个通过统一的联合-边缘分布公式来近似真实视频分布的分布匹配框架。在现有联合匹配目标的基础上，额外的边缘匹配目标从图像生成器提供专门的帧级监督，从而迁移其互补的视觉与语义先验。为了在视频生成中应用这种帧级监督，我们引入 LatentBridge 来解决视频学生模型与图像教师模型之间的潜表示不匹配问题。Latent Variation Sampling 进一步将这种帧级监督分配到不同的时间片段上，从而减少冗余。实验表明，DuoMatching 在较大程度上保持运动动态的同时，提升了视觉质量、构图和语义对齐。人工评估显示，相对于所有被评估的基线方法，其总体偏好率均超过 80%。项目页面见 https://johnzhan2023.github.io/DuoMatching/。",
       "publishedAt": "2026-10-02T00:00:00.000Z",
       "keywords": [
-        "长视频生成",
-        "自回归视频扩散",
-        "分布外",
-        "KV 缓存",
-        "测试时适应"
+        "视频生成",
+        "分布匹配蒸馏",
+        "少步生成",
+        "联合分布匹配",
+        "边缘分布匹配",
+        "语义对齐"
       ],
       "body": {
         "section": "papers",
-        "digestDate": "2026-10-07",
+        "digestDate": "2026-10-08",
         "publishedDate": "10/2",
         "time": "本次更新",
         "readTime": "3 分钟",
         "accent": "violet",
         "inRecentWindow": true,
         "paragraphs": [
-          "现代自回归（AR）视频扩散模型在短时长视频生成方面表现出色，但生成长视频仍然充满挑战，原因在于漂移现象：颜色和纹理会发生偏移，运动动态也会衰减。现有工作主要依赖 KV 条件化，即通过选择或修改缓存的键值（KV）条目来缓解漂移。然而，我们观察到仅靠 KV 条件化是不够的，因为它假设缓存的 KV 条目仍处于分布内。",
-          "这一假设在超出训练时长后便会失效：在推演过程中没有任何机制约束 KV 条目的构建，从而引发 KV 溯源问题，即缓存条目本身变得分布外（OOD）。为了解决这一问题，我们提出了分布内强制（ID-Forcing），这是一个测试时框架，使 KV 缓存和 KV 条件化都与训练配置保持一致。",
-          "其关键机制——自缓存——从源头上防止了 OOD KV 条目的产生。每个块在缓存时不关注先前的 KV 条目，从而使滚动窗口严格保持在分布内。因此，ID-Forcing 能够无缝地将短时长模型扩展到分钟级视频生成。",
-          "大量评估表明，我们的方法在标准视频生成基准上保持竞争力，同时在缓解漂移方面显著优于先前工作，这一点已通过我们的漂移指标和用户研究得到验证。"
+          "流式视频生成受益于分布匹配蒸馏（DMD），它通过将视频帧的联合分布与视频教师模型对真实视频分布的近似进行匹配来工作。尽管这种联合匹配缓解了自回归展开过程中的漂移问题，但在视觉质量和语义对齐方面仍存在局限。",
+          "为解决这些局限，我们提出 DuoMatching——一个通过统一的联合-边缘分布公式来近似真实视频分布的分布匹配框架。在现有联合匹配目标的基础上，额外的边缘匹配目标从图像生成器提供专门的帧级监督，从而迁移其互补的视觉与语义先验。",
+          "为了在视频生成中应用这种帧级监督，我们引入 LatentBridge 来解决视频学生模型与图像教师模型之间的潜表示不匹配问题。Latent Variation Sampling 进一步将这种帧级监督分配到不同的时间片段上，从而减少冗余。",
+          "实验表明，DuoMatching 在较大程度上保持运动动态的同时，提升了视觉质量、构图和语义对齐。人工评估显示，相对于所有被评估的基线方法，其总体偏好率均超过 80%。项目页面见 https://johnzhan2023.github.io/DuoMatching/。"
         ],
-        "utility": "这项研究关注如何让 AI 生成的视频在变长时保持颜色、纹理和动作的稳定，不出现越往后越“跑偏”的问题。普通人可以借此了解：未来用 AI 制作较长视频时，画面质量可能更一致，减少反复重做或后期修正的麻烦。不过，论文目前只是提出方法并在实验中验证，距离日常工具普及还有距离，不宜将其理解为已经能一键生成完美长视频。",
+        "utility": "这项研究关注如何让 AI 更快地生成视频，同时让画面更清晰、内容更符合文字描述。普通人了解它，有助于判断未来视频生成工具的进步方向：例如短视频创作、广告素材制作、影视预演等场景中，AI 生成视频可能变得更可用、更少出现画面崩坏或跑题。不过，这些结论来自论文中的实验和人工评估，实际产品效果还会受到算力、数据和使用方式等因素影响，不宜直接等同于日常工具的现有水平。",
         "externalLinks": [
           {
             "label": "查看 Hugging Face 论文页",
-            "url": "https://huggingface.co/papers/2610.03120"
+            "url": "https://huggingface.co/papers/2610.03543"
           },
           {
             "label": "打开 arXiv 原文",
-            "url": "https://arxiv.org/abs/2610.03120"
+            "url": "https://arxiv.org/abs/2610.03543"
+          }
+        ]
+      }
+    },
+    {
+      "externalId": "2610.07767",
+      "source": {
+        "id": "huggingface-daily-papers",
+        "type": "daily",
+        "name": "Hugging Face Daily Papers",
+        "url": "https://huggingface.co/papers"
+      },
+      "title": "TRACE：面向MoE语言模型FP4强化学习的轨迹引导量化感知训练",
+      "sourceUrl": "https://huggingface.co/papers/2610.07767",
+      "summary": "对大型语言模型（LLM）进行强化学习后训练时，轨迹生成阶段会带来大量计算和内存开销，这促使人们采用低精度轨迹来实现高效的强化学习训练。然而，现有的FP4强化学习方法存在一个关键局限：它们主要在训练路径和轨迹路径上独立优化量化精度，而不是直接减小两条量化执行路径之间的差异。为此，我们提出了TRACE（通过紧凑引导实现训练-轨迹量化对齐），这是一个用于混合专家（MoE）语言模型强化学习训练的FP4量化框架，旨在解决现有FP4强化学习方法的局限。TRACE包含轨迹引导的量化感知训练，利用轨迹侧的量化结果来指导训练侧的FP4舍入决策，从而直接减小训练与轨迹之间的差异。此外，TRACE采用高效的量化信息缓存方案，选择性保留来自更深层的尾数和缩放信息，以降低轨迹引导带来的存储和通信开销。我们在四个大规模MoE语言模型上，针对推理、编码和长时程强化学习任务对TRACE进行了评估。结果表明，TRACE能够实现FP4权重/激活与FP4 KV缓存的联合轨迹生成，其强化学习性能与BF16轨迹相当，同时实现高达5.4倍的轨迹加速，并且与对BF16训练策略进行事后FP4量化相比，最终FP4性能更强。",
+      "publishedAt": "2026-10-06T00:00:00.000Z",
+      "keywords": [
+        "强化学习",
+        "FP4量化",
+        "混合专家模型",
+        "量化感知训练",
+        "轨迹生成",
+        "低精度训练"
+      ],
+      "body": {
+        "section": "papers",
+        "digestDate": "2026-10-08",
+        "publishedDate": "10/6",
+        "time": "本次更新",
+        "readTime": "3 分钟",
+        "accent": "violet",
+        "inRecentWindow": true,
+        "paragraphs": [
+          "对大型语言模型（LLM）进行强化学习后训练时，轨迹生成阶段会带来大量计算和内存开销，这促使人们采用低精度轨迹来实现高效的强化学习训练。然而，现有的FP4强化学习方法存在一个关键局限：它们主要在训练路径和轨迹路径上独立优化量化精度，而不是直接减小两条量化执行路径之间的差异。",
+          "为此，我们提出了TRACE（通过紧凑引导实现训练-轨迹量化对齐），这是一个用于混合专家（MoE）语言模型强化学习训练的FP4量化框架，旨在解决现有FP4强化学习方法的局限。TRACE包含轨迹引导的量化感知训练，利用轨迹侧的量化结果来指导训练侧的FP4舍入决策，从而直接减小训练与轨迹之间的差异。此外，TRACE采用高效的量化信息缓存方案，选择性保留来自更深层的尾数和缩放信息，以降低轨迹引导带来的存储和通信开销。",
+          "我们在四个大规模MoE语言模型上，针对推理、编码和长时程强化学习任务对TRACE进行了评估。结果表明，TRACE能够实现FP4权重/激活与FP4 KV缓存的联合轨迹生成，其强化学习性能与BF16轨迹相当，同时实现高达5.4倍的轨迹加速，并且与对BF16训练策略进行事后FP4量化相比，最终FP4性能更强。"
+        ],
+        "utility": "这项研究关注如何让大型AI模型在强化学习训练时更省算力和内存。普通人可以了解：未来AI模型的训练和运行可能更高效，从而降低使用成本，让更强大的AI功能更快、更便宜地出现在日常应用里。不过，这仍是研究阶段的技术，实际影响取决于后续落地情况。",
+        "externalLinks": [
+          {
+            "label": "查看 Hugging Face 论文页",
+            "url": "https://huggingface.co/papers/2610.07767"
+          },
+          {
+            "label": "打开 arXiv 原文",
+            "url": "https://arxiv.org/abs/2610.07767"
           }
         ]
       }
