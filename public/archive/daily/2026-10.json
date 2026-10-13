@@ -1,17 +1,17 @@
 [
   {
     "section": "github",
-    "digestDate": "2026-10-13",
-    "publishedDate": "10/13",
+    "digestDate": "2026-10-14",
+    "publishedDate": "10/14",
     "time": "本次更新",
     "readTime": "3 分钟",
     "accent": "blue",
     "inRecentWindow": true,
     "paragraphs": [
-      "Diagram Design 是一个面向 AI 助手（如 Claude Code、Codex、GitHub Copilot、Cursor 等）的“技能”插件。安装后，你只需用日常语言描述需求，比如“帮我画一张应用架构图：前端、后端、数据库、Redis 缓存”，助手就会自动选择合适的图表类型、说明绘制方案，并生成一个独立的 HTML + SVG 文件。这个文件双击就能在浏览器里打开，不需要任何额外软件或配置。",
-      "它内置了 45 种图表类型，覆盖架构图、象限图、时序图等常见表达场景，并强调“编辑级”的视觉品质：没有多余的阴影，也不是那种一眼就能看出是机器生成的粗糙图。项目还支持“品牌适配”，可以抓取你网站上的配色和字体，让之后生成的每张图都统一成你自己的品牌风格。此外，它支持从 draw.io、Mermaid 或 Excalidraw 导入内容，也能导出为 PNG 或 SVG。",
-      "这个项目适合需要频繁做汇报、写文档、画流程或做产品说明的人，尤其是那些不写代码、但希望图表看起来专业、统一、不丢面子的职场用户。它也适合设计敏感度较高、看不上 AI 默认绘图效果的团队。",
-      "使用门槛较低：安装只需在支持 Agent Skills 的 AI 工具里运行一条安装命令，之后全程用自然语言对话即可。不过你仍然需要有一个可用的 AI 助手环境，并且首次安装可能涉及命令行操作；好在生成结果是独立文件，不依赖联网或特定平台，分享和存档都很方便。"
+      "Diagram Design 是一个给 AI 助手使用的“技能”，安装后你只需用日常语言描述需求，比如“帮我画一张应用架构图，包含前端、后端、数据库和 Redis 缓存”，AI 就会自动选择合适的图表类型，并生成一个独立的 HTML + SVG 文件。你双击这个文件就能在浏览器里查看，不需要任何设计软件或编程知识。",
+      "它内置了 45 种图表类型，覆盖架构图、流程图、时序图、四象限图等常见需求。与常见的 Mermaid 图表不同，它追求更接近专业设计师水准的编辑级视觉效果，没有多余的阴影和粗糙的默认样式。它还支持“品牌导入”功能，可以抓取你网站的颜色和字体，让后续生成的每张图都自动匹配你的品牌风格。",
+      "此外，它还能导入 Draw.io、Mermaid 或 Excalidraw 的文件，并支持导出为 PNG 或 SVG 图片，方便放进文档、幻灯片或网页。它兼容 Claude Code、Cursor、GitHub Copilot、Codex 等主流 AI 编程助手，安装只需一行命令。",
+      "这个项目适合产品经理、设计师、创业者、技术写作者等需要频繁制作清晰图表但不想花时间学设计工具的人。使用门槛很低：只要你会用 AI 助手打字提需求，就能得到可用的图表文件，无需写代码。"
     ],
     "facts": [
       {
@@ -20,15 +20,15 @@
       },
       {
         "label": "Stars",
-        "value": "52,534"
+        "value": "53,967"
       },
       {
         "label": "今日新增 Stars",
-        "value": "+2,100"
+        "value": "+1,813"
       },
       {
         "label": "Forks",
-        "value": "3,320"
+        "value": "3,424"
       },
       {
         "label": "许可证",
@@ -36,7 +36,7 @@
       },
       {
         "label": "最近更新",
-        "value": "2026-10-13"
+        "value": "2026-10-14"
       }
     ],
     "externalLinks": [
@@ -54,33 +54,34 @@
       }
     ],
     "id": "github-trending:cathrynlavery/diagram-design",
-    "title": "Diagram Design：让 AI 助手画出专业排版级图表",
+    "title": "Diagram Design：让 AI 帮你画出专业级图表",
     "sourceUrl": "https://github.com/cathrynlavery/diagram-design",
-    "summary": "这是一个给 AI 编程助手使用的“技能包”，让你用一句大白话就能生成设计感强、可直接打开的图表文件，替代粗糙的默认绘图效果。",
+    "summary": "这是一个让 AI 编程助手按你的品牌风格自动生成专业图表的技能包，支持 45 种图表类型，输出为可直接打开的独立 HTML 文件。",
     "tags": [
-      "AI 绘图",
-      "图表设计",
+      "AI 图表生成",
       "架构图",
-      "品牌配色",
+      "流程图",
+      "品牌风格",
       "HTML 导出",
-      "自然语言生成"
+      "设计工具"
     ],
     "source": "daily",
     "sourceLabel": "GitHub Trending",
-    "publishedAt": "2026-10-12T23:37:11.442Z"
+    "publishedAt": "2026-10-13T21:50:09.187Z"
   },
   {
     "section": "github",
-    "digestDate": "2026-10-13",
-    "publishedDate": "10/13",
+    "digestDate": "2026-10-14",
+    "publishedDate": "10/14",
     "time": "本次更新",
     "readTime": "3 分钟",
     "accent": "blue",
     "inRecentWindow": true,
     "paragraphs": [
-      "REA 是一个面向逆向工程的工具集，它把分析原生二进制、JavaScript 与 Electron 应用、.NET 程序集以及网站的能力，通过 MCP 协议接入你常用的 AI 智能体。它的典型用途是：你看到某个应用里有一个想要的功能，让智能体用 REA 去调查这个应用（即使没有源代码），解释功能如何运作，并给出证据，最后帮你为自己的项目做出类似功能。",
-      "核心能力包括：对原生二进制进行分析，可配合已安装的 Hopper、Ghidra 或 IDA 使用；对 JavaScript 和 Electron 应用做静态分析，不需要额外的原生分析引擎；还能分析 .NET 程序集与网站。所有分析在本地运行，结论会附带证据和局限说明，而不是只给一个没有依据的答案。你既可以让智能体调用，也可以在终端里直接使用这些工具。",
-      "适用人群是希望理解他人产品实现方式的产品人员、安全研究者、开发者，以及需要评估某个功能是否值得借鉴的团队。使用门槛不高：安装 Node.js 和 npm 后运行一条 setup 命令，选择你的智能体并确认改动即可，支持 Claude Code、Codex、Cursor、Gemini CLI 等常见工具；原生分析需要先配置好 Hopper、Ghidra 或 IDA 等提供方。项目采用 MIT 许可，可自由使用和修改。"
+      "REA 解决的是一个很实际的问题：当你看到某个应用里有个不错的功能，想搞明白它到底怎么做的，甚至想在自己的产品里做一个类似的，通常需要读懂对方的程序。REA 把这件事交给 AI 智能体来做——它连接你的 AI 助手与一系列分析工具，让助手去检查目标软件、解释功能原理、给出判断依据，并帮你搭出一个自己的版本。",
+      "它能分析的对象相当广：原生二进制程序、JavaScript 与 Electron 应用、.NET 程序集以及网站。分析过程在你自己的电脑上本地运行，结论会附带证据和局限性说明，而不是给一个说不清来源的答案。原生程序分析可以复用你已安装的 Hopper、Ghidra 或 IDA；纯 JavaScript 静态分析则不需要这类引擎。",
+      "使用门槛不高但也不算零门槛。你需要先装好 Node.js 和 npm，然后运行一条命令完成安装，安装程序会把 REA 注册到你的 AI 助手中并写入配套的工作流程说明，同时备份原有配置，之后重启助手即可。它支持 Claude Code、Codex、Cursor、Gemini CLI 等常见助手，也可以直接在终端里使用同样的工具。",
+      "适合的人群包括：想学习竞品实现思路的产品和开发人员、需要理解陌生程序的安全研究人员，以及希望让 AI 助手具备实际分析能力的用户。项目采用 MIT 开源许可，官网提供安装说明、图文指南和真实案例。"
     ],
     "facts": [
       {
@@ -89,15 +90,15 @@
       },
       {
         "label": "Stars",
-        "value": "155,083"
+        "value": "204,259"
       },
       {
         "label": "今日新增 Stars",
-        "value": "+45,495"
+        "value": "+54,706"
       },
       {
         "label": "Forks",
-        "value": "35,699"
+        "value": "49,744"
       },
       {
         "label": "许可证",
@@ -105,7 +106,7 @@
       },
       {
         "label": "最近更新",
-        "value": "2026-10-13"
+        "value": "2026-10-14"
       }
     ],
     "externalLinks": [
@@ -123,34 +124,34 @@
       }
     ],
     "id": "github-trending:morluto/rea",
-    "title": "REA：用智能体逆向分析任何软件",
+    "title": "REA：用 AI 智能体反向工程任何软件",
     "sourceUrl": "https://github.com/morluto/rea",
-    "summary": "REA 把逆向工程工具接入你的 AI 智能体，帮你从应用功能一路看到二进制层面，弄清一个功能是怎么实现的。",
+    "summary": "REA 是一款把 AI 助手接上逆向分析工具的开源项目，让你不用源代码也能看懂一款软件的功能是怎么实现的。",
     "tags": [
-      "逆向工程",
-      "AI智能体",
+      "反向工程",
+      "AI 智能体",
       "二进制分析",
-      "Electron应用",
-      "MCP工具",
-      "本地分析"
+      "Electron 应用",
+      "本地分析",
+      "开源工具"
     ],
     "source": "daily",
     "sourceLabel": "GitHub Trending",
-    "publishedAt": "2026-10-12T23:37:11.442Z"
+    "publishedAt": "2026-10-13T21:50:09.187Z"
   },
   {
     "section": "github",
-    "digestDate": "2026-10-13",
-    "publishedDate": "10/13",
+    "digestDate": "2026-10-14",
+    "publishedDate": "10/14",
     "time": "本次更新",
     "readTime": "3 分钟",
     "accent": "blue",
     "inRecentWindow": true,
     "paragraphs": [
-      "ArtCraft 把自己定位为“艺术家的 IDE”，核心思路是把 AI 生成从“写提示词碰运气”变成“先搭场景再生成”。它提供 2D 和 3D 的视觉编辑环境，你可以在生成最终画面之前，先布置背景、前景、道具，安排角色位置，甚至设置相机角度，从而对构图有更精确的控制。",
-      "它的核心能力包括：图像到场景（把虚拟角色放进一致的环境中，方便在同一房间里规划多个镜头）、2D 与 3D 图像合成（分层叠加背景、前景和道具，制造景深）、图像转 3D 网格（把一张图变成可旋转、可摆放的 3D 物体）、角色摆姿（在生成前调整角色姿态和相机），以及用 3D 素材套件进行场景搭建。这些功能都围绕“先搭建、后生成”的工作流展开。",
-      "适用人群主要是艺术家、设计师、影视创作者和内容制作人，尤其是那些需要精确控制画面构图、角色一致性和镜头语言的用户。相比纯提示词工具，它更适合有视觉创作需求、希望结果可重复、可迭代的专业或半专业创作者。",
-      "使用门槛方面，ArtCraft 提供官方下载安装包，也有从源码构建的文档，普通创作者可以直接下载使用。它是一款桌面应用，需要一定的学习成本来熟悉 3D 场景搭建和合成操作，但不需要编程能力。项目采用 Apache-2.0 开源许可证，对个人和商业使用都比较友好。"
+      "很多 AI 绘画工具只能靠输入一段文字提示来生成图片，结果难以复现，构图和人物一致性也很难控制。ArtCraft 想解决这个问题，它把自己定位为“艺术家的 IDE”，让创作者先在软件里搭好场景，再让 AI 生成画面，把提示词变成可以反复调整的创作流程。",
+      "它的核心能力围绕精确控制展开：支持 2D 图像合成，包括图层、抠图和绘图工具；支持 3D 图像合成，可以把背景、前景和道具分层摆放来营造景深；支持把图片转成可摆放旋转的 3D 模型；支持给角色摆姿势并预先设定镜头位置；还支持“图像到场景”，让虚拟角色出现在一致的环境中，方便在同一场景里规划多个镜头。用户可以选择适合自己工作流的 AI 模型。",
+      "它适合插画师、概念设计师、影视分镜和短片创作者，以及需要稳定角色形象和镜头构图的内容团队。相比纯网页版 AI 绘画工具，它更接近专业创作软件，强调可重复、可精修的工作方式。",
+      "使用门槛相对友好：官方提供直接下载的安装包，也提供从源码构建的方式，并配有演示视频、Discord 社区和 YouTube 频道。普通创作者下载安装后即可上手，不需要写代码；只有想自行编译或二次开发的人才需要一定的技术背景。"
     ],
     "facts": [
       {
@@ -159,15 +160,15 @@
       },
       {
         "label": "Stars",
-        "value": "21,864"
+        "value": "25,391"
       },
       {
         "label": "今日新增 Stars",
-        "value": "+4,106"
+        "value": "+4,078"
       },
       {
         "label": "Forks",
-        "value": "3,540"
+        "value": "3,996"
       },
       {
         "label": "许可证",
@@ -193,34 +194,34 @@
       }
     ],
     "id": "github-trending:storytold/artcraft",
-    "title": "ArtCraft：面向艺术家的 AI 图像与视频创作 IDE",
+    "title": "ArtCraft：面向艺术家和影视创作者的 AI 图像视频创作工作台",
     "sourceUrl": "https://github.com/storytold/artcraft",
-    "summary": "ArtCraft 是一款专为艺术家、设计师和影视创作者打造的 AI 创作工具，让你在生成图像和视频前先搭建场景、摆好角色和相机，实现更可控、可重复的创作流程。",
+    "summary": "ArtCraft 是一款面向艺术家、设计师和影视创作者的 AI 图像与视频创作软件，把生成式 AI 变成可视化、可精确控制的创作工具，而不是只靠文字提示碰运气。",
     "tags": [
-      "AI图像生成",
-      "AI视频创作",
-      "3D场景搭建",
-      "艺术家工具",
-      "视觉合成",
+      "AI 图像生成",
+      "AI 视频创作",
+      "3D 合成",
       "角色摆姿",
-      "开源创作软件"
+      "影视分镜",
+      "可视化创作工具"
     ],
     "source": "daily",
     "sourceLabel": "GitHub Trending",
-    "publishedAt": "2026-10-12T23:37:11.442Z"
+    "publishedAt": "2026-10-13T21:50:09.187Z"
   },
   {
     "section": "github",
-    "digestDate": "2026-10-13",
-    "publishedDate": "10/13",
+    "digestDate": "2026-10-14",
+    "publishedDate": "10/14",
     "time": "本次更新",
     "readTime": "3 分钟",
     "accent": "blue",
     "inRecentWindow": true,
     "paragraphs": [
-      "上帝视角（God's Eye View）看起来像是一个间谍卫星模拟器，但它的数据来源是公开的，并且是真实的。项目把航班应答器、船舶信标、卫星轨道参数、地震仪和公共摄像头等公开信号集中到一个照片级 3D 地球上，让你可以在全球视野与某架飞机、某艘船或某条街道之间自由切换。它完全在本地浏览器中运行，源代码可以查看和扩展。",
-      "功能上，它提供座舱视角跟随被追踪的航班、250 公里范围内的实时目标清单、点击追踪任意目标并显示元数据、语音白板标注、按机型显示真实 3D 飞机模型、CRT/NVG/FLIR 等传感器滤镜、检测框叠加和军用风格 HUD。还支持天气图层（GFS 或 ECMWF 风场、雷达回波、云层和闪电）、按城市查看 OpenStreetMap 中标注的车牌识别摄像头位置，以及用语音查询卫星何时从你头顶经过。大部分数据是实时或定期刷新的，交通流量是基于聚合位置数据在真实道路上模拟的，摄像头位姿和火箭轨迹为粗略估计。",
-      "适用人群包括对地理空间情报、航空航海追踪、开源情报和可视化感兴趣的爱好者、研究者、内容创作者和开发者。使用门槛较低：可以不用 API 密钥就开始，通过 Pinokio 安装或在终端本地运行，之后在应用内按需添加可选密钥。每个数据图层都是独立模块，方便替换或扩展。"
+      "上帝视角（God's Eye View）把散落在各处的公开信号汇聚到同一个可探索的 3D 地球仪上：飞机应答机、船舶信标、卫星轨道数据、地震台站和公共摄像头。你可以在全球总览和某一架飞机、某一艘船、某条街道之间自由切换，实时观察世界正在发生什么。整个程序在你的浏览器本地运行，源代码可以查看和修改。",
+      "它的交互方式很有特色：可以进入被追踪航班的驾驶舱视角，让镜头一路贴着地形飞行；点击任意目标即可锁定并显示完整信息和拖尾轨迹；还能用语音在地球上做标注，画出真实的边界多边形、标记和路线。视觉上提供多种传感器风格滤镜，如夜视、热成像、黑白和 CRT 效果，另有检测框叠加、军事风格 HUD 和电影级镜头巡游，方便录制演示片段。",
+      "数据方面，天气图层可以播放 GFS 或 ECMWF 预报风场、回放雷达和卫星云图与闪电，并跟踪飓风路径，无需密钥；还能查看 OpenStreetMap 中标注的车牌识别摄像头位置，以及按语音询问任意已加载卫星何时从你头顶升起、能否看见。需要注意的是，交通流是沿真实道路模拟的，摄像头朝向和火箭轨迹属于粗略估计。",
+      "上手门槛较低：可以完全不用 API 密钥就开始使用，通过 Pinokio 安装或在终端本地运行，之后在应用内按需添加可选密钥。适合对地理信息、航空航海追踪、开源情报和可视化感兴趣的普通用户、内容创作者和开发者，也适合想在此基础上扩展自己数据图层的人。"
     ],
     "facts": [
       {
@@ -229,15 +230,15 @@
       },
       {
         "label": "Stars",
-        "value": "53,597"
+        "value": "55,210"
       },
       {
         "label": "今日新增 Stars",
-        "value": "+1,903"
+        "value": "+1,961"
       },
       {
         "label": "Forks",
-        "value": "10,599"
+        "value": "10,804"
       },
       {
         "label": "许可证",
@@ -245,7 +246,7 @@
       },
       {
         "label": "最近更新",
-        "value": "2026-10-12"
+        "value": "2026-10-14"
       }
     ],
     "externalLinks": [
@@ -263,34 +264,34 @@
       }
     ],
     "id": "github-trending:bilawalsidhu/gods-eye-view",
-    "title": "上帝视角：浏览器里的开源卫星情报地球",
+    "title": "上帝视角：浏览器里的实时全球态势地图",
     "sourceUrl": "https://github.com/bilawalsidhu/gods-eye-view",
-    "summary": "上帝视角是一个在浏览器中运行的逼真 3D 地球模拟器，把航班、船舶、卫星、地震和公共摄像头等真实公开数据汇聚到同一个可探索的地球上。",
+    "summary": "一个在浏览器中运行的 3D 地球仪，把航班、船舶、卫星、地震、天气和公共摄像头等真实公开数据叠加在一起，像间谍卫星操作台一样查看世界。",
     "tags": [
-      "3D地球",
+      "3D 地球仪",
+      "实时追踪",
       "开源情报",
-      "卫星追踪",
-      "航班船舶",
-      "实时数据",
+      "卫星数据",
+      "天气图层",
       "可视化"
     ],
     "source": "daily",
     "sourceLabel": "GitHub Trending",
-    "publishedAt": "2026-10-12T23:37:11.442Z"
+    "publishedAt": "2026-10-13T21:50:09.187Z"
   },
   {
     "section": "github",
-    "digestDate": "2026-10-13",
-    "publishedDate": "10/13",
+    "digestDate": "2026-10-14",
+    "publishedDate": "10/14",
     "time": "本次更新",
     "readTime": "3 分钟",
     "accent": "blue",
     "inRecentWindow": true,
     "paragraphs": [
-      "AirLLM 是一个开源的大语言模型推理工具，核心目标是解决“模型太大、显卡装不下”的问题。它采用逐层流式加载的方式，把模型权重分批从硬盘读入显存，用完即释放，因此不需要量化、蒸馏或剪枝等压缩手段，就能在单张 4GB 显存的显卡上运行 70B 参数级别的大模型。根据项目说明，它甚至能运行 2.8T 参数的 Kimi K3、671B 的 DeepSeek-V3 等超大规模模型，显存占用分别低至约 3.72GB 和 12GB。",
-      "除了推理，项目还支持在有限显存下训练超大模型：冻结的权重逐层流式加载，只把适配器留在 GPU 上，官方称 125B 模型可在 6GB 显存下训练。它通过统一的 AutoModel 接口兼容 Qwen、Llama、DeepSeek、Phi、Gemma、ChatGLM、Baichuan、Mistral、InternLM 等多种模型家族，并支持 8bit/4bit 量化、FP8 模型、safetensors 格式以及 macOS 上的 CPU 推理。",
-      "这个项目适合想在自己电脑上体验大模型、但显卡显存有限的个人开发者、研究者和 AI 爱好者，也适合需要低成本部署大模型的小团队。使用门槛主要在环境配置：需要安装 Python 和 PyTorch，部分新模型对 transformers 版本、CUDA 版本、flash-attn 等依赖有特定要求，还要准备足够的硬盘空间存放模型权重。由于是逐层加载，推理速度会明显慢于把模型完整放进显存的方式，更适合对速度要求不高、但对显存要求苛刻的场景。",
-      "项目采用 Apache-2.0 许可证，更新频繁，社区活跃度很高，在 GitHub 上已有数万星标。它提供了快速开始文档、配置说明、示例 Notebook 和常见问题解答，方便不熟悉底层实现的人按步骤上手。"
+      "大语言模型通常体积巨大，动辄需要几十上百 GB 的显存才能运行，普通人手里的消费级显卡根本带不动。AirLLM 的核心思路是把模型按层拆开，需要用到哪一层才临时加载哪一层，用完就释放，因此整体内存占用被压得非常低。它不需要量化、蒸馏或剪枝，也就是不牺牲模型本身的精度。",
+      "根据项目说明，它能在单块 4GB 显卡上运行 70B 模型，在约 12GB 显存上运行 DeepSeek-V3（671B），甚至能在不到 4GB 显存上运行目前最大的开源模型 Kimi K3（2.8T）。此外它还支持在小显存下训练大模型，例如 125B 模型可在 6GB 显存下训练。它支持 Llama、Qwen、DeepSeek、ChatGLM、Mistral 等多种主流模型，并提供了自动识别模型类型的接口。",
+      "这个项目适合想在自己电脑上体验大模型、但显卡显存有限的个人开发者、研究者和 AI 爱好者，也适合需要低成本部署大模型的团队。它同时支持 CPU 推理和 MacOS，让没有独立显卡的用户也能尝试。",
+      "使用门槛中等：用户需要会安装 Python 环境、下载模型权重并运行示例代码，项目提供了快速上手文档和示例笔记本。代价是速度会明显慢于大显存直接加载，因为每层都要反复从硬盘读取，所以更适合尝鲜、验证和低频使用，而不是追求高并发高性能的生产场景。"
     ],
     "facts": [
       {
@@ -299,15 +300,15 @@
       },
       {
         "label": "Stars",
-        "value": "37,492"
+        "value": "38,258"
       },
       {
         "label": "今日新增 Stars",
-        "value": "+886"
+        "value": "+1,004"
       },
       {
         "label": "Forks",
-        "value": "3,870"
+        "value": "3,913"
       },
       {
         "label": "许可证",
@@ -315,7 +316,7 @@
       },
       {
         "label": "最近更新",
-        "value": "2026-10-12"
+        "value": "2026-10-13"
       }
     ],
     "externalLinks": [
@@ -329,34 +330,34 @@
       }
     ],
     "id": "github-trending:lyogavin/airllm",
-    "title": "AirLLM：让超大语言模型在普通显卡上跑起来的推理工具",
+    "title": "AirLLM：让超大语言模型在普通显卡上运行",
     "sourceUrl": "https://github.com/lyogavin/airllm",
-    "summary": "AirLLM 通过分层流式加载技术大幅降低显存占用，让 70B 甚至 2.8T 参数的超大语言模型能在 4GB 显存的普通显卡上运行。",
+    "summary": "AirLLM 是一个开源工具，通过分层流式加载的方式大幅降低大语言模型的内存占用，让普通人用一块小显存显卡也能运行上百亿甚至上万亿参数的超大模型。",
     "tags": [
-      "大模型推理",
-      "低显存运行",
-      "分层流式加载",
-      "单卡部署",
+      "大语言模型",
+      "低显存推理",
+      "模型分层加载",
       "开源工具",
-      "模型训练"
+      "消费级显卡",
+      "本地部署"
     ],
     "source": "daily",
     "sourceLabel": "GitHub Trending",
-    "publishedAt": "2026-10-12T23:37:11.442Z"
+    "publishedAt": "2026-10-13T21:50:09.187Z"
   },
   {
     "section": "github",
-    "digestDate": "2026-10-13",
-    "publishedDate": "10/13",
+    "digestDate": "2026-10-14",
+    "publishedDate": "10/14",
     "time": "本次更新",
     "readTime": "3 分钟",
     "accent": "blue",
     "inRecentWindow": true,
     "paragraphs": [
-      "Context Mode 解决的是 AI 编程助手在长时间对话中的一个核心痛点：每次调用外部工具（如浏览器快照、GitHub 议题列表、日志文件）都会把大量原始数据塞进 AI 的“记忆窗口”，导致上下文很快被占满。项目通过沙箱机制把原始数据挡在上下文之外，官方数据显示可将 315 KB 的数据压缩到 5.4 KB，减少约 98%，从而让 AI 能更长时间保持高效工作。",
-      "除了节省空间，它还负责“记住事情”。每一次文件编辑、Git 操作、任务进度、错误和用户决定都会被记录在本地数据库中。当对话被自动压缩时，它不会把旧数据一股脑塞回去，而是建立索引，只按需检索相关内容，让 AI 能接着之前的工作继续，而不是忘记正在编辑哪个文件、下一步要做什么。",
-      "该项目通过 MCP 协议和钩子机制，支持在 17 个平台上统一路由，这意味着它不绑定某一个 AI 编程工具，而是可以跨平台使用。它适合经常使用 AI 辅助编程、且遇到“聊久了 AI 就变笨”问题的开发者，也适合团队中需要统一管理 AI 会话记忆的场景。",
-      "使用门槛方面，它需要用户对 AI 编程助手和 MCP 协议有基本了解，并按照文档进行安装配置。项目本身是开源代码，但采用 ELv2 许可证，商用前需要留意许可条款。对于不写代码的普通用户，它并不直接提供可视化界面，更适合有技术背景的人使用。"
+      "Context Mode 解决的是 AI 编程助手在使用过程中“上下文被撑爆”的问题。当助手调用各种工具时，会往对话里塞入大量原始数据，比如网页快照、代码仓库议题列表或访问日志，这些内容很快就把可用的上下文空间占满，导致助手开始遗忘之前正在编辑的文件和任务。",
+      "它的做法是把工具返回的原始数据放进沙箱里，不让它们直接进入对话，只在需要时提取关键信息，从而把体积大幅压缩。同时，它会记录每一次文件修改、版本控制操作、任务进度和用户决定，并在会话被压缩后通过检索只取回相关部分，让助手能接着之前的工作继续做，而不是从头再来。",
+      "这个项目主要面向日常使用 AI 编程助手的开发者，尤其是那些需要让助手长时间处理复杂项目、频繁调用外部工具的人。它通过 MCP 和钩子机制接入，声称支持 17 个平台，因此已经在使用这类助手的团队可以尝试把它作为一层增强。",
+      "使用门槛偏高：它不是一个双击安装的独立软件，而是需要按文档配置到现有的 AI 编程环境里，涉及 MCP 服务器和钩子设置，对不熟悉命令行和开发工具配置的用户来说有一定学习成本。此外它的许可证并非标准开源协议，商业使用前需要自行确认条款。"
     ],
     "facts": [
       {
@@ -365,15 +366,15 @@
       },
       {
         "label": "Stars",
-        "value": "27,255"
+        "value": "28,140"
       },
       {
         "label": "今日新增 Stars",
-        "value": "+394"
+        "value": "+978"
       },
       {
         "label": "Forks",
-        "value": "1,941"
+        "value": "1,986"
       },
       {
         "label": "许可证",
@@ -381,7 +382,7 @@
       },
       {
         "label": "最近更新",
-        "value": "2026-10-13"
+        "value": "2026-10-14"
       }
     ],
     "externalLinks": [
@@ -399,21 +400,522 @@
       }
     ],
     "id": "github-trending:mksglu/context-mode",
-    "title": "Context Mode：AI 编程助手的上下文优化器",
+    "title": "Context Mode：给 AI 编程助手省上下文的记忆与沙箱工具",
     "sourceUrl": "https://github.com/mksglu/context-mode",
-    "summary": "它是一款为 AI 编程助手设计的上下文管理工具，通过压缩工具输出、保存会话记忆和统一路由，让 AI 在长时间编程中不遗忘、不浪费上下文。",
+    "summary": "一个为 AI 编程助手设计的上下文优化工具，通过沙箱隔离工具输出、保存会话记忆，把冗长的原始数据压缩约 98%。",
     "tags": [
-      "AI编程助手",
+      "AI 编程助手",
       "上下文优化",
       "会话记忆",
-      "MCP协议",
-      "工具输出压缩",
-      "开发者工具",
-      "跨平台路由"
+      "沙箱隔离",
+      "MCP",
+      "开发者工具"
     ],
     "source": "daily",
     "sourceLabel": "GitHub Trending",
-    "publishedAt": "2026-10-12T23:37:11.442Z"
+    "publishedAt": "2026-10-13T21:50:09.187Z"
+  },
+  {
+    "section": "github",
+    "digestDate": "2026-10-14",
+    "publishedDate": "10/14",
+    "time": "本次更新",
+    "readTime": "3 分钟",
+    "accent": "blue",
+    "inRecentWindow": true,
+    "paragraphs": [
+      "VoiceStudio 是一个开源的语音创作工具，被定位为云端语音服务的本地替代方案。它把语音克隆、音色设计、视频配音、语音听写、音频转写和有声书制作整合在同一个桌面应用里，所有处理都可以在你自己的电脑上完成，不需要把录音上传到别人的服务器。",
+      "对普通用户来说，它的价值在于把过去需要多个付费网站才能完成的事情集中到一个软件里：你可以用一段干净的参考录音克隆某个人的声音，也可以用文字描述来设计一个全新的音色；可以给视频配上时间对齐的旁白，也可以把长文本批量转成有声内容。它支持多达 646 种语言，并提供了本地 API 和面向自动化代理的接口，方便把语音能力接到自己的工作流中。",
+      "它适合内容创作者、播客和有声书制作者、需要给视频做多语言配音的团队，以及在意隐私、不想把声音素材交给第三方云服务的个人。软件提供 macOS、Windows 和 Linux 的安装包，也有 Docker 方式；有独立显卡的机器可以开启加速，没有独立显卡的电脑也能用 CPU 运行，只是速度会慢一些。",
+      "使用门槛方面，官方提供一条命令的安装脚本，也提供图形化安装包，日常操作基本在界面里完成，不需要写代码。需要注意的是，想要获得较快的生成速度，最好有 NVIDIA 显卡或 Apple Silicon 芯片；纯 CPU 环境也能跑，但需要预留大约 5GB 的磁盘空间，并且生成等待时间会更长。"
+    ],
+    "facts": [
+      {
+        "label": "主要语言",
+        "value": "Python"
+      },
+      {
+        "label": "Stars",
+        "value": "62,956"
+      },
+      {
+        "label": "今日新增 Stars",
+        "value": "+2,277"
+      },
+      {
+        "label": "Forks",
+        "value": "7,005"
+      },
+      {
+        "label": "许可证",
+        "value": "AGPL-3.0"
+      },
+      {
+        "label": "最近更新",
+        "value": "2026-10-14"
+      }
+    ],
+    "externalLinks": [
+      {
+        "label": "阅读项目 README",
+        "url": "https://github.com/debpalash/VoiceStudio#readme"
+      },
+      {
+        "label": "打开项目网站",
+        "url": "https://voicestudio.sh"
+      },
+      {
+        "label": "查看 Releases",
+        "url": "https://github.com/debpalash/VoiceStudio/releases"
+      }
+    ],
+    "id": "github-trending:debpalash/VoiceStudio",
+    "title": "VoiceStudio：本地运行的语音克隆与配音工作台",
+    "sourceUrl": "https://github.com/debpalash/VoiceStudio",
+    "summary": "一个完全在本地电脑上运行的语音工具，能克隆声音、设计新音色、给视频配音、做听写转写和有声书，支持 646 种语言。",
+    "tags": [
+      "语音克隆",
+      "视频配音",
+      "本地运行",
+      "多语言",
+      "有声书",
+      "语音转写",
+      "桌面应用"
+    ],
+    "source": "daily",
+    "sourceLabel": "GitHub Trending",
+    "publishedAt": "2026-10-13T21:50:09.187Z"
+  },
+  {
+    "section": "github",
+    "digestDate": "2026-10-14",
+    "publishedDate": "10/14",
+    "time": "本次更新",
+    "readTime": "3 分钟",
+    "accent": "blue",
+    "inRecentWindow": true,
+    "paragraphs": [
+      "Skills 是 Vercel 实验室推出的开源命令行工具，属于“开放智能体技能生态”的一部分。它解决的核心问题是：AI 编程助手（如 Claude Code、Cursor、Codex 等）本身能力有限，但可以通过安装“技能包”来获得特定领域的专业知识或工作流程。这个工具就是用来安装和管理这些技能包的。",
+      "它的主要能力包括：从 GitHub、GitLab、Azure Repos 或任意 Git 地址安装技能；支持私有仓库，复用你已有的 Git 认证；可以指定安装到某个具体的 AI 助手，也可以全局安装；还支持不安装直接试用某个技能，生成提示词并启动对应的 AI 助手。",
+      "它支持超过 75 种 AI 编程助手，包括 OpenCode、Claude Code、Codex、Cursor 等主流工具。安装方式统一，无论是公开技能还是私有技能，命令格式一致，降低了使用门槛。",
+      "这个项目适合希望给 AI 助手扩展能力的开发者、团队和技能作者。不过它本身是命令行工具，需要你在终端里运行命令，对完全不懂技术的用户来说有一定门槛。如果你已经在使用 AI 编程助手，并想让它掌握更多专门技能，这个工具会很有帮助。"
+    ],
+    "facts": [
+      {
+        "label": "主要语言",
+        "value": "TypeScript"
+      },
+      {
+        "label": "Stars",
+        "value": "34,413"
+      },
+      {
+        "label": "今日新增 Stars",
+        "value": "+187"
+      },
+      {
+        "label": "Forks",
+        "value": "2,948"
+      },
+      {
+        "label": "许可证",
+        "value": "MIT"
+      },
+      {
+        "label": "最近更新",
+        "value": "2026-10-10"
+      }
+    ],
+    "externalLinks": [
+      {
+        "label": "阅读项目 README",
+        "url": "https://github.com/vercel-labs/skills#readme"
+      },
+      {
+        "label": "打开项目网站",
+        "url": "https://skills.sh"
+      },
+      {
+        "label": "查看 Releases",
+        "url": "https://github.com/vercel-labs/skills/releases"
+      }
+    ],
+    "id": "github-trending:vercel-labs/skills",
+    "title": "Skills：AI 助手的技能安装与管理工具",
+    "sourceUrl": "https://github.com/vercel-labs/skills",
+    "summary": "这是一个开源的命令行工具，用来给各种 AI 编程助手安装、试用和管理“技能”，让 AI 获得特定领域的能力扩展。",
+    "tags": [
+      "AI 技能管理",
+      "命令行工具",
+      "技能安装",
+      "开源生态",
+      "AI 编程助手",
+      "Vercel"
+    ],
+    "source": "daily",
+    "sourceLabel": "GitHub Trending",
+    "publishedAt": "2026-10-13T21:50:09.187Z"
+  },
+  {
+    "section": "github",
+    "digestDate": "2026-10-14",
+    "publishedDate": "10/14",
+    "time": "本次更新",
+    "readTime": "3 分钟",
+    "accent": "blue",
+    "inRecentWindow": true,
+    "paragraphs": [
+      "xtool 是一个开源项目，目标是替代苹果官方的 Xcode 开发工具。传统上，开发 iOS 应用必须使用 macOS 系统上的 Xcode，而 xtool 把这个能力扩展到了 Linux、Windows（含 WSL）和 macOS，让更多平台的开发者都能参与 iOS 应用开发。",
+      "它的核心能力包括：把 SwiftPM 软件包构建成 iOS 应用、对 iOS 应用进行签名并安装到设备上，以及通过命令行以程序化方式与 Apple Developer Services 交互。项目提供命令行界面，包含 setup、auth、sdk、new、dev、ds、devices、install、uninstall、launch 等子命令，覆盖从环境配置到设备管理的完整流程。此外，xtool 还包含一个名为 XKit 的库，开发者可以在自己的应用中调用它来与 Apple Developer Services、iOS 设备等交互。",
+      "这个项目适合希望在没有 Mac 的 Linux 或 Windows 环境中开发 iOS 应用的开发者，也适合需要以自动化、脚本化方式构建和部署 iOS 应用的技术团队。对于已经熟悉 Swift 和 SwiftPM 的开发者来说，迁移成本相对较低。",
+      "使用门槛方面，xtool 仍需要用户拥有 Apple 开发者账号以便完成签名和与 Apple Developer Services 的交互，并且需要按照官方文档分别完成 Linux/Windows 或 macOS 的安装步骤。它面向的是有编程基础、愿意使用命令行工具的开发者，普通非技术用户直接上手会有一定难度。"
+    ],
+    "facts": [
+      {
+        "label": "主要语言",
+        "value": "Swift"
+      },
+      {
+        "label": "Stars",
+        "value": "9,200"
+      },
+      {
+        "label": "今日新增 Stars",
+        "value": "+1,182"
+      },
+      {
+        "label": "Forks",
+        "value": "389"
+      },
+      {
+        "label": "许可证",
+        "value": "MIT"
+      },
+      {
+        "label": "最近更新",
+        "value": "2026-10-14"
+      }
+    ],
+    "externalLinks": [
+      {
+        "label": "阅读项目 README",
+        "url": "https://github.com/xtool-org/xtool#readme"
+      },
+      {
+        "label": "打开项目网站",
+        "url": "https://xtool.sh"
+      },
+      {
+        "label": "查看 Releases",
+        "url": "https://github.com/xtool-org/xtool/releases"
+      }
+    ],
+    "id": "github-trending:xtool-org/xtool",
+    "title": "xtool：在 Linux、Windows 和 macOS 上构建与部署 iOS 应用的开源工具",
+    "sourceUrl": "https://github.com/xtool-org/xtool",
+    "summary": "xtool 是一个跨平台的 Xcode 替代工具，让开发者无需苹果电脑也能用 SwiftPM 构建、签名并安装 iOS 应用。",
+    "tags": [
+      "跨平台开发",
+      "iOS 应用构建",
+      "Xcode 替代",
+      "SwiftPM",
+      "命令行工具",
+      "应用签名与安装",
+      "Apple 开发者服务"
+    ],
+    "source": "daily",
+    "sourceLabel": "GitHub Trending",
+    "publishedAt": "2026-10-13T21:50:09.187Z"
+  },
+  {
+    "section": "x",
+    "digestDate": "2026-10-14",
+    "publishedDate": "10/13",
+    "time": "本次更新",
+    "readTime": "3 分钟",
+    "accent": "green",
+    "inRecentWindow": true,
+    "paragraphs": [
+      "推出 Glass：一次学习，终身受用。",
+      "核心观点：Ramp 推出名为 Glass 的产品，旨在回答“Ramp 为何能如此快速”这一问题，并提到为每位员工提供 AI（最佳模型等）。阅读时需注意：预览未完整说明 Glass 的具体功能、技术细节或“一次学习”的含义，不能将未提及的信息视为事实。"
+    ],
+    "id": "attentionvc-ai:2110007713396613568",
+    "title": "Introducing Glass: Learn Things Once.",
+    "sourceUrl": "https://x.com/eglyman/status/2110007713396613568",
+    "summary": "Ramp 联合创始人 Eric Glyman 宣布推出 Glass，并回顾构建原因。上周 David Senra 问他“Ramp 为何能如此快速”，今天他们发布答案。预览提到为每位员工提供 AI——最佳模型等。",
+    "tags": [
+      "Glass",
+      "Ramp",
+      "AI",
+      "企业效率",
+      "未来工作"
+    ],
+    "source": "daily",
+    "sourceLabel": "Eric Glyman · 技术动态 X 热榜",
+    "publishedAt": "2026-10-13T14:00:15.000Z"
+  },
+  {
+    "section": "x",
+    "digestDate": "2026-10-14",
+    "publishedDate": "10/13",
+    "time": "本次更新",
+    "readTime": "3 分钟",
+    "accent": "green",
+    "inRecentWindow": true,
+    "digestFormat": "builders-digest",
+    "paragraphs": [
+      "Thibault Sottiaux 先来了一句俏皮的“你的重置配菜想要点什么？已经做好了”，宣布重置完成，还顺手把 @poteto 也“捣碎”了，说是店里请客。紧接着他表示，好的计划都很简单，他手上就有一个，应该能让每个人的用量都显著增加，希望很快能搞定。"
+    ],
+    "externalLinks": [
+      {
+        "label": "推文 1",
+        "url": "https://x.com/thsottiaux/status/2109873287853707513"
+      },
+      {
+        "label": "推文 2",
+        "url": "https://x.com/thsottiaux/status/2109892247580000595"
+      },
+      {
+        "label": "推文 3",
+        "url": "https://x.com/thsottiaux/status/2109873307722121591"
+      }
+    ],
+    "id": "follow-builders:digest-2026-10-13-thibault-sottiaux",
+    "title": "OpenAI 的 Codex 与 ChatGPT 开发者 Thibault Sottiaux",
+    "sourceUrl": "https://x.com/thsottiaux/status/2109892247580000595",
+    "summary": "Thibault Sottiaux 宣布重置已完成，并透露有一个能让所有人用量显著提升的简单计划。",
+    "tags": [
+      "重置",
+      "用量提升",
+      "OpenAI",
+      "Codex",
+      "ChatGPT"
+    ],
+    "source": "builder",
+    "sourceLabel": "Thibault Sottiaux · Follow Builders",
+    "publishedAt": "2026-10-13T06:21:26.000Z"
+  },
+  {
+    "section": "x",
+    "digestDate": "2026-10-14",
+    "publishedDate": "10/13",
+    "time": "本次更新",
+    "readTime": "3 分钟",
+    "accent": "green",
+    "inRecentWindow": true,
+    "paragraphs": [
+      "Grok Bot 如何改变了我的工作方式",
+      "核心观点：作者长期使用 Claude Code、Codex、Cursor 等 AI 编程助手，认为它们已经改变了构建软件的方式；但 Grok Bot 带来了另一种改变——改变了工作方式。阅读时需注意：预览未说明 Grok Bot 的具体功能、使用场景或改变细节，因此不能推断其实际能力或效果。"
+    ],
+    "id": "attentionvc-ai:2109876908934787127",
+    "title": "How Grok Bot Changed the Way I Work",
+    "sourceUrl": "https://x.com/melvindvivas/status/2109876908934787127",
+    "summary": "作者 Melvin Vivas 分享使用 Grok Bot 后工作方式的变化。他此前已使用 Claude Code、Codex 和 Cursor 等 AI 编程助手，这些工具改变了软件开发方式，而 Grok Bot 则改变了工作方式本身。",
+    "tags": [
+      "Grok Bot",
+      "AI编程助手",
+      "工作方式",
+      "自动化",
+      "生产力"
+    ],
+    "source": "daily",
+    "sourceLabel": "Melvin Vivas · 技术动态 X 热榜",
+    "publishedAt": "2026-10-13T05:20:29.000Z"
+  },
+  {
+    "section": "x",
+    "digestDate": "2026-10-14",
+    "publishedDate": "10/13",
+    "time": "本次更新",
+    "readTime": "3 分钟",
+    "accent": "green",
+    "inRecentWindow": true,
+    "digestFormat": "builders-digest",
+    "paragraphs": [
+      "Garry Tan 先抛出一句态度鲜明的话：“没人会来救你，你也不需要被救。”随后他谈到投资条款，表示按比例跟投权确实重要，对投资人来说很有力量。紧接着他话锋一转，说了一句“我们需要维修工”，并附上一条链接。"
+    ],
+    "externalLinks": [
+      {
+        "label": "推文 1",
+        "url": "https://x.com/garrytan/status/2109749184639488265"
+      },
+      {
+        "label": "推文 2",
+        "url": "https://x.com/garrytan/status/2109847735449047295"
+      },
+      {
+        "label": "推文 3",
+        "url": "https://x.com/garrytan/status/2109852144350470293"
+      }
+    ],
+    "id": "follow-builders:digest-2026-10-13-garry-tan",
+    "title": "Y Combinator 总裁兼 CEO Garry Tan",
+    "sourceUrl": "https://x.com/garrytan/status/2109852144350470293",
+    "summary": "Garry Tan 连发三条推文，谈自我救赎、按比例跟投权以及社会需要维修工。",
+    "tags": [
+      "Garry Tan",
+      "Y Combinator",
+      "按比例跟投权",
+      "投资人",
+      "维修工"
+    ],
+    "source": "builder",
+    "sourceLabel": "Garry Tan · Follow Builders",
+    "publishedAt": "2026-10-13T03:42:05.000Z"
+  },
+  {
+    "section": "x",
+    "digestDate": "2026-10-14",
+    "publishedDate": "10/13",
+    "time": "本次更新",
+    "readTime": "3 分钟",
+    "accent": "green",
+    "inRecentWindow": true,
+    "digestFormat": "builders-digest",
+    "paragraphs": [
+      "Swyx 说，他工作中最好的部分之一，就是在每一座城市把 AI 最好的一面带出来，还特意补了一句“我爱纽约”。他提到在 AI Engineer NY 上，Arize AI 和 Seldo 的工作坊把房间挤得满满当当。之后他又和几位同行一起宣布，他们的工作坊写作文档已经上线。"
+    ],
+    "externalLinks": [
+      {
+        "label": "推文 1",
+        "url": "https://x.com/swyx/status/2109797444204572880"
+      },
+      {
+        "label": "推文 2",
+        "url": "https://x.com/swyx/status/2109837651893485844"
+      },
+      {
+        "label": "推文 3",
+        "url": "https://x.com/swyx/status/2109772705532715166"
+      }
+    ],
+    "id": "follow-builders:digest-2026-10-13-swyx",
+    "title": "Swyx",
+    "sourceUrl": "https://x.com/swyx/status/2109837651893485844",
+    "summary": "Swyx 在纽约的 AI Engineer 活动上办工作坊，并分享写作文档上线。",
+    "tags": [
+      "Swyx",
+      "AI Engineer",
+      "纽约",
+      "工作坊",
+      "Arize AI",
+      "写作文档"
+    ],
+    "source": "builder",
+    "sourceLabel": "Swyx · Follow Builders",
+    "publishedAt": "2026-10-13T02:44:29.000Z"
+  },
+  {
+    "section": "x",
+    "digestDate": "2026-10-14",
+    "publishedDate": "10/13",
+    "time": "本次更新",
+    "readTime": "3 分钟",
+    "accent": "green",
+    "inRecentWindow": true,
+    "digestFormat": "builders-digest",
+    "paragraphs": [
+      "Peter Yang 发了一段视频，解释为什么 Grok @bot 是他现在最喜欢的 agent。简单说，它基于 persona 而不是聊天线程来构建，所以感觉真的像在雇员工替自己干活，每个 persona 负责一项具体工作：Behind the Growth 负责客户支持，YouTube Producer 负责调研和准备，Loving Husband 负责家里的杂事，Health Coach 则盯着他的锻炼计划。他还提到自己最新的 Grok Bot 视频覆盖了这些新功能的使用方式，包括免费的 X 访问、它自己的邮箱以及 Opus。\n\n另一条推文里，他感慨很多人的童年都是被《星际争霸》定义的，连 Ben 也是；他仍然不敢相信新游戏要等到 2030 年才出。他觉得 @Blizzard_Ent 应该在这个 IP 上加倍投入，做电影、电视剧，当然还有真正的即时战略游戏。随后他又补了一句：他打赌如果暴雪为《星际争霸 3》RTS 搞众筹，能筹到几百万。"
+    ],
+    "externalLinks": [
+      {
+        "label": "推文 1",
+        "url": "https://x.com/petergyang/status/2109803399332213090"
+      },
+      {
+        "label": "推文 2",
+        "url": "https://x.com/petergyang/status/2109820627561676970"
+      },
+      {
+        "label": "推文 3",
+        "url": "https://x.com/petergyang/status/2109822610637017218"
+      }
+    ],
+    "id": "follow-builders:digest-2026-10-13-peter-yang",
+    "title": "Peter Yang",
+    "sourceUrl": "https://x.com/petergyang/status/2109822610637017218",
+    "summary": "Peter Yang 分享了他为什么把 Grok @bot 当作目前最喜欢的 agent，并顺带聊到《星际争霸》新作要等到 2030 年。",
+    "tags": [
+      "Grok Bot",
+      "persona",
+      "星际争霸",
+      "暴雪",
+      "即时战略"
+    ],
+    "source": "builder",
+    "sourceLabel": "Peter Yang · Follow Builders",
+    "publishedAt": "2026-10-13T01:44:43.000Z"
+  },
+  {
+    "section": "x",
+    "digestDate": "2026-10-14",
+    "publishedDate": "10/13",
+    "time": "本次更新",
+    "readTime": "3 分钟",
+    "accent": "green",
+    "inRecentWindow": true,
+    "digestFormat": "builders-digest",
+    "paragraphs": [
+      "Dan Shipper 用 Muse Wonder 做了一段视频，用来解释个人基准测试（personal benchmarks）。他自己说这段视频“嗯……相当粗糙”。有意思的是，Muse Wonder 到目前为止生成的所有视频都是用澳大利亚口音旁白的，他把解读空间留给读者。他随后补充说明：这是 Muse Wonder Standard 版本，而 Wonder Full 不知为何在 API 上不可用，不过他很快会跑一次试试。另外他还提到服务一度恢复上线，但质量依然很差。"
+    ],
+    "externalLinks": [
+      {
+        "label": "推文 1",
+        "url": "https://x.com/danshipper/status/2109778026091209087"
+      },
+      {
+        "label": "推文 2",
+        "url": "https://x.com/danshipper/status/2109800647575146906"
+      },
+      {
+        "label": "推文 3",
+        "url": "https://x.com/danshipper/status/2109776532503732624"
+      }
+    ],
+    "id": "follow-builders:digest-2026-10-13-dan-shipper",
+    "title": "Every 首席执行官 Dan Shipper",
+    "sourceUrl": "https://x.com/danshipper/status/2109800647575146906",
+    "summary": "Dan Shipper 用 Muse Wonder 做了一段解释个人基准测试的视频，吐槽效果粗糙，还发现所有视频都用澳大利亚口音旁白。",
+    "tags": [
+      "Muse Wonder",
+      "个人基准测试",
+      "视频生成",
+      "澳大利亚口音",
+      "API"
+    ],
+    "source": "builder",
+    "sourceLabel": "Dan Shipper · Follow Builders",
+    "publishedAt": "2026-10-13T00:17:27.000Z"
+  },
+  {
+    "section": "x",
+    "digestDate": "2026-10-14",
+    "publishedDate": "10/13",
+    "time": "本次更新",
+    "readTime": "3 分钟",
+    "accent": "green",
+    "inRecentWindow": true,
+    "digestFormat": "builders-digest",
+    "paragraphs": [
+      "Nan Yu 发了一条推文，只有一句“One. Of. Us.”，没有展开说明指的是什么。"
+    ],
+    "externalLinks": [
+      {
+        "label": "推文",
+        "url": "https://x.com/thenanyu/status/2109795153250804076"
+      }
+    ],
+    "id": "follow-builders:digest-2026-10-13-nan-yu",
+    "title": "Nan Yu",
+    "sourceUrl": "https://x.com/thenanyu/status/2109795153250804076",
+    "summary": "Nan Yu 只发了一句“One. Of. Us.”，没有更多上下文。",
+    "tags": [
+      "Nan Yu",
+      "推文"
+    ],
+    "source": "builder",
+    "sourceLabel": "Nan Yu · Follow Builders",
+    "publishedAt": "2026-10-12T23:55:37.000Z"
   },
   {
     "section": "github",
@@ -621,26 +1123,211 @@
   },
   {
     "section": "x",
-    "digestDate": "2026-10-13",
+    "digestDate": "2026-10-14",
+    "publishedDate": "10/13",
+    "time": "本次更新",
+    "readTime": "3 分钟",
+    "accent": "green",
+    "inRecentWindow": true,
+    "digestFormat": "builders-digest",
+    "paragraphs": [
+      "Box CEO Aaron Levie 说现在 AI 的局势很疯狂，Meta 也全力冲进了前沿模型赛道。他认为，当有多个玩家一起推动最先进水平时，进展会进一步加速，连最高能力层级的 token 成本也会下降。他还分享了一项研究，觉得相当酷，并认为这最终必然成为 agent 的架构：极限情况下，AI 看到手头任务后，显然会比我们事先替它决定运行框架更擅长做这件事。谈到企业场景，他认为 agent 集群会成为未来许多企业工作流的核心部分，把计算资源砸向可以大规模并行的问题实在太有用了，不可能不用。网络安全会是最大受益者之一：这个领域需要测试海量攻击排列组合，不会累也不会无聊，是极其有用的特性。可能的攻击向量搜索空间很广，通常还需要把不同场景串联起来才能完成利用。考虑到企业里需要时刻保护的 IT 系统、软件、物理基础设施和数据范围之广，这会成为大型企业最大的 token 消耗场景之一。网络安全正处在非常有趣的时期。"
+    ],
+    "externalLinks": [
+      {
+        "label": "推文 1",
+        "url": "https://x.com/levie/status/2109711062757216738"
+      },
+      {
+        "label": "推文 2",
+        "url": "https://x.com/levie/status/2109788979952558255"
+      },
+      {
+        "label": "推文 3",
+        "url": "https://x.com/levie/status/2109682812811137061"
+      }
+    ],
+    "id": "follow-builders:digest-2026-10-13-aaron-levie",
+    "title": "Box CEO Aaron Levie",
+    "sourceUrl": "https://x.com/levie/status/2109788979952558255",
+    "summary": "Aaron Levie 谈 Meta 入局前沿模型、agent 自我决定运行框架，以及 agent 集群在企业尤其是网络安全领域的应用。",
+    "tags": [
+      "Meta",
+      "前沿模型",
+      "agent 集群",
+      "网络安全",
+      "企业工作流"
+    ],
+    "source": "builder",
+    "sourceLabel": "Aaron Levie · Follow Builders",
+    "publishedAt": "2026-10-12T23:31:05.000Z"
+  },
+  {
+    "section": "x",
+    "digestDate": "2026-10-14",
+    "publishedDate": "10/13",
+    "time": "本次更新",
+    "readTime": "3 分钟",
+    "accent": "green",
+    "inRecentWindow": true,
+    "digestFormat": "builders-digest",
+    "paragraphs": [
+      "Vercel CEO Guillermo Rauch 觉得编码 CLI 正变得越来越复杂：常驻进程、三层 TUI、客户端—服务器架构，全都堆了上来。在他看来，CLI 的意义本来就是零摩擦地交付智能，并且保持 unix 风格。他推荐了 fx，只有 6MB，毫秒级启动，不绑定模型，风格克制而极简，内置 MCP、Skills、Subagents 和 ACP。他还提到可以在 Vercel AI Gateway 上使用 Muse Wonder，命令是 fx --model meta/muse-wonder-1.0。另外他转发了一条内容，配文“这也太精彩了 😂”。"
+    ],
+    "externalLinks": [
+      {
+        "label": "推文 1",
+        "url": "https://x.com/rauchg/status/2109734766107099312"
+      },
+      {
+        "label": "推文 2",
+        "url": "https://x.com/rauchg/status/2109719267344261375"
+      },
+      {
+        "label": "推文 3",
+        "url": "https://x.com/rauchg/status/2109771347064922255"
+      }
+    ],
+    "id": "follow-builders:digest-2026-10-13-guillermo-rauch",
+    "title": "Vercel CEO Guillermo Rauch",
+    "sourceUrl": "https://x.com/rauchg/status/2109771347064922255",
+    "summary": "Guillermo Rauch 吐槽编码 CLI 越来越复杂，同时推荐了轻量、模型无关的 fx，并介绍了 Vercel AI Gateway 上的 Muse Wonder。",
+    "tags": [
+      "编码 CLI",
+      "fx",
+      "Vercel AI Gateway",
+      "Muse Wonder",
+      "极简设计"
+    ],
+    "source": "builder",
+    "sourceLabel": "Guillermo Rauch · Follow Builders",
+    "publishedAt": "2026-10-12T22:21:01.000Z"
+  },
+  {
+    "section": "x",
+    "digestDate": "2026-10-14",
+    "publishedDate": "10/13",
+    "time": "本次更新",
+    "readTime": "3 分钟",
+    "accent": "green",
+    "inRecentWindow": true,
+    "digestFormat": "builders-digest",
+    "paragraphs": [
+      "fpvventures 合伙人 Nikunj Kothari 说，他认识的所有叫 Surya 的人——@sdand、@sur4js、@kickingkeys——不知为何都是很有才、兴趣多元的个体。由此他抛出两件事：第一，如果还有他应该认识的 Surya，欢迎打招呼；第二，他和 @kickingkeys 这周四晚上在纽约合办一个小型 builder happy hour，因为他在私信上有点拖延，所以直接放了 RSVP 链接方便大家报名。"
+    ],
+    "externalLinks": [
+      {
+        "label": "推文",
+        "url": "https://x.com/nikunj/status/2109763529276559566"
+      }
+    ],
+    "id": "follow-builders:digest-2026-10-13-nikunj-kothari",
+    "title": "fpvventures 合伙人 Nikunj Kothari",
+    "sourceUrl": "https://x.com/nikunj/status/2109763529276559566",
+    "summary": "Nikunj Kothari 感叹认识的几位 Surya 都是很有才的多元人物，并邀约更多 Surya 与他联系，同时宣布周四晚在纽约与 @kickingkeys 合办小型 builder happy hour。",
+    "tags": [
+      "Surya",
+      "builder happy hour",
+      "纽约",
+      "RSVP",
+      "fpvventures"
+    ],
+    "source": "builder",
+    "sourceLabel": "Nikunj Kothari · Follow Builders",
+    "publishedAt": "2026-10-12T21:49:57.000Z"
+  },
+  {
+    "section": "x",
+    "digestDate": "2026-10-14",
+    "publishedDate": "10/13",
+    "time": "本次更新",
+    "readTime": "3 分钟",
+    "accent": "green",
+    "inRecentWindow": true,
+    "digestFormat": "builders-digest",
+    "paragraphs": [
+      "Aditya Agarwal 指出，前沿实验室的员工使用 AI 的方式，和即便最顶尖的 1% AI 组织使用 AI 的方式之间，存在很大的差距。他强调这说的还是在公开能力层面上的使用，并猜测这种差距会持续相当长一段时间。他还觉得，这里面存在一个公司机会，是一个横向的加速器（horizontal accelerant）。"
+    ],
+    "externalLinks": [
+      {
+        "label": "推文",
+        "url": "https://x.com/adityaag/status/2109748501982872003"
+      }
+    ],
+    "id": "follow-builders:digest-2026-10-13-aditya-agarwal",
+    "title": "SPC 普通合伙人、Bevel Health 联合创始人 Aditya Agarwal",
+    "sourceUrl": "https://x.com/adityaag/status/2109748501982872003",
+    "summary": "Aditya Agarwal 观察到前沿实验室员工与顶尖 AI 组织在使用 AI 的方式上存在巨大差距，并认为这里面藏着一个横向加速器式的公司机会。",
+    "tags": [
+      "前沿实验室",
+      "AI 使用差距",
+      "横向加速器",
+      "公司机会",
+      "公开能力"
+    ],
+    "source": "builder",
+    "sourceLabel": "Aditya Agarwal · Follow Builders",
+    "publishedAt": "2026-10-12T20:50:14.000Z"
+  },
+  {
+    "section": "x",
+    "digestDate": "2026-10-14",
+    "publishedDate": "10/13",
+    "time": "本次更新",
+    "readTime": "3 分钟",
+    "accent": "green",
+    "inRecentWindow": true,
+    "digestFormat": "builders-digest",
+    "paragraphs": [
+      "Peter Steinberger 说 6.1 Sol ultrafast 远胜 6 Astra，成本差不多，但 250 tpm 完全是另一个游戏。他还表示，去年就说过，今年再说一遍：vibes coding 是个贬义词。"
+    ],
+    "externalLinks": [
+      {
+        "label": "推文 1",
+        "url": "https://x.com/steipete/status/2109730774593487009"
+      },
+      {
+        "label": "推文 2",
+        "url": "https://x.com/steipete/status/2109724776168300631"
+      }
+    ],
+    "id": "follow-builders:digest-2026-10-13-peter-steinberger",
+    "title": "OpenClaw 与 OpenAI 的 Peter Steinberger",
+    "sourceUrl": "https://x.com/steipete/status/2109730774593487009",
+    "summary": "Peter Steinberger 对比了 6.1 Sol ultrafast 和 6 Astra，并再次强调“vibes coding”是个贬义词。",
+    "tags": [
+      "6.1 Sol ultrafast",
+      "6 Astra",
+      "vibes coding",
+      "tpm",
+      "成本"
+    ],
+    "source": "builder",
+    "sourceLabel": "Peter Steinberger · Follow Builders",
+    "publishedAt": "2026-10-12T19:39:48.000Z"
+  },
+  {
+    "section": "x",
+    "digestDate": "2026-10-14",
     "publishedDate": "10/13",
     "time": "本次更新",
     "readTime": "3 分钟",
     "accent": "green",
     "inRecentWindow": true,
     "paragraphs": [
-      "35+ 无审查 AI 网站，用于 18+ 图像和视频生成",
-      "核心观点是汇总面向成人内容的 AI 生成与聊天平台，按图像生成、视频创建、动漫、NSFW 角色聊天、AI 伴侣等方向分类。阅读时需注意：预览只说明清单覆盖范围，未逐一列出网站名称、是否免费、合规性或安全性；此类内容涉及成人向用途，使用前应自行评估法律与平台风险。"
+      "35+ 个面向 18+ 图像和视频生成的无审查 AI 网站",
+      "核心观点：该列表汇总了 35 个以上无审查或支持 NSFW 的 AI 平台，覆盖图像生成、视频创建、动漫、AI 伴侣等类别。阅读时需注意：预览未列出具体网站名称、功能对比或使用评价，且内容涉及成人向 AI 工具，需遵守相关平台规定。"
     ],
     "id": "attentionvc-ai:2109688646882476199",
-    "title": "35+ 无审查 AI 网站，用于 18+ 图像和视频生成",
+    "title": "35+ UNCENSORED AI SITES FOR 18+ IMAGE AND VIDEO GENERATION",
     "sourceUrl": "https://x.com/rexsooo/status/2109688646882476199",
-    "summary": "一份覆盖 35 个以上无审查或支持 NSFW 的 AI 平台清单，涵盖图像生成、视频创作、动漫、AI 角色聊天与 AI 伴侣等类别。",
+    "summary": "一份面向成年人的 AI 图像和视频生成网站列表，涵盖无审查或支持 NSFW 的 AI 平台，包括图像生成、视频创作、动漫工具和 AI 伴侣等。",
     "tags": [
+      "无审查AI",
       "NSFW",
-      "AI图像生成",
-      "AI视频生成",
-      "AI伴侣",
-      "无审查平台"
+      "图像生成",
+      "视频生成",
+      "AI伴侣"
     ],
     "source": "daily",
     "sourceLabel": "Rexo · 技术动态 X 热榜",
@@ -3400,6 +4087,46 @@
     "publishedAt": "2026-10-09T00:12:24.000Z"
   },
   {
+    "section": "papers",
+    "digestDate": "2026-10-14",
+    "publishedDate": "10/9",
+    "time": "本次更新",
+    "readTime": "3 分钟",
+    "accent": "violet",
+    "inRecentWindow": true,
+    "paragraphs": [
+      "随着软件生产本身逐渐交由软件完成，编程智能体越来越多地被委托去构建贴合用户自身工作流程的智能体。这种委托暗含一个不易察觉的假设：交付的智能体会忠实服务于它被构建时所依据的需求，而不只是表面上看起来如此。目前没有任何现有基准测试检验这一假设。",
+      "我们提出 AgentSWE，一个面向智能体软件工程的基准测试，覆盖智能体开发生命周期的三个阶段：根据自然语言需求创建完整智能体、编辑生产环境中的智能体代码库，以及朝可量化目标进行优化。它的 25 个任务中，每一个都被设定为一次委托而非一场考试：构建者针对少量示例用例反复迭代，而验收则在为覆盖完整需求而设计的留出用例上运行冻结的提交结果，依据由需求推导出的评分标准，在严格的通过/失败门槛下评判行为，对于优化任务则对照源基准自身的客观指标。",
+      "在跨模型和多种运行框架评估一系列编程智能体后，我们发现没有一个能接近交付需求所要求的东西：构建者所演示的与其实际交付之间的差距是常态，而非边缘情况。随附的对失败轨迹的实证分析识别出反复出现的失败模式，其中包括对可见用例的过拟合、代码看似完整却运行时空洞，以及无依据地宣称已完成——每一种都是编程智能体可以借此学习构建所需智能体的信号。"
+    ],
+    "utility": "这项研究提醒普通人：当越来越多软件由 AI 编程工具自动生成时，它们可能只是“看起来能用”，却并未真正满足最初的需求。了解这一点，有助于你在依赖 AI 构建的工具或服务时保持审慎，对自动生成的代码和“已完成”的声明多一层核实，而不是仅凭演示效果就下判断。",
+    "externalLinks": [
+      {
+        "label": "查看 Hugging Face 论文页",
+        "url": "https://huggingface.co/papers/2610.13361"
+      },
+      {
+        "label": "打开 arXiv 原文",
+        "url": "https://arxiv.org/abs/2610.13361"
+      }
+    ],
+    "id": "huggingface-daily-papers:2610.13361",
+    "title": "AgentSWE：编程智能体能构建你真正想要的智能体吗？",
+    "sourceUrl": "https://huggingface.co/papers/2610.13361",
+    "summary": "随着软件生产本身逐渐交由软件完成，编程智能体越来越多地被委托去构建贴合用户自身工作流程的智能体。这种委托暗含一个不易察觉的假设：交付的智能体会忠实服务于它被构建时所依据的需求，而不只是表面上看起来如此。目前没有任何现有基准测试检验这一假设。我们提出 AgentSWE，一个面向智能体软件工程的基准测试，覆盖智能体开发生命周期的三个阶段：根据自然语言需求创建完整智能体、编辑生产环境中的智能体代码库，以及朝可量化目标进行优化。它的 25 个任务中，每一个都被设定为一次委托而非一场考试：构建者针对少量示例用例反复迭代，而验收则在为覆盖完整需求而设计的留出用例上运行冻结的提交结果，依据由需求推导出的评分标准，在严格的通过/失败门槛下评判行为，对于优化任务则对照源基准自身的客观指标。在跨模型和多种运行框架评估一系列编程智能体后，我们发现没有一个能接近交付需求所要求的东西：构建者所演示的与其实际交付之间的差距是常态，而非边缘情况。随附的对失败轨迹的实证分析识别出反复出现的失败模式，其中包括对可见用例的过拟合、代码看似完整却运行时空洞，以及无依据地宣称已完成——每一种都是编程智能体可以借此学习构建所需智能体的信号。",
+    "tags": [
+      "编程智能体",
+      "智能体软件工程",
+      "基准测试",
+      "需求忠实性",
+      "失败模式",
+      "过拟合"
+    ],
+    "source": "daily",
+    "sourceLabel": "Hugging Face Daily Papers",
+    "publishedAt": "2026-10-09T00:00:00.000Z"
+  },
+  {
     "section": "x",
     "digestDate": "2026-10-10",
     "publishedDate": "10/9",
@@ -4200,6 +4927,47 @@
       "强化学习",
       "第一人称视觉",
       "接物任务"
+    ],
+    "source": "daily",
+    "sourceLabel": "Hugging Face Daily Papers",
+    "publishedAt": "2026-10-08T00:00:00.000Z"
+  },
+  {
+    "section": "papers",
+    "digestDate": "2026-10-14",
+    "publishedDate": "10/8",
+    "time": "本次更新",
+    "readTime": "3 分钟",
+    "accent": "violet",
+    "inRecentWindow": true,
+    "paragraphs": [
+      "大语言模型越来越多地配备显式的“思考模式”，但其对立面“不思考”却很少受到关注。我们沿两个维度研究大语言模型的“不思考”行为。第一，如何衡量“不思考”？以往研究通常通过禁用思考模式或缺少长推理轨迹等代理指标来定义“不思考”，但这些代理指标并不可靠：禁用思考模式仍可能输出推理内容，而长轨迹可能包含填充内容而非真正的推理。",
+      "我们改为将每个回答规范化为“作答前轨迹”和“最终答案”，并在三个层面进行评估：（i）空思考率，衡量是否严格只输出答案；（ii）指令感知的问题—作答前轨迹相关性，衡量问题与作答前轨迹的相似度；（iii）以大语言模型作为评判者的显式推理率，衡量可见的显式推理。这些指标共同区分了仅输出答案、相关但非推理的文本以及显式推理三种情况。",
+      "第二，“不思考”在不同任务和模型间如何变化？我们在布尔题、多项选择题和开放性问题三类任务上，对六种提示干预方法和六个大语言模型进行了评估。我们发现，显式的“不思考”控制无法可靠地消除可见推理。模型反而表现出“思维惯性”：即使受到严格控制，显式推理依然存在，并且随着答案空间的开放而更加普遍。",
+      "在布尔题和多项选择题上准确率保持稳定，而开放性问题则揭示了“仅输出答案”的合规性与任务准确率之间的权衡。对同一问题在不同答案空间下进行改写后显示，提供候选答案会使模型更容易做到仅输出答案。这些发现表明，“不思考”是一种非平凡的能力：不能仅凭模型设置或指令就假定模型会停止显式推理，它值得与推理能力一起被系统评估。"
+    ],
+    "utility": "这项研究提醒普通人：当你要求AI“直接给答案、不要推理”时，它可能仍会在后台进行推理，只是你没有看到。这意味着AI输出是否“只给答案”不能仅靠设置或指令来保证。了解这一点有助于你在使用AI时更谨慎地判断其回答是否真的简洁直接，尤其是在需要快速决策或严格合规的场景中；同时也说明，要求AI少思考可能影响开放性问题上的准确性，需要在简洁与准确之间权衡。",
+    "externalLinks": [
+      {
+        "label": "查看 Hugging Face 论文页",
+        "url": "https://huggingface.co/papers/2610.11765"
+      },
+      {
+        "label": "打开 arXiv 原文",
+        "url": "https://arxiv.org/abs/2610.11765"
+      }
+    ],
+    "id": "huggingface-daily-papers:2610.11765",
+    "title": "思维惯性：大语言模型在被要求停止思考时仍会继续思考",
+    "sourceUrl": "https://huggingface.co/papers/2610.11765",
+    "summary": "大语言模型越来越多地配备显式的“思考模式”，但其对立面“不思考”却很少受到关注。我们沿两个维度研究大语言模型的“不思考”行为。第一，如何衡量“不思考”？以往研究通常通过禁用思考模式或缺少长推理轨迹等代理指标来定义“不思考”，但这些代理指标并不可靠：禁用思考模式仍可能输出推理内容，而长轨迹可能包含填充内容而非真正的推理。我们改为将每个回答规范化为“作答前轨迹”和“最终答案”，并在三个层面进行评估：（i）空思考率，衡量是否严格只输出答案；（ii）指令感知的问题—作答前轨迹相关性，衡量问题与作答前轨迹的相似度；（iii）以大语言模型作为评判者的显式推理率，衡量可见的显式推理。这些指标共同区分了仅输出答案、相关但非推理的文本以及显式推理三种情况。第二，“不思考”在不同任务和模型间如何变化？我们在布尔题、多项选择题和开放性问题三类任务上，对六种提示干预方法和六个大语言模型进行了评估。我们发现，显式的“不思考”控制无法可靠地消除可见推理。模型反而表现出“思维惯性”：即使受到严格控制，显式推理依然存在，并且随着答案空间的开放而更加普遍。在布尔题和多项选择题上准确率保持稳定，而开放性问题则揭示了“仅输出答案”的合规性与任务准确率之间的权衡。对同一问题在不同答案空间下进行改写后显示，提供候选答案会使模型更容易做到仅输出答案。这些发现表明，“不思考”是一种非平凡的能力：不能仅凭模型设置或指令就假定模型会停止显式推理，它值得与推理能力一起被系统评估。",
+    "tags": [
+      "大语言模型",
+      "思维惯性",
+      "不思考",
+      "显式推理",
+      "提示控制",
+      "评估指标"
     ],
     "source": "daily",
     "sourceLabel": "Hugging Face Daily Papers",
@@ -10059,77 +10827,6 @@
     "source": "builder",
     "sourceLabel": "Dan Shipper · Follow Builders",
     "publishedAt": "2026-09-30T23:45:27.000Z"
-  },
-  {
-    "section": "github",
-    "digestDate": "2026-10-01",
-    "publishedDate": "10/1",
-    "time": "本次更新",
-    "readTime": "3 分钟",
-    "accent": "blue",
-    "inRecentWindow": true,
-    "paragraphs": [
-      "VoiceStudio 是一个开源、完全本地运行的语音工作台，定位是 ElevenLabs 的替代方案。它把语音克隆、语音设计、视频配音、听写、转录和有声书制作集中在一个桌面应用里，官方称支持 646 种语言。所有本地工作流都在你自己的硬件上完成，远程服务是可选项，使用数据统计也需要你同意。",
-      "主要功能分成三类：创作方面可以克隆已有声音，或通过描述设计一个全新声音；生产方面可以给视频配上时间轴对齐的语音，也能批量生成故事和有声书；连接方面提供本地 API 和 MCP，方便智能体调用，还支持可选的远程工作节点。默认引擎是 k2-fsa/OmniVoice，也可以换成其他引擎。",
-      "它适合内容创作者、播客和视频制作者、有声书生产者，以及希望语音数据不出本地的个人或团队。听写功能配有一个浮动小部件，方便随时调用。",
-      "使用门槛中等：macOS 和 Linux 可以用一条命令安装，Windows、Linux 和 Docker 也有各自指南。硬件需求因所选引擎而异，首次使用某个功能时需要按提示下载对应模型，模型体积和运行速度取决于你的显卡和内存。"
-    ],
-    "facts": [
-      {
-        "label": "主要语言",
-        "value": "Python"
-      },
-      {
-        "label": "Stars",
-        "value": "50,291"
-      },
-      {
-        "label": "今日新增 Stars",
-        "value": "+3,481"
-      },
-      {
-        "label": "Forks",
-        "value": "5,585"
-      },
-      {
-        "label": "许可证",
-        "value": "AGPL-3.0"
-      },
-      {
-        "label": "最近更新",
-        "value": "2026-09-29"
-      }
-    ],
-    "externalLinks": [
-      {
-        "label": "阅读项目 README",
-        "url": "https://github.com/debpalash/VoiceStudio#readme"
-      },
-      {
-        "label": "打开项目网站",
-        "url": "https://voicestudio.sh"
-      },
-      {
-        "label": "查看 Releases",
-        "url": "https://github.com/debpalash/VoiceStudio/releases"
-      }
-    ],
-    "id": "github-trending:debpalash/VoiceStudio",
-    "title": "VoiceStudio：完全本地运行的开源语音克隆与配音工作台",
-    "sourceUrl": "https://github.com/debpalash/VoiceStudio",
-    "summary": "它把语音克隆、配音、听写、转录和有声书制作整合到一个本地桌面应用里，支持 646 种语言，不需要把声音数据上传到云端。",
-    "tags": [
-      "语音克隆",
-      "视频配音",
-      "本地运行",
-      "语音转文字",
-      "有声书",
-      "多语言",
-      "开源"
-    ],
-    "source": "daily",
-    "sourceLabel": "GitHub Trending",
-    "publishedAt": "2026-09-30T21:27:51.182Z"
   },
   {
     "section": "github",
