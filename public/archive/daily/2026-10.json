@@ -1,6 +1,539 @@
 [
   {
     "section": "x",
+    "digestDate": "2026-10-22",
+    "publishedDate": "10/21",
+    "time": "本次更新",
+    "readTime": "3 分钟",
+    "accent": "green",
+    "inRecentWindow": true,
+    "digestFormat": "builders-digest",
+    "paragraphs": [
+      "Swyx 说 Opus 写东西其实挺好用，前提是提示词里没碰巧出现什么莫名其妙的“禁词”。他忍不住吐槽：给我能上生产的东西，别给我神。他还引用 @CompleteSkeptic 的话说，自己没法把这种动不动就卡住的东西放在关键路径上，去搭一个 AI 媒体机构。另一边，他试着让 Codex 做动画讲解视频，结论是 ngmi（没戏）。"
+    ],
+    "externalLinks": [
+      {
+        "label": "推文 1",
+        "url": "https://x.com/swyx/status/2112772374823407870"
+      },
+      {
+        "label": "推文 2",
+        "url": "https://x.com/swyx/status/2112764130197451209"
+      }
+    ],
+    "id": "follow-builders:digest-2026-10-21-swyx",
+    "title": "Swyx",
+    "sourceUrl": "https://x.com/swyx/status/2112772374823407870",
+    "summary": "Swyx 吐槽 Opus 写东西时会被提示词里的敏感词卡住，并尝试让 Codex 做动画讲解视频但没成功。",
+    "tags": [
+      "Opus",
+      "提示词",
+      "Codex",
+      "动画讲解视频",
+      "生产可用"
+    ],
+    "source": "builder",
+    "sourceLabel": "Swyx · Follow Builders",
+    "publishedAt": "2026-10-21T05:06:02.000Z"
+  },
+  {
+    "section": "x",
+    "digestDate": "2026-10-22",
+    "publishedDate": "10/21",
+    "time": "本次更新",
+    "readTime": "3 分钟",
+    "accent": "green",
+    "inRecentWindow": true,
+    "digestFormat": "builders-digest",
+    "paragraphs": [
+      "Aaron Levie 觉得挺酷的一点是：AI 在未来可预见的一段时间里，似乎正在形成一个新兴形态，也就是专门处理特定任务或领域的自主系统。这比 LLM wrapper 时代跨了一大步，因为现在大家期待的是能把更复杂的工作交给智能体去处理，而且由于工具使用和电脑操作能力大幅提升、模型通用智能也在进步，可以比较可靠地相信事情能被办好（仍然保留人类在环）。他拆成三点：一是模型在工具和电脑使用上的能力增强，让智能体可以更细粒度地接入外部数据系统和其他软件，实际执行流程的方式开始接近同岗位的人，没有现成软件时智能体干脆自己写，这是很大的解锁；二是模型在各个垂直领域的能力都在提升，在法律上能做出更好的判断、做更深的生物研究、扫描代码安全问题、理解供应链流程等等，很多场景里模型的直觉仍不如人，但只会越来越好；三是沙箱、文件系统、数据管道这些 harness 和周边基础设施，让智能体能跑得更久、处理任意复杂或漫长的任务、以巨大规模处理数据，这些组件一年前大多还不好用，现在核心原语已经具备了不少。再加上合适的 UX、落地实施，以及围绕人类监督和协调的变更管理，这些自主系统会在大量企业工作流里变得相当强大。他提到已经在 IT 自动化、网络安全运营、药物发现、制造、AI 研究等领域看到它们，几乎可以想象经济中每个角色都配一个或多个这样的系统，前面机会很多。"
+    ],
+    "externalLinks": [
+      {
+        "label": "推文",
+        "url": "https://x.com/levie/status/2112769686798832013"
+      }
+    ],
+    "id": "follow-builders:digest-2026-10-21-aaron-levie",
+    "title": "Box CEO Aaron Levie",
+    "sourceUrl": "https://x.com/levie/status/2112769686798832013",
+    "summary": "Aaron Levie 认为，面向特定任务或领域的自主系统正成为 AI 的新形态，并列出工具使用、模型能力和周边基础设施三方面的进展。",
+    "tags": [
+      "自主系统",
+      "智能体",
+      "工具使用",
+      "企业工作流",
+      "模型能力"
+    ],
+    "source": "builder",
+    "sourceLabel": "Aaron Levie · Follow Builders",
+    "publishedAt": "2026-10-21T04:55:21.000Z"
+  },
+  {
+    "section": "x",
+    "digestDate": "2026-10-22",
+    "publishedDate": "10/21",
+    "time": "本次更新",
+    "readTime": "3 分钟",
+    "accent": "green",
+    "inRecentWindow": true,
+    "digestFormat": "builders-digest",
+    "paragraphs": [
+      "Peter Steinberger 预告明天会在 Cloudflare Connect 上和 @dok2001 聊智能体。他最近试了一套分工方式：Astra 负责规划，Sol 6.1 负责写代码。他发现，让 Astra 去 worktree 里跑 codex cli，效果比依赖 subagent 好得多；另外再派一个智能体盯着进度，防止 Astra 跑偏——有点像 /goal，但审查者不是同一个智能体对着文本文件自查，而是另一个智能体会来挑刺。他为这个“smart goal”功能写了一个 OC-plugin。他还补了一句：本来能快 9 倍，只是他们早就用上了 7.1-dev 版的 ts 编译器。"
+    ],
+    "externalLinks": [
+      {
+        "label": "推文 1",
+        "url": "https://x.com/steipete/status/2112735411688857770"
+      },
+      {
+        "label": "推文 2",
+        "url": "https://x.com/steipete/status/2112605703219347503"
+      },
+      {
+        "label": "推文 3",
+        "url": "https://x.com/steipete/status/2112607156164059450"
+      }
+    ],
+    "id": "follow-builders:digest-2026-10-21-peter-steinberger",
+    "title": "Polyagentmorous ClawFather Peter Steinberger",
+    "sourceUrl": "https://x.com/steipete/status/2112735411688857770",
+    "summary": "Peter Steinberger 预告将参加 Cloudflare Connect 对谈，并分享用 Astra 做规划、Sol 6.1 写代码的多智能体工作流心得。",
+    "tags": [
+      "智能体",
+      "Cloudflare Connect",
+      "codex cli",
+      "worktree",
+      "OC-plugin"
+    ],
+    "source": "builder",
+    "sourceLabel": "Peter Steinberger · Follow Builders",
+    "publishedAt": "2026-10-21T02:39:09.000Z"
+  },
+  {
+    "section": "x",
+    "digestDate": "2026-10-22",
+    "publishedDate": "10/21",
+    "time": "本次更新",
+    "readTime": "3 分钟",
+    "accent": "green",
+    "inRecentWindow": true,
+    "digestFormat": "builders-digest",
+    "paragraphs": [
+      "Thibault Sottiaux 先说周末的事：有用户报告用量比预期掉得更快。他们查出来大约 4 万个账号存在用量限制不一致的问题，实际套用的限制和用户所选套餐对不上。团队正在逐一联系这些用户，问题已经修正，受影响的人会拿到账户额度补偿，他也在结尾道了歉。接着是第 16 天的更新：API 现在可以缓存 12 小时；对已登录用户，Codex 和 Work 里的缓存会一直保留，回到旧对话或隔几小时再续上都没有惩罚，而且保证一定命中缓存。"
+    ],
+    "externalLinks": [
+      {
+        "label": "推文 1",
+        "url": "https://x.com/thsottiaux/status/2112592264686149749"
+      },
+      {
+        "label": "推文 2",
+        "url": "https://x.com/thsottiaux/status/2112712984644784534"
+      }
+    ],
+    "id": "follow-builders:digest-2026-10-21-thibault-sottiaux",
+    "title": "OpenAI Codex 与 ChatGPT 工程师 Thibault Sottiaux",
+    "sourceUrl": "https://x.com/thsottiaux/status/2112712984644784534",
+    "summary": "Thibault Sottiaux 就周末部分用户用量消耗过快的问题致歉并说明补偿方案，同时宣布 API 与 Codex、Work 的缓存策略升级。",
+    "tags": [
+      "用量限制",
+      "账号补偿",
+      "缓存",
+      "Codex",
+      "API"
+    ],
+    "source": "builder",
+    "sourceLabel": "Thibault Sottiaux · Follow Builders",
+    "publishedAt": "2026-10-21T01:10:02.000Z"
+  },
+  {
+    "section": "x",
+    "digestDate": "2026-10-22",
+    "publishedDate": "10/21",
+    "time": "本次更新",
+    "readTime": "3 分钟",
+    "accent": "green",
+    "inRecentWindow": true,
+    "digestFormat": "builders-digest",
+    "paragraphs": [
+      "Y Combinator 总裁兼 CEO Garry Tan 说，对任何创业公司创始人、或任何需要联系上对的人来说，最大的解锁就是能接触到正确的人。随后他宣布，GStack 现在能感知 Capy，和对方软件工厂功能 Captains 配合得很好。"
+    ],
+    "externalLinks": [
+      {
+        "label": "推文 1",
+        "url": "https://x.com/garrytan/status/2112611824432742493"
+      },
+      {
+        "label": "推文 2",
+        "url": "https://x.com/garrytan/status/2112698243553579485"
+      }
+    ],
+    "id": "follow-builders:digest-2026-10-21-garry-tan",
+    "title": "Y Combinator 总裁兼 CEO Garry Tan",
+    "sourceUrl": "https://x.com/garrytan/status/2112698243553579485",
+    "summary": "Tan 称找到对的人是创业者的最大解锁，并宣布 GStack 已支持 Capy 的软件工厂功能 Captains。",
+    "tags": [
+      "GStack",
+      "Capy",
+      "人脉",
+      "创业者",
+      "软件工厂"
+    ],
+    "source": "builder",
+    "sourceLabel": "Garry Tan · Follow Builders",
+    "publishedAt": "2026-10-21T00:11:27.000Z"
+  },
+  {
+    "section": "x",
+    "digestDate": "2026-10-22",
+    "publishedDate": "10/21",
+    "time": "本次更新",
+    "readTime": "3 分钟",
+    "accent": "green",
+    "inRecentWindow": true,
+    "digestFormat": "builders-digest",
+    "paragraphs": [
+      "Matt Turck 说这是 FirstMark 家族热闹的一天：Daytona 宣布 B 轮融资，Baba 宣布 A 轮融资，GradiumAI 发布新的 SOTA 开源端侧语音 AI 模型；就在当天早上，Synthesia 和 Rillet 还正式“占领”了纽约地铁，广告铺得到处都是。他另外强调，开源语音 AI 这边有大新闻：一整套很小的文本转语音、端侧 SOTA 模型来了。"
+    ],
+    "externalLinks": [
+      {
+        "label": "推文 1",
+        "url": "https://x.com/mattturck/status/2112696155519775041"
+      },
+      {
+        "label": "推文 2",
+        "url": "https://x.com/mattturck/status/2112623582098428015"
+      }
+    ],
+    "id": "follow-builders:digest-2026-10-21-matt-turck",
+    "title": "Matt Turck",
+    "sourceUrl": "https://x.com/mattturck/status/2112696155519775041",
+    "summary": "Matt Turck 分享 FirstMark 家族一天内的多项进展，并提到开源端侧语音 AI 模型。",
+    "tags": [
+      "FirstMark",
+      "融资",
+      "开源语音 AI",
+      "端侧模型",
+      "纽约地铁"
+    ],
+    "source": "builder",
+    "sourceLabel": "Matt Turck · Follow Builders",
+    "publishedAt": "2026-10-21T00:03:10.000Z"
+  },
+  {
+    "section": "x",
+    "digestDate": "2026-10-22",
+    "publishedDate": "10/21",
+    "time": "本次更新",
+    "readTime": "3 分钟",
+    "accent": "green",
+    "inRecentWindow": true,
+    "digestFormat": "builders-digest",
+    "paragraphs": [
+      "fpvventures 合伙人 Nikunj Kothari 发推感叹，地球上正在发生一些不可思议的事情。他接着写道，没有把 Bloom 称作“p(bloom)”是一次世代级的错过，还配了一个树的 emoji。"
+    ],
+    "externalLinks": [
+      {
+        "label": "推文",
+        "url": "https://x.com/nikunj/status/2112692719135117754"
+      }
+    ],
+    "id": "follow-builders:digest-2026-10-21-nikunj-kothari",
+    "title": "fpvventures 合伙人 Nikunj Kothari",
+    "sourceUrl": "https://x.com/nikunj/status/2112692719135117754",
+    "summary": "Nikunj Kothari 感叹地球上正发生不可思议的事，并称没押注 Bloom 是“世代级的错过”。",
+    "tags": [
+      "Nikunj Kothari",
+      "fpvventures",
+      "Bloom",
+      "投资",
+      "错过"
+    ],
+    "source": "builder",
+    "sourceLabel": "Nikunj Kothari · Follow Builders",
+    "publishedAt": "2026-10-20T23:49:30.000Z"
+  },
+  {
+    "section": "x",
+    "digestDate": "2026-10-22",
+    "publishedDate": "10/21",
+    "time": "本次更新",
+    "readTime": "3 分钟",
+    "accent": "green",
+    "inRecentWindow": true,
+    "digestFormat": "builders-digest",
+    "paragraphs": [
+      "Peter Yang 先开了个预测：Fable 5.5 会在“从现在起 5 秒后到几周后”之间的某个时间点到来，而且会非常惊艳，还特意说“你最早在我这儿听到”。随后他聊到经营自己一人 S-corp 时，给自己发工资是相当痛苦的一环。他现在与 Mercury 合作推广 Mercury Payroll，把工资发放搬进 Mercury 账户，并由团队处理州税登记文件，还能实时检查余额、在发薪日前标出可能的资金缺口。他说这些会让自己的流程轻松不少。这条是付费合作内容，他也附上了 Mercury 的说明：Mercury 是金融科技公司，不是 FDIC 承保银行，银行服务由 Choice Financial Group 和 Column N.A. 提供；Mercury 不提供法律、税务、会计或投资建议，也不充当雇主、PEO、EOR 或计划受托人；AI 生成的信息可能不完整或不准确，不应作为法律、税务或会计建议依赖，提交或批准工资操作前需自行核对。"
+    ],
+    "externalLinks": [
+      {
+        "label": "推文 1",
+        "url": "https://x.com/petergyang/status/2112607957586452724"
+      },
+      {
+        "label": "推文 2",
+        "url": "https://x.com/petergyang/status/2112683151504159073"
+      },
+      {
+        "label": "推文 3",
+        "url": "https://x.com/petergyang/status/2112683163633975713"
+      }
+    ],
+    "id": "follow-builders:digest-2026-10-21-peter-yang",
+    "title": "Peter Yang",
+    "sourceUrl": "https://x.com/petergyang/status/2112683163633975713",
+    "summary": "Peter Yang 预测 Fable 5.5 即将发布，并分享自己作为一人 S-corp 使用 Mercury Payroll 的体验。",
+    "tags": [
+      "Fable 5.5",
+      "Mercury Payroll",
+      "S-corp",
+      "发薪",
+      "付费合作"
+    ],
+    "source": "builder",
+    "sourceLabel": "Peter Yang · Follow Builders",
+    "publishedAt": "2026-10-20T23:11:32.000Z"
+  },
+  {
+    "section": "x",
+    "digestDate": "2026-10-22",
+    "publishedDate": "10/21",
+    "time": "本次更新",
+    "readTime": "3 分钟",
+    "accent": "green",
+    "inRecentWindow": true,
+    "digestFormat": "builders-digest",
+    "paragraphs": [
+      "Google 副总裁 Josh Woodward 说，Gemini App 的可信测试者社区昨天跨过了一个重要里程碑，简单说就是有很多人想在 Web、Android 和 iOS 上试用早期版本。之前报过名的人已经全部纳入，想报名的可以走他给出的入口。随后他引用 Sundar 的话：“我们如此致力于站在前沿，这写在我们的 DNA 里，我们不会用别的方式做这件事。”并招呼大家来和他们一起构建。"
+    ],
+    "externalLinks": [
+      {
+        "label": "推文 1",
+        "url": "https://x.com/joshwoodward/status/2112676777290248675"
+      },
+      {
+        "label": "推文 2",
+        "url": "https://x.com/joshwoodward/status/2112679011839344651"
+      },
+      {
+        "label": "推文 3",
+        "url": "https://x.com/joshwoodward/status/2112676778779238583"
+      }
+    ],
+    "id": "follow-builders:digest-2026-10-21-josh-woodward",
+    "title": "Google 副总裁 Josh Woodward",
+    "sourceUrl": "https://x.com/joshwoodward/status/2112679011839344651",
+    "summary": "Josh Woodward 宣布 Gemini App 可信测试者社区跨过重要里程碑，并引用 Sundar 关于前沿承诺的表态号召大家加入。",
+    "tags": [
+      "Gemini App",
+      "可信测试者",
+      "早期版本",
+      "Google",
+      "Sundar"
+    ],
+    "source": "builder",
+    "sourceLabel": "Josh Woodward · Follow Builders",
+    "publishedAt": "2026-10-20T22:55:02.000Z"
+  },
+  {
+    "section": "x",
+    "digestDate": "2026-10-22",
+    "publishedDate": "10/21",
+    "time": "本次更新",
+    "readTime": "3 分钟",
+    "accent": "green",
+    "inRecentWindow": true,
+    "digestFormat": "builders-digest",
+    "paragraphs": [
+      "Vercel CEO Guillermo Rauch 说，AI 将能算出你懂什么、不懂什么之间的精确差距，帮你一步步学会任何概念、解开任何谜团。只要你想，就能把自己的能力和智力推到上限，这就是终极教育，而且免费。紧接着他宣布，团队像当初做 aisdk 那样，正在带来一个真正开源、与运行时无关的方案来驾驭持久性：把驱动 eve 和 Workflows 的持久化基础设施开放给 Pi、OpenCode 等所有 harness，本地、Vercel 或自建都行。他还提到一个有趣的事实：连 Claude Code 和 Codex 也能用这种方式变得持久且可观测，但问题是它们目前并非为嵌入而设计，因此效率更低、可移植性更差，相比 Pi 或 Fx 还多出一层沙箱要求。"
+    ],
+    "externalLinks": [
+      {
+        "label": "推文 1",
+        "url": "https://x.com/rauchg/status/2112638107749355867"
+      },
+      {
+        "label": "推文 2",
+        "url": "https://x.com/rauchg/status/2112658577110520122"
+      }
+    ],
+    "id": "follow-builders:digest-2026-10-21-guillermo-rauch",
+    "title": "Vercel CEO Guillermo Rauch",
+    "sourceUrl": "https://x.com/rauchg/status/2112658577110520122",
+    "summary": "Rauch 认为 AI 能算出你理解与不理解的精确差距，带来免费终极教育，同时宣布把持久化基础设施开放给所有 harness。",
+    "tags": [
+      "AI 教育",
+      "持久化",
+      "开源",
+      "harness",
+      "Vercel"
+    ],
+    "source": "builder",
+    "sourceLabel": "Guillermo Rauch · Follow Builders",
+    "publishedAt": "2026-10-20T21:33:50.000Z"
+  },
+  {
+    "section": "x",
+    "digestDate": "2026-10-22",
+    "publishedDate": "10/21",
+    "time": "本次更新",
+    "readTime": "3 分钟",
+    "accent": "green",
+    "inRecentWindow": true,
+    "digestFormat": "builders-digest",
+    "paragraphs": [
+      "Sam Altman 表示非常感谢 Aleksander 接受他们的请求来接手这件事。他说，在直面超级智能的过程中，面前的安全与安保挑战极其巨大，而 Aleksander 在这方面有一套很出色的技能。"
+    ],
+    "externalLinks": [
+      {
+        "label": "推文",
+        "url": "https://x.com/sama/status/2112652656602923366"
+      }
+    ],
+    "id": "follow-builders:digest-2026-10-21-sam-altman",
+    "title": "OpenAI 首席执行官 Sam Altman",
+    "sourceUrl": "https://x.com/sama/status/2112652656602923366",
+    "summary": "Sam Altman 对 Aleksander 接受邀请、承担安全与安保相关工作表示感谢。",
+    "tags": [
+      "超级智能",
+      "安全",
+      "安保",
+      "OpenAI",
+      "人事"
+    ],
+    "source": "builder",
+    "sourceLabel": "Sam Altman · Follow Builders",
+    "publishedAt": "2026-10-20T21:10:19.000Z"
+  },
+  {
+    "section": "x",
+    "digestDate": "2026-10-22",
+    "publishedDate": "10/21",
+    "time": "本次更新",
+    "readTime": "3 分钟",
+    "accent": "green",
+    "inRecentWindow": true,
+    "digestFormat": "builders-digest",
+    "paragraphs": [
+      "Every 首席执行官 Dan Shipper 分享了自己的午饭：吃了一碗意面。他说这真是个糟糕透顶的主意，但味道实在太好了。"
+    ],
+    "externalLinks": [
+      {
+        "label": "推文",
+        "url": "https://x.com/danshipper/status/2112627161492312302"
+      }
+    ],
+    "id": "follow-builders:digest-2026-10-21-dan-shipper",
+    "title": "Every 首席执行官 Dan Shipper",
+    "sourceUrl": "https://x.com/danshipper/status/2112627161492312302",
+    "summary": "Dan Shipper 午饭吃了一碗意面，明知是个糟糕的主意，但实在太好吃了。",
+    "tags": [
+      "Dan Shipper",
+      "Every",
+      "意面",
+      "午饭",
+      "日常"
+    ],
+    "source": "builder",
+    "sourceLabel": "Dan Shipper · Follow Builders",
+    "publishedAt": "2026-10-20T19:29:00.000Z"
+  },
+  {
+    "section": "x",
+    "digestDate": "2026-10-22",
+    "publishedDate": "10/21",
+    "time": "本次更新",
+    "readTime": "3 分钟",
+    "accent": "green",
+    "inRecentWindow": true,
+    "digestFormat": "builders-digest",
+    "paragraphs": [
+      "Google Labs 介绍了自家产品 Dreambeans 的一个趣味玩法：让 Dreambeans 替你“梦”出早晨会发生什么。为此，他们拉来 Google Labs 的产品经理 Sahana R.、产品副总裁 Brian R.，还有他那条可爱到不行的毛孩子 Nala，一起参与一场叫“Dreambeans Roulette”的抽签式体验。流程很简单：打开 Dreambeans，选一个故事，然后出门把它做出来。这是三集系列里的“Dreambeans Roulette: Part 1”。Dreambeans 目前在美国向 18 岁以上用户开放，更多地区即将上线。"
+    ],
+    "externalLinks": [
+      {
+        "label": "推文",
+        "url": "https://x.com/GoogleLabs/status/2112606263163203970"
+      }
+    ],
+    "id": "follow-builders:digest-2026-10-21-google-labs",
+    "title": "Google Labs",
+    "sourceUrl": "https://x.com/GoogleLabs/status/2112606263163203970",
+    "summary": "Google Labs 用“Dreambeans Roulette”活动展示 Dreambeans 如何把用户选中的故事变成现实行动。",
+    "tags": [
+      "Dreambeans",
+      "Google Labs",
+      "故事",
+      "抽签",
+      "美国"
+    ],
+    "source": "builder",
+    "sourceLabel": "Google Labs · Follow Builders",
+    "publishedAt": "2026-10-20T18:05:58.000Z"
+  },
+  {
+    "section": "x",
+    "digestDate": "2026-10-22",
+    "publishedDate": "10/21",
+    "time": "本次更新",
+    "readTime": "3 分钟",
+    "accent": "green",
+    "inRecentWindow": true,
+    "paragraphs": [
+      "如何使用决策模型进行评估\n\n与 Antaripa Saha 合著。\n决策模型最近大量涌现，最初是 TypeSafe 的 Jev，随后是 Perplexity 的 Decider、Liquid 的 d1、Cloudflare 的 Clef，以及 OpenAI 的",
+      "核心观点：文章讨论将“决策模型”（decision models）这一新兴工具类别应用于评估（evals）场景。阅读时需注意：预览仅列出了若干决策模型产品名称，并提到 OpenAI 的产品但句子被截断，因此无法确认 OpenAI 具体指哪个模型或产品；预览也未展开具体使用方法、评估流程或结论，这些内容需以全文为准，不应根据标题或产品列表推断。"
+    ],
+    "id": "attentionvc-ai:2112588257104216294",
+    "title": "如何使用决策模型进行评估",
+    "sourceUrl": "https://x.com/HamelHusain/status/2112588257104216294",
+    "summary": "本文由 Hamel Husain 与 Antaripa Saha 合著，介绍如何将决策模型用于评估（Evals）。预览提到决策模型近期涌现，包括 TypeSafe 的 Jev、Perplexity 的 Decider、Liquid 的 d1、Cloudflare 的 Clef 以及 OpenAI 的相关产品（预览在此处截断）。",
+    "tags": [
+      "决策模型",
+      "评估",
+      "Evals",
+      "LLM 工具",
+      "Hamel Husain"
+    ],
+    "source": "daily",
+    "sourceLabel": "Hamel Husain · 技术动态 X 热榜",
+    "publishedAt": "2026-10-20T16:54:25.000Z"
+  },
+  {
+    "section": "x",
+    "digestDate": "2026-10-22",
+    "publishedDate": "10/21",
+    "time": "本次更新",
+    "readTime": "3 分钟",
+    "accent": "green",
+    "inRecentWindow": true,
+    "digestFormat": "builders-digest",
+    "paragraphs": [
+      "SPC 普通合伙人、Bevel Health 联合创始人 Aditya Agarwal 自称是个老派计算机科学家，他说推理时扩展、子代理、代理集群这条线，看起来非常像 CPU 线程、多核 CPU、多节点分布式系统那条线，历史押韵得很好。"
+    ],
+    "externalLinks": [
+      {
+        "label": "推文",
+        "url": "https://x.com/adityaag/status/2112579526379401408"
+      }
+    ],
+    "id": "follow-builders:digest-2026-10-21-aditya-agarwal",
+    "title": "Aditya Agarwal",
+    "sourceUrl": "https://x.com/adityaag/status/2112579526379401408",
+    "summary": "Aditya Agarwal 把推理时扩展、子代理、代理集群的演进类比为 CPU 线程、多核 CPU、多节点分布式系统。",
+    "tags": [
+      "推理时扩展",
+      "子代理",
+      "代理集群",
+      "CPU 线程",
+      "分布式系统"
+    ],
+    "source": "builder",
+    "sourceLabel": "Aditya Agarwal · Follow Builders",
+    "publishedAt": "2026-10-20T16:19:43.000Z"
+  },
+  {
+    "section": "x",
     "digestDate": "2026-10-21",
     "publishedDate": "10/20",
     "time": "本次更新",
@@ -181,6 +714,47 @@
     "source": "builder",
     "sourceLabel": "Peter Yang · Follow Builders",
     "publishedAt": "2026-10-20T04:18:36.000Z"
+  },
+  {
+    "section": "papers",
+    "digestDate": "2026-10-22",
+    "publishedDate": "10/20",
+    "time": "本次更新",
+    "readTime": "3 分钟",
+    "accent": "violet",
+    "inRecentWindow": true,
+    "paragraphs": [
+      "从“可控视频”走向“真正可玩的世界”，需要持久的世界状态、可执行的游戏规则以及低延迟的交互。本文提出下一代 Matrix-Game 的路线图：通过一个可执行的游戏框架，把游戏执行与视觉生成分开，并介绍首个基于该设计构建的系统 Matrix-Game 4.0。",
+      "该系统由三部分组成：一个轻量级游戏引擎负责维护世界状态并执行交互规则；一个多模态编程智能体把玩家的想法转化为游戏代码和动态场景描述；一个基于自回归视频模型的渲染器，以动态描述和记忆参考为条件，把引擎渲染的低多边形代理画面转化为精细视觉。这一框架为视觉生成提供持续引导，并支持用自然语言创建和修改场景与玩法。",
+      "渲染器在对齐的低多边形与高保真视频对上训练，并被蒸馏为因果生成器，以四帧为一块、用一到两步去噪生成。配合针对性的推理优化，Matrix-Game 4.0 可在单块 NVIDIA RTX5090 上实现 480p、60 FPS 的游戏体验，按键到显示的延迟为 112 毫秒。单步生成在稳态下达到 83 FPS，峰值 GPU 显存占用 18.2GiB。在固定提示词下，稳态吞吐在 RTX5080 上达到 67 FPS，在 RTX5070Ti 上达到 58 FPS。",
+      "作者展示了可定制的射击和驾驶游戏，其机制由引擎强制执行，并发布了代码、模型权重和低多边形游戏素材，以支持可玩游戏世界的研究与创作。"
+    ],
+    "utility": "普通人可以借此了解一种新思路：游戏画面不再全部由传统美术资源逐帧绘制，而是由视频模型根据引擎状态实时生成，同时游戏规则仍由引擎保证。这可能影响未来游戏和小型互动应用的制作方式，让用自然语言描述就能创建或修改场景与玩法变得更现实。不过文中展示的是研究系统与特定硬件上的性能数据，实际普及程度、内容质量和适用范围仍需进一步观察，不宜据此认为传统游戏开发会被立即取代。",
+    "externalLinks": [
+      {
+        "label": "查看 Hugging Face 论文页",
+        "url": "https://huggingface.co/papers/2610.27999"
+      },
+      {
+        "label": "打开 arXiv 原文",
+        "url": "https://arxiv.org/abs/2610.27999"
+      }
+    ],
+    "id": "huggingface-daily-papers:2610.27999",
+    "title": "Matrix-Game 4.0：利用视频模型构建实时可玩游戏世界",
+    "sourceUrl": "https://huggingface.co/papers/2610.27999",
+    "summary": "从“可控视频”走向“真正可玩的世界”，需要持久的世界状态、可执行的游戏规则以及低延迟的交互。本文提出下一代 Matrix-Game 的路线图：通过一个可执行的游戏框架，把游戏执行与视觉生成分开，并介绍首个基于该设计构建的系统 Matrix-Game 4.0。\n\n该系统由三部分组成：一个轻量级游戏引擎负责维护世界状态并执行交互规则；一个多模态编程智能体把玩家的想法转化为游戏代码和动态场景描述；一个基于自回归视频模型的渲染器，以动态描述和记忆参考为条件，把引擎渲染的低多边形代理画面转化为精细视觉。这一框架为视觉生成提供持续引导，并支持用自然语言创建和修改场景与玩法。\n\n渲染器在对齐的低多边形与高保真视频对上训练，并被蒸馏为因果生成器，以四帧为一块、用一到两步去噪生成。配合针对性的推理优化，Matrix-Game 4.0 可在单块 NVIDIA RTX5090 上实现 480p、60 FPS 的游戏体验，按键到显示的延迟为 112 毫秒。单步生成在稳态下达到 83 FPS，峰值 GPU 显存占用 18.2GiB。在固定提示词下，稳态吞吐在 RTX5080 上达到 67 FPS，在 RTX5070Ti 上达到 58 FPS。作者展示了可定制的射击和驾驶游戏，其机制由引擎强制执行，并发布了代码、模型权重和低多边形游戏素材，以支持可玩游戏世界的研究与创作。",
+    "tags": [
+      "视频模型",
+      "可玩游戏世界",
+      "实时渲染",
+      "游戏引擎",
+      "低延迟交互",
+      "自然语言生成"
+    ],
+    "source": "daily",
+    "sourceLabel": "Hugging Face Daily Papers",
+    "publishedAt": "2026-10-20T00:00:00.000Z"
   },
   {
     "section": "x",
@@ -650,6 +1224,88 @@
       "混合存储",
       "智能体任务",
       "推理加速"
+    ],
+    "source": "daily",
+    "sourceLabel": "Hugging Face Daily Papers",
+    "publishedAt": "2026-10-19T00:00:00.000Z"
+  },
+  {
+    "section": "papers",
+    "digestDate": "2026-10-22",
+    "publishedDate": "10/19",
+    "time": "本次更新",
+    "readTime": "3 分钟",
+    "accent": "violet",
+    "inRecentWindow": true,
+    "paragraphs": [
+      "图形用户界面（GUI）智能体越来越多地基于流式的全模态观测（包括截图、音频、视频、交互历史和设备状态）来执行操作。然而，在每一步都统一暴露完整上下文忽略了一个事实：相关性是短暂且稀疏的——决定某一步动作的信号在下一步可能就变成干扰。",
+      "由于已执行的动作会反馈到上下文中，这些错误会累积成“序列分心”，导致智能体轨迹发生不可逆的漂移。我们将底层需求表述为“聚焦感知”：一种步自适应、动作充分且非侵入式的表示。",
+      "我们在FocusGUI中实现了这一点，它是一个轻量级适配器，能根据步特定的决策参考动态优先处理多模态通道。它不统一处理所有输入，而是将最相关的证据压缩成紧凑的潜在表示，并微妙地注入到冻结解码器的嵌入中，在不改变模型原生参数空间的情况下引导模型注意力。",
+      "FocusGUI仅通过动作监督训练，既不需要模态相关性标签，也不需要微调骨干网络。在四个全模态骨干网络上，它平均将总体类型匹配率提升33.2，精确匹配率提升至冻结骨干的3.0倍，类型匹配率比最强现有增强方法高30.1。"
+    ],
+    "utility": "普通人可以了解：未来手机或电脑上的AI助手在处理多模态信息时，可能不再被无关信息干扰，从而更准确地完成操作。这项研究提示，让AI学会“聚焦”当前关键信息，有助于减少操作失误，但结论基于实验环境，实际应用效果还需进一步验证。",
+    "externalLinks": [
+      {
+        "label": "查看 Hugging Face 论文页",
+        "url": "https://huggingface.co/papers/2610.26203"
+      },
+      {
+        "label": "打开 arXiv 原文",
+        "url": "https://arxiv.org/abs/2610.26203"
+      }
+    ],
+    "id": "huggingface-daily-papers:2610.26203",
+    "title": "聚焦式全模态GUI智能体",
+    "sourceUrl": "https://huggingface.co/papers/2610.26203",
+    "summary": "图形用户界面（GUI）智能体越来越多地需要基于流式的全模态观测（包括截图、音频、视频、交互历史和设备状态）来执行操作。然而，在每一步都统一暴露完整上下文忽略了一个事实：相关性是短暂且稀疏的——决定某一步动作的信号在下一步可能就变成干扰。由于已执行的动作会反馈到上下文中，这些错误会累积成“序列分心”，导致智能体轨迹发生不可逆的漂移。我们将底层需求表述为“聚焦感知”：一种步自适应、动作充分且非侵入式的表示。我们在FocusGUI中实现了这一点，它是一个轻量级适配器，能根据步特定的决策参考动态优先处理多模态通道。它不统一处理所有输入，而是将最相关的证据压缩成紧凑的潜在表示，并微妙地注入到冻结解码器的嵌入中，在不改变模型原生参数空间的情况下引导模型注意力。FocusGUI仅通过动作监督训练，既不需要模态相关性标签，也不需要微调骨干网络。在四个全模态骨干网络上，它平均将总体类型匹配率提升33.2，精确匹配率提升至冻结骨干的3.0倍，类型匹配率比最强现有增强方法高30.1。",
+    "tags": [
+      "GUI智能体",
+      "全模态",
+      "聚焦感知",
+      "序列分心",
+      "轻量级适配器",
+      "动作监督"
+    ],
+    "source": "daily",
+    "sourceLabel": "Hugging Face Daily Papers",
+    "publishedAt": "2026-10-19T00:00:00.000Z"
+  },
+  {
+    "section": "papers",
+    "digestDate": "2026-10-22",
+    "publishedDate": "10/19",
+    "time": "本次更新",
+    "readTime": "3 分钟",
+    "accent": "violet",
+    "inRecentWindow": true,
+    "paragraphs": [
+      "世界模型能让具身智能体预判自身动作的后果，但要在多种不同具身形态之间同时建模移动与操作仍然困难，原因在于动作空间异构、多模态监督数据有限。为此，作者提出 Ropedia W0，这是首个跨越人类与多种具身机器人、以第一人称视角建模移动操作的世界基础模型。",
+      "作者构建了 Xp-Data 数据集，包含 1 万小时第一人称人类数据和 3 千小时机器人数据，配有统一的多模态标注和系统的质量控制。模型采用一种统一运动学表示：用相机位姿编码移动，用投影骨架编码操作；其中机器人骨架结合了具身特定的前向运动学与大量人工关键点标注和校正。作者还提出 Xp-Teleop，一个基于高质量灵巧人形遥操作数据的长时程移动操作基准。",
+      "评估显示，该模型在五个跨具身基准（DreamDojo、Ψ_0、ω-HOME、Xp-Teleop 和 AgiBot）以及留出的人类第一人称视频上取得最先进性能，覆盖从零样本推理到少样本和全数据后训练。扩展人类预训练数据可同时提升人类与机器人评估的表现。经过蒸馏后，模型支持实时、长达数分钟的推演，可实现实时 VR 交互。",
+      "在策略评估、基于模型的规划以及世界-动作建模中的应用，进一步证明了该模型对具身决策的实用价值。"
+    ],
+    "utility": "普通人可以借此了解机器人如何“预判”自己动作的后果，以及人类第一人称视频数据如何帮助机器人学习移动和操作。这项研究涉及跨机器人形态的通用建模、实时 VR 交互和策略评估，可能影响未来对家用或服务机器人能力、训练数据来源以及人机交互方式的判断；但文中结论来自基准测试与实验评估，距离日常生活中的实际部署仍有距离，不宜过度解读。",
+    "externalLinks": [
+      {
+        "label": "查看 Hugging Face 论文页",
+        "url": "https://huggingface.co/papers/2610.26855"
+      },
+      {
+        "label": "打开 arXiv 原文",
+        "url": "https://arxiv.org/abs/2610.26855"
+      }
+    ],
+    "id": "huggingface-daily-papers:2610.26855",
+    "title": "Ropedia W0：借助人类经验跨具身扩展移动操作世界模型",
+    "sourceUrl": "https://huggingface.co/papers/2610.26855",
+    "summary": "世界模型能让具身智能体预判动作的后果，但要在多种不同具身形态之间同时建模移动与操作仍然困难，原因在于动作空间异构、多模态监督数据有限。我们提出 Ropedia W0，这是首个跨越人类与多种具身机器人、以第一人称视角建模移动操作的世界基础模型。我们构建了 Xp-Data 数据集，包含 1 万小时第一人称人类数据和 3 千小时机器人数据，配有统一的多模态标注和系统的质量控制。一种统一运动学表示用相机位姿编码移动、用投影骨架编码操作，其中机器人骨架结合了具身特定的前向运动学与大量人工关键点标注和校正。我们还提出 Xp-Teleop，一个基于高质量灵巧人形遥操作数据的长时程移动操作基准。评估显示，该模型在五个跨具身基准（DreamDojo、Ψ_0、ω-HOME、Xp-Teleop 和 AgiBot）以及留出的人类第一人称视频上取得最先进性能，覆盖从零样本推理到少样本和全数据后训练。扩展人类预训练数据可同时提升人类与机器人评估的表现。经过蒸馏后，模型支持实时、长达数分钟的推演，可实现实时 VR 交互。在策略评估、基于模型的规划以及世界-动作建模中的应用，进一步证明了该模型对具身决策的实用价值。",
+    "tags": [
+      "世界模型",
+      "跨具身学习",
+      "移动操作",
+      "第一人称数据",
+      "人形机器人",
+      "具身决策"
     ],
     "source": "daily",
     "sourceLabel": "Hugging Face Daily Papers",
