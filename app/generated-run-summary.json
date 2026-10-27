@@ -1,18 +1,18 @@
 {
-  "id": "collection-2026-10-26T21:38:05.552Z",
-  "generatedAt": "2026-10-26T21:38:05.552Z",
-  "windowStart": "2026-10-25T16:00:00.000Z",
+  "id": "collection-2026-10-27T21:16:57.768Z",
+  "generatedAt": "2026-10-27T21:16:57.768Z",
+  "windowStart": "2026-10-26T16:00:00.000Z",
   "mode": "production",
   "status": "completed_with_errors",
-  "itemCount": 11,
-  "validItemCount": 11,
-  "publishedCount": 11,
+  "itemCount": 22,
+  "validItemCount": 22,
+  "publishedCount": 22,
   "stages": [
     {
       "id": "collect",
       "label": "采集",
       "status": "completed",
-      "detail": "完成 3/4 个来源，共 11 条内容"
+      "detail": "完成 3/4 个来源，共 22 条内容"
     },
     {
       "id": "summarize",
@@ -24,13 +24,13 @@
       "id": "quality",
       "label": "质量检查",
       "status": "completed",
-      "detail": "通过 11 条公开内容"
+      "detail": "通过 22 条公开内容"
     },
     {
       "id": "publish",
       "label": "发布",
       "status": "completed",
-      "detail": "已写入 11 条公开内容"
+      "detail": "已写入 22 条公开内容"
     }
   ],
   "sources": [
@@ -38,9 +38,9 @@
       "id": "follow-builders",
       "label": "Follow Builders",
       "status": "completed",
-      "itemCount": 5,
-      "startedAt": "2026-10-26T21:38:05.567Z",
-      "finishedAt": "2026-10-26T21:38:12.811Z",
+      "itemCount": 16,
+      "startedAt": "2026-10-27T21:16:57.783Z",
+      "finishedAt": "2026-10-27T21:17:17.980Z",
       "retryAttempts": 1
     },
     {
@@ -48,8 +48,8 @@
       "label": "技术动态 X",
       "status": "completed",
       "itemCount": 3,
-      "startedAt": "2026-10-26T21:38:12.812Z",
-      "finishedAt": "2026-10-26T21:38:19.092Z",
+      "startedAt": "2026-10-27T21:17:17.980Z",
+      "finishedAt": "2026-10-27T21:17:22.892Z",
       "retryAttempts": 1
     },
     {
@@ -57,8 +57,8 @@
       "label": "热门论文",
       "status": "completed",
       "itemCount": 3,
-      "startedAt": "2026-10-26T21:38:19.093Z",
-      "finishedAt": "2026-10-26T21:38:32.355Z",
+      "startedAt": "2026-10-27T21:17:22.893Z",
+      "finishedAt": "2026-10-27T21:17:36.320Z",
       "retryAttempts": 1
     },
     {
@@ -66,9 +66,9 @@
       "label": "GitHub Trending",
       "status": "failed",
       "itemCount": 0,
-      "error": "DeepSeek did not finish 6 GitHub entries",
-      "startedAt": "2026-10-26T21:38:32.355Z",
-      "finishedAt": "2026-10-26T21:39:52.754Z",
+      "error": "DeepSeek did not finish 1 GitHub entries",
+      "startedAt": "2026-10-27T21:17:36.465Z",
+      "finishedAt": "2026-10-27T21:18:25.237Z",
       "retryAttempts": 5
     }
   ],
@@ -3137,18 +3137,43 @@
       "value": "非技术读者可判断：AI视频正从生成逼真片段走向模拟可控世界；购物与游戏智能体的评估更看重长程交互和真实用户行为，而非单步输出。",
       "technicalLevel": "中高",
       "technicalPercentage": 70
+    },
+    {
+      "section": "x",
+      "digestDate": "2026-10-28",
+      "label": "X 推特内容",
+      "overview": "本批动态围绕 Anthropic S-1 文件展开密集拆解，聚焦算力合同结构与单位算力收入变化；同时多位一线从业者讨论 AI agent 将如何重塑公司架构与个人上网方式，企业级 AI 应用渗透率仍处早期成为共识。",
+      "trends": [
+        "算力合同从多年期承诺转向按用量计费，单位算力收入显著提升，变现效率成为关注焦点。",
+        "agent 从辅助工具走向执行主体，公司架构与个人上网方式同时面临重构讨论。"
+      ],
+      "value": "非技术读者可判断：企业级 AI 支出占比仍极低，agent 大规模替代后台流程尚处早期；算力合同结构复杂，AI 公司收入与成本节奏存在错配…",
+      "technicalLevel": "中高",
+      "technicalPercentage": 65
+    },
+    {
+      "section": "papers",
+      "digestDate": "2026-10-28",
+      "label": "热门论文",
+      "overview": "本期热门论文聚焦AI智能体的主动交互与可靠性评估：一是让视觉语言模型从连续画面中推断用户未明说的意图并动态调整回应；二是重新设计工具使用智能体的训练交互，强调决策依据与依赖覆盖；三是把智能体背后的运行框架单独拿出来做基…",
+      "trends": [
+        "三条研究都从“模型能力”转向“交互过程”：关注何时回应、依据什么行动、运行框架是否可靠，而非只看最终结果。"
+      ],
+      "value": "非技术读者可判断：AI智能体的实际表现不只取决于模型本身，还取决于交互设计与运行框架；评估正从看结果转向看过程，这会影响企业选型和部署时的…",
+      "technicalLevel": "中高",
+      "technicalPercentage": 78
     }
   ],
   "errors": [
     {
       "source": "github",
-      "message": "DeepSeek did not finish 6 GitHub entries"
+      "message": "DeepSeek did not finish 1 GitHub entries"
     }
   ],
-  "finishedAt": "2026-10-26T21:45:35.653Z",
+  "finishedAt": "2026-10-27T21:22:28.926Z",
   "items": [
     {
-      "externalId": "digest-2026-10-26-thibault-sottiaux",
+      "externalId": "digest-2026-10-27-thibault-sottiaux",
       "source": {
         "id": "follow-builders",
         "type": "builder",
@@ -3156,171 +3181,280 @@
         "url": "https://github.com/zarazhangrui/follow-builders"
       },
       "title": "OpenAI 的 Thibault Sottiaux",
-      "sourceUrl": "https://x.com/thsottiaux/status/2114595002210783279",
-      "summary": "Thibault Sottiaux 发帖记录第 21 天并称今天是重置，同时提醒可在网页版自定义 ChatGPT 外观。",
-      "publishedAt": "2026-10-26T05:48:30.000Z",
+      "sourceUrl": "https://x.com/thsottiaux/status/2114800277677092936",
+      "summary": "Thibault Sottiaux 宣布 Terra 回归，称这是 OpenAI 首个在写作、个性和细微理解请求上明显更强的模型。",
+      "publishedAt": "2026-10-26T19:24:11.000Z",
       "keywords": [
-        "ChatGPT",
+        "Terra",
         "OpenAI",
-        "外观自定义",
-        "第21天",
-        "重置"
+        "写作",
+        "computer use",
+        "用量"
       ],
       "body": {
         "section": "x",
-        "digestDate": "2026-10-27",
-        "publishedDate": "10/26",
+        "digestDate": "2026-10-28",
+        "publishedDate": "10/27",
         "time": "本次更新",
         "readTime": "3 分钟",
         "accent": "green",
         "inRecentWindow": true,
         "digestFormat": "builders-digest",
         "paragraphs": [
-          "OpenAI 负责 Codex 和 ChatGPT 的 Thibault Sottiaux 发帖记下“第 21 天”，说自己好奇剩下七天会发生什么，但今天算是一个重置。随后他提醒大家，ChatGPT 网页版的外观可以自定义，能调成让自己看着舒服的样子。"
+          "OpenAI 的 Thibault Sottiaux 宣布 Terra 回归，说这是他们第一个在写作、个性以及对请求的细微理解上都明显更强的模型。按他的说法，这个模型全面都很能打，尤其擅长 computer use，并且在 API 和订阅里给出的用量是 6.1 Sol 的两倍。"
         ],
         "externalLinks": [
           {
-            "label": "推文 1",
-            "url": "https://x.com/thsottiaux/status/2114588174249071102"
-          },
-          {
-            "label": "推文 2",
-            "url": "https://x.com/thsottiaux/status/2114595002210783279"
+            "label": "推文",
+            "url": "https://x.com/thsottiaux/status/2114800277677092936"
           }
         ]
       }
     },
     {
-      "externalId": "digest-2026-10-26-peter-yang",
+      "externalId": "digest-2026-10-27-sam-altman",
       "source": {
         "id": "follow-builders",
         "type": "builder",
-        "name": "Peter Yang · Follow Builders",
+        "name": "Sam Altman · Follow Builders",
         "url": "https://github.com/zarazhangrui/follow-builders"
       },
-      "title": "Peter Yang",
-      "sourceUrl": "https://x.com/petergyang/status/2114560930646487116",
-      "summary": "Peter Yang 分享用 Claude 快速复制短视频风格的方法，并转评 AI 审美和家庭零食的日常。",
-      "publishedAt": "2026-10-26T03:33:07.000Z",
+      "title": "OpenAI 的 Sam Altman",
+      "sourceUrl": "https://x.com/sama/status/2114818620782248024",
+      "summary": "Sam Altman 宣布 6.1 Terra 上线，并特别看好 computer use 的新阶段。",
+      "publishedAt": "2026-10-26T20:37:05.000Z",
       "keywords": [
-        "Claude",
-        "短视频风格",
-        "HyperFrames",
-        "AI 审美",
-        "教程"
+        "6.1 Terra",
+        "Sam Altman",
+        "OpenAI",
+        "computer use",
+        "上线"
       ],
       "body": {
         "section": "x",
-        "digestDate": "2026-10-27",
-        "publishedDate": "10/26",
+        "digestDate": "2026-10-28",
+        "publishedDate": "10/27",
         "time": "本次更新",
         "readTime": "3 分钟",
         "accent": "green",
         "inRecentWindow": true,
         "digestFormat": "builders-digest",
         "paragraphs": [
-          "做实用 AI 教程和访谈的 Peter Yang 介绍了一种用 Claude 在几分钟内复制任意短视频风格的做法，引用 Jake Moran 的说法：这项能力已经作为原生功能加进 HyperFrames 工作室，用户上传或挑一段参考片段，再用提示词描述想改的地方，就能看到灵感来自哪里，并换上不同字体或配色，结构上还是同一个思路。他另外感叹一张作品很漂亮，反问谁说 AI 没有品味；还打趣说这简直就是自己，只不过他妻子还是会买零食。"
+          "Sam Altman 也宣布 6.1 Terra 上线，说它在很多方面都不错，但他们尤其为 computer use 的新阶段感到兴奋。"
         ],
         "externalLinks": [
           {
-            "label": "推文 1",
-            "url": "https://x.com/petergyang/status/2114507378532229214"
-          },
-          {
-            "label": "推文 2",
-            "url": "https://x.com/petergyang/status/2114560930646487116"
-          },
-          {
-            "label": "推文 3",
-            "url": "https://x.com/petergyang/status/2114557067700916723"
+            "label": "推文",
+            "url": "https://x.com/sama/status/2114818620782248024"
           }
         ]
       }
     },
     {
-      "externalId": "digest-2026-10-26-aaron-levie",
+      "externalId": "digest-2026-10-27-claude",
+      "source": {
+        "id": "follow-builders",
+        "type": "builder",
+        "name": "Claude · Follow Builders",
+        "url": "https://github.com/zarazhangrui/follow-builders"
+      },
+      "title": "Claude",
+      "sourceUrl": "https://x.com/claudeai/status/2114780227465338985",
+      "summary": "Claude 宣布已有超过 2.5 万家非营利组织使用它，并扩展面向非营利组织的功能。",
+      "publishedAt": "2026-10-26T18:04:31.000Z",
+      "keywords": [
+        "Claude",
+        "非营利组织",
+        "插件",
+        "筹款",
+        "AI 政策"
+      ],
+      "body": {
+        "section": "x",
+        "digestDate": "2026-10-28",
+        "publishedDate": "10/27",
+        "time": "本次更新",
+        "readTime": "3 分钟",
+        "accent": "green",
+        "inRecentWindow": true,
+        "digestFormat": "builders-digest",
+        "paragraphs": [
+          "Claude 表示，目前已有超过 2.5 万家非营利组织在使用 Claude，其中大多数是小型本地团队。为此，Claude 正在扩展 Claude for Nonprofits，与大约 30 家这类组织共同打造了一个插件，加入筹款、市场营销和招聘方面的技能，并让这些技能基于每个团队自身的背景和 AI 政策。"
+        ],
+        "externalLinks": [
+          {
+            "label": "推文",
+            "url": "https://x.com/claudeai/status/2114780227465338985"
+          }
+        ]
+      }
+    },
+    {
+      "externalId": "digest-2026-10-27-thariq",
+      "source": {
+        "id": "follow-builders",
+        "type": "builder",
+        "name": "Thariq · Follow Builders",
+        "url": "https://github.com/zarazhangrui/follow-builders"
+      },
+      "title": "Thariq",
+      "sourceUrl": "https://x.com/trq212/status/2114796261362835842",
+      "summary": "Thariq 预告将在 AIE Code 闭幕主题演讲中分享他的 WoW 永久萨满 build。",
+      "publishedAt": "2026-10-26T19:08:14.000Z",
+      "keywords": [
+        "Thariq",
+        "WoW",
+        "萨满",
+        "AIE Code",
+        "主题演讲"
+      ],
+      "body": {
+        "section": "x",
+        "digestDate": "2026-10-28",
+        "publishedDate": "10/27",
+        "time": "本次更新",
+        "readTime": "3 分钟",
+        "accent": "green",
+        "inRecentWindow": true,
+        "digestFormat": "builders-digest",
+        "paragraphs": [
+          "Thariq 说自己会一直玩 WoW，并预告将在 AIE Code 的闭幕主题演讲上分享他那套 WoW 永久萨满 build。"
+        ],
+        "externalLinks": [
+          {
+            "label": "推文",
+            "url": "https://x.com/trq212/status/2114796261362835842"
+          }
+        ]
+      }
+    },
+    {
+      "externalId": "digest-2026-10-27-guillermo-rauch",
+      "source": {
+        "id": "follow-builders",
+        "type": "builder",
+        "name": "Guillermo Rauch · Follow Builders",
+        "url": "https://github.com/zarazhangrui/follow-builders"
+      },
+      "title": "Vercel CEO Guillermo Rauch",
+      "sourceUrl": "https://x.com/rauchg/status/2114770919436808572",
+      "summary": "Guillermo Rauch 复现了 OpenAI 关于利用 CPU 进行隐蔽通信的研究，做成 cpu-chat，并分享了几点发现。",
+      "publishedAt": "2026-10-26T17:27:32.000Z",
+      "keywords": [
+        "CPU 隐蔽通信",
+        "Firecracker",
+        "侧信道",
+        "开放权重模型",
+        "沙箱安全"
+      ],
+      "body": {
+        "section": "x",
+        "digestDate": "2026-10-28",
+        "publishedDate": "10/27",
+        "time": "本次更新",
+        "readTime": "3 分钟",
+        "accent": "green",
+        "inRecentWindow": true,
+        "digestFormat": "builders-digest",
+        "paragraphs": [
+          "Vercel CEO Guillermo Rauch 说自己做了个 𝚌𝚙𝚞-𝚌𝚑𝚊𝚝，复现了 OpenAI 关于利用 CPU 进行隐蔽通信的研究成果。它跑在一台普通主机上的两个以上 Firecracker microVM 里，没有联网，x86 能跑，连他的 M5 芯片也能跑。他通过三种独立机制实现了聊天：CPU 争用、缓存驱逐时序、DRAM 带宽争用，而且跨多个 CPU 都成立，把 Firecracker 的生产建议全给破了——不用 SMT、不用 KSM、租户绑到不同核心，这些都没挡住。他的结论是：只要涉及共享硬件，你的 agent 就有不小概率能偷偷通信，延迟还相当不错。好消息是，这跟 Meltdown/Spectre 那类能窃取信息的侧信道攻击有本质区别，Vercel Sandbox 这类提供商会缓解那类攻击；而且在真实环境里，这种“耳语”手法更难实现，他们也更容易通过采样硬件计数器和大量规模化统计数据来监控和检测。他还提到一个有点讽刺的细节：OpenAI 和 Anthropic 的模型拒绝做这项工作，最后是开放权重模型把活干完了。他担心实验室的这种立场可能适得其反，妨碍开发者构建正确且安全的系统——比如要做一个安全的沙箱，就需要这类分析，没有它，世界只会更不安全。"
+        ],
+        "externalLinks": [
+          {
+            "label": "推文",
+            "url": "https://x.com/rauchg/status/2114770919436808572"
+          }
+        ]
+      }
+    },
+    {
+      "externalId": "digest-2026-10-27-amjad-masad",
+      "source": {
+        "id": "follow-builders",
+        "type": "builder",
+        "name": "Amjad Masad · Follow Builders",
+        "url": "https://github.com/zarazhangrui/follow-builders"
+      },
+      "title": "Replit CEO Amjad Masad",
+      "sourceUrl": "https://x.com/amasad/status/2114890745471545419",
+      "summary": "Amjad Masad 谈 AI agent 将重塑公司架构、提出“Agent Habitat”，并调侃三个学术社区对 OpenAI 发布发现的反应。",
+      "publishedAt": "2026-10-27T01:23:41.000Z",
+      "keywords": [
+        "AI agent",
+        "公司架构",
+        "Agent Habitat",
+        "自动驾驶公司",
+        "开源发布"
+      ],
+      "body": {
+        "section": "x",
+        "digestDate": "2026-10-28",
+        "publishedDate": "10/27",
+        "time": "本次更新",
+        "readTime": "3 分钟",
+        "accent": "green",
+        "inRecentWindow": true,
+        "digestFormat": "builders-digest",
+        "paragraphs": [
+          "Replit CEO Amjad Masad 先抛出一句：“软件吞噬了世界，现在它正在学着运行世界。”接着他展开讲公司架构：几百年来，公司的架构几乎没怎么变，都是人组成的层级、按部门划分、靠官僚体系协调。AI agent 即将颠覆这一切。他说我们正在走向“自动驾驶公司”，人类负责判断，agent 执行大部分工作。Replit 正在为这种新型公司打地基，他们管它叫“Agent Habitat”。他还提到 Marc Andreessen 写了一篇很棒的文章，把这次转变放进计算史里看：每一次重大的计算革命都始于混乱，然后企业才学会怎么驾驭它。随后他换了个话题，调侃 OpenAI 问三个科学社区该怎么发布自己的发现，得到了三个不同答案：数学家说“直接发呗，现在谁还在乎这个”；计算机科学家说“开源，但顺便把我们的会议费付了”；物理学家说“交给我们，书呆子们”。"
+        ],
+        "externalLinks": [
+          {
+            "label": "推文 1",
+            "url": "https://x.com/amasad/status/2114769129282601053"
+          },
+          {
+            "label": "推文 2",
+            "url": "https://x.com/amasad/status/2114760898225299721"
+          },
+          {
+            "label": "推文 3",
+            "url": "https://x.com/amasad/status/2114890745471545419"
+          }
+        ]
+      }
+    },
+    {
+      "externalId": "digest-2026-10-27-aaron-levie",
       "source": {
         "id": "follow-builders",
         "type": "builder",
         "name": "Aaron Levie · Follow Builders",
         "url": "https://github.com/zarazhangrui/follow-builders"
       },
-      "title": "CEO Aaron Levie",
-      "sourceUrl": "https://x.com/levie/status/2114391265655816315",
-      "summary": "Aaron Levie 谈大型企业安全现状：风险面碎片化加剧，需先打好数据与基础设施基础，再让 agent 群协助防御。",
-      "publishedAt": "2026-10-25T16:18:55.000Z",
+      "title": "Box CEO Aaron Levie",
+      "sourceUrl": "https://x.com/levie/status/2114761816199098587",
+      "summary": "Aaron Levie 认为，Anthropic 的 S-1 文件显示，财富 500 强客户在 Anthropic 上的支出占比极低，说明企业级 AI 应用仍处于极早期。",
+      "publishedAt": "2026-10-26T16:51:22.000Z",
       "keywords": [
-        "企业安全",
-        "风险面",
-        "agent",
-        "技术栈现代化",
-        "数据碎片化"
+        "Anthropic",
+        "S-1",
+        "企业支出",
+        "Agent",
+        "token"
       ],
       "body": {
         "section": "x",
-        "digestDate": "2026-10-27",
-        "publishedDate": "10/26",
+        "digestDate": "2026-10-28",
+        "publishedDate": "10/27",
         "time": "本次更新",
         "readTime": "3 分钟",
         "accent": "green",
         "inRecentWindow": true,
         "digestFormat": "builders-digest",
         "paragraphs": [
-          "Box 的 CEO Aaron Levie 聊到眼下大多数大型企业安全的真实处境：风险面本来就碎片化，而且只会越来越棘手。要跟的库没完没了，要用的工具一堆，基础设施、数据和代码又铺得到处都是，大型企业自己都很难跟上，更别说小创业公司或科技圈以外的公司了。他认为很多企业得先把技术栈现代化：数据在大多数组织里高度分散，你根本说不清此刻的风险状态；有些系统权限开得太宽，有些则基本靠“ obscurity 式安全”在撑，要升级的地方很多。等数据和基础设施理顺了，至少有机会让 agent 来帮忙守环境——agent 群可以铺开、调用各种安全工具、测试各种攻击变体、读日志、处理企业数据判断风险等级等等。他说这种能力也就是过去几个月才出现，没有长时运行的 agent 和足够好的 computer use 根本做不到。眼下身份、防火墙、网络、代码扫描、数据保护等安全栈每一层都是大机会，这也是他对攻防能力平衡保持乐观的至少一个理由。但前提是，每个人都得先把基础功夫做扎实。"
+          "Box CEO Aaron Levie 聊到 Anthropic 的 S-1，点出一个关键数字：Anthropic 的财富 500 强客户平均只把不到 0.1% 的开支花在它身上。他说这个比例最终可能会趋于某个水平，因为 token 价格在降，其他大块企业支出也不会消失，但完全没理由不能涨到现在的 10 到 50 倍，达到“区区”1% 到 5% 的支出占比，而这仍只是大多数初创公司花费的一小部分。由此能看出，前沿 AI 用户和世界其他地方之间的鸿沟有多大。今天只有极少数公司真正在用 agent 处理大量后台任务，以及在并非由人触发的流程内部执行任务；这部分财富 500 强的支出，大概主要来自编程任务和广泛的员工生产力场景。真正的大跳升会发生在这些企业开始为 agent 重构底层流程的时候，而我们现在才刚看到最早期的迹象：agent 在企业里处理大量数据，swarm 做编程、生物研究、网络安全等大规模并行任务，后台工作流在流程中执行任务，等等。这些用例消耗 token 的量通常是 100 倍，也更接近支出的直接 ROI。他说，这份 S-1 既让人感受到前沿实验室商业模式的强度，即便竞争激烈，也说明 AI 建设还处在多早的阶段。"
         ],
         "externalLinks": [
           {
             "label": "推文",
-            "url": "https://x.com/levie/status/2114391265655816315"
+            "url": "https://x.com/levie/status/2114761816199098587"
           }
         ]
       }
     },
     {
-      "externalId": "digest-2026-10-26-nan-yu",
-      "source": {
-        "id": "follow-builders",
-        "type": "builder",
-        "name": "Nan Yu · Follow Builders",
-        "url": "https://github.com/zarazhangrui/follow-builders"
-      },
-      "title": "产品负责人 Nan Yu",
-      "sourceUrl": "https://x.com/thenanyu/status/2114433404557279435",
-      "summary": "Nan Yu 谈等数据或用户访谈暴露问题就太晚了，并吐槽未优化应用在 iPhone Duo 上的默认表现。",
-      "publishedAt": "2026-10-25T19:06:22.000Z",
-      "keywords": [
-        "产品",
-        "用户研究",
-        "数据",
-        "iPhone Duo",
-        "分屏模式"
-      ],
-      "body": {
-        "section": "x",
-        "digestDate": "2026-10-27",
-        "publishedDate": "10/26",
-        "time": "本次更新",
-        "readTime": "3 分钟",
-        "accent": "green",
-        "inRecentWindow": true,
-        "digestFormat": "builders-digest",
-        "paragraphs": [
-          "OpenAI Codex 的产品负责人、前 Linear 产品负责人 Nan Yu 说，等到问题出现在数据里或者用户访谈里，就已经太晚了——损害已经造成，声誉也已经受损。随后他又吐槽：iPhone Duo 明明支持分屏模式，未优化的应用却还是默认那种表现，这让他觉得离谱，并问有没有别人也这么觉得。"
-        ],
-        "externalLinks": [
-          {
-            "label": "推文 1",
-            "url": "https://x.com/thenanyu/status/2114427877240488442"
-          },
-          {
-            "label": "推文 2",
-            "url": "https://x.com/thenanyu/status/2114433404557279435"
-          }
-        ]
-      }
-    },
-    {
-      "externalId": "digest-2026-10-26-matt-turck",
+      "externalId": "digest-2026-10-27-matt-turck",
       "source": {
         "id": "follow-builders",
         "type": "builder",
@@ -3328,70 +3462,411 @@
         "url": "https://github.com/zarazhangrui/follow-builders"
       },
       "title": "FirstMark Capital 投资人 Matt Turck",
-      "sourceUrl": "https://x.com/mattturck/status/2114507945585328606",
-      "summary": "Matt Turck 发了两条推文：一条是“好地段”的随手分享，另一条调侃 VC 把 2021 年在元宇宙、游戏和加密挖矿上的押注说成“关键任务 AI 基础设施”。",
-      "publishedAt": "2026-10-26T00:02:34.000Z",
+      "sourceUrl": "https://x.com/mattturck/status/2114829981884817513",
+      "summary": "Matt Turck 调侃 Anthropic 周一早上提交 S-1，让 VC 们困在例会里没法第一时间写解读；他还用 Synthesia 一条提示词生成了 S-1 亮点视频。",
+      "publishedAt": "2026-10-26T21:22:13.000Z",
       "keywords": [
-        "Matt Turck",
-        "FirstMark Capital",
+        "Anthropic",
+        "S-1",
         "VC",
-        "元宇宙",
-        "AI 基础设施"
+        "Synthesia",
+        "视频"
       ],
       "body": {
         "section": "x",
-        "digestDate": "2026-10-27",
-        "publishedDate": "10/26",
+        "digestDate": "2026-10-28",
+        "publishedDate": "10/27",
         "time": "本次更新",
         "readTime": "3 分钟",
         "accent": "green",
         "inRecentWindow": true,
         "digestFormat": "builders-digest",
         "paragraphs": [
-          "FirstMark Capital 的投资人 Matt Turck 先发了一句“好地段”，配了图，看起来是随手分享身边场景。随后他转发了一段所谓的“罕见影像”，调侃 VC 们如何把 2021 年在元宇宙、游戏和加密挖矿上的押注，说成是“关键任务 AI 基础设施”。"
+          "FirstMark Capital 的投资人 Matt Turck 开玩笑说，Anthropic 特别“邪恶”地选在周一早上提交 S-1，这时候所有 VC 都困在周一的团队会和合伙人会里，没法立刻奉上大家都迫不及待想读的 S-1 拆解式“思想领导力”。随后他又发了一条 Anthropic S-1 亮点视频，说这是一条提示词、没有剪辑，用 Synthesia 的 Syren 做的。"
         ],
         "externalLinks": [
           {
             "label": "推文 1",
-            "url": "https://x.com/mattturck/status/2114411547594457483"
+            "url": "https://x.com/mattturck/status/2114755282181955616"
           },
           {
             "label": "推文 2",
-            "url": "https://x.com/mattturck/status/2114507945585328606"
+            "url": "https://x.com/mattturck/status/2114829981884817513"
           }
         ]
       }
     },
     {
-      "externalId": "2114445880522604545",
+      "externalId": "digest-2026-10-27-peter-steinberger",
       "source": {
-        "id": "attentionvc-ai",
-        "type": "daily",
-        "name": "Tobi · 技术动态 X 热榜",
-        "url": "https://reply-vc-90459984647.us-central1.run.app/v1/articles/leaderboard?window=3d&category=ai&lang=en&limit=30"
+        "id": "follow-builders",
+        "type": "builder",
+        "name": "Peter Steinberger · Follow Builders",
+        "url": "https://github.com/zarazhangrui/follow-builders"
       },
-      "title": "如何制作动画短视频，让你的应用收入增长10倍",
-      "sourceUrl": "https://x.com/tobiadonadon_/status/2114445880522604545",
-      "summary": "作者指出，制作动画短片通常需要动画师、素材或长时间使用剪辑工具；如果你脑子里只有一个诗句、一句引言或一个小故事，这样做工作量太大。文章以此为切入点，讨论如何简化动画短视频的制作。",
-      "publishedAt": "2026-10-25T19:55:57.000Z",
+      "title": "Polyagentmorous ClawFather Peter Steinberger",
+      "sourceUrl": "https://x.com/steipete/status/2114879798434758905",
+      "summary": "Peter Steinberger 周末测试了 bun 的 AOT 编译器，称性能提升 2-3 倍、内存占用减半。",
+      "publishedAt": "2026-10-27T00:40:11.000Z",
       "keywords": [
-        "动画短视频",
-        "应用营收",
-        "内容制作",
-        "AI自动化",
-        "营销"
+        "bun",
+        "AOT 编译器",
+        "性能",
+        "内存",
+        "测试"
       ],
       "body": {
         "section": "x",
-        "digestDate": "2026-10-27",
-        "publishedDate": "10/26",
+        "digestDate": "2026-10-28",
+        "publishedDate": "10/27",
+        "time": "本次更新",
+        "readTime": "3 分钟",
+        "accent": "green",
+        "inRecentWindow": true,
+        "digestFormat": "builders-digest",
+        "paragraphs": [
+          "Peter Steinberger 说自己周末花了一些时间测试 bun 的 AOT 编译器，结果只能用“惊艳”来形容：性能提升了 2-3 倍，内存占用还不到原来的一半。"
+        ],
+        "externalLinks": [
+          {
+            "label": "推文",
+            "url": "https://x.com/steipete/status/2114879798434758905"
+          }
+        ]
+      }
+    },
+    {
+      "externalId": "digest-2026-10-27-josh-woodward",
+      "source": {
+        "id": "follow-builders",
+        "type": "builder",
+        "name": "Josh Woodward · Follow Builders",
+        "url": "https://github.com/zarazhangrui/follow-builders"
+      },
+      "title": "Google 副总裁 Josh Woodward",
+      "sourceUrl": "https://x.com/joshwoodward/status/2114840668296409568",
+      "summary": "Josh Woodward 宣布 Google Beam 与美国陆军、USO 合作，在 20 个地点为驻外军人提供逼真的 3D 视频连线。",
+      "publishedAt": "2026-10-26T22:04:41.000Z",
+      "keywords": [
+        "Google Beam",
+        "美国陆军",
+        "USO",
+        "3D 视频",
+        "驻外军人"
+      ],
+      "body": {
+        "section": "x",
+        "digestDate": "2026-10-28",
+        "publishedDate": "10/27",
+        "time": "本次更新",
+        "readTime": "3 分钟",
+        "accent": "green",
+        "inRecentWindow": true,
+        "digestFormat": "builders-digest",
+        "paragraphs": [
+          "Josh Woodward 提到，对一名被部署在外的军人来说，错过家里的那些时刻会一点点累积起来：宝宝迈出的第一步、第一次登台演出、一起笑出声的瞬间。借着 National Day of the Deployed，他表示很兴奋能与美国陆军和 USO 合作，把 Google Beam 带到 20 个地点，让驻外军人能和亲人体验逼真、立体的 3D 视频连接。他还邀请大家观看下方那部纪录片系列。"
+        ],
+        "externalLinks": [
+          {
+            "label": "推文",
+            "url": "https://x.com/joshwoodward/status/2114840668296409568"
+          }
+        ]
+      }
+    },
+    {
+      "externalId": "digest-2026-10-27-swyx",
+      "source": {
+        "id": "follow-builders",
+        "type": "builder",
+        "name": "Swyx · Follow Builders",
+        "url": "https://github.com/zarazhangrui/follow-builders"
+      },
+      "title": "Swyx",
+      "sourceUrl": "https://x.com/swyx/status/2114864999709753526",
+      "summary": "Swyx 调侃有人从 Claude Code 转投 AIE Code，并打趣 $ANT 的估值和 AI 回复者。",
+      "publishedAt": "2026-10-26T23:41:22.000Z",
+      "keywords": [
+        "Claude Code",
+        "AIE Code",
+        "$ANT",
+        "估值",
+        "Grok"
+      ],
+      "body": {
+        "section": "x",
+        "digestDate": "2026-10-28",
+        "publishedDate": "10/27",
+        "time": "本次更新",
+        "readTime": "3 分钟",
+        "accent": "green",
+        "inRecentWindow": true,
+        "digestFormat": "builders-digest",
+        "paragraphs": [
+          "Swyx 提到有人从 Claude Code 换到了 AIE Code，评价说这算是一步“狠招”。随后他抛出个问题：你会在 $ANT 估值 2 万亿美元的时候买它的股票吗？另外他还 @ 了 Grok，问它自己的回复区里有多少是 AI。"
+        ],
+        "externalLinks": [
+          {
+            "label": "推文 1",
+            "url": "https://x.com/swyx/status/2114805687226376267"
+          },
+          {
+            "label": "推文 2",
+            "url": "https://x.com/swyx/status/2114864999709753526"
+          },
+          {
+            "label": "推文 3",
+            "url": "https://x.com/swyx/status/2114824910707277997"
+          }
+        ]
+      }
+    },
+    {
+      "externalId": "digest-2026-10-27-dan-shipper",
+      "source": {
+        "id": "follow-builders",
+        "type": "builder",
+        "name": "Dan Shipper · Follow Builders",
+        "url": "https://github.com/zarazhangrui/follow-builders"
+      },
+      "title": "Dan Shipper",
+      "sourceUrl": "https://x.com/danshipper/status/2114849110553440469",
+      "summary": "Dan Shipper 感叹某件大事，并自嘲又到了后悔没读前沿数学博士的阶段。",
+      "publishedAt": "2026-10-26T22:38:14.000Z",
+      "keywords": [
+        "前沿数学",
+        "理论计算机科学",
+        "博士",
+        "自嘲"
+      ],
+      "body": {
+        "section": "x",
+        "digestDate": "2026-10-28",
+        "publishedDate": "10/27",
+        "time": "本次更新",
+        "readTime": "3 分钟",
+        "accent": "green",
+        "inRecentWindow": true,
+        "digestFormat": "builders-digest",
+        "paragraphs": [
+          "Dan Shipper 先转发感叹了一句“这挺大的”。接着他自嘲说，又回到了那个会后悔自己没去读前沿数学和理论计算机科学博士的阶段——虽然他也补了一句，自己其实从来没考虑过读博。"
+        ],
+        "externalLinks": [
+          {
+            "label": "推文 1",
+            "url": "https://x.com/danshipper/status/2114767454026990063"
+          },
+          {
+            "label": "推文 2",
+            "url": "https://x.com/danshipper/status/2114849110553440469"
+          }
+        ]
+      }
+    },
+    {
+      "externalId": "digest-2026-10-27-aditya-agarwal",
+      "source": {
+        "id": "follow-builders",
+        "type": "builder",
+        "name": "Aditya Agarwal · Follow Builders",
+        "url": "https://github.com/zarazhangrui/follow-builders"
+      },
+      "title": "SPC 普通合伙人 Aditya Agarwal",
+      "sourceUrl": "https://x.com/adityaag/status/2114907777957245033",
+      "summary": "Aditya Agarwal 反思科学理解的局限，推荐一篇让他赞不绝口的文章，并谈到美国 AI 最大的风险是自我恐吓而放慢脚步。",
+      "publishedAt": "2026-10-27T02:31:22.000Z",
+      "keywords": [
+        "科学理解",
+        "美国 AI",
+        "政策选择",
+        "SPC",
+        "文章推荐"
+      ],
+      "body": {
+        "section": "x",
+        "digestDate": "2026-10-28",
+        "publishedDate": "10/27",
+        "time": "本次更新",
+        "readTime": "3 分钟",
+        "accent": "green",
+        "inRecentWindow": true,
+        "digestFormat": "builders-digest",
+        "paragraphs": [
+          "Aditya Agarwal 说，他越来越接受一个看法：我们对科学的理解，其实受限于我们想要得到自己能理解的解决方案这一愿望。他强烈推荐一篇文章，称它“太炸了”，怎么推荐都不为过，并特别点出其中的关键段落。谈到美国 AI 时，他认为最大的风险是把自己吓到、从而主动放慢速度；恐惧是一种政策选择，建设同样也是。他提到上周在 SPC 和 Sriramk 有过一次很棒的对话。"
+        ],
+        "externalLinks": [
+          {
+            "label": "推文 1",
+            "url": "https://x.com/adityaag/status/2114907777957245033"
+          },
+          {
+            "label": "推文 2",
+            "url": "https://x.com/adityaag/status/2114763380124987494"
+          },
+          {
+            "label": "推文 3",
+            "url": "https://x.com/adityaag/status/2114793226154418314"
+          }
+        ]
+      }
+    },
+    {
+      "externalId": "digest-2026-10-27-nikunj-kothari",
+      "source": {
+        "id": "follow-builders",
+        "type": "builder",
+        "name": "Nikunj Kothari · Follow Builders",
+        "url": "https://github.com/zarazhangrui/follow-builders"
+      },
+      "title": "FPV Ventures 合伙人 Nikunj Kothari",
+      "sourceUrl": "https://x.com/nikunj/status/2114929285890990574",
+      "summary": "Nikunj Kothari 拆解 Anthropic S-1 中的算力合同，梳理采购承诺、租赁、供应商差异、Broadcom 融资安排和单位算力收入变化。",
+      "publishedAt": "2026-10-27T03:56:49.000Z",
+      "keywords": [
+        "Anthropic",
+        "S-1",
+        "算力合同",
+        "Broadcom",
+        "单位算力收入"
+      ],
+      "body": {
+        "section": "x",
+        "digestDate": "2026-10-28",
+        "publishedDate": "10/27",
+        "time": "本次更新",
+        "readTime": "3 分钟",
+        "accent": "green",
+        "inRecentWindow": true,
+        "digestFormat": "builders-digest",
+        "paragraphs": [
+          "Nikunj Kothari 说，他看 Anthropic 的 S-1 时最想深挖的就是算力合同，下面这些要点是他和 Opus 5.5 一起梳理出来的。截至 6 月 30 日，Anthropic 有 2656 亿美元的采购承诺，以及 3214 亿美元尚未开始的租赁，小计 5870 亿美元，需分多年支付，其中还包括一些有条件租赁；文件里最新的汇总总额仍然是空白。合同结构差别很大：Google 和 Amazon 要求无论用不用都得达到最低支出；SpaceXAI 的协议潜在价值 1205 亿美元，但在 2027 年 1 月和 3 月初的锁定期结束后，任何一方都可以提前 90 天通知取消。Anthropic Direct 把芯片、建筑、电力和运营拆成不同合同，让 Anthropic 可以提前预订建筑、之后再承诺芯片，但也意味着某个供应商可能在其他人还没准备好时就开始计费，设备租金可能在算力可用之前就开始算。Broadcom 那笔 420 亿美元的融资安排从不直接给 Anthropic 现金，票据用于结算特定的设备租金账单；该安排不含每个设备舱的首个季度付款，也不含设备投入服务前应付的租金，Anthropic 得另找资金来付这些。这些票据利息 9%，按季度计入余额，IPO 后可按过去 30 天平均股价的 90% 转股；在特定收入违约期间新发的票据利息 13%、转股价 85%，股价按成交量加权计算。这笔利息还叠加在设备租赁自身的融资费用之上，后者的利率是保密的；是否转股由投资人决定，否则本金和累计利息到期以现金支付。Anthropic 把 Trainium、TPU、NVIDIA 和 AMD GPU 当作共享算力池，用于模型开发、付费客户和内部使用，不披露训练和推理之间固定的物理分配；供应商账单可以是固定的，而分配给硬件的工作会变。每 1 美元总算力和基础设施支出带来的收入，从 2025 年 Q2 的 0.57 美元升到 2026 年 Q2 的 2.08 美元；定价、利用率、技术改进和产能到位时间都会影响这个比例，这说明算力基础的变现能力有显著提升。上半年约 80% 的收入是按用量计费，而多数算力承诺却要持续多年；在按季度披露的情况下，这种用量与订阅之间的分化值得持续关注。随后他又半开玩笑地说，也许自己该换个工作了。"
+        ],
+        "externalLinks": [
+          {
+            "label": "推文 1",
+            "url": "https://x.com/nikunj/status/2114761204333998427"
+          },
+          {
+            "label": "推文 2",
+            "url": "https://x.com/nikunj/status/2114929285890990574"
+          }
+        ]
+      }
+    },
+    {
+      "externalId": "digest-2026-10-27-peter-yang",
+      "source": {
+        "id": "follow-builders",
+        "type": "builder",
+        "name": "Peter Yang · Follow Builders",
+        "url": "https://github.com/zarazhangrui/follow-builders"
+      },
+      "title": "Peter Yang",
+      "sourceUrl": "https://x.com/petergyang/status/2114928082712998087",
+      "summary": "Peter Yang 认为未来人们会让 agent 代自己在网上做事，并对 @bot 这类早期信号既感兴趣又保持警惕。",
+      "publishedAt": "2026-10-27T03:52:03.000Z",
+      "keywords": [
+        "agent",
+        "@bot",
+        "上网方式",
+        "个人助理",
+        "邮件管理"
+      ],
+      "body": {
+        "section": "x",
+        "digestDate": "2026-10-28",
+        "publishedDate": "10/27",
+        "time": "本次更新",
+        "readTime": "3 分钟",
+        "accent": "green",
+        "inRecentWindow": true,
+        "digestFormat": "builders-digest",
+        "paragraphs": [
+          "Peter Yang 聊到一种正在浮现的上网方式：在不久的将来，人们可能不再亲自阅读或处理网上的事情，而是直接标记自己的 agent 去代办，@bot 在他看来就是这种趋势的早期信号。不过他随后补了一句，觉得这整体上大概不是什么好事。他也顺势吐槽，说自己真正兴奋的不是“第 9 个帮我管理邮件的个人 agent”，而是别的东西。"
+        ],
+        "externalLinks": [
+          {
+            "label": "推文 1",
+            "url": "https://x.com/petergyang/status/2114927195332460940"
+          },
+          {
+            "label": "推文 2",
+            "url": "https://x.com/petergyang/status/2114905151572263242"
+          },
+          {
+            "label": "推文 3",
+            "url": "https://x.com/petergyang/status/2114928082712998087"
+          }
+        ]
+      }
+    },
+    {
+      "externalId": "digest-2026-10-27-nan-yu",
+      "source": {
+        "id": "follow-builders",
+        "type": "builder",
+        "name": "Nan Yu · Follow Builders",
+        "url": "https://github.com/zarazhangrui/follow-builders"
+      },
+      "title": "Nan Yu",
+      "sourceUrl": "https://x.com/thenanyu/status/2114800172270252037",
+      "summary": "Nan Yu 用一句设计评审现场的调侃配了张图。",
+      "publishedAt": "2026-10-26T19:23:46.000Z",
+      "keywords": [
+        "设计评审",
+        "产品设计",
+        "调侃"
+      ],
+      "body": {
+        "section": "x",
+        "digestDate": "2026-10-28",
+        "publishedDate": "10/27",
+        "time": "本次更新",
+        "readTime": "3 分钟",
+        "accent": "green",
+        "inRecentWindow": true,
+        "digestFormat": "builders-digest",
+        "paragraphs": [
+          "Nan Yu 发了一条简短的吐槽：设计评审里有人说这东西“很讨喜”，后面跟了张图。"
+        ],
+        "externalLinks": [
+          {
+            "label": "推文",
+            "url": "https://x.com/thenanyu/status/2114800172270252037"
+          }
+        ]
+      }
+    },
+    {
+      "externalId": "2114913843331871157",
+      "source": {
+        "id": "attentionvc-ai",
+        "type": "daily",
+        "name": "ギア · 技术动态 X 热榜",
+        "url": "https://reply-vc-90459984647.us-central1.run.app/v1/articles/leaderboard?window=3d&category=ai&lang=en&limit=30"
+      },
+      "title": "【免费发布1,439个姿势】AI美女“摆拍”数据库横空出世！",
+      "sourceUrl": "https://x.com/giaaibusi/status/2114913843331871157",
+      "summary": "作者公开了一个可用于“请改成这个姿势”指令的姿势数据库，共1,439张姿势图，同一姿势配有不同角度，覆盖全身、上半身和双人互动。",
+      "publishedAt": "2026-10-27T02:55:28.000Z",
+      "keywords": [
+        "AI绘画",
+        "姿势数据库",
+        "免费素材",
+        "图像生成",
+        "提示词"
+      ],
+      "body": {
+        "section": "x",
+        "digestDate": "2026-10-28",
+        "publishedDate": "10/27",
         "time": "本次更新",
         "readTime": "3 分钟",
         "accent": "green",
         "inRecentWindow": true,
         "paragraphs": [
-          "制作动画短片通常意味着需要一位动画师、拍摄素材，或者在剪辑工具里花上好几个小时；而如果你脑子里只有一个诗句、一句引言或一个小故事，为了这点内容付出这么多工夫实在不划算。",
-          "这是一篇面向应用开发者和营销人员的实操型长文预告。核心观点是：传统动画短视频制作成本高（人力、素材、时间），而很多创作者手上只有简短的文案或故事创意，投入产出不成比例。作者暗示存在更轻量的制作路径，但预览中未说明具体方法或工具。阅读时需注意：标题中的“10X Your App Revenue”是作者的主张性表述，预览并未给出数据或案例支撑；文中提到的 claude-code、codex、mcp 等标签表明其方法可能涉及 AI 编程与自动化工具，但具体方案需读全文确认。"
+          "←更改姿势　　姿势集→\n公开可用于“请改成这个姿势”的\n姿势数据库\n\n・合计1,439张姿势\n・同一姿势的不同角度齐全\n・全身、上半身、双人互动全覆盖",
+          "核心观点：作者整理并免费公开了一个姿势参考数据库，主打可直接用于向AI图像工具下达“请改成这个姿势”的指令。预览强调三点：数量为1,439张、同一姿势有多种角度、覆盖全身/上半身/双人互动。阅读时需注意：预览未说明具体文件格式、授权条款、下载方式或适用于哪些模型，这些信息需查看原文确认，不能仅凭标题推断。"
         ]
       }
     },
@@ -3403,199 +3878,197 @@
         "name": "Marc Andreessen 🇺🇸 · 技术动态 X 热榜",
         "url": "https://reply-vc-90459984647.us-central1.run.app/v1/articles/leaderboard?window=3d&category=ai&lang=en&limit=30"
       },
-      "title": "Replit 与“自动驾驶公司”的黎明",
+      "title": "Replit与“自动驾驶公司”的黎明",
       "sourceUrl": "https://x.com/pmarca/status/2114751107293749731",
-      "summary": "Marc Andreessen 称赞 Replit 的 Amjad 敢于把别人不敢说或没想清楚的事情直接讲出来，并以此引出“自动驾驶公司”这一概念。",
+      "summary": "Marc Andreessen 分享对 Replit 的观察，借 Amjad 的表述引出“自动驾驶公司”这一概念，即公司运营高度自动化的未来形态。",
       "publishedAt": "2026-10-26T16:08:48.000Z",
       "keywords": [
         "Replit",
         "自动驾驶公司",
-        "Marc Andreessen",
-        "多智能体",
-        "未来工作"
+        "未来工作",
+        "AI Agent",
+        "观点"
       ],
       "body": {
         "section": "x",
-        "digestDate": "2026-10-27",
+        "digestDate": "2026-10-28",
         "publishedDate": "10/27",
         "time": "本次更新",
         "readTime": "3 分钟",
         "accent": "green",
         "inRecentWindow": true,
         "paragraphs": [
-          "我喜欢 Amjad 的一点是，他有时真的会把那件事说出来，把其他人没有勇气或没想清楚而无法表达的东西讲清楚。他就是那种……",
-          "这是 a16z 联合创始人 Marc Andreessen 的一篇观点性长文预告，主题是 Replit 以及所谓“自动驾驶公司”（self-driving company）的兴起。核心观点是赞赏 Replit CEO Amjad Masad 直言不讳、能把行业趋势讲透的表达能力，并借此展开对公司形态演变的讨论。阅读时需注意：预览只到一句对 Amjad 的称赞便截断，“自动驾驶公司”的具体定义、与 Replit 的关系以及论证逻辑均未在预览中出现，不应据此推断全文结论；标签中的 multi-agent、future-of-work 提示文章可能涉及多智能体与未来工作形态，但属于推测性语境。"
+          "Replit 与自动驾驶公司的黎明\n\n我喜欢 Amjad 的一点是，有时他真的会把那件事说出来，并清晰地表达出别人没有勇气或没有想清楚的东西。他就有这样一个……",
+          "核心观点：标题提出“self-driving company（自动驾驶公司）”的比喻，指向公司像自动驾驶汽车一样高度自动运转的未来工作形态。预览只给出对 Amjad 表达能力的称赞，并未展开 Replit 的具体产品、数据或“自动驾驶公司”的实现路径。阅读时需注意：这是观点性内容，预览信息有限，不能把标题中的比喻当作已被验证的事实。"
         ]
       }
     },
     {
-      "externalId": "2114604912520921136",
+      "externalId": "2115006510979801566",
       "source": {
         "id": "attentionvc-ai",
         "type": "daily",
-        "name": "Addy Osmani · 技术动态 X 热榜",
+        "name": "Miles Ma · 技术动态 X 热榜",
         "url": "https://reply-vc-90459984647.us-central1.run.app/v1/articles/leaderboard?window=3d&category=ai&lang=en&limit=30"
       },
-      "title": "Claude Code 团队如何进行代码审查",
-      "sourceUrl": "https://x.com/addyosmani/status/2114604912520921136",
-      "summary": "Addy Osmani 分享的这篇内容提到，Claude Code 约 90% 的代码由 Claude 编写，并由此提出在大规模下如何做代码审查、谁来读代码、出错怎么办等问题。",
-      "publishedAt": "2026-10-26T06:27:53.000Z",
+      "title": "FDE 实战案例｜数据清洗（海量多模态数据，如何清洗成一套可信数据）",
+      "sourceUrl": "https://x.com/miles_mazy/status/2115006510979801566",
+      "summary": "作者讲述为一家美妆企业落地 FDE 的案例，业务涉及舆情分析、竞品调研、营销复盘，以及从评论区提取用户对功效、肤感、成分、价格和使用场景的真实反馈。",
+      "publishedAt": "2026-10-27T09:03:41.000Z",
       "keywords": [
-        "Claude Code",
-        "代码审查",
-        "AI编程",
-        "工程实践",
-        "自动化"
+        "FDE",
+        "数据清洗",
+        "多模态数据",
+        "美妆行业",
+        "用户反馈"
       ],
       "body": {
         "section": "x",
-        "digestDate": "2026-10-27",
-        "publishedDate": "10/26",
+        "digestDate": "2026-10-28",
+        "publishedDate": "10/27",
         "time": "本次更新",
         "readTime": "3 分钟",
         "accent": "green",
         "inRecentWindow": true,
         "paragraphs": [
-          "我们之前提到过，Claude Code 大约 90% 的代码是由 Claude 编写的。那么在这种规模下我们怎么做代码审查？到底谁在读代码？如果代码出了问题会怎样？这篇帖子……",
-          "这是 Google 工程师 Addy Osmani 转发或引述的一篇关于 Claude Code 团队工程实践的长文。核心信息是：Claude Code 项目中约 90% 的代码由 Claude 生成，团队因此必须重新思考代码审查的方式——包括审查主体、审查规模以及出错后的责任与补救机制。阅读时需注意：预览仅提出三个问题便截断，团队的具体审查流程、工具和结论并未在预览中给出；“90%”这一比例是文中引述的说法，预览未说明统计口径；标签显示内容还涉及职业与自动化议题，但具体观点需读全文。"
+          "前段时间，我们去一家美妆企业做 FDE 落地。具体业务包括舆情分析、竞品调研、营销活动复盘，以及从评论区里提取用户对功效、肤感、成分、价格和使用场景的真实反馈。",
+          "核心观点：以美妆企业为场景，说明 FDE 落地中的数据清洗问题——把海量多模态数据整理成一套可信数据，服务于舆情、竞品、营销复盘和用户反馈提取等业务。阅读时需注意：预览只交代了业务背景和数据类型，未给出具体清洗方法、工具链或效果指标；标题中的“怎么洗”需在正文中核实，不能提前当作方法论结论。"
         ]
       }
     },
     {
-      "externalId": "2610.31668",
+      "externalId": "2610.33568",
       "source": {
         "id": "huggingface-daily-papers",
         "type": "daily",
         "name": "Hugging Face Daily Papers",
         "url": "https://huggingface.co/papers"
       },
-      "title": "通过视频阅读、书写、分享和与世界互动",
-      "sourceUrl": "https://huggingface.co/papers/2610.31668",
-      "summary": "视频基础模型在理解和生成视觉序列方面进步很快，而视频世界模型则试图捕捉其所描绘世界的底层动态。尽管目标不同，两者都关注视频观察与不断演变的世界之间的关系。本综述以世界建模作为统一视角来考察这些进展。\n\n我们把一段观察到的视频视为一个潜在时间世界的部分、有损且按时间排序的投影，并围绕四种互补操作来组织文献：阅读，即从观察到的视频推断世界属性；书写，即根据指定或学习到的世界条件合成视频；分享，即通过共同的建模机制整合理解与生成；互动，即在动作和不断变化的观察下预测并更新世界状态。\n\n这一视角区分了观察或生成序列中的时间连贯性与底层世界状态的一致性。在任务、表示、模型、数据集和基准方面，我们追踪了一种重心转移：从片段级识别和感知保真度，转向持久状态、可控演化、物理与因果有效性，以及以互动和下游决策为基础的评估，并提炼由此产生的开放挑战。",
-      "publishedAt": "2026-10-22T00:00:00.000Z",
+      "title": "Trajectory2Gym：面向工具使用智能体的基于决策的组合交互合成",
+      "sourceUrl": "https://huggingface.co/papers/2610.33568",
+      "summary": "成功的工具使用轨迹未必是有用的监督信号。即使交互成功，也可能未充分覆盖多步依赖关系，或包含在决策时智能体可见信息下缺乏依据的动作。我们指出有效轨迹监督的两个耦合要求：组合覆盖，使重要的观察-动作依赖关系得到表示；决策依据，使每个被监督动作都得到学习者可见交互历史的支持。我们提出 Trajectory2Gym，围绕支持不足的组合结构构建可执行交互，并且只从这些交互实际执行中有依据的决策中提取监督。结构支持选择负责分配由此产生的经验，而父级归一化监督微调则以语义交互为单位保留训练权重。这将轨迹生成重新定义为有意构建可学习的交互经验，而非收集成功轨迹。在五个 Qwen3 规模上，Trajectory2Gym 在每个测试规模上都提升了 Tau1、Tau2 和 BFCL，使三个基准的等权平均值提高 16.9 至 29.8 个百分点。增益在有状态和多轮交互中最强，因为后续决策依赖先前的观察和反馈。我们的结果表明，扩展工具使用智能体不仅取决于收集更多成功轨迹，还取决于构建依赖关系得到表示、决策可从智能体可见历史中学习的交互。",
+      "publishedAt": "2026-10-24T00:00:00.000Z",
       "keywords": [
-        "视频世界模型",
-        "视频基础模型",
-        "世界建模",
-        "时间连贯性",
-        "可控演化",
-        "互动评估"
+        "工具使用智能体",
+        "轨迹监督",
+        "组合交互合成",
+        "决策依据",
+        "监督微调"
       ],
       "body": {
         "section": "papers",
-        "digestDate": "2026-10-27",
-        "publishedDate": "10/22",
+        "digestDate": "2026-10-28",
+        "publishedDate": "10/24",
         "time": "本次更新",
         "readTime": "3 分钟",
         "accent": "violet",
         "inRecentWindow": true,
         "paragraphs": [
-          "视频基础模型在理解和生成视觉序列方面进步很快，而视频世界模型则试图捕捉其所描绘世界的底层动态。尽管目标不同，两者都关注视频观察与不断演变的世界之间的关系。本综述以世界建模作为统一视角来考察这些进展。",
-          "我们把一段观察到的视频视为一个潜在时间世界的部分、有损且按时间排序的投影，并围绕四种互补操作来组织文献：阅读，即从观察到的视频推断世界属性；书写，即根据指定或学习到的世界条件合成视频；分享，即通过共同的建模机制整合理解与生成；互动，即在动作和不断变化的观察下预测并更新世界状态。",
-          "这一视角区分了观察或生成序列中的时间连贯性与底层世界状态的一致性。在任务、表示、模型、数据集和基准方面，我们追踪了一种重心转移：从片段级识别和感知保真度，转向持久状态、可控演化、物理与因果有效性，以及以互动和下游决策为基础的评估，并提炼由此产生的开放挑战。"
+          "成功的工具使用轨迹未必是有用的监督信号。即使交互成功，也可能未充分覆盖多步依赖关系，或包含在决策时智能体可见信息下缺乏依据的动作。我们指出有效轨迹监督的两个耦合要求：组合覆盖，使重要的观察-动作依赖关系得到表示；决策依据，使每个被监督动作都得到学习者可见交互历史的支持。",
+          "我们提出 Trajectory2Gym，围绕支持不足的组合结构构建可执行交互，并且只从这些交互实际执行中有依据的决策中提取监督。结构支持选择负责分配由此产生的经验，而父级归一化监督微调则以语义交互为单位保留训练权重。这将轨迹生成重新定义为有意构建可学习的交互经验，而非收集成功轨迹。",
+          "在五个 Qwen3 规模上，Trajectory2Gym 在每个测试规模上都提升了 Tau1、Tau2 和 BFCL，使三个基准的等权平均值提高 16.9 至 29.8 个百分点。增益在有状态和多轮交互中最强，因为后续决策依赖先前的观察和反馈。我们的结果表明，扩展工具使用智能体不仅取决于收集更多成功轨迹，还取决于构建依赖关系得到表示、决策可从智能体可见历史中学习的交互。"
         ],
-        "utility": "这篇综述帮助普通人理解视频人工智能正在从“看懂和生成片段”走向“模拟一个持续变化的世界”。它可能影响人们对视频生成工具、自动驾驶和机器人等应用的判断：这些系统是否真正理解世界状态，而不只是画面流畅。读者可借此更谨慎地看待相关产品宣传，但论文本身是综述，并未给出具体系统性能结论。",
+        "utility": "普通人可以借此理解：训练会使用工具的 AI 助手时，光收集“成功案例”并不够，还要让训练材料覆盖多步依赖，并确保每一步动作都能从当时可见的信息中得到合理解释。这可能影响人们对 AI 助手在多轮、有状态任务中是否可靠、以及其训练数据质量重要性的判断，但具体效果仍需结合论文测试范围看待。",
         "externalLinks": [
           {
             "label": "查看 Hugging Face 论文页",
-            "url": "https://huggingface.co/papers/2610.31668"
+            "url": "https://huggingface.co/papers/2610.33568"
           },
           {
             "label": "打开 arXiv 原文",
-            "url": "https://arxiv.org/abs/2610.31668"
+            "url": "https://arxiv.org/abs/2610.33568"
           }
         ]
       }
     },
     {
-      "externalId": "2610.30932",
+      "externalId": "2610.34662",
       "source": {
         "id": "huggingface-daily-papers",
         "type": "daily",
         "name": "Hugging Face Daily Papers",
         "url": "https://huggingface.co/papers"
       },
-      "title": "UserArena：面向长程购物智能体的交互式用户模拟基准",
-      "sourceUrl": "https://huggingface.co/papers/2610.30932",
-      "summary": "智能体式推荐通过一系列依赖上下文的决策来追求购物目标。开发与评估这类策略，需要能够忠实刻画交互式购物环境和用户在长程交互中行为反应的推荐世界模型。现有资源很少提供长程、细粒度的真实用户轨迹，也难以支持轨迹级评估以及与生产 A/B 结果的离线验证。我们提出 UserArena，一个真实电商交互基准，包含来自 11,010 名用户的 64,729 条会话轨迹，覆盖 566,102 个商品和 13 种动作类型。UserArena 将这些轨迹与交互式环境配对，并支持针对受控生产 A/B 测试结果的离线验证，从而支持从输出有效性、局部决策到序列行为、个性化与最终结果五个层次的评估。为提升模拟器在这些长程交互中的保真度，我们进一步提出同策略轨迹蒸馏（OPTD），它利用轨迹级意图，在学生模型生成的轨迹上提供密集的教师目标。实验表明，在 UserArena 的评估协议下，OPTD 在所评估的模拟器中取得最强的整体保真度，并在离线模拟中最接近地复现了生产策略的效果。",
-      "publishedAt": "2026-10-22T00:00:00.000Z",
+      "title": "StreamVibe：面向不断演变用户意图的主动式视频智能体",
+      "sourceUrl": "https://huggingface.co/papers/2610.34662",
+      "summary": "视觉语言模型正从离线的被动理解转向在线的主动交互。然而，现有方法大多依赖用户的明确请求，忽略了隐含的用户意图（例如用户浏览网站时“我下一步该点哪里？”），同时无法在用户请求可能持续变化时同步更新状态。这些局限使它们不太适合实际场景中的意图感知交互。为应对这些挑战，我们提出 StreamVibe-Bench，这是一个用于用户意图交互测试的新基准，包含 4.1K 个评估样本和 85K 个训练样本，覆盖显式、隐式和动态意图。基于该基准，我们开发了 StreamVibe-VL，一个流式主动模型，它从连续观察中推断隐含的用户意图，并随着意图演变动态调整交互方式。我们进一步提出 StreamVibe-Harness，它通过分层记忆将用户意图维护为具有灵活生命周期的持久状态，以跟踪最新的用户意图和环境状态。实验揭示了三个关键发现：(i) StreamVibe-VL 在保持较强通用视频理解能力的同时，将响应时机和回答质量相比其他基线提升了 10.7%；(ii) 现有主动模型在理解用户意图和决定何时响应方面仍然有限，尤其是在隐式和动态意图下；(iii) StreamVibe-Harness 在持续交互中进一步提升了响应一致性和适应性，使主动交互提升 12.3%。",
+      "publishedAt": "2026-10-26T00:00:00.000Z",
       "keywords": [
-        "交互式用户模拟",
-        "购物智能体",
-        "长程推荐",
-        "离线评估",
-        "A/B 测试验证",
-        "轨迹蒸馏"
+        "视觉语言模型",
+        "主动交互",
+        "用户意图理解",
+        "流式视频理解",
+        "基准测试"
       ],
       "body": {
         "section": "papers",
-        "digestDate": "2026-10-27",
-        "publishedDate": "10/22",
+        "digestDate": "2026-10-28",
+        "publishedDate": "10/26",
         "time": "本次更新",
         "readTime": "3 分钟",
         "accent": "violet",
         "inRecentWindow": true,
         "paragraphs": [
-          "智能体式推荐通过一系列依赖上下文的决策来追求购物目标。开发与评估这类策略，需要能够忠实刻画交互式购物环境和用户在长程交互中行为反应的推荐世界模型。",
-          "现有资源很少提供长程、细粒度的真实用户轨迹，也难以支持轨迹级评估以及与生产 A/B 结果的离线验证。我们提出 UserArena，一个真实电商交互基准，包含来自 11,010 名用户的 64,729 条会话轨迹，覆盖 566,102 个商品和 13 种动作类型。",
-          "UserArena 将这些轨迹与交互式环境配对，并支持针对受控生产 A/B 测试结果的离线验证，从而支持从输出有效性、局部决策到序列行为、个性化与最终结果五个层次的评估。",
-          "为提升模拟器在这些长程交互中的保真度，我们进一步提出同策略轨迹蒸馏（OPTD），它利用轨迹级意图，在学生模型生成的轨迹上提供密集的教师目标。实验表明，在 UserArena 的评估协议下，OPTD 在所评估的模拟器中取得最强的整体保真度，并在离线模拟中最接近地复现了生产策略的效果。"
+          "视觉语言模型正从离线的被动理解转向在线的主动交互。然而，现有方法大多依赖用户的明确请求，忽略了隐含的用户意图（例如用户浏览网站时“我下一步该点哪里？”），同时无法在用户请求可能持续变化时同步更新状态。这些局限使它们不太适合实际场景中的意图感知交互。",
+          "为应对这些挑战，我们提出 StreamVibe-Bench，这是一个用于用户意图交互测试的新基准，包含 4.1K 个评估样本和 85K 个训练样本，覆盖显式、隐式和动态意图。基于该基准，我们开发了 StreamVibe-VL，一个流式主动模型，它从连续观察中推断隐含的用户意图，并随着意图演变动态调整交互方式。我们进一步提出 StreamVibe-Harness，它通过分层记忆将用户意图维护为具有灵活生命周期的持久状态，以跟踪最新的用户意图和环境状态。",
+          "实验揭示了三个关键发现：(i) StreamVibe-VL 在保持较强通用视频理解能力的同时，将响应时机和回答质量相比其他基线提升了 10.7%；(ii) 现有主动模型在理解用户意图和决定何时响应方面仍然有限，尤其是在隐式和动态意图下；(iii) StreamVibe-Harness 在持续交互中进一步提升了响应一致性和适应性，使主动交互提升 12.3%。"
         ],
-        "utility": "普通人可以借此理解：电商平台在正式上线新的推荐或购物助手策略前，如何用真实用户轨迹和模拟环境做离线测试。它有助于判断平台评估是否更贴近真实用户长期行为，但论文结论主要针对模拟保真度和离线复现效果，并不直接说明某个具体产品一定更好。",
+        "utility": "这项研究关注的是让视频类智能助手不再只等用户明确发问，而是能从连续画面中推测用户可能想做什么，并在合适时机主动回应。普通人可以借此了解未来智能助手在浏览网页、使用软件或观看视频时可能变得更“懂你”，但也应注意这类能力目前仍处于研究阶段，实际效果和适用范围还需进一步验证。",
         "externalLinks": [
           {
             "label": "查看 Hugging Face 论文页",
-            "url": "https://huggingface.co/papers/2610.30932"
+            "url": "https://huggingface.co/papers/2610.34662"
           },
           {
             "label": "打开 arXiv 原文",
-            "url": "https://arxiv.org/abs/2610.30932"
+            "url": "https://arxiv.org/abs/2610.34662"
           }
         ]
       }
     },
     {
-      "externalId": "2610.31162",
+      "externalId": "2610.32285",
       "source": {
         "id": "huggingface-daily-papers",
         "type": "daily",
         "name": "Hugging Face Daily Papers",
         "url": "https://huggingface.co/papers"
       },
-      "title": "HiSTEVE 1.0：利用人机界面视觉-语言-动作智能体玩转开放世界游戏",
-      "sourceUrl": "https://huggingface.co/papers/2610.31162",
-      "summary": "构建能像人类玩家一样在开放世界游戏中行动的虚拟具身智能体，是一个长期目标，它既需要长时程自主性，也需要可靠的原始界面控制能力。作为程序生成的开放世界，Minecraft 为研究这两种能力的结合提供了天然测试平台。现有智能体通常只具备其中一种：要么有原生的视觉运动控制但缺乏长时程自主性，要么通过环境 API 或预定义技能执行高层规划。为弥合这一差距，作者提出 HiSTEVE——一个带有能力感知智能体外壳（harness）的分层 VLA 智能体。",
-      "publishedAt": "2026-10-22T00:00:00.000Z",
+      "title": "以轨迹审判：面向可靠性与失败归因的AI智能体运行框架基准测试",
+      "sourceUrl": "https://huggingface.co/papers/2610.32285",
+      "summary": "大语言模型智能体正越来越多地被用于解决现实问题，其效果既取决于底层模型，也取决于支撑其运行的“运行框架”（harness）。然而，现有基准测试大多关注模型能力和智能体的整体表现，对运行框架本身的评估关注有限。为填补这一空白，我们提出TraceTrial-Bench，将运行框架的可靠性划分为七个组成部分：上下文、执行、治理、生命周期、可观测性、工具和验证。我们构建了95个专家级、以机制为导向的任务，配有可执行或基于状态的基准真值，以支持语义等价的比较，同时保留每个运行框架的原生行为。我们设计了轨迹追踪（TT）模块来捕获智能体的执行轨迹，并引入两层评估框架，分别评估智能体表现和运行框架可靠性。此外，我们设计了多源证据获取（MEA）模块，为基于大语言模型的评估提供来自智能体上下文、运行框架和执行环境的证据，并开发了失败归因（FA）模块，利用显式机制链支持运行层面的归因。在4个运行框架、9个模型和95个任务上，我们对3420次运行进行了评估，得到的运行框架宏观平均得分为59.8%至72.0%，同时有31.1%的运行虽然至少未通过一项运行框架标准，却仍实现了任务成功。TraceTrial-Bench为比较智能体运行框架、诊断其失败以及研究运行框架设计与模型行为的相互作用，提供了可审计、可复现的基础。",
+      "publishedAt": "2026-10-23T00:00:00.000Z",
       "keywords": [
-        "开放世界游戏",
-        "具身智能体",
-        "视觉-语言-动作模型",
-        "Minecraft",
-        "分层规划"
+        "AI智能体",
+        "运行框架",
+        "基准测试",
+        "可靠性评估",
+        "失败归因",
+        "轨迹追踪"
       ],
       "body": {
         "section": "papers",
-        "digestDate": "2026-10-27",
-        "publishedDate": "10/22",
+        "digestDate": "2026-10-28",
+        "publishedDate": "10/23",
         "time": "本次更新",
         "readTime": "3 分钟",
         "accent": "violet",
         "inRecentWindow": true,
         "paragraphs": [
-          "构建能像人类玩家一样在开放世界游戏中行动的虚拟具身智能体，是一个长期目标，它既需要长时程自主性，也需要可靠的原始界面控制能力。作为程序生成的开放世界，Minecraft 为研究这两种能力的结合提供了天然测试平台。现有智能体通常只具备其中一种：要么有原生的视觉运动控制但缺乏长时程自主性，要么通过环境 API 或预定义技能执行高层规划。",
-          "为弥合这一差距，作者提出 HiSTEVE——一个带有能力感知智能体外壳（harness）的分层 VLA 智能体。在编排层，外壳配备用于跟踪进度的结构化记忆，以及一个 VLM 规划器，用于在 VLA 能力范围内选择子任务。为可靠判断子任务是否完成，作者进一步引入一个与策略耦合的任务完成状态检测器，它以 VLA 策略上下文为条件来发出候选完成信号。在控制层，单个 VLA 以纯视觉感知和原生键盘鼠标动作执行所有子任务。",
-          "为缓解异构 GUI 与非 GUI 交互之间的干扰，作者引入按交互类型区分的 RMSNorm 分支，以及独立的鼠标移动 token 嵌入。作者还通过世界知识注入、模仿学习和利用环境反馈的强化学习来训练 VLA，以提升可靠性和恢复能力。",
-          "HiSTEVE 在原子任务上达到当前最优表现：在 MineStudio Bench 上得分 85.0%，在 OpenHA 上平均成功率为 37.4%；同时还能像人类玩家一样完成从零制作铁镐等长时程任务。"
+          "大语言模型智能体正越来越多地被用于解决现实问题，其效果既取决于底层模型，也取决于支撑其运行的“运行框架”（harness）。然而，现有基准测试大多关注模型能力和智能体的整体表现，对运行框架本身的评估关注有限。",
+          "为填补这一空白，我们提出TraceTrial-Bench，将运行框架的可靠性划分为七个组成部分：上下文、执行、治理、生命周期、可观测性、工具和验证。我们构建了95个专家级、以机制为导向的任务，配有可执行或基于状态的基准真值，以支持语义等价的比较，同时保留每个运行框架的原生行为。",
+          "我们设计了轨迹追踪（TT）模块来捕获智能体的执行轨迹，并引入两层评估框架，分别评估智能体表现和运行框架可靠性。此外，我们设计了多源证据获取（MEA）模块，为基于大语言模型的评估提供来自智能体上下文、运行框架和执行环境的证据，并开发了失败归因（FA）模块，利用显式机制链支持运行层面的归因。",
+          "在4个运行框架、9个模型和95个任务上，我们对3420次运行进行了评估，得到的运行框架宏观平均得分为59.8%至72.0%，同时有31.1%的运行虽然至少未通过一项运行框架标准，却仍实现了任务成功。TraceTrial-Bench为比较智能体运行框架、诊断其失败以及研究运行框架设计与模型行为的相互作用，提供了可审计、可复现的基础。"
         ],
-        "utility": "这项研究展示了 AI 如何仅凭屏幕画面和模拟的键盘鼠标操作，在 Minecraft 这类开放世界中完成从零制作铁镐等连续任务，而不依赖游戏内部接口。普通人可以借此了解游戏 AI 从“会操作”走向“会自己定计划并坚持完成”的进展，也有助于判断未来游戏助手、自动化测试或虚拟角色可能达到的能力边界；不过其成功率仍有限，距离稳定替代人类玩家尚有距离。",
+        "utility": "普通人可以借此理解：AI智能体能否可靠完成任务，不只取决于模型本身，还取决于承载它的软件框架。这项研究提供了一套可审计的测试方法，帮助判断智能体在哪些环节容易出错，以及“任务成功”是否掩盖了过程缺陷。这对使用AI工具处理事务、评估AI产品可靠性有一定参考价值，但结论仅针对所测试的框架、模型和任务，不宜过度外推。",
         "externalLinks": [
           {
             "label": "查看 Hugging Face 论文页",
-            "url": "https://huggingface.co/papers/2610.31162"
+            "url": "https://huggingface.co/papers/2610.32285"
           },
           {
             "label": "打开 arXiv 原文",
-            "url": "https://arxiv.org/abs/2610.31162"
+            "url": "https://arxiv.org/abs/2610.32285"
           }
         ]
       }
