@@ -1,18 +1,18 @@
 {
-  "id": "collection-2026-10-31T20:27:29.191Z",
-  "generatedAt": "2026-10-31T20:27:29.191Z",
-  "windowStart": "2026-10-30T16:00:00.000Z",
+  "id": "collection-2026-11-01T21:10:50.042Z",
+  "generatedAt": "2026-11-01T21:10:50.042Z",
+  "windowStart": "2026-10-31T16:00:00.000Z",
   "mode": "production",
   "status": "completed_with_errors",
-  "itemCount": 17,
-  "validItemCount": 17,
-  "publishedCount": 17,
+  "itemCount": 13,
+  "validItemCount": 13,
+  "publishedCount": 13,
   "stages": [
     {
       "id": "collect",
       "label": "采集",
       "status": "completed",
-      "detail": "完成 2/4 个来源，共 17 条内容"
+      "detail": "完成 3/4 个来源，共 13 条内容"
     },
     {
       "id": "summarize",
@@ -24,13 +24,13 @@
       "id": "quality",
       "label": "质量检查",
       "status": "completed",
-      "detail": "通过 17 条公开内容"
+      "detail": "通过 13 条公开内容"
     },
     {
       "id": "publish",
       "label": "发布",
       "status": "completed",
-      "detail": "已写入 17 条公开内容"
+      "detail": "已写入 13 条公开内容"
     }
   ],
   "sources": [
@@ -38,28 +38,27 @@
       "id": "follow-builders",
       "label": "Follow Builders",
       "status": "completed",
-      "itemCount": 14,
-      "startedAt": "2026-10-31T20:27:29.203Z",
-      "finishedAt": "2026-10-31T20:27:45.641Z",
+      "itemCount": 7,
+      "startedAt": "2026-11-01T21:10:50.057Z",
+      "finishedAt": "2026-11-01T21:10:58.219Z",
       "retryAttempts": 1
     },
     {
       "id": "technical-x",
       "label": "技术动态 X",
-      "status": "failed",
-      "itemCount": 0,
-      "error": "DeepSeek completed 1/2 technical X entries",
-      "startedAt": "2026-10-31T20:27:45.642Z",
-      "finishedAt": "2026-10-31T20:27:49.556Z",
-      "retryAttempts": 5
+      "status": "completed",
+      "itemCount": 3,
+      "startedAt": "2026-11-01T21:10:58.219Z",
+      "finishedAt": "2026-11-01T21:11:02.494Z",
+      "retryAttempts": 1
     },
     {
       "id": "papers",
       "label": "热门论文",
       "status": "completed",
       "itemCount": 3,
-      "startedAt": "2026-10-31T20:27:49.557Z",
-      "finishedAt": "2026-10-31T20:28:05.844Z",
+      "startedAt": "2026-11-01T21:11:02.495Z",
+      "finishedAt": "2026-11-01T21:11:15.333Z",
       "retryAttempts": 1
     },
     {
@@ -67,9 +66,9 @@
       "label": "GitHub Trending",
       "status": "failed",
       "itemCount": 0,
-      "error": "DeepSeek did not finish 2 GitHub entries",
-      "startedAt": "2026-10-31T20:28:05.845Z",
-      "finishedAt": "2026-10-31T20:29:08.707Z",
+      "error": "DeepSeek did not finish 5 GitHub entries",
+      "startedAt": "2026-11-01T21:11:15.333Z",
+      "finishedAt": "2026-11-01T21:12:29.964Z",
       "retryAttempts": 5
     }
   ],
@@ -3263,306 +3262,42 @@
       "value": "非技术读者可判断：多模态智能体将更能引用证据、跨模态理解更省算力，模型对齐也可能不再只靠扩大规模。",
       "technicalLevel": "中高",
       "technicalPercentage": 72
+    },
+    {
+      "section": "x",
+      "digestDate": "2026-11-02",
+      "label": "X 推特内容",
+      "overview": "今天一线 AI Builder 的讨论集中在两条线上：一是智能体与 AI 工作方式本身，从超级智能体架构设想，到用批评循环替代极限投入，再到以“AI 之前做不到”为标尺检验使用深度；二是 AI 进入内容生产与算力基建，…",
+      "trends": [
+        "讨论重心从“AI 能否做”转向“AI 做出来的是否超出原有上限”，同时内容创作与算力扩张并进。"
+      ],
+      "value": "非技术读者可判断：AI 的竞争点正从工具可用性转向成果是否质变，以及内容门槛与算力规模同步被推高。",
+      "technicalLevel": "中等",
+      "technicalPercentage": 45
+    },
+    {
+      "section": "papers",
+      "digestDate": "2026-11-02",
+      "label": "热门论文",
+      "overview": "本期关注三类进展：实时交互式世界生成在长时程空间一致性上的突破，面向专业工作的智能体训练数据构建方法，以及多模态大模型中跨模态共享的检索机制。",
+      "trends": [
+        "世界生成与智能体训练都在追求可扩展性，前者靠紧凑记忆控制增长，后者靠任务规划修复提升监督质量；多模态研究则从单一模态转向跨模态共…"
+      ],
+      "value": "非技术读者可判断：实时可探索的生成世界正接近可用，专业工作智能体训练有了规模化路径，多模态模型的长文检索能力可被定位并定向增强。",
+      "technicalLevel": "高",
+      "technicalPercentage": 88
     }
   ],
   "errors": [
     {
-      "source": "technical-x",
-      "message": "DeepSeek completed 1/2 technical X entries"
-    },
-    {
       "source": "github",
-      "message": "DeepSeek did not finish 2 GitHub entries"
+      "message": "DeepSeek did not finish 5 GitHub entries"
     }
   ],
-  "finishedAt": "2026-10-31T20:34:15.596Z",
+  "finishedAt": "2026-11-01T21:17:04.902Z",
   "items": [
     {
-      "externalId": "digest-2026-10-31-claude",
-      "source": {
-        "id": "follow-builders",
-        "type": "builder",
-        "name": "Claude · Follow Builders",
-        "url": "https://github.com/zarazhangrui/follow-builders"
-      },
-      "title": "Claude",
-      "sourceUrl": "https://x.com/claudeai/status/2116220869479428500",
-      "summary": "Claude 宣布重命名 Max 套餐，并取消已验证 Ultra 账户的 5 小时限制。",
-      "publishedAt": "2026-10-30T17:29:07.000Z",
-      "keywords": [
-        "Claude",
-        "Max 套餐",
-        "Ultra",
-        "订阅",
-        "使用限制"
-      ],
-      "body": {
-        "section": "x",
-        "digestDate": "2026-11-01",
-        "publishedDate": "10/31",
-        "time": "本次更新",
-        "readTime": "3 分钟",
-        "accent": "green",
-        "inRecentWindow": true,
-        "digestFormat": "builders-digest",
-        "paragraphs": [
-          "Claude 宣布把 Max 套餐改名：Max 5x 改成 Max，Max 20x 改成 Ultra，价格不变，Max 仍是每月 100 美元，Ultra 仍是 200 美元，现有订阅用户什么都不用做。同时从今天起，对大多数现有订阅用户取消已验证 Ultra 账户的 5 小时限制；较新的账户在完成验证前会保留一个临时限制，用来防止欺诈和滥用，限制解除时会收到邮件。每周限制保持不变。"
-        ],
-        "externalLinks": [
-          {
-            "label": "推文",
-            "url": "https://x.com/claudeai/status/2116220869479428500"
-          }
-        ]
-      }
-    },
-    {
-      "externalId": "digest-2026-10-31-boris-cherny",
-      "source": {
-        "id": "follow-builders",
-        "type": "builder",
-        "name": "Boris Cherny · Follow Builders",
-        "url": "https://github.com/zarazhangrui/follow-builders"
-      },
-      "title": "Boris Cherny",
-      "sourceUrl": "https://x.com/bcherny/status/2116222842413142111",
-      "summary": "Boris Cherny 同步表示，已验证 Ultra 账户的 5 小时限制将被取消。",
-      "publishedAt": "2026-10-30T17:36:57.000Z",
-      "keywords": [
-        "Boris Cherny",
-        "Ultra",
-        "5 小时限制",
-        "Claude"
-      ],
-      "body": {
-        "section": "x",
-        "digestDate": "2026-11-01",
-        "publishedDate": "10/31",
-        "time": "本次更新",
-        "readTime": "3 分钟",
-        "accent": "green",
-        "inRecentWindow": true,
-        "digestFormat": "builders-digest",
-        "paragraphs": [
-          "在 Anthropic 做 Claude 的 Boris Cherny 也发了一条，说他们正在取消已验证 Ultra 账户的 5 小时限制。"
-        ],
-        "externalLinks": [
-          {
-            "label": "推文",
-            "url": "https://x.com/bcherny/status/2116222842413142111"
-          }
-        ]
-      }
-    },
-    {
-      "externalId": "digest-2026-10-31-thibault-sottiaux",
-      "source": {
-        "id": "follow-builders",
-        "type": "builder",
-        "name": "Thibault Sottiaux · Follow Builders",
-        "url": "https://github.com/zarazhangrui/follow-builders"
-      },
-      "title": "OpenAI Codex 与 ChatGPT 团队成员 Thibault Sottiaux",
-      "sourceUrl": "https://x.com/thsottiaux/status/2116405414921384099",
-      "summary": "Thibault Sottiaux 宣布移动端支持多账号切换，桌面端即将跟进，并预告接下来两天会有“重置”和“存下”的安排。",
-      "publishedAt": "2026-10-31T05:42:26.000Z",
-      "keywords": [
-        "多账号切换",
-        "移动端",
-        "桌面端",
-        "重置",
-        "OpenAI"
-      ],
-      "body": {
-        "section": "x",
-        "digestDate": "2026-11-01",
-        "publishedDate": "10/31",
-        "time": "本次更新",
-        "readTime": "3 分钟",
-        "accent": "green",
-        "inRecentWindow": true,
-        "digestFormat": "builders-digest",
-        "paragraphs": [
-          "Thibault Sottiaux 带来第 26 天的更新：现在在移动端可以轻松在多个账号之间切换，桌面端也很快会支持。他还预告，接下来两天会是重置……存下……至于拿这些做什么，就随你了 👀。"
-        ],
-        "externalLinks": [
-          {
-            "label": "推文",
-            "url": "https://x.com/thsottiaux/status/2116405414921384099"
-          }
-        ]
-      }
-    },
-    {
-      "externalId": "digest-2026-10-31-garry-tan",
-      "source": {
-        "id": "follow-builders",
-        "type": "builder",
-        "name": "Garry Tan · Follow Builders",
-        "url": "https://github.com/zarazhangrui/follow-builders"
-      },
-      "title": "Y Combinator 总裁兼 CEO Garry Tan",
-      "sourceUrl": "https://x.com/garrytan/status/2116303457774899251",
-      "summary": "Garry Tan 预告与 PStack、GStack 创作者录制的 Lightcone 节目，并介绍 GBrain Cloud 可让所有 agent 共用同一份上下文。",
-      "publishedAt": "2026-10-30T22:57:18.000Z",
-      "keywords": [
-        "Lightcone",
-        "GBrain Cloud",
-        "agent",
-        "上下文",
-        "YC"
-      ],
-      "body": {
-        "section": "x",
-        "digestDate": "2026-11-01",
-        "publishedDate": "10/31",
-        "time": "本次更新",
-        "readTime": "3 分钟",
-        "accent": "green",
-        "inRecentWindow": true,
-        "digestFormat": "builders-digest",
-        "paragraphs": [
-          "Garry Tan 先提到 PStack 和 GStack 的创作者，说等不及要分享他们与 poteto、romanugarte_ 一起录的那期 Lightcone 节目。随后他介绍 GBrain Cloud，称这是让 GBrain 在你所有 agent 上跑起来最快的方式：每个 harness 各有长处，Grok、Muse、Dots 适合个人用途，OpenClaw、Hermes 胜在原始能力，Claude Code、Codex、Capy 擅长代码生成，而 GBrain 让你把上下文跑在它们全部之上。"
-        ],
-        "externalLinks": [
-          {
-            "label": "推文 1",
-            "url": "https://x.com/garrytan/status/2116262167892852812"
-          },
-          {
-            "label": "推文 2",
-            "url": "https://x.com/garrytan/status/2116303457774899251"
-          }
-        ]
-      }
-    },
-    {
-      "externalId": "digest-2026-10-31-thariq",
-      "source": {
-        "id": "follow-builders",
-        "type": "builder",
-        "name": "Thariq · Follow Builders",
-        "url": "https://github.com/zarazhangrui/follow-builders"
-      },
-      "title": "Thariq",
-      "sourceUrl": "https://x.com/trq212/status/2116212324696777073",
-      "summary": "Thariq 认为应对经济悲观情绪的办法是更彻底地相信 AGI，并期待一个能解释自身工作、让每个人发挥最大效能的良好对齐 ASI。",
-      "publishedAt": "2026-10-30T16:55:10.000Z",
-      "keywords": [
-        "AGI",
-        "ASI",
-        "对齐",
-        "经济悲观主义",
-        "智能"
-      ],
-      "body": {
-        "section": "x",
-        "digestDate": "2026-11-01",
-        "publishedDate": "10/31",
-        "time": "本次更新",
-        "readTime": "3 分钟",
-        "accent": "green",
-        "inRecentWindow": true,
-        "digestFormat": "builders-digest",
-        "paragraphs": [
-          "曾任职于 Anthropic Claude Code 团队的 Thariq 谈到经济悲观主义时，给出的解法是“更加 AGI-pilled”。他说自己相信一个对齐良好的 ASI，它能解释自己在做什么、带着我们一起往前走，并让每个个体都发挥出最大效能。紧接着他补了一句：几乎所有人都很不会预测更多智能究竟会以什么方式体现在经济里，而“它会很贵、还会让所有人失业”这个最简单的答案，在他看来其实并不够 AGI-pilled，大家应该避免把这种想象“超信”成现实。"
-        ],
-        "externalLinks": [
-          {
-            "label": "推文 1",
-            "url": "https://x.com/trq212/status/2116212322838655014"
-          },
-          {
-            "label": "推文 2",
-            "url": "https://x.com/trq212/status/2116212324696777073"
-          }
-        ]
-      }
-    },
-    {
-      "externalId": "digest-2026-10-31-josh-woodward",
-      "source": {
-        "id": "follow-builders",
-        "type": "builder",
-        "name": "Josh Woodward · Follow Builders",
-        "url": "https://github.com/zarazhangrui/follow-builders"
-      },
-      "title": "Google 副总裁 Josh Woodward",
-      "sourceUrl": "https://x.com/joshwoodward/status/2116220878593900775",
-      "summary": "Josh Woodward 提到 iPhone Duo 上周五发布，Gemini App 首发当天就已上线并针对它做了优化。",
-      "publishedAt": "2026-10-30T17:29:09.000Z",
-      "keywords": [
-        "Gemini App",
-        "iPhone Duo",
-        "Google",
-        "发布",
-        "优化"
-      ],
-      "body": {
-        "section": "x",
-        "digestDate": "2026-11-01",
-        "publishedDate": "10/31",
-        "time": "本次更新",
-        "readTime": "3 分钟",
-        "accent": "green",
-        "inRecentWindow": true,
-        "digestFormat": "builders-digest",
-        "paragraphs": [
-          "Google 副总裁 Josh Woodward 提到，iPhone Duo 上周五发布，Gemini App 在第一天就到位，并且针对它做了优化。"
-        ],
-        "externalLinks": [
-          {
-            "label": "推文",
-            "url": "https://x.com/joshwoodward/status/2116220878593900775"
-          }
-        ]
-      }
-    },
-    {
-      "externalId": "digest-2026-10-31-zara-zhang",
-      "source": {
-        "id": "follow-builders",
-        "type": "builder",
-        "name": "Zara Zhang · Follow Builders",
-        "url": "https://github.com/zarazhangrui/follow-builders"
-      },
-      "title": "Builder Zara Zhang",
-      "sourceUrl": "https://x.com/zarazhangrui/status/2116283023415287932",
-      "summary": "Zara Zhang 发布了一支关于“非设计师如何用 AI 做出有品味的东西”的视频随笔，并透露视频剪辑只靠一段很长的提示词交给 coding agent 完成。",
-      "publishedAt": "2026-10-30T21:36:06.000Z",
-      "keywords": [
-        "AI 创作",
-        "品味",
-        "视频随笔",
-        "提示词",
-        "coding agent"
-      ],
-      "body": {
-        "section": "x",
-        "digestDate": "2026-11-01",
-        "publishedDate": "10/31",
-        "time": "本次更新",
-        "readTime": "3 分钟",
-        "accent": "green",
-        "inRecentWindow": true,
-        "digestFormat": "builders-digest",
-        "paragraphs": [
-          "Zara Zhang 分享了一支视频随笔，主题是“不是设计师，怎么用 AI 做出有品味的东西”。她补充说，这支视频的剪辑只用了 1 条提示词——一条非常长的提示词——由 coding agent 完成。"
-        ],
-        "externalLinks": [
-          {
-            "label": "推文 1",
-            "url": "https://x.com/zarazhangrui/status/2116281211962454056"
-          },
-          {
-            "label": "推文 2",
-            "url": "https://x.com/zarazhangrui/status/2116283023415287932"
-          }
-        ]
-      }
-    },
-    {
-      "externalId": "digest-2026-10-31-guillermo-rauch",
+      "externalId": "digest-2026-11-01-guillermo-rauch",
       "source": {
         "id": "follow-builders",
         "type": "builder",
@@ -3570,171 +3305,76 @@
         "url": "https://github.com/zarazhangrui/follow-builders"
       },
       "title": "Vercel CEO Guillermo Rauch",
-      "sourceUrl": "https://x.com/rauchg/status/2116369601508593911",
-      "summary": "Guillermo Rauch 称当下是人类黄金时代，畅想每台桌面都有一个 agent，并感叹某个产品的改进速度令人瞠目。",
-      "publishedAt": "2026-10-31T03:20:07.000Z",
+      "sourceUrl": "https://x.com/rauchg/status/2116710688550994042",
+      "summary": "Guillermo Rauch 表示某个东西放在旧金山会非常有冲击力。",
+      "publishedAt": "2026-11-01T01:55:29.000Z",
       "keywords": [
-        "agent",
-        "黄金时代",
-        "基准测试",
-        "token 效率",
-        "模型"
+        "Guillermo Rauch",
+        "Vercel",
+        "旧金山",
+        "推文"
       ],
       "body": {
         "section": "x",
-        "digestDate": "2026-11-01",
-        "publishedDate": "10/31",
+        "digestDate": "2026-11-02",
+        "publishedDate": "11/1",
         "time": "本次更新",
         "readTime": "3 分钟",
         "accent": "green",
         "inRecentWindow": true,
         "digestFormat": "builders-digest",
         "paragraphs": [
-          "Guillermo Rauch 先感叹“我们正处在人类的黄金时代”，接着抛出“每台桌面上都有一个 agent”的画面。他还提到某个产品（原文链接未展开）的改进速度让人瞠目，如今它更小、更快、也更省 token；团队持续做基准测试，让它在开源和闭源模型上不断改进自身表现。"
-        ],
-        "externalLinks": [
-          {
-            "label": "推文 1",
-            "url": "https://x.com/rauchg/status/2116369601508593911"
-          },
-          {
-            "label": "推文 2",
-            "url": "https://x.com/rauchg/status/2116345666108854781"
-          },
-          {
-            "label": "推文 3",
-            "url": "https://x.com/rauchg/status/2116253050742694182"
-          }
-        ]
-      }
-    },
-    {
-      "externalId": "digest-2026-10-31-alex-albert",
-      "source": {
-        "id": "follow-builders",
-        "type": "builder",
-        "name": "Alex Albert · Follow Builders",
-        "url": "https://github.com/zarazhangrui/follow-builders"
-      },
-      "title": "AnthropicAI 研究员 Alex Albert",
-      "sourceUrl": "https://x.com/alexalbert__/status/2116227345501880781",
-      "summary": "Alex Albert 聊到 Ultra 订阅档位的命名和取消 5 小时速率限制。",
-      "publishedAt": "2026-10-30T17:54:51.000Z",
-      "keywords": [
-        "Ultra",
-        "订阅方案",
-        "速率限制",
-        "AnthropicAI",
-        "命名"
-      ],
-      "body": {
-        "section": "x",
-        "digestDate": "2026-11-01",
-        "publishedDate": "10/31",
-        "time": "本次更新",
-        "readTime": "3 分钟",
-        "accent": "green",
-        "inRecentWindow": true,
-        "digestFormat": "builders-digest",
-        "paragraphs": [
-          "AnthropicAI 的研究员 Alex Albert 提到，Ultra 这个名字听起来比 Max 20x 更顺耳，而且 Ultra 订阅用户不再有 5 小时的速率限制。他还顺带分享了一段关于这个方案的历史以及目前进展的简短回顾。"
-        ],
-        "externalLinks": [
-          {
-            "label": "推文 1",
-            "url": "https://x.com/alexalbert__/status/2116227345501880781"
-          },
-          {
-            "label": "推文 2",
-            "url": "https://x.com/alexalbert__/status/2116227346869194935"
-          }
-        ]
-      }
-    },
-    {
-      "externalId": "digest-2026-10-31-matt-turck",
-      "source": {
-        "id": "follow-builders",
-        "type": "builder",
-        "name": "Matt Turck · Follow Builders",
-        "url": "https://github.com/zarazhangrui/follow-builders"
-      },
-      "title": "FirstMarkCap 投资人 Matt Turck",
-      "sourceUrl": "https://x.com/mattturck/status/2116335155535052951",
-      "summary": "Matt Turck 澄清法国一项投票并非法律、也不可能成为法律。",
-      "publishedAt": "2026-10-31T01:03:15.000Z",
-      "keywords": [
-        "法国",
-        "立法",
-        "下议院",
-        "投票",
-        "民粹主义"
-      ],
-      "body": {
-        "section": "x",
-        "digestDate": "2026-11-01",
-        "publishedDate": "10/31",
-        "time": "本次更新",
-        "readTime": "3 分钟",
-        "accent": "green",
-        "inRecentWindow": true,
-        "digestFormat": "builders-digest",
-        "paragraphs": [
-          "FirstMarkCap 的投资人 Matt Turck 先开了个关于法国人的玩笑，然后澄清说：那根本不是法律；它完全没有机会成为法律，在立法流程里根本活不下来；那只是下议院里 11 个民粹主义蠢货投的票，而且当时会场几乎空着，577 名议员只到了 35 人。他最后补了一句：不过确实还是挺丢人的。"
+          "Vercel CEO Guillermo Rauch 发推说，这个东西放在旧金山会非常有冲击力。"
         ],
         "externalLinks": [
           {
             "label": "推文",
-            "url": "https://x.com/mattturck/status/2116335155535052951"
+            "url": "https://x.com/rauchg/status/2116710688550994042"
           }
         ]
       }
     },
     {
-      "externalId": "digest-2026-10-31-amjad-masad",
+      "externalId": "digest-2026-11-01-aaron-levie",
       "source": {
         "id": "follow-builders",
         "type": "builder",
-        "name": "Amjad Masad · Follow Builders",
+        "name": "Aaron Levie · Follow Builders",
         "url": "https://github.com/zarazhangrui/follow-builders"
       },
-      "title": "Replit CEO Amjad Masad",
-      "sourceUrl": "https://x.com/amasad/status/2116343923925041462",
-      "summary": "Amjad Masad 宣布推出面向政府的 Replit，并称在 Replit 上托管应用并开启 autofix 后，软件就变成能自我维护的软件。",
-      "publishedAt": "2026-10-31T01:38:05.000Z",
+      "title": "Box CEO Aaron Levie",
+      "sourceUrl": "https://x.com/levie/status/2116652002830963114",
+      "summary": "Aaron Levie 提出一个检验 AI 使用是否够深入的标准：如果这件事在 AI 之前也能做，说明你还没把 AI 用到位。",
+      "publishedAt": "2026-10-31T22:02:17.000Z",
       "keywords": [
-        "Replit",
-        "政府版",
-        "autofix",
-        "自我维护软件",
-        "Amjad Masad"
+        "Aaron Levie",
+        "Box",
+        "AI 使用",
+        "产品原型",
+        "智能"
       ],
       "body": {
         "section": "x",
-        "digestDate": "2026-11-01",
-        "publishedDate": "10/31",
+        "digestDate": "2026-11-02",
+        "publishedDate": "11/1",
         "time": "本次更新",
         "readTime": "3 分钟",
         "accent": "green",
         "inRecentWindow": true,
         "digestFormat": "builders-digest",
         "paragraphs": [
-          "Replit CEO Amjad Masad 在推文里宣布推出 Replit for Government，也就是面向政府机构的版本。他还提到一个用法：如果把应用托管在 Replit 上并开启 autofix，它就成了“能自我维护的软件”（Self-Maintaining Software）。"
+          "Box CEO Aaron Levie 分享了一个检验自己是否把 AI 用够了的试金石。他说，大概六个月前，AI 能帮你做到的最好程度，无非是把本来就会做的东西稍微快一点做出来；但现在情况变了，用 AI 做出来的成果可以、也应该大幅超过以前能做到的水平，而且时间只要一小部分。\n\n他给出的具体标准是：产品原型不仅要功能完整、可交互，功能本身也应该明显强于以前能做出的版本；工程架构应该能带来过去无法追求的性​​能提升；项目调研应该把该主题在所有分析维度上的每一个事实都吃透；用 AI 落地的业务流程应该以完全不同的方式运转，并能从过去所有失败中学习，这是人类做不到的。\n\nLevie 认为，我们无疑正在进入一个 AI 在大多数维度上比人更聪明的时期。也许不是每一个重要维度都如此，因为智能仍然是参差不齐的，但至少在足够多的维度上，当 AI 与人类擅长的事情结合时，就能得到质变的结果。所以他的简单测试是：如果你现在做的事在 AI 出现之前也能做，那你很可能还没把 AI 用够。"
         ],
         "externalLinks": [
           {
-            "label": "推文 1",
-            "url": "https://x.com/amasad/status/2116343923925041462"
-          },
-          {
-            "label": "推文 2",
-            "url": "https://x.com/amasad/status/2116341851825287476"
+            "label": "推文",
+            "url": "https://x.com/levie/status/2116652002830963114"
           }
         ]
       }
     },
     {
-      "externalId": "digest-2026-10-31-swyx",
+      "externalId": "digest-2026-11-01-swyx",
       "source": {
         "id": "follow-builders",
         "type": "builder",
@@ -3742,46 +3382,119 @@
         "url": "https://github.com/zarazhangrui/follow-builders"
       },
       "title": "Swyx",
-      "sourceUrl": "https://x.com/swyx/status/2116379186831257954",
-      "summary": "Swyx 吐槽有人拿他自己节目的 show notes 来引用他，另外晒出一个 600 万播放、180 万月活的数据，并配了一句“一切都好，你问这个干嘛”。",
-      "publishedAt": "2026-10-31T03:58:13.000Z",
+      "sourceUrl": "https://x.com/swyx/status/2116773135668404286",
+      "summary": "Swyx 主张用“低投入加批评循环”替代极限投入，并调侃对 effort 等级的执念就像这个时代的“制表符 vs 空格”。",
+      "publishedAt": "2026-11-01T06:03:37.000Z",
       "keywords": [
-        "Swyx",
-        "节目笔记",
-        "播放量",
-        "月活",
-        "吐槽"
+        "低投入",
+        "批评循环",
+        "Opus 5.5",
+        "effort 等级",
+        "Hackertube"
       ],
       "body": {
         "section": "x",
-        "digestDate": "2026-11-01",
-        "publishedDate": "10/31",
+        "digestDate": "2026-11-02",
+        "publishedDate": "11/1",
         "time": "本次更新",
         "readTime": "3 分钟",
         "accent": "green",
         "inRecentWindow": true,
         "digestFormat": "builders-digest",
         "paragraphs": [
-          "Swyx 这几条推文挺跳脱。他先晒出一个数字：600 万播放、180 万月活，配文只有一句“一切都好，你问这个干嘛”。接着他吐槽有人拿他自己节目的 show notes 来引用他，说别拿“古代魔法”来引经据典，写的时候他本人就在场。"
+          "Swyx 招呼大家干脆都站到“光明面”来：低投入加上批评循环，比什么“superultramaxhighwhatever”都强；对受吞吐量限制的人，他还指了条路，让人去看 swyxio/skills/babysit-runs。顺带一提，他说 Karpathy 在今天上线的 Hackertube 这个最新项目里，用的是 Opus 5.5 的 medium 档。Swyx 觉得对 effort 等级抱有强烈立场，就像我们这个时代的“制表符 vs 空格”之争，各凭喜好调就行——不过他补了一句，自己那套肯定比你的更优越。"
         ],
         "externalLinks": [
           {
             "label": "推文 1",
-            "url": "https://x.com/swyx/status/2116379186831257954"
+            "url": "https://x.com/swyx/status/2116642586387730593"
           },
           {
             "label": "推文 2",
-            "url": "https://x.com/swyx/status/2116372094527443439"
-          },
-          {
-            "label": "推文 3",
-            "url": "https://x.com/swyx/status/2116323655294828814"
+            "url": "https://x.com/swyx/status/2116773135668404286"
           }
         ]
       }
     },
     {
-      "externalId": "digest-2026-10-31-peter-yang",
+      "externalId": "digest-2026-11-01-garry-tan",
+      "source": {
+        "id": "follow-builders",
+        "type": "builder",
+        "name": "Garry Tan · Follow Builders",
+        "url": "https://github.com/zarazhangrui/follow-builders"
+      },
+      "title": "Garry Tan",
+      "sourceUrl": "https://x.com/garrytan/status/2116640529232609515",
+      "summary": "Garry Tan 引用一段关于“为什么最糟的人会爬上顶端”的论述：计划失败后需要强制力，系统筛选的是没有顾忌的人，而团结多数靠的是共同敌人。",
+      "publishedAt": "2026-10-31T21:16:42.000Z",
+      "keywords": [
+        "政治",
+        "强制力",
+        "系统筛选",
+        "共同敌人",
+        "社会"
+      ],
+      "body": {
+        "section": "x",
+        "digestDate": "2026-11-02",
+        "publishedDate": "11/1",
+        "time": "本次更新",
+        "readTime": "3 分钟",
+        "accent": "green",
+        "inRecentWindow": true,
+        "digestFormat": "builders-digest",
+        "paragraphs": [
+          "Garry Tan 引了一段话来回应“为什么在一个政治破败的社会里，最糟的人反而会爬到顶端”：当计划失败——而它总会失败——就需要强制力，需要有人愿意去做正直的人拒绝做的事。系统并不提拔最好的人，它挑选的是毫无顾忌的人；而要围绕这个计划聚起多数人，没有什么比一个共同敌人更管用：富人、外国人、异见者。"
+        ],
+        "externalLinks": [
+          {
+            "label": "推文",
+            "url": "https://x.com/garrytan/status/2116640529232609515"
+          }
+        ]
+      }
+    },
+    {
+      "externalId": "digest-2026-11-01-nikunj-kothari",
+      "source": {
+        "id": "follow-builders",
+        "type": "builder",
+        "name": "Nikunj Kothari · Follow Builders",
+        "url": "https://github.com/zarazhangrui/follow-builders"
+      },
+      "title": "fpvventures 合伙人 Nikunj Kothari",
+      "sourceUrl": "https://x.com/nikunj/status/2116624458198982668",
+      "summary": "Nikunj Kothari 分享今年第一场雪的照片，感叹初雪总是特别。",
+      "publishedAt": "2026-10-31T20:12:50.000Z",
+      "keywords": [
+        "初雪",
+        "冬天",
+        "日常",
+        "fpvventures"
+      ],
+      "body": {
+        "section": "x",
+        "digestDate": "2026-11-02",
+        "publishedDate": "11/1",
+        "time": "本次更新",
+        "readTime": "3 分钟",
+        "accent": "green",
+        "inRecentWindow": true,
+        "digestFormat": "builders-digest",
+        "paragraphs": [
+          "fpvventures 合伙人 Nikunj Kothari 发了一张照片，配文说第一场雪总是特别的。"
+        ],
+        "externalLinks": [
+          {
+            "label": "推文",
+            "url": "https://x.com/nikunj/status/2116624458198982668"
+          }
+        ]
+      }
+    },
+    {
+      "externalId": "digest-2026-11-01-peter-yang",
       "source": {
         "id": "follow-builders",
         "type": "builder",
@@ -3789,218 +3502,317 @@
         "url": "https://github.com/zarazhangrui/follow-builders"
       },
       "title": "Peter Yang",
-      "sourceUrl": "https://x.com/petergyang/status/2116353054614442364",
-      "summary": "Peter Yang 推荐《星际迷航：皮卡德》第三季，并透露正在用 Grok 机器人解决回复机器人问题、即将采访 Jacob。",
-      "publishedAt": "2026-10-31T02:14:22.000Z",
+      "sourceUrl": "https://x.com/petergyang/status/2116754343315841471",
+      "summary": "Peter Yang 聊万圣节：应该每季度过一次，最棒的是能随便装扮，还说自己更愿意听某个东西而不是 Spotify。",
+      "publishedAt": "2026-11-01T04:48:57.000Z",
       "keywords": [
-        "星际迷航",
-        "皮卡德",
-        "Grok",
-        "回复机器人",
-        "开源",
-        "访谈"
+        "万圣节",
+        "节日",
+        "装扮",
+        "Spotify",
+        "日常"
       ],
       "body": {
         "section": "x",
-        "digestDate": "2026-11-01",
-        "publishedDate": "10/31",
+        "digestDate": "2026-11-02",
+        "publishedDate": "11/1",
         "time": "本次更新",
         "readTime": "3 分钟",
         "accent": "green",
         "inRecentWindow": true,
         "digestFormat": "builders-digest",
         "paragraphs": [
-          "Peter Yang 说，如果你是看着《星际迷航：下一代》长大的千禧一代，又想念 Patrick Stewart，那他强烈推荐去看《皮卡德》第三季。他几年前看过，觉得这是这帮船员应得的正式结局，也很感谢 Terry Matalas 和团队把它做出来。他还提醒不用看第一季和第二季，直接跳到第三季就行。转头他又聊起自己的小工程：Grok 机器人要一劳永逸地解决他的回复机器人问题，他还在问大家有没有其他好用的信号可以加进去，并说等打磨好之后会开源。另外他提到自己正在就下面那个“爆款”内容采访 Jacob，还说自己有游戏背景，估计两人会有很多可聊的，并请大家订阅以便尽快看到访谈。"
+          "Peter Yang 说万圣节简直是最好的节日，应该每个季度都过一次；他不太在意讨糖那部分，觉得能随便装扮成什么都行才是最棒的。随后他又半开玩笑地问：更喜欢听这个而不是 Spotify，会不会有点奇怪。"
         ],
         "externalLinks": [
           {
             "label": "推文 1",
-            "url": "https://x.com/petergyang/status/2116353054614442364"
+            "url": "https://x.com/petergyang/status/2116732887265656978"
           },
           {
             "label": "推文 2",
-            "url": "https://x.com/petergyang/status/2116333763466858713"
+            "url": "https://x.com/petergyang/status/2116754343315841471"
           },
           {
             "label": "推文 3",
-            "url": "https://x.com/petergyang/status/2116330754699596010"
+            "url": "https://x.com/petergyang/status/2116733034926100841"
           }
         ]
       }
     },
     {
-      "externalId": "digest-2026-10-31-aditya-agarwal",
+      "externalId": "digest-2026-11-01-matt-turck",
       "source": {
         "id": "follow-builders",
         "type": "builder",
-        "name": "Aditya Agarwal · Follow Builders",
+        "name": "Matt Turck · Follow Builders",
         "url": "https://github.com/zarazhangrui/follow-builders"
       },
-      "title": "Aditya Agarwal",
-      "sourceUrl": "https://x.com/adityaag/status/2116249251651215822",
-      "summary": "Aditya Agarwal 谈投资人和媒体对最后一轮私募估值的执念，认为 Anthropic 上市时的市值无论高低都是惊人的价值创造。",
-      "publishedAt": "2026-10-30T19:21:54.000Z",
+      "title": "FirstMark Capital 投资人 Matt Turck",
+      "sourceUrl": "https://x.com/mattturck/status/2116653171741470990",
+      "summary": "Matt Turck 发布了一条带南瓜和幽灵表情的推文，称某样东西是永不过时的经典。",
+      "publishedAt": "2026-10-31T22:06:56.000Z",
       "keywords": [
-        "私募估值",
-        "Anthropic",
-        "上市",
-        "价值创造",
-        "投资人"
+        "Matt Turck",
+        "FirstMark Capital",
+        "经典",
+        "万圣节",
+        "推文"
       ],
       "body": {
         "section": "x",
-        "digestDate": "2026-11-01",
-        "publishedDate": "10/31",
+        "digestDate": "2026-11-02",
+        "publishedDate": "11/1",
         "time": "本次更新",
         "readTime": "3 分钟",
         "accent": "green",
         "inRecentWindow": true,
         "digestFormat": "builders-digest",
         "paragraphs": [
-          "Aditya Agarwal 觉得投资人和媒体总盯着最后一轮私募价格这件事很奇怪。他说，不管 Anthropic 上市时是 1.2 万亿美元还是 2 万亿美元，六年内创造出这样的价值都已经极其惊人；而且大多数公司的价值其实是在上市之后才被创造出来的。"
+          "FirstMark Capital 的投资人 Matt Turck 发了一条推文，只写了一句“永不过时的经典 🎃👻”，并附上了一个链接。"
         ],
         "externalLinks": [
           {
             "label": "推文",
-            "url": "https://x.com/adityaag/status/2116249251651215822"
+            "url": "https://x.com/mattturck/status/2116653171741470990"
           }
         ]
       }
     },
     {
-      "externalId": "2610.36671",
+      "externalId": "2116720147113058754",
+      "source": {
+        "id": "attentionvc-ai",
+        "type": "daily",
+        "name": "Cern Basher · 技术动态 X 热榜",
+        "url": "https://reply-vc-90459984647.us-central1.run.app/v1/articles/leaderboard?window=3d&category=ai&lang=en&limit=30"
+      },
+      "title": "靶场与垃圾信息：SpaceX 两座巨型新 AI 数据中心",
+      "sourceUrl": "https://x.com/CernBasher/status/2116720147113058754",
+      "summary": "Cern Basher 称，随着 42 万块 NVIDIA GB300 GPU 计划在年底前上线，SpaceX 正在快速扩建 Colossus II；预览提到 2026 年 10 月 31 日 Elon 披露了两座巨型新 AI 数据中心的细节。",
+      "publishedAt": "2026-11-01T02:33:04.000Z",
+      "keywords": [
+        "SpaceX",
+        "AI数据中心",
+        "NVIDIA GB300",
+        "Colossus II",
+        "Elon Musk"
+      ],
+      "body": {
+        "section": "x",
+        "digestDate": "2026-11-02",
+        "publishedDate": "11/1",
+        "time": "本次更新",
+        "readTime": "3 分钟",
+        "accent": "green",
+        "inRecentWindow": true,
+        "paragraphs": [
+          "靶场与垃圾信息：SpaceX 两座巨型新 AI 数据中心。随着 42 万块额外的 NVIDIA GB300 GPU 计划在年底前上线，SpaceX 正在快速扩建 Colossus II。2026 年 10 月 31 日，Elon 披露了两座巨型新 AI 数据中心的细节。",
+          "核心信息是 SpaceX 的 AI 算力扩张：Colossus II 将新增 42 万块 NVIDIA GB300 GPU，且 Elon 披露了两座新数据中心的细节。需要注意：标题中的“靶场与垃圾信息”在预览中未解释，不能据此推断具体含义；预览未说明数据中心位置、用途或与 xAI 的关系，阅读时应以原文后续内容为准。"
+        ]
+      }
+    },
+    {
+      "externalId": "2116684286837330374",
+      "source": {
+        "id": "attentionvc-ai",
+        "type": "daily",
+        "name": "Theo · 技术动态 X 热榜",
+        "url": "https://reply-vc-90459984647.us-central1.run.app/v1/articles/leaderboard?window=3d&category=ai&lang=en&limit=30"
+      },
+      "title": "如何用 Claude Code 零成本制作病毒视频（完整指南）",
+      "sourceUrl": "https://x.com/theoxmotion/status/2116684286837330374",
+      "summary": "Theo 分享用 Claude Code 制作病毒视频的方法：一个后院剖开视频在 TikTok 获得 1310 万播放，且是新账号首条视频；他把该形式做成免费 Claude 提示词，并复用于火柴人故事和讲座讲解。",
+      "publishedAt": "2026-11-01T00:10:34.000Z",
+      "keywords": [
+        "Claude Code",
+        "病毒视频",
+        "TikTok",
+        "提示词",
+        "内容创作"
+      ],
+      "body": {
+        "section": "x",
+        "digestDate": "2026-11-02",
+        "publishedDate": "11/1",
+        "time": "本次更新",
+        "readTime": "3 分钟",
+        "accent": "green",
+        "inRecentWindow": true,
+        "paragraphs": [
+          "如何用 Claude Code 零成本制作病毒视频（完整指南）。一个剖开后院的视频获得了 1310 万次观看。这是一个新账号在 TikTok 上的第一条视频，所以我将这种形式重建为一个免费的 Claude 提示词，然后对火柴人故事和讲座讲解做了同样的事。这……",
+          "核心观点是用免费 Claude 提示词复刻高传播视频模板，降低创作门槛。需要注意：1310 万播放和“新账号首条视频”是作者自述的案例，预览未提供可验证数据；所谓“零成本”指工具层面，未涵盖时间与素材成本。"
+        ]
+      }
+    },
+    {
+      "externalId": "2116857257245987236",
+      "source": {
+        "id": "attentionvc-ai",
+        "type": "daily",
+        "name": "DeepSeek Harness · 技术动态 X 热榜",
+        "url": "https://reply-vc-90459984647.us-central1.run.app/v1/articles/leaderboard?window=3d&category=ai&lang=en&limit=30"
+      },
+      "title": "探索超级智能体设计：迈向更自主的智能体系统",
+      "sourceUrl": "https://x.com/DeepSeekHarness/status/2116857257245987236",
+      "summary": "DeepSeek Harness 发布文章讨论“超级智能体”的架构设想，原文为中文、此为机器翻译；文章明确说明是架构理念探讨，并非介绍 DeepSeek Harness 现有功能。",
+      "publishedAt": "2026-11-01T11:37:54.000Z",
+      "keywords": [
+        "超级智能体",
+        "多智能体",
+        "自主系统",
+        "架构设计",
+        "机器翻译"
+      ],
+      "body": {
+        "section": "x",
+        "digestDate": "2026-11-02",
+        "publishedDate": "11/1",
+        "time": "本次更新",
+        "readTime": "3 分钟",
+        "accent": "green",
+        "inRecentWindow": true,
+        "paragraphs": [
+          "探索超级智能体设计：迈向更自主的智能体系统。原文为中文，这是机器翻译。本文讨论架构理念，不是对 DeepSeek Harness 现有功能的介绍。1. 超级智能体 关于……",
+          "核心观点是探讨更自主的多智能体系统架构。阅读时需注意：这是机器翻译，术语可能有偏差；作者已声明内容为架构设想而非产品功能说明，不应将其理解为 DeepSeek Harness 已具备的能力。"
+        ]
+      }
+    },
+    {
+      "externalId": "2610.40614",
       "source": {
         "id": "huggingface-daily-papers",
         "type": "daily",
         "name": "Hugging Face Daily Papers",
         "url": "https://huggingface.co/papers"
       },
-      "title": "只在需要时看：面向高效扩散视觉语言模型的证书引导视觉路由",
-      "sourceUrl": "https://huggingface.co/papers/2610.36671",
-      "summary": "扩散视觉语言模型（DVLM）在每一个去噪步骤都会处理完整输入。在我们研究的基准上，视觉 token 占输入的 89%–97%，因此大部分解码计算都花在反复处理同一张图像上。视觉 token 剪枝方法能部分减轻这一负担，但会丢失被剪掉的信息，而且每一步仍要处理剩余图像。为了衡量图像实际被需要的频率，我们在每个解码步骤比较 LLaDA-V 在有图像和无图像时的预测，发现去掉图像后，平均只有 22.8% 的步骤会改变某个 token 是否被解除掩码，最低可至 7.9%。据此我们提出 LOWN，一种在每个步骤决定是否处理图像以及解除多少 token 掩码的解码方法。LOWN 先在没有图像的情况下预测被掩码的 token，只有当该预测与上一次有图像条件时的预测不一致时，才处理图像。一致即“证明”先前预测可被复用，被证明的 token 数量决定该步骤解除多少掩码。我们还观察到不同基准对图像的需求不同，因此需要 LOWN 的自适应决策，而非固定调度。无需训练或调参阈值，LOWN 在十个基准上保留了 LLaDA-V 99.6% 的得分，平均只消耗 35.3% 的解码 FLOPs。LOWN 还能推广到基于 LLaDA 的 DVLM，可与视觉 token 剪枝正交组合，并能在键值缓存下运行以进一步提效。代码与项目页面见 https://hyeon9698.github.io/LOWN/",
-      "publishedAt": "2026-10-27T00:00:00.000Z",
+      "title": "L3G-World：基于潜在三维高斯记忆的实时无限世界生成",
+      "sourceUrl": "https://huggingface.co/papers/2610.40614",
+      "summary": "交互式世界模型能够根据用户动作生成视觉内容，但要在实时条件下保持长时程探索中的空间一致性仍然困难。现有方法依赖时间上下文或显式三维记忆，而这两类方案的可扩展性都较差，因为记忆会随生成流的长度而增长。此外，显式三维记忆需要重新编码RGB渲染结果来为潜在视频生成器提供条件，这使实时生成无法实现。本文提出潜在三维高斯记忆（L3G），它结合了前馈重建的高效性与一种紧凑、可快速渲染的场景表示。基于该记忆，作者提出L3G-World，其中记忆更新器与视频扩散变换器（DiT）交替自回归运行，以生成空间一致的世界。记忆更新器在新观测区域生成高斯并细化已有高斯，使记忆随场景范围而非流长度增长。每个高斯还存储VAE潜在特征，使记忆可直接渲染到DiT的潜在空间中，无需VAE重新编码。实验表明，L3G-World实现了最先进的生成质量和长时程空间一致性；与各指标上最高效的先前三维记忆基线相比，三维图元最多减少38.6倍，记忆更新快3.2倍，记忆渲染快359倍，从而以9 FPS实现实时世界生成。",
+      "publishedAt": "2026-10-29T00:00:00.000Z",
       "keywords": [
-        "扩散视觉语言模型",
-        "视觉 token 剪枝",
-        "自适应解码",
-        "计算效率",
-        "多模态推理"
+        "世界模型",
+        "三维高斯",
+        "实时生成",
+        "空间一致性",
+        "潜在表示",
+        "视频扩散变换器"
       ],
       "body": {
         "section": "papers",
-        "digestDate": "2026-11-01",
+        "digestDate": "2026-11-02",
+        "publishedDate": "10/29",
+        "time": "本次更新",
+        "readTime": "3 分钟",
+        "accent": "violet",
+        "inRecentWindow": true,
+        "paragraphs": [
+          "交互式世界模型能够根据用户动作生成视觉内容，但要在实时条件下保持长时程探索中的空间一致性仍然困难。现有方法依赖时间上下文或显式三维记忆，而这两类方案的可扩展性都较差，因为记忆会随生成流的长度而增长。此外，显式三维记忆需要重新编码RGB渲染结果来为潜在视频生成器提供条件，这使实时生成无法实现。",
+          "本文提出潜在三维高斯记忆（L3G），它结合了前馈重建的高效性与一种紧凑、可快速渲染的场景表示。基于该记忆，作者提出L3G-World，其中记忆更新器与视频扩散变换器（DiT）交替自回归运行，以生成空间一致的世界。记忆更新器在新观测区域生成高斯并细化已有高斯，使记忆随场景范围而非流长度增长。每个高斯还存储VAE潜在特征，使记忆可直接渲染到DiT的潜在空间中，无需VAE重新编码。",
+          "实验表明，L3G-World实现了最先进的生成质量和长时程空间一致性；与各指标上最高效的先前三维记忆基线相比，三维图元最多减少38.6倍，记忆更新快3.2倍，记忆渲染快359倍，从而以9 FPS实现实时世界生成。"
+        ],
+        "utility": "普通人可以借此了解未来交互式虚拟世界或游戏式内容生成的一种技术方向：系统在用户不断探索时仍能记住场景的空间结构，并尝试实时生成画面。文中报告的速度和一致性指标说明这类方法在效率上有所改进，但这些结果来自特定实验设置，不代表日常应用已经成熟；对相关产品体验、内容创作工具或虚拟场景应用的判断，宜将其视为研究进展而非确定承诺。",
+        "externalLinks": [
+          {
+            "label": "查看 Hugging Face 论文页",
+            "url": "https://huggingface.co/papers/2610.40614"
+          },
+          {
+            "label": "打开 arXiv 原文",
+            "url": "https://arxiv.org/abs/2610.40614"
+          }
+        ]
+      }
+    },
+    {
+      "externalId": "2610.37161",
+      "source": {
+        "id": "huggingface-daily-papers",
+        "type": "daily",
+        "name": "Hugging Face Daily Papers",
+        "url": "https://huggingface.co/papers"
+      },
+      "title": "WorkFactory：将专业意图转化为可执行工作，用于可扩展的智能体训练",
+      "sourceUrl": "https://huggingface.co/papers/2610.37161",
+      "summary": "为工作型智能体扩展监督训练，需要大量能产生可靠专家示范的多样化专业任务。然而，任务信息缺失或不一致会妨碍教师执行，并削弱由此产生的监督信号。我们提出 WorkFactory，一个用于构建连贯且可执行专业任务的可扩展框架。该框架从专业意图出发，通过信息级规划构建信息支持图来指导任务实例化，显式表示预期输出所需信息的依赖关系和位置。随后，探测执行会识别支持失败，并在保持预期工作的前提下指导修复。我们构建了跨越 612 种职业的 112,686 个任务，并利用收集到的教师轨迹对 4B、27B 和 35B-A3B 规模的 Qwen 模型进行微调，得到 WorkPilot 系列。三个模型在四个专业工作基准上均优于各自的基础模型，其中 WorkPilot-35B-A3B 在 GDPval-AA v2.1 上的 Elo 从 879 提升至 1565。扩展性分析揭示了依赖模型的收益递减现象，执行长度先增加后减少。受控组件分析表明，规划与修复减少了探测诊断出的任务环境缺陷，并提升了下游性能。数据和模型可在 https://github.com/IQuestLab/WorkFactory 获取。",
+      "publishedAt": "2026-10-27T00:00:00.000Z",
+      "keywords": [
+        "智能体训练",
+        "专业任务构建",
+        "信息支持图",
+        "探测执行",
+        "监督微调",
+        "可扩展框架"
+      ],
+      "body": {
+        "section": "papers",
+        "digestDate": "2026-11-02",
         "publishedDate": "10/27",
         "time": "本次更新",
         "readTime": "3 分钟",
         "accent": "violet",
         "inRecentWindow": true,
         "paragraphs": [
-          "扩散视觉语言模型（DVLM）在每一个去噪步骤都会处理完整输入。在我们研究的基准上，视觉 token 占输入的 89%–97%，因此大部分解码计算都花在反复处理同一张图像上。视觉 token 剪枝方法能部分减轻这一负担，但会丢失被剪掉的信息，而且每一步仍要处理剩余图像。",
-          "为了衡量图像实际被需要的频率，我们在每个解码步骤比较 LLaDA-V 在有图像和无图像时的预测，发现去掉图像后，平均只有 22.8% 的步骤会改变某个 token 是否被解除掩码，最低可至 7.9%。据此我们提出 LOWN，一种在每个步骤决定是否处理图像以及解除多少 token 掩码的解码方法。LOWN 先在没有图像的情况下预测被掩码的 token，只有当该预测与上一次有图像条件时的预测不一致时，才处理图像。一致即“证明”先前预测可被复用，被证明的 token 数量决定该步骤解除多少掩码。",
-          "我们还观察到不同基准对图像的需求不同，因此需要 LOWN 的自适应决策，而非固定调度。无需训练或调参阈值，LOWN 在十个基准上保留了 LLaDA-V 99.6% 的得分，平均只消耗 35.3% 的解码 FLOPs。LOWN 还能推广到基于 LLaDA 的 DVLM，可与视觉 token 剪枝正交组合，并能在键值缓存下运行以进一步提效。代码与项目页面见 https://hyeon9698.github.io/LOWN/"
+          "为工作型智能体扩展监督训练，需要大量能产生可靠专家示范的多样化专业任务。然而，任务信息缺失或不一致会妨碍教师执行，并削弱由此产生的监督信号。我们提出 WorkFactory，一个用于构建连贯且可执行专业任务的可扩展框架。",
+          "该框架从专业意图出发，通过信息级规划构建信息支持图来指导任务实例化，显式表示预期输出所需信息的依赖关系和位置。随后，探测执行会识别支持失败，并在保持预期工作的前提下指导修复。",
+          "我们构建了跨越 612 种职业的 112,686 个任务，并利用收集到的教师轨迹对 4B、27B 和 35B-A3B 规模的 Qwen 模型进行微调，得到 WorkPilot 系列。三个模型在四个专业工作基准上均优于各自的基础模型，其中 WorkPilot-35B-A3B 在 GDPval-AA v2.1 上的 Elo 从 879 提升至 1565。",
+          "扩展性分析揭示了依赖模型的收益递减现象，执行长度先增加后减少。受控组件分析表明，规划与修复减少了探测诊断出的任务环境缺陷，并提升了下游性能。数据和模型可在 https://github.com/IQuestLab/WorkFactory 获取。"
         ],
-        "utility": "普通人可以借此理解：多模态 AI 在“看图答题”时，并非每一步都必须重新看一遍图。这项研究说明，通过判断何时真正需要图像，可以在几乎不损失效果的情况下大幅减少计算量。这对使用 AI 服务的用户意味着更低的运行成本和更快的响应可能；对开发者则提示，优化多模态模型不必只靠删减图像信息，还可以按需调用视觉信息。不过，这些结论来自论文所测试的基准和模型，实际产品中的效果仍需具体验证。",
+        "utility": "这项研究提供了一种系统化生成专业任务并训练工作型智能体的方法，普通人可以借此了解 AI 智能体如何被训练来处理真实职业任务。它可能影响未来 AI 助手在办公、专业服务等场景中的可靠性和可用性，但具体效果仍需结合实际应用验证。",
         "externalLinks": [
           {
             "label": "查看 Hugging Face 论文页",
-            "url": "https://huggingface.co/papers/2610.36671"
+            "url": "https://huggingface.co/papers/2610.37161"
           },
           {
             "label": "打开 arXiv 原文",
-            "url": "https://arxiv.org/abs/2610.36671"
+            "url": "https://arxiv.org/abs/2610.37161"
           }
         ]
       }
     },
     {
-      "externalId": "2610.39301",
+      "externalId": "2610.32411",
       "source": {
         "id": "huggingface-daily-papers",
         "type": "daily",
         "name": "Hugging Face Daily Papers",
         "url": "https://huggingface.co/papers"
       },
-      "title": "Youtu-Parsing-Omni：一个编码器、一套模式、全模态",
-      "sourceUrl": "https://huggingface.co/papers/2610.39301",
-      "summary": "我们提出 Youtu-Parsing-Omni，一种全模态解析器，可把文档、图像、音频和视频转换为在空间和时间上具有依据的结构化记录，为需要在多种模态中阅读、定位并引用证据的智能体提供感知层。其设计基于“每个模态共用一个编码器、每个任务共用一套模式”。Youtu-Omni-Encoder 从预训练语言模型初始化以增强文本读取能力，以共享权重在统一的时空坐标系中编码所有模态；少量融合层让视频帧能够关注同时发生的音频，从而把跨模态融合与时间对齐纳入感知本身。OmniSchema 统一了全部十项解析任务的输出，使单一的自演化后训练流程 OmniSchema-Aware On-Policy Distillation（OSAD）能够为各任务提供共享的、基于 token 角色的目标。每一轮中，模型针对来自自身参考条件副本的 token 级目标，在自己的 rollout 上训练，随后该副本用训练后的权重刷新，使解析器与其监督共同演化。凭借单个 50 亿参数检查点，Youtu-Parsing-Omni 在 OmniDocBench v1.6 上取得最先进性能（总体 96.96），并在 OmniParsingBench 上领先所有开放权重模型（平均 75.08），其优势集中在音频和视频方面。它还在图表解析总体得分上最佳（95.02），在比较系统中取得最高的化学指纹精确一致率，并在排版乐谱的字符级转写上与专用光学音乐模型相当，同时远超通用系统。代码和模型权重已公开。",
-      "publishedAt": "2026-10-29T00:00:00.000Z",
+      "title": "更全面地审视多模态大语言模型中的检索头",
+      "sourceUrl": "https://huggingface.co/papers/2610.32411",
+      "summary": "在长输入中定位相关证据是多模态大语言模型的一项核心能力。此前研究将这一能力归因于“检索头”，即一小部分稀疏的注意力头，它们负责把上下文中的信息传递到输出。然而，这些分析仅局限于有限几种模态和相应模型，而且如何利用检索头来增强模型仍有待探索。本文追问：这一机制是否会随模型输入模态的扩展而扩展。",
+      "publishedAt": "2026-10-23T00:00:00.000Z",
       "keywords": [
-        "全模态解析",
-        "结构化记录",
-        "跨模态融合",
-        "时空对齐",
-        "后训练蒸馏",
-        "开放权重模型"
+        "多模态大语言模型",
+        "检索头",
+        "跨模态共享",
+        "注意力消融",
+        "文档检索",
+        "视听输入"
       ],
       "body": {
         "section": "papers",
-        "digestDate": "2026-11-01",
-        "publishedDate": "10/29",
+        "digestDate": "2026-11-02",
+        "publishedDate": "10/23",
         "time": "本次更新",
         "readTime": "3 分钟",
         "accent": "violet",
         "inRecentWindow": true,
         "paragraphs": [
-          "我们提出 Youtu-Parsing-Omni，一种全模态解析器，可把文档、图像、音频和视频转换为在空间和时间上具有依据的结构化记录，为需要在多种模态中阅读、定位并引用证据的智能体提供感知层。其设计基于“每个模态共用一个编码器、每个任务共用一套模式”。",
-          "Youtu-Omni-Encoder 从预训练语言模型初始化以增强文本读取能力，以共享权重在统一的时空坐标系中编码所有模态；少量融合层让视频帧能够关注同时发生的音频，从而把跨模态融合与时间对齐纳入感知本身。OmniSchema 统一了全部十项解析任务的输出，使单一的自演化后训练流程 OmniSchema-Aware On-Policy Distillation（OSAD）能够为各任务提供共享的、基于 token 角色的目标。每一轮中，模型针对来自自身参考条件副本的 token 级目标，在自己的 rollout 上训练，随后该副本用训练后的权重刷新，使解析器与其监督共同演化。",
-          "凭借单个 50 亿参数检查点，Youtu-Parsing-Omni 在 OmniDocBench v1.6 上取得最先进性能（总体 96.96），并在 OmniParsingBench 上领先所有开放权重模型（平均 75.08），其优势集中在音频和视频方面。它还在图表解析总体得分上最佳（95.02），在比较系统中取得最高的化学指纹精确一致率，并在排版乐谱的字符级转写上与专用光学音乐模型相当，同时远超通用系统。代码和模型权重已公开。"
+          "在长输入中定位相关证据是多模态大语言模型的一项核心能力。此前研究将这一能力归因于“检索头”，即一小部分稀疏的注意力头，它们负责把上下文中的信息传递到输出。然而，这些分析仅局限于有限几种模态和相应模型，而且如何利用检索头来增强模型仍有待探索。本文追问：这一机制是否会随模型输入模态的扩展而扩展。",
+          "作者以视听输入作为新增模态，构造了配对输入：同一个答案要么以语音说出，要么显示在屏幕上。在证据内容固定的情况下，检索头在新模态中依然稀疏，并且在很大程度上跨模态共享。在18个语言、视觉-语言和全模态检查点上，全模态模型大体保留了其骨干模型的检索头。消融这些头几乎消除了全部视听检索能力。",
+          "跨模态共享的这些头占全部头的不到2%，但消融它们同样会削弱文档理解、空间感知和视觉数学能力。基于这些发现，作者把检索头变成优化目标，用排序目标训练其注意力。这使得Qwen3-VL-8B在MMDocIR上的页面Recall@1提升了6.03个百分点，并改善了三个模型家族的文档检索表现。功能性注意力头由此既可成为观察多模态模型的透镜，也可成为改进模型的目标。"
         ],
-        "utility": "这项研究展示了一种把文档、图片、音频和视频统一转成可定位、可引用结构化信息的技术路径。普通人可以借此理解：未来处理扫描文件、会议录音、视频素材或乐谱、图表、化学结构图时，AI 工具可能更擅长同时识别多种内容并标出出处。不过，文中成绩来自特定基准测试，实际产品效果还会受数据、场景和部署方式影响，不宜直接外推为日常工具已经达到同等水平。",
+        "utility": "这项研究帮助普通人理解：多模态模型能从长材料中找到所需信息，依赖的是少数可跨模态复用的注意力机制；这类机制一旦受损，文档理解、空间判断和视觉数学等能力也会受影响。它提示未来模型可能通过针对性训练提升从长文档中找信息的能力，但相关效果目前仅在特定模型和基准上验证，不宜过度外推。",
         "externalLinks": [
           {
             "label": "查看 Hugging Face 论文页",
-            "url": "https://huggingface.co/papers/2610.39301"
+            "url": "https://huggingface.co/papers/2610.32411"
           },
           {
             "label": "打开 arXiv 原文",
-            "url": "https://arxiv.org/abs/2610.39301"
-          }
-        ]
-      }
-    },
-    {
-      "externalId": "2610.39302",
-      "source": {
-        "id": "huggingface-daily-papers",
-        "type": "daily",
-        "name": "Hugging Face Daily Papers",
-        "url": "https://huggingface.co/papers"
-      },
-      "title": "用JEPA证明并改进柏拉图表示假说",
-      "sourceUrl": "https://huggingface.co/papers/2610.39302",
-      "summary": "不同模态训练的模型是否会收敛到相同的世界表示，是人工智能的核心问题。柏拉图表示假说（PRH）推测随着规模扩大会如此，但缺乏证明，因此既不能提供保证，也不能给出方法。我们把这个假说变成定理。首先，我们证明柏拉图表示定理：联合嵌入预测架构（JEPA）在任意多个模态上分别训练时，只要正样本对是同一场景的两个观测——即好视角——且其他情况下错位有界，它们学到的表示就只相差一个旋转。其次，我们表明下一词预测是一种使用坏视角（单个文档的片段）的JEPA，这解释了为何语言模型只有靠规模才能与视觉对齐。第三，我们从14.5万条字幕到9.4亿网络图像的文本验证了该理论，并发现一个对齐的缩放律，能在种子噪声范围内预测未见过的运行。在相同语料上，好视角达到相同对齐所需训练样本比下一词预测少42倍；一个1.09亿参数的文本JEPA与DINOv2和CLIP图像编码器的对齐程度，优于我们评估的所有语言模型（最大720亿参数），也优于CLIP的文本编码器：下一词预测是通往柏拉图表示的极低效路径。作为展示，一个旋转就能把分别训练的编码器变成图像描述器（COCO上CIDEr为0.838）。甚至这个旋转也不需要配对：在最新的无配对基准上，我们的文本JEPA在ImageNet-100上取得64%的top-5零样本准确率，超过语言模型（最大80亿参数）报告的最高56%。因此，正视角而非单纯规模，才是构建柏拉图表示的杠杆。",
-      "publishedAt": "2026-10-29T00:00:00.000Z",
-      "keywords": [
-        "柏拉图表示假说",
-        "联合嵌入预测架构",
-        "多模态对齐",
-        "下一词预测",
-        "表示学习",
-        "缩放律"
-      ],
-      "body": {
-        "section": "papers",
-        "digestDate": "2026-11-01",
-        "publishedDate": "10/29",
-        "time": "本次更新",
-        "readTime": "3 分钟",
-        "accent": "violet",
-        "inRecentWindow": true,
-        "paragraphs": [
-          "不同模态训练的模型是否会收敛到相同的世界表示，是人工智能的核心问题。柏拉图表示假说（PRH）推测随着规模扩大会如此，但缺乏证明，因此既不能提供保证，也不能给出方法。我们把这个假说变成定理。",
-          "首先，我们证明柏拉图表示定理：联合嵌入预测架构（JEPA）在任意多个模态上分别训练时，只要正样本对是同一场景的两个观测——即好视角——且其他情况下错位有界，它们学到的表示就只相差一个旋转。其次，我们表明下一词预测是一种使用坏视角（单个文档的片段）的JEPA，这解释了为何语言模型只有靠规模才能与视觉对齐。",
-          "第三，我们从14.5万条字幕到9.4亿网络图像的文本验证了该理论，并发现一个对齐的缩放律，能在种子噪声范围内预测未见过的运行。在相同语料上，好视角达到相同对齐所需训练样本比下一词预测少42倍；一个1.09亿参数的文本JEPA与DINOv2和CLIP图像编码器的对齐程度，优于我们评估的所有语言模型（最大720亿参数），也优于CLIP的文本编码器：下一词预测是通往柏拉图表示的极低效路径。",
-          "作为展示，一个旋转就能把分别训练的编码器变成图像描述器（COCO上CIDEr为0.838）。甚至这个旋转也不需要配对：在最新的无配对基准上，我们的文本JEPA在ImageNet-100上取得64%的top-5零样本准确率，超过语言模型（最大80亿参数）报告的最高56%。因此，正视角而非单纯规模，才是构建柏拉图表示的杠杆。"
-        ],
-        "utility": "普通人可以借此理解：AI模型跨文本和图像“理解世界”的方式未必只靠堆规模，训练数据的配对方式可能更关键。这会影响人们对大模型能力来源的判断，也可能影响未来多模态AI产品在数据效率和成本上的选择；但文中结论基于特定实验设定，不宜直接外推到所有AI系统。",
-        "externalLinks": [
-          {
-            "label": "查看 Hugging Face 论文页",
-            "url": "https://huggingface.co/papers/2610.39302"
-          },
-          {
-            "label": "打开 arXiv 原文",
-            "url": "https://arxiv.org/abs/2610.39302"
+            "url": "https://arxiv.org/abs/2610.32411"
           }
         ]
       }
