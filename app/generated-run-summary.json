@@ -1,7 +1,7 @@
 {
-  "id": "collection-2026-11-17T00:47:10.771Z",
-  "generatedAt": "2026-11-17T00:47:10.771Z",
-  "windowStart": "2026-11-15T16:00:00.000Z",
+  "id": "collection-2026-11-17T23:50:48.023Z",
+  "generatedAt": "2026-11-17T23:50:48.023Z",
+  "windowStart": "2026-11-16T16:00:00.000Z",
   "mode": "production",
   "status": "completed_with_errors",
   "itemCount": 0,
@@ -39,9 +39,9 @@
       "label": "Follow Builders",
       "status": "failed",
       "itemCount": 0,
-      "error": "DeepSeek returned HTTP 402: Insufficient Balance (request_id: 5dbeb173-e920-4ea3-8fec-ec46dfab310c)",
-      "startedAt": "2026-11-17T00:47:10.782Z",
-      "finishedAt": "2026-11-17T00:47:11.572Z",
+      "error": "DeepSeek returned HTTP 402: Insufficient Balance (request_id: 34d54548-463e-4592-8eab-1536b602a02f)",
+      "startedAt": "2026-11-17T23:50:48.034Z",
+      "finishedAt": "2026-11-17T23:50:48.715Z",
       "retryAttempts": 1
     },
     {
@@ -49,9 +49,9 @@
       "label": "技术动态 X",
       "status": "failed",
       "itemCount": 0,
-      "error": "DeepSeek returned HTTP 402: Insufficient Balance (request_id: 5581e59d-6a44-455d-ba22-7c7e6bcd9a95)",
-      "startedAt": "2026-11-17T00:47:11.572Z",
-      "finishedAt": "2026-11-17T00:47:12.425Z",
+      "error": "DeepSeek returned HTTP 402: Insufficient Balance (request_id: a56d9b84-a16d-4dfc-9ced-412c634729b7)",
+      "startedAt": "2026-11-17T23:50:48.716Z",
+      "finishedAt": "2026-11-17T23:50:49.468Z",
       "retryAttempts": 1
     },
     {
@@ -60,8 +60,8 @@
       "status": "failed",
       "itemCount": 0,
       "error": "DeepSeek did not return a complete paper entry",
-      "startedAt": "2026-11-17T00:47:12.426Z",
-      "finishedAt": "2026-11-17T00:47:15.478Z",
+      "startedAt": "2026-11-17T23:50:49.469Z",
+      "finishedAt": "2026-11-17T23:50:52.396Z",
       "retryAttempts": 5
     },
     {
@@ -69,10 +69,10 @@
       "label": "GitHub Trending",
       "status": "failed",
       "itemCount": 0,
-      "error": "DeepSeek returned HTTP 402: Insufficient Balance (request_id: 6acd2682-47d1-4522-85b4-8d74f6726ad6)",
-      "startedAt": "2026-11-17T00:47:15.478Z",
-      "finishedAt": "2026-11-17T00:47:18.178Z",
-      "retryAttempts": 1
+      "error": "403 ",
+      "startedAt": "2026-11-17T23:50:52.397Z",
+      "finishedAt": "2026-11-17T23:50:53.396Z",
+      "retryAttempts": 5
     }
   ],
   "sectionSummaries": [
@@ -3491,11 +3491,11 @@
   "errors": [
     {
       "source": "follow-builders",
-      "message": "DeepSeek returned HTTP 402: Insufficient Balance (request_id: 5dbeb173-e920-4ea3-8fec-ec46dfab310c)"
+      "message": "DeepSeek returned HTTP 402: Insufficient Balance (request_id: 34d54548-463e-4592-8eab-1536b602a02f)"
     },
     {
       "source": "technical-x",
-      "message": "DeepSeek returned HTTP 402: Insufficient Balance (request_id: 5581e59d-6a44-455d-ba22-7c7e6bcd9a95)"
+      "message": "DeepSeek returned HTTP 402: Insufficient Balance (request_id: a56d9b84-a16d-4dfc-9ced-412c634729b7)"
     },
     {
       "source": "papers",
@@ -3503,9 +3503,9 @@
     },
     {
       "source": "github",
-      "message": "DeepSeek returned HTTP 402: Insufficient Balance (request_id: 6acd2682-47d1-4522-85b4-8d74f6726ad6)"
+      "message": "403 "
     }
   ],
-  "finishedAt": "2026-11-17T00:47:50.766Z",
+  "finishedAt": "2026-11-17T23:51:29.832Z",
   "items": []
 }
